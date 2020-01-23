@@ -44,7 +44,8 @@
 									</tr>
 									<tr>
 										<td colspan="2" class="w3-text-blue">
-											Subscribe Email Notification
+											<input type="checkbox" id="subscription" value="checked-subscription"/> 
+											Subscribe Notification
 										</td>
 									</tr>
 								</table>
@@ -81,20 +82,24 @@
 						</table>
 					</div>
 				</div>
-				<div class="w3-container w3-margin-0 w3-padding-0" style="height:300px;overflow:auto;">
+				<div class="w3-container w3-margin-0 w3-padding-0" style="height:230px;overflow:auto;">
 					<!-- Summer 2014 semester result -->
+					<!-- use red in fail -->
+					<!-- use blue in retake -->
+					<!-- use yellow in incomplete -->
 					<table style="width:90%;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
 						<tr class="w3-black w3-bold w3-padding-small">
 							<td colspan="2" class="w3-padding-small">Semester: Summer-2014</td>
 							<td colspan="2" class="w3-padding-small">CGPA: 4.00</td>
-							<td class="w3-padding-small">Credit: 7.5</td>
+							<td colspan="2" class="w3-padding-small">Credit: 7.5</td>
 						</tr>
 						<tr class="w3-teal w3-bold">
 							<td style="width:20%;" class="w3-padding-small">Course Code</td>
 							<td style="width:40%;" class="w3-padding-small">Course Title</td>
 							<td style="width:10%;" class="w3-padding-small">Credit</td>
 							<td style="width:10%;" class="w3-padding-small">Grade</td>
-							<td style="width:20%;" class="w3-padding-small">Grade Point</td>
+							<td style="width:10%;" class="w3-padding-small">Grade Point</td>
+							<td style="width:10%;" class="w3-padding-small">Remarks</td>
 						</tr>
 						<tr>
 							<td class="w3-padding-small">CSE 111</td>
@@ -102,6 +107,7 @@
 							<td class="w3-padding-small">3.00</td>
 							<td class="w3-padding-small">A+</td>
 							<td class="w3-padding-small">4.00</td>
+							<td class="w3-padding-small"></td>
 						</tr>
 						<tr class="w3-light-gray">
 							<td class="w3-padding-small">CSE 113</td>
@@ -109,6 +115,7 @@
 							<td class="w3-padding-small">3.00</td>
 							<td class="w3-padding-small">A+</td>
 							<td class="w3-padding-small">4.00</td>
+							<td class="w3-padding-small"></td>
 						</tr>
 						<tr>
 							<td class="w3-padding-small">CSE 114</td>
@@ -116,6 +123,7 @@
 							<td class="w3-padding-small">1.50</td>
 							<td class="w3-padding-small">A+</td>
 							<td class="w3-padding-small">4.00</td>
+							<td class="w3-padding-small"></td>
 						</tr>
 					</table>
 					
@@ -123,14 +131,15 @@
 						<tr class="w3-black w3-bold w3-padding-small">
 							<td colspan="2" class="w3-padding-small">Semester: Summer-2014</td>
 							<td colspan="2" class="w3-padding-small">CGPA: 4.00</td>
-							<td class="w3-padding-small">Credit: 7.5</td>
+							<td colspan="2"class="w3-padding-small">Credit: 7.5</td>
 						</tr>
 						<tr class="w3-teal w3-bold">
 							<td style="width:20%;" class="w3-padding-small">Course Code</td>
 							<td style="width:40%;" class="w3-padding-small">Course Title</td>
 							<td style="width:10%;" class="w3-padding-small">Credit</td>
 							<td style="width:10%;" class="w3-padding-small">Grade</td>
-							<td style="width:20%;" class="w3-padding-small">Grade Point</td>
+							<td style="width:10%;" class="w3-padding-small">Grade Point</td>
+							<td style="width:10%;" class="w3-padding-small">Remarks</td>
 						</tr>
 						<tr>
 							<td class="w3-padding-small">CSE 111</td>
@@ -138,6 +147,7 @@
 							<td class="w3-padding-small">3.00</td>
 							<td class="w3-padding-small">A+</td>
 							<td class="w3-padding-small">4.00</td>
+							<td class="w3-padding-small"></td>
 						</tr>
 						<tr class="w3-light-gray">
 							<td class="w3-padding-small">CSE 113</td>
@@ -145,6 +155,7 @@
 							<td class="w3-padding-small">3.00</td>
 							<td class="w3-padding-small">A+</td>
 							<td class="w3-padding-small">4.00</td>
+							<td class="w3-padding-small"></td>
 						</tr>
 						<tr>
 							<td class="w3-padding-small">CSE 114</td>
@@ -152,6 +163,7 @@
 							<td class="w3-padding-small">1.50</td>
 							<td class="w3-padding-small">A+</td>
 							<td class="w3-padding-small">4.00</td>
+							<td class="w3-padding-small"></td>
 						</tr>
 					</table>
 					
