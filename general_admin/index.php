@@ -4,9 +4,8 @@
 <!--Navbar -->
 <?php include("../includes/general_admin/navbar.php"); ?>
 
-<div class="w3-container" style="min-height:510px;">
-
-</div>
+<!--Navbar -->
+<?php include("../includes/general_admin/login_window.php"); ?>
 
 <!-- Footer -->
 <?php include("../includes/general_admin/footer.php"); ?>

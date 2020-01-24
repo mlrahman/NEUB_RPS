@@ -6,6 +6,9 @@ Mir Lutfur Rahman
 Lecturer
 Department of Computer Science & Engineering
 North East University Bangladesh
+Website: https://mlrahman.github.io
+Email: mlrahman@neub.edu.bd
+       mirlutfur.rahman@gmail.com
 -->
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns#"  lang="en-gb">
@@ -26,5 +29,11 @@ North East University Bangladesh
 		<script src="../js/main.js"></script> 
 	</head>
 	<body class="w3-black">
+		
+		<div id="rs_not_found" class="w3-container w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
+			<i class="fa fa-bell-o"></i> Notification
+		</div>
+	
+	
 		<div class="w3-content w3-white" style="max-width:2000px;">
 		
