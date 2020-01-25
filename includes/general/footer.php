@@ -8,19 +8,19 @@
 							<p style="margin:0px 15px;width:50px;" class="w3-bottombar w3-border-teal"> </p>
 							<table class="w3-table " style="width:100%;max-width:350px;">
 								<tr>
-									<td>Address:</td><td>Telihaor, Sheikhghat, Sylhet-3100</td>
+									<td>Address:</td><td><?php echo $address; ?></td>
 								</tr>
 								<tr>
-									<td>Tel:</td><td>0821 710221-2</td>
+									<td>Tel:</td><td><?php echo $telephone; ?></td>
 								</tr>
 								<tr>
-									<td>Email:</td><td><a href="mailto:info@neub.edu.bd" title="NEUB" target="_blank" class="w3-hover-text-teal w3-decoration-null">info@neub.edu.bd</a></td>
+									<td>Email:</td><td><a href="mailto:<?php echo $email; ?>" title="<?php echo $title; ?>" target="_blank" class="w3-hover-text-teal w3-decoration-null"><?php echo $email; ?></a></td>
 								</tr>
 								<tr>
-									<td>Mobile:</td><td>01755566994</td>
+									<td>Mobile:</td><td><?php echo $mobile; ?></td>
 								</tr>
 								<tr>
-									<td>Web:</td><td><a href="https://www.neub.edu.bd" title="NEUB" target="_blank" class="w3-hover-text-teal w3-decoration-null">www.neub.edu.bd</a></td>
+									<td>Web:</td><td><a href="https://<?php echo $web; ?>" title="<?php echo $title; ?>" target="_blank" class="w3-hover-text-teal w3-decoration-null"><?php echo $web; ?></a></td>
 								</tr>
 							</table>
 						</div>
@@ -28,7 +28,7 @@
 						<div class="w3-third w3-container w3-mobile w3-left-align">
 							<p style="margin:0px 15px;"><b>FIND US ON MAP</b></p>
 							<p style="margin:0px 15px;width:50px;" class="w3-bottombar w3-border-teal"> </p>
-							<div class="w3-container w3-padding-16" style="width:100%;max-width:400px; height:210px;"><div class="gmap_canvas"><iframe id="gmap_canvas" style="height:100%;width:100%;" src="https://maps.google.com/maps?q=north%20east%20university%20bangladesh&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div></div>
+							<div class="w3-container w3-padding-16" style="width:100%;max-width:400px; height:210px;"><div class="gmap_canvas"><iframe id="gmap_canvas" style="height:100%;width:100%;" src="<?php echo $map; ?>" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div></div>
 						</div>
 						<div style="padding: 0px 0px 0px 50px;" class="w3-third w3-container w3-mobile w3-left-align w3-hide-small w3-hide-medium">
 							<p style="margin:0px;"><b>CONTACT US</b></p>
@@ -49,9 +49,9 @@
 					</div>
 				</div>
 					
-				<p class="w3-cursor w3-hide-medium w3-hide-small w3-large w3-margin">Copyright &copy <?php echo DATE("Y"); ?> <a href="https://www.neub.edu.bd" title="NEUB" target="_blank" class="w3-hover-text-teal w3-decoration-null">North East University Bangladesh.</a></p>
-				<p class="w3-cursor w3-hide-large w3-hide-small w3-medium w3-margin">Copyright &copy <?php echo DATE("Y"); ?> <a href="https://www.neub.edu.bd" title="NEUB" target="_blank" class="w3-hover-text-teal w3-decoration-null">North East University Bangladesh.</a></p>
-				<p class="w3-cursor w3-hide-medium w3-hide-large w3-small w3-margin">Copyright &copy <?php echo DATE("Y"); ?> <a href="https://www.neub.edu.bd" title="NEUB" target="_blank" class="w3-hover-text-teal w3-decoration-null">North East University Bangladesh.</a></p>
+				<p class="w3-cursor w3-hide-medium w3-hide-small w3-large w3-margin">Copyright &copy <?php echo DATE("Y"); ?> <a href="https://<?php echo $web; ?>" title="NEUB" target="_blank" class="w3-hover-text-teal w3-decoration-null">North East University Bangladesh.</a></p>
+				<p class="w3-cursor w3-hide-large w3-hide-small w3-medium w3-margin">Copyright &copy <?php echo DATE("Y"); ?> <a href="https://<?php echo $web; ?>" title="NEUB" target="_blank" class="w3-hover-text-teal w3-decoration-null">North East University Bangladesh.</a></p>
+				<p class="w3-cursor w3-hide-medium w3-hide-large w3-small w3-margin">Copyright &copy <?php echo DATE("Y"); ?> <a href="https://<?php echo $web; ?>" title="NEUB" target="_blank" class="w3-hover-text-teal w3-decoration-null">North East University Bangladesh.</a></p>
 			</footer>
 		</div>
 	</body>
