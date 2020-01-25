@@ -33,8 +33,79 @@
 	
 </header>
 <script>
-
+	function ValidateEmail(x)  
+	{  
+		var atposition=x.indexOf("@");  
+		var dotposition=x.lastIndexOf(".");  
+		if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){  
+			return false;  
+		}
+		else return true; 		
+	}
 	
+	function enable_subscribe(flag)
+	{
+		if(flag==1)
+		{
+			document.getElementById('edit_subscription').style.display='block';
+		}
+		else if(flag==0)
+		{
+			document.getElementById('edit_subscription').style.display='none';
+		}
+		else if(flag==2)
+		{
+			var p_sub_email=document.getElementById('sub_email').value;
+			var s_id=document.getElementById('sub_s_id').value;
+			var dob=document.getElementById('sub_dob').value;
+			var sub_email=document.getElementById('subscription_email').value.trim();
+			if(p_sub_email==sub_email)
+			{
+				document.getElementById('sub_no_change').style.display='block';
+				setTimeout(function(){ document.getElementById('sub_no_change').style.display='none'; }, 1500);
+			}
+			else if(ValidateEmail(sub_email)==false)
+			{
+				document.getElementById('subscription_email').value=p_sub_email;
+				document.getElementById('sub_invalid').style.display='block';
+				setTimeout(function(){ document.getElementById('sub_invalid').style.display='none'; }, 1500);
+			
+			}
+			else
+			{
+				document.getElementById('sub_loading').style.display='block';
+				var xmlhttp2 = new XMLHttpRequest();
+				xmlhttp2.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						document.getElementById('sub_loading').style.display='none';
+						//console.log(this.responseText);
+						if(this.responseText.trim()=="not_done")
+						{
+							document.getElementById('sub_failed').style.display='block';
+							setTimeout(function(){ document.getElementById('sub_failed').style.display='none'; }, 1500);
+					
+						}
+						else if(this.responseText.trim()=="done")
+						{
+							//console.log('kjhg');
+							document.getElementById('sub_email').value=sub_email;
+							document.getElementById('sub_change_done').style.display='block';
+							setTimeout(function(){ document.getElementById('sub_change_done').style.display='none'; }, 1500);
+					
+						}
+					}
+					else if(this.status==403 || this.status==404)
+					{
+						document.getElementById('sub_loading').style.display='none';
+						document.getElementById('rs_server_failed').style.display='block';
+						setTimeout(function(){ document.getElementById('rs_server_failed').style.display='none'; }, 1500);
+					}
+				};
+				xmlhttp2.open("GET", "set_sub_email.php?s_id=" + s_id + "&dob=" + dob +"&email=" + sub_email, true);
+				xmlhttp2.send();
+			}
+		}
+	}
 	function get_result()
 	{
 		var s_id1=document.getElementById('s_id1').value.trim();
@@ -75,7 +146,7 @@
 			xmlhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					document.getElementById('rs_loading').style.display='none';
-					if(this.responseText=="not_found")
+					if(this.responseText.trim()=="not_found")
 					{
 						document.getElementById("rs_not_found").style.display="block";
 						setTimeout(function(){ document.getElementById("rs_not_found").style.display="none"; }, 1500);

@@ -66,4 +66,5 @@ function get_date($date)
 	$year=$date[0].$date[1].$date[2].$date[3];
 	return $day.' '.$month.', '.$year;
 }
+
 ?>

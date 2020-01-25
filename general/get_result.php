@@ -22,6 +22,7 @@
 		$session = get_session($reg_no);
 		$gender = $result[0][3];
 		$birthdate = $result[0][2];
+		$subscription_email = $result[0][4];
 		$prog_id = $result[0][6];
 		$prcr_id = $result[0][7];
 		
@@ -54,10 +55,15 @@
 
 	<div class=" w3-modal-content w3-round-large w3-animate-bottom w3-card-4 w3-leftbar w3-rightbar w3-bottombar w3-topbar w3-border-white">
 		<header class="w3-container w3-black w3-bottombar w3-border-teal w3-round-top-large"> 
-			<span onclick="document.getElementById('result_popup').style.display='none';document.getElementById('result_popup').innerHTML ='Oops..'" class="w3-button w3-display-topright w3-xlarge w3-hover-teal w3-round" style="padding:2px 12px;margin: 15px 10px;"><b>&times;</b></span>
+			<span onclick="document.getElementById('result_popup').style.display='none';document.getElementById('result_popup').innerHTML ='Oops..'" class="w3-button w3-display-topright w3-large w3-hover-teal w3-round" style="padding:2px 12px;margin: 15px 10px;"><i class="fa fa-close"></i> Close</span>
 			<p class="w3-xxlarge" style="margin:5px 0px;">Fetched Result</p>
 		</header>
+		<div id="sub_loading" class="w3-container w3-margin-0 w3-padding-0 w3-black w3-animate-top w3-center" style="width:100%;height:100%;opacity:0.75;z-index:111;padding-top:150px;top:0;left:0;position:absolute;display:none;">
+			<p class="w3-bold">Please wait while setting subscription email..</p>
+			<i class="fa fa-spinner w3-spin " style="font-size:120px;"></i>
+		</div>
 		<div class="w3-container w3-row w3-round-bottom-large w3-padding w3-border w3-border-teal" style="height:100%;">
+			
 			<div class="w3-container w3-padding-small" style="margin:0px;padding:0px;width:100%;min-height:200px;height:auto;">
 				<div class="w3-row w3-bottombar">
 					<!--part 1 -->
@@ -96,8 +102,16 @@
 									</tr>
 									<tr>
 										<td colspan="2" class="w3-text-blue">
-											<input type="checkbox" id="subscription" value="checked-subscription"/> 
-											Subscribe Notification
+											<input type="checkbox" id="subscription" onclick="enable_subscribe(1)" value="checked-subscription" <?php if($subscription_email!="") { echo 'checked disabled'; } ?>/> 
+											<font onclick="enable_subscribe(1)">Subscribe Notification</font>
+											<div class="w3-margin-0 w3-padding-0" id="edit_subscription" style="display:none;">
+												<input type="email" placeholder=" Email Address" value="<?php if($subscription_email!="") { echo $subscription_email; } ?>" id="subscription_email" class="w3-round-large"> 
+												<input type="hidden" id="sub_s_id" value="<?php echo $reg_no; ?>">
+												<input type="hidden" id="sub_dob" value="<?php echo $birthdate; ?>">
+												<input type="hidden" id="sub_email" value="<?php echo $subscription_email; ?>">
+												<i class="w3-green fa fa-check-square-o w3-large" onclick="enable_subscribe(2)"></i> 
+												<i class="w3-red fa fa-times-circle-o w3-large" onclick="enable_subscribe(0)"></i>
+											</div>
 										</td>
 									</tr>
 								</table>
@@ -139,7 +153,7 @@
 					<!-- use red in fail -->
 					<!-- use blue in retake -->
 					<!-- use yellow in incomplete -->
-					<button class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:270px;display:block;margin:5px 0px;"><i class="fa fa-arrow-circle-o-down"></i> Semester: Summer-2014</button>
+					<button class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:5px 0px;"><i class="fa fa-arrow-circle-o-down"></i> Semester Result: Summer-2014</button>
 					<table style="width:90%;" class="w3-hide w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
 						<tr class="w3-black w3-bold w3-padding-small">
 							<td colspan="2" class="w3-padding-small">Semester: Summer-2014</td>
@@ -180,7 +194,7 @@
 						</tr>
 					</table>
 					
-					<button class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:270px; display:block;margin:5px 0px;"><i class="fa fa-arrow-circle-o-down"></i> Semester: Fall-2014</button>
+					<button class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px; display:block;margin:5px 0px;"><i class="fa fa-arrow-circle-o-down"></i> Semester Result: Fall-2014</button>
 					<table style="width:90%;" class="w3-hide w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
 						<tr class="w3-black w3-bold w3-padding-small">
 							<td colspan="2" class="w3-padding-small">Semester: Summer-2014</td>
