@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 25, 2020 at 08:29 PM
+-- Generation Time: Jan 26, 2020 at 09:14 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -33,12 +33,19 @@ CREATE TABLE `nr_admin` (
   `nr_admin_name` varchar(100) NOT NULL,
   `nr_admin_email` varchar(60) NOT NULL,
   `nr_admin_password` varchar(60) NOT NULL,
-  `nr_admin_mobile` varchar(20) NOT NULL,
+  `nr_admin_cell_no` varchar(20) NOT NULL,
   `nr_admin_photo` varchar(60) NOT NULL,
-  `nr_admin_type` enum('General','Moderator','Admin') NOT NULL,
+  `nr_admin_type` enum('Moderator','Admin') NOT NULL,
   `nr_admin_designation` varchar(50) NOT NULL,
   `nr_admin_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Dumping data for table `nr_admin`
+--
+
+INSERT INTO `nr_admin` (`nr_admin_id`, `nr_admin_name`, `nr_admin_email`, `nr_admin_password`, `nr_admin_cell_no`, `nr_admin_photo`, `nr_admin_type`, `nr_admin_designation`, `nr_admin_status`) VALUES
+(1, 'Shams Elahi Rasel', 'ser@gmail.com', '', '', '', 'Admin', 'Controller of Examination, NEUB', 'Active');
 
 -- --------------------------------------------------------
 
@@ -47,12 +54,21 @@ CREATE TABLE `nr_admin` (
 --
 
 CREATE TABLE `nr_course` (
+  `nr_course_id` bigint(20) NOT NULL,
   `nr_course_code` varchar(20) NOT NULL,
   `nr_course_title` varchar(100) NOT NULL,
   `nr_course_credit` float NOT NULL,
   `nr_prog_id` bigint(20) NOT NULL,
   `nr_course_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Dumping data for table `nr_course`
+--
+
+INSERT INTO `nr_course` (`nr_course_id`, `nr_course_code`, `nr_course_title`, `nr_course_credit`, `nr_prog_id`, `nr_course_status`) VALUES
+(1, 'CSE 111', 'Fundamentals of Computers', 3, 1, 'Active'),
+(2, 'CSE 113', 'Structured Programming Language', 3, 1, 'Active');
 
 -- --------------------------------------------------------
 
@@ -73,6 +89,26 @@ CREATE TABLE `nr_department` (
 
 INSERT INTO `nr_department` (`nr_dept_id`, `nr_dept_title`, `nr_dept_code`, `nr_dept_status`) VALUES
 (1, 'Computer Science & Engineering', 3, 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nr_faculty`
+--
+
+CREATE TABLE `nr_faculty` (
+  `nr_faculty_id` bigint(20) NOT NULL,
+  `nr_faculty_name` varchar(100) NOT NULL,
+  `nr_faculty_designation` varchar(150) NOT NULL,
+  `nr_faculty_join_date` varchar(20) NOT NULL,
+  `nr_faculty_resign_date` varchar(20) NOT NULL,
+  `nr_faculty_type` enum('Permanent','Guest','Adjunct') NOT NULL,
+  `nr_dept_id` bigint(20) NOT NULL,
+  `nr_faculty_password` varchar(100) NOT NULL,
+  `nr_faculty_email` varchar(100) NOT NULL,
+  `nr_faculty_cell_no` varchar(20) NOT NULL,
+  `nr_faculty_photo` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 -- --------------------------------------------------------
 
@@ -126,16 +162,44 @@ INSERT INTO `nr_program_credit` (`nr_prcr_id`, `nr_prog_id`, `nr_prcr_total`, `n
 CREATE TABLE `nr_result` (
   `nr_result_id` bigint(20) NOT NULL,
   `nr_stud_id` bigint(20) NOT NULL,
-  `nr_course_code` varchar(20) NOT NULL,
-  `nr_result_marks` float NOT NULL,
-  `nr_result_grade` varchar(30) NOT NULL,
-  `nr_result_grade_point` float NOT NULL,
+  `nr_course_id` bigint(20) NOT NULL,
+  `nr_result_marks` double NOT NULL,
+  `nr_result_grade` varchar(200) NOT NULL,
+  `nr_result_grade_point` double NOT NULL,
   `nr_result_semester` enum('Spring','Summer','Fall') NOT NULL,
   `nr_result_year` year(4) NOT NULL,
   `nr_result_remarks` enum('Incomplete','Expelled','Makeup_MS','Makeup_SF','Makeup_MS_SF','Withdraw') NOT NULL,
   `nr_result_status` enum('Active','Inactive') NOT NULL,
-  `nr_prog_id` bigint(20) NOT NULL
+  `nr_prog_id` bigint(20) NOT NULL,
+  `nr_result_publish_date` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nr_result_check_transaction`
+--
+
+CREATE TABLE `nr_result_check_transaction` (
+  `nr_stud_id` bigint(20) NOT NULL,
+  `nr_rechtr_ip_address` varchar(20) NOT NULL,
+  `nr_rechtr_country` varchar(50) NOT NULL,
+  `nr_rechtr_city` varchar(50) NOT NULL,
+  `nr_rechtr_lat` varchar(100) NOT NULL,
+  `nr_rechtr_lng` varchar(100) NOT NULL,
+  `nr_rechtr_timezone` varchar(100) NOT NULL,
+  `nr_rechtr_date` varchar(100) NOT NULL,
+  `nr_rechtr_time` varchar(100) NOT NULL,
+  `nr_rechtr_status` enum('Active','Inactive') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Dumping data for table `nr_result_check_transaction`
+--
+
+INSERT INTO `nr_result_check_transaction` (`nr_stud_id`, `nr_rechtr_ip_address`, `nr_rechtr_country`, `nr_rechtr_city`, `nr_rechtr_lat`, `nr_rechtr_lng`, `nr_rechtr_timezone`, `nr_rechtr_date`, `nr_rechtr_time`, `nr_rechtr_status`) VALUES
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-26', '08:20 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-26', '08:37 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -149,10 +213,10 @@ CREATE TABLE `nr_student` (
   `nr_stud_dob` varchar(20) NOT NULL,
   `nr_stud_gender` enum('Male','Female','Other') NOT NULL,
   `nr_stud_email` varchar(60) NOT NULL,
+  `nr_stud_cell_no` varchar(20) NOT NULL,
   `nr_stud_photo` varchar(60) NOT NULL,
   `nr_prog_id` bigint(20) NOT NULL,
   `nr_prcr_id` bigint(20) NOT NULL,
-  `nr_stud_credit_waived` float NOT NULL,
   `nr_stud_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
@@ -160,8 +224,44 @@ CREATE TABLE `nr_student` (
 -- Dumping data for table `nr_student`
 --
 
-INSERT INTO `nr_student` (`nr_stud_id`, `nr_stud_name`, `nr_stud_dob`, `nr_stud_gender`, `nr_stud_email`, `nr_stud_photo`, `nr_prog_id`, `nr_prcr_id`, `nr_stud_credit_waived`, `nr_stud_status`) VALUES
-(140203020002, 'Mir Lutfur Rahman', '1996-07-02', 'Male', 'mirlutfur.rahman@gmail.com', '', 1, 1, 0, 'Active');
+INSERT INTO `nr_student` (`nr_stud_id`, `nr_stud_name`, `nr_stud_dob`, `nr_stud_gender`, `nr_stud_email`, `nr_stud_cell_no`, `nr_stud_photo`, `nr_prog_id`, `nr_prcr_id`, `nr_stud_status`) VALUES
+(140203020002, 'Mir Lutfur Rahman', '1996-07-02', 'Male', 'mlrahman@gmail.com', '', '', 1, 1, 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nr_student_waived_credit`
+--
+
+CREATE TABLE `nr_student_waived_credit` (
+  `nr_stwacr_id` bigint(20) NOT NULL,
+  `nr_stud_id` bigint(20) NOT NULL,
+  `nr_course_id` bigint(20) NOT NULL,
+  `nr_stwacr_date` varchar(20) NOT NULL,
+  `nr_stwacr_marks` double NOT NULL,
+  `nr_stwacr_grade` varchar(200) NOT NULL,
+  `nr_stwacr_grade_point` double NOT NULL,
+  `nr_stwacr_status` enum('Active','Inactive') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Dumping data for table `nr_student_waived_credit`
+--
+
+INSERT INTO `nr_student_waived_credit` (`nr_stwacr_id`, `nr_stud_id`, `nr_course_id`, `nr_stwacr_date`, `nr_stwacr_marks`, `nr_stwacr_grade`, `nr_stwacr_grade_point`, `nr_stwacr_status`) VALUES
+(1, 140203020002, 1, '2020-01-26', 140203031112.5, '1858411229d78def5b8862e672cb210208e69afd', 140203026812.5, 'Active'),
+(2, 140203020002, 2, '2020-01-26', 140203032362.5, '1858411229d78def5b8862e672cb210208e69afd', 140203026812.5, 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `nr_student_waived_credit_total`
+-- (See below for the actual view)
+--
+CREATE TABLE `nr_student_waived_credit_total` (
+`total_credit` double
+,`nr_stud_id` bigint(20)
+);
 
 -- --------------------------------------------------------
 
@@ -171,6 +271,7 @@ INSERT INTO `nr_student` (`nr_stud_id`, `nr_stud_name`, `nr_stud_dob`, `nr_stud_
 
 CREATE TABLE `nr_system_component` (
   `nr_syco_id` bigint(20) NOT NULL,
+  `nr_admin_id` bigint(20) NOT NULL,
   `nr_syco_title` varchar(50) NOT NULL,
   `nr_syco_caption` varchar(50) NOT NULL,
   `nr_syco_address` varchar(150) NOT NULL,
@@ -188,8 +289,17 @@ CREATE TABLE `nr_system_component` (
 -- Dumping data for table `nr_system_component`
 --
 
-INSERT INTO `nr_system_component` (`nr_syco_id`, `nr_syco_title`, `nr_syco_caption`, `nr_syco_address`, `nr_syco_tel`, `nr_syco_email`, `nr_syco_mobile`, `nr_syco_web`, `nr_syco_contact_email`, `nr_syco_map_link`, `nr_syco_date`, `nr_syco_status`) VALUES
-(1, 'NEUB Result Portal', 'Permanent Campus', 'Telihaor, Sheikhghat, Sylhet-3100', '0821 710221-2', 'info@neub.edu.bd', '01755566994', 'www.neub.edu.bd', 'result@neub.edu.bd', 'https://maps.google.com/maps?q=north%20east%20university%20bangladesh&t=&z=15&ie=UTF8&iwloc=&output=embed', '2020-01-25', 'Active');
+INSERT INTO `nr_system_component` (`nr_syco_id`, `nr_admin_id`, `nr_syco_title`, `nr_syco_caption`, `nr_syco_address`, `nr_syco_tel`, `nr_syco_email`, `nr_syco_mobile`, `nr_syco_web`, `nr_syco_contact_email`, `nr_syco_map_link`, `nr_syco_date`, `nr_syco_status`) VALUES
+(1, 1, 'NEUB Result Portal', 'Permanent Campus', 'Telihaor, Sheikhghat, Sylhet-3100', '0821 710221-2', 'info@neub.edu.bd', '01755566994', 'www.neub.edu.bd', 'result@neub.edu.bd', 'https://maps.google.com/maps?q=north%20east%20university%20bangladesh&t=&z=15&ie=UTF8&iwloc=&output=embed', '2020-01-25', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `nr_student_waived_credit_total`
+--
+DROP TABLE IF EXISTS `nr_student_waived_credit_total`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `nr_student_waived_credit_total`  AS  select sum(`c`.`nr_course_credit`) AS `total_credit`,`nswc`.`nr_stud_id` AS `nr_stud_id` from (`nr_course` `c` join `nr_student_waived_credit` `nswc`) where `c`.`nr_course_id` = `nswc`.`nr_course_id` and `nswc`.`nr_stwacr_status` = 'Active' group by `nswc`.`nr_stud_id` ;
 
 --
 -- Indexes for dumped tables
@@ -205,7 +315,7 @@ ALTER TABLE `nr_admin`
 -- Indexes for table `nr_course`
 --
 ALTER TABLE `nr_course`
-  ADD PRIMARY KEY (`nr_course_code`),
+  ADD PRIMARY KEY (`nr_course_id`),
   ADD KEY `nr_prog_id` (`nr_prog_id`);
 
 --
@@ -213,6 +323,13 @@ ALTER TABLE `nr_course`
 --
 ALTER TABLE `nr_department`
   ADD PRIMARY KEY (`nr_dept_id`);
+
+--
+-- Indexes for table `nr_faculty`
+--
+ALTER TABLE `nr_faculty`
+  ADD PRIMARY KEY (`nr_faculty_id`),
+  ADD KEY `nr_dept_id` (`nr_dept_id`);
 
 --
 -- Indexes for table `nr_program`
@@ -234,8 +351,14 @@ ALTER TABLE `nr_program_credit`
 ALTER TABLE `nr_result`
   ADD PRIMARY KEY (`nr_result_id`),
   ADD KEY `nr_stud_id` (`nr_stud_id`),
-  ADD KEY `nr_course_code` (`nr_course_code`),
-  ADD KEY `nr_prog_id` (`nr_prog_id`);
+  ADD KEY `nr_prog_id` (`nr_prog_id`),
+  ADD KEY `nr_course_id` (`nr_course_id`);
+
+--
+-- Indexes for table `nr_result_check_transaction`
+--
+ALTER TABLE `nr_result_check_transaction`
+  ADD KEY `nr_stud_id` (`nr_stud_id`);
 
 --
 -- Indexes for table `nr_student`
@@ -246,10 +369,19 @@ ALTER TABLE `nr_student`
   ADD KEY `nr_prcr_id` (`nr_prcr_id`);
 
 --
+-- Indexes for table `nr_student_waived_credit`
+--
+ALTER TABLE `nr_student_waived_credit`
+  ADD PRIMARY KEY (`nr_stwacr_id`),
+  ADD KEY `nr_stud_id` (`nr_stud_id`),
+  ADD KEY `nr_course_id` (`nr_course_id`);
+
+--
 -- Indexes for table `nr_system_component`
 --
 ALTER TABLE `nr_system_component`
-  ADD PRIMARY KEY (`nr_syco_id`);
+  ADD PRIMARY KEY (`nr_syco_id`),
+  ADD KEY `nr_admin_id` (`nr_admin_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -259,13 +391,25 @@ ALTER TABLE `nr_system_component`
 -- AUTO_INCREMENT for table `nr_admin`
 --
 ALTER TABLE `nr_admin`
-  MODIFY `nr_admin_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `nr_admin_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `nr_course`
+--
+ALTER TABLE `nr_course`
+  MODIFY `nr_course_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `nr_department`
 --
 ALTER TABLE `nr_department`
   MODIFY `nr_dept_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `nr_faculty`
+--
+ALTER TABLE `nr_faculty`
+  MODIFY `nr_faculty_id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `nr_program`
@@ -286,6 +430,12 @@ ALTER TABLE `nr_result`
   MODIFY `nr_result_id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `nr_student_waived_credit`
+--
+ALTER TABLE `nr_student_waived_credit`
+  MODIFY `nr_stwacr_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `nr_system_component`
 --
 ALTER TABLE `nr_system_component`
@@ -300,6 +450,12 @@ ALTER TABLE `nr_system_component`
 --
 ALTER TABLE `nr_course`
   ADD CONSTRAINT `nr_course_ibfk_1` FOREIGN KEY (`nr_prog_id`) REFERENCES `nr_program` (`nr_prog_id`);
+
+--
+-- Constraints for table `nr_faculty`
+--
+ALTER TABLE `nr_faculty`
+  ADD CONSTRAINT `nr_faculty_ibfk_1` FOREIGN KEY (`nr_dept_id`) REFERENCES `nr_department` (`nr_dept_id`);
 
 --
 -- Constraints for table `nr_program`
@@ -318,8 +474,14 @@ ALTER TABLE `nr_program_credit`
 --
 ALTER TABLE `nr_result`
   ADD CONSTRAINT `nr_result_ibfk_1` FOREIGN KEY (`nr_stud_id`) REFERENCES `nr_student` (`nr_stud_id`),
-  ADD CONSTRAINT `nr_result_ibfk_2` FOREIGN KEY (`nr_course_code`) REFERENCES `nr_course` (`nr_course_code`),
-  ADD CONSTRAINT `nr_result_ibfk_3` FOREIGN KEY (`nr_prog_id`) REFERENCES `nr_program` (`nr_prog_id`);
+  ADD CONSTRAINT `nr_result_ibfk_3` FOREIGN KEY (`nr_prog_id`) REFERENCES `nr_program` (`nr_prog_id`),
+  ADD CONSTRAINT `nr_result_ibfk_4` FOREIGN KEY (`nr_course_id`) REFERENCES `nr_course` (`nr_course_id`);
+
+--
+-- Constraints for table `nr_result_check_transaction`
+--
+ALTER TABLE `nr_result_check_transaction`
+  ADD CONSTRAINT `nr_result_check_transaction_ibfk_1` FOREIGN KEY (`nr_stud_id`) REFERENCES `nr_student` (`nr_stud_id`);
 
 --
 -- Constraints for table `nr_student`
@@ -327,6 +489,19 @@ ALTER TABLE `nr_result`
 ALTER TABLE `nr_student`
   ADD CONSTRAINT `nr_student_ibfk_1` FOREIGN KEY (`nr_prog_id`) REFERENCES `nr_program` (`nr_prog_id`),
   ADD CONSTRAINT `nr_student_ibfk_2` FOREIGN KEY (`nr_prcr_id`) REFERENCES `nr_program_credit` (`nr_prcr_id`);
+
+--
+-- Constraints for table `nr_student_waived_credit`
+--
+ALTER TABLE `nr_student_waived_credit`
+  ADD CONSTRAINT `nr_student_waived_credit_ibfk_1` FOREIGN KEY (`nr_stud_id`) REFERENCES `nr_student` (`nr_stud_id`),
+  ADD CONSTRAINT `nr_student_waived_credit_ibfk_2` FOREIGN KEY (`nr_course_id`) REFERENCES `nr_course` (`nr_course_id`);
+
+--
+-- Constraints for table `nr_system_component`
+--
+ALTER TABLE `nr_system_component`
+  ADD CONSTRAINT `nr_system_component_ibfk_1` FOREIGN KEY (`nr_admin_id`) REFERENCES `nr_admin` (`nr_admin_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

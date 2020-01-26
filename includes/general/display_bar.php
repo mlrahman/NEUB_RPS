@@ -33,6 +33,25 @@
 	
 </header>
 <script>
+	function show_result_div(y)
+	{
+		var z=document.getElementById(y+'_icon').className;
+		//console.log(z);
+		if(z=="fa fa-plus-square")
+		{
+			document.getElementById(y+'_icon').classList.remove("fa-plus-square");
+			document.getElementById(y+'_icon').classList.add("fa-minus-square");
+			document.getElementById(y).style.display='block';
+		}
+		else if(z=="fa fa-minus-square")
+		{
+			document.getElementById(y+'_icon').classList.remove("fa-minus-square");
+			document.getElementById(y+'_icon').classList.add("fa-plus-square");
+			document.getElementById(y).style.display='none';
+			
+		}
+	}
+
 	function ValidateEmail(x)  
 	{  
 		var atposition=x.indexOf("@");  
@@ -150,6 +169,11 @@
 					{
 						document.getElementById("rs_not_found").style.display="block";
 						setTimeout(function(){ document.getElementById("rs_not_found").style.display="none"; }, 1500);
+					}
+					else if(this.responseText.trim()=="error")
+					{
+						document.getElementById("rs_system_failed").style.display="block";
+						setTimeout(function(){ document.getElementById("rs_system_failed").style.display="none"; }, 1500);
 					}
 					else
 					{	

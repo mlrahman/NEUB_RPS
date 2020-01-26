@@ -4,7 +4,7 @@
 		<div class="w3-container" style="margin:0px;padding:0px;">
 
 			<div class="w3-container"><br>
-				<h2  style="margin-bottom:0px;font-family: 'Comic Sans MS', cursive, sans-serif;" class="w3-xlarge w3-bold w3-center" >General Admin</h2>
+				<h2  style="margin-bottom:0px;font-family: 'Comic Sans MS', cursive, sans-serif;" class="w3-xlarge w3-bold w3-center" >Faculty Login</h2>
 			</div>
 
 			<form style="margin-top:0px;" class="w3-container w3-margin-bottom" action="index.php" method="post">

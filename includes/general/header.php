@@ -18,15 +18,15 @@ Email: mlrahman@neub.edu.bd
 	$stmt->execute();
 	$result = $stmt->fetchAll();
 	//echo '<script>console.log("'.$result[0][1].'-ttt");</script>';
-	$title=$result[0][1];
-	$caption=$result[0][2];
-	$address=$result[0][3];
-	$telephone=$result[0][4];
-	$email=$result[0][5];
-	$mobile=$result[0][6];
-	$web=$result[0][7];
-	$contact_email=$result[0][8];//for sending message from contact us form
-	$map=$result[0][9];
+	$title=$result[0][2];
+	$caption=$result[0][3];
+	$address=$result[0][4];
+	$telephone=$result[0][5];
+	$email=$result[0][6];
+	$mobile=$result[0][7];
+	$web=$result[0][8];
+	$contact_email=$result[0][9];//for sending message from contact us form
+	$map=$result[0][10];
 	//logo and video is always fixed in name 
 	
 ?>
@@ -62,6 +62,10 @@ Email: mlrahman@neub.edu.bd
 		
 		<div id="rs_server_failed" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
 			<i class="fa fa-bell-o"></i> Sorry! Internal server error occured.
+		</div>
+		
+		<div id="rs_system_failed" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
+			<i class="fa fa-bell-o"></i> Sorry! System error occured.
 		</div>
 		
 		<div id="rs_loading" title="Fetching result, please wait.." class="w3-container w3-animate-top w3-text-white w3-center" style="display:none;width:100%;height:100%;background:black;opacity:0.6;top:0;left:0;position:fixed;z-index:9999;padding-top:170px;">

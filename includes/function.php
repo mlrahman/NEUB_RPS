@@ -1,4 +1,65 @@
 <?php
+function get_current_date()
+{
+	return Date("Y-m-d");
+}
+
+function get_current_time()
+{
+	return Date("h:i A");
+}
+
+function grade_point_encrypt($s_id,$g)
+{
+	return ($s_id+(((($g*100.0)+255.5)*10.0)+255.5));
+}
+function grade_point_decrypt($s_id,$g)
+{
+	return ((((($g-$s_id)-255.5)/10.0)-255.5)/100.0);
+}
+function marks_encrypt($s_id,$m)
+{
+	return ($s_id+(((($m*10.0)+255.5)*10.0)+255.5));
+}
+function marks_decrypt($s_id,$m)
+{
+	return ((((($m-$s_id)-255.5)/10.0)-255.5)/10.0);
+}
+function grade_encrypt($s_id,$g)
+{
+	$g=$s_id.'++'.$g.'++';
+	$g=sha1($g);
+	$g=md5($g);
+	$g=sha1($g);
+	return $g;
+}
+function grade_decrypt($s_id,$g)
+{
+	if(grade_encrypt($s_id,'I')==$g) return 'I'; //incomplete
+	if(grade_encrypt($s_id,'F')==$g) return 'F';
+	if(grade_encrypt($s_id,'D')==$g) return 'D';
+	if(grade_encrypt($s_id,'C')==$g) return 'C';
+	if(grade_encrypt($s_id,'C+')==$g) return 'C+';
+	if(grade_encrypt($s_id,'B-')==$g) return 'B-';
+	if(grade_encrypt($s_id,'B')==$g) return 'B';
+	if(grade_encrypt($s_id,'B+')==$g) return 'B+';
+	if(grade_encrypt($s_id,'A-')==$g) return 'A-';
+	if(grade_encrypt($s_id,'A')==$g) return 'A';
+	if(grade_encrypt($s_id,'A+')==$g) return 'A+';
+}
+
+function getVisIpAddr() { 
+      
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) { 
+        return $_SERVER['HTTP_CLIENT_IP']; 
+    } 
+    else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) { 
+        return $_SERVER['HTTP_X_FORWARDED_FOR']; 
+    } 
+    else { 
+        return $_SERVER['REMOTE_ADDR']; 
+    }	
+} 
 
 function get_session($s_id)
 {

@@ -1,56 +1,92 @@
 <?php
 	if(isset($_GET['s_id']) && isset($_GET['dob']))
 	{
-		$s_id=$_GET['s_id'];
-		$dob=$_GET['dob'];
-		require("../includes/db_connection.php");
-		require("../includes/function.php");
-		$stmt = $conn->prepare("select * from nr_student where nr_stud_id=:s_id and nr_stud_dob=:dob and nr_stud_status='Active' limit 1 ");
-		$stmt->bindParam(':s_id', $s_id);
-		$stmt->bindParam(':dob', $dob);
-		$stmt->execute();
-		$result = $stmt->fetchAll();
+		try{
+			$s_id=$_GET['s_id'];
+			$dob=$_GET['dob'];
+			require("../includes/db_connection.php");
+			require("../includes/function.php");
+			$stmt = $conn->prepare("select * from nr_student where nr_stud_id=:s_id and nr_stud_dob=:dob and nr_stud_status='Active' limit 1 ");
+			$stmt->bindParam(':s_id', $s_id);
+			$stmt->bindParam(':dob', $dob);
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			
+			if(count($result)==0)
+			{
+				echo 'not_found';
+				die();
+			}
+			
+			//Check details will insert into transaction
+			
+			$vis_ip = getVisIPAddr();
+			$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
+			if($vis_ip=="")$vis_ip="N/A";
+			$country=$ipdat->geoplugin_countryName;
+			if($country=="")$country="N/A";
+			$city=$ipdat->geoplugin_city;
+			if($city=="")$city="N/A";
+			$lat=$ipdat->geoplugin_latitude;
+			if($lat=="")$lat="N/A";
+			$lng=$ipdat->geoplugin_longitude;
+			if($lng=="")$lng="N/A";
+			$timezone=$ipdat->geoplugin_timezone;
+			if($timezone=="")$timezone="N/A";
+			$date=get_current_date();
+			$time=get_current_time();
+			$stmt = $conn->prepare("insert into nr_result_check_transaction values(:s_id,'$vis_ip','$country','$city','$lat','$lng','$timezone','$date','$time','Active') ");
+			$stmt->bindParam(':s_id', $s_id);
+			$stmt->execute();
+			
+			
+			
+			$name = $result[0][1];
+			$reg_no = $result[0][0];
+			$session = get_session($reg_no);
+			$gender = $result[0][3];
+			$birthdate = $result[0][2];
+			$subscription_email = $result[0][4];
+			$prog_id = $result[0][7];
+			$prcr_id = $result[0][8];
+			
+			$stmt = $conn->prepare("select * from nr_program where nr_prog_id=$prog_id");
+			$stmt->execute();
+			$prog_result = $stmt->fetchAll();
+			$degree = $prog_result[0][1];
+			
+			$stmt = $conn->prepare("select * from nr_program_credit where nr_prcr_id=$prcr_id");
+			$stmt->execute();
+			$prcr_result = $stmt->fetchAll();
+			$total_credit=$prcr_result[0][2];
+			
+			$earned_credit=0.0; //need to be calculate
+			
+			$stmt = $conn->prepare("select * from nr_student_waived_credit_total where nr_stud_id=:s_id ");
+			$stmt->bindParam(':s_id', $s_id);
+			$stmt->execute();
+			$stwacrto_result = $stmt->fetchAll();
+			$waived_credit=$stwacrto_result[0][0]; 
+			
+			
+			$total_cgpa=0.0; //nedd to be calculate
+			
+			$degree_status=$total_credit-($earned_credit+$waived_credit);
+			if($degree_status==0)
+				$degree_status='Completed';
+			else
+				$degree_status='Not Completed';
+			
+			$photo=$result[0][6];
+			
+			if($waived_credit==0) $waived_credit='N/A';
 		
-		if(count($result)==0)
+		}catch(PDOException $e)
 		{
-			echo 'not_found';
+			echo 'error';
 			die();
 		}
 		
-		$name = $result[0][1];
-		$reg_no = $result[0][0];
-		$session = get_session($reg_no);
-		$gender = $result[0][3];
-		$birthdate = $result[0][2];
-		$subscription_email = $result[0][4];
-		$prog_id = $result[0][6];
-		$prcr_id = $result[0][7];
-		
-		$stmt = $conn->prepare("select * from nr_program where nr_prog_id=$prog_id");
-		$stmt->execute();
-		$prog_result = $stmt->fetchAll();
-		$degree = $prog_result[0][1];
-		
-		$stmt = $conn->prepare("select * from nr_program_credit where nr_prcr_id=$prcr_id");
-		$stmt->execute();
-		$prcr_result = $stmt->fetchAll();
-		$total_credit=$prcr_result[0][2];
-		
-		$earned_credit=0.0; //need to be calculate
-		
-		$waived_credit=$result[0][8];
-		
-		$total_cgpa=0.0; //nedd to be calculate
-		
-		$degree_status=$total_credit-($earned_credit+$waived_credit);
-		if($degree_status==0)
-			$degree_status='Completed';
-		else
-			$degree_status='Not Completed';
-		
-		$photo=$result[0][5];
-		
-		if($waived_credit==0) $waived_credit='N/A';
 ?>
 
 	<div class=" w3-modal-content w3-round-large w3-animate-bottom w3-card-4 w3-leftbar w3-rightbar w3-bottombar w3-topbar w3-border-white">
@@ -103,7 +139,7 @@
 									<tr>
 										<td colspan="2" class="w3-text-blue">
 											<input type="checkbox" id="subscription" onclick="enable_subscribe(1)" value="checked-subscription" <?php if($subscription_email!="") { echo 'checked disabled'; } ?>/> 
-											<font onclick="enable_subscribe(1)">Subscribe Notification</font>
+											<font onclick="enable_subscribe(1)" class="w3-cursor">Subscribe Notification</font>
 											<div class="w3-margin-0 w3-padding-0" id="edit_subscription" style="display:none;">
 												<input type="email" placeholder=" Email Address" value="<?php if($subscription_email!="") { echo $subscription_email; } ?>" id="subscription_email" class="w3-round-large"> 
 												<input type="hidden" id="sub_s_id" value="<?php echo $reg_no; ?>">
@@ -153,8 +189,8 @@
 					<!-- use red in fail -->
 					<!-- use blue in retake -->
 					<!-- use yellow in incomplete -->
-					<button class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:5px 0px;"><i class="fa fa-arrow-circle-o-down"></i> Semester Result: Summer-2014</button>
-					<table style="width:90%;" class="w3-hide w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
+					<button onclick="show_result_div('Summer-2014')" class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:5px 0px;"><i class="fa fa-plus-square" id="Summer-2014_icon" ></i> Semester Result: Summer-2014</button>
+					<table id="Summer-2014" style="width:90%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
 						<tr class="w3-black w3-bold w3-padding-small">
 							<td colspan="2" class="w3-padding-small">Semester: Summer-2014</td>
 							<td colspan="2" class="w3-padding-small">CGPA: 4.00</td>
@@ -194,10 +230,10 @@
 						</tr>
 					</table>
 					
-					<button class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px; display:block;margin:5px 0px;"><i class="fa fa-arrow-circle-o-down"></i> Semester Result: Fall-2014</button>
-					<table style="width:90%;" class="w3-hide w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
+					<button onclick="show_result_div('Fall-2014')"  class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px; display:block;margin:5px 0px;"><i class="fa fa-plus-square" id="Fall-2014_icon"></i> Semester Result: Fall-2014</button>
+					<table id="Fall-2014" style="width:90%;display:none;" class=" w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
 						<tr class="w3-black w3-bold w3-padding-small">
-							<td colspan="2" class="w3-padding-small">Semester: Summer-2014</td>
+							<td colspan="2" class="w3-padding-small">Semester: Fall-2014</td>
 							<td colspan="2" class="w3-padding-small">CGPA: 4.00</td>
 							<td colspan="2"class="w3-padding-small">Credit: 7.5</td>
 						</tr>
