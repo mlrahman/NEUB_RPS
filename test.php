@@ -2,11 +2,44 @@
 
 include("includes/function.php");
 
-echo marks_encrypt(140203020002,95.5).'</br>';
-echo marks_decrypt(140203020002,marks_encrypt(140203020002,95.5)).'</br>';
-echo grade_encrypt(140203020002,'A+').'</br>';
-echo grade_decrypt(140203020002,grade_encrypt(140203020002,'A+')).'</br>';
-echo grade_point_encrypt(140203020002,4.00).'</br>';
-echo grade_point_decrypt(140203020002,grade_point_encrypt(140203020002,4.00)).'</br>';
+$s_id=140203020002;
+$marks=75;
+$gpa=3.75;
+$g='A';
+
+echo marks_encrypt($s_id,$marks).'</br>';
+echo marks_decrypt($s_id,marks_encrypt($s_id,$marks)).'</br>';
+echo grade_encrypt($s_id,$g).'</br>';
+echo grade_decrypt($s_id,grade_encrypt($s_id,$g)).'</br>';
+echo grade_point_encrypt($s_id,$gpa).'</br>';
+echo grade_point_decrypt($s_id,grade_point_encrypt($s_id,$gpa)).'</br>';
+
+echo '-------------------------------------</br>';
+
+$k=array();
+for($i=1;$i<=10;$i++)
+{
+	$j=array('a'=>10,'b'=>20,'c'=>30,'d'=>40);
+	$k[$i]=$j;
+}
+
+echo count($k[1]).'</br>';
+$k[1][4]=50;
+echo count($k[1]).'</br>';
+
+
+
+foreach($k as $a)
+{
+	echo $a['a'].' --- '.$a['b'].'</br>';
+}
+
+$a=array();
+$a['h'][0]=10;
+//echo $a['h'][0];
+//echo array_key_exists('i',$a);
+
+
+
 
 ?>

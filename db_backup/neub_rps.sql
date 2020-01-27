@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2020 at 09:14 PM
+-- Generation Time: Jan 27, 2020 at 09:10 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -68,7 +68,11 @@ CREATE TABLE `nr_course` (
 
 INSERT INTO `nr_course` (`nr_course_id`, `nr_course_code`, `nr_course_title`, `nr_course_credit`, `nr_prog_id`, `nr_course_status`) VALUES
 (1, 'CSE 111', 'Fundamentals of Computers', 3, 1, 'Active'),
-(2, 'CSE 113', 'Structured Programming Language', 3, 1, 'Active');
+(2, 'CSE 113', 'Structured Programming Language', 3, 1, 'Active'),
+(3, 'CSE 114', 'Structured Programming Language Lab', 1.5, 1, 'Active'),
+(4, 'CSE 311', 'Computer Architecture', 3, 1, 'Active'),
+(5, 'CSE 313', 'Database System', 3, 1, 'Active'),
+(6, 'CSE 314', 'Database System Lab', 1.5, 1, 'Active');
 
 -- --------------------------------------------------------
 
@@ -174,6 +178,14 @@ CREATE TABLE `nr_result` (
   `nr_result_publish_date` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
+--
+-- Dumping data for table `nr_result`
+--
+
+INSERT INTO `nr_result` (`nr_result_id`, `nr_stud_id`, `nr_course_id`, `nr_result_marks`, `nr_result_grade`, `nr_result_grade_point`, `nr_result_semester`, `nr_result_year`, `nr_result_remarks`, `nr_result_status`, `nr_prog_id`, `nr_result_publish_date`) VALUES
+(1, 140203020002, 3, 140203029312.5, '89f276cc01d4af01fa8cee48af8ee962bac42500', 140203026062.5, 'Spring', 2015, '', 'Active', 1, '2020-01-27'),
+(2, 140203020002, 4, 140203029812.5, '500910d02d287a8c898c406ea348043c050d31ca', 140203026312.5, 'Spring', 2015, '', 'Active', 1, '2020-01-27');
+
 -- --------------------------------------------------------
 
 --
@@ -199,7 +211,17 @@ CREATE TABLE `nr_result_check_transaction` (
 
 INSERT INTO `nr_result_check_transaction` (`nr_stud_id`, `nr_rechtr_ip_address`, `nr_rechtr_country`, `nr_rechtr_city`, `nr_rechtr_lat`, `nr_rechtr_lng`, `nr_rechtr_timezone`, `nr_rechtr_date`, `nr_rechtr_time`, `nr_rechtr_status`) VALUES
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-26', '08:20 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-26', '08:37 PM', 'Active');
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-26', '08:37 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '05:52 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '06:30 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '07:07 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '07:18 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '07:55 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '08:18 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '08:58 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '08:59 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '09:01 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '09:09 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -255,17 +277,6 @@ INSERT INTO `nr_student_waived_credit` (`nr_stwacr_id`, `nr_stud_id`, `nr_course
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `nr_student_waived_credit_total`
--- (See below for the actual view)
---
-CREATE TABLE `nr_student_waived_credit_total` (
-`total_credit` double
-,`nr_stud_id` bigint(20)
-);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `nr_system_component`
 --
 
@@ -291,15 +302,6 @@ CREATE TABLE `nr_system_component` (
 
 INSERT INTO `nr_system_component` (`nr_syco_id`, `nr_admin_id`, `nr_syco_title`, `nr_syco_caption`, `nr_syco_address`, `nr_syco_tel`, `nr_syco_email`, `nr_syco_mobile`, `nr_syco_web`, `nr_syco_contact_email`, `nr_syco_map_link`, `nr_syco_date`, `nr_syco_status`) VALUES
 (1, 1, 'NEUB Result Portal', 'Permanent Campus', 'Telihaor, Sheikhghat, Sylhet-3100', '0821 710221-2', 'info@neub.edu.bd', '01755566994', 'www.neub.edu.bd', 'result@neub.edu.bd', 'https://maps.google.com/maps?q=north%20east%20university%20bangladesh&t=&z=15&ie=UTF8&iwloc=&output=embed', '2020-01-25', 'Active');
-
--- --------------------------------------------------------
-
---
--- Structure for view `nr_student_waived_credit_total`
---
-DROP TABLE IF EXISTS `nr_student_waived_credit_total`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `nr_student_waived_credit_total`  AS  select sum(`c`.`nr_course_credit`) AS `total_credit`,`nswc`.`nr_stud_id` AS `nr_stud_id` from (`nr_course` `c` join `nr_student_waived_credit` `nswc`) where `c`.`nr_course_id` = `nswc`.`nr_course_id` and `nswc`.`nr_stwacr_status` = 'Active' group by `nswc`.`nr_stud_id` ;
 
 --
 -- Indexes for dumped tables
@@ -397,7 +399,7 @@ ALTER TABLE `nr_admin`
 -- AUTO_INCREMENT for table `nr_course`
 --
 ALTER TABLE `nr_course`
-  MODIFY `nr_course_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `nr_course_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `nr_department`
@@ -427,7 +429,7 @@ ALTER TABLE `nr_program_credit`
 -- AUTO_INCREMENT for table `nr_result`
 --
 ALTER TABLE `nr_result`
-  MODIFY `nr_result_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `nr_result_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `nr_student_waived_credit`

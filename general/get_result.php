@@ -19,7 +19,6 @@
 			}
 			
 			//Check details will insert into transaction
-			
 			$vis_ip = getVisIPAddr();
 			$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
 			if($vis_ip=="")$vis_ip="N/A";
@@ -50,26 +49,141 @@
 			$prog_id = $result[0][7];
 			$prcr_id = $result[0][8];
 			
+			//Search for student program
 			$stmt = $conn->prepare("select * from nr_program where nr_prog_id=$prog_id");
 			$stmt->execute();
 			$prog_result = $stmt->fetchAll();
 			$degree = $prog_result[0][1];
 			
+			//Search for student program credit
 			$stmt = $conn->prepare("select * from nr_program_credit where nr_prcr_id=$prcr_id");
 			$stmt->execute();
 			$prcr_result = $stmt->fetchAll();
 			$total_credit=$prcr_result[0][2];
 			
-			$earned_credit=0.0; //need to be calculate
-			
-			$stmt = $conn->prepare("select * from nr_student_waived_credit_total where nr_stud_id=:s_id ");
+			//Fetching student result
+			$stmt = $conn->prepare("select * from nr_result where nr_stud_id=:s_id and nr_result_status='Active' "); 
 			$stmt->bindParam(':s_id', $s_id);
 			$stmt->execute();
-			$stwacrto_result = $stmt->fetchAll();
-			$waived_credit=$stwacrto_result[0][0]; 
+			$stud_result=$stmt->fetchAll();
+			$cg=array();
+			$se_re=array();
+			for($i = 0; $i < count($stud_result); $i++) {
+				
+				$stud_result_id=$stud_result[$i][0];
+				$stud_course_id=$stud_result[$i][2];
+				$stud_marks=marks_decrypt($s_id,$stud_result[$i][3]);
+				$stud_grade=grade_decrypt($s_id,$stud_result[$i][4]);
+				$stud_grade_point=grade_point_decrypt($s_id,$stud_result[$i][5]);
+				$stud_semester=$stud_result[$i][6];
+				$stud_year=$stud_result[$i][7];
+				$stud_remarks=$stud_result[$i][8];
+				//$stud_status=$stud_result[$i][9];
+				$stud_prog_id=$stud_result[$i][10];
+				$stud_pub_date=$stud_result[$i][11];
+				//echo '--> '.$stud_result_id.' --- '.$stud_marks.' --- '.$stud_grade.' --- '.$stud_grade_point.' --- '.$stud_course_id.'</br>';
+				$stmt = $conn->prepare("select * from nr_course where nr_course_id='$stud_course_id'"); 
+				$stmt->execute();
+				$course_result=$stmt->fetchAll();
+				$stud_course_code=$course_result[0][1];
+				$stud_course_title=$course_result[0][2];
+				$stud_course_credit=$course_result[0][3];
+				//echo '--> '.$stud_course_code.' --- '.$stud_course_title.' --- '.$stud_course_credit.'</br>';
+				$abc=array('course_code'=>$stud_course_code,'course_title'=>$stud_course_title,'course_credit'=>$stud_course_credit,'grade'=>$stud_grade,'marks'=>$stud_marks,'grade_point'=>$stud_grade_point,'semester'=>$stud_semester,'year'=>$stud_year,'remarks'=>$stud_remarks);
+				
+				//Storing data for showing in tables
+								
+				if(array_key_exists(($stud_semester.'-'.$stud_year),$se_re))
+				{
+					$se_re[($stud_semester.'-'.$stud_year)][count($se_re[($stud_semester.'-'.$stud_year)])]=$abc;
+				}
+				else
+					$se_re[($stud_semester.'-'.$stud_year)][0]=$abc;
+				
+				
+				//Calculating cg and credits by checking unique and best result
+				if(array_key_exists($stud_course_code,$cg))
+				{
+					$prev_grade_point=$cg[$stud_course_code]['gpa'];
+					if($stud_grade_point>=$prev_grade_point)
+						$cg[$stud_course_code]=array('credit'=>$stud_course_credit,'gpa'=>$stud_grade_point);
+				}
+				else
+				{
+					if($stud_grade_point>0.0)
+						$cg[$stud_course_code]=array('credit'=>$stud_course_credit,'gpa'=>$stud_grade_point);
+				}
+				
+			}
+			
+			$earned_credit=0.0;
+			$earned_gpa=0.0;
+			foreach($cg as $cge)
+			{
+				$earned_credit=$earned_credit+$cge['credit'];
+				$earned_gpa=$earned_gpa+($cge['credit']*$cge['gpa']);
+			}
+			$earned_credit=number_format($earned_credit, 2);
+					
+
+
+					
+			//fetching waived course result
+			$stmt = $conn->prepare("select * from nr_student_waived_credit where nr_stud_id=:s_id and nr_stwacr_status='Active' "); 
+			$stmt->bindParam(':s_id', $s_id);
+			$stmt->execute();
+			$stud_result=$stmt->fetchAll();
+			$ra_w=array();
+			$cg_w=array();
+			for($i = 0; $i < count($stud_result); $i++) {
+				
+				$stud_stwacr_id=$stud_result[$i][0];
+				$stud_course_id=$stud_result[$i][2];
+				$stud_marks=marks_decrypt($s_id,$stud_result[$i][4]);
+				$stud_grade=grade_decrypt($s_id,$stud_result[$i][5]);
+				$stud_grade_point=grade_point_decrypt($s_id,$stud_result[$i][6]);
+				$stud_pub_date=$stud_result[$i][3];
+				//echo '--> '.$stud_result_id.' --- '.$stud_marks.' --- '.$stud_grade.' --- '.$stud_grade_point.' --- '.$stud_course_id.'</br>';
+				$stmt = $conn->prepare("select * from nr_course where nr_course_id='$stud_course_id'"); 
+				$stmt->execute();
+				$course_result=$stmt->fetchAll();
+				$stud_course_code=$course_result[0][1];
+				$stud_course_title=$course_result[0][2];
+				$stud_course_credit=$course_result[0][3];
+				
+				$abc=array('course_code'=>$stud_course_code,'course_title'=>$stud_course_title,'course_credit'=>$stud_course_credit,'grade'=>$stud_grade,'marks'=>$stud_marks,'grade_point'=>$stud_grade_point);
+				
+				//Storing data for showing in tables
+				$ra_w[$i]=$abc;
+				
+				//Calculating cg and credits by checking unique and best result
+				if(array_key_exists($stud_course_code,$cg_w))
+				{
+					$prev_grade_point=$cg_w[$stud_course_code]['gpa'];
+					if($stud_grade_point>=$prev_grade_point)
+						$cg_w[$stud_course_code]=array('credit'=>$stud_course_credit,'gpa'=>$stud_grade_point);
+				}
+				else
+				{
+					if($stud_grade_point>0.0)
+						$cg_w[$stud_course_code]=array('credit'=>$stud_course_credit,'gpa'=>$stud_grade_point);
+				}
+				
+				
+			}
+			$waived_credit=0.0; 
+			$waived_gpa=0.0; 
+			foreach($cg_w as $cge)
+			{
+				$waived_credit=$waived_credit+$cge['credit'];
+				$waived_gpa=$waived_gpa+($cge['credit']*$cge['gpa']);
+			}
+			$waived_credit=number_format($waived_credit, 2);
 			
 			
-			$total_cgpa=0.0; //nedd to be calculate
+			//Calculating from both waived and earned_credit
+			$total_cgpa=number_format((($earned_gpa+$waived_gpa)/($earned_credit+$waived_credit)),2); 
+			
 			
 			$degree_status=$total_credit-($earned_credit+$waived_credit);
 			if($degree_status==0)
@@ -189,87 +303,155 @@
 					<!-- use red in fail -->
 					<!-- use blue in retake -->
 					<!-- use yellow in incomplete -->
-					<button onclick="show_result_div('Summer-2014')" class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:5px 0px;"><i class="fa fa-plus-square" id="Summer-2014_icon" ></i> Semester Result: Summer-2014</button>
-					<table id="Summer-2014" style="width:90%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
-						<tr class="w3-black w3-bold w3-padding-small">
-							<td colspan="2" class="w3-padding-small">Semester: Summer-2014</td>
-							<td colspan="2" class="w3-padding-small">CGPA: 4.00</td>
-							<td colspan="2" class="w3-padding-small">Credit: 7.5</td>
-						</tr>
-						<tr class="w3-teal w3-bold">
-							<td style="width:20%;" class="w3-padding-small">Course Code</td>
-							<td style="width:40%;" class="w3-padding-small">Course Title</td>
-							<td style="width:10%;" class="w3-padding-small">Credit</td>
-							<td style="width:10%;" class="w3-padding-small">Grade</td>
-							<td style="width:10%;" class="w3-padding-small">Grade Point</td>
-							<td style="width:10%;" class="w3-padding-small">Remarks</td>
-						</tr>
-						<tr>
-							<td class="w3-padding-small">CSE 111</td>
-							<td class="w3-padding-small">Fundamentals of Computers</td>
-							<td class="w3-padding-small">3.00</td>
-							<td class="w3-padding-small">A+</td>
-							<td class="w3-padding-small">4.00</td>
-							<td class="w3-padding-small"></td>
-						</tr>
-						<tr class="w3-light-gray">
-							<td class="w3-padding-small">CSE 113</td>
-							<td class="w3-padding-small">Structured Programming Language</td>
-							<td class="w3-padding-small">3.00</td>
-							<td class="w3-padding-small">A+</td>
-							<td class="w3-padding-small">4.00</td>
-							<td class="w3-padding-small"></td>
-						</tr>
-						<tr>
-							<td class="w3-padding-small">CSE 114</td>
-							<td class="w3-padding-small">Structured Programming Language Lab</td>
-							<td class="w3-padding-small">1.50</td>
-							<td class="w3-padding-small">A+</td>
-							<td class="w3-padding-small">4.00</td>
-							<td class="w3-padding-small"></td>
-						</tr>
-					</table>
+					<?php
+						
+						for($i=get_year($s_id);$i<=Date("Y");$i++)
+						{			
+							if(array_key_exists(('Spring-'.$i),$se_re))
+							{
+								$t_c=0.0;
+								$t_g=0.0;
+								foreach($se_re['Spring-'.$i] as $z)
+								{
+									$t_c=$t_c+$z['course_credit'];
+									$t_g=$t_g+($z['grade_point']*$z['course_credit']);
+								}
+								
+					?>
+								<button onclick="show_result_div('<?php echo 'Spring-'.$i; ?>')" class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:5px 0px;"><i class="fa fa-plus-square" id="<?php echo 'Spring-'.$i; ?>_icon" ></i> Semester Result: <?php echo 'Spring-'.$i; ?></button>
+								<table id="<?php echo 'Spring-'.$i; ?>" style="width:90%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
+									<tr class="w3-black w3-bold w3-padding-small">
+										<td colspan="2" class="w3-padding-small">Semester: <?php echo 'Spring-'.$i; ?></td>
+										<td colspan="2" class="w3-padding-small">CGPA: <?php echo number_format(($t_g/$t_c),2); ?></td>
+										<td colspan="2" class="w3-padding-small">Credit: <?php echo number_format($t_c,2); ?></td>
+									</tr>
+									<tr class="w3-teal w3-bold">
+										<td style="width:20%;" class="w3-padding-small">Course Code</td>
+										<td style="width:40%;" class="w3-padding-small">Course Title</td>
+										<td style="width:10%;" class="w3-padding-small">Credit</td>
+										<td style="width:10%;" class="w3-padding-small">Grade</td>
+										<td style="width:10%;" class="w3-padding-small">Grade Point</td>
+										<td style="width:10%;" class="w3-padding-small">Remarks</td>
+									</tr>
+									<?php
+										foreach($se_re['Spring-'.$i] as $z)
+										{
+									?>
+											<tr>
+												<td class="w3-padding-small"><?php echo $z['course_code']; ?></td>
+												<td class="w3-padding-small"><?php echo $z['course_title']; ?></td>
+												<td class="w3-padding-small"><?php echo number_format($z['course_credit'],2); ?></td>
+												<td class="w3-padding-small"><?php echo $z['grade']; ?></td>
+												<td class="w3-padding-small"><?php echo number_format($z['grade_point'],2); ?></td>
+												<td class="w3-padding-small"><?php echo $z['remarks']; ?></td>
+											</tr>
+									<?php 
+										}
+									?>
+								</table>
 					
-					<button onclick="show_result_div('Fall-2014')"  class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px; display:block;margin:5px 0px;"><i class="fa fa-plus-square" id="Fall-2014_icon"></i> Semester Result: Fall-2014</button>
-					<table id="Fall-2014" style="width:90%;display:none;" class=" w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
-						<tr class="w3-black w3-bold w3-padding-small">
-							<td colspan="2" class="w3-padding-small">Semester: Fall-2014</td>
-							<td colspan="2" class="w3-padding-small">CGPA: 4.00</td>
-							<td colspan="2"class="w3-padding-small">Credit: 7.5</td>
-						</tr>
-						<tr class="w3-teal w3-bold">
-							<td style="width:20%;" class="w3-padding-small">Course Code</td>
-							<td style="width:40%;" class="w3-padding-small">Course Title</td>
-							<td style="width:10%;" class="w3-padding-small">Credit</td>
-							<td style="width:10%;" class="w3-padding-small">Grade</td>
-							<td style="width:10%;" class="w3-padding-small">Grade Point</td>
-							<td style="width:10%;" class="w3-padding-small">Remarks</td>
-						</tr>
-						<tr>
-							<td class="w3-padding-small">CSE 111</td>
-							<td class="w3-padding-small">Fundamentals of Computers</td>
-							<td class="w3-padding-small">3.00</td>
-							<td class="w3-padding-small">A+</td>
-							<td class="w3-padding-small">4.00</td>
-							<td class="w3-padding-small"></td>
-						</tr>
-						<tr class="w3-light-gray">
-							<td class="w3-padding-small">CSE 113</td>
-							<td class="w3-padding-small">Structured Programming Language</td>
-							<td class="w3-padding-small">3.00</td>
-							<td class="w3-padding-small">A+</td>
-							<td class="w3-padding-small">4.00</td>
-							<td class="w3-padding-small"></td>
-						</tr>
-						<tr>
-							<td class="w3-padding-small">CSE 114</td>
-							<td class="w3-padding-small">Structured Programming Language Lab</td>
-							<td class="w3-padding-small">1.50</td>
-							<td class="w3-padding-small">A+</td>
-							<td class="w3-padding-small">4.00</td>
-							<td class="w3-padding-small"></td>
-						</tr>
-					</table>
+					<?php
+							}
+							
+							if(array_key_exists(('Summer-'.$i),$se_re))
+							{
+								$t_c=0.0;
+								$t_g=0.0;
+								foreach($se_re['Summer-'.$i] as $z)
+								{
+									$t_c=$t_c+$z['course_credit'];
+									$t_g=$t_g+($z['grade_point']*$z['course_credit']);
+								}
+								
+					?>
+								<button onclick="show_result_div('<?php echo 'Summer-'.$i; ?>')" class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:5px 0px;"><i class="fa fa-plus-square" id="<?php echo 'Summer-'.$i; ?>_icon" ></i> Semester Result: <?php echo 'Summer-'.$i; ?></button>
+								<table id="<?php echo 'Summer-'.$i; ?>" style="width:90%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
+									<tr class="w3-black w3-bold w3-padding-small">
+										<td colspan="2" class="w3-padding-small">Semester: <?php echo 'Summer-'.$i; ?></td>
+										<td colspan="2" class="w3-padding-small">CGPA: <?php echo number_format(($t_g/$t_c),2); ?></td>
+										<td colspan="2" class="w3-padding-small">Credit: <?php echo number_format($t_c,2); ?></td>
+									</tr>
+									<tr class="w3-teal w3-bold">
+										<td style="width:20%;" class="w3-padding-small">Course Code</td>
+										<td style="width:40%;" class="w3-padding-small">Course Title</td>
+										<td style="width:10%;" class="w3-padding-small">Credit</td>
+										<td style="width:10%;" class="w3-padding-small">Grade</td>
+										<td style="width:10%;" class="w3-padding-small">Grade Point</td>
+										<td style="width:10%;" class="w3-padding-small">Remarks</td>
+									</tr>
+									<?php
+										foreach($se_re['Summer-'.$i] as $z)
+										{
+									?>
+											<tr>
+												<td class="w3-padding-small"><?php echo $z['course_code']; ?></td>
+												<td class="w3-padding-small"><?php echo $z['course_title']; ?></td>
+												<td class="w3-padding-small"><?php echo number_format($z['course_credit'],2); ?></td>
+												<td class="w3-padding-small"><?php echo $z['grade']; ?></td>
+												<td class="w3-padding-small"><?php echo number_format($z['grade_point'],2); ?></td>
+												<td class="w3-padding-small"><?php echo $z['remarks']; ?></td>
+											</tr>
+									<?php 
+										}
+									?>
+								</table>
+					
+					<?php
+							}
+							
+							if(array_key_exists(('Fall-'.$i),$se_re))
+							{
+								$t_c=0.0;
+								$t_g=0.0;
+								foreach($se_re['Fall-'.$i] as $z)
+								{
+									$t_c=$t_c+$z['course_credit'];
+									$t_g=$t_g+($z['grade_point']*$z['course_credit']);
+								}
+								
+					?>
+								<button onclick="show_result_div('<?php echo 'Fall-'.$i; ?>')" class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:5px 0px;"><i class="fa fa-plus-square" id="<?php echo 'Fall-'.$i; ?>_icon" ></i> Semester Result: <?php echo 'Fall-'.$i; ?></button>
+								<table id="<?php echo 'Fall-'.$i; ?>" style="width:90%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
+									<tr class="w3-black w3-bold w3-padding-small">
+										<td colspan="2" class="w3-padding-small">Semester: <?php echo 'Fall-'.$i; ?></td>
+										<td colspan="2" class="w3-padding-small">CGPA: <?php echo number_format(($t_g/$t_c),2); ?></td>
+										<td colspan="2" class="w3-padding-small">Credit: <?php echo number_format($t_c,2); ?></td>
+									</tr>
+									<tr class="w3-teal w3-bold">
+										<td style="width:20%;" class="w3-padding-small">Course Code</td>
+										<td style="width:40%;" class="w3-padding-small">Course Title</td>
+										<td style="width:10%;" class="w3-padding-small">Credit</td>
+										<td style="width:10%;" class="w3-padding-small">Grade</td>
+										<td style="width:10%;" class="w3-padding-small">Grade Point</td>
+										<td style="width:10%;" class="w3-padding-small">Remarks</td>
+									</tr>
+									<?php
+										foreach($se_re['Fall-'.$i] as $z)
+										{
+									?>
+											<tr>
+												<td class="w3-padding-small"><?php echo $z['course_code']; ?></td>
+												<td class="w3-padding-small"><?php echo $z['course_title']; ?></td>
+												<td class="w3-padding-small"><?php echo number_format($z['course_credit'],2); ?></td>
+												<td class="w3-padding-small"><?php echo $z['grade']; ?></td>
+												<td class="w3-padding-small"><?php echo number_format($z['grade_point'],2); ?></td>
+												<td class="w3-padding-small"><?php echo $z['remarks']; ?></td>
+											</tr>
+									<?php 
+										}
+									?>
+								</table>
+					
+					<?php
+							}
+							
+							
+						}
+					
+					?>
+					
+					
+					
 					
 				</div>
 			</div>

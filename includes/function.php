@@ -73,6 +73,13 @@ function get_session($s_id)
 	return $semester.'-'.$year;
 }
 
+function get_year($s_id)
+{
+	$year='20'.$s_id[0].$s_id[1];
+	return $year;
+}
+
+
 function get_date($date)
 {
 	$day=$date[8].$date[9];
