@@ -11,23 +11,34 @@ Email: mlrahman@neub.edu.bd
        mirlutfur.rahman@gmail.com
 -->
 <?php 
-
+	ob_start();
 	require("../includes/db_connection.php"); 
-	$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
-	$stmt->execute();
-	$result = $stmt->fetchAll();
-	//echo '<script>console.log("'.$result[0][1].'-ttt");</script>';
-	$title=$result[0][2];
-	$caption=$result[0][3];
-	$address=$result[0][4];
-	$telephone=$result[0][5];
-	$email=$result[0][6];
-	$mobile=$result[0][7];
-	$web=$result[0][8];
-	$contact_email=$result[0][9];//for sending message from contact us form
-	$map=$result[0][10];
-	//logo and video is always fixed in name 
-	
+	require("../includes/function.php");
+	try
+	{	
+		$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
+		$stmt->execute();
+		$result = $stmt->fetchAll();
+		//echo '<script>console.log("'.$result[0][1].'-ttt");</script>';
+		$title=$result[0][2];
+		$caption=$result[0][3];
+		$address=$result[0][4];
+		$telephone=$result[0][5];
+		$email=$result[0][6];
+		$mobile=$result[0][7];
+		$web=$result[0][8];
+		$contact_email=$result[0][9];//for sending message from contact us form
+		$map=$result[0][10];
+		//logo and video is always fixed in name 
+	}
+	catch(PDOException $e)
+	{
+		die();
+	}
+	catch(Exception $e)
+	{
+		die();
+	}
 ?>
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns#"  lang="en-gb">

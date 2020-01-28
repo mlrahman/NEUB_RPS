@@ -11,24 +11,51 @@ Email: mlrahman@neub.edu.bd
        mirlutfur.rahman@gmail.com
 -->
 <?php 
-
+	ob_start();
 	require("../includes/db_connection.php"); 
 	require("../includes/function.php"); 
-	$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
-	$stmt->execute();
-	$result = $stmt->fetchAll();
-	//echo '<script>console.log("'.$result[0][1].'-ttt");</script>';
-	$title=$result[0][2];
-	$caption=$result[0][3];
-	$address=$result[0][4];
-	$telephone=$result[0][5];
-	$email=$result[0][6];
-	$mobile=$result[0][7];
-	$web=$result[0][8];
-	$contact_email=$result[0][9];//for sending message from contact us form
-	$map=$result[0][10];
-	//logo and video is always fixed in name 
-	
+	try
+	{
+		$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
+		$stmt->execute();
+		$result = $stmt->fetchAll();
+		//echo '<script>console.log("'.$result[0][1].'-ttt");</script>';
+		$title=$result[0][2];
+		$caption=$result[0][3];
+		$address=$result[0][4];
+		$telephone=$result[0][5];
+		$email=$result[0][6];
+		$mobile=$result[0][7];
+		$web=$result[0][8];
+		$contact_email=$result[0][9];//for sending message from contact us form
+		$map=$result[0][10];
+		//logo and video is always fixed in name 
+		
+		//deleting search transaction
+		$trx=1000;
+		$stmt = $conn->prepare("select * from nr_result_check_transaction order by nr_rechtr_date desc, nr_rechtr_time desc ");
+		$stmt->execute();
+		$re_trx = $stmt->fetchAll();
+		for($i=0;$i<count($re_trx);$i++)
+		{
+			if($i>$trx)
+			{
+				$re_date=$re_trx[$i][7];
+				$re_time=$re_trx[$i][8];
+				$stmt = $conn->prepare("delete from nr_result_check_transaction where nr_rechtr_date='$re_date' and nr_rechtr_time='$re_time' ");
+				$stmt->execute();
+			}
+		}
+	}
+	catch(PDOException $e)
+	{
+		die();
+	}
+	catch(Exception $e)
+	{
+		die();
+	}
+		
 ?>
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns#"  lang="en-gb">

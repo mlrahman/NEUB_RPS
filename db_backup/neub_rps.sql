@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2020 at 09:10 PM
+-- Generation Time: Jan 28, 2020 at 09:10 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -114,6 +114,13 @@ CREATE TABLE `nr_faculty` (
   `nr_faculty_photo` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
+--
+-- Dumping data for table `nr_faculty`
+--
+
+INSERT INTO `nr_faculty` (`nr_faculty_id`, `nr_faculty_name`, `nr_faculty_designation`, `nr_faculty_join_date`, `nr_faculty_resign_date`, `nr_faculty_type`, `nr_dept_id`, `nr_faculty_password`, `nr_faculty_email`, `nr_faculty_cell_no`, `nr_faculty_photo`) VALUES
+(1, 'Noushad Sojib', 'Assistant Professor', '2016-04-20', '', 'Permanent', 1, '', '', '', '');
+
 -- --------------------------------------------------------
 
 --
@@ -175,16 +182,17 @@ CREATE TABLE `nr_result` (
   `nr_result_remarks` enum('Incomplete','Expelled','Makeup_MS','Makeup_SF','Makeup_MS_SF','Withdraw') NOT NULL,
   `nr_result_status` enum('Active','Inactive') NOT NULL,
   `nr_prog_id` bigint(20) NOT NULL,
-  `nr_result_publish_date` varchar(100) NOT NULL
+  `nr_result_publish_date` varchar(100) NOT NULL,
+  `nr_faculty_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 --
 -- Dumping data for table `nr_result`
 --
 
-INSERT INTO `nr_result` (`nr_result_id`, `nr_stud_id`, `nr_course_id`, `nr_result_marks`, `nr_result_grade`, `nr_result_grade_point`, `nr_result_semester`, `nr_result_year`, `nr_result_remarks`, `nr_result_status`, `nr_prog_id`, `nr_result_publish_date`) VALUES
-(1, 140203020002, 3, 140203029312.5, '89f276cc01d4af01fa8cee48af8ee962bac42500', 140203026062.5, 'Spring', 2015, '', 'Active', 1, '2020-01-27'),
-(2, 140203020002, 4, 140203029812.5, '500910d02d287a8c898c406ea348043c050d31ca', 140203026312.5, 'Spring', 2015, '', 'Active', 1, '2020-01-27');
+INSERT INTO `nr_result` (`nr_result_id`, `nr_stud_id`, `nr_course_id`, `nr_result_marks`, `nr_result_grade`, `nr_result_grade_point`, `nr_result_semester`, `nr_result_year`, `nr_result_remarks`, `nr_result_status`, `nr_prog_id`, `nr_result_publish_date`, `nr_faculty_id`) VALUES
+(1, 140203020002, 3, 140203029312.5, '89f276cc01d4af01fa8cee48af8ee962bac42500', 140203026062.5, 'Spring', 2015, '', 'Active', 1, '2020-01-27', 1),
+(2, 140203020002, 4, 140203029812.5, '500910d02d287a8c898c406ea348043c050d31ca', 140203026312.5, 'Spring', 2015, '', 'Active', 1, '2020-01-27', 1);
 
 -- --------------------------------------------------------
 
@@ -210,18 +218,119 @@ CREATE TABLE `nr_result_check_transaction` (
 --
 
 INSERT INTO `nr_result_check_transaction` (`nr_stud_id`, `nr_rechtr_ip_address`, `nr_rechtr_country`, `nr_rechtr_city`, `nr_rechtr_lat`, `nr_rechtr_lng`, `nr_rechtr_timezone`, `nr_rechtr_date`, `nr_rechtr_time`, `nr_rechtr_status`) VALUES
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-26', '08:20 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-26', '08:37 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '05:52 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '06:30 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '07:07 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '07:18 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '07:55 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '08:18 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '08:58 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '08:59 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '09:01 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-27', '09:09 PM', 'Active');
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '05:11 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '05:11 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '05:12 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '05:16 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '05:17 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '05:18 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '05:29 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '05:31 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '05:33 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '05:34 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '05:36 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '05:38 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '05:47 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '05:49 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '06:16 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '06:47 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '06:47 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:19 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:21 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:22 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:23 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:26 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:27 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:28 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:33 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:36 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:36 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:38 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:39 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:41 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:44 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:45 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:46 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:53 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:54 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:54 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:55 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:56 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:56 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:57 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:57 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '07:58 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:00 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:00 PM', 'Active'),
+(140203020002, '192.168.0.101', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:01 PM', 'Active'),
+(140203020002, '192.168.0.101', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:01 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:07 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:08 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:09 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:09 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:10 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:10 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:11 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:11 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:12 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:12 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:13 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:13 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:14 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:14 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:14 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:14 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:15 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:15 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:15 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:16 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:16 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:18 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:19 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:19 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:20 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:20 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:21 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:21 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:23 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:24 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:25 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:25 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:25 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:26 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:26 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:26 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:26 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:27 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:27 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:27 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:27 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:28 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:31 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:31 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:39 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:40 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:45 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:46 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:46 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:47 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:47 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:47 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:48 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:48 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:49 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:49 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:50 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:51 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:55 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:55 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:56 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:56 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:57 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:57 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:57 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '08:58 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-28', '09:05 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -260,9 +369,6 @@ CREATE TABLE `nr_student_waived_credit` (
   `nr_stud_id` bigint(20) NOT NULL,
   `nr_course_id` bigint(20) NOT NULL,
   `nr_stwacr_date` varchar(20) NOT NULL,
-  `nr_stwacr_marks` double NOT NULL,
-  `nr_stwacr_grade` varchar(200) NOT NULL,
-  `nr_stwacr_grade_point` double NOT NULL,
   `nr_stwacr_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
@@ -270,9 +376,9 @@ CREATE TABLE `nr_student_waived_credit` (
 -- Dumping data for table `nr_student_waived_credit`
 --
 
-INSERT INTO `nr_student_waived_credit` (`nr_stwacr_id`, `nr_stud_id`, `nr_course_id`, `nr_stwacr_date`, `nr_stwacr_marks`, `nr_stwacr_grade`, `nr_stwacr_grade_point`, `nr_stwacr_status`) VALUES
-(1, 140203020002, 1, '2020-01-26', 140203031112.5, '1858411229d78def5b8862e672cb210208e69afd', 140203026812.5, 'Active'),
-(2, 140203020002, 2, '2020-01-26', 140203032362.5, '1858411229d78def5b8862e672cb210208e69afd', 140203026812.5, 'Active');
+INSERT INTO `nr_student_waived_credit` (`nr_stwacr_id`, `nr_stud_id`, `nr_course_id`, `nr_stwacr_date`, `nr_stwacr_status`) VALUES
+(1, 140203020002, 1, '2020-01-26', 'Active'),
+(2, 140203020002, 2, '2020-01-26', 'Active');
 
 -- --------------------------------------------------------
 
@@ -354,7 +460,8 @@ ALTER TABLE `nr_result`
   ADD PRIMARY KEY (`nr_result_id`),
   ADD KEY `nr_stud_id` (`nr_stud_id`),
   ADD KEY `nr_prog_id` (`nr_prog_id`),
-  ADD KEY `nr_course_id` (`nr_course_id`);
+  ADD KEY `nr_course_id` (`nr_course_id`),
+  ADD KEY `nr_faculty_id` (`nr_faculty_id`);
 
 --
 -- Indexes for table `nr_result_check_transaction`
@@ -411,7 +518,7 @@ ALTER TABLE `nr_department`
 -- AUTO_INCREMENT for table `nr_faculty`
 --
 ALTER TABLE `nr_faculty`
-  MODIFY `nr_faculty_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `nr_faculty_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `nr_program`
@@ -477,7 +584,8 @@ ALTER TABLE `nr_program_credit`
 ALTER TABLE `nr_result`
   ADD CONSTRAINT `nr_result_ibfk_1` FOREIGN KEY (`nr_stud_id`) REFERENCES `nr_student` (`nr_stud_id`),
   ADD CONSTRAINT `nr_result_ibfk_3` FOREIGN KEY (`nr_prog_id`) REFERENCES `nr_program` (`nr_prog_id`),
-  ADD CONSTRAINT `nr_result_ibfk_4` FOREIGN KEY (`nr_course_id`) REFERENCES `nr_course` (`nr_course_id`);
+  ADD CONSTRAINT `nr_result_ibfk_4` FOREIGN KEY (`nr_course_id`) REFERENCES `nr_course` (`nr_course_id`),
+  ADD CONSTRAINT `nr_result_ibfk_5` FOREIGN KEY (`nr_faculty_id`) REFERENCES `nr_faculty` (`nr_faculty_id`);
 
 --
 -- Constraints for table `nr_result_check_transaction`

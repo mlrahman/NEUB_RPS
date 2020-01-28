@@ -1,5 +1,5 @@
 <?php
-
+/*
 include("includes/function.php");
 
 $s_id=140203020002;
@@ -38,8 +38,21 @@ $a=array();
 $a['h'][0]=10;
 //echo $a['h'][0];
 //echo array_key_exists('i',$a);
+*/
 
+require_once 'includes/library/autoload.inc.php';
 
+use Dompdf\Dompdf;
+$dompdf = new Dompdf();
+$dompdf->loadHtml('<h1>hello world</h1>');
 
+// (Optional) Setup the paper size and orientation
+$dompdf->setPaper('A4', 'portrait');
+
+// Render the HTML as PDF
+$dompdf->render();
+
+// Output the generated PDF to Browser
+$dompdf->stream();
 
 ?>
