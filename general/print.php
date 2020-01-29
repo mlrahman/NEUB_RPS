@@ -25,6 +25,21 @@
 				die();
 			}
 			
+			$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
+			$stmt->execute();
+			$result_t = $stmt->fetchAll();
+			$title=$result_t[0][2];
+			$caption=$result_t[0][3];
+			$address=$result_t[0][4];
+			$telephone=$result_t[0][5];
+			$email=$result_t[0][6];
+			$mobile=$result_t[0][7];
+			$web=$result_t[0][8];
+			$contact_email=$result_t[0][9];
+			$map=$result_t[0][10];
+			
+			
+			
 			//Check details will insert into transaction
 			$vis_ip = getVisIPAddr();
 			$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
@@ -171,8 +186,10 @@
 			
 			
 			//Calculating cgpa from earned_credit
-			$total_cgpa=number_format(($earned_gpa/$earned_credit),2); 
-			
+			if($earned_credit==0)
+				$total_cgpa=number_format(0.0,2);
+			else
+				$total_cgpa=number_format(($earned_gpa/$earned_credit),2);
 			
 			$degree_status=$total_credit-($earned_credit+$waived_credit);
 			if($degree_status==0)
@@ -196,140 +213,375 @@
 			
 			$html='
 			<style>
-			.header, .header-space,
-			.footer, .footer-space {
-			  height: 100px;
+			.page-header, .page-header-space{
+				height: 390px;
 			}
-			.header {
+					
+			.page-footer, .page-footer-space {
+			  height: 30px;
+			}
+			.page-header {
 			  position: fixed;
 			  top: 0;
+			  position: running(header);
 			}
-			.footer {
+			.page-footer {
 			  position: fixed;
 			  bottom: 0;
+			  position: running(footer);
 			}
-			</style>
-			<body style="font-family: "Century Schoolbook", sans-serif;">
+			.page{
+				page-break-after: always;
+				page-break-before: always;
+			}
 			
-			<div class="header">
-				<div style="margin:0px;padding:0px;width:100%;max-width:800px;">
-					<image src="../images/system/logo.png" alt="NEUB LOGO" style="width:100%;max-width:90px;float:left;">
-					<p style="float:left;margin: 5px 0px 0px 0px;font-size:45px;">North East University Bangladesh</p>
-					<p style="float:left;font-size:30px;margin:0px 0px 20px 160px;">Sylhet, Bangladesh.</p>
-				</div>
-				<div style="border-top:4px solid black;margin: 0px;padding:0px;width:100%;max-width:750px;height:auto;clear:left;display:block;">
-					<p style="color:red;font-size:10px;text-align:justify;">
-						<b>Note:</b> This is an unofficial transcript downloaded from North East University Bangladesh result portal. For any query you can visit the official website, result portal or can contact with the controller of examination. 
-					</p>
-					<p style="font-weight:bold;">Online Transcript of Academic Record</p>
-							
-					<div>
-						<div style="width:50%;min-width:350px;float:left;">
-							<div>
-								<div style="width:110px;float:left;">';
-									if($photo=="" && $gender=="Male"){ 
-										$html=$html.'<img src="../images/system/male_profile.png" class="w3-image" style="margin:0px;padding:0px;width:100%;max-width:100px;height: 120px;" title="Picture (120X100)"/>';
-									} else if($photo==""){ 
-										$html=$html.'<img src="../images/system/female_profile.png" class="w3-image" style="margin:0px;padding:0px;width:100%;max-width:100px;height: 120px;" title="Picture (120X100)"/>';
-									} else { 
-										$html=$html.'<img src="../images/student/'.$photo.'" class="w3-image" style="margin:0px;padding:0px;width:100%;max-width:100px;height: 120px;" title="Picture (120X100)"/>';
-									}
-									
-								$html=$html.'</div>
-								<div style="min-width:200px;float:left;">
-									<table>
-										<tr>
-											<td valign="top">Name</td>
-											<td valign="top" class="w3-bold">: '.$name.'</td>
-										</tr>
-										<tr>
-											<td valign="top">Reg. No</td>
-											<td valign="top" class="w3-bold">: '.$reg_no.'</td>
-										</tr>
-										<tr>
-											<td valign="top">Session</td>
-											<td valign="top">: '.$session.'</td>
-										</tr>
-										<tr>
-											<td valign="top">Gender</td>
-											<td valign="top">: '.$gender.'</td>
-										</tr>
-										<tr>
-											<td valign="top">Birthdate</td>
-											<td valign="top">: '.get_date($birthdate).'</td>
-										</tr>
-										<tr>
-											<td valign="top" style="font-weight:bold;">Issue Date</td>
-											<td valign="top" style="font-weight:bold;">: '.get_date(get_current_date()).'</td>
-										</tr>
-									</table>
-								</div>
-							</div>
+			</style>
+			<body style="font-family: "Century Schoolbook", sans-serif;font-size:12px;">
+			
+			
+			<div class="page-header">
+				<div style="margin:0px;padding:0px;width:700px;border-bottom: 3px solid black;">
+					<div style="margin:0px;padding:0px;width:700px;height:86px;">
+						<div style="width:70px;padding:0px;margin:0px;float:left;">
+							<img src="../images/system/logo.png" alt="NEUB LOGO" style="width:68px;height:80px;">
 						</div>
-						<div style="width:50%;min-width:350px;float:left;">
-							<table style="width:100%;">
+						<div style="width:630px;float:left;padding:0px;margin:0px;">
+							<p style="padding: 0px;margin:10px 0px 5px 0px;font-size:25px;font-weight:bold;margin-left:8px;">NORTH EAST UNIVERSITY BANGLADESH (NEUB)</p>
+							<p style="margin:0px;padding:0px;font-size: 22px;font-weight:bold;text-align:center;">SYLHET, BANGLADESH.</p>
+						</div>
+					</div>
+				</div>
+				<p style="color:red;font-size:11px;text-align:justify;margin:4px 0px;padding:0px;">
+					<b>Note:</b> This is an unofficial transcript downloaded from North East University Bangladesh result portal. For any query you can visit the official website, result portal or can contact with the office of the controller of examination. 
+				</p>
+				<p style="margin:8px 0px 5px 0px;padding:0px;font-size:17px;font-weight:bold;">
+					Online Transcript of Academic Record
+				</p>
+				<div style="margin:0px;padding:0px;width:700px;">
+					<div style="margin:0px;padding:0px;width:700px;height:100px;">
+						
+						<div style="width:530px;padding:0px;margin:0px;float:left;">
+							<table style="max-width:200px;font-weight:bold;font-size:12px;">
 								<tr>
-									<td valign="top">Degree</td>
-									<td colspan="2" valign="top" class="w3-bold">: '.$degree.'</td>
+									<td valign="top">Student Name</td>
+									<td valign="top">: '.$name.'</td>
 								</tr>
 								<tr>
-									<td valign="top">Degree Credit</td>
-									<td colspan="2" valign="top" class="w3-bold">: '.$total_credit.'</td>
+									<td valign="top">Registration No</td>
+									<td valign="top">: '.$reg_no.'</td>
+								</tr>
+								<tr>
+									<td valign="top">Session</td>
+									<td valign="top">: '.$session.'</td>
+								</tr>
+								<tr>
+									<td valign="top">Gender</td>
+									<td valign="top">: '.$gender.'</td>
+								</tr>
+								<tr>
+									<td valign="top">Degree Name</td>
+									<td valign="top">: '.$degree.'</td>
+								</tr>
+								<tr>
+									<td valign="top">Credit Required</td>
+									<td valign="top">: '.$total_credit.'</td>
 								</tr>
 								<tr>
 									<td valign="top">Credit Earned</td>
-									<td colspan="2" valign="top" class="w3-text-green">: '.$earned_credit.'</td>
+									<td valign="top">: '.$earned_credit.'</td>
 								</tr>
 								<tr>
 									<td valign="top">Credit Waived</td>
-									<td colspan="2" valign="top">: '.$waived_credit.'</td>
+									<td valign="top">: '.$waived_credit.'</td>
 								</tr>
 								<tr>
-									<td valign="top">CGPA</td>
-									<td colspan="2" valign="top" class="w3-text-red">: '.$total_cgpa.'</td>
+									<td valign="top">CGPA Earned</td>
+									<td valign="top">: '.$total_cgpa.'</td>
 								</tr>
 								<tr>
 									<td valign="top">Degree Status</td>
-									<td valign="top" class="w3-bold">: '.$degree_status.'</td>
+									<td valign="top">: '.$degree_status.'</td>
+								</tr>
+								<tr>
+									<td valign="top" style="color:blue;">Issue Date</td>
+									<td valign="top" style="color:blue;">: '.get_date(get_current_date()).'</td>
 								</tr>
 							</table>
+						</div>
+						<div style="width:170px;padding:0px;margin:0px;float:left;">
+							<p style="margin:0px 0px 3px 0px;padding:0px;font-size:12px;font-weight:bold;text-align:left;">
+								Grading System
+							</p>
+							<table style="border: 1px solid black;font-size:12px;text-align:center;width:170px;">
+								<tr>
+									<td style="border: 1px solid black;width:90px;margin:0px;padding:0px;"><b>Marks%</b></td>
+									<td style="border: 1px solid black;width:40px;margin:0px;padding:0px;"><b>Letter</b></td>
+									<td style="border: 1px solid black;width:40pxmargin:0px;padding:0px;"><b>Grade Point</b></td>
+								</tr>
+								<tr>
+									<td>80% and Above</td> 
+									<td>A+</td>
+									<td>4.00</td>
+								</tr>
+								<tr>
+									<td>75% - 79%</td>
+									<td>A</td>
+									<td>3.75</td>
+								</tr> 
+								<tr>
+									<td>70% - 74%</td>
+									<td>A-</td>
+									<td>3.50</td>
+								</tr> 
+								<tr>
+									<td>65% - 69%</td>
+									<td>B+</td>
+									<td>3.25</td>
+								</tr> 
+								<tr>
+									<td>60% - 64%</td>
+									<td>B</td>
+									<td>3.00</td>
+								</tr> 
+								<tr>
+									<td>55% - 59%</td>
+									<td>B-</td>
+									<td>2.75</td>
+								</tr> 
+								<tr>
+									<td>50% - 54%</td>
+									<td>C+</td>
+									<td>2.50</td>
+								</tr> 
+								<tr>
+									<td>45% - 49%</td>
+									<td>C</td>
+									<td>2.25</td>
+								</tr> 
+								<tr>
+									<td>40% - 44%</td>
+									<td>D</td>
+									<td>2.00</td>
+								</tr> 
+								<tr>
+									<td>Less than 40%</td>
+									<td>F</td>
+									<td>0.00</td>
+								</tr>
+									
+							</table>
+							
 						</div>
 					</div>
 				</div>
 			</div>
 			
-			<div class="footer">
 			
+			
+			<div class="page-footer">
+				<div style="border-top:3px solid black;margin: 0px;padding:0px;width:700px;text-align:center;">
+					<p style="margin:0px;padding:0px;font-size:12px;">Address: '.$address.'</p>
+					<p style="margin:0px;padding:0px;font-size:12px;">Phone: '.$telephone.', Fax: 0821-710223, Mobile: '.$mobile.', E-mail: '.$email.'</p>
+					<p style="margin:0px;padding:0px;font-size:12px;">Website: '.$web.'</p>
+				</div>
 			</div>
 			
 			
 			<table>
+				
 				<thead>
 					<tr><td>
-						<div class="header-space">&nbsp;</div>
+						<div class="page-header-space">&nbsp;</div>
 					</td></tr>
 				</thead>
-				<tbody><tr><td>
-					
-					
-				</td></tr></tbody>
-				<tfoot><tr><td>
+				<tbody><tr><td><div class="page">';
 				
-				</td></tr></tfoot>
+				
+				for($i=get_year($s_id);$i<=Date("Y");$i++)
+				{			
+					if(array_key_exists(('Spring-'.$i),$se_re))
+					{
+						$t_c=0.0;
+						$t_g=0.0;
+						foreach($se_re['Spring-'.$i] as $z)
+						{
+							if(number_format($z['grade_point'],2)>0.0)
+							{
+								$t_c=$t_c+$z['course_credit'];
+								$t_g=$t_g+($z['grade_point']*$z['course_credit']);
+							}
+						}
+						$html=$html.'<div><table style="width:700px;margin-top:10px;font-size:12px;" >
+							<tr>
+								<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>Semester: '.'Spring-'.$i.'</b></td>
+								<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>CGPA: '; if($t_c==0.0){  $html=$html.number_format(0.0,2); } else{  $html=$html.number_format(($t_g/$t_c),2); } $html=$html.'</b></td>
+								<td colspan="1" valign="top" style="border-top: 1px solid black;"><b>Credit: '.number_format($t_c,2).'</b></td>
+							</tr>
+							<tr class="w3-teal w3-bold">
+								<td style="width:15%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Course Code</b></td>
+								<td style="width:40%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Course Title</b></td>
+								<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Credit</b></td>
+								<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Grade</b></td>
+								<td style="width:25%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Grade Point</b></td>
+							</tr>';
+							
+								foreach($se_re['Spring-'.$i] as $z)
+								{
+									if(number_format($z['grade_point'],2)>0.0 or (number_format($z['grade_point'],2)==0.0 && $z['grade']=='F'))
+									{										
+										$html=$html.'<tr>
+											<td valign="top">'.$z['course_code'].'</td>
+											<td valign="top">'.$z['course_title'].'</td>
+											<td valign="top">'.number_format($z['course_credit'],2).'</td>
+											<td valign="top">'.$z['grade'].'</td>
+											<td valign="top">'.number_format($z['grade_point'],2).'</td>
+										</tr>';
+									}
+								}
+							
+						$html=$html.'<tr><td colspan="5" style="border-top: 1px solid black;"></td></tr></table></div>';
+						
+					}
+					
+					if(array_key_exists(('Summer-'.$i),$se_re))
+					{
+						$t_c=0.0;
+						$t_g=0.0;
+						foreach($se_re['Summer-'.$i] as $z)
+						{
+							if(number_format($z['grade_point'],2)>0.0)
+							{
+								$t_c=$t_c+$z['course_credit'];
+								$t_g=$t_g+($z['grade_point']*$z['course_credit']);
+							}
+						}
+						$html=$html.'<div><table style="width:700px;margin-top:10px;font-size:12px;" >
+							<tr>
+								<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>Semester: '.'Summer-'.$i.'</b></td>
+								<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>CGPA: '; if($t_c==0.0){  $html=$html.number_format(0.0,2); } else{  $html=$html.number_format(($t_g/$t_c),2); } $html=$html.'</b></td>
+								<td colspan="1" valign="top" style="border-top: 1px solid black;"><b>Credit: '.number_format($t_c,2).'</b></td>
+							</tr>
+							<tr class="w3-teal w3-bold">
+								<td style="width:15%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Course Code</b></td>
+								<td style="width:40%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Course Title</b></td>
+								<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Credit</b></td>
+								<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Grade</b></td>
+								<td style="width:25%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Grade Point</b></td>
+							</tr>';
+							
+								foreach($se_re['Summer-'.$i] as $z)
+								{
+									if(number_format($z['grade_point'],2)>0.0 or (number_format($z['grade_point'],2)==0.0 && $z['grade']=='F'))
+									{
+										$html=$html.'<tr>
+											<td valign="top">'.$z['course_code'].'</td>
+											<td valign="top">'.$z['course_title'].'</td>
+											<td valign="top">'.number_format($z['course_credit'],2).'</td>
+											<td valign="top">'.$z['grade'].'</td>
+											<td valign="top">'.number_format($z['grade_point'],2).'</td>
+										</tr>';
+									}
+								}
+							
+						$html=$html.'<tr><td colspan="5" style="border-top: 1px solid black;"></td></tr></table></div>';
+						
+					}
+					
+					if(array_key_exists(('Fall-'.$i),$se_re))
+					{
+						$t_c=0.0;
+						$t_g=0.0;
+						foreach($se_re['Fall-'.$i] as $z)
+						{
+							if(number_format($z['grade_point'],2)>0.0)
+							{
+								$t_c=$t_c+$z['course_credit'];
+								$t_g=$t_g+($z['grade_point']*$z['course_credit']);
+							}
+						}
+						$html=$html.'<div><table style="width:700px;margin-top:10px;font-size:12px;" >
+							<tr>
+								<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>Semester: '.'Fall-'.$i.'</b></td>
+								<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>CGPA: '; if($t_c==0.0){  $html=$html.number_format(0.0,2); } else{  $html=$html.number_format(($t_g/$t_c),2); } $html=$html.'</b></td>
+								<td colspan="1" valign="top" style="border-top: 1px solid black;"><b>Credit: '.number_format($t_c,2).'</b></td>
+							</tr>
+							<tr class="w3-teal w3-bold">
+								<td style="width:15%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Course Code</b></td>
+								<td style="width:40%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Course Title</b></td>
+								<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Credit</b></td>
+								<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Grade</b></td>
+								<td style="width:25%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Grade Point</b></td>
+							</tr>';
+							
+								foreach($se_re['Fall-'.$i] as $z)
+								{
+									if(number_format($z['grade_point'],2)>0.0 or (number_format($z['grade_point'],2)==0.0 && $z['grade']=='F'))
+									{
+										$html=$html.'<tr>
+											<td valign="top">'.$z['course_code'].'</td>
+											<td valign="top">'.$z['course_title'].'</td>
+											<td valign="top">'.number_format($z['course_credit'],2).'</td>
+											<td valign="top">'.$z['grade'].'</td>
+											<td valign="top">'.number_format($z['grade_point'],2).'</td>
+										</tr>';
+									}
+								}
+							
+						$html=$html.'<tr><td colspan="5" style="border-top: 1px solid black;"></td></tr></table></div>';
+						
+					}
+				}
+				
+				//show waived courses there
+				for($k=0;$k<15;$k++)
+				if(count($ra_w)>0)
+				{
+					
+					$html=$html.'<div><table id="course_waived" style="width:700px;margin-top:10px;font-size:12px;">
+						<tr>
+							<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>Waived Courses</b></td>
+							<td valign="top" style="border-top: 1px solid black;"><b>Credit: '.number_format($waived_credit,2).'</b></td>
+						</tr>
+						<tr class="w3-teal w3-bold">
+							<td valign="top" style="width:15%;border-top: 1px solid black;border-bottom: 1px solid black;"><b>Course Code</b></td>
+							<td valign="top" style="width:40%;border-top: 1px solid black;border-bottom: 1px solid black;"><b>Course Title</b></td>
+							<td valign="top" style="width:45%;border-top: 1px solid black;border-bottom: 1px solid black;"><b>Credit</b></td>
+						</tr>';
+						
+						foreach($ra_w as $cge)
+						{
+					
+							$html=$html.'<tr>
+								<td valign="top">'.$cge['course_code'].'</td>
+								<td valign="top">'.$cge['course_title'].'</td>
+								<td valign="top">'.number_format($cge['course_credit'],2).'</td>
+							</tr>';
+					
+						}
+						
+					$html=$html.'<tr><td colspan="3" style="border-top: 1px solid black;"></td></tr></table></div>';
+			
+				}
+				
+
+				
+				
+				$html=$html.'</div></td></tr></tbody>
+				<tfoot><tr><td><div class="page-footer-space">&nbsp;</div></td></tr></tfoot>
 				</table>
 			</body>';
 			
 			$dompdf->loadHtml($html);
 
 			// (Optional) Setup the paper size and orientation
-			$dompdf->setPaper('Legal', 'portrait');
+			$dompdf->setPaper('A4', 'portrait');
 
 			// Render the HTML as PDF
 			$dompdf->render();
 
 			// Output the generated PDF to Browser
-			$dompdf->stream();
-			//echo $html;
+			//$dompdf->stream();
+			echo $html;
 			
 
 

@@ -1,19 +1,21 @@
 <?php
-/*
+
 include("includes/function.php");
 
 $s_id=140203020002;
-$marks=75;
-$gpa=3.75;
-$g='A';
-
+$marks=70;
+$gpa=3.5;
+$g='A-';
+echo 'Marks:</br>';
 echo marks_encrypt($s_id,$marks).'</br>';
 echo marks_decrypt($s_id,marks_encrypt($s_id,$marks)).'</br>';
+echo 'Grade:</br>';
 echo grade_encrypt($s_id,$g).'</br>';
 echo grade_decrypt($s_id,grade_encrypt($s_id,$g)).'</br>';
+echo 'Grade Point:</br>';
 echo grade_point_encrypt($s_id,$gpa).'</br>';
 echo grade_point_decrypt($s_id,grade_point_encrypt($s_id,$gpa)).'</br>';
-
+/*
 echo '-------------------------------------</br>';
 
 $k=array();
@@ -38,7 +40,7 @@ $a=array();
 $a['h'][0]=10;
 //echo $a['h'][0];
 //echo array_key_exists('i',$a);
-*/
+
 
 require_once 'includes/library/autoload.inc.php';
 
@@ -54,5 +56,7 @@ $dompdf->render();
 
 // Output the generated PDF to Browser
 $dompdf->stream();
+*/
+
 
 ?>

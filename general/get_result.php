@@ -165,7 +165,10 @@
 			
 			
 			//Calculating cgpa from earned_credit
-			$total_cgpa=number_format(($earned_gpa/$earned_credit),2); 
+			if($earned_credit==0)
+				$total_cgpa=number_format(0.0,2);
+			else
+				$total_cgpa=number_format(($earned_gpa/$earned_credit),2); 
 			
 			
 			$degree_status=$total_credit-($earned_credit+$waived_credit);
@@ -305,8 +308,11 @@
 								$t_g=0.0;
 								foreach($se_re['Spring-'.$i] as $z)
 								{
-									$t_c=$t_c+$z['course_credit'];
-									$t_g=$t_g+($z['grade_point']*$z['course_credit']);
+									if(number_format($z['grade_point'],2)>0.0)
+									{
+										$t_c=$t_c+$z['course_credit'];
+										$t_g=$t_g+($z['grade_point']*$z['course_credit']);
+									}
 								}
 								
 					?>
@@ -314,7 +320,7 @@
 								<table id="<?php echo 'Spring-'.$i; ?>" style="width:90%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
 									<tr class="w3-black w3-bold w3-padding-small">
 										<td colspan="2" valign="top" class="w3-padding-small">Semester: <?php echo 'Spring-'.$i; ?></td>
-										<td colspan="2" valign="top" class="w3-padding-small">CGPA: <?php echo number_format(($t_g/$t_c),2); ?></td>
+										<td colspan="2" valign="top" class="w3-padding-small">CGPA: <?php if($t_c==0.0){ echo number_format(0.0,2); } else{ echo number_format(($t_g/$t_c),2); } ?></td>
 										<td colspan="2" valign="top" class="w3-padding-small">Credit: <?php echo number_format($t_c,2); ?></td>
 									</tr>
 									<tr class="w3-teal w3-bold">
@@ -351,8 +357,11 @@
 								$t_g=0.0;
 								foreach($se_re['Summer-'.$i] as $z)
 								{
-									$t_c=$t_c+$z['course_credit'];
-									$t_g=$t_g+($z['grade_point']*$z['course_credit']);
+									if(number_format($z['grade_point'],2)>0.0)
+									{
+										$t_c=$t_c+$z['course_credit'];
+										$t_g=$t_g+($z['grade_point']*$z['course_credit']);
+									}
 								}
 								
 					?>
@@ -360,7 +369,7 @@
 								<table id="<?php echo 'Summer-'.$i; ?>" style="width:90%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
 									<tr class="w3-black w3-bold w3-padding-small">
 										<td colspan="2" valign="top" class="w3-padding-small">Semester: <?php echo 'Summer-'.$i; ?></td>
-										<td colspan="2" valign="top" class="w3-padding-small">CGPA: <?php echo number_format(($t_g/$t_c),2); ?></td>
+										<td colspan="2" valign="top" class="w3-padding-small">CGPA: <?php if($t_c==0.0){ echo number_format(0.0,2); } else{ echo number_format(($t_g/$t_c),2); } ?></td>
 										<td colspan="2" valign="top" class="w3-padding-small">Credit: <?php echo number_format($t_c,2); ?></td>
 									</tr>
 									<tr class="w3-teal w3-bold">
@@ -397,8 +406,11 @@
 								$t_g=0.0;
 								foreach($se_re['Fall-'.$i] as $z)
 								{
-									$t_c=$t_c+$z['course_credit'];
-									$t_g=$t_g+($z['grade_point']*$z['course_credit']);
+									if(number_format($z['grade_point'],2)>0.0)
+									{
+										$t_c=$t_c+$z['course_credit'];
+										$t_g=$t_g+($z['grade_point']*$z['course_credit']);
+									}
 								}
 								
 					?>
@@ -406,7 +418,7 @@
 								<table id="<?php echo 'Fall-'.$i; ?>" style="width:90%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
 									<tr class="w3-black w3-bold w3-padding-small">
 										<td colspan="2" valign="top" class="w3-padding-small">Semester: <?php echo 'Fall-'.$i; ?></td>
-										<td colspan="2" valign="top" class="w3-padding-small">CGPA: <?php echo number_format(($t_g/$t_c),2); ?></td>
+										<td colspan="2" valign="top" class="w3-padding-small">CGPA: <?php if($t_c==0.0){ echo number_format(0.0,2); } else{ echo number_format(($t_g/$t_c),2); } ?></td>
 										<td colspan="2" valign="top" class="w3-padding-small">Credit: <?php echo number_format($t_c,2); ?></td>
 									</tr>
 									<tr class="w3-teal w3-bold">
