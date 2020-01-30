@@ -1,14 +1,50 @@
 <?php
 
+function sent_mail($to,$subject,$msg)
+{
+	
+	$headers[]= 'Reply-To: '.$website_title.' <'.$website_email.'>';
+	$headers[]= 'Return-Path: '.$website_title.' <'.$website_email.'>';
+	$headers[]= 'From: '.$website_title.' <'.$website_email.'>'; 
+	$headers[] = 'Cc: '.$website_email.'';
+	$headers[]= 'Organization: '.$website_title.'';
+	$headers[]= 'MIME-Version: 1.0';
+	$headers[]= 'Content-type: text/html; charset=iso-8859-1';
+	$headers[]= 'X-Priority: 3';
+	$headers[]= 'X-Mailer: PHP'. phpversion();
+	
+	
+	mail($to, $subject, $msg, implode("\r\n", $headers));
+}
+
+function sent_mail_personal($to,$from,$name,$subject,$msg)
+{
+	//$name of from person and $from wmail of from person
+	$headers[]= 'Reply-To: '.$name.' <'.$from.'>';
+	$headers[]= 'Return-Path: '.$name.' <'.$from.'>';
+	$headers[]= 'From: '.$name.' <'.$from.'>'; 
+	//$headers[] = 'Cc: '.$from.'';
+	//$headers[]= 'Organization: '.$name.'';
+	$headers[]= 'MIME-Version: 1.0';
+	$headers[]= 'Content-type: text/html; charset=iso-8859-1';
+	$headers[]= 'X-Priority: 3';
+	$headers[]= 'X-Mailer: PHP'. phpversion();
+	
+	mail($to, $subject, $msg, implode("\r\n", $headers));
+}
 
 function get_current_date()
 {
-	return Date("Y-m-d");
+	$offset=6*60*60; //GMT +6.
+	$dateFormat="Y-m-d";
+	return gmdate($dateFormat, time()+$offset);
 }
 
 function get_current_time()
 {
-	return Date("h:i A");
+	$offset=6*60*60; //GMT +6.
+	$timeFormat="h:i A";
+	return gmdate($timeFormat, time()+$offset);
 }
 
 function grade_point_encrypt($s_id,$g)
@@ -135,6 +171,88 @@ function get_date($date)
 	}
 	$year=$date[0].$date[1].$date[2].$date[3];
 	return $day.' '.$month.', '.$year;
+}
+
+function photo_upload($file,$i,$max_foto_size,$photo_extention,$folder_name,$path='')
+{
+		if($file['tmp_name']=="")
+		{
+			return "1";
+		}
+		if($file['tmp_name']!="")
+		{
+				$p=$file['name'];
+				$pos=strrpos($p,".");
+				$ph=strtolower(substr($p,$pos+1,strlen($p)-$pos));
+				$im_size =  round($file['size']/1024,2);
+
+				if($im_size > $max_foto_size)
+				   {
+						//echo "Image is Too Large";
+						return "1";
+				   }
+				$photo_extention = explode(",",$photo_extention);
+				if(!in_array($ph,$photo_extention ))
+				   {
+						//echo "Upload Correct Image";
+
+						return "1";
+				   }
+		}
+		$ran=date(time());
+		$c=$ran.rand(1,10000);
+		$ran.=$c.".".$ph;
+
+		if(isset($file['tmp_name']) && is_uploaded_file($file['tmp_name']))
+		{
+			$ff = $folder_name."/".$ran;
+			move_uploaded_file($file['tmp_name'], $ff );
+			chmod($ff, 0777);
+		}
+	   return  $ran;
+}
+
+//Image Resize function
+function photo_resize($updir, $img, $id, $dir, $sz1, $sz2)
+{
+	$thumbnail_width = $sz1;
+	$thumbnail_height = $sz2;
+	$thumb_beforeword = "";
+	$arr_image_details = getimagesize("$updir" . $id . '' . "$img"); // pass id to thumb name
+	$original_width = $arr_image_details[0];
+	$original_height = $arr_image_details[1];
+	if ($original_width > $original_height) {
+		$new_width = $thumbnail_width;
+		$new_height = intval($original_height * $new_width / $original_width);
+	} else {
+		$new_height = $thumbnail_height;
+		$new_width = intval($original_width * $new_height / $original_height);
+	}
+	$dest_x = intval(($thumbnail_width - $new_width) / 2);
+	$dest_y = intval(($thumbnail_height - $new_height) / 2);
+	if ($arr_image_details[2] == IMAGETYPE_GIF) {
+		$imgt = "ImageGIF";
+		$imgcreatefrom = "ImageCreateFromGIF";
+	}
+	if ($arr_image_details[2] == IMAGETYPE_JPEG) {
+		$imgt = "ImageJPEG";
+		$imgcreatefrom = "ImageCreateFromJPEG";
+	}
+	if ($arr_image_details[2] == IMAGETYPE_PNG) {
+		$imgt = "ImagePNG";
+		$imgcreatefrom = "ImageCreateFromPNG";
+	}
+	if ($imgt) {
+		$old_image = $imgcreatefrom("$updir" . $id . '' . "$img");
+		$new_image = imagecreatetruecolor($thumbnail_width, $thumbnail_height);
+		imagecopyresized($new_image, $old_image, $dest_x, $dest_y, 0, 0, $new_width, $new_height, $original_width, $original_height);
+		$imgt($new_image, $dir . $id . '' . "$thumb_beforeword" . "$img");
+		return 'done';
+	}
+	else
+	{
+		return 'error';
+	}
 }
 
 ?>
