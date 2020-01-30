@@ -3,7 +3,7 @@
  * @package php-svg-lib
  * @link    http://github.com/PhenX/php-svg-lib
  * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license GNU LGPLv3+ http://www.gnu.org/copyleft/lesser.html
+ * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 
 namespace Svg\Tag;
@@ -29,22 +29,23 @@ class Path extends Shape
         'M' => 'L',
     );
 
-    public function start($attributes)
+    public function start($attribs)
     {
-        if (!isset($attributes['d'])) {
+        if (!isset($attribs['d'])) {
             $this->hasShape = false;
 
             return;
         }
 
         $commands = array();
-        preg_match_all('/([MZLHVCSQTAmzlhvcsqta])([eE ,\-.\d]+)*/', $attributes['d'], $commands, PREG_SET_ORDER);
+        preg_match_all('/([MZLHVCSQTAmzlhvcsqta])([eE ,\-.\d]+)*/', $attribs['d'], $commands, PREG_SET_ORDER);
 
         $path = array();
         foreach ($commands as $c) {
             if (count($c) == 3) {
                 $arguments = array();
-                preg_match_all('/([-+]?((\d+\.\d+)|((\d+)|(\.\d+)))(?:e[-+]?\d+)?)/i', $c[2], $arguments, PREG_PATTERN_ORDER);
+                preg_match_all('/[\-^]?[\d.]+(e[\-]?[\d]+){0,1}/i', $c[2], $arguments, PREG_PATTERN_ORDER);
+
                 $item = $arguments[0];
                 $commandLower = strtolower($c[1]);
 

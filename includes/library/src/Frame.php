@@ -148,7 +148,7 @@ class Frame
     protected $_is_cache = array();
 
     /**
-     * Tells whether the frame was already pushed to the next page
+     * Tells wether the frame was already pushed to the next page
      *
      * @var bool
      */
@@ -160,7 +160,7 @@ class Frame
     public $_float_next_line = false;
 
     /**
-     * Tells whether the frame was split
+     * Tells wether the frame was split
      *
      * @var bool
      */
@@ -306,6 +306,7 @@ class Frame
         $this->_original_style->dispose();
         $this->_original_style = null;
         unset($this->_original_style);
+
     }
 
     /**
@@ -324,14 +325,6 @@ class Frame
         $this->_style = null;
         unset($this->_style);
         $this->_style = clone $this->_original_style;
-
-        // If this represents a generated node then child nodes represent generated content.
-        // Remove the children since the content will be generated next time this frame is reflowed. 
-        if ($this->_node->nodeName === "dompdf_generated" && $this->_style->content != "normal") {
-            foreach ($this->get_children() as $child) {
-                $this->remove_child($child);
-            }
-        }
     }
 
     /**
@@ -433,7 +426,7 @@ class Frame
     /**
      * Containing block dimensions
      *
-     * @param $i string The key of the wanted containing block's dimension (x, y, w, h)
+     * @param $i string The key of the wanted containing block's dimension (x, y, x, h)
      *
      * @return float[]|float
      */
@@ -474,24 +467,15 @@ class Frame
     {
         $style = $this->_style;
 
-        return (
-            (float)$style->length_in_pt(
-                array(
-                    $style->height,
-                    (float)$style->length_in_pt(
-                        array(
-                            $style->border_top_width,
-                            $style->border_bottom_width,
-                            $style->margin_top,
-                            $style->margin_bottom,
-                            $style->padding_top,
-                            $style->padding_bottom
-                        ), $this->_containing_block["w"]
-                    )
-                ),
-                $this->_containing_block["h"]
-            )
-        );
+        return $style->length_in_pt(array(
+            $style->height,
+            $style->margin_top,
+            $style->margin_bottom,
+            $style->border_top_width,
+            $style->border_bottom_width,
+            $style->padding_top,
+            $style->padding_bottom
+        ), $this->_containing_block["h"]);
     }
 
     /**
@@ -504,7 +488,7 @@ class Frame
     {
         $style = $this->_style;
 
-        return (float)$style->length_in_pt(array(
+        return $style->length_in_pt(array(
             $style->width,
             $style->margin_left,
             $style->margin_right,
@@ -522,63 +506,15 @@ class Frame
     {
         $style = $this->_style;
 
-        return (
-            (float)$style->length_in_pt(
-                array(
-                    //$style->height,
-                    (float)$style->length_in_pt(
-                        array(
-                            $style->border_top_width,
-                            $style->border_bottom_width,
-                            $style->margin_top,
-                            $style->margin_bottom,
-                            $style->padding_top,
-                            $style->padding_bottom
-                        ), $this->_containing_block["w"]
-                    )
-                ),
-                $this->_containing_block["h"]
-            )
-        );
-    }
-
-    /**
-     * Return the content box (x,y,w,h) of the frame
-     *
-     * @return array
-     */
-    public function get_content_box()
-    {
-        $style = $this->_style;
-        $cb = $this->_containing_block;
-
-        $x = $this->_position["x"] +
-            (float)$style->length_in_pt(
-                array(
-                    $style->margin_left,
-                    $style->border_left_width,
-                    $style->padding_left
-                ),
-                $cb["w"]
-            );
-
-        $y = $this->_position["y"] +
-            (float)$style->length_in_pt(
-                array(
-                    $style->margin_top,
-                    $style->border_top_width,
-                    $style->padding_top
-                ),
-                $cb["w"]);
-
-        $w = $style->length_in_pt($style->width, $cb["w"]);
-
-        $h = $style->length_in_pt($style->height, $cb["h"]);
-
-        return array(0 => $x, "x" => $x,
-            1 => $y, "y" => $y,
-            2 => $w, "w" => $w,
-            3 => $h, "h" => $h);
+        return $style->length_in_pt(array(
+            //$style->height,
+            $style->margin_top,
+            $style->margin_bottom,
+            $style->border_top_width,
+            $style->border_bottom_width,
+            $style->padding_top,
+            $style->padding_bottom
+        ), $this->_containing_block["h"]);
     }
 
     /**
@@ -592,39 +528,24 @@ class Frame
         $cb = $this->_containing_block;
 
         $x = $this->_position["x"] +
-            (float)$style->length_in_pt(
-                array(
-                    $style->margin_left,
-                    $style->border_left_width
-                ),
+            $style->length_in_pt(array($style->margin_left,
+                    $style->border_left_width),
                 $cb["w"]);
 
         $y = $this->_position["y"] +
-            (float)$style->length_in_pt(
-                array(
-                    $style->margin_top,
-                    $style->border_top_width
-                ),
-                $cb["h"]
-            );
+            $style->length_in_pt(array($style->margin_top,
+                    $style->border_top_width),
+                $cb["h"]);
 
-        $w = $style->length_in_pt(
-                array(
-                    $style->padding_left,
-                    $style->width,
-                    $style->padding_right
-                ),
-                $cb["w"]
-            );
+        $w = $style->length_in_pt(array($style->padding_left,
+                $style->width,
+                $style->padding_right),
+            $cb["w"]);
 
-        $h = $style->length_in_pt(
-                array(
-                    $style->padding_top,
-                    $style->padding_bottom,
-                    $style->length_in_pt($style->height, $cb["h"])
-                ),
-                $cb["w"]
-            );
+        $h = $style->length_in_pt(array($style->padding_top,
+                $style->height,
+                $style->padding_bottom),
+            $cb["h"]);
 
         return array(0 => $x, "x" => $x,
             1 => $y, "y" => $y,
@@ -642,29 +563,23 @@ class Frame
         $style = $this->_style;
         $cb = $this->_containing_block;
 
-        $x = $this->_position["x"] + (float)$style->length_in_pt($style->margin_left, $cb["w"]);
+        $x = $this->_position["x"] + $style->length_in_pt($style->margin_left, $cb["w"]);
 
-        $y = $this->_position["y"] + (float)$style->length_in_pt($style->margin_top, $cb["w"]);
+        $y = $this->_position["y"] + $style->length_in_pt($style->margin_top, $cb["h"]);
 
-        $w = $style->length_in_pt(
-            array(
-                $style->border_left_width,
+        $w = $style->length_in_pt(array($style->border_left_width,
                 $style->padding_left,
                 $style->width,
                 $style->padding_right,
-                $style->border_right_width
-            ),
+                $style->border_right_width),
             $cb["w"]);
 
-        $h = $style->length_in_pt(
-            array(
-                $style->border_top_width,
+        $h = $style->length_in_pt(array($style->border_top_width,
                 $style->padding_top,
+                $style->height,
                 $style->padding_bottom,
-                $style->border_bottom_width,
-                $style->length_in_pt($style->height, $cb["h"])
-            ),
-            $cb["w"]);
+                $style->border_bottom_width),
+            $cb["h"]);
 
         return array(0 => $x, "x" => $x,
             1 => $y, "y" => $y,
@@ -802,56 +717,6 @@ class Frame
     }
 
     /**
-     * Indicates if the margin height is auto sized
-     *
-     * @return bool
-     */
-    public function is_auto_height()
-    {
-        $style = $this->_style;
-
-        return in_array(
-            "auto",
-            array(
-                $style->height,
-                $style->margin_top,
-                $style->margin_bottom,
-                $style->border_top_width,
-                $style->border_bottom_width,
-                $style->padding_top,
-                $style->padding_bottom,
-                $this->_containing_block["h"]
-            ),
-            true
-        );
-    }
-
-    /**
-     * Indicates if the margin width is auto sized
-     *
-     * @return bool
-     */
-    public function is_auto_width()
-    {
-        $style = $this->_style;
-
-        return in_array(
-            "auto",
-            array(
-                $style->width,
-                $style->margin_left,
-                $style->margin_right,
-                $style->border_left_width,
-                $style->border_right_width,
-                $style->padding_left,
-                $style->padding_right,
-                $this->_containing_block["w"]
-            ),
-            true
-        );
-    }
-
-    /**
      * Tells if the frame is a text node
      *
      * @return bool
@@ -903,18 +768,6 @@ class Frame
         }
 
         return $this->_is_cache["block"] = in_array($this->get_style()->display, Style::$BLOCK_TYPES);
-    }
-
-    /**
-     * @return bool
-     */
-    public function is_inline_block()
-    {
-        if (isset($this->_is_cache["inline_block"])) {
-            return $this->_is_cache["inline_block"];
-        }
-
-        return $this->_is_cache["inline_block"] = ($this->get_style()->display === 'inline-block');
     }
 
     /**
@@ -1007,11 +860,6 @@ class Frame
         }
 
         $child->_parent = $this;
-        $decorator = $child->get_decorator();
-        // force an update to the cached parent
-        if ($decorator !== null) {
-            $decorator->get_parent(false);
-        }
         $child->_next_sibling = null;
 
         // Handle the first child

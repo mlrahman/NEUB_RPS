@@ -22,7 +22,7 @@ class AttributeTranslator
     // Munged data originally from
     // http://www.w3.org/TR/REC-html40/index/attributes.html
     // http://www.cs.tut.fi/~jkorpela/html2css.html
-    private static $__ATTRIBUTE_LOOKUP = array(
+    static private $__ATTRIBUTE_LOOKUP = array(
         //'caption' => array ( 'align' => '', ),
         'img' => array(
             'align' => array(
@@ -32,11 +32,11 @@ class AttributeTranslator
                 'left' => 'float: left;',
                 'right' => 'float: right;'
             ),
-            'border' => 'border: %0.2Fpx solid;',
-            'height' => 'height: %spx;',
-            'hspace' => 'padding-left: %1$0.2Fpx; padding-right: %1$0.2Fpx;',
-            'vspace' => 'padding-top: %1$0.2Fpx; padding-bottom: %1$0.2Fpx;',
-            'width' => 'width: %spx;',
+            'border' => 'border: %0.2F px solid;',
+            'height' => 'height: %s px;',
+            'hspace' => 'padding-left: %1$0.2F px; padding-right: %1$0.2F px;',
+            'vspace' => 'padding-top: %1$0.2F px; padding-bottom: %1$0.2F px;',
+            'width' => 'width: %s px;',
         ),
         'table' => array(
             'align' => array(
@@ -88,10 +88,6 @@ class AttributeTranslator
         ),
         'h6' => array(
             'align' => 'text-align: %s;',
-        ),
-        //TODO: translate more form element attributes
-        'input' => array(
-            'size' => '!set_input_width'
         ),
         'p' => array(
             'align' => 'text-align: %s;',
@@ -183,8 +179,8 @@ class AttributeTranslator
         ),
     );
 
-    protected static $_last_basefont_size = 3;
-    protected static $_font_size_lookup = array(
+    static protected $_last_basefont_size = 3;
+    static protected $_font_size_lookup = array(
         // For basefont support
         -3 => "4pt",
         -2 => "5pt",
@@ -249,6 +245,7 @@ class AttributeTranslator
             $style = ltrim($style);
             $node->setAttribute(self::$_style_attr, $style);
         }
+
     }
 
     /**
@@ -258,7 +255,7 @@ class AttributeTranslator
      *
      * @return string
      */
-    protected static function _resolve_target(\DOMNode $node, $target, $value)
+    static protected function _resolve_target(\DOMNode $node, $target, $value)
     {
         if ($target[0] === "!") {
             // Function call
@@ -287,7 +284,7 @@ class AttributeTranslator
      *
      * @return \DOMNodeList|\DOMElement[]
      */
-    protected static function get_cell_list(\DOMNode $node)
+    static protected function get_cell_list(\DOMNode $node)
     {
         $xpath = new \DOMXpath($node->ownerDocument);
 
@@ -316,7 +313,7 @@ class AttributeTranslator
      *
      * @return string
      */
-    protected static function _get_valid_color($value)
+    static protected function _get_valid_color($value)
     {
         if (preg_match('/^#?([0-9A-F]{6})$/i', $value, $matches)) {
             $value = "#$matches[1]";
@@ -331,7 +328,7 @@ class AttributeTranslator
      *
      * @return string
      */
-    protected static function _set_color(\DOMElement $node, $value)
+    static protected function _set_color(\DOMElement $node, $value)
     {
         $value = self::_get_valid_color($value);
 
@@ -344,7 +341,7 @@ class AttributeTranslator
      *
      * @return string
      */
-    protected static function _set_background_color(\DOMElement $node, $value)
+    static protected function _set_background_color(\DOMElement $node, $value)
     {
         $value = self::_get_valid_color($value);
 
@@ -357,7 +354,7 @@ class AttributeTranslator
      *
      * @return null
      */
-    protected static function _set_table_cellpadding(\DOMElement $node, $value)
+    static protected function _set_table_cellpadding(\DOMElement $node, $value)
     {
         $cell_list = self::get_cell_list($node);
 
@@ -374,7 +371,7 @@ class AttributeTranslator
      *
      * @return string
      */
-    protected static function _set_table_border(\DOMElement $node, $value)
+    static protected function _set_table_border(\DOMElement $node, $value)
     {
         $cell_list = self::get_cell_list($node);
 
@@ -397,7 +394,7 @@ class AttributeTranslator
      *
      * @return string
      */
-    protected static function _set_table_cellspacing(\DOMElement $node, $value)
+    static protected function _set_table_cellspacing(\DOMElement $node, $value)
     {
         $style = rtrim($node->getAttribute(self::$_style_attr), ";");
 
@@ -416,7 +413,7 @@ class AttributeTranslator
      *
      * @return null|string
      */
-    protected static function _set_table_rules(\DOMElement $node, $value)
+    static protected function _set_table_rules(\DOMElement $node, $value)
     {
         $new_style = "; border-collapse: collapse;";
 
@@ -466,7 +463,7 @@ class AttributeTranslator
      *
      * @return string
      */
-    protected static function _set_hr_size(\DOMElement $node, $value)
+    static protected function _set_hr_size(\DOMElement $node, $value)
     {
         $style = rtrim($node->getAttribute(self::$_style_attr), ";");
         $style .= "; border-width: " . max(0, $value - 2) . "; ";
@@ -480,7 +477,7 @@ class AttributeTranslator
      *
      * @return null|string
      */
-    protected static function _set_hr_align(\DOMElement $node, $value)
+    static protected function _set_hr_align(\DOMElement $node, $value)
     {
         $style = rtrim($node->getAttribute(self::$_style_attr), ";");
         $width = $node->getAttribute("width");
@@ -515,26 +512,9 @@ class AttributeTranslator
      * @param \DOMElement $node
      * @param string $value
      *
-     * @return null|string
-     */
-    protected static function _set_input_width(\DOMElement $node, $value)
-    {
-        if (empty($value)) { return null; }
-
-        if ($node->hasAttribute("type") && in_array(strtolower($node->getAttribute("type")), array("text","password"))) {
-            return sprintf("width: %Fem", (((int)$value * .65)+2));
-        } else {
-            return sprintf("width: %upx;", (int)$value);
-        }
-    }
-
-    /**
-     * @param \DOMElement $node
-     * @param string $value
-     *
      * @return null
      */
-    protected static function _set_table_row_align(\DOMElement $node, $value)
+    static protected function _set_table_row_align(\DOMElement $node, $value)
     {
         $cell_list = self::get_cell_list($node);
 
@@ -551,7 +531,7 @@ class AttributeTranslator
      *
      * @return null
      */
-    protected static function _set_table_row_valign(\DOMElement $node, $value)
+    static protected function _set_table_row_valign(\DOMElement $node, $value)
     {
         $cell_list = self::get_cell_list($node);
 
@@ -568,7 +548,7 @@ class AttributeTranslator
      *
      * @return null
      */
-    protected static function _set_table_row_bgcolor(\DOMElement $node, $value)
+    static protected function _set_table_row_bgcolor(\DOMElement $node, $value)
     {
         $cell_list = self::get_cell_list($node);
         $value = self::_get_valid_color($value);
@@ -586,7 +566,7 @@ class AttributeTranslator
      *
      * @return null
      */
-    protected static function _set_body_link(\DOMElement $node, $value)
+    static protected function _set_body_link(\DOMElement $node, $value)
     {
         $a_list = $node->getElementsByTagName("a");
         $value = self::_get_valid_color($value);
@@ -604,7 +584,7 @@ class AttributeTranslator
      *
      * @return null
      */
-    protected static function _set_basefont_size(\DOMElement $node, $value)
+    static protected function _set_basefont_size(\DOMElement $node, $value)
     {
         // FIXME: ? we don't actually set the font size of anything here, just
         // the base size for later modification by <font> tags.
@@ -619,7 +599,7 @@ class AttributeTranslator
      *
      * @return string
      */
-    protected static function _set_font_size(\DOMElement $node, $value)
+    static protected function _set_font_size(\DOMElement $node, $value)
     {
         $style = $node->getAttribute(self::$_style_attr);
 

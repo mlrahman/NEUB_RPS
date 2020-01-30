@@ -93,6 +93,9 @@
 				//echo '--> '.$stud_course_code.' --- '.$stud_course_title.' --- '.$stud_course_credit.'</br>';
 				$abc=array('course_code'=>$stud_course_code,'course_title'=>$stud_course_title,'course_credit'=>$stud_course_credit,'grade'=>$stud_grade,'marks'=>$stud_marks,'grade_point'=>$stud_grade_point,'semester'=>$stud_semester,'year'=>$stud_year,'remarks'=>$stud_remarks);
 				
+						
+				
+				
 				//Storing data for showing in tables
 								
 				if(array_key_exists(($stud_semester.'-'.$stud_year),$se_re))
@@ -225,24 +228,24 @@
 							<div class="w3-rest w3-container w3-padding-0 w3-margin-0" style="min-width:200px;">
 								<table>
 									<tr>
-										<td valign="top">Name</td>
-										<td valign="top" class="w3-bold">: <?php echo $name; ?></td>
+										<td vertical-align="top">Name</td>
+										<td vertical-align="top" class="w3-bold">: <?php echo $name; ?></td>
 									</tr>
 									<tr>
-										<td valign="top">Reg. No</td>
-										<td valign="top" class="w3-bold">: <?php echo $reg_no; ?></td>
+										<td vertical-align="top">Reg. No</td>
+										<td vertical-align="top" class="w3-bold">: <?php echo $reg_no; ?></td>
 									</tr>
 									<tr>
-										<td valign="top">Session</td>
-										<td valign="top">: <?php echo $session; ?></td>
+										<td vertical-align="top">Session</td>
+										<td vertical-align="top">: <?php echo $session; ?></td>
 									</tr>
 									<tr>
-										<td valign="top">Gender</td>
-										<td valign="top">: <?php echo $gender; ?></td>
+										<td vertical-align="top">Gender</td>
+										<td vertical-align="top">: <?php echo $gender; ?></td>
 									</tr>
 									<tr>
-										<td valign="top">Birthdate</td>
-										<td valign="top">: <?php echo get_date($birthdate); ?></td>
+										<td vertical-align="top">Birthdate</td>
+										<td vertical-align="top">: <?php echo get_date($birthdate); ?></td>
 									</tr>
 									<tr>
 										<td colspan="2" class="w3-text-blue">
@@ -266,29 +269,29 @@
 					<div class="w3-half w3-container w3-padding-0">
 						<table style="width:100%;">
 							<tr>
-								<td valign="top">Degree</td>
-								<td colspan="2" valign="top" class="w3-bold">: <?php echo $degree; ?></td>
+								<td vertical-align="top">Degree</td>
+								<td colspan="2" vertical-align="top" class="w3-bold">: <?php echo $degree; ?></td>
 							</tr>
 							<tr>
-								<td valign="top">Degree Credit</td>
-								<td colspan="2" valign="top" class="w3-bold">: <?php echo $total_credit; ?></td>
+								<td vertical-align="top">Degree Credit</td>
+								<td colspan="2" vertical-align="top" class="w3-bold">: <?php echo $total_credit; ?></td>
 							</tr>
 							<tr>
-								<td valign="top">Credit Earned</td>
-								<td colspan="2" valign="top" class="w3-text-green">: <?php echo $earned_credit; ?></td>
+								<td vertical-align="top">Credit Earned</td>
+								<td colspan="2" vertical-align="top" class="w3-text-green">: <?php echo $earned_credit; ?></td>
 							</tr>
 							<tr>
-								<td valign="top">Credit Waived</td>
-								<td colspan="2" valign="top">: <?php echo $waived_credit; ?></td>
+								<td vertical-align="top">Credit Waived</td>
+								<td colspan="2" vertical-align="top">: <?php echo $waived_credit; ?></td>
 							</tr>
 							<tr>
-								<td valign="top">CGPA</td>
-								<td colspan="2" valign="top" class="w3-text-red">: <?php echo $total_cgpa; ?></td>
+								<td vertical-align="top">CGPA</td>
+								<td colspan="2" vertical-align="top" class="w3-text-red">: <?php echo $total_cgpa; ?></td>
 							</tr>
 							<tr>
-								<td valign="top">Degree Status</td>
-								<td valign="top" class="w3-bold">: <?php echo $degree_status; ?></td>
-								<td valign="top"><a href="print.php?s_id=<?php echo $s_id; ?>&dob=<?php echo $dob; ?>" target="_blank" class="w3-button w3-round-large w3-black w3-hover-teal w3-padding-small w3-right"><i class="fa fa-print"></i> Print</a></td>
+								<td vertical-align="top">Degree Status</td>
+								<td vertical-align="top" class="w3-bold">: <?php echo $degree_status; ?></td>
+								<td vertical-align="top"><a onclick="window.open('print.php?s_id=<?php echo $s_id; ?>&dob=<?php echo $dob; ?>')" target="_blank" class="w3-button w3-round-large w3-black w3-hover-teal w3-padding-small w3-right"><i class="fa fa-print"></i> Print</a></td>
 							</tr>
 						</table>
 					</div>
@@ -319,29 +322,29 @@
 								<button title="Click here to view details" onclick="show_result_div('<?php echo 'Spring-'.$i; ?>')" class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:8px 0px 5px 0px;"><i class="fa fa-plus-square" id="<?php echo 'Spring-'.$i; ?>_icon" ></i> Semester Result: <?php echo 'Spring-'.$i; ?></button>
 								<table id="<?php echo 'Spring-'.$i; ?>" style="width:90%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
 									<tr class="w3-black w3-bold w3-padding-small">
-										<td colspan="2" valign="top" class="w3-padding-small">Semester: <?php echo 'Spring-'.$i; ?></td>
-										<td colspan="2" valign="top" class="w3-padding-small">CGPA: <?php if($t_c==0.0){ echo number_format(0.0,2); } else{ echo number_format(($t_g/$t_c),2); } ?></td>
-										<td colspan="2" valign="top" class="w3-padding-small">Credit: <?php echo number_format($t_c,2); ?></td>
+										<td colspan="2" vertical-align="top" class="w3-padding-small">Semester: <?php echo 'Spring-'.$i; ?></td>
+										<td colspan="2" vertical-align="top" class="w3-padding-small">CGPA: <?php if($t_c==0.0){ echo number_format(0.0,2); } else{ echo number_format(($t_g/$t_c),2); } ?></td>
+										<td colspan="2" vertical-align="top" class="w3-padding-small">Credit: <?php echo number_format($t_c,2); ?></td>
 									</tr>
 									<tr class="w3-teal w3-bold">
-										<td style="width:20%;" valign="top" class="w3-padding-small">Course Code</td>
-										<td style="width:40%;" valign="top" class="w3-padding-small">Course Title</td>
-										<td style="width:10%;" valign="top" class="w3-padding-small">Credit</td>
-										<td style="width:10%;" valign="top" class="w3-padding-small">Grade</td>
-										<td style="width:10%;" valign="top" class="w3-padding-small">Grade Point</td>
-										<td style="width:10%;" valign="top" class="w3-padding-small">Remarks</td>
+										<td style="width:20%;" vertical-align="top" class="w3-padding-small">Course Code</td>
+										<td style="width:40%;" vertical-align="top" class="w3-padding-small">Course Title</td>
+										<td style="width:10%;" vertical-align="top" class="w3-padding-small">Credit</td>
+										<td style="width:10%;" vertical-align="top" class="w3-padding-small">Grade</td>
+										<td style="width:10%;" vertical-align="top" class="w3-padding-small">Grade Point</td>
+										<td style="width:10%;" vertical-align="top" class="w3-padding-small">Remarks</td>
 									</tr>
 									<?php
 										foreach($se_re['Spring-'.$i] as $z)
 										{
 									?>
 											<tr>
-												<td valign="top" class="w3-padding-small"><?php echo $z['course_code']; ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo $z['course_title']; ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo number_format($z['course_credit'],2); ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo $z['grade']; ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo number_format($z['grade_point'],2); ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo $z['remarks']; ?></td>
+												<td vertical-align="top" class="w3-padding-small"><?php echo $z['course_code']; ?></td>
+												<td vertical-align="top" class="w3-padding-small"><?php echo $z['course_title']; ?></td>
+												<td vertical-align="top" class="w3-padding-small"><?php echo number_format($z['course_credit'],2); ?></td>
+												<td vertical-align="top" class="w3-padding-small"><?php echo $z['grade']; ?></td>
+												<td vertical-align="top" class="w3-padding-small"><?php echo number_format($z['grade_point'],2); ?></td>
+												<td vertical-align="top" class="w3-padding-small"><?php echo $z['remarks']; ?></td>
 											</tr>
 									<?php 
 										}
@@ -368,29 +371,29 @@
 								<button title="Click here to view details" onclick="show_result_div('<?php echo 'Summer-'.$i; ?>')" class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:8px 0px 5px 0px;"><i class="fa fa-plus-square" id="<?php echo 'Summer-'.$i; ?>_icon" ></i> Semester Result: <?php echo 'Summer-'.$i; ?></button>
 								<table id="<?php echo 'Summer-'.$i; ?>" style="width:90%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
 									<tr class="w3-black w3-bold w3-padding-small">
-										<td colspan="2" valign="top" class="w3-padding-small">Semester: <?php echo 'Summer-'.$i; ?></td>
-										<td colspan="2" valign="top" class="w3-padding-small">CGPA: <?php if($t_c==0.0){ echo number_format(0.0,2); } else{ echo number_format(($t_g/$t_c),2); } ?></td>
-										<td colspan="2" valign="top" class="w3-padding-small">Credit: <?php echo number_format($t_c,2); ?></td>
+										<td colspan="2" vertical-align="top" class="w3-padding-small">Semester: <?php echo 'Summer-'.$i; ?></td>
+										<td colspan="2" vertical-align="top" class="w3-padding-small">CGPA: <?php if($t_c==0.0){ echo number_format(0.0,2); } else{ echo number_format(($t_g/$t_c),2); } ?></td>
+										<td colspan="2" vertical-align="top" class="w3-padding-small">Credit: <?php echo number_format($t_c,2); ?></td>
 									</tr>
 									<tr class="w3-teal w3-bold">
-										<td style="width:20%;" valign="top" class="w3-padding-small">Course Code</td>
-										<td style="width:40%;" valign="top" class="w3-padding-small">Course Title</td>
-										<td style="width:10%;" valign="top" class="w3-padding-small">Credit</td>
-										<td style="width:10%;" valign="top" class="w3-padding-small">Grade</td>
-										<td style="width:10%;" valign="top" class="w3-padding-small">Grade Point</td>
-										<td style="width:10%;" valign="top" class="w3-padding-small">Remarks</td>
+										<td style="width:20%;" vertical-align="top" class="w3-padding-small">Course Code</td>
+										<td style="width:40%;" vertical-align="top" class="w3-padding-small">Course Title</td>
+										<td style="width:10%;" vertical-align="top" class="w3-padding-small">Credit</td>
+										<td style="width:10%;" vertical-align="top" class="w3-padding-small">Grade</td>
+										<td style="width:10%;" vertical-align="top" class="w3-padding-small">Grade Point</td>
+										<td style="width:10%;" vertical-align="top" class="w3-padding-small">Remarks</td>
 									</tr>
 									<?php
 										foreach($se_re['Summer-'.$i] as $z)
 										{
 									?>
 											<tr>
-												<td valign="top" class="w3-padding-small"><?php echo $z['course_code']; ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo $z['course_title']; ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo number_format($z['course_credit'],2); ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo $z['grade']; ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo number_format($z['grade_point'],2); ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo $z['remarks']; ?></td>
+												<td vertical-align="top" class="w3-padding-small"><?php echo $z['course_code']; ?></td>
+												<td vertical-align="top" class="w3-padding-small"><?php echo $z['course_title']; ?></td>
+												<td vertical-align="top" class="w3-padding-small"><?php echo number_format($z['course_credit'],2); ?></td>
+												<td vertical-align="top" class="w3-padding-small"><?php echo $z['grade']; ?></td>
+												<td vertical-align="top" class="w3-padding-small"><?php echo number_format($z['grade_point'],2); ?></td>
+												<td vertical-align="top" class="w3-padding-small"><?php echo $z['remarks']; ?></td>
 											</tr>
 									<?php 
 										}
@@ -417,29 +420,29 @@
 								<button title="Click here to view details" onclick="show_result_div('<?php echo 'Fall-'.$i; ?>')" class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:8px 0px 5px 0px;"><i class="fa fa-plus-square" id="<?php echo 'Fall-'.$i; ?>_icon" ></i> Semester Result: <?php echo 'Fall-'.$i; ?></button>
 								<table id="<?php echo 'Fall-'.$i; ?>" style="width:90%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
 									<tr class="w3-black w3-bold w3-padding-small">
-										<td colspan="2" valign="top" class="w3-padding-small">Semester: <?php echo 'Fall-'.$i; ?></td>
-										<td colspan="2" valign="top" class="w3-padding-small">CGPA: <?php if($t_c==0.0){ echo number_format(0.0,2); } else{ echo number_format(($t_g/$t_c),2); } ?></td>
-										<td colspan="2" valign="top" class="w3-padding-small">Credit: <?php echo number_format($t_c,2); ?></td>
+										<td colspan="2" vertical-align="top" class="w3-padding-small">Semester: <?php echo 'Fall-'.$i; ?></td>
+										<td colspan="2" vertical-align="top" class="w3-padding-small">CGPA: <?php if($t_c==0.0){ echo number_format(0.0,2); } else{ echo number_format(($t_g/$t_c),2); } ?></td>
+										<td colspan="2" vertical-align="top" class="w3-padding-small">Credit: <?php echo number_format($t_c,2); ?></td>
 									</tr>
 									<tr class="w3-teal w3-bold">
-										<td style="width:20%;" valign="top" class="w3-padding-small">Course Code</td>
-										<td style="width:40%;" valign="top" class="w3-padding-small">Course Title</td>
-										<td style="width:10%;" valign="top" class="w3-padding-small">Credit</td>
-										<td style="width:10%;" valign="top" class="w3-padding-small">Grade</td>
-										<td style="width:10%;" valign="top" class="w3-padding-small">Grade Point</td>
-										<td style="width:10%;" valign="top" class="w3-padding-small">Remarks</td>
+										<td style="width:20%;" vertical-align="top" class="w3-padding-small">Course Code</td>
+										<td style="width:40%;" vertical-align="top" class="w3-padding-small">Course Title</td>
+										<td style="width:10%;" vertical-align="top" class="w3-padding-small">Credit</td>
+										<td style="width:10%;" vertical-align="top" class="w3-padding-small">Grade</td>
+										<td style="width:10%;" vertical-align="top" class="w3-padding-small">Grade Point</td>
+										<td style="width:10%;" vertical-align="top" class="w3-padding-small">Remarks</td>
 									</tr>
 									<?php
 										foreach($se_re['Fall-'.$i] as $z)
 										{
 									?>
 											<tr>
-												<td valign="top" class="w3-padding-small"><?php echo $z['course_code']; ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo $z['course_title']; ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo number_format($z['course_credit'],2); ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo $z['grade']; ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo number_format($z['grade_point'],2); ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo $z['remarks']; ?></td>
+												<td vertical-align="top" class="w3-padding-small"><?php echo $z['course_code']; ?></td>
+												<td vertical-align="top" class="w3-padding-small"><?php echo $z['course_title']; ?></td>
+												<td vertical-align="top" class="w3-padding-small"><?php echo number_format($z['course_credit'],2); ?></td>
+												<td vertical-align="top" class="w3-padding-small"><?php echo $z['grade']; ?></td>
+												<td vertical-align="top" class="w3-padding-small"><?php echo number_format($z['grade_point'],2); ?></td>
+												<td vertical-align="top" class="w3-padding-small"><?php echo $z['remarks']; ?></td>
 											</tr>
 									<?php 
 										}
@@ -457,22 +460,22 @@
 							<button title="Click here to view details" onclick="show_result_div('course_waived')" class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:8px 0px 5px 0px;"><i class="fa fa-plus-square" id="course_waived_icon" ></i> Waived Course List</button>
 							<table id="course_waived" style="width:90%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
 								<tr class="w3-black w3-bold w3-padding-small">
-									<td colspan="2" valign="top" class="w3-padding-small">Waived Courses</td>
-									<td class="w3-padding-small" valign="top">Credit: <?php echo number_format($waived_credit,2); ?></td>
+									<td colspan="2" vertical-align="top" class="w3-padding-small">Waived Courses</td>
+									<td class="w3-padding-small" vertical-align="top">Credit: <?php echo number_format($waived_credit,2); ?></td>
 								</tr>
 								<tr class="w3-teal w3-bold">
-									<td valign="top" style="width:150px;max-width:25%;" class="w3-padding-small">Course Code</td>
-									<td valign="top" style="width:400px;max-width:45%;" class="w3-padding-small">Course Title</td>
-									<td valign="top" style="width:200px;max-width:30%;" class="w3-padding-small">Credit</td>
+									<td vertical-align="top" style="width:150px;max-width:25%;" class="w3-padding-small">Course Code</td>
+									<td vertical-align="top" style="width:400px;max-width:45%;" class="w3-padding-small">Course Title</td>
+									<td vertical-align="top" style="width:200px;max-width:30%;" class="w3-padding-small">Credit</td>
 								</tr>
 								<?php
 									foreach($ra_w as $cge)
 									{
 								?>
 										<tr>
-											<td valign="top" class="w3-padding-small"><?php echo $cge['course_code']; ?></td>
-											<td valign="top" class="w3-padding-small"><?php echo $cge['course_title']; ?></td>
-											<td valign="top" class="w3-padding-small"><?php echo number_format($cge['course_credit'],2); ?></td>
+											<td vertical-align="top" class="w3-padding-small"><?php echo $cge['course_code']; ?></td>
+											<td vertical-align="top" class="w3-padding-small"><?php echo $cge['course_title']; ?></td>
+											<td vertical-align="top" class="w3-padding-small"><?php echo number_format($cge['course_credit'],2); ?></td>
 										</tr>
 								
 								<?php
