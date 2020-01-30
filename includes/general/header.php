@@ -19,6 +19,11 @@ Email: mlrahman@neub.edu.bd
 		$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
 		$stmt->execute();
 		$result = $stmt->fetchAll();
+		if(count($result)==0)
+		{
+			echo 'System not ready';
+			die();
+		}
 		//echo '<script>console.log("'.$result[0][1].'-ttt");</script>';
 		$title=$result[0][2];
 		$caption=$result[0][3];
@@ -49,10 +54,12 @@ Email: mlrahman@neub.edu.bd
 	}
 	catch(PDOException $e)
 	{
+		echo 'System not ready';
 		die();
 	}
 	catch(Exception $e)
 	{
+		echo 'System not ready';
 		die();
 	}
 		

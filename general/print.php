@@ -23,6 +23,13 @@
 			$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
 			$stmt->execute();
 			$result_t = $stmt->fetchAll();
+			
+			if(count($result_t)==0)
+			{
+				header("location: index.php");
+				die();
+			}
+			
 			$title=$result_t[0][2];
 			$caption=$result_t[0][3];
 			$address=$result_t[0][4];
@@ -70,20 +77,30 @@
 			$stmt->execute();
 			$prog_result = $stmt->fetchAll();
 			$degree = $prog_result[0][1];
-			
+			if(count($prog_result)==0)
+			{
+				header("location: index.php");
+				die();
+			}
 			
 			//Search for student program credit
 			$stmt = $conn->prepare("select * from nr_program_credit where nr_prcr_id=$prcr_id");
 			$stmt->execute();
 			$prcr_result = $stmt->fetchAll();
 			$total_credit=$prcr_result[0][2];
-			
+			if(count($prcr_result)==0)
+			{
+				header("location: index.php");
+				die();
+			}
 			
 			//Fetching student result
 			$stmt = $conn->prepare("select * from nr_result where nr_stud_id=:s_id and nr_result_status='Active' "); 
 			$stmt->bindParam(':s_id', $s_id);
 			$stmt->execute();
 			$stud_result=$stmt->fetchAll();
+			
+				
 			$cg=array();
 			$se_re=array();
 			for($i = 0; $i < count($stud_result); $i++) {

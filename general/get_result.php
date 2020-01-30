@@ -54,6 +54,11 @@
 			$stmt->execute();
 			$prog_result = $stmt->fetchAll();
 			$degree = $prog_result[0][1];
+			if(count($prog_result)==0)
+			{
+				echo 'not_found';
+				die();
+			}
 			
 			
 			//Search for student program credit
@@ -61,6 +66,11 @@
 			$stmt->execute();
 			$prcr_result = $stmt->fetchAll();
 			$total_credit=$prcr_result[0][2];
+			if(count($prcr_result)==0)
+			{
+				echo 'not_found';
+				die();
+			}
 			
 			
 			//Fetching student result

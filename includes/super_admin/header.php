@@ -20,6 +20,11 @@ Email: mlrahman@neub.edu.bd
 		$stmt->execute();
 		$result = $stmt->fetchAll();
 		//echo '<script>console.log("'.$result[0][1].'-ttt");</script>';
+		if(count($result)==0)
+		{
+			echo 'System not ready';
+			die();
+		}
 		$title=$result[0][2];
 		$caption=$result[0][3];
 		$address=$result[0][4];
