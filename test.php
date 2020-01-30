@@ -3,9 +3,9 @@
 include("includes/function.php");
 
 $s_id=140203020002;
-$marks=70;
-$gpa=3.5;
-$g='A-';
+$marks=30;
+$gpa=0.00;
+$g='F';
 echo 'Marks:</br>';
 echo marks_encrypt($s_id,$marks).'</br>';
 echo marks_decrypt($s_id,marks_encrypt($s_id,$marks)).'</br>';
@@ -15,6 +15,7 @@ echo grade_decrypt($s_id,grade_encrypt($s_id,$g)).'</br>';
 echo 'Grade Point:</br>';
 echo grade_point_encrypt($s_id,$gpa).'</br>';
 echo grade_point_decrypt($s_id,grade_point_encrypt($s_id,$gpa)).'</br>';
+
 /*
 echo '-------------------------------------</br>';
 
@@ -57,5 +58,19 @@ $dompdf->render();
 // Output the generated PDF to Browser
 $dompdf->stream();
 */
-
+/*
+$arr=array();
+$arr['Summer'][0]=10;
+$arr['Summer'][1]=20;
+$arr['Summer'][2]=30;
+$arr['Summer'][3]=40;
+$arr['Fall'][0]=100;
+$arr['Fall'][1]=200;
+$arr['Fall'][2]=300;
+$arr['Fall'][3]=400;
+foreach($arr as $a=>$b)
+{
+	echo 'key: '.$a.' '.count($arr[$a]).'</br>';
+}
+*/
 ?>

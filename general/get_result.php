@@ -100,10 +100,64 @@
 								
 				if(array_key_exists(($stud_semester.'-'.$stud_year),$se_re))
 				{
-					$se_re[($stud_semester.'-'.$stud_year)][count($se_re[($stud_semester.'-'.$stud_year)])]=$abc;
+					$fl=0;
+					foreach($se_re as $key=>$kk)
+					{
+						for($j=0;$j<count($se_re[$key]);$j++)
+						{
+							if(array_key_exists($j,$se_re[$key]))
+							{
+								$prev_cc=$se_re[$key][$j]['course_code'];
+								//echo 'key: '.$key.' index: '.$j.' Course Code: '.$prev_cc.' Current course code: '.$stud_course_code.'</br>';
+								$prev_gp=$se_re[$key][$j]['grade_point'];
+								//echo 'key: '.$key.' index: '.$j.' Grade Point: '.$prev_gp.' Current grade point: '.$stud_grade_point.'</br>';
+								
+								//improve course checking current grade>prev grade
+								if($prev_cc==$stud_course_code && $prev_gp!=0.0 && $stud_grade_point>$prev_gp)
+								{
+									//echo $prev_cc;
+									unset($se_re[$key][$j]);
+								}
+								else if($prev_cc==$stud_course_code && $prev_gp!=0.0 && $stud_grade_point<=$prev_gp)
+									$fl=1;
+							}
+						}
+					}
+					if($fl==0)
+						$se_re[($stud_semester.'-'.$stud_year)][count($se_re[($stud_semester.'-'.$stud_year)])]=$abc;
+					
 				}
 				else
-					$se_re[($stud_semester.'-'.$stud_year)][0]=$abc;
+				{
+					$fl=0;
+					foreach($se_re as $key=>$kk)
+					{
+						for($j=0;$j<count($se_re[$key]);$j++)
+						{
+							if(array_key_exists($j,$se_re[$key]))
+							{
+								$prev_cc=$se_re[$key][$j]['course_code'];
+								//echo 'key: '.$key.' index: '.$j.' Course Code: '.$prev_cc.' Current course code: '.$stud_course_code.'</br>';
+								$prev_gp=$se_re[$key][$j]['grade_point'];
+								//echo 'key: '.$key.' index: '.$j.' Grade Point: '.$prev_gp.' Current grade point: '.$stud_grade_point.'</br>';
+								
+								//improve course checking current grade>prev grade
+								if($prev_cc==$stud_course_code && $prev_gp!=0.0 && $stud_grade_point>$prev_gp)
+								{
+									//echo $prev_cc;
+									unset($se_re[$key][$j]);
+								}
+								else if($prev_cc==$stud_course_code && $prev_gp!=0.0 && $stud_grade_point<=$prev_gp)
+									$fl=1;
+							}
+							
+						}
+					}
+					if($fl==0)
+						$se_re[($stud_semester.'-'.$stud_year)][0]=$abc;
+				}
+				
+				
 				
 				
 				//Calculating cg and credits by checking unique and best result
