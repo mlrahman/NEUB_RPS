@@ -1,5 +1,6 @@
 
 <header class="w3-display-container w3-grayscale-min w3-dark-gray w3-hover-teal" style="height:450px;overflow:hidden;">
+	
 	<img src="../images/system/video_alt.jpg" class="w3-image w3-grayscale w3-opacity-min" alt="Video Alternate" style="height:100%;width:100%;"/>
 	
 	<video autoplay muted loop id="myVideo" class="w3-grayscale">

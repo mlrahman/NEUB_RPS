@@ -143,12 +143,12 @@
 								//echo 'key: '.$key.' index: '.$j.' Grade Point: '.$prev_gp.' Current grade point: '.$stud_grade_point.'</br>';
 								
 								//improve course checking current grade>prev grade
-								if($prev_cc==$stud_course_code && $prev_gp!=0.0 && $stud_grade_point>$prev_gp)
+								if($prev_cc==$stud_course_code && $prev_gp!=0.0 && $stud_grade_point>=$prev_gp)
 								{
 									//echo $prev_cc;
 									unset($se_re[$key][$j]);
 								}
-								else if($prev_cc==$stud_course_code && $prev_gp!=0.0 && $stud_grade_point<=$prev_gp)
+								else if($prev_cc==$stud_course_code && $prev_gp!=0.0 && $stud_grade_point<$prev_gp)
 									$fl=1;
 							}
 						}
@@ -172,12 +172,12 @@
 								//echo 'key: '.$key.' index: '.$j.' Grade Point: '.$prev_gp.' Current grade point: '.$stud_grade_point.'</br>';
 								
 								//improve course checking current grade>prev grade
-								if($prev_cc==$stud_course_code && $prev_gp!=0.0 && $stud_grade_point>$prev_gp)
+								if($prev_cc==$stud_course_code && $prev_gp!=0.0 && $stud_grade_point>=$prev_gp)
 								{
 									//echo $prev_cc;
 									unset($se_re[$key][$j]);
 								}
-								else if($prev_cc==$stud_course_code && $prev_gp!=0.0 && $stud_grade_point<=$prev_gp)
+								else if($prev_cc==$stud_course_code && $prev_gp!=0.0 && $stud_grade_point<$prev_gp)
 									$fl=1;
 							}
 							

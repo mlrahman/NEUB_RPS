@@ -33,8 +33,14 @@
 			$message .= '<p><b>Message Details:</b></p>';
 			$message .= '<p>'.$msg.'</p></body></html>';
 			
-			sent_mail_personal($to,$from,$name,$subject,$message);
-			echo 'done';
+			$ch=sent_mail_personal($to,$from,$name,$subject,$message);
+			if($ch==false)
+			{
+				echo 'error';
+				die();
+			}
+			else
+				echo 'done';
 			
 		}
 		catch(PDOException $e)

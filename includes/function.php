@@ -2,35 +2,50 @@
 
 function sent_mail($to,$subject,$msg)
 {
-	
-	$headers[]= 'Reply-To: '.$website_title.' <'.$website_email.'>';
-	$headers[]= 'Return-Path: '.$website_title.' <'.$website_email.'>';
-	$headers[]= 'From: '.$website_title.' <'.$website_email.'>'; 
-	$headers[] = 'Cc: '.$website_email.'';
-	$headers[]= 'Organization: '.$website_title.'';
-	$headers[]= 'MIME-Version: 1.0';
-	$headers[]= 'Content-type: text/html; charset=iso-8859-1';
-	$headers[]= 'X-Priority: 3';
-	$headers[]= 'X-Mailer: PHP'. phpversion();
-	
-	
-	mail($to, $subject, $msg, implode("\r\n", $headers));
+	try
+	{
+		$headers[]= 'Reply-To: '.$website_title.' <'.$website_email.'>';
+		$headers[]= 'Return-Path: '.$website_title.' <'.$website_email.'>';
+		$headers[]= 'From: '.$website_title.' <'.$website_email.'>'; 
+		$headers[] = 'Cc: '.$website_email.'';
+		$headers[]= 'Organization: '.$website_title.'';
+		$headers[]= 'MIME-Version: 1.0';
+		$headers[]= 'Content-type: text/html; charset=iso-8859-1';
+		$headers[]= 'X-Priority: 3';
+		$headers[]= 'X-Mailer: PHP'. phpversion();
+		
+		
+		mail($to, $subject, $msg, implode("\r\n", $headers));
+		return true;
+	}
+	catch(Exception $e)
+	{
+		return false;
+	}
 }
 
 function sent_mail_personal($to,$from,$name,$subject,$msg)
 {
-	//$name of from person and $from wmail of from person
-	$headers[]= 'Reply-To: '.$name.' <'.$from.'>';
-	$headers[]= 'Return-Path: '.$name.' <'.$from.'>';
-	$headers[]= 'From: '.$name.' <'.$from.'>'; 
-	//$headers[] = 'Cc: '.$from.'';
-	//$headers[]= 'Organization: '.$name.'';
-	$headers[]= 'MIME-Version: 1.0';
-	$headers[]= 'Content-type: text/html; charset=iso-8859-1';
-	$headers[]= 'X-Priority: 3';
-	$headers[]= 'X-Mailer: PHP'. phpversion();
-	
-	mail($to, $subject, $msg, implode("\r\n", $headers));
+	try
+	{
+		//$name of from person and $from wmail of from person
+		$headers[]= 'Reply-To: '.$name.' <'.$from.'>';
+		$headers[]= 'Return-Path: '.$name.' <'.$from.'>';
+		$headers[]= 'From: '.$name.' <'.$from.'>'; 
+		//$headers[] = 'Cc: '.$from.'';
+		//$headers[]= 'Organization: '.$name.'';
+		$headers[]= 'MIME-Version: 1.0';
+		$headers[]= 'Content-type: text/html; charset=iso-8859-1';
+		$headers[]= 'X-Priority: 3';
+		$headers[]= 'X-Mailer: PHP'. phpversion();
+		
+		mail($to, $subject, $msg, implode("\r\n", $headers));
+		return true;
+	}
+	catch(Exception $e)
+	{
+		return false;
+	}
 }
 
 function get_current_date()

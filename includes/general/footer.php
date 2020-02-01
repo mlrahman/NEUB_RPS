@@ -35,7 +35,7 @@
 							<p style="margin:0px;width:50px;" class="w3-bottombar w3-border-teal"> </p>
 							<input class="w3-input w3-animate-input w3-border-teal" placeholder=" Your Name" id="y_name1" type="text" style="width:80%;max-width:100%;margin:10px 0px;" autocomplete="off">
 							<input class="w3-input w3-animate-input w3-border-teal" placeholder=" Your Email" id="y_email1" type="text" style="width:80%;max-width:100%;margin:10px 0px;" autocomplete="off">
-							<input class="w3-input w3-animate-input w3-border-teal" placeholder=" Your Message" id="y_message1" type="text" style="width:80%;max-width:100%;margin:10px 0px;" autocomplete="off">
+							<input class="w3-input w3-animate-input w3-border-teal" placeholder=" Your Message" id="y_msg1" type="text" style="width:80%;max-width:100%;margin:10px 0px;" autocomplete="off">
 							<button class="w3-button w3-right w3-round w3-black w3-hover-teal" onclick="send_message()"><i class="fa fa-send"> Submit</i></button>
 						</div>
 						<div style="padding: 0px 0px 0px 30px;" class="w3-third w3-container w3-mobile w3-left-align w3-hide-large">
@@ -43,7 +43,7 @@
 							<p style="margin:0px;width:50px;" class="w3-bottombar w3-border-teal"> </p>
 							<input class="w3-input w3-animate-input w3-border-teal" placeholder=" Your Name" id="y_name2" type="text" style="width:80%;max-width:100%;margin:10px 0px;" autocomplete="off">
 							<input class="w3-input w3-animate-input w3-border-teal" placeholder=" Your Email" id="y_email2" type="text" style="width:80%;max-width:100%;margin:10px 0px;" autocomplete="off">
-							<input class="w3-input w3-animate-input w3-border-teal" placeholder=" Your Message" id="y_message2" type="text" style="width:80%;max-width:100%;margin:10px 0px;" autocomplete="off">
+							<input class="w3-input w3-animate-input w3-border-teal" placeholder=" Your Message" id="y_msg2" type="text" style="width:80%;max-width:100%;margin:10px 0px;" autocomplete="off">
 							<button class="w3-button w3-right w3-round w3-black w3-hover-teal" onclick="send_message()"><i class="fa fa-send"> Submit</i></button>
 						</div>
 					</div>
@@ -55,10 +55,10 @@
 					{
 						var y_name1=document.getElementById('y_name1').value.trim();
 						var y_email1=document.getElementById('y_email1').value.trim();
-						var y_messsage1=document.getElementById('y_message1').value.trim();
+						var y_message1=document.getElementById('y_msg1').value.trim();
 						var y_name2=document.getElementById('y_name2').value.trim();
 						var y_email2=document.getElementById('y_email2').value.trim();
-						var y_messsage2=document.getElementById('y_message2').value.trim();
+						var y_message2=document.getElementById('y_msg2').value.trim();
 						var y_name,y_email,y_message;
 						if(y_name2.length>=y_name1.length && y_email2.length>=y_email1.length && y_message2.length>=y_message1.length)
 						{
@@ -86,10 +86,10 @@
 						{
 							document.getElementById('y_name1').value='';
 							document.getElementById('y_email1').value='';
-							document.getElementById('y_message1').value='';
+							document.getElementById('y_msg1').value='';
 							document.getElementById('y_name2').value='';
 							document.getElementById('y_email2').value='';
-							document.getElementById('y_message2').value='';
+							document.getElementById('y_msg2').value='';
 								
 							document.getElementById('y_loading').style.display='block';
 							var xmlhttp3 = new XMLHttpRequest();
@@ -103,7 +103,7 @@
 										setTimeout(function(){ document.getElementById('y_sent').style.display='none'; }, 1500);
 					
 									}
-									else if(this.responseText.trim()=="error")
+									else if(this.responseText.trim()!="done")
 									{
 										document.getElementById("rs_system_failed").style.display="block";
 										setTimeout(function(){ document.getElementById("rs_system_failed").style.display="none"; }, 1500);
