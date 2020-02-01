@@ -12,6 +12,7 @@ Email: mlrahman@neub.edu.bd
 -->
 <?php 
 	ob_start();
+	session_start();
 	require("../includes/db_connection.php"); 
 	require("../includes/function.php"); 
 	try
@@ -35,6 +36,24 @@ Email: mlrahman@neub.edu.bd
 		$contact_email=$result[0][9];//for sending message from contact us form
 		$map=$result[0][10];
 		//logo and video is always fixed in name 
+		
+		
+		//deleting login transaction
+		$trx=1000;
+		$stmt = $conn->prepare("select * from nr_faculty_login_transaction order by nr_falotr_date desc, nr_falotr_time desc ");
+		$stmt->execute();
+		$re_trx = $stmt->fetchAll();
+		for($i=0;$i<count($re_trx);$i++)
+		{
+			if($i>$trx)
+			{
+				$fa_date=$re_trx[$i][7];
+				$fa_time=$re_trx[$i][8];
+				$stmt = $conn->prepare("delete from nr_faculty_login_transaction where nr_falotr_date='$fa_date' and nr_falotr_time='$fa_time' ");
+				$stmt->execute();
+			}
+		}
+		
 	}
 	catch(PDOException $e)
 	{
@@ -66,5 +85,8 @@ Email: mlrahman@neub.edu.bd
 		
 	</head>
 	<body class="w3-black">
+		<div id="invalid_msg" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
+			<i class="fa fa-bell-o"></i> <p id="msg" class="w3-margin-0 w3-padding-0" style="display: inline;"></p>
+		</div>
 		<div class="w3-content w3-white" style="max-width:2000px;">
 		

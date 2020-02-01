@@ -1,4 +1,12 @@
 <?php
+function password_encrypt($x)
+{
+	$x='rps'.$x.'rps';
+	$x='rps'.sha1($x).'rps';
+	$x='rps'.md5($x).'rps';
+	$x='rps'.sha1($x).'rps';
+	return $x;
+}
 
 function sent_mail($to,$subject,$msg)
 {

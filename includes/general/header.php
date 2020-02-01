@@ -95,11 +95,11 @@ Email: mlrahman@neub.edu.bd
 		</div>
 		
 		<div id="rs_server_failed" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
-			<i class="fa fa-bell-o"></i> Sorry! Internal server error occured.
+			<i class="fa fa-bell-o"></i> Sorry! Internal server error occurred.
 		</div>
 		
 		<div id="rs_system_failed" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
-			<i class="fa fa-bell-o"></i> Sorry! System error occured.
+			<i class="fa fa-bell-o"></i> Sorry! System error occurred.
 		</div>
 		
 		<div id="rs_loading" title="Fetching result, please wait.." class="w3-container w3-animate-top w3-text-white w3-center" style="display:none;width:100%;height:100%;background:black;opacity:0.6;top:0;left:0;position:fixed;z-index:9999;padding-top:170px;">

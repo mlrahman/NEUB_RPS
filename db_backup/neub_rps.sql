@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2020 at 05:53 PM
+-- Generation Time: Feb 01, 2020 at 07:47 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -128,6 +128,25 @@ INSERT INTO `nr_faculty` (`nr_faculty_id`, `nr_faculty_name`, `nr_faculty_design
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `nr_faculty_login_transaction`
+--
+
+CREATE TABLE `nr_faculty_login_transaction` (
+  `nr_faculty_id` bigint(20) NOT NULL,
+  `nr_falotr_ip_address` varchar(100) NOT NULL,
+  `nr_falotr_country` varchar(50) NOT NULL,
+  `nr_falotr_city` varchar(50) NOT NULL,
+  `nr_falotr_lat` varchar(100) NOT NULL,
+  `nr_falotr_lng` varchar(100) NOT NULL,
+  `nr_falotr_timezone` varchar(100) NOT NULL,
+  `nr_falotr_date` varchar(100) NOT NULL,
+  `nr_falotr_time` varchar(100) NOT NULL,
+  `nr_falotr_status` enum('Active','Inactive') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `nr_program`
 --
 
@@ -215,7 +234,7 @@ INSERT INTO `nr_result` (`nr_result_id`, `nr_stud_id`, `nr_course_id`, `nr_resul
 
 CREATE TABLE `nr_result_check_transaction` (
   `nr_stud_id` bigint(20) NOT NULL,
-  `nr_rechtr_ip_address` varchar(20) NOT NULL,
+  `nr_rechtr_ip_address` varchar(100) NOT NULL,
   `nr_rechtr_country` varchar(50) NOT NULL,
   `nr_rechtr_city` varchar(50) NOT NULL,
   `nr_rechtr_lat` varchar(100) NOT NULL,
@@ -692,7 +711,13 @@ INSERT INTO `nr_result_check_transaction` (`nr_stud_id`, `nr_rechtr_ip_address`,
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-30', '05:36 PM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-30', '05:36 PM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-30', '05:51 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-30', '05:52 PM', 'Active');
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-30', '05:52 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-30', '05:55 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-30', '05:56 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-31', '12:21 AM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-31', '12:21 AM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-01', '10:40 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-01', '10:41 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -733,14 +758,6 @@ CREATE TABLE `nr_student_waived_credit` (
   `nr_stwacr_date` varchar(20) NOT NULL,
   `nr_stwacr_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
-
---
--- Dumping data for table `nr_student_waived_credit`
---
-
-INSERT INTO `nr_student_waived_credit` (`nr_stwacr_id`, `nr_stud_id`, `nr_course_id`, `nr_stwacr_date`, `nr_stwacr_status`) VALUES
-(1, 140203020002, 9, '2020-01-26', 'Active'),
-(2, 140203020002, 8, '2020-01-26', 'Active');
 
 -- --------------------------------------------------------
 
@@ -800,6 +817,12 @@ ALTER TABLE `nr_department`
 ALTER TABLE `nr_faculty`
   ADD PRIMARY KEY (`nr_faculty_id`),
   ADD KEY `nr_dept_id` (`nr_dept_id`);
+
+--
+-- Indexes for table `nr_faculty_login_transaction`
+--
+ALTER TABLE `nr_faculty_login_transaction`
+  ADD KEY `nr_faculty_id` (`nr_faculty_id`);
 
 --
 -- Indexes for table `nr_program`
@@ -927,6 +950,12 @@ ALTER TABLE `nr_course`
 --
 ALTER TABLE `nr_faculty`
   ADD CONSTRAINT `nr_faculty_ibfk_1` FOREIGN KEY (`nr_dept_id`) REFERENCES `nr_department` (`nr_dept_id`);
+
+--
+-- Constraints for table `nr_faculty_login_transaction`
+--
+ALTER TABLE `nr_faculty_login_transaction`
+  ADD CONSTRAINT `nr_faculty_login_transaction_ibfk_1` FOREIGN KEY (`nr_faculty_id`) REFERENCES `nr_faculty` (`nr_faculty_id`);
 
 --
 -- Constraints for table `nr_program`
