@@ -52,13 +52,38 @@
 						$stmt->execute();
 						
 						$_SESSION['faculty_id']=$faculty_id;
-						$_SESSION['email']=$result[0][8];
-						$_SESSION['password']=$result[0][9];
+						$_SESSION['faculty_email']=$result[0][8];
+						$_SESSION['faculty_password']=$result[0][7];
+						$_SESSION['faculty_two_factor_status']=$result[0][10];
+						$_SESSION['faculty_two_factor_check']='N';
+						$_SESSION['faculty_time']=$time;
+						$_SESSION['faculty_date']=$date;
+						$_SESSION['faculty_dept_id']=$result[0][6];
 						$_SESSION['done']='Hi! '.$result[0][1].'. Welcome to the faculty panel';
 						
+						if(isset($_REQUEST['re_faculty']))
+						{
+							if(!isset($_COOKIE['faculty_login']) || !isset($_COOKIE['faculty_email']) || !isset($_COOKIE['faculty_password']))
+							{
+								setcookie('faculty_login', 'save', time() + (86400 * 30));
+								setcookie('faculty_email', $email, time() + (86400 * 30));
+								setcookie('faculty_password', $_REQUEST['faculty_password'], time() + (86400 * 30));
+							}
+						}
+						else
+						{
+							//echo 'deleted';
+							setcookie('faculty_login', "", time() - (86400 * 30));
+							setcookie('faculty_email', "", time() - (86400 * 30));
+							setcookie('faculty_password', "", time() - (86400 * 30));
+						}
 						
+						//redirecting logged in page
 						
 						session_write_close();
+						header("location: f_index.php");
+						die();
+						//echo 'ok';
 						
 					}
 					else
@@ -89,5 +114,6 @@
 	else
 	{
 		header("location: index.php");
+		die();
 	}
 ?>

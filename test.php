@@ -1,7 +1,7 @@
 <?php
 
 include("includes/function.php");
-
+/*
 $s_id=140203020002;
 $marks=30;
 $gpa=0.00;
@@ -73,4 +73,12 @@ foreach($arr as $a=>$b)
 	echo 'key: '.$a.' '.count($arr[$a]).'</br>';
 }
 */
+
+echo 'Password: '.password_encrypt('1234');
+if(isset($_REQUEST['y']))
+	echo '</br>'.$_REQUEST['x'];
 ?>
+<form action="test.php">
+<input type="checkbox" name="x">
+<input type="submit" name="y">
+</form>

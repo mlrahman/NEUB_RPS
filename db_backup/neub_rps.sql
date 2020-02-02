@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2020 at 07:47 PM
+-- Generation Time: Feb 02, 2020 at 08:30 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -115,15 +115,31 @@ CREATE TABLE `nr_faculty` (
   `nr_faculty_email` varchar(100) NOT NULL,
   `nr_faculty_cell_no` varchar(20) NOT NULL,
   `nr_faculty_photo` varchar(100) NOT NULL,
-  `nr_faculty_status` enum('Active','Inactive') NOT NULL
+  `nr_faculty_status` enum('Active','Inactive') NOT NULL,
+  `nr_faculty_two_factor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 --
 -- Dumping data for table `nr_faculty`
 --
 
-INSERT INTO `nr_faculty` (`nr_faculty_id`, `nr_faculty_name`, `nr_faculty_designation`, `nr_faculty_join_date`, `nr_faculty_resign_date`, `nr_faculty_type`, `nr_dept_id`, `nr_faculty_password`, `nr_faculty_email`, `nr_faculty_cell_no`, `nr_faculty_photo`, `nr_faculty_status`) VALUES
-(1, 'Noushad Sojib', 'Assistant Professor', '2016-04-20', '', 'Permanent', 1, '', '', '', '', 'Active');
+INSERT INTO `nr_faculty` (`nr_faculty_id`, `nr_faculty_name`, `nr_faculty_designation`, `nr_faculty_join_date`, `nr_faculty_resign_date`, `nr_faculty_type`, `nr_dept_id`, `nr_faculty_password`, `nr_faculty_email`, `nr_faculty_cell_no`, `nr_faculty_photo`, `nr_faculty_status`, `nr_faculty_two_factor`) VALUES
+(1, 'Noushad Sojib', 'Assistant Professor', '2016-04-20', '', 'Permanent', 1, 'rps096c17f2c657debcfeee07fd066949a7a2906da7rps', 'mlrahman@neub.edu.bd', '', '', 'Active', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nr_faculty_link_token`
+--
+
+CREATE TABLE `nr_faculty_link_token` (
+  `nr_faculty_id` bigint(20) NOT NULL,
+  `nr_falito_token` varchar(100) NOT NULL,
+  `nr_falito_type` enum('Two Factor','Forget Password') NOT NULL,
+  `nr_falito_date` varchar(20) NOT NULL,
+  `nr_falito_time` varchar(20) NOT NULL,
+  `nr_falito_status` enum('Active','Inactive') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 -- --------------------------------------------------------
 
@@ -143,6 +159,40 @@ CREATE TABLE `nr_faculty_login_transaction` (
   `nr_falotr_time` varchar(100) NOT NULL,
   `nr_falotr_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Dumping data for table `nr_faculty_login_transaction`
+--
+
+INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_address`, `nr_falotr_country`, `nr_falotr_city`, `nr_falotr_lat`, `nr_falotr_lng`, `nr_falotr_timezone`, `nr_falotr_date`, `nr_falotr_time`, `nr_falotr_status`) VALUES
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '12:09 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '12:10 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '12:11 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '12:37 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '12:43 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '12:45 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '12:47 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '12:50 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '12:50 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '12:53 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '12:54 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '12:54 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '12:54 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '12:55 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '12:56 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '12:57 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '12:57 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '12:58 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '01:00 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '01:08 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '01:08 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '01:09 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '01:09 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '01:13 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '01:13 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '01:14 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '01:14 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '01:19 AM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -717,7 +767,11 @@ INSERT INTO `nr_result_check_transaction` (`nr_stud_id`, `nr_rechtr_ip_address`,
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-31', '12:21 AM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-01-31', '12:21 AM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-01', '10:40 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-01', '10:41 PM', 'Active');
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-01', '10:41 PM', 'Active'),
+(140203020002, '192.168.0.104', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-02', '02:13 PM', 'Active'),
+(140203020002, '192.168.0.104', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-02', '02:13 PM', 'Active'),
+(140203020002, '192.168.0.120', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-02', '02:14 PM', 'Active'),
+(140203020002, '192.168.0.120', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-02', '02:15 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -817,6 +871,12 @@ ALTER TABLE `nr_department`
 ALTER TABLE `nr_faculty`
   ADD PRIMARY KEY (`nr_faculty_id`),
   ADD KEY `nr_dept_id` (`nr_dept_id`);
+
+--
+-- Indexes for table `nr_faculty_link_token`
+--
+ALTER TABLE `nr_faculty_link_token`
+  ADD KEY `nr_faculty_id` (`nr_faculty_id`);
 
 --
 -- Indexes for table `nr_faculty_login_transaction`
@@ -950,6 +1010,12 @@ ALTER TABLE `nr_course`
 --
 ALTER TABLE `nr_faculty`
   ADD CONSTRAINT `nr_faculty_ibfk_1` FOREIGN KEY (`nr_dept_id`) REFERENCES `nr_department` (`nr_dept_id`);
+
+--
+-- Constraints for table `nr_faculty_link_token`
+--
+ALTER TABLE `nr_faculty_link_token`
+  ADD CONSTRAINT `nr_faculty_link_token_ibfk_1` FOREIGN KEY (`nr_faculty_id`) REFERENCES `nr_faculty` (`nr_faculty_id`);
 
 --
 -- Constraints for table `nr_faculty_login_transaction`

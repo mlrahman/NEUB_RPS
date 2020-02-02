@@ -27,9 +27,9 @@
 							
 				<div class="w3-section w3-border w3-round-large w3-padding">
 				  <label><b>Email</b></label>
-				  <input class="w3-input w3-border w3-margin-bottom w3-round-large" type="email" placeholder="Enter Email" autocomplete="off" name="faculty_email" value="<?php if(isset($_COOKIE["controller_login"])) { echo $_COOKIE["controller_login"]; } ?>" required>
+				  <input class="w3-input w3-border w3-margin-bottom w3-round-large" type="email" placeholder="Enter Email" autocomplete="off" name="faculty_email" value="<?php if(isset($_COOKIE["faculty_email"])) { echo $_COOKIE["faculty_email"]; } ?>" required>
 				  <label><b>Password</b></label>
-				  <input class="w3-input w3-border w3-margin-bottom w3-round-large" type="password" placeholder="Enter Password" autocomplete="off" name="faculty_password" value="<?php if(isset($_COOKIE["controller_password"])) { echo $_COOKIE["controller_password"]; } ?>" required>
+				  <input class="w3-input w3-border w3-margin-bottom w3-round-large" type="password" placeholder="Enter Password" autocomplete="off" name="faculty_password" value="<?php if(isset($_COOKIE["faculty_password"])) { echo $_COOKIE["faculty_password"]; } ?>" required>
 				  
 				  <?php 
 					//spam Check 
