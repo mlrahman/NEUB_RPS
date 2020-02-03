@@ -74,7 +74,7 @@ Email: mlrahman@neub.edu.bd
 		
 		
 	</head>
-	<body class="w3-white">
+	<body class="w3-black">
 		<div id="welcome_msg" class="w3-container w3-animate-top w3-center w3-green w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
 			<i class="fa fa-bell-o"></i> <p id="msg" class="w3-margin-0 w3-padding-0" style="display: inline;"></p>
 		</div>
@@ -95,4 +95,46 @@ Email: mlrahman@neub.edu.bd
 			session_write_close();
 		?>
 	
-		<a href="log_out.php?log_out=yes">Sign Out</a>
+		
+		
+		<div class="w3-content" style="max-width:1400px;">
+			<!-- The Grid -->
+			<div class="w3-row-padding w3-white">
+				
+				<!-- Left Column -->
+				<div class="w3-third w3-margin-top">
+					<div class="w3-white w3-text-grey w3-card-4  w3-border w3-border-black" style="height:603px;overflow:auto;">
+						
+						<a href="log_out.php?log_out=yes">Sign Out</a>
+		
+						
+						
+						
+					</div>
+				</div>
+				
+				<!-- Right Column -->
+				<div class="w3-twothird w3-margin-top">
+					<div class="w3-container w3-card w3-white w3-margin-bottom w3-border w3-border-black" style="height:603px;overflow:auto;">
+					
+					</div>
+				</div>
+				
+			</div>
+			
+			
+			<!-- Footer -->
+			<div class="w3-container w3-center">
+				<p class="w3-cursor w3-hide-medium w3-hide-small w3-large w3-margin">Copyright &copy <?php echo DATE("Y"); ?> <a href="https://<?php echo $web; ?>" title="NEUB" target="_blank" class="w3-hover-text-teal w3-decoration-null">North East University Bangladesh.</a></p>
+				<p class="w3-cursor w3-hide-large w3-hide-small w3-medium w3-margin">Copyright &copy <?php echo DATE("Y"); ?> <a href="https://<?php echo $web; ?>" title="NEUB" target="_blank" class="w3-hover-text-teal w3-decoration-null">North East University Bangladesh.</a></p>
+				<p class="w3-cursor w3-hide-medium w3-hide-large w3-small w3-margin">Copyright &copy <?php echo DATE("Y"); ?> <a href="https://<?php echo $web; ?>" title="NEUB" target="_blank" class="w3-hover-text-teal w3-decoration-null">North East University Bangladesh.</a></p>
+			</div>
+			
+			
+		</div>
+		
+		
+	</body>
+</html>		
+		
+		
