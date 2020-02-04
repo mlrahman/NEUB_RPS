@@ -9,7 +9,7 @@
 		unset($_SESSION['error']);
 	}
 ?>
-<div class="w3-container" style="padding:40px 0px 20px 0px;min-height:500px;">
+<div class="w3-container" style="padding:30px 0px 30px 0px;min-height:500px;">
 	<div class="w3-container w3-card-4 w3-animate-zoom w3-light-gray w3-round-large" style="max-width:450px;margin: 0 auto;">
 	
 		<div class="w3-container" style="margin:0px;padding:0px;">
