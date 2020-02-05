@@ -51,15 +51,16 @@
 						$stmt->bindParam(':f_id', $faculty_id);
 						$stmt->execute();
 						
+						$f_name=$result[0][1];
 						$_SESSION['faculty_id']=$faculty_id;
 						$_SESSION['faculty_email']=$result[0][8];
 						$_SESSION['faculty_password']=$result[0][7];
-						$_SESSION['faculty_two_factor_status']=$result[0][10];
+						$_SESSION['faculty_two_factor_status']=$result[0][12];
 						$_SESSION['faculty_two_factor_check']='N';
 						$_SESSION['faculty_time']=$time;
 						$_SESSION['faculty_date']=$date;
 						$_SESSION['faculty_dept_id']=$result[0][6];
-						$_SESSION['done']='Hi! '.$result[0][1].'. Welcome to the faculty panel';
+						$_SESSION['done']='Hi! '.$f_name.'. Welcome to the faculty panel';
 						
 						if(isset($_REQUEST['re_faculty']))
 						{
@@ -81,6 +82,46 @@
 						//redirecting logged in page
 						
 						session_write_close();
+						
+						//clearing previous OTPs & Forget My Password links
+						$stmt = $conn->prepare("delete from nr_faculty_link_token where nr_faculty_id=:f_id");
+						$stmt->bindParam(':f_id', $faculty_id);
+						$stmt->execute();
+						
+						//send otp if two factor enabled
+						if($_SESSION['faculty_two_factor_status']==1)
+						{
+							$iotp=get_otp();
+							$d=get_current_date();
+							$t=get_current_time();
+							//Inserting new OTPs
+							$stmt = $conn->prepare("insert into nr_faculty_link_token values(:f_id,'$iotp','Two Factor','$d','$t','Active') ");
+							$stmt->bindParam(':f_id', $faculty_id);
+							$stmt->execute();
+							
+							
+							$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
+							$stmt->execute();
+							$result = $stmt->fetchAll();
+							if(count($result)==0)
+							{
+								echo 'System not ready';
+								die();
+							}
+							$title=$result[0][2];
+							$contact_email=$result[0][9];
+							
+							//sending new OTP to user
+							$msg="Dear ".$f_name.", Your Two Factor Authentication OTP is: ".$iotp;
+							$message = '<html><body>';
+							$message .= '<h1>Two Factor Authentication OTP From - '.$title.'</h1><p>  </p>';
+							$message .= '<p><b>Message Details:</b></p>';
+							$message .= '<p>'.$msg.'</p></body></html>';
+							
+							
+							sent_mail($_SESSION['faculty_email'],$title.' - OTP for Two Factor Authentication',$message,$title,$contact_email);
+						}
+						
 						header("location: f_index.php");
 						die();
 						//echo 'ok';

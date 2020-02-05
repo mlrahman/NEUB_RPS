@@ -8,14 +8,15 @@ function password_encrypt($x)
 	return $x;
 }
 
-function sent_mail($to,$subject,$msg)
+function sent_mail($to,$subject,$msg,$website_title,$website_email)
 {
 	try
 	{
 		$headers[]= 'Reply-To: '.$website_title.' <'.$website_email.'>';
 		$headers[]= 'Return-Path: '.$website_title.' <'.$website_email.'>';
 		$headers[]= 'From: '.$website_title.' <'.$website_email.'>'; 
-		$headers[] = 'Cc: '.$website_email.'';
+		//Using for sent email backup
+		//$headers[] = 'Cc: '.$website_email.'';
 		$headers[]= 'Organization: '.$website_title.'';
 		$headers[]= 'MIME-Version: 1.0';
 		$headers[]= 'Content-type: text/html; charset=iso-8859-1';
@@ -54,6 +55,20 @@ function sent_mail_personal($to,$from,$name,$subject,$msg)
 	{
 		return false;
 	}
+}
+
+function get_otp()
+{
+	$otp=DATE("h");
+	$otp=$otp.rand(10,99);
+	$otp=$otp.DATE("m");
+	$otp=$otp.rand(10,99);
+	$otp=$otp.DATE("y");
+	return $otp;
+}
+function get_link()
+{
+	return sha1(get_otp());
 }
 
 function get_current_date()

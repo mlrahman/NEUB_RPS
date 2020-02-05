@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2020 at 08:30 PM
--- Server version: 10.4.10-MariaDB
--- PHP Version: 7.1.33
+-- Generation Time: Feb 05, 2020 at 09:16 PM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -124,7 +124,7 @@ CREATE TABLE `nr_faculty` (
 --
 
 INSERT INTO `nr_faculty` (`nr_faculty_id`, `nr_faculty_name`, `nr_faculty_designation`, `nr_faculty_join_date`, `nr_faculty_resign_date`, `nr_faculty_type`, `nr_dept_id`, `nr_faculty_password`, `nr_faculty_email`, `nr_faculty_cell_no`, `nr_faculty_photo`, `nr_faculty_status`, `nr_faculty_two_factor`) VALUES
-(1, 'Noushad Sojib', 'Assistant Professor', '2016-04-20', '', 'Permanent', 1, 'rps096c17f2c657debcfeee07fd066949a7a2906da7rps', 'mlrahman@neub.edu.bd', '', '', 'Active', 0);
+(1, 'Noushad Sojib', 'Assistant Professor', '2016-04-20', '', 'Permanent', 1, 'rps096c17f2c657debcfeee07fd066949a7a2906da7rps', 'mlrahman@neub.edu.bd', '', '', 'Active', 1);
 
 -- --------------------------------------------------------
 
@@ -140,6 +140,14 @@ CREATE TABLE `nr_faculty_link_token` (
   `nr_falito_time` varchar(20) NOT NULL,
   `nr_falito_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Dumping data for table `nr_faculty_link_token`
+--
+
+INSERT INTO `nr_faculty_link_token` (`nr_faculty_id`, `nr_falito_token`, `nr_falito_type`, `nr_falito_date`, `nr_falito_time`, `nr_falito_status`) VALUES
+(1, '0996023620', 'Two Factor', '2020-02-06', '02:15 AM', 'Active'),
+(1, 'fb5aafd25c2bad224ba1c51923049dfe5b466217', 'Forget Password', '2020-02-06', '02:15 AM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -192,7 +200,24 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '01:13 AM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '01:14 AM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '01:14 AM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '01:19 AM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-03', '01:19 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-05', '10:47 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-05', '11:10 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-05', '11:12 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-06', '12:07 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-06', '12:07 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-06', '12:07 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-06', '12:08 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-06', '12:22 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-06', '12:24 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-06', '12:25 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-06', '12:26 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-06', '12:37 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-06', '12:51 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-06', '12:53 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-06', '12:57 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-06', '02:01 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-06', '02:15 AM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -266,7 +291,7 @@ CREATE TABLE `nr_result` (
 INSERT INTO `nr_result` (`nr_result_id`, `nr_stud_id`, `nr_course_id`, `nr_result_marks`, `nr_result_grade`, `nr_result_grade_point`, `nr_result_semester`, `nr_result_year`, `nr_result_remarks`, `nr_result_status`, `nr_prog_id`, `nr_result_publish_date`, `nr_faculty_id`) VALUES
 (1, 140203020002, 3, 140203029312.5, '89f276cc01d4af01fa8cee48af8ee962bac42500', 140203026062.5, 'Spring', 2015, '', 'Active', 1, '2020-01-27', 1),
 (2, 140203020002, 4, 140203029812.5, '500910d02d287a8c898c406ea348043c050d31ca', 140203026312.5, 'Spring', 2015, '', 'Active', 1, '2020-01-27', 1),
-(3, 140203020002, 1, 140203022812.5, 'b25f2dcaddc7d4daf4753b3672867ec37dc1f0b4', 140203022812.5, 'Spring', 2015, 'Incomplete', 'Active', 1, '2020-01-29', 1),
+(3, 140203020002, 1, 140203022812.5, '264c6dfec271ba9a2a1526fa29b7754ef7eb0fd8', 140203022812.5, 'Spring', 2015, '', 'Active', 1, '2020-01-29', 1),
 (4, 140203020002, 2, 140203028812.5, '5177875dc921885677fcc6e571bca2fb1146eaaa', 140203025812.5, 'Spring', 2015, '', 'Active', 1, '2020-01-29', 1),
 (5, 140203020002, 5, 140203022812.5, '264c6dfec271ba9a2a1526fa29b7754ef7eb0fd8', 140203022812.5, 'Spring', 2015, '', 'Active', 1, '2020-01-29', 1),
 (6, 140203020002, 7, 140203029812.5, '500910d02d287a8c898c406ea348043c050d31ca', 140203026312.5, 'Fall', 2014, '', 'Active', 1, '2020-01-29', 1),
@@ -771,7 +796,14 @@ INSERT INTO `nr_result_check_transaction` (`nr_stud_id`, `nr_rechtr_ip_address`,
 (140203020002, '192.168.0.104', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-02', '02:13 PM', 'Active'),
 (140203020002, '192.168.0.104', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-02', '02:13 PM', 'Active'),
 (140203020002, '192.168.0.120', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-02', '02:14 PM', 'Active'),
-(140203020002, '192.168.0.120', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-02', '02:15 PM', 'Active');
+(140203020002, '192.168.0.120', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-02', '02:15 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-05', '10:39 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-05', '10:39 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-05', '10:41 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-05', '10:41 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-05', '10:45 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-06', '01:08 AM', 'Active'),
+(140203020002, '192.168.0.101', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-06', '01:12 AM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -840,7 +872,7 @@ CREATE TABLE `nr_system_component` (
 --
 
 INSERT INTO `nr_system_component` (`nr_syco_id`, `nr_admin_id`, `nr_syco_title`, `nr_syco_caption`, `nr_syco_address`, `nr_syco_tel`, `nr_syco_email`, `nr_syco_mobile`, `nr_syco_web`, `nr_syco_contact_email`, `nr_syco_map_link`, `nr_syco_date`, `nr_syco_status`) VALUES
-(1, 1, 'NEUB Result Portal', 'Permanent Campus', 'Telihaor, Sheikhghat, Sylhet-3100', '0821 710221-2', 'info@neub.edu.bd', '01755566994', 'www.neub.edu.bd', 'result@neub.edu.bd', 'https://maps.google.com/maps?q=north%20east%20university%20bangladesh&t=&z=15&ie=UTF8&iwloc=&output=embed', '2020-01-25', 'Active');
+(1, 1, 'NEUB Result Portal', 'Permanent Campus', 'Telihaor, Sheikhghat, Sylhet-3100', '0821 710221-2', 'info@neub.edu.bd', '01755566994', 'www.neub.edu.bd', 'mirlutfur.rahman@gmail.com', 'https://maps.google.com/maps?q=north%20east%20university%20bangladesh&t=&z=15&ie=UTF8&iwloc=&output=embed', '2020-01-25', 'Active');
 
 --
 -- Indexes for dumped tables
