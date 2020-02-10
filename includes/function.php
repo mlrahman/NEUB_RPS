@@ -59,11 +59,11 @@ function sent_mail_personal($to,$from,$name,$subject,$msg)
 
 function get_otp()
 {
-	$otp=DATE("h");
+	$otp=DATE("y");
 	$otp=$otp.rand(10,99);
-	$otp=$otp.DATE("m");
+	$otp=$otp.DATE("s");
 	$otp=$otp.rand(10,99);
-	$otp=$otp.DATE("y");
+	$otp=$otp.DATE("d");
 	return $otp;
 }
 function get_link()

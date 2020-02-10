@@ -3,7 +3,7 @@
 	//checking logged in or not
 	
 	try{
-		if(isset($_SESSION['faculty_id']) && isset($_SESSION['faculty_email']) && isset($_SESSION['faculty_password']) && isset($_SESSION['faculty_time']) && isset($_SESSION['faculty_date']) && isset($_SESSION['faculty_two_factor_status']) && isset($_SESSION['faculty_two_factor_check']))
+		if(isset($_SESSION['faculty_id']) && isset($_SESSION['faculty_email']) && isset($_SESSION['faculty_password']) && isset($_SESSION['faculty_time']) && isset($_SESSION['faculty_date']) && isset($_SESSION['faculty_two_factor_status']) && isset($_SESSION['faculty_two_factor_check']) && isset($_SESSION['faculty_name']) && isset($_SESSION['faculty_dept_id']))
 		{
 			$faculty_id=$_SESSION['faculty_id'];
 			$faculty_email=$_SESSION['faculty_email'];
@@ -36,6 +36,9 @@
 					unset($_SESSION['faculty_time']);
 					unset($_SESSION['faculty_two_factor_status']);
 					unset($_SESSION['faculty_two_factor_check']);
+					unset($_SESSION['faculty_dept_id']);
+					unset($_SESSION['faculty_name']);
+					unset($_SESSION['otp_count']);
 					header("location: index.php");
 					die();
 				}
@@ -49,6 +52,9 @@
 				unset($_SESSION['faculty_time']);
 				unset($_SESSION['faculty_two_factor_status']);
 				unset($_SESSION['faculty_two_factor_check']);
+				unset($_SESSION['faculty_dept_id']);
+				unset($_SESSION['faculty_name']);
+				unset($_SESSION['otp_count']);
 				header("location: index.php");
 				die();
 			}
@@ -63,6 +69,9 @@
 		unset($_SESSION['faculty_time']);
 		unset($_SESSION['faculty_two_factor_status']);
 		unset($_SESSION['faculty_two_factor_check']);
+		unset($_SESSION['faculty_dept_id']);
+		unset($_SESSION['faculty_name']);
+		unset($_SESSION['otp_count']);
 		header("location: index.php");
 		die();
 	}

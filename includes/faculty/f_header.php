@@ -39,6 +39,9 @@ Email: mlrahman@neub.edu.bd
 		$contact_email=$result[0][9];//for sending message from contact us form
 		$map=$result[0][10];
 		//logo and video is always fixed in name 
+		
+		
+		
 	}
 	catch(PDOException $e)
 	{
@@ -74,6 +77,14 @@ Email: mlrahman@neub.edu.bd
 		<div id="welcome_msg" class="w3-container w3-animate-top w3-center w3-green w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
 			<i class="fa fa-bell-o"></i> <p id="msg" class="w3-margin-0 w3-padding-0" style="display: inline;"></p>
 		</div>
+		
+		<div id="invalid_msg" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
+			<i class="fa fa-bell-o"></i> <p id="i_msg" class="w3-margin-0 w3-padding-0" style="display: inline;"></p>
+		</div>
+		
+		<div id="resend_otp_msg" class="w3-container w3-animate-top w3-center w3-green w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
+			<i class="fa fa-bell-o"></i> <p class="w3-margin-0 w3-padding-0" style="display: inline;"> We have sent you an email with a new OTP.</p>
+		</div>
 	
 		
 		<div id="two_factor" class="w3-modal">
@@ -83,7 +94,7 @@ Email: mlrahman@neub.edu.bd
 					<p class="w3-xxlarge" style="margin:5px 0px;">Two Factor Authentication</p>
 				</header>
 				<div class="w3-container w3-row w3-round-bottom-large w3-padding w3-border w3-border-teal" style="height:100%;">
-					<form style="margin: 0 auto;" class="w3-container w3-margin-bottom" action="f_header.php" method="post">
+					<form style="margin: 0 auto;" class="w3-container w3-margin-bottom" action="f_index.php" method="post">
 						<div class="w3-section w3-padding w3-center w3-bold w3-text-red">
 							*We have sent you an OTP to your email. Please insert the OTP to pass the two factor authentication.<font class="w3-text-blue"> Three times wrong OTP submission will temporarily block your ID.</font> 
 						</div>
@@ -111,7 +122,7 @@ Email: mlrahman@neub.edu.bd
 								</div>
 					
 								<div class="w3-col" style="width:33.33%;padding: 0px 10px 0px 10px;">
-									<a href="#" class="w3-button w3-block w3-black w3-hover-teal w3-margin-top w3-padding w3-round-large"><i class="fa fa-send"></i> Resend OTP</a>
+									<a href="f_index.php?resend_otp=yes" class="w3-button w3-block w3-black w3-hover-teal w3-margin-top w3-padding w3-round-large"><i class="fa fa-send"></i> Resend OTP</a>
 								</div>
 								
 								<div class="w3-col" style="width:33.33%;padding: 0px 0px 0px 10px;">
@@ -140,6 +151,125 @@ Email: mlrahman@neub.edu.bd
 			reservation_captcha4.onchange=reservation_captcha_val4;
 		</script>
 		<?php
+			//checking otp
+			if(isset($_REQUEST['two_check']))
+			{
+				$faculty_id=$_SESSION['faculty_id'];
+				$faculty_otp=trim($_REQUEST['faculty_otp']);
+				$stmt = $conn->prepare("select * from nr_faculty_link_token where nr_faculty_id=:f_id and nr_falito_token=:f_tok ");
+				$stmt->bindParam(':f_id', $faculty_id);
+				$stmt->bindParam(':f_tok', $faculty_otp);
+				$stmt->execute();
+				$result=$stmt->fetchAll();
+				if(count($result)==0)
+				{
+					$_SESSION['error']='Sorry! you have entered an invalid OTP ('.(3-($_SESSION['otp_count']+1)).')';
+					$_SESSION['otp_count']=$_SESSION['otp_count']+1;
+					if($_SESSION['otp_count']>=3)
+					{
+						$stmt = $conn->prepare("update nr_faculty set nr_faculty_status='Inactive' where nr_faculty_id=:f_id");
+						$stmt->bindParam(':f_id', $faculty_id);
+						$stmt->execute();
+						$_SESSION['error']='Your ID temporarily blocked for wrong OTPs.';
+						header("location: log_out.php?log_out=yes");
+						die();
+					}
+					
+				}
+				else
+				{
+					if($result[0][5]=='Active')
+					{
+						//two factor_passed
+						$stmt = $conn->prepare("delete from nr_faculty_link_token where nr_faculty_id=:f_id");
+						$stmt->bindParam(':f_id', $faculty_id);
+						$stmt->execute();
+						
+						$_SESSION['faculty_two_factor_check']='Y';
+						$_SESSION['done']="Two factor authentication successful.";
+						header("location: f_index.php");
+						die();
+					}
+					else
+					{
+						$_SESSION['error']='Sorry! you have entered an invalid OTP ('.(3-($_SESSION['otp_count']+1)).')';
+						$_SESSION['otp_count']=$_SESSION['otp_count']+1;
+						if($_SESSION['otp_count']>=3)
+						{
+							$stmt = $conn->prepare("update nr_faculty set nr_faculty_status='Inactive' where nr_faculty_id=:f_id");
+							$stmt->bindParam(':f_id', $faculty_id);
+							$stmt->execute();
+							$_SESSION['error']='Your ID temporarily blocked for wrong OTPs.';
+							header("location: log_out.php?log_out=yes");
+							die();
+						}
+					}
+				}
+			}
+			
+			
+			
+			if(isset($_SESSION['done']))
+			{
+				echo "<script>
+						document.getElementById('welcome_msg').style.display='block';
+						document.getElementById('msg').innerHTML='".$_SESSION['done']."';
+						setTimeout(function(){ document.getElementById('welcome_msg').style.display='none'; }, 2000);
+					</script>";
+				unset($_SESSION['done']);
+			}
+			if(isset($_SESSION['error']))
+			{
+				echo "<script>
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='".$_SESSION['error']."';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					</script>";
+				unset($_SESSION['error']);
+			}
+			
+			if(isset($_REQUEST['resend_otp']))
+			{
+				$faculty_id=$_SESSION['faculty_id'];
+				$f_name=$_SESSION['faculty_name'];
+				//clearing previous OTPs & Forget My Password links
+				$stmt = $conn->prepare("delete from nr_faculty_link_token where nr_faculty_id=:f_id");
+				$stmt->bindParam(':f_id', $faculty_id);
+				$stmt->execute();
+				
+				$iotp=get_otp();
+				$d=get_current_date();
+				$t=get_current_time();
+				//Inserting new OTPs
+				$stmt = $conn->prepare("insert into nr_faculty_link_token values(:f_id,'$iotp','Two Factor','$d','$t','Active') ");
+				$stmt->bindParam(':f_id', $faculty_id);
+				$stmt->execute();
+				
+				//sending new OTP to user
+				$msg="Dear ".$f_name.", Your Two Factor Authentication OTP is: ".$iotp;
+				$message = '<html><body>';
+				$message .= '<h1>Two Factor Authentication OTP From - '.$title.'</h1><p>  </p>';
+				$message .= '<p><b>Message Details:</b></p>';
+				$message .= '<p>'.$msg.'</p></body></html>';
+				
+				
+				sent_mail($_SESSION['faculty_email'],$title.' - OTP for Two Factor Authentication',$message,$title,$contact_email);
+				
+				$_SESSION['otp_sent']='yes';
+				header("location: f_index.php");
+				die();
+				
+			}
+			if(isset($_SESSION['otp_sent']))
+			{
+				echo "<script>
+						document.getElementById('resend_otp_msg').style.display='block';
+						setTimeout(function(){ document.getElementById('resend_otp_msg').style.display='none'; }, 2000);
+					</script>";
+				unset($_SESSION['otp_sent']);
+			}
+			
+		
 			if($_SESSION['faculty_two_factor_status']==1) //two factor enabled
 			{
 				if($_SESSION['faculty_two_factor_check']=='N') //two factor not passed yet
@@ -153,14 +283,7 @@ Email: mlrahman@neub.edu.bd
 				}
 				
 			}
-			if(isset($_SESSION['done']))
-			{
-				echo "<script>
-						document.getElementById('welcome_msg').style.display='block';
-						document.getElementById('msg').innerHTML='".$_SESSION['done']."';
-						setTimeout(function(){ document.getElementById('welcome_msg').style.display='none'; }, 2000);
-					</script>";
-				unset($_SESSION['done']);
-			}
+			
+			
 		?>
 		

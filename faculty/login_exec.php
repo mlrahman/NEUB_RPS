@@ -52,6 +52,7 @@
 						$stmt->execute();
 						
 						$f_name=$result[0][1];
+						$_SESSION['faculty_name']=$f_name;
 						$_SESSION['faculty_id']=$faculty_id;
 						$_SESSION['faculty_email']=$result[0][8];
 						$_SESSION['faculty_password']=$result[0][7];
@@ -61,6 +62,7 @@
 						$_SESSION['faculty_date']=$date;
 						$_SESSION['faculty_dept_id']=$result[0][6];
 						$_SESSION['done']='Hi! '.$f_name.'. Welcome to the faculty panel';
+						$_SESSION['otp_count']=0;
 						
 						if(isset($_REQUEST['re_faculty']))
 						{

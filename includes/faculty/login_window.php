@@ -10,29 +10,44 @@
 		$result = $stmt->fetchAll();
 		if(count($result)==1)
 		{
-			$ip_server = $_SERVER['SERVER_ADDR'];
-			$token=get_link();
-			$link=$ip_server.'/faculty/forget_password.php?token='.$token;
-			$d=get_current_date();
-			$t=get_current_time();
-			$faculty_id=$result[0][0];
-			$f_name=$result[0][1];
-			//Inserting new OTPs
-			$stmt = $conn->prepare("insert into nr_faculty_link_token values(:f_id,'$token','Forget Password','$d','$t','Active') ");
-			$stmt->bindParam(':f_id', $faculty_id);
-			$stmt->execute();
-			
-			//sending password recovery link to user
-			$msg="Dear ".$f_name.", Your Password Recovery Link is: <a href='https://".$link."' target='_blank'>".$link."</a>";
-			$message = '<html><body>';
-			$message .= '<h1>Password Recovery Link from - '.$title.'</h1><p>  </p>';
-			$message .= '<p><b>Message Details:</b></p>';
-			$message .= '<p>'.$msg.'</p></body></html>';
-			
-			
-			sent_mail($email,$title.' - Password Recovery Link',$message,$title,$contact_email);
-			
-			$_SESSION['f_success']='Password recovery link sent to your email address.';
+			if($result[0][11]=='Active')
+			{
+				//Creating forget password link and sending to user
+				$ip_server = $_SERVER['SERVER_ADDR'];
+				$token=get_link();
+				$link=$ip_server.'/faculty/forget_password.php?token='.$token;
+				$d=get_current_date();
+				$t=get_current_time();
+				$faculty_id=$result[0][0];
+				$f_name=$result[0][1];
+				
+				//clearing previous links and otps
+				$stmt = $conn->prepare("delete from nr_faculty_link_token where nr_faculty_id=:f_id");
+				$stmt->bindParam(':f_id', $faculty_id);
+				$stmt->execute();
+				
+				//Inserting new OTPs
+				$stmt = $conn->prepare("insert into nr_faculty_link_token values(:f_id,'$token','Forget Password','$d','$t','Active') ");
+				$stmt->bindParam(':f_id', $faculty_id);
+				$stmt->execute();
+				
+				//sending password recovery link to user
+				$msg="Dear ".$f_name.", Your Password Recovery Link is: <a href='https://".$link."' target='_blank'>".$link."</a>";
+				$message = '<html><body>';
+				$message .= '<h1>Password Recovery Link from - '.$title.'</h1><p>  </p>';
+				$message .= '<p><b>Message Details:</b></p>';
+				$message .= '<p>'.$msg.'</p></body></html>';
+				
+				
+				sent_mail($email,$title.' - Password Recovery Link',$message,$title,$contact_email);
+				
+				$_SESSION['f_success']='Password recovery link sent to your email address.';
+			}
+			else
+			{
+				$_SESSION['f_error']='Sorry! this ID is inactive.';
+				$enable=1;
+			}
 		}
 		else
 		{
@@ -192,7 +207,7 @@
 		echo "<script>
 				document.getElementById('invalid_msg').style.display='block';
 				document.getElementById('msg').innerHTML='".$_SESSION['error']."';
-				setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 1500);
+				setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 			</script>";
 		unset($_SESSION['error']);
 	}
@@ -201,7 +216,7 @@
 		echo "<script>
 				document.getElementById('invalid_msg').style.display='block';
 				document.getElementById('msg').innerHTML='".$_SESSION['f_error']."';
-				setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 1500);
+				setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 			</script>";
 		unset($_SESSION['f_error']);
 	}
@@ -210,7 +225,7 @@
 		echo "<script>
 				document.getElementById('valid_msg').style.display='block';
 				document.getElementById('v_msg').innerHTML='".$_SESSION['f_success']."';
-				setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 1500);
+				setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
 			</script>";
 		unset($_SESSION['f_success']);
 	}

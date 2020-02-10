@@ -3,6 +3,14 @@
 	{
 		ob_start();
 		session_start();
+		require("../includes/db_connection.php"); 
+		require("../includes/function.php"); 
+		
+		$faculty_id=$_SESSION['faculty_id'];
+		$stmt = $conn->prepare("delete from nr_faculty_link_token where nr_faculty_id=:f_id");
+		$stmt->bindParam(':f_id', $faculty_id);
+		$stmt->execute();
+		
 		unset($_SESSION['faculty_id']);
 		unset($_SESSION['faculty_email']);
 		unset($_SESSION['faculty_password']);
@@ -10,6 +18,9 @@
 		unset($_SESSION['faculty_time']);
 		unset($_SESSION['faculty_two_factor_status']);
 		unset($_SESSION['faculty_two_factor_check']);
+		unset($_SESSION['faculty_dept_id']);
+		unset($_SESSION['faculty_name']);
+		unset($_SESSION['otp_count']);
 		session_write_close();
 		header("location: index.php");
 		die();
