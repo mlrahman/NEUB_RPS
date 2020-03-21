@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 10, 2020 at 07:14 PM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.8
+-- Generation Time: Mar 21, 2020 at 05:27 PM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.1.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -218,7 +218,8 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-10', '11:23 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-10', '11:23 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-10', '11:25 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-10', '11:26 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-10', '11:26 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-07', '01:59 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -278,7 +279,7 @@ CREATE TABLE `nr_result` (
   `nr_result_grade_point` double NOT NULL,
   `nr_result_semester` enum('Spring','Summer','Fall') NOT NULL,
   `nr_result_year` year(4) NOT NULL,
-  `nr_result_remarks` enum('Incomplete','Expelled','Makeup_MS','Makeup_SF','Makeup_MS_SF','Withdraw') NOT NULL,
+  `nr_result_remarks` enum('Incomplete','Expelled_Mid','MakeUp_MS','MakeUp_SF','MakeUp_MS_SF','Expelled_SF','MakeUp_MS, Expelled_SF','MakeUp_MS, Incomplete','Improvement','Retake') NOT NULL,
   `nr_result_status` enum('Active','Inactive') NOT NULL,
   `nr_prog_id` bigint(20) NOT NULL,
   `nr_result_publish_date` varchar(100) NOT NULL,
