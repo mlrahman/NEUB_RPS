@@ -13,7 +13,7 @@
 			if($result[0][11]=='Active')
 			{
 				//Creating forget password link and sending to user
-				$ip_server = $_SERVER['SERVER_ADDR'];
+				$ip_server = $_SERVER['SERVER_ADDR']; //root link 
 				$token=get_link();
 				$link=$ip_server.'/faculty/forget_password.php?token='.$token;
 				$d=get_current_date();
