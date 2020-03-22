@@ -66,7 +66,7 @@
 						
 						if(isset($_REQUEST['re_faculty']))
 						{
-							if(!isset($_COOKIE['faculty_login']) || !isset($_COOKIE['faculty_email']) || !isset($_COOKIE['faculty_password']))
+							if(!isset($_COOKIE['faculty_login']) || !isset($_COOKIE['faculty_email']) || !isset($_COOKIE['faculty_password']) || $_COOKIE['faculty_email']!=$email || $_COOKIE['faculty_password']!=$_REQUEST['faculty_password'])
 							{
 								setcookie('faculty_login', 'save', time() + (86400 * 30));
 								setcookie('faculty_email', $email, time() + (86400 * 30));
