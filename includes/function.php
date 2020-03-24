@@ -155,6 +155,65 @@ function get_year($s_id)
 	return $year;
 }
 
+function get_current_semester()
+{
+	$date=get_current_date();
+	if($date[5]=='0' && $date[6]=='1')
+	{
+		$semester='Spring';
+	}		
+	else if($date[5]=='0' && $date[6]=='2')
+	{
+		$semester='Spring';
+	}
+	else if($date[5]=='0' && $date[6]=='3')
+	{
+		$semester='Spring';
+	}
+	else if($date[5]=='0' && $date[6]=='4')
+	{
+		$semester='Spring';
+	}
+	else if($date[5]=='0' && $date[6]=='5')
+	{
+		$semester='Summer';
+	}
+	else if($date[5]=='0' && $date[6]=='6')
+	{
+		$semester='Summer';
+	}
+	else if($date[5]=='0' && $date[6]=='7')
+	{
+		$semester='Summer';
+	}
+	else if($date[5]=='0' && $date[6]=='8')
+	{
+		$semester='Summer';
+	}
+	else if($date[5]=='0' && $date[6]=='9')
+	{
+		$semester='Fall';
+	}
+	else if($date[5]=='0' && $date[6]=='10')
+	{
+		$semester='Fall';
+	}
+	else if($date[5]=='0' && $date[6]=='11')
+	{
+		$semester='Fall';
+	}
+	else if($date[5]=='0' && $date[6]=='12')
+	{
+		$semester='Fall';
+	}
+	return $semester;
+}
+function get_current_year()
+{
+	$date=get_current_date();
+	$year=$date[0].$date[1].$date[2].$date[3];
+	return $year;
+}
 
 function get_date($date)
 {

@@ -20,9 +20,9 @@
 		$result = $stmt->fetchAll();
 		if(count($result)>=1)
 		{
-			$y=count($result);
+			$c_y=count($result);
 			$drop=0;
-			for($index=0;$index<$y;$index++)
+			for($index=0;$index<$c_y;$index++)
 			{
 				$s_id=$result[$index][0];
 				$prcr_id = $result[$index][8];
@@ -99,9 +99,84 @@
 				
 				
 				$degree_status=$total_credit-($earned_credit+$waived_credit);
-				if($degree_status!=0)
+				if($degree_status!=0)  //not graduated
 				{
-					//SELECT * FROM `nr_result` order by nr_result_year desc, nr_result_semester desc;
+					$stmt = $conn->prepare("SELECT * FROM nr_result where nr_stud_id=:s_id and nr_result_status='Active' order by nr_result_year desc, nr_result_semester desc");
+					$stmt->bindParam(':s_id', $s_id);
+					$stmt->execute();
+					$stud_result=$stmt->fetchAll();
+					if(count($stud_result)!=0)  //check for students who have results in db
+					{
+						$last_semester=$stud_result[0][6];
+						$last_year=$stud_result[0][7];
+						$current_semester=get_current_semester();
+						$current_year=get_current_year();
+						$gap=0;
+						for($y=$last_year;$y<=$current_year;$y++)
+						{
+							if($y==$last_year)
+							{
+								if($last_semester=='Spring')
+								{
+									if(('Spring-'.$last_year)!=($current_semester.'-'.$current_year))
+										$gap++;
+									else
+										break;
+									
+									if(('Summer-'.$last_year)!=($current_semester.'-'.$current_year))
+										$gap++;
+									else 
+										break;
+										
+									if(('Fall-'.$last_year)!=($current_semester.'-'.$current_year))
+										$gap++;
+									else
+										break;
+								}
+								else if($last_semester=='Summer')
+								{
+									if(('Summer-'.$last_year)!=($current_semester.'-'.$current_year))
+										$gap++;
+									else 
+										break;
+										
+									if(('Fall-'.$last_year)!=($current_semester.'-'.$current_year))
+										$gap++;
+									else
+										break;
+								}
+								else if($last_semester=='Fall')
+								{
+																			
+									if(('Fall-'.$last_year)!=($current_semester.'-'.$current_year))
+										$gap++;
+									else
+										break;
+								}
+							}
+							else
+							{
+								if(('Spring-'.$y)!=($current_semester.'-'.$current_year))
+										$gap++;
+								else
+									break;
+								
+								if(('Summer-'.$y)!=($current_semester.'-'.$current_year))
+									$gap++;
+								else 
+									break;
+									
+								if(('Fall-'.$y)!=($current_semester.'-'.$current_year))
+									$gap++;
+								else
+									break;
+							}
+						}
+						
+						if($gap>2)
+							$drop++;
+					}
+					
 				}
 			}
 			echo $drop;
