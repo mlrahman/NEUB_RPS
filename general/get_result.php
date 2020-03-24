@@ -75,7 +75,7 @@
 			
 			
 			//Fetching student result
-			$stmt = $conn->prepare("select * from nr_result where nr_stud_id=:s_id and nr_result_status='Active' "); 
+			$stmt = $conn->prepare("select * from nr_result where nr_stud_id=:s_id and nr_result_status='Active' order by nr_result_year asc, nr_result_semester asc"); 
 			$stmt->bindParam(':s_id', $s_id);
 			$stmt->execute();
 			$stud_result=$stmt->fetchAll();
@@ -382,8 +382,7 @@
 										$t_g=$t_g+($z['grade_point']*$z['course_credit']);
 									}
 								}
-								if($t_c>0.0)
-								{
+								
 								
 					?>
 								<button title="Click here to view details" onclick="show_result_div('<?php echo 'Spring-'.$i; ?>')" class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:8px 0px 5px 0px;"><i class="fa fa-plus-square" id="<?php echo 'Spring-'.$i; ?>_icon" ></i> Semester Result: <?php echo 'Spring-'.$i; ?></button>
@@ -419,7 +418,7 @@
 								</table>
 					
 					<?php
-								}
+								
 							}
 							
 							if(array_key_exists(('Summer-'.$i),$se_re))
@@ -434,8 +433,7 @@
 										$t_g=$t_g+($z['grade_point']*$z['course_credit']);
 									}
 								}
-								if($t_c>0.0)
-								{
+								
 					?>
 								<button title="Click here to view details" onclick="show_result_div('<?php echo 'Summer-'.$i; ?>')" class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:8px 0px 5px 0px;"><i class="fa fa-plus-square" id="<?php echo 'Summer-'.$i; ?>_icon" ></i> Semester Result: <?php echo 'Summer-'.$i; ?></button>
 								<table id="<?php echo 'Summer-'.$i; ?>" style="width:90%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
@@ -470,7 +468,7 @@
 								</table>
 					
 					<?php
-								}
+								
 							}
 							
 							if(array_key_exists(('Fall-'.$i),$se_re))
@@ -485,8 +483,7 @@
 										$t_g=$t_g+($z['grade_point']*$z['course_credit']);
 									}
 								}
-								if($t_c>0.0)
-								{
+								
 								
 					?>
 								<button title="Click here to view details" onclick="show_result_div('<?php echo 'Fall-'.$i; ?>')" class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:8px 0px 5px 0px;"><i class="fa fa-plus-square" id="<?php echo 'Fall-'.$i; ?>_icon" ></i> Semester Result: <?php echo 'Fall-'.$i; ?></button>
@@ -522,7 +519,7 @@
 								</table>
 					
 					<?php
-								}
+								
 							}
 						}
 						

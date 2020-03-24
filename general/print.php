@@ -96,7 +96,7 @@
 			$total_credit=$prcr_result[0][2];
 			
 			//Fetching student result
-			$stmt = $conn->prepare("select * from nr_result where nr_stud_id=:s_id and nr_result_status='Active' "); 
+			$stmt = $conn->prepare("select * from nr_result where nr_stud_id=:s_id and nr_result_status='Active' order by nr_result_year asc, nr_result_semester asc"); 
 			$stmt->bindParam(':s_id', $s_id);
 			$stmt->execute();
 			$stud_result=$stmt->fetchAll();
@@ -518,8 +518,7 @@
 											$t_g=$t_g+($z['grade_point']*$z['course_credit']);
 										}
 									}
-									if($t_c>0.0)
-									{
+									
 									$html=$html.'<table style="width:700px;margin-top:10px;font-size:12px;" >
 										<tr>
 											<td colspan="2" vertical-align="top" style="border-top: 1px solid black;"><b>Semester: '.'Spring-'.$i.'</b></td>
@@ -549,7 +548,7 @@
 											}
 										
 									$html=$html.'<tr><td colspan="5" style="border-top: 1px solid black;"></td></tr></table>';
-									}
+									
 								}
 								
 								
@@ -565,8 +564,6 @@
 											$t_g=$t_g+($z['grade_point']*$z['course_credit']);
 										}
 									}
-									if($t_c>0.0)
-									{
 									$html=$html.'<table style="width:700px;margin-top:10px;font-size:12px;" >
 										<tr>
 											<td colspan="2" vertical-align="top" style="border-top: 1px solid black;"><b>Semester: '.'Summer-'.$i.'</b></td>
@@ -596,7 +593,7 @@
 											}
 										
 									$html=$html.'<tr><td colspan="5" style="border-top: 1px solid black;"></td></tr></table>';
-									}
+									
 								}
 								
 								if(array_key_exists(('Fall-'.$i),$se_re))
@@ -611,8 +608,6 @@
 											$t_g=$t_g+($z['grade_point']*$z['course_credit']);
 										}
 									}
-									if($t_c>0.0)
-									{
 									$html=$html.'<table style="width:700px;margin-top:10px;font-size:12px;" >
 										<tr>
 											<td colspan="2" vertical-align="top" style="border-top: 1px solid black;"><b>Semester: '.'Fall-'.$i.'</b></td>
@@ -642,7 +637,7 @@
 											}
 										
 									$html=$html.'<tr><td colspan="5" style="border-top: 1px solid black;"></td></tr></table>';
-									}
+									
 								}
 							}
 							

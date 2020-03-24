@@ -162,7 +162,7 @@
 								if(('Fall-'.$last_year)!=($first_semester.'-'.$first_year))
 								{
 									$from_semester='Fall';
-									$from_year=$last_year;
+									$from_year=$q;
 									$ct++;
 								}
 								else
@@ -171,7 +171,7 @@
 								if(('Summer-'.$last_year)!=($first_semester.'-'.$first_year))
 								{
 									$from_semester='Summer';
-									$from_year=$last_year;
+									$from_year=$q;
 									$ct++;
 								}
 								else 
@@ -180,7 +180,7 @@
 								if(('Spring-'.$last_year)!=($first_semester.'-'.$first_year))
 								{
 									$from_semester='Spring';
-									$from_year=$last_year;
+									$from_year=$q;
 									$ct++;
 								}
 								else
@@ -191,7 +191,7 @@
 								if(('Summer-'.$last_year)!=($first_semester.'-'.$first_year))
 								{
 									$from_semester='Summer';
-									$from_year=$last_year;
+									$from_year=$q;
 									$ct++;
 								}
 								else 
@@ -200,7 +200,7 @@
 								if(('Spring-'.$last_year)!=($first_semester.'-'.$first_year))
 								{
 									$from_semester='Spring';
-									$from_year=$last_year;
+									$from_year=$q;
 									$ct++;
 								}
 								else
@@ -212,7 +212,7 @@
 								if(('Spring-'.$last_year)!=($first_semester.'-'.$first_year))
 								{
 									$from_semester='Spring';
-									$from_year=$last_year;
+									$from_year=$q;
 									$ct++;
 								}
 								else
@@ -248,10 +248,10 @@
 							else
 								break;
 						}
-						
-						if($ct==5)
+						if($ct>4)
 							break;
 					}
+					//echo $from_year.' '.$from_semester;
 					
 				?>
 					From: 
@@ -360,16 +360,90 @@
 		
 				<script>
 					//generate to values
+					var last_semester=<?php echo '"'.$last_semester.'"';?>;
+					var last_year=parseInt(<?php echo '"'.$last_year.'"';?>);
 					function get_student_graph_to()
 					{
 						document.getElementById('student_graph_to').innerHTML='<option value="">Loading..</option>';
+						var student_graph_from=document.getElementById('student_graph_from').value;
+						if(student_graph_from!="")
+						{
+							var first_semester="";
+							for(var i=0;i<student_graph_from.length;i++)
+							{
+								if(student_graph_from[i]=='-') break;
+								else
+									first_semester=first_semester+student_graph_from[i];
+							}
+							var first_year=parseInt(""+student_graph_from[student_graph_from.length-4]+student_graph_from[student_graph_from.length-3]+student_graph_from[student_graph_from.length-2]+student_graph_from[student_graph_from.length-1]);
+							//console.log(first_semester+" "+first_year);
+							var kkr="";
+							for(var q=first_year;q<=last_year;q++)
+							{
+								if(q==first_year)
+								{
+									if(first_semester=="Spring")
+									{
+										if(("Summer-"+first_year)!=(last_semester+"-"+last_year))
+										{
+											kkr=kkr+ "<option value='Summer-"+q+"'>Summer-"+q+"</option>";
+										}
+										else 
+											break;
+											
+										if(("Fall-"+first_year)!=(last_semester+"-"+last_year))
+										{
+											kkr=kkr+ "<option value='Fall-"+q+"'>Fall-"+q+"</option>";
+										}
+										else
+											break;
+									}
+									else if(first_semester=="Summer")
+									{
+										
+										if(("Fall-"+first_year)!=(last_semester+"-"+last_year))
+										{
+											
+											kkr=kkr+ "<option value='Fall-"+q+"'>Fall-"+q+"</option>";
+										}
+										else
+											break;
+									}
+								}
+								else
+								{
+									if(("Spring-"+q)!=(last_semester+"-"+last_year))
+									{
+										kkr=kkr+ "<option value='Spring-"+q+"'>Spring-"+q+"</option>";
+									}
+									else
+										break;
+									if(("Summer-"+q)!=(last_semester+"-"+last_year))
+									{
+										kkr=kkr+ "<option value='Summer-"+q+"'>Summer-"+q+"</option>";
+									}
+									else
+										break;
+									if(("Fall-"+q)!=(last_semester+"-"+last_year))
+									{
+										kkr=kkr+ "<option value='Fall-"+q+"'>Fall-"+q+"</option>";
+									}
+									else
+										break;
+								}
+							}
+							document.getElementById('student_graph_to').innerHTML='<option value="">Select</option>'+kkr+'<option value="'+last_semester+'-'+last_year+'">'+last_semester+'-'+last_year+'</option>';
+							
+							
+						}
+						
 					}
 					//student_graph
 					function get_student_graph()
 					{
 						var student_graph_from=document.getElementById('student_graph_from').value;
 						var student_graph_to=document.getElementById('student_graph_to').value;
-						if(student_graph_to!="")
+						if(student_graph_to!="" || student_graph_from!="")
 						{
 							//console.log(student_graph_from+' '+student_graph_to);
 							var student_graph = new XMLHttpRequest();
@@ -379,18 +453,20 @@
 									var arr2=new Array();
 									var arr3=new Array();
 									
-									var lab=new Array("Spring-2018", "Summer-2018", "Fall-2018", "Spring-2019", "Summer-2019", "Fall-2019");
+									var lab=new Array();
 									
-									var bgc1=new Array("rgba(0, 128, 0, 0.5)","rgba(0, 128, 0, 0.5)","rgba(0, 128, 0, 0.5)","rgba(0, 128, 0, 0.5)","rgba(0, 128, 0, 0.5)","rgba(0, 128, 0, 0.5)");
-									var boc1=new Array("rgba(0, 128, 0, 1)","rgba(0, 128, 0, 1)","rgba(0, 128, 0, 1)","rgba(0, 128, 0, 1)","rgba(0, 128, 0, 1)","rgba(0, 128, 0, 1)");
+									var bgc1=new Array();
+									var boc1=new Array();
 									
-									var bgc2=new Array("rgba(54, 162, 235, 0.5)","rgba(54, 162, 235, 0.5)","rgba(54, 162, 235, 0.5)","rgba(54, 162, 235, 0.5)","rgba(54, 162, 235, 0.5)","rgba(54, 162, 235, 0.5)");
-									var boc2=new Array("rgba(54, 162, 235, 1)","rgba(54, 162, 235, 1)","rgba(54, 162, 235, 1)","rgba(54, 162, 235, 1)","rgba(54, 162, 235, 1)","rgba(54, 162, 235, 1)");
+									var bgc2=new Array();
+									var boc2=new Array();
 									
-									var bgc3=new Array("rgba(255, 99, 132, 0.5)","rgba(255, 99, 132, 0.5)","rgba(255, 99, 132, 0.5)","rgba(255, 99, 132, 0.5)","rgba(255, 99, 132, 0.5)","rgba(255, 99, 132, 0.5)");
-									var boc3=new Array("rgba(255, 99, 132, 1)","rgba(255, 99, 132, 1)","rgba(255, 99, 132, 1)","rgba(255, 99, 132, 1)","rgba(255, 99, 132, 1)","rgba(255, 99, 132, 1)");
-
+									var bgc3=new Array();
+									var boc3=new Array();
+									
 									var data=this.responseText;
+									//console.log(data);
+									
 									var num_s="";
 									var num=0;
 									var st_sz=data.length,i;
@@ -445,6 +521,54 @@
 										}
 										if(data[i]=="@")
 											break;
+									}
+									i++;
+									num_s="",num=0;
+									var xx=0;
+									for(;i<st_sz;i++)
+									{
+										if(data[i]>="0" && data[i]<="9")
+										{
+											num_s=num_s+data[i];
+										}
+										else
+										{
+											num=parseInt(num_s);
+											xx=num;
+											num=0;
+											num_s="";
+										}
+										if(data[i]=="@")
+											break;
+									}
+									i++;
+									num_s="";
+									for(;i<st_sz;i++)
+									{
+										if(data[i]=="%")
+											break;
+										if(data[i]!="@")
+										{
+											num_s=num_s+data[i];
+										}
+										else
+										{
+											lab.push(num_s);
+											num_s="";
+										}
+									}
+									
+									
+									for(var j=0;j<xx;j++)
+									{
+										bgc1.push("rgba(0, 128, 0, 0.5)");
+										boc1.push("rgba(0, 128, 0, 1)");
+										
+										bgc2.push("rgba(54, 162, 235, 0.5)");
+										boc2.push("rgba(54, 162, 235, 1)");
+										
+										bgc3.push("rgba(255, 99, 132, 0.5)");
+										boc3.push("rgba(255, 99, 132, 1)");
 									}
 									
 									//grpah area
@@ -506,6 +630,7 @@
 									document.getElementById("stu_stat").innerHTML = '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
 								}
 							};
+									
 							student_graph.open("GET", "../includes/faculty/get_student_graph.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&student_graph_from="+student_graph_from+"&student_graph_to="+student_graph_to, true);
 							student_graph.send();
 						}

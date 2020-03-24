@@ -352,4 +352,5 @@ function photo_resize($updir, $img, $id, $dir, $sz1, $sz2)
 	}
 }
 
+
 ?>

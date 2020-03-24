@@ -28,7 +28,7 @@
 				$prcr_id = $result[$index][8];
 				
 				//Fetching student result
-				$stmt = $conn->prepare("select * from nr_result where nr_stud_id=:s_id and nr_result_status='Active' "); 
+				$stmt = $conn->prepare("select * from nr_result where nr_stud_id=:s_id and nr_result_status='Active' order by nr_result_year asc, nr_result_semester asc"); 
 				$stmt->bindParam(':s_id', $s_id);
 				$stmt->execute();
 				$stud_result=$stmt->fetchAll();
