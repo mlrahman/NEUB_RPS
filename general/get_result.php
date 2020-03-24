@@ -65,12 +65,13 @@
 			$stmt = $conn->prepare("select * from nr_program_credit where nr_prcr_id=$prcr_id");
 			$stmt->execute();
 			$prcr_result = $stmt->fetchAll();
-			$total_credit=$prcr_result[0][2];
 			if(count($prcr_result)==0)
 			{
 				echo 'not_found';
 				die();
 			}
+			$total_credit=$prcr_result[0][2];
+			
 			
 			
 			//Fetching student result

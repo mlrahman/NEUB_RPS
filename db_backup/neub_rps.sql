@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 10, 2020 at 07:14 PM
+-- Generation Time: Mar 24, 2020 at 10:21 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
 
@@ -116,15 +116,16 @@ CREATE TABLE `nr_faculty` (
   `nr_faculty_cell_no` varchar(20) NOT NULL,
   `nr_faculty_photo` varchar(100) NOT NULL,
   `nr_faculty_status` enum('Active','Inactive') NOT NULL,
-  `nr_faculty_two_factor` int(11) NOT NULL
+  `nr_faculty_two_factor` int(11) NOT NULL,
+  `nr_faculty_gender` enum('Male','Female','Other') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 --
 -- Dumping data for table `nr_faculty`
 --
 
-INSERT INTO `nr_faculty` (`nr_faculty_id`, `nr_faculty_name`, `nr_faculty_designation`, `nr_faculty_join_date`, `nr_faculty_resign_date`, `nr_faculty_type`, `nr_dept_id`, `nr_faculty_password`, `nr_faculty_email`, `nr_faculty_cell_no`, `nr_faculty_photo`, `nr_faculty_status`, `nr_faculty_two_factor`) VALUES
-(1, 'Noushad Sojib', 'Assistant Professor', '2016-04-20', '', 'Permanent', 1, 'rps096c17f2c657debcfeee07fd066949a7a2906da7rps', 'mlrahman@neub.edu.bd', '', '', 'Active', 1);
+INSERT INTO `nr_faculty` (`nr_faculty_id`, `nr_faculty_name`, `nr_faculty_designation`, `nr_faculty_join_date`, `nr_faculty_resign_date`, `nr_faculty_type`, `nr_dept_id`, `nr_faculty_password`, `nr_faculty_email`, `nr_faculty_cell_no`, `nr_faculty_photo`, `nr_faculty_status`, `nr_faculty_two_factor`, `nr_faculty_gender`) VALUES
+(1, 'Noushad Sojib', 'Assistant Professor', '2016-04-20', '', 'Permanent', 1, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'mlrahman@neub.edu.bd', '', '', 'Active', 1, 'Male');
 
 -- --------------------------------------------------------
 
@@ -218,7 +219,17 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-10', '11:23 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-10', '11:23 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-10', '11:25 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-10', '11:26 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-10', '11:26 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-21', '03:31 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-21', '03:33 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-21', '04:25 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-21', '08:21 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-21', '08:24 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-21', '08:25 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-21', '09:24 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '12:09 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '02:19 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '02:19 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -278,7 +289,7 @@ CREATE TABLE `nr_result` (
   `nr_result_grade_point` double NOT NULL,
   `nr_result_semester` enum('Spring','Summer','Fall') NOT NULL,
   `nr_result_year` year(4) NOT NULL,
-  `nr_result_remarks` enum('Incomplete','Expelled','Makeup_MS','Makeup_SF','Makeup_MS_SF','Withdraw') NOT NULL,
+  `nr_result_remarks` enum('Incomplete','Expelled_Mid','MakeUp_MS','MakeUp_SF','MakeUp_MS_SF','Expelled_SF','MakeUp_MS, Expelled_SF','MakeUp_MS, Incomplete','Improvement','Retake') NOT NULL,
   `nr_result_status` enum('Active','Inactive') NOT NULL,
   `nr_prog_id` bigint(20) NOT NULL,
   `nr_result_publish_date` varchar(100) NOT NULL,
@@ -290,7 +301,7 @@ CREATE TABLE `nr_result` (
 --
 
 INSERT INTO `nr_result` (`nr_result_id`, `nr_stud_id`, `nr_course_id`, `nr_result_marks`, `nr_result_grade`, `nr_result_grade_point`, `nr_result_semester`, `nr_result_year`, `nr_result_remarks`, `nr_result_status`, `nr_prog_id`, `nr_result_publish_date`, `nr_faculty_id`) VALUES
-(1, 140203020002, 3, 140203029312.5, '89f276cc01d4af01fa8cee48af8ee962bac42500', 140203026062.5, 'Spring', 2015, '', 'Active', 1, '2020-01-27', 1),
+(1, 140203020002, 3, 140203029312.5, '89f276cc01d4af01fa8cee48af8ee962bac42500', 140203026062.5, 'Fall', 2015, '', 'Active', 1, '2020-01-27', 1),
 (2, 140203020002, 4, 140203029812.5, '500910d02d287a8c898c406ea348043c050d31ca', 140203026312.5, 'Spring', 2015, '', 'Active', 1, '2020-01-27', 1),
 (3, 140203020002, 1, 140203022812.5, '264c6dfec271ba9a2a1526fa29b7754ef7eb0fd8', 140203022812.5, 'Spring', 2015, '', 'Active', 1, '2020-01-29', 1),
 (4, 140203020002, 2, 140203028812.5, '5177875dc921885677fcc6e571bca2fb1146eaaa', 140203025812.5, 'Spring', 2015, '', 'Active', 1, '2020-01-29', 1),
@@ -804,7 +815,14 @@ INSERT INTO `nr_result_check_transaction` (`nr_stud_id`, `nr_rechtr_ip_address`,
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-05', '10:41 PM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-05', '10:45 PM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-06', '01:08 AM', 'Active'),
-(140203020002, '192.168.0.101', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-06', '01:12 AM', 'Active');
+(140203020002, '192.168.0.101', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-06', '01:12 AM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-21', '03:31 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-21', '08:20 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-21', '08:20 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-22', '12:16 AM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-22', '12:17 AM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '01:28 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '02:43 PM', 'Active');
 
 -- --------------------------------------------------------
 

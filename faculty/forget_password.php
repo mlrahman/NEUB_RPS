@@ -1,7 +1,44 @@
 <!--Header-->
 <?php 
-	if(isset($_REQUEST['token']))
+	if(isset($_REQUEST['set_password']) && isset($_REQUEST['faculty_id']) && isset($_REQUEST['email']) && isset($_REQUEST['faculty_password']) && isset($_REQUEST['faculty_cpassword']))
 	{
+		require("../includes/faculty/header.php"); 
+		require("../includes/faculty/navbar.php"); 
+		$faculty_id=trim($_REQUEST['faculty_id']);
+		$faculty_email=trim($_REQUEST['email']);
+		$faculty_password=trim($_REQUEST['faculty_password']);
+		$faculty_cpassword=trim($_REQUEST['faculty_cpassword']);
+		
+		$stmt = $conn->prepare("select * from nr_faculty where nr_faculty_id=:f_id and nr_faculty_email=:f_email and nr_faculty_status='Active' ");
+		$stmt->bindParam(':f_id', $faculty_id);
+		$stmt->bindParam(':f_email', $faculty_email);
+		$stmt->execute();
+		$result=$stmt->fetchAll();
+		if(count($result)==0 || $faculty_password!=$faculty_cpassword)
+		{
+			$_SESSION['error']='Invalid request no permission for access.';
+			header("location: index.php");
+			die();
+		}
+		else
+		{
+			$password=password_encrypt($faculty_password);
+			$stmt = $conn->prepare("update nr_faculty set nr_faculty_password=:f_pass where nr_faculty_id=:f_id and nr_faculty_email=:f_email and nr_faculty_status='Active' ");
+			$stmt->bindParam(':f_pass', $password);
+			$stmt->bindParam(':f_id', $faculty_id);
+			$stmt->bindParam(':f_email', $faculty_email);
+			$stmt->execute();
+			
+			$_SESSION['f_success']='Password reset successfully done.';
+			header("location: index.php");
+			die();
+		}
+		//echo 'if executed';
+			
+	}
+	else if(isset($_REQUEST['token']))
+	{
+		
 
 		require("../includes/faculty/header.php"); 
 		require("../includes/faculty/navbar.php"); 
@@ -38,9 +75,11 @@
 				header("location: index.php");
 				die();
 			}
+			$faculty_id=$result[0][0];
 			$faculty_name=$result[0][1];
 			$faculty_email=$result[0][8];
 		}
+		//echo 'else if executed';
 
 ?>
 <div class="w3-container" style="padding:30px 0px 30px 0px;min-height:500px;">
@@ -53,9 +92,7 @@
 			</div>
 			<form style="margin-top:0px;" class="w3-container w3-margin-bottom" action="forget_password.php" method="post">
 					
-				<div id="invalid_msg" style="display:none;" class="w3-section w3-padding w3-center w3-bold w3-text-red">
-					
-				</div>
+				
 				
 							
 				<div class="w3-section w3-border w3-round-large w3-padding">
@@ -65,10 +102,13 @@
 				  <label><b>Email</b></label>
 				  <input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $faculty_email; ?>" disabled>
 				  
+				  <input type="hidden" name="faculty_id" value="<?php echo $faculty_id; ?>">
+				  <input type="hidden" name="email" value="<?php echo $faculty_email; ?>">
+				  
 				  <label><b>New Password</b></label>
-				  <input class="w3-input w3-border w3-margin-bottom w3-round-large" type="password" placeholder="Enter New Password" autocomplete="off" name="faculty_password" required>
+				  <input class="w3-input w3-border w3-margin-bottom w3-round-large" type="password" placeholder="Enter New Password" autocomplete="off" name="faculty_password" id="pass" required>
 				  <label><b>Confirm New Password</b></label>
-				  <input class="w3-input w3-border w3-margin-bottom w3-round-large" type="password" placeholder="Enter Confirm New Password" autocomplete="off" name="faculty_cpassword" required>
+				  <input class="w3-input w3-border w3-margin-bottom w3-round-large" type="password" placeholder="Enter Confirm New Password" autocomplete="off" name="faculty_cpassword" id="c_pass" required>
 				  
 				  <?php 
 					//spam Check 
@@ -114,6 +154,27 @@
 				  }
 				}
 				reservation_captcha4.onchange=reservation_captcha_val4;
+				
+				//checking password similarity
+				var c_pass=document.getElementById("c_pass");
+				var pass=document.getElementById("pass");
+				function password_check()
+				{
+					if(c_pass.value != pass.value) {
+						c_pass.setCustomValidity("Password doesn't match.");
+					}
+					else if((pass.value).length < 6)
+					{
+						c_pass.setCustomValidity("Password must be 6 digits or more.");
+					}
+					else
+					{
+						c_pass.setCustomValidity('');
+						pass.setCustomValidity('');
+					}
+				}
+				c_pass.onchange=password_check;
+				
 			</script>
 		</div>
 	</div>
@@ -124,6 +185,7 @@
 	}
 	else
 	{
+		//echo 'else executed';
 		header("location: index.php");
 		die();
 	}

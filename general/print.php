@@ -87,12 +87,13 @@
 			$stmt = $conn->prepare("select * from nr_program_credit where nr_prcr_id=$prcr_id");
 			$stmt->execute();
 			$prcr_result = $stmt->fetchAll();
-			$total_credit=$prcr_result[0][2];
 			if(count($prcr_result)==0)
 			{
 				header("location: index.php");
 				die();
 			}
+			
+			$total_credit=$prcr_result[0][2];
 			
 			//Fetching student result
 			$stmt = $conn->prepare("select * from nr_result where nr_stud_id=:s_id and nr_result_status='Active' "); 
