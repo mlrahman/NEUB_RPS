@@ -221,7 +221,6 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-10', '11:23 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-10', '11:25 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-10', '11:26 PM', 'Active'),
-<<<<<<< HEAD
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-21', '03:31 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-21', '03:33 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-21', '04:25 PM', 'Active'),
@@ -232,9 +231,6 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '12:09 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '02:19 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '02:19 PM', 'Active');
-=======
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-07', '01:59 PM', 'Active');
->>>>>>> 3cbad3b731067af9672d2b64dd4ddf93db2f86d7
 
 -- --------------------------------------------------------
 
