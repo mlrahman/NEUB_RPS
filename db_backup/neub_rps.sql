@@ -1,11 +1,17 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+<<<<<<< HEAD
 -- Generation Time: Mar 24, 2020 at 10:21 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
+=======
+-- Generation Time: Mar 21, 2020 at 05:27 PM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.1.33
+>>>>>>> 3cbad3b731067af9672d2b64dd4ddf93db2f86d7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -220,6 +226,7 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-10', '11:23 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-10', '11:25 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-02-10', '11:26 PM', 'Active'),
+<<<<<<< HEAD
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-21', '03:31 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-21', '03:33 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-21', '04:25 PM', 'Active'),
@@ -230,6 +237,9 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '12:09 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '02:19 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '02:19 PM', 'Active');
+=======
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-07', '01:59 PM', 'Active');
+>>>>>>> 3cbad3b731067af9672d2b64dd4ddf93db2f86d7
 
 -- --------------------------------------------------------
 
