@@ -1,14 +1,14 @@
 <?php
 
 include("includes/function.php");
-/*
+
 $s_id=140203020002;
 $marks=30;
 $gpa=0.00;
 $g='F';
 echo 'Marks:</br>';
 echo marks_encrypt($s_id,$marks).'</br>';
-echo marks_decrypt($s_id,marks_encrypt($s_id,$marks)).'</br>';
+echo marks_decrypt($s_id,140203030812.5).'</br>';
 echo 'Grade:</br>';
 echo grade_encrypt($s_id,$g).'</br>';
 echo grade_decrypt($s_id,grade_encrypt($s_id,$g)).'</br>';
@@ -73,10 +73,11 @@ foreach($arr as $a=>$b)
 	echo 'key: '.$a.' '.count($arr[$a]).'</br>';
 }
 */
-
+/*
 echo 'Password: '.password_encrypt('1234');
 if(isset($_REQUEST['y']))
 	echo '</br>'.$_REQUEST['x'];
+*/
 ?>
 <form action="test.php">
 <input type="checkbox" name="x">

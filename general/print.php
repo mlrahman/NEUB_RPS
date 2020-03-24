@@ -518,6 +518,8 @@
 											$t_g=$t_g+($z['grade_point']*$z['course_credit']);
 										}
 									}
+									if($t_c>0.0)
+									{
 									$html=$html.'<table style="width:700px;margin-top:10px;font-size:12px;" >
 										<tr>
 											<td colspan="2" vertical-align="top" style="border-top: 1px solid black;"><b>Semester: '.'Spring-'.$i.'</b></td>
@@ -547,8 +549,9 @@
 											}
 										
 									$html=$html.'<tr><td colspan="5" style="border-top: 1px solid black;"></td></tr></table>';
-									
+									}
 								}
+								
 								
 								if(array_key_exists(('Summer-'.$i),$se_re))
 								{
@@ -562,6 +565,8 @@
 											$t_g=$t_g+($z['grade_point']*$z['course_credit']);
 										}
 									}
+									if($t_c>0.0)
+									{
 									$html=$html.'<table style="width:700px;margin-top:10px;font-size:12px;" >
 										<tr>
 											<td colspan="2" vertical-align="top" style="border-top: 1px solid black;"><b>Semester: '.'Summer-'.$i.'</b></td>
@@ -591,7 +596,7 @@
 											}
 										
 									$html=$html.'<tr><td colspan="5" style="border-top: 1px solid black;"></td></tr></table>';
-									
+									}
 								}
 								
 								if(array_key_exists(('Fall-'.$i),$se_re))
@@ -606,6 +611,8 @@
 											$t_g=$t_g+($z['grade_point']*$z['course_credit']);
 										}
 									}
+									if($t_c>0.0)
+									{
 									$html=$html.'<table style="width:700px;margin-top:10px;font-size:12px;" >
 										<tr>
 											<td colspan="2" vertical-align="top" style="border-top: 1px solid black;"><b>Semester: '.'Fall-'.$i.'</b></td>
@@ -635,7 +642,7 @@
 											}
 										
 									$html=$html.'<tr><td colspan="5" style="border-top: 1px solid black;"></td></tr></table>';
-									
+									}
 								}
 							}
 							
