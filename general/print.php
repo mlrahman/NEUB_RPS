@@ -391,48 +391,48 @@
 								<div style="width:410px;float:left;height:240px;">
 									<table style="font-weight:bold;font-size:12px;">
 										<tr>
-											<td vertical-align="top">Student Name</td>
-											<td vertical-align="top">: '.$name.'</td>
+											<td valign="top">Student Name</td>
+											<td valign="top">: '.$name.'</td>
 										</tr>
 										<tr>
-											<td vertical-align="top">Registration No</td>
-											<td vertical-align="top">: '.$reg_no.'</td>
+											<td valign="top">Registration No</td>
+											<td valign="top">: '.$reg_no.'</td>
 										</tr>
 										<tr>
-											<td vertical-align="top">Session</td>
-											<td vertical-align="top">: '.$session.'</td>
+											<td valign="top">Session</td>
+											<td valign="top">: '.$session.'</td>
 										</tr>
 										<tr>
-											<td vertical-align="top">Gender</td>
-											<td vertical-align="top">: '.$gender.'</td>
+											<td valign="top">Gender</td>
+											<td valign="top">: '.$gender.'</td>
 										</tr>
 										<tr>
-											<td vertical-align="top">Degree Name</td>
-											<td vertical-align="top">: '.$degree.'</td>
+											<td valign="top">Degree Name</td>
+											<td valign="top">: '.$degree.'</td>
 										</tr>
 										<tr>
-											<td vertical-align="top">Credit Required</td>
-											<td vertical-align="top">: '.$total_credit.'</td>
+											<td valign="top">Credit Required</td>
+											<td valign="top">: '.$total_credit.'</td>
 										</tr>
 										<tr>
-											<td vertical-align="top">Credit Earned</td>
-											<td vertical-align="top">: '.$earned_credit.'</td>
+											<td valign="top">Credit Earned</td>
+											<td valign="top">: '.$earned_credit.'</td>
 										</tr>
 										<tr>
-											<td vertical-align="top">Credit Waived</td>
-											<td vertical-align="top">: '.$waived_credit.'</td>
+											<td valign="top">Credit Waived</td>
+											<td valign="top">: '.$waived_credit.'</td>
 										</tr>
 										<tr>
-											<td vertical-align="top">CGPA Earned</td>
-											<td vertical-align="top">: '.$total_cgpa.'</td>
+											<td valign="top">CGPA Earned</td>
+											<td valign="top">: '.$total_cgpa.'</td>
 										</tr>
 										<tr>
-											<td vertical-align="top">Degree Status</td>
-											<td vertical-align="top">: '.$degree_status.'</td>
+											<td valign="top">Degree Status</td>
+											<td valign="top">: '.$degree_status.'</td>
 										</tr>
 										<tr>
-											<td vertical-align="top" style="color:blue;">Issue Date</td>
-											<td vertical-align="top" style="color:blue;">: '.get_date(get_current_date()).'</td>
+											<td valign="top" style="color:blue;">Issue Date</td>
+											<td valign="top" style="color:blue;">: '.get_date(get_current_date()).'</td>
 										</tr>
 									</table>
 								</div>
@@ -521,16 +521,16 @@
 									
 									$html=$html.'<table style="width:700px;margin-top:10px;font-size:12px;" >
 										<tr>
-											<td colspan="2" vertical-align="top" style="border-top: 1px solid black;"><b>Semester: '.'Spring-'.$i.'</b></td>
-											<td colspan="2" vertical-align="top" style="border-top: 1px solid black;"><b>CGPA: '; if($t_c==0.0){  $html=$html.number_format(0.0,2); } else{  $html=$html.number_format(($t_g/$t_c),2); } $html=$html.'</b></td>
-											<td colspan="1" vertical-align="top" style="border-top: 1px solid black;"><b>Credit: '.number_format($t_c,2).'</b></td>
+											<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>Semester: '.'Spring-'.$i.'</b></td>
+											<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>CGPA: '; if($t_c==0.0){  $html=$html.number_format(0.0,2); } else{  $html=$html.number_format(($t_g/$t_c),2); } $html=$html.'</b></td>
+											<td colspan="1" valign="top" style="border-top: 1px solid black;"><b>Credit: '.number_format($t_c,2).'</b></td>
 										</tr>
 										<tr class="w3-teal w3-bold">
-											<td style="width:15%;border-top: 1px solid black;border-bottom: 1px solid black;" vertical-align="top"><b>Course Code</b></td>
-											<td style="width:40%;border-top: 1px solid black;border-bottom: 1px solid black;" vertical-align="top"><b>Course Title</b></td>
-											<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" vertical-align="top"><b>Credit</b></td>
-											<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" vertical-align="top"><b>Grade</b></td>
-											<td style="width:25%;border-top: 1px solid black;border-bottom: 1px solid black;" vertical-align="top"><b>Grade Point</b></td>
+											<td style="width:15%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Course Code</b></td>
+											<td style="width:40%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Course Title</b></td>
+											<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Credit</b></td>
+											<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Grade</b></td>
+											<td style="width:25%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Grade Point</b></td>
 										</tr>';
 										
 											foreach($se_re['Spring-'.$i] as $z)
@@ -538,11 +538,11 @@
 												if(number_format($z['grade_point'],2)>0.0 or (number_format($z['grade_point'],2)==0.0 && $z['grade']=='F'))
 												{										
 													$html=$html.'<tr>
-														<td vertical-align="top">'.$z['course_code'].'</td>
-														<td vertical-align="top">'.$z['course_title'].'</td>
-														<td vertical-align="top">'.number_format($z['course_credit'],2).'</td>
-														<td vertical-align="top">'.$z['grade'].'</td>
-														<td vertical-align="top">'.number_format($z['grade_point'],2).'</td>
+														<td valign="top">'.$z['course_code'].'</td>
+														<td valign="top">'.$z['course_title'].'</td>
+														<td valign="top">'.number_format($z['course_credit'],2).'</td>
+														<td valign="top">'.$z['grade'].'</td>
+														<td valign="top">'.number_format($z['grade_point'],2).'</td>
 													</tr>';
 												}
 											}
@@ -566,16 +566,16 @@
 									}
 									$html=$html.'<table style="width:700px;margin-top:10px;font-size:12px;" >
 										<tr>
-											<td colspan="2" vertical-align="top" style="border-top: 1px solid black;"><b>Semester: '.'Summer-'.$i.'</b></td>
-											<td colspan="2" vertical-align="top" style="border-top: 1px solid black;"><b>CGPA: '; if($t_c==0.0){  $html=$html.number_format(0.0,2); } else{  $html=$html.number_format(($t_g/$t_c),2); } $html=$html.'</b></td>
-											<td colspan="1" vertical-align="top" style="border-top: 1px solid black;"><b>Credit: '.number_format($t_c,2).'</b></td>
+											<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>Semester: '.'Summer-'.$i.'</b></td>
+											<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>CGPA: '; if($t_c==0.0){  $html=$html.number_format(0.0,2); } else{  $html=$html.number_format(($t_g/$t_c),2); } $html=$html.'</b></td>
+											<td colspan="1" valign="top" style="border-top: 1px solid black;"><b>Credit: '.number_format($t_c,2).'</b></td>
 										</tr>
 										<tr class="w3-teal w3-bold">
-											<td style="width:15%;border-top: 1px solid black;border-bottom: 1px solid black;" vertical-align="top"><b>Course Code</b></td>
-											<td style="width:40%;border-top: 1px solid black;border-bottom: 1px solid black;" vertical-align="top"><b>Course Title</b></td>
-											<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" vertical-align="top"><b>Credit</b></td>
-											<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" vertical-align="top"><b>Grade</b></td>
-											<td style="width:25%;border-top: 1px solid black;border-bottom: 1px solid black;" vertical-align="top"><b>Grade Point</b></td>
+											<td style="width:15%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Course Code</b></td>
+											<td style="width:40%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Course Title</b></td>
+											<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Credit</b></td>
+											<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Grade</b></td>
+											<td style="width:25%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Grade Point</b></td>
 										</tr>';
 										
 											foreach($se_re['Summer-'.$i] as $z)
@@ -583,11 +583,11 @@
 												if(number_format($z['grade_point'],2)>0.0 or (number_format($z['grade_point'],2)==0.0 && $z['grade']=='F'))
 												{
 													$html=$html.'<tr>
-														<td vertical-align="top">'.$z['course_code'].'</td>
-														<td vertical-align="top">'.$z['course_title'].'</td>
-														<td vertical-align="top">'.number_format($z['course_credit'],2).'</td>
-														<td vertical-align="top">'.$z['grade'].'</td>
-														<td vertical-align="top">'.number_format($z['grade_point'],2).'</td>
+														<td valign="top">'.$z['course_code'].'</td>
+														<td valign="top">'.$z['course_title'].'</td>
+														<td valign="top">'.number_format($z['course_credit'],2).'</td>
+														<td valign="top">'.$z['grade'].'</td>
+														<td valign="top">'.number_format($z['grade_point'],2).'</td>
 													</tr>';
 												}
 											}
@@ -610,16 +610,16 @@
 									}
 									$html=$html.'<table style="width:700px;margin-top:10px;font-size:12px;" >
 										<tr>
-											<td colspan="2" vertical-align="top" style="border-top: 1px solid black;"><b>Semester: '.'Fall-'.$i.'</b></td>
-											<td colspan="2" vertical-align="top" style="border-top: 1px solid black;"><b>CGPA: '; if($t_c==0.0){  $html=$html.number_format(0.0,2); } else{  $html=$html.number_format(($t_g/$t_c),2); } $html=$html.'</b></td>
-											<td colspan="1" vertical-align="top" style="border-top: 1px solid black;"><b>Credit: '.number_format($t_c,2).'</b></td>
+											<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>Semester: '.'Fall-'.$i.'</b></td>
+											<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>CGPA: '; if($t_c==0.0){  $html=$html.number_format(0.0,2); } else{  $html=$html.number_format(($t_g/$t_c),2); } $html=$html.'</b></td>
+											<td colspan="1" valign="top" style="border-top: 1px solid black;"><b>Credit: '.number_format($t_c,2).'</b></td>
 										</tr>
 										<tr class="w3-teal w3-bold">
-											<td style="width:15%;border-top: 1px solid black;border-bottom: 1px solid black;" vertical-align="top"><b>Course Code</b></td>
-											<td style="width:40%;border-top: 1px solid black;border-bottom: 1px solid black;" vertical-align="top"><b>Course Title</b></td>
-											<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" vertical-align="top"><b>Credit</b></td>
-											<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" vertical-align="top"><b>Grade</b></td>
-											<td style="width:25%;border-top: 1px solid black;border-bottom: 1px solid black;" vertical-align="top"><b>Grade Point</b></td>
+											<td style="width:15%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Course Code</b></td>
+											<td style="width:40%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Course Title</b></td>
+											<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Credit</b></td>
+											<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Grade</b></td>
+											<td style="width:25%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Grade Point</b></td>
 										</tr>';
 										
 											foreach($se_re['Fall-'.$i] as $z)
@@ -627,11 +627,11 @@
 												if(number_format($z['grade_point'],2)>0.0 or (number_format($z['grade_point'],2)==0.0 && $z['grade']=='F'))
 												{
 													$html=$html.'<tr>
-														<td vertical-align="top">'.$z['course_code'].'</td>
-														<td vertical-align="top">'.$z['course_title'].'</td>
-														<td vertical-align="top">'.number_format($z['course_credit'],2).'</td>
-														<td vertical-align="top">'.$z['grade'].'</td>
-														<td vertical-align="top">'.number_format($z['grade_point'],2).'</td>
+														<td valign="top">'.$z['course_code'].'</td>
+														<td valign="top">'.$z['course_title'].'</td>
+														<td valign="top">'.number_format($z['course_credit'],2).'</td>
+														<td valign="top">'.$z['grade'].'</td>
+														<td valign="top">'.number_format($z['grade_point'],2).'</td>
 													</tr>';
 												}
 											}
@@ -647,22 +647,22 @@
 								
 								$html=$html.'<table id="course_waived" style="width:700px;margin-top:10px;font-size:12px;">
 									<tr>
-										<td colspan="2" vertical-align="top" style="border-top: 1px solid black;"><b>Waived Courses</b></td>
-										<td vertical-align="top" style="border-top: 1px solid black;"><b>Credit: '.number_format($waived_credit,2).'</b></td>
+										<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>Waived Courses</b></td>
+										<td valign="top" style="border-top: 1px solid black;"><b>Credit: '.number_format($waived_credit,2).'</b></td>
 									</tr>
 									<tr class="w3-teal w3-bold">
-										<td vertical-align="top" style="width:15%;border-top: 1px solid black;border-bottom: 1px solid black;"><b>Course Code</b></td>
-										<td vertical-align="top" style="width:40%;border-top: 1px solid black;border-bottom: 1px solid black;"><b>Course Title</b></td>
-										<td vertical-align="top" style="width:45%;border-top: 1px solid black;border-bottom: 1px solid black;"><b>Credit</b></td>
+										<td valign="top" style="width:15%;border-top: 1px solid black;border-bottom: 1px solid black;"><b>Course Code</b></td>
+										<td valign="top" style="width:40%;border-top: 1px solid black;border-bottom: 1px solid black;"><b>Course Title</b></td>
+										<td valign="top" style="width:45%;border-top: 1px solid black;border-bottom: 1px solid black;"><b>Credit</b></td>
 									</tr>';
 									
 									foreach($ra_w as $cge)
 									{
 								
 										$html=$html.'<tr>
-											<td vertical-align="top">'.$cge['course_code'].'</td>
-											<td vertical-align="top">'.$cge['course_title'].'</td>
-											<td vertical-align="top">'.number_format($cge['course_credit'],2).'</td>
+											<td valign="top">'.$cge['course_code'].'</td>
+											<td valign="top">'.$cge['course_title'].'</td>
+											<td valign="top">'.number_format($cge['course_credit'],2).'</td>
 										</tr>';
 								
 									}
