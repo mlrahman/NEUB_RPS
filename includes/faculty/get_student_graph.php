@@ -36,13 +36,299 @@
 		
 		function fetch_student_graph_data_graduates($semester,$year)
 		{
-			return '10-';
+			//fetching given semester graduates
+			require("../db_connection.php");
+			$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_stud_status='Active' ");
+			$stmt->bindParam(':f_d_id', $_REQUEST['faculty_dept_id']);
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			if(count($result)>=1)
+			{
+				$y=count($result);
+				$grad=0;
+				for($index=0;$index<$y;$index++) //per student
+				{
+					$s_id=$result[$index][0];
+					$prcr_id = $result[$index][8];
+					
+					//Fetching student result
+					$stmt = $conn->prepare("select * from nr_result where nr_stud_id=:s_id and nr_result_status='Active' order by nr_result_year asc, nr_result_semester asc"); 
+					$stmt->bindParam(':s_id', $s_id);
+					$stmt->execute();
+					$stud_result=$stmt->fetchAll();
+					$cg=array();
+					$se_re=array();
+					for($i = 0; $i < count($stud_result); $i++) {
+						
+						$stud_course_id=$stud_result[$i][2];
+						$stud_grade_point=grade_point_decrypt($s_id,$stud_result[$i][5]);
+						$stmt = $conn->prepare("select * from nr_course where nr_course_id='$stud_course_id'"); 
+						$stmt->execute();
+						$course_result=$stmt->fetchAll();
+						$stud_course_code=$course_result[0][1];
+						$stud_course_credit=$course_result[0][3];
+											
+						//Calculating cg and credits by checking unique and best result
+						if(array_key_exists($stud_course_code,$cg))
+						{
+							$prev_grade_point=$cg[$stud_course_code]['gpa'];
+							if($stud_grade_point>=$prev_grade_point)
+								$cg[$stud_course_code]=array('credit'=>$stud_course_credit,'gpa'=>$stud_grade_point);
+						}
+						else
+						{
+							if($stud_grade_point>0.0)
+								$cg[$stud_course_code]=array('credit'=>$stud_course_credit,'gpa'=>$stud_grade_point);
+						}
+					}
+					
+					//calculating earned credit
+					$earned_credit=0.0;
+					foreach($cg as $cge)
+					{
+						$earned_credit=$earned_credit+$cge['credit'];
+					}
+					$earned_credit=number_format($earned_credit, 2);
+					
+					//fetching waived course credits
+					$stmt = $conn->prepare("select * from nr_student_waived_credit where nr_stud_id=:s_id and nr_stwacr_status='Active' "); 
+					$stmt->bindParam(':s_id', $s_id);
+					$stmt->execute();
+					$stud_result=$stmt->fetchAll();
+					$waived_credit=0.0;
+					for($i = 0; $i < count($stud_result); $i++) {
+						
+						$stud_course_id=$stud_result[$i][2];
+						$stmt = $conn->prepare("select * from nr_course where nr_course_id='$stud_course_id'"); 
+						$stmt->execute();
+						$course_result=$stmt->fetchAll();
+						$stud_course_credit=$course_result[0][3];
+						
+						$waived_credit=$waived_credit+$stud_course_credit;
+					}
+					$waived_credit=number_format($waived_credit, 2);
+					
+					
+					//Search for student program credit
+					$stmt = $conn->prepare("select * from nr_program_credit where nr_prcr_id=$prcr_id");
+					$stmt->execute();
+					$prcr_result = $stmt->fetchAll();
+					if(count($prcr_result)==0)
+					{
+						echo '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
+						die();
+					}
+					$total_credit=$prcr_result[0][2];
+					
+					
+					
+					$degree_status=$total_credit-($earned_credit+$waived_credit);
+					if($degree_status==0)
+					{
+						$stmt = $conn->prepare("select * from nr_result where nr_stud_id=:s_id and nr_result_status='Active' order by nr_result_year desc, nr_result_semester desc"); 
+						$stmt->bindParam(':s_id', $s_id);
+						$stmt->execute();
+						$stud_result=$stmt->fetchAll();
+						if(count($stud_result)!=0)  //check for students who have results in db
+						{
+							$last_semester=$stud_result[0][6];
+							$last_year=$stud_result[0][7];
+						}
+						if($last_semester==$semester && $last_year==$year)
+							$grad++;  //'Graduated'
+					}
+				}
+				return ($grad.'-');
+			}
+			else
+			{
+				return '0-';
+			}
+			
 		}
 		
 		function fetch_student_graph_data_dropouts($semester,$year)
 		{
-			return '15-';
+			//fetching given semester dropouts
+			require("../db_connection.php");
+			$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_stud_status='Active' ");
+			$stmt->bindParam(':f_d_id', $_REQUEST['faculty_dept_id']);
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			if(count($result)>=1)
+			{
+				$c_y=count($result);
+				$drop=0;
+				for($index=0;$index<$c_y;$index++)
+				{
+					$s_id=$result[$index][0];
+					$prcr_id = $result[$index][8];
+					
+					//Fetching student result
+					$stmt = $conn->prepare("select * from nr_result where nr_stud_id=:s_id and nr_result_status='Active' order by nr_result_year asc, nr_result_semester asc"); 
+					$stmt->bindParam(':s_id', $s_id);
+					$stmt->execute();
+					$stud_result=$stmt->fetchAll();
+					$cg=array();
+					$se_re=array();
+					for($i = 0; $i < count($stud_result); $i++) {
+						
+						$stud_course_id=$stud_result[$i][2];
+						$stud_grade_point=grade_point_decrypt($s_id,$stud_result[$i][5]);
+						$stmt = $conn->prepare("select * from nr_course where nr_course_id='$stud_course_id'"); 
+						$stmt->execute();
+						$course_result=$stmt->fetchAll();
+						$stud_course_code=$course_result[0][1];
+						$stud_course_credit=$course_result[0][3];
+											
+						//Calculating cg and credits by checking unique and best result
+						if(array_key_exists($stud_course_code,$cg))
+						{
+							$prev_grade_point=$cg[$stud_course_code]['gpa'];
+							if($stud_grade_point>=$prev_grade_point)
+								$cg[$stud_course_code]=array('credit'=>$stud_course_credit,'gpa'=>$stud_grade_point);
+						}
+						else
+						{
+							if($stud_grade_point>0.0)
+								$cg[$stud_course_code]=array('credit'=>$stud_course_credit,'gpa'=>$stud_grade_point);
+						}
+					}
+					
+					//calculating earned credit
+					$earned_credit=0.0;
+					foreach($cg as $cge)
+					{
+						$earned_credit=$earned_credit+$cge['credit'];
+					}
+					$earned_credit=number_format($earned_credit, 2);
+					
+					//fetching waived course credits
+					$stmt = $conn->prepare("select * from nr_student_waived_credit where nr_stud_id=:s_id and nr_stwacr_status='Active' "); 
+					$stmt->bindParam(':s_id', $s_id);
+					$stmt->execute();
+					$stud_result=$stmt->fetchAll();
+					$waived_credit=0.0;
+					for($i = 0; $i < count($stud_result); $i++) {
+						
+						$stud_course_id=$stud_result[$i][2];
+						$stmt = $conn->prepare("select * from nr_course where nr_course_id='$stud_course_id'"); 
+						$stmt->execute();
+						$course_result=$stmt->fetchAll();
+						$stud_course_credit=$course_result[0][3];
+						
+						$waived_credit=$waived_credit+$stud_course_credit;
+					}
+					$waived_credit=number_format($waived_credit, 2);
+					
+					
+					//Search for student program credit
+					$stmt = $conn->prepare("select * from nr_program_credit where nr_prcr_id=$prcr_id");
+					$stmt->execute();
+					$prcr_result = $stmt->fetchAll();
+					if(count($prcr_result)==0)
+					{
+						echo '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
+						die();
+					}
+					$total_credit=$prcr_result[0][2];
+					
+					
+					
+					$degree_status=$total_credit-($earned_credit+$waived_credit);
+					if($degree_status!=0)  //not graduated
+					{
+						$stmt = $conn->prepare("SELECT * FROM nr_result where nr_stud_id=:s_id and nr_result_status='Active' order by nr_result_year desc, nr_result_semester desc");
+						$stmt->bindParam(':s_id', $s_id);
+						$stmt->execute();
+						$stud_result=$stmt->fetchAll();
+						if(count($stud_result)!=0)  //check for students who have results in db
+						{
+							$last_semester=$stud_result[0][6];
+							$last_year=$stud_result[0][7];
+							$current_semester=$semester;
+							$current_year=$year;
+							if($last_year<=$current_year && ((($current_semester="Spring" || $current_semester="Fall" || $current_semester="Summer") && $last_semester="Fall") || (($current_semester="Spring" || $current_semester="Summer") && $last_semester="Summer") || (($current_semester="Spring") && $last_semester="Spring")))
+							{
+								$gap=0;
+								for($y=$last_year;$y<=$current_year;$y++)
+								{
+									if($y==$last_year)
+									{
+										if($last_semester=='Spring')
+										{
+											if(('Spring-'.$last_year)!=($current_semester.'-'.$current_year))
+												$gap++;
+											else
+												break;
+											
+											if(('Summer-'.$last_year)!=($current_semester.'-'.$current_year))
+												$gap++;
+											else 
+												break;
+												
+											if(('Fall-'.$last_year)!=($current_semester.'-'.$current_year))
+												$gap++;
+											else
+												break;
+										}
+										else if($last_semester=='Summer')
+										{
+											if(('Summer-'.$last_year)!=($current_semester.'-'.$current_year))
+												$gap++;
+											else 
+												break;
+												
+											if(('Fall-'.$last_year)!=($current_semester.'-'.$current_year))
+												$gap++;
+											else
+												break;
+										}
+										else if($last_semester=='Fall')
+										{
+																					
+											if(('Fall-'.$last_year)!=($current_semester.'-'.$current_year))
+												$gap++;
+											else
+												break;
+										}
+									}
+									else
+									{
+										if(('Spring-'.$y)!=($current_semester.'-'.$current_year))
+												$gap++;
+										else
+											break;
+										
+										if(('Summer-'.$y)!=($current_semester.'-'.$current_year))
+											$gap++;
+										else 
+											break;
+											
+										if(('Fall-'.$y)!=($current_semester.'-'.$current_year))
+											$gap++;
+										else
+											break;
+									}
+								}
+								
+								if($gap==2)  //last available semester result and student available semester result difference 
+								{
+									$drop++;
+								}
+							}
+						}
+						
+					}
+				}
+				return $drop.'-';
+			}
+			else
+			{
+				return '0-';
+			}
 		}
+		//end of function
 		
 		$student_graph_from=$_REQUEST['student_graph_from'];
 		$student_graph_to=$_REQUEST['student_graph_to'];

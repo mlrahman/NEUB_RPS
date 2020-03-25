@@ -1,7 +1,12 @@
 <?php
 
 include("includes/function.php");
-
+/*
+$last_semester='2018Fall';
+$current_semester='2018Summer';
+if($last_semester<=$current_semester)
+echo 'ok';
+/*
 $s_id=140203020002;
 $marks=30;
 $gpa=0.00;

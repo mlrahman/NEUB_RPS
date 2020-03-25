@@ -3,10 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2020 at 10:21 AM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.8
-
+-- Generation Time: Mar 25, 2020 at 01:30 PM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.1.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -230,7 +229,10 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-21', '09:24 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '12:09 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '02:19 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '02:19 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '02:19 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '08:02 PM', 'Active'),
+(1, '192.168.0.100', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '08:10 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '03:09 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -290,7 +292,7 @@ CREATE TABLE `nr_result` (
   `nr_result_grade_point` double NOT NULL,
   `nr_result_semester` enum('Spring','Summer','Fall') NOT NULL,
   `nr_result_year` year(4) NOT NULL,
-  `nr_result_remarks` enum('Incomplete','Expelled_Mid','MakeUp_MS','MakeUp_SF','MakeUp_MS_SF','Expelled_SF','MakeUp_MS, Expelled_SF','MakeUp_MS, Incomplete','Improvement','Retake') NOT NULL,
+  `nr_result_remarks` enum('Incomplete','Expelled_Mid','MakeUp_MS','MakeUp_SF','MakeUp_MS_SF','Expelled_SF','MakeUp_MS, Expelled_SF','MakeUp_MS, Incomplete','Improvement','Retake','') NOT NULL,
   `nr_result_status` enum('Active','Inactive') NOT NULL,
   `nr_prog_id` bigint(20) NOT NULL,
   `nr_result_publish_date` varchar(100) NOT NULL,
@@ -302,16 +304,16 @@ CREATE TABLE `nr_result` (
 --
 
 INSERT INTO `nr_result` (`nr_result_id`, `nr_stud_id`, `nr_course_id`, `nr_result_marks`, `nr_result_grade`, `nr_result_grade_point`, `nr_result_semester`, `nr_result_year`, `nr_result_remarks`, `nr_result_status`, `nr_prog_id`, `nr_result_publish_date`, `nr_faculty_id`) VALUES
-(1, 140203020002, 3, 140203029312.5, '89f276cc01d4af01fa8cee48af8ee962bac42500', 140203026062.5, 'Fall', 2015, '', 'Active', 1, '2020-01-27', 1),
-(2, 140203020002, 4, 140203029812.5, '500910d02d287a8c898c406ea348043c050d31ca', 140203026312.5, 'Spring', 2015, '', 'Active', 1, '2020-01-27', 1),
+(1, 140203020002, 3, 140203029312.5, '89f276cc01d4af01fa8cee48af8ee962bac42500', 140203026062.5, 'Fall', 2016, '', 'Active', 1, '2020-01-27', 1),
+(2, 140203020002, 4, 140203029812.5, '500910d02d287a8c898c406ea348043c050d31ca', 140203026312.5, 'Fall', 2015, '', 'Active', 1, '2020-01-27', 1),
 (3, 140203020002, 1, 140203022812.5, '264c6dfec271ba9a2a1526fa29b7754ef7eb0fd8', 140203022812.5, 'Spring', 2015, '', 'Active', 1, '2020-01-29', 1),
 (4, 140203020002, 2, 140203028812.5, '5177875dc921885677fcc6e571bca2fb1146eaaa', 140203025812.5, 'Spring', 2015, '', 'Active', 1, '2020-01-29', 1),
-(5, 140203020002, 5, 140203022812.5, '264c6dfec271ba9a2a1526fa29b7754ef7eb0fd8', 140203022812.5, 'Spring', 2015, '', 'Active', 1, '2020-01-29', 1),
+(5, 140203020002, 5, 140203022812.5, '264c6dfec271ba9a2a1526fa29b7754ef7eb0fd8', 140203022812.5, 'Summer', 2014, '', 'Active', 1, '2020-01-29', 1),
 (6, 140203020002, 7, 140203029812.5, '500910d02d287a8c898c406ea348043c050d31ca', 140203026312.5, 'Fall', 2014, '', 'Active', 1, '2020-01-29', 1),
-(7, 140203020002, 1, 140203022812.5, '264c6dfec271ba9a2a1526fa29b7754ef7eb0fd8', 140203022812.5, 'Fall', 2014, '', 'Active', 1, '2020-01-29', 1),
+(7, 140203020002, 1, 140203022812.5, '264c6dfec271ba9a2a1526fa29b7754ef7eb0fd8', 140203022812.5, 'Fall', 2016, '', 'Active', 1, '2020-01-29', 1),
 (8, 140203020002, 3, 140203030812.5, '1858411229d78def5b8862e672cb210208e69afd', 140203026812.5, 'Summer', 2015, '', 'Active', 1, '2020-01-30', 1),
-(9, 140203020002, 5, 140203026812.5, 'd7f53c387a852879c393673564ff1bd45666d0ab', 140203024812.5, 'Summer', 2015, '', 'Active', 1, '2020-01-30', 1),
-(10, 140203020002, 7, 140203022812.5, 'd7f53c387a852879c393673564ff1bd45666d0ab', 140203022812.5, 'Summer', 2015, '', 'Active', 1, '2020-01-30', 1),
+(9, 140203020002, 5, 140203026812.5, 'd7f53c387a852879c393673564ff1bd45666d0ab', 140203024812.5, 'Summer', 2016, '', 'Active', 1, '2020-01-30', 1),
+(10, 140203020002, 7, 140203022812.5, '264c6dfec271ba9a2a1526fa29b7754ef7eb0fd8', 140203022812.5, 'Summer', 2014, '', 'Active', 1, '2020-01-30', 1),
 (11, 140203020002, 2, 140203025812.5, '264c6dfec271ba9a2a1526fa29b7754ef7eb0fd8', 140203022812.5, 'Summer', 2015, '', 'Active', 1, '2020-01-30', 1);
 
 -- --------------------------------------------------------
@@ -823,7 +825,20 @@ INSERT INTO `nr_result_check_transaction` (`nr_stud_id`, `nr_rechtr_ip_address`,
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-22', '12:16 AM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-22', '12:17 AM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '01:28 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '02:43 PM', 'Active');
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '02:43 PM', 'Active'),
+(140203020002, '192.168.0.100', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '08:13 PM', 'Active'),
+(140203020002, '192.168.0.100', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '08:14 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '12:40 AM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '12:48 AM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '12:51 AM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '12:54 AM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '12:58 AM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '12:59 AM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '01:00 AM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '05:46 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '06:24 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '06:25 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '06:25 PM', 'Active');
 
 -- --------------------------------------------------------
 
