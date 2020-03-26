@@ -10,7 +10,7 @@
 		header("location:index.php");
 		die();
 	}
-	if(isset($_REQUEST['student_graph_to']) && isset($_REQUEST['student_graph_from']) && isset($_REQUEST['faculty_dept_id']) && isset($_REQUEST['faculty_id']) && $_REQUEST['faculty_dept_id']==$_SESSION['faculty_dept_id'] && $_REQUEST['faculty_id']==$_SESSION['faculty_id'])
+	if(isset($_REQUEST['program_id']) && isset($_REQUEST['student_graph_to']) && isset($_REQUEST['student_graph_from']) && isset($_REQUEST['faculty_dept_id']) && isset($_REQUEST['faculty_id']) && $_REQUEST['faculty_dept_id']==$_SESSION['faculty_dept_id'] && $_REQUEST['faculty_id']==$_SESSION['faculty_id'])
 	{
 		//Data transfer format
 		//echo '86-36-19-67-35-25@20-15-25-10-18-12@2-5-7-12-3-1@';
@@ -19,7 +19,16 @@
 		function fetch_student_graph_data_admission($semester,$year)
 		{
 			require("../db_connection.php");
-			$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id)  and nr_stud_status='Active' ");
+			$program_id=trim($_REQUEST['program_id']);
+			if($program_id==-1)
+			{
+				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_stud_status='Active' ");
+			}
+			else
+			{
+				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_prog_id=:prog_id and nr_stud_status='Active' ");
+				$stmt->bindParam(':prog_id', $program_id);
+			}
 			$stmt->bindParam(':f_d_id', $_REQUEST['faculty_dept_id']);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
@@ -38,7 +47,16 @@
 		{
 			//fetching given semester graduates
 			require("../db_connection.php");
-			$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_stud_status='Active' ");
+			$program_id=trim($_REQUEST['program_id']);
+			if($program_id==-1)
+			{
+				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_stud_status='Active' ");
+			}
+			else
+			{
+				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_prog_id=:prog_id and nr_stud_status='Active' ");
+				$stmt->bindParam(':prog_id', $program_id);
+			}
 			$stmt->bindParam(':f_d_id', $_REQUEST['faculty_dept_id']);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
@@ -151,7 +169,16 @@
 		{
 			//fetching given semester dropouts
 			require("../db_connection.php");
-			$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_stud_status='Active' ");
+			$program_id=trim($_REQUEST['program_id']);
+			if($program_id==-1)
+			{
+				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_stud_status='Active' ");
+			}
+			else
+			{
+				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_prog_id=:prog_id and nr_stud_status='Active' ");
+				$stmt->bindParam(':prog_id', $program_id);
+			}
 			$stmt->bindParam(':f_d_id', $_REQUEST['faculty_dept_id']);
 			$stmt->execute();
 			$result = $stmt->fetchAll();

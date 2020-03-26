@@ -250,6 +250,7 @@
 	var last_year=parseInt(<?php echo '"'.$last_year.'"';?>);
 	function get_student_graph_to()
 	{
+		
 		document.getElementById('student_graph_to').innerHTML='<option value="">Loading..</option>';
 		var student_graph_from=document.getElementById('student_graph_from').value;
 		if(student_graph_from!="")
@@ -327,6 +328,8 @@
 	//student_graph
 	function get_student_graph()
 	{
+		var prog_id=document.getElementById('program_id').value;
+		
 		var student_graph_from=document.getElementById('student_graph_from').value;
 		var student_graph_to=document.getElementById('student_graph_to').value;
 		if(student_graph_to!="" || student_graph_from!="")
@@ -521,7 +524,7 @@
 				}
 			};
 					
-			student_graph.open("GET", "../includes/faculty/get_student_graph.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&student_graph_from="+student_graph_from+"&student_graph_to="+student_graph_to, true);
+			student_graph.open("GET", "../includes/faculty/get_student_graph.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&student_graph_from="+student_graph_from+"&student_graph_to="+student_graph_to+"&program_id="+prog_id, true);
 			student_graph.send();
 		}
 	}

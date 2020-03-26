@@ -10,7 +10,7 @@
 		header("location:index.php");
 		die();
 	}
-	if(isset($_REQUEST['student_cgpa_to']) && isset($_REQUEST['student_cgpa_from']) && isset($_REQUEST['faculty_dept_id']) && isset($_REQUEST['faculty_id']) && $_REQUEST['faculty_dept_id']==$_SESSION['faculty_dept_id'] && $_REQUEST['faculty_id']==$_SESSION['faculty_id'])
+	if(isset($_REQUEST['program_id']) && isset($_REQUEST['student_cgpa_to']) && isset($_REQUEST['student_cgpa_from']) && isset($_REQUEST['faculty_dept_id']) && isset($_REQUEST['faculty_id']) && $_REQUEST['faculty_dept_id']==$_SESSION['faculty_dept_id'] && $_REQUEST['faculty_id']==$_SESSION['faculty_id'])
 	{
 		//Data transfer format
 		//echo '3.15-3.40-3.65@3@Spring-2015@Summer-2015@Fall-2015@%';
@@ -20,7 +20,16 @@
 		function fetch_student_cgpa_data($semester,$year)
 		{
 			require("../db_connection.php");
-			$stmt = $conn->prepare("select * from nr_result a,nr_course b where a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_result_status='Active' and a.nr_course_id=b.nr_course_id and a.nr_result_semester='$semester' and a.nr_result_year='$year' order by a.nr_stud_id asc");
+			$program_id=trim($_REQUEST['program_id']);
+			if($program_id==-1)
+			{
+				$stmt = $conn->prepare("select * from nr_result a,nr_course b where a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_result_status='Active' and a.nr_course_id=b.nr_course_id and a.nr_result_semester='$semester' and a.nr_result_year='$year' order by a.nr_stud_id asc");
+			}
+			else
+			{
+				$stmt = $conn->prepare("select * from nr_result a,nr_course b where a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' and a.nr_course_id=b.nr_course_id and a.nr_result_semester='$semester' and a.nr_result_year='$year' order by a.nr_stud_id asc");
+				$stmt->bindParam(':prog_id', $program_id);
+			}
 			$stmt->bindParam(':f_d_id', $_REQUEST['faculty_dept_id']);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
@@ -63,7 +72,16 @@
 		function fetch_student_g_cgpa_data($semester,$year)
 		{
 			require("../db_connection.php");
-			$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_stud_status='Active' ");
+			$program_id=trim($_REQUEST['program_id']);
+			if($program_id==-1)
+			{
+				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_stud_status='Active' ");
+			}
+			else
+			{
+				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_prog_id=:prog_id and nr_stud_status='Active' ");
+				$stmt->bindParam(':prog_id', $program_id);
+			}
 			$stmt->bindParam(':f_d_id', $_REQUEST['faculty_dept_id']);
 			$stmt->execute();
 			$result = $stmt->fetchAll();

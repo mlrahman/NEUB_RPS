@@ -10,11 +10,20 @@
 		header("location:index.php");
 		die();
 	}
-	if(isset($_REQUEST['faculty_dept_id']) && isset($_REQUEST['faculty_id']) && $_REQUEST['faculty_dept_id']==$_SESSION['faculty_dept_id'] && $_REQUEST['faculty_id']==$_SESSION['faculty_id'])
+	if(isset($_REQUEST['program_id']) && isset($_REQUEST['faculty_dept_id']) && isset($_REQUEST['faculty_id']) && $_REQUEST['faculty_dept_id']==$_SESSION['faculty_dept_id'] && $_REQUEST['faculty_id']==$_SESSION['faculty_id'])
 	{
+		$program_id=trim($_REQUEST['program_id']);
 		$faculty_id=trim($_REQUEST['faculty_id']);
 		$faculty_dept_id=trim($_REQUEST['faculty_dept_id']);
-		$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_stud_status='Active' ");
+		if($program_id==-1)
+		{
+			$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_stud_status='Active' ");
+		}
+		else
+		{
+			$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_prog_id=:prog_id and nr_stud_status='Active' ");
+			$stmt->bindParam(':prog_id', $program_id);
+		}
 		$stmt->bindParam(':f_d_id', $faculty_dept_id);
 		$stmt->execute();
 		$result = $stmt->fetchAll();
@@ -106,7 +115,7 @@
 		}
 		else
 		{
-			echo '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
+			echo 'N/A';
 		}
 	}
 	else

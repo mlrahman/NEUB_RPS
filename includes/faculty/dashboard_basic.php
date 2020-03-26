@@ -50,56 +50,86 @@
 </div>
 
 <script>
-//Total Students
-	var total_students = new XMLHttpRequest();
-	total_students.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("total_students").innerHTML = this.responseText;
-		}
-		if (this.readyState == 4 && (this.status == 403 || this.status == 404)) {
-			document.getElementById("total_students").innerHTML = '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
-		}
-	};
-	total_students.open("GET", "../includes/faculty/get_total_students.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>, true);
-	total_students.send();
+	//Total Students
+	function load_total_students()
+	{
+		var prog_id=document.getElementById('program_id').value;
+		
+		document.getElementById("total_students").innerHTML='<i class="fa fa-refresh w3-spin" title="loading..">';
+		var total_students = new XMLHttpRequest();
+		total_students.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById("total_students").innerHTML = this.responseText;
+			}
+			if (this.readyState == 4 && (this.status == 403 || this.status == 404)) {
+				document.getElementById("total_students").innerHTML = '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
+			}
+		};
+		total_students.open("GET", "../includes/faculty/get_total_students.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id="+prog_id, true);
+		total_students.send();
+	}
+	load_total_students();
 	
 	//Graduated
-	var graduates = new XMLHttpRequest();
-	graduates.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("graduates").innerHTML = this.responseText;
-		}
-		if (this.readyState == 4 && (this.status == 403 || this.status == 404)) {
-			document.getElementById("graduates").innerHTML = '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
-		}
-	};
-	graduates.open("GET", "../includes/faculty/get_graduates.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>, true);
-	graduates.send();
+	function load_graduates()
+	{
+		var prog_id=document.getElementById('program_id').value;
+		
+		document.getElementById("graduates").innerHTML='<i class="fa fa-refresh w3-spin" title="loading..">';
+	
+		var graduates = new XMLHttpRequest();
+		graduates.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById("graduates").innerHTML = this.responseText;
+			}
+			if (this.readyState == 4 && (this.status == 403 || this.status == 404)) {
+				document.getElementById("graduates").innerHTML = '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
+			}
+		};
+		graduates.open("GET", "../includes/faculty/get_graduates.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id="+prog_id, true);
+		graduates.send();
+	}
+	load_graduates();
 	
 	//Top CGPA
-	var top_cgpa = new XMLHttpRequest();
-	top_cgpa.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("top_cgpa").innerHTML = this.responseText;
-		}
-		if (this.readyState == 4 && (this.status == 403 || this.status == 404)) {
-			document.getElementById("top_cgpa").innerHTML = '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
-		}
-	};
-	top_cgpa.open("GET", "../includes/faculty/get_top_cgpa.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>, true);
-	top_cgpa.send();
+	function load_top_cgpa()
+	{
+		var prog_id=document.getElementById('program_id').value;
+		
+		document.getElementById("top_cgpa").innerHTML='<i class="fa fa-refresh w3-spin" title="loading..">';
+	
+		var top_cgpa = new XMLHttpRequest();
+		top_cgpa.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById("top_cgpa").innerHTML = this.responseText;
+			}
+			if (this.readyState == 4 && (this.status == 403 || this.status == 404)) {
+				document.getElementById("top_cgpa").innerHTML = '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
+			}
+		};
+		top_cgpa.open("GET", "../includes/faculty/get_top_cgpa.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id="+prog_id, true);
+		top_cgpa.send();
+	}
+	load_top_cgpa();
 	
 	//Dropouts
-	var dropouts = new XMLHttpRequest();
-	dropouts.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("dropouts").innerHTML = this.responseText;
-		}
-		if (this.readyState == 4 && (this.status == 403 || this.status == 404)) {
-			document.getElementById("dropouts").innerHTML = '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
-		}
-	};
-	dropouts.open("GET", "../includes/faculty/get_dropouts.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>, true);
-	dropouts.send();
-
+	function load_dropouts()
+	{
+		var prog_id=document.getElementById('program_id').value;
+		
+		document.getElementById("dropouts").innerHTML='<i class="fa fa-refresh w3-spin" title="loading..">';
+	
+		var dropouts = new XMLHttpRequest();
+		dropouts.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById("dropouts").innerHTML = this.responseText;
+			}
+			if (this.readyState == 4 && (this.status == 403 || this.status == 404)) {
+				document.getElementById("dropouts").innerHTML = '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
+			}
+		};
+		dropouts.open("GET", "../includes/faculty/get_dropouts.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id="+prog_id, true);
+		dropouts.send();
+	}
+	load_dropouts();
 </script>

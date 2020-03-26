@@ -11,7 +11,7 @@
 
 
 
-<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:0px 0px 15px 0px;width:270px;"><i class="fa fa-bar-chart-o"></i> CGPA Statistics</p>
+<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:0px 0px 15px 0px;width:270px;"><i class="fa fa-line-chart"></i> CGPA Statistics</p>
 				
 <p class="w3-right w3-margin-top w3-padding-0">
 <?php
@@ -326,6 +326,8 @@
 	//student_cgpa
 	function get_student_cgpa()
 	{
+		var prog_id=document.getElementById('program_id').value;
+		
 		var student_cgpa_from=document.getElementById('student_cgpa_from').value;
 		var student_cgpa_to=document.getElementById('student_cgpa_to').value;
 		if(student_cgpa_to!="" || student_cgpa_from!="")
@@ -492,7 +494,7 @@
 				}
 			};
 					
-			student_cgpa.open("GET", "../includes/faculty/get_student_cgpa.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&student_cgpa_from="+student_cgpa_from+"&student_cgpa_to="+student_cgpa_to, true);
+			student_cgpa.open("GET", "../includes/faculty/get_student_cgpa.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&student_cgpa_from="+student_cgpa_from+"&student_cgpa_to="+student_cgpa_to+"&program_id="+prog_id, true);
 			student_cgpa.send();
 		}
 	}
