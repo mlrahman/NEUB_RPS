@@ -62,7 +62,7 @@
 				document.getElementById("total_students").innerHTML = this.responseText;
 			}
 			if (this.readyState == 4 && (this.status == 403 || this.status == 404)) {
-				document.getElementById("total_students").innerHTML = '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
+				document.getElementById("total_students").innerHTML = '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Network Error</i>';
 			}
 		};
 		total_students.open("GET", "../includes/faculty/get_total_students.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id="+prog_id, true);
@@ -83,7 +83,7 @@
 				document.getElementById("graduates").innerHTML = this.responseText;
 			}
 			if (this.readyState == 4 && (this.status == 403 || this.status == 404)) {
-				document.getElementById("graduates").innerHTML = '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
+				document.getElementById("graduates").innerHTML = '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Network Error</i>';
 			}
 		};
 		graduates.open("GET", "../includes/faculty/get_graduates.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id="+prog_id, true);
@@ -104,7 +104,7 @@
 				document.getElementById("top_cgpa").innerHTML = this.responseText;
 			}
 			if (this.readyState == 4 && (this.status == 403 || this.status == 404)) {
-				document.getElementById("top_cgpa").innerHTML = '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
+				document.getElementById("top_cgpa").innerHTML = '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Network Error</i>';
 			}
 		};
 		top_cgpa.open("GET", "../includes/faculty/get_top_cgpa.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id="+prog_id, true);
@@ -125,7 +125,7 @@
 				document.getElementById("dropouts").innerHTML = this.responseText;
 			}
 			if (this.readyState == 4 && (this.status == 403 || this.status == 404)) {
-				document.getElementById("dropouts").innerHTML = '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
+				document.getElementById("dropouts").innerHTML = '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Network Error</i>';
 			}
 		};
 		dropouts.open("GET", "../includes/faculty/get_dropouts.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id="+prog_id, true);

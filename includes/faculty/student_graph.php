@@ -520,7 +520,7 @@
 					
 				}
 				if (this.readyState == 4 && (this.status == 403 || this.status == 404)) {
-					document.getElementById("student_graph").innerHTML = '<p class="w3-center w3-margin"><i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i></p>';
+					document.getElementById("student_graph").innerHTML = '<p class="w3-center w3-margin"><i class="fa fa-warning w3-text-red" title="Error occured!!"> Network Error</i></p>';
 				}
 			};
 					
