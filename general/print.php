@@ -384,7 +384,7 @@
 									} else if($photo==""){ 
 											$html=$html.'<img src="../images/system/female_profile.png" style="margin:0px;padding:0px;width:70px;height: 80px;border: 2px solid black;" title="Picture (120X100)"/>';
 									} else { 
-											$html=$html.'<img src="../images/student/<?php echo $photo; ?>"  style="margin:0px;padding:0px;width:70px;height: 80px;border: 2px solid black;" title="Picture (120X100)"/>';
+											$html=$html.'<img src="../images/student/'.$photo.'"  style="margin:0px;padding:0px;width:70px;height: 80px;border: 2px solid black;" title="Picture (120X100)"/>';
 									} 
 								
 								$html=$html.'</div>

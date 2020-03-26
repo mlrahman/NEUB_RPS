@@ -283,11 +283,11 @@
 						<div class="w3-row w3-padding-0">
 							<div class="w3-col w3-container w3-padding-0 w3-margin-0" style="width:110px;">
 								<?php if($photo=="" && $gender=="Male"){ ?>
-										<img src="../images/system/male_profile.png" class="w3-image" style="margin:0px;padding:0px;width:100%;max-width:100px;height: 120px;" title="Picture (120X100)"/>
+										<img src="../images/system/male_profile.png" class="w3-image" style="margin:5px 0px;padding:0px;width:100%;max-width:100px;height: 120px;border: 2px solid black;" title="Picture (120X100)"/>
 								<?php } else if($photo==""){ ?>
-										<img src="../images/system/female_profile.png" class="w3-image" style="margin:0px;padding:0px;width:100%;max-width:100px;height: 120px;" title="Picture (120X100)"/>
+										<img src="../images/system/female_profile.png" class="w3-image" style="margin:5px 0px;padding:0px;width:100%;max-width:100px;height: 120px;border: 2px solid black;" title="Picture (120X100)"/>
 								<?php } else { ?>
-										<img src="../images/student/<?php echo $photo; ?>" class="w3-image" style="margin:0px;padding:0px;width:100%;max-width:100px;height: 120px;" title="Picture (120X100)"/>
+										<img src="../images/student/<?php echo $photo; ?>" class="w3-image" style="margin:5px 0px;padding:0px;width:100%;max-width:100px;height: 120px;border: 2px solid black;" title="Picture (120X100)"/>
 								<?php } ?>
 							</div>
 							<div class="w3-rest w3-container w3-padding-0 w3-margin-0" style="min-width:200px;">

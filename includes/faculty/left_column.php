@@ -48,11 +48,11 @@
 			<p class="w3-align-left w3-text-black w3-margin-0">Welcome, </p>
 			<div class="w3-col s3">
 				<?php if($photo=="" && $gender=="Male"){ ?>
-					<img src="../images/system/male_profile.png" class="w3-circle w3-margin-right w3-margin-top" style="width:100%;max-width:70px;">
+					<img src="../images/system/male_profile.png" id="faculty_profile_image" class="w3-circle w3-margin-right w3-margin-top" style="width:100%;max-width:70px;">
 				<?php } else if($photo==""){ ?>
-					<img src="../images/system/female_profile.png" class="w3-circle w3-margin-right w3-margin-top" style="width:100%;max-width:70px;">
+					<img src="../images/system/female_profile.png" id="faculty_profile_image" class="w3-circle w3-margin-right w3-margin-top" style="width:100%;max-width:70px;">
 				<?php } else { ?>
-					<img src="../images/faculty/<?php echo $photo; ?>" class="w3-circle w3-margin-right w3-margin-top" style="width:100%;max-width:70px;">
+					<img src="../images/faculty/<?php echo $photo; ?>" id="faculty_profile_image" class="w3-circle w3-margin-right w3-margin-top" style="width:100%;max-width:70px;">
 				<?php } ?>
 			</div>
 			<div class="w3-col s8">
@@ -66,12 +66,38 @@
 		
 		<div class="w3-bar-block w3-text-black" style="height: auto;margin: 20px 25px;">
 			<p class="w3-bold w3-xlarge w3-text-teal w3-bottombar" style="margin:0px 0px 15px 0px;"><i class="fa fa-folder-open-o"></i> Menu</p>
-			<a href="#" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar"><i class="fa fa-dashboard"></i> Dashboard</a>
-			<a href="#" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top"><i class="fa fa-search"></i> Search Result</a>
-			<a href="#" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top"><i class="fa fa-edit"></i> Edit Profile</a>
+			<a href="#" onclick="get_page(1)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar"><i class="fa fa-dashboard"></i> Dashboard</a>
+			<a href="#" onclick="get_page(2)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top"><i class="fa fa-search"></i> Search Result</a>
+			<a href="#" onclick="get_page(3)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top"><i class="fa fa-edit"></i> Edit Profile</a>
 			<a href="log_out.php?log_out=yes" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top"><i class="fa fa-sign-out"></i> Sign Out</a>
 		</div>
-		
+		<script>
+			function get_page(a)
+			{
+				if(a==1)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-dashboard"></i> Faculty Dashboard';
+					document.getElementById('page1').style.display='block';
+					document.getElementById('page2').style.display='none';
+					document.getElementById('page3').style.display='none';
+				}
+				else if(a==2)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-search"></i> Search Result';
+					document.getElementById('page1').style.display='none';
+					document.getElementById('page2').style.display='block';
+					document.getElementById('page3').style.display='none';
+				}
+				else if(a==3)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-edit"></i> Edit Profile';
+					
+					document.getElementById('page1').style.display='none';
+					document.getElementById('page2').style.display='none';
+					document.getElementById('page3').style.display='block';
+				}
+			}
+		</script>
 		
 		
 		
