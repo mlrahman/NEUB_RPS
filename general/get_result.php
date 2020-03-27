@@ -405,8 +405,6 @@
 										{
 											if($z['grade']=='F')
 												echo '<tr class="w3-text-red">';
-											else if($z['remarks']!="")
-												echo '<tr class="w3-text-blue">';
 											else
 												echo '<tr>';
 									?>
@@ -416,7 +414,7 @@
 												<td valign="top" class="w3-padding-small"><?php echo number_format($z['course_credit'],2); ?></td>
 												<td valign="top" class="w3-padding-small"><?php echo $z['grade']; ?></td>
 												<td valign="top" class="w3-padding-small"><?php echo number_format($z['grade_point'],2); ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo $z['remarks']; ?></td>
+												<td valign="top" class="w3-padding-small <?php if($z['remarks']!=""){ echo 'w3-text-blue'; } ?>"><?php echo $z['remarks']; ?></td>
 											</tr>
 									<?php 
 										}
@@ -461,8 +459,6 @@
 										{
 											if($z['grade']=='F')
 												echo '<tr class="w3-text-red">';
-											else if($z['remarks']!="")
-												echo '<tr class="w3-text-blue">';
 											else
 												echo '<tr>';
 									?>
@@ -472,7 +468,7 @@
 												<td valign="top" class="w3-padding-small"><?php echo number_format($z['course_credit'],2); ?></td>
 												<td valign="top" class="w3-padding-small"><?php echo $z['grade']; ?></td>
 												<td valign="top" class="w3-padding-small"><?php echo number_format($z['grade_point'],2); ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo $z['remarks']; ?></td>
+												<td valign="top" class="w3-padding-small <?php if($z['remarks']!=""){ echo 'w3-text-blue'; } ?>"><?php echo $z['remarks']; ?></td>
 											</tr>
 									<?php 
 										}
@@ -518,8 +514,6 @@
 										{
 											if($z['grade']=='F')
 												echo '<tr class="w3-text-red">';
-											else if($z['remarks']!="")
-												echo '<tr class="w3-text-blue">';
 											else
 												echo '<tr>';
 									?>
@@ -529,7 +523,7 @@
 												<td valign="top" class="w3-padding-small"><?php echo number_format($z['course_credit'],2); ?></td>
 												<td valign="top" class="w3-padding-small"><?php echo $z['grade']; ?></td>
 												<td valign="top" class="w3-padding-small"><?php echo number_format($z['grade_point'],2); ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo $z['remarks']; ?></td>
+												<td valign="top" class="w3-padding-small <?php if($z['remarks']!=""){ echo 'w3-text-blue'; } ?>"><?php echo $z['remarks']; ?></td>
 											</tr>
 									<?php 
 										}
