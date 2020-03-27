@@ -11,7 +11,7 @@
 
 <p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:0px 0px 15px 0px;width:270px;"><i class="fa fa-bar-chart-o"></i> Student Statistics</p>
 				
-<p class="w3-right w3-margin-top w3-padding-0">
+<p class="w3-right w3-padding w3-margin-0 w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-round-large">
 <?php
 	$stmt = $conn->prepare("SELECT * FROM nr_result where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:dept_id) and nr_result_status='Active' order by nr_result_year asc, nr_result_semester asc");
 	$stmt->bindParam(':dept_id', $_SESSION['faculty_dept_id']);

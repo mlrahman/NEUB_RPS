@@ -21,7 +21,11 @@
 		<!-- page1 starts here -->
 		<div id="page1" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
 			
-			<p class="w3-right w3-margin-right w3-text-teal w3-bold">
+			
+			<i onclick="page1_topFunction()" id="page1_btn" class="fa fa-chevron-circle-up w3-cursor w3-text-black w3-hover-text-teal w3-xxlarge" title="Go to top" style="display:none;bottom: 95px;right:45px;z-index: 99999;position:fixed;"></i>
+
+			
+			<p class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 7px;">
 				
 				<i class="fa fa-folder-open-o"></i> Program: 
 				<select onchange="reload_dashboard()" id="program_id">
@@ -75,6 +79,30 @@
 			<div class="w3-container w3-margin-bottom">
 				<?php include("../includes/faculty/recent_results.php"); ?>
 			</div>
+			
+			
+			<!-- Go to top button-->
+			<script>
+				//Get the button
+				var page1_btn = document.getElementById("page1_btn");
+				var page1=document.getElementById('page1');
+				// When the user scrolls down 20px from the top of the document, show the button
+				page1.onscroll = function() {page1_scrollFunction()};
+
+				function page1_scrollFunction() {
+				  if (page1.scrollTop > 20) {
+					page1_btn.style.display = "block";
+				  } else {
+					page1_btn.style.display = "none";
+				  }
+				}
+
+				// When the user clicks on the button, scroll to the top of the document
+				function page1_topFunction() {
+				  page1.scrollTop = 0;
+				}
+			</script>
+			
 			
 		</div>
 		<!-- Page 2 starts here -->
