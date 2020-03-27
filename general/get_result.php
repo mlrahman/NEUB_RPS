@@ -361,7 +361,7 @@
 						</table>
 					</div>
 				</div>
-				<div class="w3-container w3-margin-0 w3-padding-0" style="height:auto;max-height:230px;overflow:auto;">
+				<div class="w3-container w3-margin-0 w3-padding-0" style="height:auto;max-height:250px;overflow:auto;">
 					<!-- Summer 2014 semester result -->
 					<!-- use red in fail -->
 					<!-- use blue in retake -->
@@ -403,8 +403,14 @@
 									<?php
 										foreach($se_re['Spring-'.$i] as $z)
 										{
+											if($z['grade']=='F')
+												echo '<tr class="w3-text-red">';
+											else if($z['remarks']!="")
+												echo '<tr class="w3-text-blue">';
+											else
+												echo '<tr>';
 									?>
-											<tr>
+											
 												<td valign="top" class="w3-padding-small"><?php echo $z['course_code']; ?></td>
 												<td valign="top" class="w3-padding-small"><?php echo $z['course_title']; ?></td>
 												<td valign="top" class="w3-padding-small"><?php echo number_format($z['course_credit'],2); ?></td>
@@ -453,8 +459,14 @@
 									<?php
 										foreach($se_re['Summer-'.$i] as $z)
 										{
+											if($z['grade']=='F')
+												echo '<tr class="w3-text-red">';
+											else if($z['remarks']!="")
+												echo '<tr class="w3-text-blue">';
+											else
+												echo '<tr>';
 									?>
-											<tr>
+											
 												<td valign="top" class="w3-padding-small"><?php echo $z['course_code']; ?></td>
 												<td valign="top" class="w3-padding-small"><?php echo $z['course_title']; ?></td>
 												<td valign="top" class="w3-padding-small"><?php echo number_format($z['course_credit'],2); ?></td>
@@ -504,8 +516,14 @@
 									<?php
 										foreach($se_re['Fall-'.$i] as $z)
 										{
+											if($z['grade']=='F')
+												echo '<tr class="w3-text-red">';
+											else if($z['remarks']!="")
+												echo '<tr class="w3-text-blue">';
+											else
+												echo '<tr>';
 									?>
-											<tr>
+											
 												<td valign="top" class="w3-padding-small"><?php echo $z['course_code']; ?></td>
 												<td valign="top" class="w3-padding-small"><?php echo $z['course_title']; ?></td>
 												<td valign="top" class="w3-padding-small"><?php echo number_format($z['course_credit'],2); ?></td>
