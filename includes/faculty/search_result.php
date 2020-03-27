@@ -11,6 +11,7 @@
 
 <div class="w3-container w3-margin-bottom">
 	
+	
 	<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:0px 0px 15px 0px;width:280px;"><i class="fa fa-server"></i> All Student Results</p>
 	
 	<p class="w3-right w3-padding w3-margin-0 w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-round-large">
@@ -22,8 +23,10 @@
 			<option value="4">Name DESC</option>
 			<option value="5">Credit Earned ASC</option>
 			<option value="6">Credit Earned DESC</option>
-			<option value="7">CGPA ASC</option>
-			<option value="8">CGPA DESC</option>
+			<option value="7">Credit Waived ASC</option>
+			<option value="8">Credit Waived DESC</option>
+			<option value="9">CGPA ASC</option>
+			<option value="10">CGPA DESC</option>
 		</select>
 	</p>
 	
@@ -34,8 +37,8 @@
 		<tr class="w3-teal w3-bold">
 			<td style="width:7%;" valign="top" class="w3-padding-small">S.L. No</td>
 			<td style="width:8%;" valign="top" class="w3-padding-small">Student ID</td>
-			<td style="width:25%;" valign="top" class="w3-padding-small">Name</td>
-			<td style="width:16%;" valign="top" class="w3-padding-small">Session</td>
+			<td style="width:24%;" valign="top" class="w3-padding-small">Name</td>
+			<td style="width:17%;" valign="top" class="w3-padding-small">Session</td>
 			<td style="width:9%;" valign="top" class="w3-padding-small">Credit Earned</td>
 			<td style="width:9%;" valign="top" class="w3-padding-small">Credit Waived</td>
 			<td style="width:9%;" valign="top" class="w3-padding-small">Program Credit</td>
@@ -51,7 +54,7 @@
 		</tr>
 	</table>
 	<p id="show_more_btn_search_result" onclick="get_total2_search_results(1)" class="w3-center w3-margin-0" style="display:none;"><a class="w3-cursor w3-bold w3-text-blue w3-decoration-null w3-margin-bottom" style="margin:5px 0px;">Show More <i class="fa fa-sort-down"></i></a></p>
-
+	
 
 	<script>
 		var page2=0,total2;
@@ -75,7 +78,7 @@
 			};
 			document.getElementById('search_data_label').innerHTML='<i class="fa fa-refresh w3-spin"></i>';
 					
-			total2_results.open("GET", "../includes/faculty/get_total2_search_results.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id2="+prog_id+"&sort="+r_sort, true);
+			total2_results.open("GET", "../includes/faculty/get_total2_search_results.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id2="+prog_id, true);
 			total2_results.send();
 		}
 		

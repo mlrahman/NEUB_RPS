@@ -144,23 +144,31 @@
 			
 			<!-- Go to top button-->
 			<script>
-				//Get the button
-				var page2_btn = document.getElementById("page2_btn");
-				var page2=document.getElementById('page2');
-				// When the user scrolls down 20px from the top of the document, show the button
-				page2.onscroll = function() {page2_scrollFunction()};
+				function page2_enable()
+				{
+						//Get the button
+					var page2_btn = document.getElementById("page2_btn");
+					var page2=document.getElementById('page2');
+					// When the user scrolls down 20px from the top of the document, show the button
+					page2.onscroll = function() {page2_scrollFunction()};
 
-				function page2_scrollFunction() {
-				  if (page2.scrollTop > 20) {
-					page2_btn.style.display = "block";
-				  } else {
-					page2_btn.style.display = "none";
-				  }
+					function page2_scrollFunction() {
+						//console.log("sad");
+						//console.log(page2.scrollTop);
+					  if (page2.scrollTop > 20) {
+						page2_btn.style.display = "block";
+					  } else {
+						page2_btn.style.display = "none";
+					  }
+					}
+
+					// When the user clicks on the button, scroll to the top of the document
+					
 				}
-
-				// When the user clicks on the button, scroll to the top of the document
 				function page2_topFunction() {
-				  page2.scrollTop = 0;
+					var page2=document.getElementById('page2');
+					
+					page2.scrollTop = 0;
 				}
 			</script>
 			

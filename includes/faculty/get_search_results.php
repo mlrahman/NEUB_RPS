@@ -19,7 +19,250 @@
 		$sort=trim($_REQUEST['sort']);
 		if($sort>4)
 		{
-			
+			if($program_id2==-1)
+			{
+				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id)  and nr_stud_status='Active' limit $page,5");
+			}
+			else
+			{
+				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_prog_id=:prog_id and nr_stud_status='Active' limit $page,5");
+				$stmt->bindParam(':prog_id', $program_id2);
+			}
+			$stmt->bindParam(':f_d_id', $faculty_dept_id);
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			if(count($result)>0)
+			{
+				$stu=array();
+				for($kk=0;$kk<count($result);$kk++)
+				{
+					//individual student result
+					$s_id=$result[$kk][0];
+					$prcr_id = $result[$kk][8];
+					$s_name=$result[$kk][1];
+					
+					//Fetching student result
+					$stmt = $conn->prepare("select * from nr_result where nr_stud_id=:s_id and nr_result_status='Active' order by nr_result_year asc, nr_result_semester asc"); 
+					$stmt->bindParam(':s_id', $s_id);
+					$stmt->execute();
+					$stud_result=$stmt->fetchAll();
+					$cg=array();
+					$se_re=array();
+					for($i = 0; $i < count($stud_result); $i++) {
+						
+						$stud_course_id=$stud_result[$i][2];
+						$stud_grade_point=grade_point_decrypt($s_id,$stud_result[$i][5]);
+						$stmt = $conn->prepare("select * from nr_course where nr_course_id='$stud_course_id'"); 
+						$stmt->execute();
+						$course_result=$stmt->fetchAll();
+						$stud_course_code=$course_result[0][1];
+						$stud_course_credit=$course_result[0][3];
+											
+						//Calculating cg and credits by checking unique and best result
+						if(array_key_exists($stud_course_code,$cg))
+						{
+							$prev_grade_point=$cg[$stud_course_code]['gpa'];
+							if($stud_grade_point>=$prev_grade_point)
+								$cg[$stud_course_code]=array('credit'=>$stud_course_credit,'gpa'=>$stud_grade_point);
+						}
+						else
+						{
+							if($stud_grade_point>0.0)
+								$cg[$stud_course_code]=array('credit'=>$stud_course_credit,'gpa'=>$stud_grade_point);
+						}
+					}
+					
+					//calculating earned credit
+					$earned_credit=0.0;
+					$earned_gpa=0.0;
+					foreach($cg as $cge)
+					{
+						$earned_credit=$earned_credit+$cge['credit'];
+						$earned_gpa=$earned_gpa+($cge['credit']*$cge['gpa']);
+					}
+					$earned_credit=number_format($earned_credit, 2);
+					
+					//Calculating cgpa from earned_credit
+					if($earned_credit==0)
+						$total_cgpa=number_format(0.0,2);
+					else
+						$total_cgpa=number_format(($earned_gpa/$earned_credit),2);
+					
+					//fetching waived course credits
+					$stmt = $conn->prepare("select * from nr_student_waived_credit where nr_stud_id=:s_id and nr_stwacr_status='Active' "); 
+					$stmt->bindParam(':s_id', $s_id);
+					$stmt->execute();
+					$stud_result=$stmt->fetchAll();
+					$waived_credit=0.0;
+					for($i = 0; $i < count($stud_result); $i++) {
+						
+						$stud_course_id=$stud_result[$i][2];
+						$stmt = $conn->prepare("select * from nr_course where nr_course_id='$stud_course_id'"); 
+						$stmt->execute();
+						$course_result=$stmt->fetchAll();
+						$stud_course_credit=$course_result[0][3];
+						
+						$waived_credit=$waived_credit+$stud_course_credit;
+					}
+					$waived_credit=number_format($waived_credit, 2);
+					
+					
+					//Search for student program credit
+					$stmt = $conn->prepare("select * from nr_program_credit where nr_prcr_id=$prcr_id");
+					$stmt->execute();
+					$prcr_result = $stmt->fetchAll();
+					if(count($prcr_result)==0)
+					{
+						echo '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
+						die();
+					}
+					$total_credit=$prcr_result[0][2];
+					
+					$stu[$s_id]=array('s_id'=>$s_id,'name'=>$s_name,'earned_credit'=>$earned_credit,'total_credit'=>$total_credit,'waived_credit'=>$waived_credit,'cgpa'=>$total_cgpa);
+				}
+				if($sort==5)
+				{
+					function cmp($a, $b)
+					{
+						return strcmp($a["earned_credit"], $b["earned_credit"]);
+					}
+					usort($stu, "cmp");
+					
+					foreach($stu as $st)
+					{
+						if($st['waived_credit']==0.00) $st['waived_credit']='N/A';
+					
+						echo '<tr>
+							<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['s_id'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['name'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.get_session($st['s_id']).'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['earned_credit'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['waived_credit'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['total_credit'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['cgpa'].'</td>
+							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result('.$st['s_id'].')"><i class="fa fa-envelope-open-o"></i> View</a></td>
+						</tr>';
+					}
+				}
+				else if($sort==6)
+				{
+					function cmp($a, $b)
+					{
+						return !strcmp($a["earned_credit"], $b["earned_credit"]);
+					}
+					usort($stu, "cmp");
+					foreach($stu as $st)
+					{
+						if($st['waived_credit']==0.00) $st['waived_credit']='N/A';
+						echo '<tr>
+							<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['s_id'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['name'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.get_session($st['s_id']).'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['earned_credit'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['waived_credit'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['total_credit'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['cgpa'].'</td>
+							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result('.$st['s_id'].')"><i class="fa fa-envelope-open-o"></i> View</a></td>
+						</tr>';
+					}
+				}
+				else if($sort==7)
+				{
+					function cmp($a, $b)
+					{
+						return strcmp($a["waived_credit"], $b["waived_credit"]);
+					}
+					usort($stu, "cmp");
+					foreach($stu as $st)
+					{
+						if($st['waived_credit']==0.00) $st['waived_credit']='N/A';
+						echo '<tr>
+							<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['s_id'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['name'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.get_session($st['s_id']).'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['earned_credit'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['waived_credit'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['total_credit'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['cgpa'].'</td>
+							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result('.$st['s_id'].')"><i class="fa fa-envelope-open-o"></i> View</a></td>
+						</tr>';
+					}
+				}
+				else if($sort==8)
+				{
+					function cmp($a, $b)
+					{
+						return !strcmp($a["waived_credit"], $b["waived_credit"]);
+					}
+					usort($stu, "cmp");
+					foreach($stu as $st)
+					{
+						if($st['waived_credit']==0.00) $st['waived_credit']='N/A';
+						echo '<tr>
+							<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['s_id'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['name'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.get_session($st['s_id']).'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['earned_credit'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['waived_credit'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['total_credit'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['cgpa'].'</td>
+							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result('.$st['s_id'].')"><i class="fa fa-envelope-open-o"></i> View</a></td>
+						</tr>';
+					}
+				}
+				else if($sort==9)
+				{
+					function cmp($a, $b)
+					{
+						return strcmp($a["cgpa"], $b["cgpa"]);
+					}
+					usort($stu, "cmp");
+					foreach($stu as $st)
+					{
+						if($st['waived_credit']==0.00) $st['waived_credit']='N/A';
+						echo '<tr>
+							<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['s_id'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['name'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.get_session($st['s_id']).'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['earned_credit'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['waived_credit'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['total_credit'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['cgpa'].'</td>
+							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result('.$st['s_id'].')"><i class="fa fa-envelope-open-o"></i> View</a></td>
+						</tr>';
+					}
+				}
+				else if($sort==10)
+				{
+					function cmp($a, $b)
+					{
+						return !strcmp($a["cgpa"], $b["cgpa"]);
+					}
+					usort($stu, "cmp");
+					foreach($stu as $st)
+					{
+						if($st['waived_credit']==0.00) $st['waived_credit']='N/A';
+						echo '<tr>
+							<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['s_id'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['name'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.get_session($st['s_id']).'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['earned_credit'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['waived_credit'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['total_credit'].'</td>
+							<td valign="top" class="w3-padding-small w3-border">'.$st['cgpa'].'</td>
+							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result('.$st['s_id'].')"><i class="fa fa-envelope-open-o"></i> View</a></td>
+						</tr>';
+					}
+				}
+				
+				
+			}
 		}
 		else
 		{
