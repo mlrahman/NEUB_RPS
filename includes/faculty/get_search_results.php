@@ -21,11 +21,11 @@
 		{
 			if($program_id2==-1)
 			{
-				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id)  and nr_stud_status='Active' limit $page,5");
+				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id)  and nr_stud_status='Active'");
 			}
 			else
 			{
-				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_prog_id=:prog_id and nr_stud_status='Active' limit $page,5");
+				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_prog_id=:prog_id and nr_stud_status='Active'");
 				$stmt->bindParam(':prog_id', $program_id2);
 			}
 			$stmt->bindParam(':f_d_id', $faculty_dept_id);
@@ -124,12 +124,17 @@
 				{
 					function cmp($a, $b)
 					{
-						return strcmp($a["earned_credit"], $b["earned_credit"]);
+						return ($a["earned_credit"]>$b["earned_credit"]);
 					}
 					usort($stu, "cmp");
-					
+					$count=0;
+					$count2=0;
 					foreach($stu as $st)
 					{
+						$count++;
+						if($count<=$page) continue;
+						$count2++;
+						if($count2>5) break;
 						if($st['waived_credit']==0.00) $st['waived_credit']='N/A';
 					
 						echo '<tr>
@@ -149,11 +154,17 @@
 				{
 					function cmp($a, $b)
 					{
-						return !strcmp($a["earned_credit"], $b["earned_credit"]);
+						return ($a["earned_credit"]<$b["earned_credit"]);
 					}
 					usort($stu, "cmp");
+					$count=0;
+					$count2=0;
 					foreach($stu as $st)
 					{
+						$count++;
+						if($count<=$page) continue;
+						$count2++;
+						if($count2>5) break;
 						if($st['waived_credit']==0.00) $st['waived_credit']='N/A';
 						echo '<tr>
 							<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
@@ -172,11 +183,17 @@
 				{
 					function cmp($a, $b)
 					{
-						return strcmp($a["waived_credit"], $b["waived_credit"]);
+						return ($a["waived_credit"]>$b["waived_credit"]);
 					}
 					usort($stu, "cmp");
+					$count=0;
+					$count2=0;
 					foreach($stu as $st)
 					{
+						$count++;
+						if($count<=$page) continue;
+						$count2++;
+						if($count2>5) break;
 						if($st['waived_credit']==0.00) $st['waived_credit']='N/A';
 						echo '<tr>
 							<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
@@ -195,11 +212,17 @@
 				{
 					function cmp($a, $b)
 					{
-						return !strcmp($a["waived_credit"], $b["waived_credit"]);
+						return ($a["waived_credit"]< $b["waived_credit"]);
 					}
 					usort($stu, "cmp");
+					$count=0;
+					$count2=0;
 					foreach($stu as $st)
 					{
+						$count++;
+						if($count<=$page) continue;
+						$count2++;
+						if($count2>5) break;
 						if($st['waived_credit']==0.00) $st['waived_credit']='N/A';
 						echo '<tr>
 							<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
@@ -218,11 +241,17 @@
 				{
 					function cmp($a, $b)
 					{
-						return strcmp($a["cgpa"], $b["cgpa"]);
+						return ($a["cgpa"]> $b["cgpa"]);
 					}
 					usort($stu, "cmp");
+					$count=0;
+					$count2=0;
 					foreach($stu as $st)
 					{
+						$count++;
+						if($count<=$page) continue;
+						$count2++;
+						if($count2>5) break;
 						if($st['waived_credit']==0.00) $st['waived_credit']='N/A';
 						echo '<tr>
 							<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
@@ -241,11 +270,17 @@
 				{
 					function cmp($a, $b)
 					{
-						return !strcmp($a["cgpa"], $b["cgpa"]);
+						return ($a["cgpa"]< $b["cgpa"]);
 					}
 					usort($stu, "cmp");
+					$count=0;
+					$count2=0;
 					foreach($stu as $st)
 					{
+						$count++;
+						if($count<=$page) continue;
+						$count2++;
+						if($count2>5) break;
 						if($st['waived_credit']==0.00) $st['waived_credit']='N/A';
 						echo '<tr>
 							<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>

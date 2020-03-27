@@ -6,14 +6,14 @@ $last_semester='2018Fall';
 $current_semester='2018Summer';
 if($last_semester<=$current_semester)
 echo 'ok';
-/*
-$s_id=140203020002;
-$marks=30;
-$gpa=0.00;
-$g='F';
+*/
+$s_id=140203020004;
+$marks=70;
+$gpa=3.50;
+$g='A-';
 echo 'Marks:</br>';
 echo marks_encrypt($s_id,$marks).'</br>';
-echo marks_decrypt($s_id,140203030812.5).'</br>';
+echo marks_decrypt($s_id,marks_encrypt($s_id,$marks)).'</br>';
 echo 'Grade:</br>';
 echo grade_encrypt($s_id,$g).'</br>';
 echo grade_decrypt($s_id,'89f276cc01d4af01fa8cee48af8ee962bac42500').'</br>';
