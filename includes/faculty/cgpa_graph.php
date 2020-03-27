@@ -11,7 +11,7 @@
 
 
 
-<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:0px 0px 15px 0px;width:270px;"><i class="fa fa-line-chart"></i> CGPA Statistics</p>
+<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:0px 0px 15px 0px;width:245px;"><i class="fa fa-line-chart"></i> CGPA Statistics</p>
 				
 <p class="w3-right w3-padding w3-margin-0 w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-round-large">
 <?php

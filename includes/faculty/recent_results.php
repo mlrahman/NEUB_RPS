@@ -9,7 +9,7 @@
 	}
 ?>
 
-<p class="w3-bold w3-xlarge w3-text-teal w3-bottombar" style="margin:0px 0px 15px 0px;width:270px;"><i class="fa fa-server"></i> Recent Results</p>
+<p class="w3-bold w3-xlarge w3-text-teal w3-bottombar" style="margin:0px 0px 15px 0px;width:230px;"><i class="fa fa-server"></i> Recent Results</p>
 
 
 <table style="width:100%;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar">

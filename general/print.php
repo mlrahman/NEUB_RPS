@@ -504,6 +504,11 @@
 						
 						
 						';
+						
+						if(count($se_re)==0)
+						{
+							$html=$html.'<p class="w3-center w3-text-red" style="margin: 50px 0px 50px 0px;"><i class="fa fa-warning"></i> No result available</p>';
+						}
 							for($i=get_year($s_id);$i<=Date("Y");$i++)
 							{			
 								if(array_key_exists(('Spring-'.$i),$se_re))

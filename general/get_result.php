@@ -361,13 +361,16 @@
 						</table>
 					</div>
 				</div>
-				<div class="w3-container w3-margin-0 w3-padding-0" style="height:auto;max-height:250px;overflow:auto;">
+				<div class="w3-container w3-margin-0 w3-padding-0" style="height:auto;max-height:240px;overflow:auto;">
 					<!-- Summer 2014 semester result -->
 					<!-- use red in fail -->
 					<!-- use blue in retake -->
 					<!-- use yellow in incomplete -->
 					<?php
-						
+						if(count($se_re)==0)
+						{
+							echo '<p class="w3-center w3-text-red" style="margin: 50px 0px 50px 0px;"><i class="fa fa-warning"></i> No result available</p>';
+						}
 						for($i=get_year($s_id);$i<=Date("Y");$i++)
 						{			
 							if(array_key_exists(('Spring-'.$i),$se_re))

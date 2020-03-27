@@ -107,7 +107,64 @@
 		</div>
 		<!-- Page 2 starts here -->
 		<div id="page2" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
-		
+			
+			<i onclick="page2_topFunction()" id="page2_btn" class="fa fa-chevron-circle-up w3-cursor w3-text-black w3-hover-text-teal w3-xxlarge" title="Go to top" style="display:none;bottom: 95px;right:45px;z-index: 99999;position:fixed;"></i>
+
+			
+			<p class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 7px;">
+				
+				<i class="fa fa-folder-open-o"></i> Program: 
+				<select onchange="reload_dashboard2()" id="program_id2">
+					<option value="-1">All</option>
+					<?php
+						$stmt = $conn->prepare("SELECT * FROM nr_program where nr_dept_id=:dept_id and nr_prog_status='Active' order by nr_prog_id asc");
+						$stmt->bindParam(':dept_id', $_SESSION['faculty_dept_id']);
+						$stmt->execute();
+						$stud_result=$stmt->fetchAll();
+						if(count($stud_result)>0)
+						{
+							for($k=0;$k<count($stud_result);$k++)
+							{
+								$prog_id=$stud_result[$k][0];
+								$prog_title=$stud_result[$k][1];
+								echo '<option value="'.$prog_id.'">'.$prog_title.'</option>';
+							}
+						}
+					?>
+				</select>
+				<script>
+					function reload_dashboard2()
+					{
+						get_total2_search_results(0);
+					}
+				</script>
+			</p>
+						
+			<?php include("../includes/faculty/search_result.php"); ?>
+			
+			<!-- Go to top button-->
+			<script>
+				//Get the button
+				var page2_btn = document.getElementById("page2_btn");
+				var page2=document.getElementById('page2');
+				// When the user scrolls down 20px from the top of the document, show the button
+				page2.onscroll = function() {page2_scrollFunction()};
+
+				function page2_scrollFunction() {
+				  if (page2.scrollTop > 20) {
+					page2_btn.style.display = "block";
+				  } else {
+					page2_btn.style.display = "none";
+				  }
+				}
+
+				// When the user clicks on the button, scroll to the top of the document
+				function page2_topFunction() {
+				  page2.scrollTop = 0;
+				}
+			</script>
+			
+			
 		</div>
 		<!-- Page 3 starts here -->
 		<div id="page3" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
