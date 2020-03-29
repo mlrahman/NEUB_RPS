@@ -33,6 +33,13 @@ function sent_mail($to,$subject,$msg,$website_title,$website_email)
 	}
 }
 
+function get_reference($s_id)
+{
+	//16 digits
+	$ref=$s_id[10].$s_id[11].rand(10,99).DATE("y").DATE("d").DATE("h").DATE("i").DATE("s").rand(10,99);
+	return $ref;
+}
+
 function sent_mail_personal($to,$from,$name,$subject,$msg)
 {
 	try

@@ -15,6 +15,7 @@
 		
 		try{
 			$s_id=$_REQUEST['s_id'];
+			$faculty_id=$_REQUEST['faculty_id'];
 			$stmt = $conn->prepare("select * from nr_student where nr_stud_id=:s_id and nr_stud_status='Active' limit 1 ");
 			$stmt->bindParam(':s_id', $s_id);
 			$stmt->execute();
@@ -64,8 +65,11 @@
 			if($timezone=="")$timezone="N/A";
 			$date=get_current_date();
 			$time=get_current_time();
-			$stmt = $conn->prepare("insert into nr_result_check_transaction values(:s_id,'$vis_ip','$country','$city','$lat','$lng','$timezone','$date','$time','Active') ");
+			$ref=get_reference($s_id);
+			
+			$stmt = $conn->prepare("insert into nr_transcript_print_reference values(:s_id,'Faculty',:f_id,'$vis_ip','$country','$city','$lat','$lng','$timezone','$date','$time','$ref','Active') ");
 			$stmt->bindParam(':s_id', $s_id);
+			$stmt->bindParam(':f_id', $faculty_id);
 			$stmt->execute();
 			
 			
@@ -274,7 +278,7 @@
 			
 			if($waived_credit==0) $waived_credit='N/A';
 				
-				
+			
 			
 			
 			/*******************************************/
@@ -334,11 +338,11 @@
 				<body onclick="document.getElementById(\'content\').innerHTML=\'\';window.close();"  style="font-family: "Century Schoolbook", sans-serif;font-size:12px;"><div id="content">';
 			
 				$html=$html.'
-				<div class="page-header" style="text-align: center">
+				<div class="page-header" style="text-align: center;">
 					<div style="border-bottom: 3px solid black;">
-						<div style="height:86px;">
-							<div style="width:70px;padding:0px;margin:0px;float:left;">
-								<img src="../../images/system/logo.png" alt="NEUB LOGO" style="width:68px;height:80px;">
+						<div style="height:75px;">
+							<div style="width:65px;padding:0px;margin:0px;float:left;">
+								<img src="../../images/system/logo.png" alt="NEUB LOGO" style="width:68px;height:70px;">
 							</div>
 							<div style="width:630px;float:left;padding:0px;margin:0px;">
 								<p style="padding: 0px;margin:10px 0px 5px 0px;font-size:25px;font-weight:bold;margin-left:8px;">NORTH EAST UNIVERSITY BANGLADESH (NEUB)</p>
@@ -349,7 +353,9 @@
 					<p style="color:red;font-size:11px;text-align:justify;margin:4px 0px 0px 0px;padding:0px;">
 						<b>Note:</b> This is an unofficial transcript downloaded from North East University Bangladesh result portal. For any query you can visit the official website, result portal or can contact with the office of the controller of examination. 
 					</p>
-					
+					<p style="color:purple;font-size:12px;text-align:right;margin:0px 0px 0px 0px;">
+						<b>Ref: '.$ref.'</b>
+					</p>
 				</div>
 
 				  <div class="page-footer">

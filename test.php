@@ -1,12 +1,10 @@
 <?php
 
 include("includes/function.php");
+
+//echo get_reference('140203020002');
+
 /*
-$last_semester='2018Fall';
-$current_semester='2018Summer';
-if($last_semester<=$current_semester)
-echo 'ok';
-*/
 $s_id=140203020004;
 $marks=70;
 $gpa=3.50;
@@ -83,8 +81,8 @@ echo 'Password: '.password_encrypt('1234');
 if(isset($_REQUEST['y']))
 	echo '</br>'.$_REQUEST['x'];
 */
+
+
+
+
 ?>
-<form action="test.php">
-<input type="checkbox" name="x">
-<input type="submit" name="y">
-</form>
