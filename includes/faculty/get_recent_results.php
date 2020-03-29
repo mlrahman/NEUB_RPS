@@ -38,9 +38,13 @@
 				$grade=grade_decrypt($s_id,$stud_result[$k][4]);
 				$grade_point=number_format(grade_point_decrypt($s_id,$stud_result[$k][5]),2);
 				$remarks=$stud_result[$k][8];
+				
+				$col1='';
+				if($grade=='F') $col1='w3-text-red';
+				$col2='';
+				if($remarks!="") $col2='w3-text-blue';
 
-
-				echo '<tr>
+				echo '<tr class="'.$col1.'">
 					<td valign="top" class="w3-padding-small">'.$semester.'</td>
 					<td valign="top" class="w3-padding-small">'.$s_id.'</td>
 					<td valign="top" class="w3-padding-small">'.$c_code.'</td>
@@ -48,7 +52,7 @@
 					<td valign="top" class="w3-padding-small">'.$c_credit.'</td>
 					<td valign="top" class="w3-padding-small">'.$grade.'</td>
 					<td valign="top" class="w3-padding-small">'.$grade_point.'</td>
-					<td valign="top" class="w3-padding-small">'.$remarks.'</td>
+					<td valign="top" class="w3-padding-small '.$col2.'">'.$remarks.'</td>
 				</tr>';
 
 			}
@@ -56,6 +60,6 @@
 	}
 	else
 	{
-		echo '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
+		echo '<i class="fa fa-warning w3-text-red" title="Error occurred!!"> Error</i>';
 	}
 ?>

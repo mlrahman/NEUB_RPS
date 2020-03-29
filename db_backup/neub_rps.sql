@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 25, 2020 at 01:30 PM
+-- Generation Time: Mar 29, 2020 at 02:26 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -125,7 +125,7 @@ CREATE TABLE `nr_faculty` (
 --
 
 INSERT INTO `nr_faculty` (`nr_faculty_id`, `nr_faculty_name`, `nr_faculty_designation`, `nr_faculty_join_date`, `nr_faculty_resign_date`, `nr_faculty_type`, `nr_dept_id`, `nr_faculty_password`, `nr_faculty_email`, `nr_faculty_cell_no`, `nr_faculty_photo`, `nr_faculty_status`, `nr_faculty_two_factor`, `nr_faculty_gender`) VALUES
-(1, 'Noushad Sojib', 'Assistant Professor', '2016-04-20', '', 'Permanent', 1, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'mlrahman@neub.edu.bd', '', '', 'Active', 1, 'Male');
+(1, 'Noushad Sojib', 'Assistant Professor', '2016-04-20', '', 'Permanent', 1, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'mlrahman@neub.edu.bd', '01739213886', '158525084315852508436143.jpg', 'Active', 0, 'Male');
 
 -- --------------------------------------------------------
 
@@ -232,7 +232,66 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '02:19 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '08:02 PM', 'Active'),
 (1, '192.168.0.100', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-24', '08:10 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '03:09 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '03:09 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-26', '03:31 PM', 'Active'),
+(1, '192.168.0.101', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-26', '03:37 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-26', '06:20 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-26', '10:24 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '12:36 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '12:59 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '01:02 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '01:30 AM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '06:00 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '06:36 PM', 'Active'),
+(1, '192.168.0.102', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '10:30 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '01:39 PM', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nr_faculty_result_check_transaction`
+--
+
+CREATE TABLE `nr_faculty_result_check_transaction` (
+  `nr_stud_id` bigint(20) NOT NULL,
+  `nr_faculty_id` bigint(20) NOT NULL,
+  `nr_rechtr_ip_address` varchar(100) NOT NULL,
+  `nr_rechtr_country` varchar(50) NOT NULL,
+  `nr_rechtr_city` varchar(50) NOT NULL,
+  `nr_rechtr_lat` varchar(100) NOT NULL,
+  `nr_rechtr_lng` varchar(100) NOT NULL,
+  `nr_rechtr_timezone` varchar(100) NOT NULL,
+  `nr_rechtr_date` varchar(100) NOT NULL,
+  `nr_rechtr_time` varchar(100) NOT NULL,
+  `nr_rechtr_status` enum('Active','Inactive') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Dumping data for table `nr_faculty_result_check_transaction`
+--
+
+INSERT INTO `nr_faculty_result_check_transaction` (`nr_stud_id`, `nr_faculty_id`, `nr_rechtr_ip_address`, `nr_rechtr_country`, `nr_rechtr_city`, `nr_rechtr_lat`, `nr_rechtr_lng`, `nr_rechtr_timezone`, `nr_rechtr_date`, `nr_rechtr_time`, `nr_rechtr_status`) VALUES
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '05:29 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '05:30 PM', 'Active'),
+(140203020006, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '05:31 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '05:32 PM', 'Active'),
+(140203020006, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '05:36 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '05:36 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '05:37 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '05:38 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '05:57 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '05:59 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '05:59 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '06:03 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '06:07 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '06:09 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '06:15 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '06:16 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '06:18 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '06:20 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '06:22 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '06:25 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '06:25 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -253,7 +312,8 @@ CREATE TABLE `nr_program` (
 --
 
 INSERT INTO `nr_program` (`nr_prog_id`, `nr_prog_title`, `nr_prog_code`, `nr_dept_id`, `nr_prog_status`) VALUES
-(1, 'B.Sc. (Engg.) in CSE', 2, 1, 'Active');
+(1, 'B.Sc. (Engg.) in CSE', 2, 1, 'Active'),
+(2, 'M.Sc. (Engg.) in CSE', 3, 1, 'Active');
 
 -- --------------------------------------------------------
 
@@ -275,7 +335,8 @@ CREATE TABLE `nr_program_credit` (
 --
 
 INSERT INTO `nr_program_credit` (`nr_prcr_id`, `nr_prog_id`, `nr_prcr_total`, `nr_prcr_date`, `nr_prcr_ex_date`, `nr_prcr_status`) VALUES
-(1, 1, 160, '2012-01-01', '', 'Active');
+(1, 1, 160, '2012-01-01', '', 'Active'),
+(2, 2, 36, '2020-03-26', '', 'Active');
 
 -- --------------------------------------------------------
 
@@ -304,7 +365,7 @@ CREATE TABLE `nr_result` (
 --
 
 INSERT INTO `nr_result` (`nr_result_id`, `nr_stud_id`, `nr_course_id`, `nr_result_marks`, `nr_result_grade`, `nr_result_grade_point`, `nr_result_semester`, `nr_result_year`, `nr_result_remarks`, `nr_result_status`, `nr_prog_id`, `nr_result_publish_date`, `nr_faculty_id`) VALUES
-(1, 140203020002, 3, 140203029312.5, '89f276cc01d4af01fa8cee48af8ee962bac42500', 140203026062.5, 'Fall', 2016, '', 'Active', 1, '2020-01-27', 1),
+(1, 140203020002, 3, 140203029312.5, '89f276cc01d4af01fa8cee48af8ee962bac42500', 140203026062.5, 'Fall', 2016, 'MakeUp_MS', 'Active', 1, '2020-01-27', 1),
 (2, 140203020002, 4, 140203029812.5, '500910d02d287a8c898c406ea348043c050d31ca', 140203026312.5, 'Fall', 2015, '', 'Active', 1, '2020-01-27', 1),
 (3, 140203020002, 1, 140203022812.5, '264c6dfec271ba9a2a1526fa29b7754ef7eb0fd8', 140203022812.5, 'Spring', 2015, '', 'Active', 1, '2020-01-29', 1),
 (4, 140203020002, 2, 140203028812.5, '5177875dc921885677fcc6e571bca2fb1146eaaa', 140203025812.5, 'Spring', 2015, '', 'Active', 1, '2020-01-29', 1),
@@ -314,7 +375,8 @@ INSERT INTO `nr_result` (`nr_result_id`, `nr_stud_id`, `nr_course_id`, `nr_resul
 (8, 140203020002, 3, 140203030812.5, '1858411229d78def5b8862e672cb210208e69afd', 140203026812.5, 'Summer', 2015, '', 'Active', 1, '2020-01-30', 1),
 (9, 140203020002, 5, 140203026812.5, 'd7f53c387a852879c393673564ff1bd45666d0ab', 140203024812.5, 'Summer', 2016, '', 'Active', 1, '2020-01-30', 1),
 (10, 140203020002, 7, 140203022812.5, '264c6dfec271ba9a2a1526fa29b7754ef7eb0fd8', 140203022812.5, 'Summer', 2014, '', 'Active', 1, '2020-01-30', 1),
-(11, 140203020002, 2, 140203025812.5, '264c6dfec271ba9a2a1526fa29b7754ef7eb0fd8', 140203022812.5, 'Summer', 2015, '', 'Active', 1, '2020-01-30', 1);
+(11, 140203020002, 2, 140203025812.5, '264c6dfec271ba9a2a1526fa29b7754ef7eb0fd8', 140203022812.5, 'Summer', 2015, '', 'Active', 1, '2020-01-30', 1),
+(12, 140203020004, 1, 140203029814.5, '4ebc27a8251909faa082444ff8bfb1b68ab051e1', 140203026314.5, 'Spring', 2015, '', 'Active', 1, '2020-03-27', 1);
 
 -- --------------------------------------------------------
 
@@ -838,7 +900,56 @@ INSERT INTO `nr_result_check_transaction` (`nr_stud_id`, `nr_rechtr_ip_address`,
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '05:46 PM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '06:24 PM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '06:25 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '06:25 PM', 'Active');
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '06:25 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '08:57 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-25', '08:58 PM', 'Active'),
+(140203020002, '192.168.0.101', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-26', '03:39 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-26', '05:54 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-26', '05:55 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-26', '07:09 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-26', '07:15 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-26', '07:15 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-26', '07:17 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-26', '07:17 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-26', '07:19 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-26', '07:20 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-26', '10:09 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '05:17 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '05:32 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '05:33 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '05:35 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '05:37 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '05:39 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '05:41 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '05:44 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '05:45 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '05:48 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '05:51 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '05:51 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '05:52 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '05:53 PM', 'Active');
+INSERT INTO `nr_result_check_transaction` (`nr_stud_id`, `nr_rechtr_ip_address`, `nr_rechtr_country`, `nr_rechtr_city`, `nr_rechtr_lat`, `nr_rechtr_lng`, `nr_rechtr_timezone`, `nr_rechtr_date`, `nr_rechtr_time`, `nr_rechtr_status`) VALUES
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '05:54 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '05:55 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '05:56 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '06:44 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '07:32 PM', 'Active'),
+(140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '10:12 PM', 'Active'),
+(140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '10:12 PM', 'Active'),
+(140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '10:15 PM', 'Active'),
+(140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '10:16 PM', 'Active'),
+(140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '10:16 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '10:16 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '10:17 PM', 'Active'),
+(140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '10:19 PM', 'Active'),
+(140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '10:19 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '10:19 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '10:19 PM', 'Active'),
+(140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '10:20 PM', 'Active'),
+(140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-27', '10:20 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '06:18 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '06:20 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '06:22 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -864,7 +975,12 @@ CREATE TABLE `nr_student` (
 --
 
 INSERT INTO `nr_student` (`nr_stud_id`, `nr_stud_name`, `nr_stud_dob`, `nr_stud_gender`, `nr_stud_email`, `nr_stud_cell_no`, `nr_stud_photo`, `nr_prog_id`, `nr_prcr_id`, `nr_stud_status`) VALUES
-(140203020002, 'Mir Lutfur Rahman', '1996-07-02', 'Male', 'mlrahman@gmail.com', '', '', 1, 1, 'Active');
+(140203020002, 'Mir Lutfur Rahman', '1996-07-02', 'Male', 'mlrahman@gmail.com', '', '', 1, 1, 'Active'),
+(140203020003, 'Rocksar Sultana Smriti', '1990-07-02', 'Female', '', '', '', 1, 1, 'Active'),
+(140203020004, 'Pranta Sarkar', '1990-07-02', 'Male', 'psarkar@gmail.com', '', '', 1, 1, 'Active'),
+(140203020005, 'Topu Dash Roy', '1994-12-31', 'Male', 'topucse05@gmail.com', '', '', 1, 1, 'Active'),
+(140203020006, 'Shamima Khatun', '1990-07-02', 'Female', '', '', '', 1, 1, 'Active'),
+(140203020009, 'Nusrat Hoque', '1990-07-02', 'Female', '', '', '', 1, 1, 'Active');
 
 -- --------------------------------------------------------
 
@@ -879,6 +995,13 @@ CREATE TABLE `nr_student_waived_credit` (
   `nr_stwacr_date` varchar(20) NOT NULL,
   `nr_stwacr_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Dumping data for table `nr_student_waived_credit`
+--
+
+INSERT INTO `nr_student_waived_credit` (`nr_stwacr_id`, `nr_stud_id`, `nr_course_id`, `nr_stwacr_date`, `nr_stwacr_status`) VALUES
+(3, 140203020009, 1, '2020-01-01', 'Active');
 
 -- --------------------------------------------------------
 
@@ -949,6 +1072,13 @@ ALTER TABLE `nr_faculty_link_token`
 -- Indexes for table `nr_faculty_login_transaction`
 --
 ALTER TABLE `nr_faculty_login_transaction`
+  ADD KEY `nr_faculty_id` (`nr_faculty_id`);
+
+--
+-- Indexes for table `nr_faculty_result_check_transaction`
+--
+ALTER TABLE `nr_faculty_result_check_transaction`
+  ADD KEY `nr_stud_id` (`nr_stud_id`),
   ADD KEY `nr_faculty_id` (`nr_faculty_id`);
 
 --
@@ -1036,25 +1166,25 @@ ALTER TABLE `nr_faculty`
 -- AUTO_INCREMENT for table `nr_program`
 --
 ALTER TABLE `nr_program`
-  MODIFY `nr_prog_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `nr_prog_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `nr_program_credit`
 --
 ALTER TABLE `nr_program_credit`
-  MODIFY `nr_prcr_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `nr_prcr_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `nr_result`
 --
 ALTER TABLE `nr_result`
-  MODIFY `nr_result_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `nr_result_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `nr_student_waived_credit`
 --
 ALTER TABLE `nr_student_waived_credit`
-  MODIFY `nr_stwacr_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `nr_stwacr_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `nr_system_component`
@@ -1089,6 +1219,13 @@ ALTER TABLE `nr_faculty_link_token`
 --
 ALTER TABLE `nr_faculty_login_transaction`
   ADD CONSTRAINT `nr_faculty_login_transaction_ibfk_1` FOREIGN KEY (`nr_faculty_id`) REFERENCES `nr_faculty` (`nr_faculty_id`);
+
+--
+-- Constraints for table `nr_faculty_result_check_transaction`
+--
+ALTER TABLE `nr_faculty_result_check_transaction`
+  ADD CONSTRAINT `nr_faculty_result_check_transaction_ibfk_1` FOREIGN KEY (`nr_stud_id`) REFERENCES `nr_student` (`nr_stud_id`),
+  ADD CONSTRAINT `nr_faculty_result_check_transaction_ibfk_2` FOREIGN KEY (`nr_faculty_id`) REFERENCES `nr_faculty` (`nr_faculty_id`);
 
 --
 -- Constraints for table `nr_program`

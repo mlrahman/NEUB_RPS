@@ -39,7 +39,8 @@
 	{
 		//return 0;
 		var prog_id=document.getElementById('program_id').value;
-		
+		document.getElementById("recent_results_loading").innerHTML='<td colspan="8"><p class="w3-center" style="margin: 10px 0px 10px 0px;"><i class="fa fa-refresh w3-spin"></i> Please wait!! while loading...</p></td>';
+			
 		var total_results = new XMLHttpRequest();
 		total_results.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
@@ -68,7 +69,6 @@
 			var prog_id=document.getElementById('program_id').value;
 		
 			document.getElementById("show_more_btn").style.display='none';
-			document.getElementById("recent_results_loading").innerHTML='<td colspan="8"><p class="w3-center" style="margin: 10px 0px 10px 0px;"><i class="fa fa-refresh w3-spin"></i> Please wait!! while loading...</p></td>';
 			
 			var recent_results = new XMLHttpRequest();
 			recent_results.onreadystatechange = function() {
@@ -95,6 +95,7 @@
 		}
 		else
 		{
+			document.getElementById("recent_results_loading").innerHTML='';
 			document.getElementById('recent_result_tables').innerHTML='<tr><td colspan="8"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
 			document.getElementById("show_more_btn").style.display='none';
 			

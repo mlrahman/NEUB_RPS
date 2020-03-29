@@ -25,7 +25,7 @@
 			<i onclick="page1_topFunction()" id="page1_btn" class="fa fa-chevron-circle-up w3-cursor w3-text-black w3-hover-text-teal w3-xxlarge" title="Go to top" style="display:none;bottom: 95px;right:45px;z-index: 99999;position:fixed;"></i>
 
 			
-			<p class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 7px;">
+			<p class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 7px;z-index: 99999;">
 				
 				<i class="fa fa-folder-open-o"></i> Program: 
 				<select onchange="reload_dashboard()" id="program_id">
@@ -111,7 +111,7 @@
 			<i onclick="page2_topFunction()" id="page2_btn" class="fa fa-chevron-circle-up w3-cursor w3-text-black w3-hover-text-teal w3-xxlarge" title="Go to top" style="display:none;bottom: 95px;right:45px;z-index: 99999;position:fixed;"></i>
 
 			
-			<p class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 7px;">
+			<p class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 7px;z-index: 99999;">
 				
 				<i class="fa fa-folder-open-o"></i> Program: 
 				<select onchange="reload_dashboard2()" id="program_id2">
@@ -136,6 +136,8 @@
 					function reload_dashboard2()
 					{
 						get_total2_search_results(0);
+						get_suggestions();
+						close_search_box();
 					}
 				</script>
 			</p>
