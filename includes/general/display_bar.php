@@ -196,4 +196,26 @@
 		}
 		
 	}
+	
+	function search_result_button(id)
+	{
+		for(var i=1;i<=5;i++)
+		{
+			if(i!=parseInt(id))
+			{
+				document.getElementById('se_re_div_'+i).style.display='none';
+				//console.log(document.getElementById('se_re_btn_'+i).classList);
+				if(document.getElementById('se_re_btn_'+i).classList.contains("w3-teal"))
+					document.getElementById('se_re_btn_'+i).classList.remove("w3-teal");
+				if(document.getElementById('se_re_btn_'+i).classList.contains("w3-border-teal"))
+					document.getElementById('se_re_btn_'+i).classList.remove("w3-border-teal");
+				document.getElementById('se_re_btn_'+i).classList.add("w3-white");
+			}
+		}
+		document.getElementById('se_re_btn_'+id).classList.add("w3-teal");
+		document.getElementById('se_re_btn_'+id).classList.add("w3-border-teal");
+		if(document.getElementById('se_re_btn_'+id).classList.contains("w3-white"))
+			document.getElementById('se_re_btn_'+id).classList.remove("w3-white");
+		document.getElementById('se_re_div_'+id).style.display='block';
+	}
 </script>

@@ -97,7 +97,7 @@ Email: mlrahman@neub.edu.bd
 		
 		<div id="two_factor" class="w3-modal">
 			<!--two factor window will be here -->
-			<div class=" w3-modal-content w3-round-large w3-animate-bottom w3-card-4 w3-leftbar w3-rightbar w3-bottombar w3-topbar w3-border-white">
+			<div class=" w3-modal-content w3-round-large w3-animate-bottom w3-card-4 w3-leftbar w3-rightbar w3-bottombar w3-topbar w3-border-white" style="margin-top:50px;">
 				<header class="w3-container w3-black w3-bottombar w3-border-teal w3-round-top-large"> 
 					<p class="w3-xxlarge" style="margin:5px 0px;">Two Factor Authentication</p>
 				</header>

@@ -81,6 +81,10 @@
 			$stud_result=$stmt->fetchAll();
 			$cg=array();
 			$se_re=array();
+			$fail_re=array();
+			$pass_re=array();
+			$fail_credit=0;
+			$pass_credit=0;
 			for($i = 0; $i < count($stud_result); $i++) {
 				
 				$stud_result_id=$stud_result[$i][0];
@@ -105,6 +109,50 @@
 				$abc=array('course_code'=>$stud_course_code,'course_title'=>$stud_course_title,'course_credit'=>$stud_course_credit,'grade'=>$stud_grade,'marks'=>$stud_marks,'grade_point'=>$stud_grade_point,'semester'=>$stud_semester,'year'=>$stud_year,'remarks'=>$stud_remarks);
 				
 						
+				//storing pass course only
+				if(array_key_exists($stud_course_code,$pass_re))
+				{
+					if($stud_grade!='F')
+					{
+						if($stud_grade_point>$pass_re[$stud_course_code]['grade_point'])
+						{
+							$pass_re[$stud_course_code]=$abc;
+						}
+					}
+					
+				}
+				else
+				{
+					if($stud_grade!='F')
+					{
+						$pass_re[$stud_course_code]=$abc;
+						$pass_credit+=$stud_course_credit;
+					}
+				}
+				
+				
+				//storing fail course only
+				if(array_key_exists($stud_course_code,$fail_re))
+				{
+					if($stud_grade!='F')
+					{
+						unset($fail_re[$stud_course_code]);
+						$fail_credit-=$stud_course_credit;
+					}
+					else
+					{
+						$fail_re[$stud_course_code]['semester']=$stud_semester;
+						$fail_re[$stud_course_code]['year']=$stud_year;
+					}
+				}
+				else
+				{
+					if($stud_grade=='F')
+					{
+						$fail_re[$stud_course_code]=$abc;
+						$fail_credit+=$stud_course_credit;
+					}
+				}
 				
 				
 				//Storing data for showing in tables
@@ -361,7 +409,14 @@
 						</table>
 					</div>
 				</div>
-				<div class="w3-container w3-margin-0 w3-padding-0" style="height:auto;max-height:240px;overflow:auto;">
+				<button onclick="search_result_button(1)" id="se_re_btn_1" class="w3-button w3-teal w3-hover-teal w3-padding-small w3-border w3-border-teal w3-medium"><i class="fa fa-server"></i> All Result</button>
+				<button onclick="search_result_button(2)" id="se_re_btn_2" class="w3-button w3-white w3-hover-teal w3-padding-small w3-border w3-medium"><i class="fa fa-sticky-note-o"></i> Fail Courses</button>
+				<button onclick="search_result_button(3)" id="se_re_btn_3" class="w3-button w3-white w3-hover-teal w3-padding-small w3-border w3-medium"><i class="fa fa-check-square-o"></i> Pass Courses</button>
+				<button onclick="search_result_button(4)" id="se_re_btn_4" class="w3-button w3-white w3-hover-teal w3-padding-small w3-border w3-medium"><i class="fa fa-file-text-o"></i> Drop Courses</button>
+				<button onclick="search_result_button(5)" id="se_re_btn_5" class="w3-button w3-white w3-hover-teal w3-padding-small w3-border w3-medium"><i class="	fa fa-ticket"></i> Waived Courses</button>
+				
+				
+				<div id="se_re_div_1" class="w3-container w3-margin-0 w3-padding-0" style="height: 270px;overflow:auto;">
 					<!-- Summer 2014 semester result -->
 					<!-- use red in fail -->
 					<!-- use blue in retake -->
@@ -389,7 +444,7 @@
 								
 					?>
 								<button title="Click here to view details" onclick="show_result_div('<?php echo 'Spring-'.$i; ?>')" class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:8px 0px 5px 0px;"><i class="fa fa-plus-square" id="<?php echo 'Spring-'.$i; ?>_icon" ></i> Semester Result: <?php echo 'Spring-'.$i; ?></button>
-								<table id="<?php echo 'Spring-'.$i; ?>" style="width:90%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
+								<table id="<?php echo 'Spring-'.$i; ?>" style="width:96%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
 									<tr class="w3-black w3-bold w3-padding-small">
 										<td colspan="2" valign="top" class="w3-padding-small">Semester: <?php echo 'Spring-'.$i; ?></td>
 										<td colspan="2" valign="top" class="w3-padding-small">CGPA: <?php if($t_c==0.0){ echo number_format(0.0,2); } else{ echo number_format(($t_g/$t_c),2); } ?></td>
@@ -443,7 +498,7 @@
 								
 					?>
 								<button title="Click here to view details" onclick="show_result_div('<?php echo 'Summer-'.$i; ?>')" class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:8px 0px 5px 0px;"><i class="fa fa-plus-square" id="<?php echo 'Summer-'.$i; ?>_icon" ></i> Semester Result: <?php echo 'Summer-'.$i; ?></button>
-								<table id="<?php echo 'Summer-'.$i; ?>" style="width:90%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
+								<table id="<?php echo 'Summer-'.$i; ?>" style="width:96%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
 									<tr class="w3-black w3-bold w3-padding-small">
 										<td colspan="2" valign="top" class="w3-padding-small">Semester: <?php echo 'Summer-'.$i; ?></td>
 										<td colspan="2" valign="top" class="w3-padding-small">CGPA: <?php if($t_c==0.0){ echo number_format(0.0,2); } else{ echo number_format(($t_g/$t_c),2); } ?></td>
@@ -498,7 +553,7 @@
 								
 					?>
 								<button title="Click here to view details" onclick="show_result_div('<?php echo 'Fall-'.$i; ?>')" class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:8px 0px 5px 0px;"><i class="fa fa-plus-square" id="<?php echo 'Fall-'.$i; ?>_icon" ></i> Semester Result: <?php echo 'Fall-'.$i; ?></button>
-								<table id="<?php echo 'Fall-'.$i; ?>" style="width:90%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
+								<table id="<?php echo 'Fall-'.$i; ?>" style="width:96%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
 									<tr class="w3-black w3-bold w3-padding-small">
 										<td colspan="2" valign="top" class="w3-padding-small">Semester: <?php echo 'Fall-'.$i; ?></td>
 										<td colspan="2" valign="top" class="w3-padding-small">CGPA: <?php if($t_c==0.0){ echo number_format(0.0,2); } else{ echo number_format(($t_g/$t_c),2); } ?></td>
@@ -537,21 +592,134 @@
 								
 							}
 						}
+					?>
+					
+				</div>
+				<div id="se_re_div_2" class="w3-container w3-margin-0 w3-padding-0" style="display:none;height: 270px;overflow:auto;">
+					<?php
+						//show failed courses there
+						if(count($fail_re)==0)
+						{
+							echo '<p class="w3-center w3-text-red" style="margin: 50px 0px 50px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
+						}
+						if(count($fail_re)>0)
+						{
+							foreach($fail_re as $cge)
+							{
+								if(array_key_exists($cge['course_code'],$pass_re))
+								{
+									$ww=$cge['course_code'];
+									$fail_credit-=$cge['course_credit'];
+									unset($fail_re[$ww]);
+								}
+							}
+					?>
+							<table style="width:96%;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
+								<tr class="w3-black w3-bold w3-padding-small">
+									<td colspan="2" valign="top" class="w3-padding-small">Fail Courses</td>
+									<td colspan="2" class="w3-padding-small" valign="top">Credit: <?php echo number_format($fail_credit,2); ?></td>
+								</tr>
+								<tr class="w3-teal w3-bold">
+									<td valign="top" style="width:20%;" class="w3-padding-small">Course Code</td>
+									<td valign="top" style="width:45%;" class="w3-padding-small">Course Title</td>
+									<td valign="top" style="width:15%;" class="w3-padding-small">Credit</td>
+									<td valign="top" style="width:20%;" class="w3-padding-small">Semester</td>
+								</tr>
+								<?php
+									foreach($fail_re as $cge)
+									{
+								?>
+										<tr>
+											<td valign="top" class="w3-padding-small"><?php echo $cge['course_code']; ?></td>
+											<td valign="top" class="w3-padding-small"><?php echo $cge['course_title']; ?></td>
+											<td valign="top" class="w3-padding-small"><?php echo number_format($cge['course_credit'],2); ?></td>
+											<td valign="top" class="w3-padding-small"><?php echo $cge['semester'].'-'.$cge['year']; ?></td>
+										</tr>
+								
+								<?php
+									}
+								?>
+							</table>
+					<?php	
+						}
 						
+					?>
+					
+				</div>
+				<div id="se_re_div_3" class="w3-container w3-margin-0 w3-padding-0" style="display:none;height: 270px;overflow:auto;">
+					<?php
+						//show passed courses there
+						if(count($pass_re)==0)
+						{
+							echo '<p class="w3-center w3-text-red" style="margin: 50px 0px 50px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
+						}
+						if(count($pass_re)>0)
+						{
+							
+					?>
+							<table style="width:96%;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
+								<tr class="w3-black w3-bold w3-padding-small">
+									<td colspan="4" valign="top" class="w3-padding-small">Pass Courses</td>
+									<td colspan="3" class="w3-padding-small" valign="top">Credit: <?php echo number_format($pass_credit,2); ?></td>
+								</tr>
+								<tr class="w3-teal w3-bold">
+									<td valign="top" style="width:13%;" class="w3-padding-small">Course Code</td>
+									<td valign="top" style="width:33%;" class="w3-padding-small">Course Title</td>
+									<td valign="top" style="width:9%;" class="w3-padding-small">Credit</td>
+									<td valign="top" style="width:9%;" class="w3-padding-small">Grade</td>
+									<td valign="top" style="width:9%;" class="w3-padding-small">Grade Point</td>
+									<td valign="top" style="width:18%;" class="w3-padding-small">Semester</td>
+									<td valign="top" style="width:9%;" class="w3-padding-small">Remarks</td>
+								</tr>
+								<?php
+									foreach($pass_re as $cge)
+									{
+								?>
+										<tr>
+											<td valign="top" class="w3-padding-small"><?php echo $cge['course_code']; ?></td>
+											<td valign="top" class="w3-padding-small"><?php echo $cge['course_title']; ?></td>
+											<td valign="top" class="w3-padding-small"><?php echo number_format($cge['course_credit'],2); ?></td>
+											<td valign="top" class="w3-padding-small"><?php echo $cge['grade']; ?></td>
+											<td valign="top" class="w3-padding-small"><?php echo number_format($cge['grade_point'],2); ?></td>
+											<td valign="top" class="w3-padding-small"><?php echo $cge['semester'].'-'.$cge['year']; ?></td>
+											<td valign="top" class="w3-padding-small"><?php echo $cge['remarks']; ?></td>
+										</tr>
+								
+								<?php
+									}
+								?>
+							</table>
+					<?php	
+						}
+						
+					?>
+				</div>
+				<div id="se_re_div_4" class="w3-container w3-margin-0 w3-padding-0" style="display:none;height: 270px;overflow:auto;">
+					<?php
+						//Drop courses there
+						
+					
+					?>
+				</div>
+				<div id="se_re_div_5" class="w3-container w3-margin-0 w3-padding-0" style="display:none;height: 270px;overflow:auto;">
+					<?php
 						//show waived courses there
+						if(count($ra_w)==0)
+						{
+							echo '<p class="w3-center w3-text-red" style="margin: 50px 0px 50px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
+						}
 						if(count($ra_w)>0)
 						{
 					?>
-							<button title="Click here to view details" onclick="show_result_div('course_waived')" class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:8px 0px 5px 0px;"><i class="fa fa-plus-square" id="course_waived_icon" ></i> Waived Course List</button>
-							<table id="course_waived" style="width:90%;display:none;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
+							<table style="width:96%;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
 								<tr class="w3-black w3-bold w3-padding-small">
 									<td colspan="2" valign="top" class="w3-padding-small">Waived Courses</td>
 									<td class="w3-padding-small" valign="top">Credit: <?php echo number_format($waived_credit,2); ?></td>
 								</tr>
 								<tr class="w3-teal w3-bold">
-									<td valign="top" style="width:150px;max-width:25%;" class="w3-padding-small">Course Code</td>
-									<td valign="top" style="width:400px;max-width:45%;" class="w3-padding-small">Course Title</td>
-									<td valign="top" style="width:200px;max-width:30%;" class="w3-padding-small">Credit</td>
+									<td valign="top" style="width:25%;" class="w3-padding-small">Course Code</td>
+									<td valign="top" style="width:45%;" class="w3-padding-small">Course Title</td>
+									<td valign="top" style="width:30%;" class="w3-padding-small">Credit</td>
 								</tr>
 								<?php
 									foreach($ra_w as $cge)
@@ -570,9 +738,7 @@
 					<?php	
 						}
 						
-					
 					?>
-					
 				</div>
 			</div>
 		</div>
