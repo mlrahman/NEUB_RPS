@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2020 at 06:21 PM
+-- Generation Time: Mar 29, 2020 at 06:45 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -96,6 +96,22 @@ CREATE TABLE `nr_department` (
 
 INSERT INTO `nr_department` (`nr_dept_id`, `nr_dept_title`, `nr_dept_code`, `nr_dept_status`) VALUES
 (1, 'Computer Science & Engineering', 3, 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nr_drop`
+--
+
+CREATE TABLE `nr_drop` (
+  `nr_drop_id` bigint(20) NOT NULL,
+  `nr_prcr_id` bigint(20) NOT NULL,
+  `nr_prog_id` bigint(20) NOT NULL,
+  `nr_course_id` bigint(20) NOT NULL,
+  `nr_drop_semester` enum('1st','2nd','3rd','4th','5th','6th','7th','8th','9th','10th','11th','12th') NOT NULL,
+  `nr_drop_remarks` varchar(100) NOT NULL,
+  `nr_drop_status` enum('Active','Inactive') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1171,6 +1187,15 @@ ALTER TABLE `nr_department`
   ADD PRIMARY KEY (`nr_dept_id`);
 
 --
+-- Indexes for table `nr_drop`
+--
+ALTER TABLE `nr_drop`
+  ADD PRIMARY KEY (`nr_drop_id`),
+  ADD KEY `nr_prcr_id` (`nr_prcr_id`),
+  ADD KEY `nr_prog_id` (`nr_prog_id`),
+  ADD KEY `nr_course_id` (`nr_course_id`);
+
+--
 -- Indexes for table `nr_faculty`
 --
 ALTER TABLE `nr_faculty`
@@ -1279,6 +1304,12 @@ ALTER TABLE `nr_department`
   MODIFY `nr_dept_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `nr_drop`
+--
+ALTER TABLE `nr_drop`
+  MODIFY `nr_drop_id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `nr_faculty`
 --
 ALTER TABLE `nr_faculty`
@@ -1323,6 +1354,14 @@ ALTER TABLE `nr_system_component`
 --
 ALTER TABLE `nr_course`
   ADD CONSTRAINT `nr_course_ibfk_1` FOREIGN KEY (`nr_prog_id`) REFERENCES `nr_program` (`nr_prog_id`);
+
+--
+-- Constraints for table `nr_drop`
+--
+ALTER TABLE `nr_drop`
+  ADD CONSTRAINT `nr_drop_ibfk_1` FOREIGN KEY (`nr_prcr_id`) REFERENCES `nr_program_credit` (`nr_prcr_id`),
+  ADD CONSTRAINT `nr_drop_ibfk_2` FOREIGN KEY (`nr_prog_id`) REFERENCES `nr_program` (`nr_prog_id`),
+  ADD CONSTRAINT `nr_drop_ibfk_3` FOREIGN KEY (`nr_course_id`) REFERENCES `nr_course` (`nr_course_id`);
 
 --
 -- Constraints for table `nr_faculty`
