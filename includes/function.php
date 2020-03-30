@@ -156,6 +156,19 @@ function get_session($s_id)
 	return $semester.'-'.$year;
 }
 
+function get_session_semester($s_id)
+{
+	if($s_id[3]=='1')
+		$semester='Spring';
+	else if($s_id[3]=='2')
+		$semester='Summer';
+	else if($s_id[3]=='3')
+		$semester='Fall';
+	return $semester;
+}
+
+
+
 function get_year($s_id)
 {
 	$year='20'.$s_id[0].$s_id[1];

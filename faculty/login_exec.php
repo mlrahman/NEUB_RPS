@@ -32,9 +32,10 @@
 					if($result[0][4]=='')
 					{
 						$faculty_id=$result[0][0];
+						$f_name=$result[0][1];
 						//Check details will insert into transaction
 						$vis_ip = getVisIPAddr();
-						$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
+						$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=".$vis_ip));
 						if($vis_ip=="")$vis_ip="N/A";
 						$country=$ipdat->geoplugin_countryName;
 						if($country=="")$country="N/A";
@@ -48,11 +49,48 @@
 						if($timezone=="")$timezone="N/A";
 						$date=get_current_date();
 						$time=get_current_time();
+						
+						
+						
+						
+						//checking for new login
+						$stmt = $conn->prepare("select * from nr_faculty_login_transaction where nr_faculty_id=:f_id and nr_falotr_country='$country' and nr_falotr_city='$city' and nr_falotr_lat='$lat' and nr_falotr_lng='$lng' and nr_falotr_ip_address='$vis_ip' ");
+						$stmt->bindParam(':f_id', $faculty_id);
+						$stmt->execute();
+						$result2 = $stmt->fetchAll();
+						if(count($result2)==0)
+						{
+							$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
+							$stmt->execute();
+							$result4 = $stmt->fetchAll();
+							
+							if(count($result4)==0)
+							{
+								echo 'System not ready';
+								die();
+							}
+							$title=$result4[0][2];
+							$email=$result[0][8];
+							$contact_email=$result4[0][9];
+							//sending new login notification to the user
+							$msg="Dear ".$f_name.", We detect a new login into your account in <b>".$title."</b>. Please check the following details:  <b><p>IP Address: ".$vis_ip."</p><p>Country: ".$country."</p><p>City: ".$city."</p><p>Date: ".get_date($date)."</p><p>Time: ".$time."</p></b><p>Inform the admin if you don't know about this sign in. You can contact at <a href='mailto:".$contact_email."'>".$contact_email."</a></p>";
+							$message = '<html><body>';
+							$message .= '<h1>New Sign In Notification from - '.$title.'</h1><p>  </p>';
+							$message .= '<p><b>Message Details:</b></p>';
+							$message .= '<p>'.$msg.'</p></body></html>';
+							
+							
+							sent_mail($email,$title.' - New Sign In Notification',$message,$title,$contact_email);
+							
+						}							
+						
+						
+						//inserting login record
 						$stmt = $conn->prepare("insert into nr_faculty_login_transaction values(:f_id,'$vis_ip','$country','$city','$lat','$lng','$timezone','$date','$time','Active') ");
 						$stmt->bindParam(':f_id', $faculty_id);
 						$stmt->execute();
 						
-						$f_name=$result[0][1];
+						
 						$_SESSION['faculty_name']=$f_name;
 						$_SESSION['faculty_id']=$faculty_id;
 						$_SESSION['faculty_email']=$result[0][8];

@@ -44,7 +44,7 @@
 			
 			//Check details will insert into transaction
 			$vis_ip = getVisIPAddr();
-			$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
+			$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=".$vis_ip));
 			if($vis_ip=="")$vis_ip="N/A";
 			$country=$ipdat->geoplugin_countryName;
 			if($country=="")$country="N/A";

@@ -27,7 +27,7 @@
 			
 			//Check details will insert into transaction
 			$vis_ip = getVisIPAddr();
-			$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
+			$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=".$vis_ip));
 			if($vis_ip=="")$vis_ip="N/A";
 			$country=$ipdat->geoplugin_countryName;
 			if($country=="")$country="N/A";
@@ -683,8 +683,236 @@
 				<div id="se_re_div_4" class="w3-container w3-margin-0 w3-padding-0" style="display:none;height:auto;">
 					<?php
 						//Drop courses there
+						//getting dept last result semester
+						$stmt = $conn->prepare("SELECT * FROM nr_result where nr_prog_id=:prog_id and  nr_result_status='Active' order by nr_result_year desc, nr_result_semester desc");
+						$stmt->bindParam(':prog_id', $prog_id);
+						$stmt->execute();
+						$stud_result=$stmt->fetchAll();
+						if(count($stud_result)!=0)  //check for students who have results in db
+						{
+							$last_semester=$stud_result[0][6];
+							$last_year=$stud_result[0][7];
+						}
+						
+						//echo $last_semester.' '.$last_year.'</br>';
+						$first_semester=get_session_semester($s_id);
+						$first_year=get_year($s_id);
+						//echo $first_semester.' '.$first_year.'</br>';
+						
+						if($first_year>$last_year)
+						{
+							echo '<p class="w3-center w3-text-red" style="margin: 50px 0px 50px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
+						
+						}
+						else if($first_year==$last_year && (($last_semester=="Spring" && ($first_semester=="Summer" || $first_semester=="Fall")) || ($last_semester=="Summer" && $first_semester=="Fall")))
+						{
+							echo '<p class="w3-center w3-text-red" style="margin: 50px 0px 50px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
+						}
+						else
+						{
+							//getting total semester count
+							$ct=1;
+							for($q=$last_year;$q>=$first_year;$q--)
+							{
+								if($q==$last_year)
+								{
+									if($last_semester=='Fall')
+									{
+										if(('Fall-'.$last_year)!=($first_semester.'-'.$first_year))
+										{
+											$from_semester='Fall';
+											$from_year=$q;
+											$ct++;
+										}
+										else
+											break;
+										
+										if(('Summer-'.$last_year)!=($first_semester.'-'.$first_year))
+										{
+											$from_semester='Summer';
+											$from_year=$q;
+											$ct++;
+										}
+										else 
+											break;
+											
+										if(('Spring-'.$last_year)!=($first_semester.'-'.$first_year))
+										{
+											$from_semester='Spring';
+											$from_year=$q;
+											$ct++;
+										}
+										else
+											break;
+									}
+									else if($last_semester=='Summer')
+									{
+										if(('Summer-'.$last_year)!=($first_semester.'-'.$first_year))
+										{
+											$from_semester='Summer';
+											$from_year=$q;
+											$ct++;
+										}
+										else 
+											break;
+											
+										if(('Spring-'.$last_year)!=($first_semester.'-'.$first_year))
+										{
+											$from_semester='Spring';
+											$from_year=$q;
+											$ct++;
+										}
+										else
+											break;
+									}
+									else if($last_semester=='Spring')
+									{
+																				
+										if(('Spring-'.$last_year)!=($first_semester.'-'.$first_year))
+										{
+											$from_semester='Spring';
+											$from_year=$q;
+											$ct++;
+										}
+										else
+											break;
+									}
+								}
+								else
+								{
+									if(('Fall-'.$q)!=($first_semester.'-'.$first_year))
+									{
+										$from_semester='Fall';
+										$from_year=$q;
+										$ct++;
+									}
+									else
+										break;
+									
+									if(('Summer-'.$q)!=($first_semester.'-'.$first_year))
+									{
+										$from_semester='Summer';
+										$from_year=$q;
+										$ct++;
+									}
+									else
+										break;
+									
+									if(('Spring-'.$q)!=($first_semester.'-'.$first_year))
+									{
+										$from_semester='Spring';
+										$from_year=$q;
+										$ct++;
+									}
+									else
+										break;
+								}
+							}
+							//echo $ct;  //no of semester passed with published result
+							$stmt = $conn->prepare("select * from nr_course a,nr_drop b where a.nr_course_id=b.nr_course_id and b.nr_drop_semester<='$ct' and b.nr_prcr_id=:prcr_id and b.nr_drop_status='Active' ");
+							$stmt->bindParam(':prcr_id', $prcr_id);
+							$stmt->execute();
+							$stud_result=$stmt->fetchAll();
+							if(count($stud_result)==0)
+							{
+								//no drop course found
+								echo '<p class="w3-center w3-text-red" style="margin: 50px 0px 50px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
+							}
+							else
+							{
+								$drop_re=array();
+								$drop_credit=0.0;
+								$optional=array();
+								for($p=0;$p<count($stud_result);$p++)
+								{
+									$course_code=$stud_result[$p][1];
+									$course_title=$stud_result[$p][2];
+									$course_credit=$stud_result[$p][3];
+									if($stud_result[$p][11]=="Compulsory")
+									{
+										if(!array_key_exists($course_code,$pass_re) && !array_key_exists($course_code,$fail_re))
+										{
+											$drop_re[$course_code]=array('course_code'=>$course_code,'course_title'=>$course_title,'course_credit'=>$course_credit);
+											$drop_credit+=$course_credit;
+										}
+									}
+									else
+									{
+										//storing optional course data for further calculation
+										$course_remarks=$stud_result[$p][11];
+										$optional[$course_remarks][$course_code]=array('course_type'=>$course_remarks,'course_code'=>$course_code,'course_title'=>$course_title,'course_credit'=>$course_credit);
+									}
+								}
+								//Generating Optional Courses
+								foreach($optional as $option)
+								{
+									$fl=0;
+									$crs_title="";
+									$crs_code="";
+									foreach($option as $sub)
+									{
+										//echo $sub['course_type'].' '.$sub['course_code'].'</br>';
+										if(array_key_exists($sub['course_code'],$pass_re) || array_key_exists($sub['course_code'],$fail_re))
+										{
+											$fl=1;
+											break;
+										}
+									}
+									if($fl==0)
+									{
+										$crs_title=$sub['course_type'];
+										$crs_code="";
+										$yy=$sub['course_code'];
+										for($s=0;$s<5;$s++)
+										{
+											$crs_code=$crs_code.$yy[$s];
+										}
+										$crs_code=$crs_code.'*'.'*';
+										$drop_re[$crs_code]=array('course_code'=>$crs_code,'course_title'=>$crs_title,'course_credit'=>$sub['course_credit']);
+										$drop_credit+=$sub['course_credit'];
+									}
+								}
+								
+							}
+							if(count($drop_re)==0)
+							{
+								echo '<p class="w3-center w3-text-red" style="margin: 50px 0px 50px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
+							}
+							else
+							{
+								?>
+								<p class="w3-margin-0 w3-padding-0 w3-small w3-bold w3-justify w3-text-red">
+									Note: This drop courses list generated according to the program syllabus so it may not be same with the department offered course list.
+								</p>
+								<table style="width:96%;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
+									<tr class="w3-black w3-bold w3-padding-small">
+										<td colspan="2" valign="top" class="w3-padding-small">Drop Courses</td>
+										<td colspan="1" class="w3-padding-small" valign="top">Credit: <?php echo number_format($drop_credit,2); ?></td>
+									</tr>
+									<tr class="w3-teal w3-bold">
+										<td valign="top" style="width:30%;" class="w3-padding-small">Course Code</td>
+										<td valign="top" style="width:45%;" class="w3-padding-small">Course Title</td>
+										<td valign="top" style="width:25%;" class="w3-padding-small">Credit</td>
+									</tr>
+									<?php
+										foreach($drop_re as $cge)
+										{
+									?>
+											<tr>
+												<td valign="top" class="w3-padding-small"><?php echo $cge['course_code']; ?></td>
+												<td valign="top" class="w3-padding-small"><?php echo $cge['course_title']; ?></td>
+												<td valign="top" class="w3-padding-small"><?php echo number_format($cge['course_credit'],2); ?></td>
+											</tr>
+									
+									<?php
+										}
+									?>
+								</table>
+							<?php	
+							}
 						
 					
+						}
 					?>
 				</div>
 				<div id="se_re_div_5" class="w3-container w3-margin-0 w3-padding-0" style="display:none;height:auto;">
