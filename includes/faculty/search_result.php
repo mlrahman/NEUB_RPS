@@ -17,69 +17,12 @@
 			<i class="fa fa-search w3-text-teal"></i> 
 			<input type="text" id="search_text" onkeyup="get_suggestions()" class="w3-input w3-border-teal" style="width:92%;min-width:230px;display:inline;" placeholder="Enter Student Name or ID for Search">
 		</div>
-		<div class="w3-container w3-margin-0 w3-padding-0" id="suggestion_box" style="display:none;width:50%;min-width:300px;margin:0 auto;">
-			<div class="w3-container w3-bottombar w3-leftbar w3-white w3-padding-0 w3-margin-0" style="width:50%;min-width:300px;height:auto;max-height:190px;overflow-y:scroll;border-radius: 0px 0px 7px 7px;position:absolute;z-index:999;">
-				<table style="width:100%;margin:0px;" class="w3-medium w3-round">
-					<!--
-					<tr class="w3-black w3-bold">
-						<td style="width:30%;" valign="top" class="w3-padding-small">Student ID</td>
-						<td style="width:48%;" valign="top" class="w3-padding-small">Name</td>
-						<td style="width:22%;" valign="top" class="w3-padding-small">Action</td>
-					</tr>
-					-->
-					<tbody class="w3-container w3-margin-0 w3-padding-0" id="search_suggestion_tables">
 		
-		
-					</tbody>
-					<tr id="search_suggestion_loading" >
-						
-					</tr>
-				</table>
-			</div>
-		</div>
 		<script>
 			function get_suggestions()
 			{
 				close_search_box();
-				var search_text=document.getElementById('search_text').value.trim();
-				if(search_text=="")
-				{
-					document.getElementById('search_suggestion_loading').innerHTML='';
-					document.getElementById('search_suggestion_tables').innerHTML='';
-					document.getElementById('suggestion_box').style.display='none';
-				}
-				else
-				{
-					var prog_id=document.getElementById('program_id2').value;
-					document.getElementById('suggestion_box').style.display='block';
-					document.getElementById('search_suggestion_loading').innerHTML='<td colspan="3"><p class="w3-center" style="margin: 10px 0px 10px 0px;"><i class="fa fa-refresh w3-spin"></i> Please wait!! while loading...</p></td>';
-					var search_suggestion = new XMLHttpRequest();
-					search_suggestion.onreadystatechange = function() {
-						if (this.readyState == 4 && this.status == 200) {
-							var res=this.responseText.trim();
-							if(res=="")
-							{
-								document.getElementById("search_suggestion_tables").innerHTML ='';
-								document.getElementById("search_suggestion_loading").innerHTML = '<td colspan="3"><p class="w3-center w3-margin"><i class="fa fa-warning w3-text-red" title="No data found"> No data available</i></p></td>';
-							}
-							else
-							{
-								document.getElementById("search_suggestion_loading").innerHTML = '';
-								document.getElementById("search_suggestion_tables").innerHTML = res;
-								
-								
-								
-							}
-							
-						}
-						if (this.readyState == 4 && (this.status == 403 || this.status == 404)) {
-							document.getElementById("search_suggestion_loading").innerHTML = '<td colspan="3"><p class="w3-center w3-margin"><i class="fa fa-warning w3-text-red" title="Error occurred!!"> Network Error</i></p></td>';
-						}
-					};
-							
-					search_suggestion.open("GET", "../includes/faculty/get_search_suggestion.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id2="+prog_id+"&search_text="+search_text, true);
-					search_suggestion.send();
-				}
+				get_total2_search_results(0);
 			}
 		
 		</script>
@@ -224,6 +167,8 @@
 				
 			var prog_id=document.getElementById('program_id2').value;
 			var r_sort=document.getElementById('search_result_sort').value;
+			var search_text=document.getElementById('search_text').value.trim();
+			
 			
 			var total2_results = new XMLHttpRequest();
 			total2_results.onreadystatechange = function() {
@@ -239,7 +184,7 @@
 			};
 			document.getElementById('search_data_label').innerHTML='<i class="fa fa-refresh w3-spin"></i>';
 					
-			total2_results.open("GET", "../includes/faculty/get_total2_search_results.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id2="+prog_id, true);
+			total2_results.open("GET", "../includes/faculty/get_total2_search_results.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id2="+prog_id+"&search_text="+search_text, true);
 			total2_results.send();
 		}
 		
@@ -252,8 +197,10 @@
 			}
 			if(total2!=0)
 			{
+				//console.log('clicked');
 				var prog_id=document.getElementById('program_id2').value;
 				var r_sort=document.getElementById('search_result_sort').value;
+				var search_text=document.getElementById('search_text').value.trim();
 			
 			
 				document.getElementById("show_more_btn_search_result").style.display='none';
@@ -261,6 +208,7 @@
 				var search_results = new XMLHttpRequest();
 				search_results.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
+						//console.log(this.responseText());
 						document.getElementById("search_results_loading").innerHTML='';
 						document.getElementById('search_result_tables').innerHTML=document.getElementById('search_result_tables').innerHTML+this.responseText;
 						document.getElementById('search_data_label').innerHTML=total2;
@@ -280,7 +228,7 @@
 				var search_results_from=page2;
 				page2=page2+5;
 				
-				search_results.open("GET", "../includes/faculty/get_search_results.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&search_results_from="+search_results_from+"&program_id2="+prog_id+"&sort="+r_sort, true);
+				search_results.open("GET", "../includes/faculty/get_search_results.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&search_results_from="+search_results_from+"&program_id2="+prog_id+"&sort="+r_sort+"&search_text="+search_text, true);
 				search_results.send();
 			}
 			else

@@ -138,7 +138,6 @@
 					function reload_dashboard2()
 					{
 						get_total2_search_results(0);
-						get_suggestions();
 						close_search_box();
 					}
 				</script>
