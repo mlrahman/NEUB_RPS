@@ -100,16 +100,16 @@
 		Grade: 
 		<select id="filter_grade" onchange="get_total_search_results2(0)" type="w3-input w3-round-large">
 			<option value="-1">All</option>
-			<option value="A+">A+</option>
-			<option value="A">A</option>
-			<option value="A-">A-</option>
-			<option value="B+">B+</option>
-			<option value="B">B</option>
-			<option value="B-">B-</option>
-			<option value="C+">C+</option>
-			<option value="C">C</option>
-			<option value="D">D</option>
-			<option value="F">F</option>
+			<option value="1">A+</option>
+			<option value="2">A</option>
+			<option value="3">A-</option>
+			<option value="4">B+</option>
+			<option value="5">B</option>
+			<option value="6">B-</option>
+			<option value="7">C+</option>
+			<option value="8">C</option>
+			<option value="9">D</option>
+			<option value="10">F</option>
 		</select>
 		 
 		<span onclick="document.getElementById('filter').style.display='none';" title="Close filter" class="w3-button w3-medium w3-red w3-hover-teal w3-round w3-margin-0" style="padding:0px 4px; margin:0px 0px 0px 8px;"><i class="fa fa-minus w3-margin-0 w3-padding-0"></i></span>
@@ -179,7 +179,7 @@
 			var total3_results = new XMLHttpRequest();
 			total3_results.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
-					
+					//console.log(this.responseText);
 					total3=parseInt(this.responseText.trim());
 					get_search_results2(x);
 				}

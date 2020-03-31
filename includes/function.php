@@ -8,6 +8,20 @@ function password_encrypt($x)
 	return $x;
 }
 
+function get_filter_grade($id)
+{
+	if($id==1) return 'A+';
+	if($id==2) return 'A';
+	if($id==3) return 'A-';
+	if($id==4) return 'B+';
+	if($id==5) return 'B';
+	if($id==6) return 'B-';
+	if($id==7) return 'C+';
+	if($id==8) return 'C';
+	if($id==9) return 'D';
+	if($id==10) return 'F';
+}
+
 function sent_mail($to,$subject,$msg,$website_title,$website_email)
 {
 	try

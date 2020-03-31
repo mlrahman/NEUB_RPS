@@ -6,9 +6,9 @@ include("includes/function.php");
 
 /*
 $s_id=140203020004;
-$marks=70;
-$gpa=3.50;
-$g='A-';
+$marks=30;
+$gpa=0.00;
+$g='F';
 echo 'Marks:</br>';
 echo marks_encrypt($s_id,$marks).'</br>';
 echo marks_decrypt($s_id,marks_encrypt($s_id,$marks)).'</br>';
