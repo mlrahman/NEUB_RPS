@@ -251,6 +251,7 @@
 			$stmt->execute();
 			$stud_result=$stmt->fetchAll();
 			$ra_w=array();
+			$wa_re=array();
 			for($i = 0; $i < count($stud_result); $i++) {
 				
 				$stud_stwacr_id=$stud_result[$i][0];
@@ -268,6 +269,7 @@
 				
 				//Storing data for showing in tables
 				$ra_w[$i]=$abc;	
+				$wa_re[$stud_course_code]=$abc;
 			}
 			
 			$waived_credit=0.0; 
@@ -424,7 +426,7 @@
 					<?php
 						if(count($se_re)==0)
 						{
-							echo '<p class="w3-center w3-text-red" style="margin: 50px 0px 50px 0px;"><i class="fa fa-warning"></i> No result available</p>';
+							echo '<p class="w3-center w3-text-red" style="margin: 100px 0px 0px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
 						}
 						for($i=get_year($s_id);$i<=Date("Y");$i++)
 						{			
@@ -600,7 +602,7 @@
 						//show failed courses there
 						if(count($fail_re)==0)
 						{
-							echo '<p class="w3-center w3-text-red" style="margin: 50px 0px 50px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
+							echo '<p class="w3-center w3-text-red" style="margin: 100px 0px 0px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
 						}
 						if(count($fail_re)>0)
 						{
@@ -651,7 +653,7 @@
 						//show passed courses there
 						if(count($pass_re)==0)
 						{
-							echo '<p class="w3-center w3-text-red" style="margin: 50px 0px 50px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
+							echo '<p class="w3-center w3-text-red" style="margin: 100px 0px 0px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
 						}
 						if(count($pass_re)>0)
 						{
@@ -715,12 +717,12 @@
 						
 						if($first_year>$last_year)
 						{
-							echo '<p class="w3-center w3-text-red" style="margin: 50px 0px 50px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
+							echo '<p class="w3-center w3-text-red" style="margin: 100px 0px 0px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
 						
 						}
 						else if($first_year==$last_year && (($last_semester=="Spring" && ($first_semester=="Summer" || $first_semester=="Fall")) || ($last_semester=="Summer" && $first_semester=="Fall")))
 						{
-							echo '<p class="w3-center w3-text-red" style="margin: 50px 0px 50px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
+							echo '<p class="w3-center w3-text-red" style="margin: 100px 0px 0px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
 						}
 						else
 						{
@@ -830,7 +832,7 @@
 							if(count($stud_result)==0)
 							{
 								//no drop course found
-								echo '<p class="w3-center w3-text-red" style="margin: 50px 0px 50px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
+								echo '<p class="w3-center w3-text-red" style="margin: 100px 0px 0px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
 							}
 							else
 							{
@@ -844,7 +846,7 @@
 									$course_credit=$stud_result[$p][3];
 									if($stud_result[$p][11]=="Compulsory")
 									{
-										if(!array_key_exists($course_code,$pass_re) && !array_key_exists($course_code,$fail_re))
+										if(!array_key_exists($course_code,$pass_re) && !array_key_exists($course_code,$fail_re) && !array_key_exists($course_code,$wa_re))
 										{
 											$drop_re[$course_code]=array('course_code'=>$course_code,'course_title'=>$course_title,'course_credit'=>$course_credit);
 											$drop_credit+=$course_credit;
@@ -866,7 +868,7 @@
 									foreach($option as $sub)
 									{
 										//echo $sub['course_type'].' '.$sub['course_code'].'</br>';
-										if(array_key_exists($sub['course_code'],$pass_re) || array_key_exists($sub['course_code'],$fail_re))
+										if(array_key_exists($sub['course_code'],$pass_re) || array_key_exists($sub['course_code'],$fail_re) || array_key_exists($sub['course_code'],$wa_re))
 										{
 											$fl=1;
 											break;
@@ -890,7 +892,7 @@
 							}
 							if(count($drop_re)==0)
 							{
-								echo '<p class="w3-center w3-text-red" style="margin: 50px 0px 50px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
+								echo '<p class="w3-center w3-text-red" style="margin: 100px 0px 0px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
 							}
 							else
 							{
@@ -934,7 +936,7 @@
 						//show waived courses there
 						if(count($ra_w)==0)
 						{
-							echo '<p class="w3-center w3-text-red" style="margin: 50px 0px 50px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
+							echo '<p class="w3-center w3-text-red" style="margin: 100px 0px 0px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
 						}
 						if(count($ra_w)>0)
 						{

@@ -39,6 +39,7 @@
 			if($lng=="")$lng="N/A";
 			$timezone=$ipdat->geoplugin_timezone;
 			if($timezone=="")$timezone="N/A";
+			
 			$date=get_current_date();
 			$time=get_current_time();
 			$stmt = $conn->prepare("insert into nr_faculty_result_check_transaction values(:s_id,:f_id,'$vis_ip','$country','$city','$lat','$lng','$timezone','$date','$time','Active') ");
@@ -62,7 +63,7 @@
 			$degree = $prog_result[0][1];
 			if(count($prog_result)==0)
 			{
-				echo '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
+				echo '<i class="fa fa-warning w3-text-red" title="Network Network Error Occurred Occurred!!"> Network Error Occurred</i>';
 				die();
 			}
 			
@@ -73,7 +74,7 @@
 			$prcr_result = $stmt->fetchAll();
 			if(count($prcr_result)==0)
 			{
-				echo '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
+				echo '<i class="fa fa-warning w3-text-red" title="Network Network Error Occurred Occurred!!"> Network Error Occurred</i>';
 				die();
 			}
 			$total_credit=$prcr_result[0][2];
@@ -258,6 +259,7 @@
 			$stmt->execute();
 			$stud_result=$stmt->fetchAll();
 			$ra_w=array();
+			$wa_re=array();
 			for($i = 0; $i < count($stud_result); $i++) {
 				
 				$stud_stwacr_id=$stud_result[$i][0];
@@ -275,6 +277,7 @@
 				
 				//Storing data for showing in tables
 				$ra_w[$i]=$abc;	
+				$wa_re[$stud_course_code]=$abc;
 			}
 			
 			$waived_credit=0.0; 
@@ -309,12 +312,12 @@
 			
 		}catch(PDOException $e)
 		{
-			echo '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
+			echo '<i class="fa fa-warning w3-text-red" title="Network Network Error Occurred Occurred!!"> Network Error Occurred</i>';
 			die();
 		}
 		catch(Exception $e)
 		{
-			echo '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
+			echo '<i class="fa fa-warning w3-text-red" title="Network Network Error Occurred Occurred!!"> Network Error Occurred</i>';
 			die();
 		}
 		
@@ -830,7 +833,7 @@
 									$course_credit=$stud_result[$p][3];
 									if($stud_result[$p][11]=="Compulsory")
 									{
-										if(!array_key_exists($course_code,$pass_re) && !array_key_exists($course_code,$fail_re))
+										if(!array_key_exists($course_code,$pass_re) && !array_key_exists($course_code,$fail_re) && !array_key_exists($course_code,$wa_re))
 										{
 											$drop_re[$course_code]=array('course_code'=>$course_code,'course_title'=>$course_title,'course_credit'=>$course_credit);
 											$drop_credit+=$course_credit;
@@ -852,7 +855,7 @@
 									foreach($option as $sub)
 									{
 										//echo $sub['course_type'].' '.$sub['course_code'].'</br>';
-										if(array_key_exists($sub['course_code'],$pass_re) || array_key_exists($sub['course_code'],$fail_re))
+										if(array_key_exists($sub['course_code'],$pass_re) || array_key_exists($sub['course_code'],$fail_re) || array_key_exists($sub['course_code'],$wa_re))
 										{
 											$fl=1;
 											break;
@@ -962,6 +965,6 @@
 	}
 	else
 	{
-		echo '<i class="fa fa-warning w3-text-red" title="Error occurred!!"> Error</i>';
+		echo '<i class="fa fa-warning w3-text-red" title="Network Error Occurred occurred!!"> Network Error Occurred</i>';
 	}
 ?>
