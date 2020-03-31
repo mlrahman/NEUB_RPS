@@ -85,7 +85,8 @@
 			$pass_re=array();
 			$fail_credit=0;
 			$pass_credit=0;
-			for($i = 0; $i < count($stud_result); $i++) {
+			$sz1=count($stud_result);
+			for($i = 0; $i < $sz1; $i++) {
 				
 				$stud_result_id=$stud_result[$i][0];
 				$stud_course_id=$stud_result[$i][2];
@@ -162,7 +163,8 @@
 					$fl=0;
 					foreach($se_re as $key=>$kk)
 					{
-						for($j=0;$j<count($se_re[$key]);$j++)
+						$sz2=count($se_re[$key]);
+						for($j=0;$j<$sz2;$j++)
 						{
 							if(array_key_exists($j,$se_re[$key]))
 							{
@@ -191,7 +193,8 @@
 					$fl=0;
 					foreach($se_re as $key=>$kk)
 					{
-						for($j=0;$j<count($se_re[$key]);$j++)
+						$sz3=count($se_re[$key]);
+						for($j=0;$j<$sz3;$j++)
 						{
 							if(array_key_exists($j,$se_re[$key]))
 							{
@@ -252,7 +255,8 @@
 			$stud_result=$stmt->fetchAll();
 			$ra_w=array();
 			$wa_re=array();
-			for($i = 0; $i < count($stud_result); $i++) {
+			$sz4=count($stud_result);
+			for($i = 0; $i < $sz4; $i++) {
 				
 				$stud_stwacr_id=$stud_result[$i][0];
 				$stud_course_id=$stud_result[$i][2];
@@ -839,7 +843,8 @@
 								$drop_re=array();
 								$drop_credit=0.0;
 								$optional=array();
-								for($p=0;$p<count($stud_result);$p++)
+								$sz5=count($stud_result);
+								for($p=0;$p<$sz5;$p++)
 								{
 									$course_code=$stud_result[$p][1];
 									$course_title=$stud_result[$p][2];
