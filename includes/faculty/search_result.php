@@ -9,7 +9,7 @@
 	}
 ?>
 
-<div class="w3-container w3-margin-bottom">
+<div id="search_view_1" class="w3-container w3-margin-bottom">
 	
 	<div class="w3-container" style="margin: 12px 0px 25px 0px;padding:0px;position:relative;">
 	

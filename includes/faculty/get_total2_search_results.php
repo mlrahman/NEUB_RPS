@@ -35,11 +35,11 @@
 		}
 		else
 		{
-			echo '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
+			echo '<i class="fa fa-warning w3-text-red" title="Error occurred!!"> Error</i>';
 		}
 	}
 	else
 	{
-		echo '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
+		echo '<i class="fa fa-warning w3-text-red" title="Error occurred!!"> Error</i>';
 	}
 ?>

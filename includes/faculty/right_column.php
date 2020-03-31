@@ -110,8 +110,8 @@
 			
 			<i onclick="page2_topFunction()" id="page2_btn" class="fa fa-chevron-circle-up w3-cursor w3-text-black w3-hover-text-teal w3-xxlarge" title="Go to top" style="display:none;bottom: 95px;right:45px;z-index: 99999;position:fixed;"></i>
 
-			
-			<p class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 7px;z-index: 99999;">
+			<!-- Program for student view -->
+			<p id="prog_student" class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 0px;z-index: 99999;">
 				
 				<i class="fa fa-folder-open-o"></i> Program: 
 				<select onchange="reload_dashboard2()" id="program_id2">
@@ -141,8 +141,50 @@
 					}
 				</script>
 			</p>
-						
+			
+			<!-- Program for course view -->
+			<p id="prog_course" class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 0px;z-index: 99999;display:none;">
+				
+				<i class="fa fa-folder-open-o"></i> Program: 
+				<select onchange="reload_dashboard3()" id="program_id3">
+					<option value="-1">All</option>
+					<?php
+						$stmt = $conn->prepare("SELECT * FROM nr_program where nr_dept_id=:dept_id and nr_prog_status='Active' order by nr_prog_id asc");
+						$stmt->bindParam(':dept_id', $_SESSION['faculty_dept_id']);
+						$stmt->execute();
+						$stud_result=$stmt->fetchAll();
+						if(count($stud_result)>0)
+						{
+							for($k=0;$k<count($stud_result);$k++)
+							{
+								$prog_id=$stud_result[$k][0];
+								$prog_title=$stud_result[$k][1];
+								echo '<option value="'.$prog_id.'">'.$prog_title.'</option>';
+							}
+						}
+					?>
+				</select>
+				<script>
+					function reload_dashboard3()
+					{
+						get_total_search_results2(0);
+						close_search_box2();
+					}
+				</script>
+			</p>
+			
+			<p class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 7px;z-index: 99999;">
+				<i class="fa fa-hand-o-right"></i> View for:
+				<select onchange="search_result_view_change()" id="search_view">
+					<option value="1">Student</option>
+					<option value="2">Course</option>
+				</select>
+			</p>
+			
+			<!-- Student view -->			
 			<?php include("../includes/faculty/search_result.php"); ?>
+			<!-- Course View -->
+			<?php include("../includes/faculty/search_result2.php"); ?>
 			
 			<!-- Go to top button-->
 			<script>
@@ -172,6 +214,47 @@
 					
 					page2.scrollTop = 0;
 				}
+				
+				function search_result_view_change()
+				{
+					var id=document.getElementById('search_view').value;
+					id=parseInt(id);
+					if(id==1)
+					{
+						var prog=document.getElementById('program_id3').value;
+						document.getElementById('program_id2').value=prog;
+						
+						document.getElementById('prog_course').style.display='none';
+						document.getElementById('prog_student').style.display='block';
+						
+						reload_dashboard2();
+						////
+						document.getElementById('search_text2').value='';
+						get_total_search_results2(0);
+						close_search_box2();
+						
+						document.getElementById('search_view_2').style.display='none';
+					}
+					else
+					{
+						var prog=document.getElementById('program_id2').value;
+						document.getElementById('program_id3').value=prog;
+						
+						document.getElementById('prog_student').style.display='none';
+						document.getElementById('prog_course').style.display='block';
+						
+						reload_dashboard3();
+						
+						document.getElementById('search_text').value='';
+						get_suggestions();
+						close_search_box();
+						
+						document.getElementById('search_view_1').style.display='none';
+					}
+					document.getElementById('search_view_'+id).style.display='block';
+					
+				}
+				
 			</script>
 			
 			
