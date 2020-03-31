@@ -33,7 +33,8 @@
 		if(count($result)>0)
 		{
 			
-			for($kk=0;$kk<count($result);$kk++)
+			$szz=count($result);
+			for($kk=0;$kk<$szz;$kk++)
 			{
 				$s_id=$result[$kk][0];
 				$s_name=$result[$kk][1];

@@ -45,7 +45,8 @@ Email: mlrahman@neub.edu.bd
 		$stmt = $conn->prepare("select * from nr_faculty_login_transaction order by nr_falotr_date desc, nr_falotr_time desc ");
 		$stmt->execute();
 		$re_trx = $stmt->fetchAll();
-		for($i=0;$i<count($re_trx);$i++)
+		$sz=count($re_trx);
+		for($i=0;$i<$sz;$i++)
 		{
 			if($i>$trx)
 			{
@@ -62,7 +63,8 @@ Email: mlrahman@neub.edu.bd
 		$stmt = $conn->prepare("select * from nr_faculty_result_check_transaction order by nr_rechtr_date desc, nr_rechtr_time desc ");
 		$stmt->execute();
 		$re_trx = $stmt->fetchAll();
-		for($i=0;$i<count($re_trx);$i++)
+		$sz=count($re_trx);
+		for($i=0;$i<$sz;$i++)
 		{
 			if($i>$trx)
 			{
@@ -78,7 +80,8 @@ Email: mlrahman@neub.edu.bd
 		$stmt = $conn->prepare("select * from nr_transcript_print_reference order by nr_trprre_date desc, nr_trprre_time desc ");
 		$stmt->execute();
 		$re_trx = $stmt->fetchAll();
-		for($i=0;$i<count($re_trx);$i++)
+		$sz=count($re_trx);
+		for($i=0;$i<$sz;$i++)
 		{
 			if($i>$trx)
 			{

@@ -37,7 +37,8 @@
 						$stud_result=$stmt->fetchAll();
 						if(count($stud_result)>0)
 						{
-							for($k=0;$k<count($stud_result);$k++)
+							$sz=count($stud_result);
+							for($k=0;$k<$sz;$k++)
 							{
 								$prog_id=$stud_result[$k][0];
 								$prog_title=$stud_result[$k][1];
@@ -123,7 +124,8 @@
 						$stud_result=$stmt->fetchAll();
 						if(count($stud_result)>0)
 						{
-							for($k=0;$k<count($stud_result);$k++)
+							$sz=count($stud_result);
+							for($k=0;$k<$sz;$k++)
 							{
 								$prog_id=$stud_result[$k][0];
 								$prog_title=$stud_result[$k][1];
@@ -155,7 +157,8 @@
 						$stud_result=$stmt->fetchAll();
 						if(count($stud_result)>0)
 						{
-							for($k=0;$k<count($stud_result);$k++)
+							$sz=count($stud_result);
+							for($k=0;$k<$sz;$k++)
 							{
 								$prog_id=$stud_result[$k][0];
 								$prog_title=$stud_result[$k][1];
@@ -167,6 +170,7 @@
 				<script>
 					function reload_dashboard3()
 					{
+						get_filter_semester();
 						get_total_search_results2(0);
 						close_search_box2();
 					}

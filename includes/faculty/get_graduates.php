@@ -43,7 +43,8 @@
 				$stud_result=$stmt->fetchAll();
 				$cg=array();
 				$se_re=array();
-				for($i = 0; $i < count($stud_result); $i++) {
+				$sz1=count($stud_result);
+				for($i = 0; $i < $sz1; $i++) {
 					
 					$stud_course_id=$stud_result[$i][2];
 					$stud_grade_point=grade_point_decrypt($s_id,$stud_result[$i][5]);
@@ -81,7 +82,8 @@
 				$stmt->execute();
 				$stud_result=$stmt->fetchAll();
 				$waived_credit=0.0;
-				for($i = 0; $i < count($stud_result); $i++) {
+				$sz2=count($stud_result);
+				for($i = 0; $i < $sz2; $i++) {
 					
 					$stud_course_id=$stud_result[$i][2];
 					$stmt = $conn->prepare("select * from nr_course where nr_course_id='$stud_course_id'"); 

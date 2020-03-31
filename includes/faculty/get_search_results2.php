@@ -150,7 +150,8 @@
 		$result = $stmt->fetchAll();
 		if(count($result)>0)
 		{
-			for($kk=0;$kk<count($result);$kk++)
+			$sz=count($result);
+			for($kk=0;$kk<$sz;$kk++)
 			{
 				//individual course result
 				$r_id=$result[$kk][0];

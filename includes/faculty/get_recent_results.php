@@ -28,7 +28,8 @@
 		$stud_result=$stmt->fetchAll();
 		if(count($stud_result)>=1)
 		{
-			for($k=0;$k<count($stud_result);$k++)
+			$sz=count($stud_result);
+			for($k=0;$k<$sz;$k++)
 			{
 				$s_id=$stud_result[$k][1];
 				$semester=$stud_result[$k][6].'-'.$stud_result[$k][7];

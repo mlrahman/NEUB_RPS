@@ -93,17 +93,46 @@
 	
 	<div class="w3-container w3-padding w3-margin-0 w3-padding-0 w3-topbar w3-right w3-leftbar w3-bottombar w3-rightbar w3-round-large" id="filter" style="display:none;">
 		Semester: 
-		<select id="search_result_semester" onchange="" type="w3-input w3-round-large">
-			<option value="1">All</option>
+		<select id="filter_semester" onchange="get_total_search_results2(0)" type="w3-input w3-round-large">
+			<option value="-1">All</option>
 			
 		</select>
 		Grade: 
-		<select id="search_result_semester" onchange="" type="w3-input w3-round-large">
-			<option value="1">All</option>
-			
+		<select id="filter_grade" onchange="get_total_search_results2(0)" type="w3-input w3-round-large">
+			<option value="-1">All</option>
+			<option value="A+">A+</option>
+			<option value="A">A</option>
+			<option value="A-">A-</option>
+			<option value="B+">B+</option>
+			<option value="B">B</option>
+			<option value="B-">B-</option>
+			<option value="C+">C+</option>
+			<option value="C">C</option>
+			<option value="D">D</option>
+			<option value="F">F</option>
 		</select>
 		 
 		<span onclick="document.getElementById('filter').style.display='none';" title="Close filter" class="w3-button w3-medium w3-red w3-hover-teal w3-round w3-margin-0" style="padding:0px 4px; margin:0px 0px 0px 8px;"><i class="fa fa-minus w3-margin-0 w3-padding-0"></i></span>
+		
+		<script>
+			function get_filter_semester()
+			{
+				var prog_id=document.getElementById('program_id3').value;
+			
+				var fi_sem = new XMLHttpRequest();
+				fi_sem.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						
+						document.getElementById('filter_semester').innerHTML=this.responseText;
+					}
+					if (this.readyState == 4 && (this.status == 403 || this.status == 404)) {
+						document.getElementById('filter_semester').innerHTML='<option value="-1">All</option>';
+					}
+				};
+				fi_sem.open("GET", "../includes/faculty/get_filter_semester.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id2="+prog_id, true);
+				fi_sem.send();
+			}
+		</script>
 		
 	</div>
 	
@@ -142,6 +171,8 @@
 				
 			var prog_id=document.getElementById('program_id3').value;
 			var r_sort=document.getElementById('search_result_sort2').value;
+			var filter_semester=document.getElementById('filter_semester').value;
+			var filter_grade=document.getElementById('filter_grade').value;
 			var search_text=document.getElementById('search_text2').value.trim();
 			
 			
@@ -159,7 +190,7 @@
 			};
 			document.getElementById('search_data_label2').innerHTML='<i class="fa fa-refresh w3-spin"></i>';
 					
-			total3_results.open("GET", "../includes/faculty/get_total_search_results2.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id2="+prog_id+"&search_text="+search_text, true);
+			total3_results.open("GET", "../includes/faculty/get_total_search_results2.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id2="+prog_id+"&search_text="+search_text+"&filter_semester="+filter_semester+"&filter_grade="+filter_grade, true);
 			total3_results.send();
 		}
 		
@@ -176,6 +207,8 @@
 				var r_sort=document.getElementById('search_result_sort2').value;
 				var search_text=document.getElementById('search_text2').value.trim();
 			
+				var filter_semester=document.getElementById('filter_semester').value;
+				var filter_grade=document.getElementById('filter_grade').value;
 			
 				document.getElementById("show_more_btn_search_result2").style.display='none';
 				
@@ -201,7 +234,7 @@
 				var search_results_from=page3;
 				page3=page3+5;
 				
-				search_results.open("GET", "../includes/faculty/get_search_results2.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&search_results_from="+search_results_from+"&program_id2="+prog_id+"&sort="+r_sort+"&search_text="+search_text, true);
+				search_results.open("GET", "../includes/faculty/get_search_results2.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&search_results_from="+search_results_from+"&program_id2="+prog_id+"&sort="+r_sort+"&search_text="+search_text+"&filter_semester="+filter_semester+"&filter_grade="+filter_grade, true);
 				search_results.send();
 			}
 			else
