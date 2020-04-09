@@ -1,6 +1,6 @@
 <?php
 	try{
-		require("../includes/faculty/logged_out_auth.php");
+		require("../includes/super_admin/logged_out_auth.php");
 	}
 	catch(Exception $e)
 	{
@@ -25,4 +25,4 @@
 	session_write_close();
 	
 ?>
-		
+			

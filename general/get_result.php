@@ -306,6 +306,9 @@
 			
 			if($waived_credit==0) $waived_credit='N/A';
 			
+			
+			
+			
 		}catch(PDOException $e)
 		{
 			echo 'error';
@@ -980,6 +983,7 @@
 	</div>
 
 <?php	
+		
 	}
 	else
 		header("location: index.php");

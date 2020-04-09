@@ -1,0 +1,89 @@
+
+<?php
+	try{
+		require("../includes/super_admin/logged_out_auth.php");
+	}
+	catch(Exception $e)
+	{
+		header("location:index.php");
+		die();
+	}
+?>
+<!-- Left Column -->
+<div class="w3-third w3-margin-top">
+	<div class="w3-white w3-text-grey w3-card-4  w3-border w3-border-black w3-round-large" style="height:auto;max-height:603px;min-height:603px;overflow:auto;">
+		
+		<div class="w3-bar w3-black w3-card w3-padding">
+			<a href="https://<?php echo $web; ?>" class="w3-bar-item" target="_blank" style="padding: 8px 5px;">
+				<image src="../images/system/logo.png" alt="NEUB LOGO" class="w3-image" style="width:100%;max-width:30px;">
+			</a>
+			<a href="sa_index.php" class="w3-bar-item w3-xlarge w3-decoration-null" style="padding: 8px 3px;"><?php echo $title; ?></a>
+			
+		</div>
+		
+		<!-- admin ID info -->
+		<?php
+			$stmt = $conn->prepare("select * from nr_admin where nr_admin_id=:admin_id and nr_admin_email=:admin_email and nr_admin_status='Active' and (nr_admin_type='Admin' or nr_admin_type='Super Admin') ");
+			$stmt->bindParam(':admin_id', $_SESSION['admin_id']);
+			$stmt->bindParam(':admin_email', $_SESSION['admin_email']);
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			if(count($result)!=1)
+				die();
+			
+			$photo=$result[0][5];
+			$gender=$result[0][11];
+			$designation=$result[0][7];
+			
+		?>
+		<div class="w3-container w3-row w3-border w3-round-large w3-leftbar w3-rightbar" style="height: auto;margin: 20px 25px;padding: 10px 10px;">
+			<p class="w3-align-left w3-text-black w3-margin-0">Welcome, </p>
+			<div class="w3-col s3">
+				<?php if($photo=="" && $gender=="Male"){ ?>
+					<img src="../images/system/male_profile.png" id="admin_profile_image" class="w3-circle w3-margin-right w3-margin-top" style="width:100%;max-width:70px;">
+				<?php } else if($photo==""){ ?>
+					<img src="../images/system/female_profile.png" id="admin_profile_image" class="w3-circle w3-margin-right w3-margin-top" style="width:100%;max-width:70px;">
+				<?php } else { ?>
+					<img src="../images/admin/<?php echo $photo; ?>" id="admin_profile_image" class="w3-circle w3-margin-right w3-margin-top" style="width:100%;max-width:70px;">
+				<?php } ?>
+			</div>
+			<div class="w3-col s8">
+				<p class="w3-align-left w3-text-black">
+					<strong><?php echo $_SESSION['admin_name']; ?></strong>
+					</br><?php echo $designation; ?>
+				</p>
+			</div>
+		</div>
+		
+		<div class="w3-bar-block w3-text-black" style="height: auto;margin: 20px 25px;">
+			<p class="w3-bold w3-xlarge w3-text-teal w3-bottombar" style="margin:0px 0px 15px 0px;"><i class="fa fa-folder-open-o"></i> Menu</p>
+			<a onclick="get_page(1)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-cursor"><i class="fa fa-dashboard"></i> Dashboard</a>
+			
+			<a onclick="get_page(3)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-edit"></i> Edit Profile</a>
+			<a href="log_out.php?log_out=yes" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top"><i class="fa fa-sign-out"></i> Sign Out</a>
+		</div>
+		<script>
+			function get_page(a)
+			{
+				if(a==1)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-dashboard"></i> <?php echo $_SESSION["admin_type"]; ?> Dashboard';
+					document.getElementById('page1').style.display='block';
+					
+					document.getElementById('page3').style.display='none';
+				}
+				else if(a==3)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-edit"></i> Edit Profile';
+					document.getElementById('page1').style.display='none';
+					
+					document.getElementById('page3').style.display='block';
+				}
+			}
+		</script>
+		
+		
+		
+	</div>
+
+</div>

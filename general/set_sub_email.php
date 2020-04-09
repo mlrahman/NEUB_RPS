@@ -4,6 +4,7 @@
 		$s_id=$_GET['s_id'];
 		$dob=$_GET['dob'];
 		$email=$_GET['email'];
+		ob_start();
 		require("../includes/db_connection.php");
 		require("../includes/function.php");
 		$stmt = $conn->prepare("select * from nr_student where nr_stud_id=:s_id and nr_stud_dob=:dob and nr_stud_status='Active' limit 1 ");
@@ -26,6 +27,8 @@
 			$stmt->execute();
 			echo 'done';
 		}
+		
+		
 	}
 	else
 		header("location: index.php");

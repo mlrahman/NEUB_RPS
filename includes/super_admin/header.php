@@ -12,8 +12,10 @@ Email: mlrahman@neub.edu.bd
 -->
 <?php 
 	ob_start();
+	session_start();
 	require("../includes/db_connection.php"); 
 	require("../includes/function.php");
+	require("../includes/super_admin/logged_in_auth.php"); 
 	try
 	{	
 		$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
@@ -35,6 +37,25 @@ Email: mlrahman@neub.edu.bd
 		$contact_email=$result[0][9];//for sending message from contact us form
 		$map=$result[0][10];
 		//logo and video is always fixed in name 
+		
+		
+		//deleting login transaction
+		$trx=1000;
+		$stmt = $conn->prepare("select * from nr_admin_login_transaction order by nr_suadlotr_date desc, nr_suadlotr_time desc ");
+		$stmt->execute();
+		$re_trx = $stmt->fetchAll();
+		$sz=count($re_trx);
+		for($i=0;$i<$sz;$i++)
+		{
+			if($i>$trx)
+			{
+				$fa_date=$re_trx[$i][7];
+				$fa_time=$re_trx[$i][8];
+				$stmt = $conn->prepare("delete from nr_admin_login_transaction where nr_suadlotr_date='$fa_date' and nr_suadlotr_time='$fa_time' ");
+				$stmt->execute();
+			}
+		}
+		
 	}
 	catch(PDOException $e)
 	{
@@ -62,8 +83,17 @@ Email: mlrahman@neub.edu.bd
 		<link rel="stylesheet" href="../css/welcome_video.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<script src="../js/main.js"></script>
-	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+		
 	</head>
 	<body class="w3-black">
+		<div id="invalid_msg" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
+			<i class="fa fa-bell-o"></i> <p id="msg" class="w3-margin-0 w3-padding-0" style="display: inline;"></p>
+		</div>
+		<div id="valid_msg" class="w3-container w3-animate-top w3-center w3-green w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
+			<i class="fa fa-bell-o"></i> <p id="v_msg" class="w3-margin-0 w3-padding-0" style="display: inline;"></p>
+		</div>
+	
 		<div class="w3-content w3-white" style="max-width:2000px;">
 		

@@ -19,7 +19,7 @@ Email: mlrahman@neub.edu.bd
 		session_start();
 		require("../includes/db_connection.php"); 
 		require("../includes/function.php"); 
-		require("../includes/faculty/logged_out_auth.php"); 
+		require("../includes/super_admin/logged_out_auth.php"); 
 
 			
 		$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
@@ -102,13 +102,13 @@ Email: mlrahman@neub.edu.bd
 					<p class="w3-xxlarge" style="margin:5px 0px;">Two Factor Authentication</p>
 				</header>
 				<div class="w3-container w3-row w3-round-bottom-large w3-padding w3-border w3-border-teal" style="height:100%;">
-					<form style="margin: 0 auto;" class="w3-container w3-margin-bottom" action="f_index.php" method="post">
+					<form style="margin: 0 auto;" class="w3-container w3-margin-bottom" action="sa_index.php" method="post">
 						<div class="w3-section w3-padding w3-center w3-bold w3-text-red">
-							*We have sent you an OTP to your email. Please insert the OTP to pass the two factor authentication.<font class="w3-text-blue"> Three times wrong OTP submission will temporarily block your ID.</font> 
+							*We have sent you an OTP to your email. Please insert the OTP to pass the two factor authentication.<font class="w3-text-blue"> Five times wrong OTP submission will temporarily block your ID.</font> 
 						</div>
 						<div class="w3-section w3-border w3-round-large w3-padding w3-text-black w3-justify">
 							<label><b>Your OTP</b></label>
-							<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="number" placeholder="Enter your OTP" autocomplete="off" name="faculty_otp" required>
+							<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="number" placeholder="Enter your OTP" autocomplete="off" name="admin_otp" required>
 							<?php 
 								//spam Check 
 								$aaa=rand(1,20);
@@ -130,7 +130,7 @@ Email: mlrahman@neub.edu.bd
 								</div>
 					
 								<div class="w3-col" style="width:33.33%;padding: 0px 10px 0px 10px;">
-									<a href="f_index.php?resend_otp=yes" class="w3-button w3-block w3-black w3-hover-teal w3-margin-top w3-padding w3-round-large"><i class="fa fa-send"></i> Resend OTP</a>
+									<a href="sa_index.php?resend_otp=yes" class="w3-button w3-block w3-black w3-hover-teal w3-margin-top w3-padding w3-round-large"><i class="fa fa-send"></i> Resend OTP</a>
 								</div>
 								
 								<div class="w3-col" style="width:33.33%;padding: 0px 0px 0px 10px;">
@@ -162,21 +162,21 @@ Email: mlrahman@neub.edu.bd
 			//checking otp
 			if(isset($_REQUEST['two_check']))
 			{
-				$faculty_id=$_SESSION['faculty_id'];
-				$faculty_otp=trim($_REQUEST['faculty_otp']);
-				$stmt = $conn->prepare("select * from nr_faculty_link_token where nr_faculty_id=:f_id and nr_falito_token=:f_tok ");
-				$stmt->bindParam(':f_id', $faculty_id);
-				$stmt->bindParam(':f_tok', $faculty_otp);
+				$admin_id=$_SESSION['admin_id'];
+				$admin_otp=trim($_REQUEST['admin_otp']);
+				$stmt = $conn->prepare("select * from nr_admin_link_token where nr_admin_id=:sa_id and nr_suadlito_token=:sa_tok ");
+				$stmt->bindParam(':sa_id', $admin_id);
+				$stmt->bindParam(':sa_tok', $admin_otp);
 				$stmt->execute();
 				$result=$stmt->fetchAll();
 				if(count($result)==0)
 				{
-					$_SESSION['error']='Sorry! you have entered an invalid OTP ('.(3-($_SESSION['otp_count']+1)).')';
-					$_SESSION['otp_count']=$_SESSION['otp_count']+1;
-					if($_SESSION['otp_count']>=3)
+					$_SESSION['error']='Sorry! you have entered an invalid OTP ('.(5-($_SESSION['otp_count2']+1)).')';
+					$_SESSION['otp_count2']=$_SESSION['otp_count2']+1;
+					if($_SESSION['otp_count2']>=5)
 					{
-						$stmt = $conn->prepare("update nr_faculty set nr_faculty_status='Inactive' where nr_faculty_id=:f_id");
-						$stmt->bindParam(':f_id', $faculty_id);
+						$stmt = $conn->prepare("update nr_admin set nr_admin_status='Inactive' where nr_admin_id=:sa_id");
+						$stmt->bindParam(':sa_id', $admin_id);
 						$stmt->execute();
 						$_SESSION['error']='Your ID temporarily blocked for wrong OTPs.';
 						header("location: log_out.php?log_out=yes");
@@ -189,23 +189,23 @@ Email: mlrahman@neub.edu.bd
 					if($result[0][5]=='Active')
 					{
 						//two factor_passed
-						$stmt = $conn->prepare("delete from nr_faculty_link_token where nr_faculty_id=:f_id");
-						$stmt->bindParam(':f_id', $faculty_id);
+						$stmt = $conn->prepare("delete from nr_admin_link_token where nr_admin_id=:sa_id");
+						$stmt->bindParam(':sa_id', $admin_id);
 						$stmt->execute();
 						
-						$_SESSION['faculty_two_factor_check']='Y';
+						$_SESSION['admin_two_factor_check']='Y';
 						$_SESSION['done']="Two factor authentication successful.";
-						header("location: f_index.php");
+						header("location: sa_index.php");
 						die();
 					}
 					else
 					{
-						$_SESSION['error']='Sorry! you have entered an invalid OTP ('.(3-($_SESSION['otp_count']+1)).')';
-						$_SESSION['otp_count']=$_SESSION['otp_count']+1;
-						if($_SESSION['otp_count']>=3)
+						$_SESSION['error']='Sorry! you have entered an invalid OTP ('.(5-($_SESSION['otp_count2']+1)).')';
+						$_SESSION['otp_count2']=$_SESSION['otp_count2']+1;
+						if($_SESSION['otp_count2']>=5)
 						{
-							$stmt = $conn->prepare("update nr_faculty set nr_faculty_status='Inactive' where nr_faculty_id=:f_id");
-							$stmt->bindParam(':f_id', $faculty_id);
+							$stmt = $conn->prepare("update nr_admin set nr_admin_status='Inactive' where nr_admin_id=:sa_id");
+							$stmt->bindParam(':sa_id', $admin_id);
 							$stmt->execute();
 							$_SESSION['error']='Your ID temporarily blocked for wrong OTPs.';
 							header("location: log_out.php?log_out=yes");
@@ -238,33 +238,33 @@ Email: mlrahman@neub.edu.bd
 			
 			if(isset($_REQUEST['resend_otp']))
 			{
-				$faculty_id=$_SESSION['faculty_id'];
-				$f_name=$_SESSION['faculty_name'];
+				$admin_id=$_SESSION['admin_id'];
+				$sa_name=$_SESSION['admin_name'];
 				//clearing previous OTPs & Forget My Password links
-				$stmt = $conn->prepare("delete from nr_faculty_link_token where nr_faculty_id=:f_id");
-				$stmt->bindParam(':f_id', $faculty_id);
+				$stmt = $conn->prepare("delete from nr_admin_link_token where nr_admin_id=:sa_id");
+				$stmt->bindParam(':sa_id', $admin_id);
 				$stmt->execute();
 				
 				$iotp=get_otp();
 				$d=get_current_date();
 				$t=get_current_time();
 				//Inserting new OTPs
-				$stmt = $conn->prepare("insert into nr_faculty_link_token values(:f_id,'$iotp','Two Factor','$d','$t','Active') ");
-				$stmt->bindParam(':f_id', $faculty_id);
+				$stmt = $conn->prepare("insert into nr_admin_link_token values(:sa_id,'$iotp','Two Factor','$d','$t','Active') ");
+				$stmt->bindParam(':sa_id', $admin_id);
 				$stmt->execute();
 				
 				//sending new OTP to user
-				$msg="Dear ".$f_name.", Your Two Factor Authentication OTP is: ".$iotp;
+				$msg="Dear ".$sa_name.", Your Two Factor Authentication OTP is: ".$iotp;
 				$message = '<html><body>';
 				$message .= '<h1>Two Factor Authentication OTP From - '.$title.'</h1><p>  </p>';
 				$message .= '<p><b>Message Details:</b></p>';
 				$message .= '<p>'.$msg.'</p></body></html>';
 				
 				
-				sent_mail($_SESSION['faculty_email'],$title.' - OTP for Two Factor Authentication',$message,$title,$contact_email);
+				sent_mail($_SESSION['admin_email'],$title.' - OTP for Two Factor Authentication',$message,$title,$contact_email);
 				
 				$_SESSION['otp_sent']='yes';
-				header("location: f_index.php");
+				header("location: sa_index.php");
 				die();
 				
 			}
@@ -278,9 +278,9 @@ Email: mlrahman@neub.edu.bd
 			}
 			
 		
-			if($_SESSION['faculty_two_factor_status']==1) //two factor enabled
+			if($_SESSION['admin_two_factor_status']==1) //two factor enabled
 			{
-				if($_SESSION['faculty_two_factor_check']=='N') //two factor not passed yet
+				if($_SESSION['admin_two_factor_check']=='N') //two factor not passed yet
 				{
 					echo '
 					<script>
