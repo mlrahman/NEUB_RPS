@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2020 at 05:04 PM
--- Server version: 10.4.10-MariaDB
--- PHP Version: 7.1.33
+-- Generation Time: Apr 09, 2020 at 11:52 AM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -35,7 +35,7 @@ CREATE TABLE `nr_admin` (
   `nr_admin_password` varchar(60) NOT NULL,
   `nr_admin_cell_no` varchar(20) NOT NULL,
   `nr_admin_photo` varchar(60) NOT NULL,
-  `nr_admin_type` enum('Moderator','Admin') NOT NULL,
+  `nr_admin_type` enum('Moderator','Admin','Super Admin') NOT NULL,
   `nr_admin_designation` varchar(50) NOT NULL,
   `nr_admin_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
@@ -203,7 +203,11 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-30', '08:43 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-30', '08:48 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '01:34 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '02:06 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '02:06 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-01', '03:37 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-01', '03:46 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-05', '03:34 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '03:44 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -354,7 +358,8 @@ INSERT INTO `nr_faculty_result_check_transaction` (`nr_stud_id`, `nr_faculty_id`
 (140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '05:15 PM', 'Active'),
 (140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '05:35 PM', 'Active'),
 (140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '06:52 PM', 'Active'),
-(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '07:56 PM', 'Active');
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '07:56 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-01', '03:38 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1055,7 +1060,9 @@ INSERT INTO `nr_result_check_transaction` (`nr_stud_id`, `nr_rechtr_ip_address`,
 (140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '02:00 PM', 'Active'),
 (140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '02:01 PM', 'Active'),
 (140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '02:01 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '07:56 PM', 'Active');
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '07:56 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-01', '03:36 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '03:47 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1171,6 +1178,8 @@ INSERT INTO `nr_transcript_print_reference` (`nr_stud_id`, `nr_trprre_printed_by
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '02:48 PM', '0254203110482865', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '01:56 PM', '0263203109565166', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '07:32 PM', '0264202903321638', 'Active'),
+(140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-01', '03:38 PM', '0271200111382437', 'Active'),
+(140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-01', '03:36 PM', '0274200111364473', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '07:57 PM', '0279203103571149', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '01:57 PM', '0283203109572421', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '06:52 PM', '0299203102523693', 'Active'),
