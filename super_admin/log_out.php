@@ -20,7 +20,7 @@
 		unset($_SESSION['admin_two_factor_check']);
 		unset($_SESSION['admin_type']);
 		unset($_SESSION['admin_name']);
-		unset($_SESSION['otp_count']);
+		unset($_SESSION['otp_count2']);
 		session_write_close();
 		header("location: index.php");
 		die();

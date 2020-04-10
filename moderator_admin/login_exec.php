@@ -1,6 +1,6 @@
 
 <?php
-	if(isset($_REQUEST['sign_in']) && isset($_REQUEST['admin_email']) && isset($_REQUEST['admin_password']))
+	if(isset($_REQUEST['sign_in']) && isset($_REQUEST['moderator_email']) && isset($_REQUEST['moderator_password']))
 	{
 		try
 		{
@@ -9,11 +9,11 @@
 			require("../includes/db_connection.php");
 			require("../includes/function.php");
 			
-			$email=trim($_REQUEST['admin_email']);
-			$password=password_encrypt(trim($_REQUEST['admin_password']));
+			$email=trim($_REQUEST['moderator_email']);
+			$password=password_encrypt(trim($_REQUEST['moderator_password']));
 			
 			
-			$stmt = $conn->prepare("select * from nr_admin where nr_admin_email=:email and nr_admin_password=:password and (nr_admin_type='Admin' or nr_admin_type='Super Admin') ");
+			$stmt = $conn->prepare("select * from nr_admin where nr_admin_email=:email and nr_admin_password=:password and nr_admin_type='Moderator'  ");
 			$stmt->bindParam(':email', $email);
 			$stmt->bindParam(':password', $password);
 			$stmt->execute();
@@ -31,7 +31,7 @@
 				{
 					if($result[0][10]=='')
 					{
-						$admin_id=$result[0][0];
+						$moderator_id=$result[0][0];
 						$sa_name=$result[0][1];
 						$sa_type=$result[0][6];
 						//Check details will insert into transaction
@@ -56,7 +56,7 @@
 						
 						//checking for new login
 						$stmt = $conn->prepare("select * from nr_admin_login_transaction where nr_admin_id=:sa_id and nr_suadlotr_country='$country' and nr_suadlotr_city='$city' and nr_suadlotr_lat='$lat' and nr_suadlotr_lng='$lng' and nr_suadlotr_ip_address='$vis_ip' ");
-						$stmt->bindParam(':sa_id', $admin_id);
+						$stmt->bindParam(':sa_id', $moderator_id);
 						$stmt->execute();
 						$result2 = $stmt->fetchAll();
 						if(count($result2)==0)
@@ -88,37 +88,37 @@
 						
 						//inserting login record
 						$stmt = $conn->prepare("insert into nr_admin_login_transaction values(:sa_id,'$vis_ip','$country','$city','$lat','$lng','$timezone','$date','$time','Active') ");
-						$stmt->bindParam(':sa_id', $admin_id);
+						$stmt->bindParam(':sa_id', $moderator_id);
 						$stmt->execute();
 						
 						
-						$_SESSION['admin_name']=$sa_name;
-						$_SESSION['admin_type']=$sa_type;
-						$_SESSION['admin_id']=$admin_id;
-						$_SESSION['admin_email']=$result[0][2];
-						$_SESSION['admin_password']=$result[0][3];
-						$_SESSION['admin_two_factor_status']=$result[0][9];
-						$_SESSION['admin_two_factor_check']='N';
-						$_SESSION['admin_time']=$time;
-						$_SESSION['admin_date']=$date;
-						$_SESSION['done']='Hi! '.$sa_name.'. Welcome to the admin panel';
-						$_SESSION['otp_count2']=0;
+						$_SESSION['moderator_name']=$sa_name;
+						$_SESSION['moderator_type']=$sa_type;
+						$_SESSION['moderator_id']=$moderator_id;
+						$_SESSION['moderator_email']=$result[0][2];
+						$_SESSION['moderator_password']=$result[0][3];
+						$_SESSION['moderator_two_factor_status']=$result[0][9];
+						$_SESSION['moderator_two_factor_check']='N';
+						$_SESSION['moderator_time']=$time;
+						$_SESSION['moderator_date']=$date;
+						$_SESSION['done']='Hi! '.$sa_name.'. Welcome to the moderator panel';
+						$_SESSION['otp_count3']=0;
 						
-						if(isset($_REQUEST['re_admin']))
+						if(isset($_REQUEST['re_moderator']))
 						{
-							if(!isset($_COOKIE['admin_login']) || !isset($_COOKIE['admin_email']) || !isset($_COOKIE['admin_password']) || $_COOKIE['admin_email']!=$email || $_COOKIE['admin_password']!=$_REQUEST['admin_password'])
+							if(!isset($_COOKIE['moderator_login']) || !isset($_COOKIE['moderator_email']) || !isset($_COOKIE['moderator_password']) || $_COOKIE['moderator_email']!=$email || $_COOKIE['moderator_password']!=$_REQUEST['moderator_password'])
 							{
-								setcookie('admin_login', 'save', time() + (86400 * 30));
-								setcookie('admin_email', $email, time() + (86400 * 30));
-								setcookie('admin_password', $_REQUEST['admin_password'], time() + (86400 * 30));
+								setcookie('moderator_login', 'save', time() + (86400 * 30));
+								setcookie('moderator_email', $email, time() + (86400 * 30));
+								setcookie('moderator_password', $_REQUEST['moderator_password'], time() + (86400 * 30));
 							}
 						}
 						else
 						{
 							//echo 'deleted';
-							setcookie('admin_login', "", time() - (86400 * 30));
-							setcookie('admin_email', "", time() - (86400 * 30));
-							setcookie('admin_password', "", time() - (86400 * 30));
+							setcookie('moderator_login', "", time() - (86400 * 30));
+							setcookie('moderator_email', "", time() - (86400 * 30));
+							setcookie('moderator_password', "", time() - (86400 * 30));
 						}
 						
 						//redirecting logged in page
@@ -127,18 +127,18 @@
 						
 						//clearing previous OTPs & Forget My Password links
 						$stmt = $conn->prepare("delete from nr_admin_link_token where nr_admin_id=:sa_id");
-						$stmt->bindParam(':sa_id', $admin_id);
+						$stmt->bindParam(':sa_id', $moderator_id);
 						$stmt->execute();
 						
 						//send otp if two factor enabled
-						if($_SESSION['admin_two_factor_status']==1)
+						if($_SESSION['moderator_two_factor_status']==1)
 						{
 							$iotp=get_otp();
 							$d=get_current_date();
 							$t=get_current_time();
 							//Inserting new OTPs
 							$stmt = $conn->prepare("insert into nr_admin_link_token values(:sa_id,'$iotp','Two Factor','$d','$t','Active') ");
-							$stmt->bindParam(':sa_id', $admin_id);
+							$stmt->bindParam(':sa_id', $moderator_id);
 							$stmt->execute();
 							
 							
@@ -161,7 +161,7 @@
 							$message .= '<p>'.$msg.'</p></body></html>';
 							
 							
-							sent_mail($_SESSION['admin_email'],$title.' - OTP for Two Factor Authentication',$message,$title,$contact_email);
+							sent_mail($_SESSION['moderator_email'],$title.' - OTP for Two Factor Authentication',$message,$title,$contact_email);
 						}
 						
 						header("location: sa_index.php");
