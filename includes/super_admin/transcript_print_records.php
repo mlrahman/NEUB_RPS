@@ -68,7 +68,7 @@
 	<p class="w3-right w3-padding w3-margin-0 w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-round-large">
 		<span>
 			Sort By: 
-			<select id="search_result_sort12" onchange="get_total_search_results12(0)" type="w3-input w3-round-large">
+			<select id="search_result_sort12" onchange="get_total_search_results12(0,0)" type="w3-input w3-round-large">
 				<option value="1">Ref. ASC</option>
 				<option value="2">Ref. DESC</option>
 				<option value="3">Date ASC</option>
@@ -99,7 +99,7 @@
 			
 		</tr>
 	</table>
-	<p id="show_more_btn_search_result12" onclick="get_total_search_results12(1)" class="w3-center w3-margin-0" style="display:none;"><a class="w3-cursor w3-bold w3-text-blue w3-decoration-null w3-margin-bottom" style="margin:5px 0px;">Show More <i class="fa fa-sort-down"></i></a></p>
+	<p id="show_more_btn_search_result12" onclick="get_total_search_results12(1,1)" class="w3-center w3-margin-0" style="display:none;"><a class="w3-cursor w3-bold w3-text-blue w3-decoration-null w3-margin-bottom" style="margin:5px 0px;">Show More <i class="fa fa-sort-down"></i></a></p>
 
 
 </div>
@@ -130,7 +130,7 @@
 	function get_search_result12()
 	{
 		close_search_box12();
-		get_total_search_results12(0);
+		get_total_search_results12(0,0);
 	}
 	
 	function view_result12(ref,user_id)
@@ -166,8 +166,8 @@
 	}
 	
 	
-	var page12=0,total12,c_ch12=0;
-	function get_total_search_results12(x)
+	var page12=0,total12;
+	function get_total_search_results12(x,y)
 	{
 		//return 0;
 		document.getElementById("search_results_loading12").innerHTML='<td colspan="7"><p class="w3-center" style="margin: 10px 0px 10px 0px;"><i class="fa fa-refresh w3-spin"></i> Please wait!! while loading...</p></td>';
@@ -183,23 +183,21 @@
 			if (this.readyState == 4 && this.status == 200) {
 				//console.log(this.responseText);
 				total12=parseInt(this.responseText.trim());
-				get_search_results12(x);
+				get_search_results12(x,y);
 			}
 			if (this.readyState == 4 && (this.status == 403 || this.status == 404)) {
 				total12=0;
-				get_search_results12(x);
+				get_search_results12(x,y);
 			}
 		};
 		document.getElementById('search_data_label12').innerHTML='<i class="fa fa-refresh w3-spin"></i>';
-		if(c_ch12==0)
-		{
-			c_ch12=1;
-			total12_results.open("GET", "../includes/super_admin/get_total_search_results12.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&search_text="+search_text+"&program_id="+prog_id+"&dept_id="+dept_id, true);
-			total12_results.send();
-		}
+		
+		total12_results.open("GET", "../includes/super_admin/get_total_search_results12.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&search_text="+search_text+"&program_id="+prog_id+"&dept_id="+dept_id, true);
+		total12_results.send();
+		
 	}
 	
-	function get_search_results12(x)
+	function get_search_results12(x,y)
 	{
 		if(x==0)
 		{
@@ -220,9 +218,16 @@
 			search_results.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					document.getElementById("search_results_loading12").innerHTML='';
-					document.getElementById('search_result_tables12').innerHTML=document.getElementById('search_result_tables12').innerHTML+this.responseText;
+					if(y==0) //first call
+					{
+						document.getElementById('search_result_tables12').innerHTML=this.responseText;
+					}
+					else //show_more
+					{
+						document.getElementById('search_result_tables12').innerHTML=document.getElementById('search_result_tables12').innerHTML+this.responseText;
+					}
 					document.getElementById('search_data_label12').innerHTML=total12;
-					c_ch12=0;
+					
 					if(total12>page12)
 					{
 						document.getElementById("show_more_btn_search_result12").style.display='block';
@@ -243,7 +248,7 @@
 		}
 		else
 		{
-			c_ch12=0;
+			
 			document.getElementById("search_results_loading12").innerHTML='';
 			document.getElementById('search_data_label12').innerHTML='N/A';
 			document.getElementById('search_result_tables12').innerHTML='<tr><td colspan="7"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
