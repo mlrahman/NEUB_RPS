@@ -159,7 +159,7 @@
 	
 
 	<script>
-		var page2=0,total2;
+		var page2=0,total2,c_ch1=0;
 		function get_total2_search_results(x)
 		{
 			//return 0;
@@ -183,9 +183,11 @@
 				}
 			};
 			document.getElementById('search_data_label').innerHTML='<i class="fa fa-refresh w3-spin"></i>';
-					
-			total2_results.open("GET", "../includes/faculty/get_total2_search_results.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id2="+prog_id+"&search_text="+search_text, true);
-			total2_results.send();
+			if(c_ch1==0)
+			{	c_ch1=1;
+				total2_results.open("GET", "../includes/faculty/get_total2_search_results.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id2="+prog_id+"&search_text="+search_text, true);
+				total2_results.send();
+			}
 		}
 		
 		function get_search_results(x)
@@ -212,7 +214,7 @@
 						document.getElementById("search_results_loading").innerHTML='';
 						document.getElementById('search_result_tables').innerHTML=document.getElementById('search_result_tables').innerHTML+this.responseText;
 						document.getElementById('search_data_label').innerHTML=total2;
-					
+						c_ch1=0;
 						if(total2>page2)
 						{
 							document.getElementById("show_more_btn_search_result").style.display='block';
@@ -233,6 +235,7 @@
 			}
 			else
 			{
+				c_ch1=0;
 				document.getElementById("search_results_loading").innerHTML='';
 				document.getElementById('search_data_label').innerHTML='N/A';
 				document.getElementById('search_result_tables').innerHTML='<tr><td colspan="9"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';

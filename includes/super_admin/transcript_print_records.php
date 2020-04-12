@@ -166,7 +166,7 @@
 	}
 	
 	
-	var page12=0,total12;
+	var page12=0,total12,c_ch12=0;
 	function get_total_search_results12(x)
 	{
 		//return 0;
@@ -191,9 +191,12 @@
 			}
 		};
 		document.getElementById('search_data_label12').innerHTML='<i class="fa fa-refresh w3-spin"></i>';
-				
-		total12_results.open("GET", "../includes/super_admin/get_total_search_results12.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&search_text="+search_text+"&program_id="+prog_id+"&dept_id="+dept_id, true);
-		total12_results.send();
+		if(c_ch12==0)
+		{
+			c_ch12=1;
+			total12_results.open("GET", "../includes/super_admin/get_total_search_results12.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&search_text="+search_text+"&program_id="+prog_id+"&dept_id="+dept_id, true);
+			total12_results.send();
+		}
 	}
 	
 	function get_search_results12(x)
@@ -219,7 +222,7 @@
 					document.getElementById("search_results_loading12").innerHTML='';
 					document.getElementById('search_result_tables12').innerHTML=document.getElementById('search_result_tables12').innerHTML+this.responseText;
 					document.getElementById('search_data_label12').innerHTML=total12;
-				
+					c_ch12=0;
 					if(total12>page12)
 					{
 						document.getElementById("show_more_btn_search_result12").style.display='block';
@@ -240,6 +243,7 @@
 		}
 		else
 		{
+			c_ch12=0;
 			document.getElementById("search_results_loading12").innerHTML='';
 			document.getElementById('search_data_label12').innerHTML='N/A';
 			document.getElementById('search_result_tables12').innerHTML='<tr><td colspan="7"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
