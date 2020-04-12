@@ -19,16 +19,15 @@
 			<input type="text" id="search_text12" oninput="get_search_result12()" class="w3-input w3-border-teal" style="width:92%;min-width:230px;display:inline;" placeholder="Enter Ref. No. or Printed By for Search">
 		</div>
 	</div>
-	<script>
-		function get_search_result12()
-		{
-			//close_search_box12();
-			get_total_search_results12(0);
-		}
-	</script>
 	
 
-	
+	<div id="search_window12" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
+		<span onclick="close_search_box12()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
+		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:270px;"><i class="fa fa-cube"></i> Transcript Details</p>
+		<div id="search_window_details12" class="w3-container w3-margin-0 w3-padding-0">
+		
+		</div>
+	</div>
 
 	
 	<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:0px 0px 15px 0px;width:280px;"><i class="fa fa-server"></i> Transcript Records</p>
@@ -74,6 +73,45 @@
 
 
 <script>
+	
+	function get_search_result12()
+	{
+		close_search_box12();
+		get_total_search_results12(0);
+	}
+	
+	function view_result12(ref,user_id)
+	{
+		document.getElementById('search_text12').value='';
+		get_search_result12();
+		
+		document.getElementById('search_window12').style.display='block';
+		var page12=document.getElementById('page12');
+		page12.scrollTop = 20;
+		document.getElementById('search_window_details12').innerHTML='<p class="w3-center" style="margin: 50px 0px 50px 0px;"><i class="fa fa-refresh w3-spin"></i> Please wait!! while loading...</p>';
+		var search_window_result = new XMLHttpRequest();
+		search_window_result.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				
+				document.getElementById('search_window_details12').innerHTML=this.responseText;
+			}
+			if (this.readyState == 4 && (this.status == 403 || this.status == 404)) {
+				document.getElementById('search_window_details12').innerHTML='<p class="w3-center w3-text-red" style="margin: 50px 0px 50px 0px;" title="Network Error Occurred"><i class="fa fa-warning"></i> Network Error Occurred</p>';
+		
+			}
+		};
+				
+		search_window_result.open("GET", "../includes/super_admin/get_search_window_results12.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&ref="+ref+"&user_id="+user_id, true);
+		search_window_result.send();
+		
+		
+	}
+	function close_search_box12()
+	{
+		document.getElementById('search_window_details12').innerHTML='';
+		document.getElementById('search_window12').style.display='none';
+	}
+	
 	
 	var page12=0,total12;
 	function get_total_search_results12(x)

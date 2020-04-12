@@ -52,7 +52,9 @@
 				
 				$role=$result[$i][1];
 				$ref=$result[$i][11];
+				$ref_t="'".$ref."'";
 				$user_id=$result[$i][2];
+				$user_id_t="'".$user_id."'";
 				$date=get_date($result[$i][9]);
 				$time=$result[$i][10];
 				if($role=='Faculty')
@@ -73,7 +75,7 @@
 							<td valign="top" class="w3-padding-small w3-border">'.$role.'</td>
 							<td valign="top" class="w3-padding-small w3-border">'.$date.'</td>
 							<td valign="top" class="w3-padding-small w3-border">'.$time.'</td>
-							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result12('.$ref.','.$user_id.','.$t_result[0][1].')"><i class="fa fa-envelope-open-o"></i> View</a></td>
+							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result12('.$ref_t.','.$user_id_t.')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 						</tr>';
 						
 					}
@@ -90,7 +92,7 @@
 							<td valign="top" class="w3-padding-small w3-border">'.$role.'</td>
 							<td valign="top" class="w3-padding-small w3-border">'.$date.'</td>
 							<td valign="top" class="w3-padding-small w3-border">'.$time.'</td>
-							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result12('.$ref.','.$user_id.','.$t_result[0][1].')"><i class="fa fa-envelope-open-o"></i> View</a></td>
+							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result12('.$ref_t.','.$user_id_t.')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 						</tr>';
 					}
 				}
@@ -112,7 +114,7 @@
 							<td valign="top" class="w3-padding-small w3-border">'.$role.'</td>
 							<td valign="top" class="w3-padding-small w3-border">'.$date.'</td>
 							<td valign="top" class="w3-padding-small w3-border">'.$time.'</td>
-							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result12('.$ref.','.$user_id.','.$t_result[0][1].')"><i class="fa fa-envelope-open-o"></i> View</a></td>
+							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result12('.$ref_t.','.$user_id_t.')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 						</tr>';
 						
 					}
@@ -129,7 +131,7 @@
 							<td valign="top" class="w3-padding-small w3-border">'.$role.'</td>
 							<td valign="top" class="w3-padding-small w3-border">'.$date.'</td>
 							<td valign="top" class="w3-padding-small w3-border">'.$time.'</td>
-							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result12('.$ref.','.$user_id.','.$t_result[0][1].')"><i class="fa fa-envelope-open-o"></i> View</a></td>
+							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result12('.$ref_t.','.$user_id_t.')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 						</tr>';
 					}
 				}
@@ -151,7 +153,7 @@
 							<td valign="top" class="w3-padding-small w3-border">'.$role.'</td>
 							<td valign="top" class="w3-padding-small w3-border">'.$date.'</td>
 							<td valign="top" class="w3-padding-small w3-border">'.$time.'</td>
-							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result12('.$ref.','.$user_id.','.$t_result[0][1].')"><i class="fa fa-envelope-open-o"></i> View</a></td>
+							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result12('.$ref_t.','.$user_id_t.')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 						</tr>';
 						
 					}
@@ -168,7 +170,7 @@
 							<td valign="top" class="w3-padding-small w3-border">'.$role.'</td>
 							<td valign="top" class="w3-padding-small w3-border">'.$date.'</td>
 							<td valign="top" class="w3-padding-small w3-border">'.$time.'</td>
-							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result12('.$ref.','.$user_id.','.$t_result[0][1].')"><i class="fa fa-envelope-open-o"></i> View</a></td>
+							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result12('.$ref_t.','.$user_id_t.')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 						</tr>';
 					}
 				}
