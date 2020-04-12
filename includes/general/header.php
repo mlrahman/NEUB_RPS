@@ -37,7 +37,7 @@ Email: mlrahman@neub.edu.bd
 		//logo and video is always fixed in name 
 		
 		//deleting search transaction
-		$trx=2000;
+		$trx=3000;
 		$stmt = $conn->prepare("select * from nr_result_check_transaction order by nr_rechtr_date desc, nr_rechtr_time desc ");
 		$stmt->execute();
 		$re_trx = $stmt->fetchAll();

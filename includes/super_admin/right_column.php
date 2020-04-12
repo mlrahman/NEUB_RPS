@@ -199,9 +199,7 @@
 		</div>
 		<!-- page12 starts here -->
 		<div id="page12" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
-			
-			
-			
+			<?php include("../includes/super_admin/transcript_print_records.php"); ?>
 		</div>
 		<!-- page13 starts here -->
 		<div id="page13" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">

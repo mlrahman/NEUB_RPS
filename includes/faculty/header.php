@@ -41,7 +41,7 @@ Email: mlrahman@neub.edu.bd
 		
 		
 		//deleting login transaction
-		$trx=1000;
+		$trx=3000;
 		$stmt = $conn->prepare("select * from nr_faculty_login_transaction order by nr_falotr_date desc, nr_falotr_time desc ");
 		$stmt->execute();
 		$re_trx = $stmt->fetchAll();
@@ -59,7 +59,7 @@ Email: mlrahman@neub.edu.bd
 		
 		
 		//deleting search transaction
-		$trx=2000;
+		$trx=3000;
 		$stmt = $conn->prepare("select * from nr_faculty_result_check_transaction order by nr_rechtr_date desc, nr_rechtr_time desc ");
 		$stmt->execute();
 		$re_trx = $stmt->fetchAll();
