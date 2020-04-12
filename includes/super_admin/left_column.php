@@ -55,30 +55,124 @@
 			</div>
 		</div>
 		
-		<div class="w3-bar-block w3-text-black" style="height: auto;margin: 20px 25px;">
-			<p class="w3-bold w3-xlarge w3-text-teal w3-bottombar" style="margin:0px 0px 15px 0px;"><i class="fa fa-folder-open-o"></i> Menu</p>
+		<div class="w3-bar-block w3-text-black" style="height: 326px;overflow:auto;margin: 20px 25px;">
+			<p class="w3-bold w3-xlarge w3-text-teal w3-bottombar w3-white" style="margin:0px 0px 15px 0px;position: -webkit-sticky;   position: sticky;  top: 0; z-index:99999;"><i class="fa fa-folder-open-o"></i> Menu</p>
 			<a onclick="get_page(1)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-cursor"><i class="fa fa-dashboard"></i> Dashboard</a>
-			
-			<a onclick="get_page(3)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-edit"></i> Edit Profile</a>
+			<a onclick="get_page(2)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-bank"></i> Departments</a>
+			<a onclick="get_page(3)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-tree"></i> Programs</a>
+			<a onclick="get_page(4)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-book"></i> Course List</a> 
+			<a onclick="get_page(5)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-laptop"></i> Course Offer List</a> 
+			<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
+			<a onclick="get_page(15)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-users"></i> Admins</a>
+			<?php } ?>
+			<a onclick="get_page(6)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-users"></i> Moderators</a>
+			<a onclick="get_page(7)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-users"></i> Faculties</a>
+			<a onclick="get_page(8)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-users"></i> Students</a>
+			<a onclick="get_page(9)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-table"></i> Results</a>
+			<a onclick="get_page(10)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-desktop"></i> System Components</a> 
+			<a onclick="get_page(11)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-history"></i> Result Search Records</a>
+			<a onclick="get_page(12)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-history"></i> Transcript Print Records</a>
+			<a onclick="get_page(13)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-history"></i> User Login Records</a>
+			<a onclick="get_page(14)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-edit"></i> Edit Profile</a>
 			<a href="log_out.php?log_out=yes" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top"><i class="fa fa-sign-out"></i> Sign Out</a>
 		</div>
 		<script>
 			function get_page(a)
 			{
+				document.getElementById('page1').style.display='none';
+				document.getElementById('page2').style.display='none';
+				document.getElementById('page3').style.display='none';
+				document.getElementById('page4').style.display='none';
+				document.getElementById('page5').style.display='none';
+				document.getElementById('page6').style.display='none';
+				document.getElementById('page7').style.display='none';
+				document.getElementById('page8').style.display='none';
+				document.getElementById('page9').style.display='none';
+				document.getElementById('page10').style.display='none';
+				document.getElementById('page11').style.display='none';
+				document.getElementById('page12').style.display='none';
+				document.getElementById('page13').style.display='none';
+				document.getElementById('page14').style.display='none';
+				<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
+				document.getElementById('page15').style.display='none';
+				<?php } ?>
 				if(a==1)
 				{
 					document.getElementById('page_title').innerHTML='<i class="fa fa-dashboard"></i> <?php echo $_SESSION["admin_type"]; ?> Dashboard';
-					document.getElementById('page1').style.display='block';
-					
-					document.getElementById('page3').style.display='none';
+					document.getElementById('page1').style.display='block';	
+				}
+				else if(a==2)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-bank"></i> Departments';
+					document.getElementById('page2').style.display='block';
 				}
 				else if(a==3)
 				{
-					document.getElementById('page_title').innerHTML='<i class="fa fa-edit"></i> Edit Profile';
-					document.getElementById('page1').style.display='none';
-					
+					document.getElementById('page_title').innerHTML='<i class="fa fa-tree"></i> Programs';
 					document.getElementById('page3').style.display='block';
 				}
+				else if(a==4)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-book"></i> Course List';
+					document.getElementById('page4').style.display='block';
+				}
+				else if(a==5)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-laptop"></i> Course Offer List';
+					document.getElementById('page5').style.display='block';
+				}
+				else if(a==6)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-users"></i> Moderators';
+					document.getElementById('page6').style.display='block';
+				}
+				else if(a==7)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-users"></i> Faculties';
+					document.getElementById('page7').style.display='block';
+				}
+				else if(a==8)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-users"></i> Students';
+					document.getElementById('page8').style.display='block';
+				}
+				else if(a==9)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-table"></i> Results';
+					document.getElementById('page9').style.display='block';
+				}
+				else if(a==10)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-desktop"></i> System Components';
+					document.getElementById('page10').style.display='block';
+				}
+				else if(a==11)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-history"></i> Result Search Records';
+					document.getElementById('page11').style.display='block';
+				}
+				else if(a==12)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-history"></i> Transcript Print Records';
+					document.getElementById('page12').style.display='block';
+				}
+				else if(a==13)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-history"></i> User Login Records';
+					document.getElementById('page13').style.display='block';
+				}
+				else if(a==14)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-edit"></i> Edit Profile';
+					document.getElementById('page14').style.display='block';
+				}
+				<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
+				else if(a==15)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-users"></i> Admins';
+					document.getElementById('page15').style.display='block';
+				}
+				<?php } ?>
 			}
 		</script>
 		

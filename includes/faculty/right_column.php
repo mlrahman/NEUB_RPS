@@ -28,7 +28,7 @@
 			<p class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 7px;z-index: 99999;">
 				
 				<i class="fa fa-folder-open-o"></i> Program: 
-				<select onchange="reload_dashboard()" id="program_id">
+				<select onchange="reload_dashboard()" id="program_id" style="max-width:150px;">
 					<option value="-1">All</option>
 					<?php
 						$stmt = $conn->prepare("SELECT * FROM nr_program where nr_dept_id=:dept_id and nr_prog_status='Active' order by nr_prog_id asc");
@@ -115,7 +115,7 @@
 			<p id="prog_student" class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 0px;z-index: 99999;">
 				
 				<i class="fa fa-folder-open-o"></i> Program: 
-				<select onchange="reload_dashboard2()" id="program_id2">
+				<select onchange="reload_dashboard2()" id="program_id2" style="max-width:150px;">
 					<option value="-1">All</option>
 					<?php
 						$stmt = $conn->prepare("SELECT * FROM nr_program where nr_dept_id=:dept_id and nr_prog_status='Active' order by nr_prog_id asc");
@@ -147,7 +147,7 @@
 			<p id="prog_course" class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 0px;z-index: 99999;display:none;">
 				
 				<i class="fa fa-folder-open-o"></i> Program: 
-				<select onchange="reload_dashboard3()" id="program_id3">
+				<select onchange="reload_dashboard3()" id="program_id3" style="max-width:150px;">
 					<option value="-1">All</option>
 					<?php
 						$stmt = $conn->prepare("SELECT * FROM nr_program where nr_dept_id=:dept_id and nr_prog_status='Active' order by nr_prog_id asc");

@@ -1,6 +1,6 @@
 <?php
 	try{
-		require("../includes/faculty/logged_out_auth.php");
+		require("../includes/super_admin/logged_out_auth.php");
 	}
 	catch(Exception $e)
 	{
@@ -39,6 +39,7 @@
 	{
 		//return 0;
 		var prog_id=document.getElementById('program_id').value;
+		var dept_id=document.getElementById('dept_id').value;
 		document.getElementById("recent_results_loading").innerHTML='<td colspan="8"><p class="w3-center" style="margin: 10px 0px 10px 0px;"><i class="fa fa-refresh w3-spin"></i> Please wait!! while loading...</p></td>';
 			
 		var total_results = new XMLHttpRequest();
@@ -53,7 +54,7 @@
 				get_recent_results(x);
 			}
 		};
-		total_results.open("GET", "../includes/faculty/get_total_results.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id="+prog_id, true);
+		total_results.open("GET", "../includes/super_admin/get_total_results.php?dept_id="+dept_id+"&admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&program_id="+prog_id, true);
 		total_results.send();
 	}
 	
@@ -67,6 +68,7 @@
 		if(total!=0)
 		{
 			var prog_id=document.getElementById('program_id').value;
+			var dept_id=document.getElementById('dept_id').value;
 		
 			document.getElementById("show_more_btn").style.display='none';
 			
@@ -90,7 +92,7 @@
 			var recent_results_from=page;
 			page=page+5;
 			
-			recent_results.open("GET", "../includes/faculty/get_recent_results.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&recent_results_from="+recent_results_from+"&program_id="+prog_id, true);
+			recent_results.open("GET", "../includes/super_admin/get_recent_results.php?dept_id="+dept_id+"&admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&recent_results_from="+recent_results_from+"&program_id="+prog_id, true);
 			recent_results.send();
 		}
 		else
@@ -102,7 +104,7 @@
 		}
 	}
 	
-	get_total_recent_results(0);
+	//get_total_recent_results(0);
 
 		
 </script>

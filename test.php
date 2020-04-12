@@ -4,17 +4,17 @@ include("includes/function.php");
 
 //echo get_reference('140203020002');
 
-/*
-$s_id=140203020004;
-$marks=30;
-$gpa=0.00;
-$g='F';
+
+$s_id=150102040001;
+$marks=70;
+$gpa=3.50;
+$g='A-';
 echo 'Marks:</br>';
 echo marks_encrypt($s_id,$marks).'</br>';
 echo marks_decrypt($s_id,marks_encrypt($s_id,$marks)).'</br>';
 echo 'Grade:</br>';
 echo grade_encrypt($s_id,$g).'</br>';
-echo grade_decrypt($s_id,'89f276cc01d4af01fa8cee48af8ee962bac42500').'</br>';
+echo grade_decrypt($s_id,grade_encrypt($s_id,$g)).'</br>';
 echo 'Grade Point:</br>';
 echo grade_point_encrypt($s_id,$gpa).'</br>';
 echo grade_point_decrypt($s_id,grade_point_encrypt($s_id,$gpa)).'</br>';
