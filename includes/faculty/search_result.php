@@ -15,7 +15,7 @@
 	
 		<div class="w3-container w3-topbar w3-bottombar w3-round-large w3-rightbar w3-leftbar w3-padding" style="margin:0 auto; width:50%;min-width:300px;">
 			<i class="fa fa-search w3-text-teal"></i> 
-			<input type="text" id="search_text" onkeyup="get_suggestions()" class="w3-input w3-border-teal" style="width:92%;min-width:230px;display:inline;" placeholder="Enter Student Name or ID for Search">
+			<input type="text" id="search_text" oninput="get_suggestions()" class="w3-input w3-border-teal" style="width:92%;min-width:230px;display:inline;" placeholder="Enter Student Name or ID for Search">
 		</div>
 		
 		<script>

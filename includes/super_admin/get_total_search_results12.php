@@ -1,0 +1,83 @@
+<?php
+	session_start();
+	require("../db_connection.php"); 
+	require("../function.php"); 
+	try{
+		require("logged_out_auth.php");
+	}
+	catch(Exception $e)
+	{
+		header("location:index.php");
+		die();
+	}
+	if(isset($_REQUEST['search_text']) && isset($_REQUEST['admin_id']) &&  $_REQUEST['admin_id']==$_SESSION['admin_id'])
+	{
+		$admin_id=trim($_REQUEST['admin_id']);
+		$search_text=trim($_REQUEST['search_text']);
+		$stmt = $conn->prepare("select * from nr_transcript_print_reference where nr_trprre_status='Active' ");
+		$stmt->execute();
+		$result = $stmt->fetchAll();
+		if(count($result)>0)
+		{
+			$sz=count($result);
+			$count=0;
+			for($i=0;$i<$sz;$i++)
+			{
+				$role=$result[$i][1];
+				$ref=$result[$i][11];
+				$user_id=$result[$i][2];
+				if($role=='Faculty')
+				{
+					$stmt = $conn->prepare("select * from nr_faculty where nr_faculty_id='$user_id' ");
+					$stmt->execute();
+					$t_result = $stmt->fetchAll();
+					if($search_text!='' && (stripos($t_result[0][1], $search_text) !== false || stripos($ref, $search_text) !== false))
+					{
+						$count++;
+					}
+					else if($search_text=='')
+					{
+						$count++;
+					}
+				}
+				else if($role=='Student')
+				{
+					$stmt = $conn->prepare("select * from nr_student where nr_stud_id='$user_id' ");
+					$stmt->execute();
+					$t_result = $stmt->fetchAll();
+					if($search_text!='' && (stripos($t_result[0][1], $search_text) !== false || stripos($ref, $search_text) !== false))
+					{
+						$count++;
+					}
+					else if($search_text=='')
+					{
+						$count++;
+					}
+				}
+				else
+				{
+					$stmt = $conn->prepare("select * from nr_admin where nr_admin_id='$user_id' ");
+					$stmt->execute();
+					$t_result = $stmt->fetchAll();
+					if($search_text!='' && (stripos($t_result[0][1], $search_text) !== false || stripos($ref, $search_text) !== false))
+					{
+						$count++;
+					}
+					else if($search_text=='')
+					{
+						$count++;
+					}
+				}
+			}
+			echo $count;
+		}
+		else
+		{
+			echo '0';
+		}
+	}
+	else
+	{
+		echo '<i class="fa fa-warning w3-text-red" title="Error occurred!!"> Error</i>';
+	}
+?>

@@ -14,7 +14,7 @@
 	<div class="w3-container" style="margin: 12px 0px 25px 0px;padding:0px;position:relative;">
 		<div class="w3-container w3-topbar w3-bottombar w3-round-large w3-rightbar w3-leftbar w3-padding" style="margin:0 auto; width:50%;min-width:300px;">
 			<i class="fa fa-search w3-text-teal"></i> 
-			<input type="text" id="search_text2" onkeyup="get_search_result2()" class="w3-input w3-border-teal" style="width:92%;min-width:230px;display:inline;" placeholder="Enter Course Name or Code for Search">
+			<input type="text" id="search_text2" oninput="get_search_result2()" class="w3-input w3-border-teal" style="width:92%;min-width:230px;display:inline;" placeholder="Enter Course Name or Code for Search">
 		</div>
 	</div>
 
@@ -241,7 +241,7 @@
 			{
 				document.getElementById("search_results_loading2").innerHTML='';
 				document.getElementById('search_data_label2').innerHTML='N/A';
-				document.getElementById('search_result_tables2').innerHTML='<tr><td colspan="9"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+				document.getElementById('search_result_tables2').innerHTML='<tr><td colspan="8"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
 				document.getElementById("show_more_btn_search_result2").style.display='none';
 				
 			}
