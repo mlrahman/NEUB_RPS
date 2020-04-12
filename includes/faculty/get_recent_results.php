@@ -16,11 +16,11 @@
 		$program_id=$_REQUEST['program_id'];
 		if($program_id==-1)
 		{
-			$stmt = $conn->prepare("SELECT * FROM nr_result a,nr_course b where a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:dept_id) and a.nr_course_id=b.nr_course_id and nr_result_status='Active' order by nr_result_id desc limit $page,5");
+			$stmt = $conn->prepare("SELECT * FROM nr_result a,nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:dept_id) and a.nr_course_id=b.nr_course_id and nr_result_status='Active' order by nr_result_id desc limit $page,5");
 		}
 		else
 		{
-			$stmt = $conn->prepare("SELECT * FROM nr_result a,nr_course b where a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:dept_id) and a.nr_prog_id=:prog_id and a.nr_course_id=b.nr_course_id and nr_result_status='Active' order by nr_result_id desc limit $page,5");
+			$stmt = $conn->prepare("SELECT * FROM nr_result a,nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:dept_id) and a.nr_prog_id=:prog_id and a.nr_course_id=b.nr_course_id and nr_result_status='Active' order by nr_result_id desc limit $page,5");
 			$stmt->bindParam(':prog_id', $program_id);
 		}
 		$stmt->bindParam(':dept_id', $_SESSION['faculty_dept_id']);

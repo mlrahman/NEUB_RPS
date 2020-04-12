@@ -23,11 +23,11 @@
 			$program_id=trim($_REQUEST['program_id']);
 			if($program_id==-1)
 			{
-				$stmt = $conn->prepare("select * from nr_result a,nr_course b where a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_result_status='Active' and a.nr_course_id=b.nr_course_id and a.nr_result_semester='$semester' and a.nr_result_year='$year' order by a.nr_stud_id asc");
+				$stmt = $conn->prepare("select * from nr_result a,nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_result_status='Active' and a.nr_course_id=b.nr_course_id and a.nr_result_semester='$semester' and a.nr_result_year='$year' order by a.nr_stud_id asc");
 			}
 			else
 			{
-				$stmt = $conn->prepare("select * from nr_result a,nr_course b where a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' and a.nr_course_id=b.nr_course_id and a.nr_result_semester='$semester' and a.nr_result_year='$year' order by a.nr_stud_id asc");
+				$stmt = $conn->prepare("select * from nr_result a,nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' and a.nr_course_id=b.nr_course_id and a.nr_result_semester='$semester' and a.nr_result_year='$year' order by a.nr_stud_id asc");
 				$stmt->bindParam(':prog_id', $program_id);
 			}
 			$stmt->bindParam(':f_d_id', $_REQUEST['faculty_dept_id']);

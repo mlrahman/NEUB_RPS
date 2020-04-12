@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2020 at 11:10 AM
+-- Generation Time: Apr 12, 2020 at 11:26 AM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -48,7 +48,8 @@ CREATE TABLE `nr_admin` (
 --
 
 INSERT INTO `nr_admin` (`nr_admin_id`, `nr_admin_name`, `nr_admin_email`, `nr_admin_password`, `nr_admin_cell_no`, `nr_admin_photo`, `nr_admin_type`, `nr_admin_designation`, `nr_admin_status`, `nr_admin_two_factor`, `nr_admin_resign_date`, `nr_admin_gender`) VALUES
-(1, 'Shams Elahi Rasel', 'mirlutfur.rahman@gmail.com', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '', '', 'Super Admin', 'Controller of Examination, NEUB', 'Active', 1, '', 'Male');
+(1, 'Shams Elahi Rasel', 'mirlutfur.rahman@gmail.com', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '', '', 'Super Admin', 'Controller of Examination, NEUB', 'Active', 1, '', 'Male'),
+(2, 'Fahad Ahmed', 'mlrahman@neub.edu.bd', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '', '', 'Moderator', 'Assistant Controller of NEUB', 'Active', 1, '', 'Male');
 
 -- --------------------------------------------------------
 
@@ -93,7 +94,13 @@ INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '10:07 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '10:08 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '10:12 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '10:21 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '10:21 PM', 'Active'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-10', '03:15 PM', 'Active'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-10', '03:19 PM', 'Active'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-10', '03:20 PM', 'Active'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-10', '03:24 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-11', '06:13 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:24 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -124,7 +131,8 @@ INSERT INTO `nr_course` (`nr_course_id`, `nr_course_code`, `nr_course_title`, `n
 (7, 'CSE 123', 'Discrete Mathematics', 3, 1, 'Active'),
 (8, 'CSE 211', 'Object Oriented Programming Language', 3, 1, 'Active'),
 (9, 'CSE 212', 'Object Oriented Programming Language Lab', 1.5, 1, 'Active'),
-(10, 'CSE 455', 'Bioinformatics', 3, 1, 'Active');
+(10, 'CSE 455', 'Bioinformatics', 3, 1, 'Active'),
+(11, 'BBA 201', 'Cost Management and Accounting', 3, 3, 'Active');
 
 -- --------------------------------------------------------
 
@@ -144,7 +152,10 @@ CREATE TABLE `nr_department` (
 --
 
 INSERT INTO `nr_department` (`nr_dept_id`, `nr_dept_title`, `nr_dept_code`, `nr_dept_status`) VALUES
-(1, 'Computer Science & Engineering', 3, 'Active');
+(1, 'Computer Science & Engineering', 3, 'Active'),
+(2, 'Business Administration', 2, 'Active'),
+(3, 'English', 1, 'Active'),
+(4, 'Law and Justice', 4, 'Active');
 
 -- --------------------------------------------------------
 
@@ -249,7 +260,11 @@ CREATE TABLE `nr_faculty_login_transaction` (
 INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_address`, `nr_falotr_country`, `nr_falotr_city`, `nr_falotr_lat`, `nr_falotr_lng`, `nr_falotr_timezone`, `nr_falotr_date`, `nr_falotr_time`, `nr_falotr_status`) VALUES
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '10:13 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '10:14 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '10:17 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '10:17 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-11', '06:09 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-11', '09:26 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-11', '09:48 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:13 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -401,7 +416,9 @@ INSERT INTO `nr_faculty_result_check_transaction` (`nr_stud_id`, `nr_faculty_id`
 (140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '05:35 PM', 'Active'),
 (140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '06:52 PM', 'Active'),
 (140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '07:56 PM', 'Active'),
-(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '09:33 PM', 'Active');
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '09:33 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-11', '06:10 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:23 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -423,7 +440,8 @@ CREATE TABLE `nr_program` (
 
 INSERT INTO `nr_program` (`nr_prog_id`, `nr_prog_title`, `nr_prog_code`, `nr_dept_id`, `nr_prog_status`) VALUES
 (1, 'B.Sc. (Engg.) in CSE', 2, 1, 'Active'),
-(2, 'M.Sc. (Engg.) in CSE', 3, 1, 'Active');
+(2, 'M.Sc. (Engg.) in CSE', 3, 1, 'Active'),
+(3, 'BBA', 4, 2, 'Active');
 
 -- --------------------------------------------------------
 
@@ -446,7 +464,8 @@ CREATE TABLE `nr_program_credit` (
 
 INSERT INTO `nr_program_credit` (`nr_prcr_id`, `nr_prog_id`, `nr_prcr_total`, `nr_prcr_date`, `nr_prcr_ex_date`, `nr_prcr_status`) VALUES
 (1, 1, 160, '2012-01-01', '', 'Active'),
-(2, 2, 36, '2020-03-26', '', 'Active');
+(2, 2, 36, '2020-03-26', '', 'Active'),
+(3, 3, 127, '2020-04-11', '', 'Active');
 
 -- --------------------------------------------------------
 
@@ -487,7 +506,8 @@ INSERT INTO `nr_result` (`nr_result_id`, `nr_stud_id`, `nr_course_id`, `nr_resul
 (10, 140203020002, 7, 140203022812.5, '264c6dfec271ba9a2a1526fa29b7754ef7eb0fd8', 140203022812.5, 'Summer', 2014, '', 'Active', 1, '2020-01-30', 1),
 (11, 140203020002, 2, 140203025812.5, '264c6dfec271ba9a2a1526fa29b7754ef7eb0fd8', 140203022812.5, 'Summer', 2015, '', 'Active', 1, '2020-01-30', 1),
 (12, 140203020004, 1, 140203029814.5, '4ebc27a8251909faa082444ff8bfb1b68ab051e1', 140203026314.5, 'Spring', 2015, '', 'Active', 1, '2020-03-27', 1),
-(13, 140203020004, 10, 140203025814.5, 'd46b42d101ffeddecfdc21efea570b4d17fe65a2', 140203022814.5, 'Spring', 2016, 'MakeUp_MS_SF', 'Active', 1, '2020-03-31', 1);
+(13, 140203020004, 10, 140203025814.5, 'd46b42d101ffeddecfdc21efea570b4d17fe65a2', 140203022814.5, 'Spring', 2016, 'MakeUp_MS_SF', 'Active', 1, '2020-03-31', 1),
+(14, 150102040001, 11, 150102049811.5, '48f31fa4724d90fe2fa9edaf7f95a5acbdba471a', 150102046311.5, 'Summer', 2015, 'MakeUp_SF', 'Active', 3, '2020-04-11', 1);
 
 -- --------------------------------------------------------
 
@@ -1103,7 +1123,17 @@ INSERT INTO `nr_result_check_transaction` (`nr_stud_id`, `nr_rechtr_ip_address`,
 (140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '02:01 PM', 'Active'),
 (140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '02:01 PM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '07:56 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '09:38 PM', 'Active');
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '09:38 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:04 PM', 'Active'),
+(150102040001, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:06 PM', 'Active'),
+(150102040001, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:09 PM', 'Active'),
+(150102040001, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:12 PM', 'Active'),
+(150102040001, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:27 PM', 'Active'),
+(150102040001, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:30 PM', 'Active'),
+(150102040001, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:31 PM', 'Active'),
+(150102040001, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:35 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:35 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:36 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1134,7 +1164,8 @@ INSERT INTO `nr_student` (`nr_stud_id`, `nr_stud_name`, `nr_stud_dob`, `nr_stud_
 (140203020004, 'Pranta Sarkar', '1990-07-02', 'Male', 'psarkar@gmail.com', '', '', 1, 1, 'Active'),
 (140203020005, 'Topu Dash Roy', '1994-12-31', 'Male', 'topucse05@gmail.com', '', '', 1, 1, 'Active'),
 (140203020006, 'Shamima Khatun', '1990-07-02', 'Female', '', '', '', 1, 1, 'Active'),
-(140203020009, 'Nusrat Hoque', '1990-07-02', 'Female', '', '', '', 1, 1, 'Active');
+(140203020009, 'Nusrat Hoque', '1990-07-02', 'Female', '', '', '', 1, 1, 'Active'),
+(150102040001, 'Rahat Mahmud', '1994-07-02', 'Male', '', '', '', 3, 3, 'Active');
 
 -- --------------------------------------------------------
 
@@ -1213,8 +1244,10 @@ CREATE TABLE `nr_transcript_print_reference` (
 --
 
 INSERT INTO `nr_transcript_print_reference` (`nr_stud_id`, `nr_trprre_printed_by`, `nr_trprre_user_id`, `nr_trprre_ip_address`, `nr_trprre_country`, `nr_trprre_city`, `nr_trprre_lat`, `nr_trprre_lng`, `nr_trprre_timezone`, `nr_trprre_date`, `nr_trprre_time`, `nr_trprre_reference`, `nr_trprre_status`) VALUES
+(150102040001, 'Student', 150102040001, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:12 PM', '0131201210123742', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '09:39 PM', '0234200905393013', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '07:34 PM', '0236202903340580', 'Active'),
+(140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:37 PM', '0241201210371642', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '07:56 PM', '0248203103563025', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '07:40 PM', '0250202903405318', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '02:48 PM', '0254203110482865', 'Active'),
@@ -1363,19 +1396,19 @@ ALTER TABLE `nr_transcript_print_reference`
 -- AUTO_INCREMENT for table `nr_admin`
 --
 ALTER TABLE `nr_admin`
-  MODIFY `nr_admin_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `nr_admin_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `nr_course`
 --
 ALTER TABLE `nr_course`
-  MODIFY `nr_course_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `nr_course_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `nr_department`
 --
 ALTER TABLE `nr_department`
-  MODIFY `nr_dept_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `nr_dept_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `nr_drop`
@@ -1393,19 +1426,19 @@ ALTER TABLE `nr_faculty`
 -- AUTO_INCREMENT for table `nr_program`
 --
 ALTER TABLE `nr_program`
-  MODIFY `nr_prog_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `nr_prog_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `nr_program_credit`
 --
 ALTER TABLE `nr_program_credit`
-  MODIFY `nr_prcr_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `nr_prcr_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `nr_result`
 --
 ALTER TABLE `nr_result`
-  MODIFY `nr_result_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `nr_result_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `nr_student_waived_credit`

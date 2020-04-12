@@ -29,11 +29,11 @@
 			$order='asc';
 			if($program_id2==-1)
 			{
-				$stmt = $conn->prepare("select * from nr_result a, nr_course b where (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and nr_result_status='Active' order by ".$order_by." ".$order);
+				$stmt = $conn->prepare("select * from nr_result a, nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and nr_result_status='Active' order by ".$order_by." ".$order);
 			}
 			else
 			{
-				$stmt = $conn->prepare("select * from nr_result a, nr_course b where (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' order by ".$order_by." ".$order);
+				$stmt = $conn->prepare("select * from nr_result a, nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' order by ".$order_by." ".$order);
 				$stmt->bindParam(':prog_id', $program_id2);
 			}
 			$stmt->bindParam(':f_d_id', $faculty_dept_id);
@@ -45,11 +45,11 @@
 			$order='desc';
 			if($program_id2==-1)
 			{
-				$stmt = $conn->prepare("select * from nr_result a, nr_course b where (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and nr_result_status='Active' order by ".$order_by." ".$order);
+				$stmt = $conn->prepare("select * from nr_result a, nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and nr_result_status='Active' order by ".$order_by." ".$order);
 			}
 			else
 			{
-				$stmt = $conn->prepare("select * from nr_result a, nr_course b where (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' order by ".$order_by." ".$order);
+				$stmt = $conn->prepare("select * from nr_result a, nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' order by ".$order_by." ".$order);
 				$stmt->bindParam(':prog_id', $program_id2);
 			}
 			$stmt->bindParam(':f_d_id', $faculty_dept_id);
@@ -57,15 +57,15 @@
 		}
 		else if($sort==3)
 		{
-			$order_by='nr_stud_id';
+			$order_by='c.nr_stud_id';
 			$order='asc';
 			if($program_id2==-1)
 			{
-				$stmt = $conn->prepare("select * from nr_result a, nr_course b where (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and nr_result_status='Active' order by ".$order_by." ".$order);
+				$stmt = $conn->prepare("select * from nr_result a, nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and nr_result_status='Active' order by ".$order_by." ".$order);
 			}
 			else
 			{
-				$stmt = $conn->prepare("select * from nr_result a, nr_course b where (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' order by ".$order_by." ".$order);
+				$stmt = $conn->prepare("select * from nr_result a, nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' order by ".$order_by." ".$order);
 				$stmt->bindParam(':prog_id', $program_id2);
 			}
 			$stmt->bindParam(':f_d_id', $faculty_dept_id);
@@ -73,15 +73,15 @@
 		}
 		else if($sort==4)
 		{
-			$order_by='nr_stud_id';
+			$order_by='c.nr_stud_id';
 			$order='desc';
 			if($program_id2==-1)
 			{
-				$stmt = $conn->prepare("select * from nr_result a, nr_course b where (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and nr_result_status='Active' order by ".$order_by." ".$order);
+				$stmt = $conn->prepare("select * from nr_result a, nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and nr_result_status='Active' order by ".$order_by." ".$order);
 			}
 			else
 			{
-				$stmt = $conn->prepare("select * from nr_result a, nr_course b where (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' order by ".$order_by." ".$order);
+				$stmt = $conn->prepare("select * from nr_result a, nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' order by ".$order_by." ".$order);
 				$stmt->bindParam(':prog_id', $program_id2);
 			}
 			$stmt->bindParam(':f_d_id', $faculty_dept_id);
@@ -93,11 +93,11 @@
 			$order='asc';
 			if($program_id2==-1)
 			{
-				$stmt = $conn->prepare("select * from nr_result a, nr_course b where (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and nr_result_status='Active' order by b.".$order_by." ".$order);
+				$stmt = $conn->prepare("select * from nr_result a, nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and nr_result_status='Active' order by b.".$order_by." ".$order);
 			}
 			else
 			{
-				$stmt = $conn->prepare("select * from nr_result a, nr_course b where (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' order by b.".$order_by." ".$order);
+				$stmt = $conn->prepare("select * from nr_result a, nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' order by b.".$order_by." ".$order);
 				$stmt->bindParam(':prog_id', $program_id2);
 			}
 			$stmt->bindParam(':f_d_id', $faculty_dept_id);
@@ -109,11 +109,11 @@
 			$order='desc';
 			if($program_id2==-1)
 			{
-				$stmt = $conn->prepare("select * from nr_result a, nr_course b where (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and nr_result_status='Active' order by b.".$order_by." ".$order);
+				$stmt = $conn->prepare("select * from nr_result a, nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and nr_result_status='Active' order by b.".$order_by." ".$order);
 			}
 			else
 			{
-				$stmt = $conn->prepare("select * from nr_result a, nr_course b where (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' order by b.".$order_by." ".$order);
+				$stmt = $conn->prepare("select * from nr_result a, nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' order by b.".$order_by." ".$order);
 				$stmt->bindParam(':prog_id', $program_id2);
 			}
 			$stmt->bindParam(':f_d_id', $faculty_dept_id);
@@ -125,11 +125,11 @@
 			$order='asc';
 			if($program_id2==-1)
 			{
-				$stmt = $conn->prepare("select * from nr_result a, nr_course b where (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and nr_result_status='Active' order by b.".$order_by." ".$order);
+				$stmt = $conn->prepare("select * from nr_result a, nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and nr_result_status='Active' order by b.".$order_by." ".$order);
 			}
 			else
 			{
-				$stmt = $conn->prepare("select * from nr_result a, nr_course b where (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' order by b.".$order_by." ".$order);
+				$stmt = $conn->prepare("select * from nr_result a, nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' order by b.".$order_by." ".$order);
 				$stmt->bindParam(':prog_id', $program_id2);
 			}
 			$stmt->bindParam(':f_d_id', $faculty_dept_id);
@@ -141,11 +141,11 @@
 			$order='desc';
 			if($program_id2==-1)
 			{
-				$stmt = $conn->prepare("select * from nr_result a, nr_course b where (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and nr_result_status='Active' order by b.".$order_by." ".$order);
+				$stmt = $conn->prepare("select * from nr_result a, nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and nr_result_status='Active' order by b.".$order_by." ".$order);
 			}
 			else
 			{
-				$stmt = $conn->prepare("select * from nr_result a, nr_course b where (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' order by b.".$order_by." ".$order);
+				$stmt = $conn->prepare("select * from nr_result a, nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and (b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id and a.nr_prog_id in (select nr_prog_id from nr_program where  nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' order by b.".$order_by." ".$order);
 				$stmt->bindParam(':prog_id', $program_id2);
 			}
 			$stmt->bindParam(':f_d_id', $faculty_dept_id);

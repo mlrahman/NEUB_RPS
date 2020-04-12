@@ -707,6 +707,8 @@
 					<?php
 						//Drop courses there
 						//getting dept last result semester
+						$last_semester='';
+						$last_year='';
 						$stmt = $conn->prepare("SELECT * FROM nr_result where nr_prog_id=:prog_id and  nr_result_status='Active' order by nr_result_year desc, nr_result_semester desc");
 						$stmt->bindParam(':prog_id', $prog_id);
 						$stmt->execute();
@@ -720,6 +722,8 @@
 						//echo $last_semester.' '.$last_year.'</br>';
 						$first_semester=get_session_semester($s_id);
 						$first_year=get_year($s_id);
+						if($last_semester=='') $last_semester=$first_semester;
+						if($last_year=='') $last_year=$first_year;
 						//echo $first_semester.' '.$first_year.'</br>';
 						
 						if($first_year>$last_year)
@@ -897,44 +901,44 @@
 									}
 								}
 								
-							}
-							if(count($drop_re)==0)
-							{
-								echo '<p class="w3-center w3-text-red" style="margin: 100px 0px 0px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
-							}
-							else
-							{
-								?>
-								<p class="w3-margin-0 w3-padding-0 w3-small w3-bold w3-justify w3-text-red">
-									Note: This drop courses list generated according to the program syllabus so it may not be same with the department offered course list.
-								</p>
-								<table style="width:96%;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
-									<tr class="w3-black w3-bold w3-padding-small">
-										<td colspan="2" valign="top" class="w3-padding-small">Drop Courses</td>
-										<td colspan="1" class="w3-padding-small" valign="top">Credit: <?php echo number_format($drop_credit,2); ?></td>
-									</tr>
-									<tr class="w3-teal w3-bold">
-										<td valign="top" style="width:30%;" class="w3-padding-small">Course Code</td>
-										<td valign="top" style="width:45%;" class="w3-padding-small">Course Title</td>
-										<td valign="top" style="width:25%;" class="w3-padding-small">Credit</td>
-									</tr>
-									<?php
-										foreach($drop_re as $cge)
-										{
+							
+								if(count($drop_re)==0)
+								{
+									echo '<p class="w3-center w3-text-red" style="margin: 100px 0px 0px 0px;"><i class="fa fa-warning"></i> No data available.</p>';
+								}
+								else
+								{
 									?>
-											<tr>
-												<td valign="top" class="w3-padding-small"><?php echo $cge['course_code']; ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo $cge['course_title']; ?></td>
-												<td valign="top" class="w3-padding-small"><?php echo number_format($cge['course_credit'],2); ?></td>
-											</tr>
-									
-									<?php
-										}
-									?>
-								</table>
-							<?php	
+									<p class="w3-margin-0 w3-padding-0 w3-small w3-bold w3-justify w3-text-red">
+										Note: This drop courses list generated according to the program syllabus so it may not be same with the department offered course list.
+									</p>
+									<table style="width:96%;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
+										<tr class="w3-black w3-bold w3-padding-small">
+											<td colspan="2" valign="top" class="w3-padding-small">Drop Courses</td>
+											<td colspan="1" class="w3-padding-small" valign="top">Credit: <?php echo number_format($drop_credit,2); ?></td>
+										</tr>
+										<tr class="w3-teal w3-bold">
+											<td valign="top" style="width:30%;" class="w3-padding-small">Course Code</td>
+											<td valign="top" style="width:45%;" class="w3-padding-small">Course Title</td>
+											<td valign="top" style="width:25%;" class="w3-padding-small">Credit</td>
+										</tr>
+										<?php
+											foreach($drop_re as $cge)
+											{
+										?>
+												<tr>
+													<td valign="top" class="w3-padding-small"><?php echo $cge['course_code']; ?></td>
+													<td valign="top" class="w3-padding-small"><?php echo $cge['course_title']; ?></td>
+													<td valign="top" class="w3-padding-small"><?php echo number_format($cge['course_credit'],2); ?></td>
+												</tr>
+										
+										<?php
+											}
+										?>
+									</table>
+								<?php	
+								}
 							}
-						
 					
 						}
 					?>
