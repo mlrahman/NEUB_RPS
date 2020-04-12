@@ -9,7 +9,7 @@
 	}
 ?>
 
-<i onclick="page12_topFunction()" id="page12_btn" class="fa fa-chevron-circle-up w3-cursor w3-text-black w3-hover-text-teal w3-xxlarge" title="Go to top" style="display:none;bottom: 95px;right:45px;z-index: 99999;position:fixed;"></i>
+<i onclick="pa12_topFunction()" id="pa12_btn" class="fa fa-chevron-circle-up w3-cursor w3-text-black w3-hover-text-teal w3-xxlarge" title="Go to top" style="display:none;bottom: 95px;right:45px;z-index: 99999;position:fixed;"></i>
 
 <div class="w3-container w3-margin-bottom w3-margin-top">
 
@@ -195,7 +195,7 @@
 	
 	
 	//Get the button
-	var pa12_btn = document.getElementById("page12_btn");
+	var pa12_btn = document.getElementById("pa12_btn");
 	var pa12=document.getElementById('page12');
 	// When the user scrolls down 20px from the top of the document, show the button
 	pa12.onscroll = function() {pa12_scrollFunction()};
