@@ -10,7 +10,7 @@
 		header("location:index.php");
 		die();
 	}
-	if(isset($_REQUEST['search_text']) && isset($_REQUEST['sort']) && isset($_REQUEST['search_results_from']) && isset($_REQUEST['admin_id']) &&  $_REQUEST['admin_id']==$_SESSION['admin_id'])
+	if(isset($_REQUEST['dept_id']) && isset($_REQUEST['program_id']) && isset($_REQUEST['search_text']) && isset($_REQUEST['sort']) && isset($_REQUEST['search_results_from']) && isset($_REQUEST['admin_id']) &&  $_REQUEST['admin_id']==$_SESSION['admin_id'])
 	{
 		$admin_id=trim($_REQUEST['admin_id']);
 		$search_text=trim($_REQUEST['search_text']);
@@ -38,7 +38,29 @@
 		}
 		
 		
-		$stmt = $conn->prepare("select * from nr_transcript_print_reference where nr_trprre_status='Active' order by ".$order_by." ".$order." ");
+		$dept_id=trim($_REQUEST['dept_id']);
+		$program_id=trim($_REQUEST['program_id']);
+		
+		if($program_id==-1 && $dept_id==-1)
+		{
+			$stmt = $conn->prepare("select * from nr_transcript_print_reference where nr_trprre_status='Active' order by ".$order_by." ".$order." ");
+		}
+		else if($program_id==-1 && $dept_id!=-1)
+		{
+			$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_dept_id=:dept_id and a.nr_trprre_status='Active' order by ".$order_by." ".$order." ");
+			$stmt->bindParam(':dept_id', $dept_id);
+		}
+		else if($program_id!=-1 && $dept_id==-1)
+		{
+			$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_prog_id=:prog_id and a.nr_trprre_status='Active' order by ".$order_by." ".$order." ");
+			$stmt->bindParam(':prog_id', $program_id);
+		}
+		else
+		{
+			$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_dept_id=:dept_id and c.nr_prog_id=:prog_id and a.nr_trprre_status='Active' order by ".$order_by." ".$order." ");
+			$stmt->bindParam(':dept_id', $dept_id);
+			$stmt->bindParam(':prog_id', $program_id);
+		}
 		$stmt->execute();
 		$result = $stmt->fetchAll();
 		if(count($result)>0)
