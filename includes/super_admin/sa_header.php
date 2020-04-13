@@ -39,8 +39,9 @@ Email: mlrahman@neub.edu.bd
 		$web=$result[0][8];
 		$contact_email=$result[0][9];//for sending message from contact us form
 		$map=$result[0][10];
-		//logo and video is always fixed in name 
-		
+		$logo=$result[0][13];
+		$video_alt=$result[0][14];
+		$video=$result[0][15];
 		
 		
 		
@@ -65,7 +66,7 @@ Email: mlrahman@neub.edu.bd
 		<meta name="generator" content="<?php echo $title; ?>"/>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="shortcut icon" href="../images/system/logo.png">
+		<link rel="shortcut icon" href="../images/system/<?php echo $logo; ?>">
 		<title><?php echo $title; ?></title>
 		<link rel="stylesheet" href="../css/w3.css">
 		<link rel="stylesheet" href="../css/style.css">

@@ -1,10 +1,10 @@
 
 <header class="w3-display-container w3-grayscale-min w3-dark-gray w3-hover-teal" style="height:450px;overflow:hidden;">
 	
-	<img src="../images/system/video_alt.jpg" class="w3-image w3-grayscale w3-opacity-min" alt="Video Alternate" style="height:100%;width:100%;"/>
+	<img src="../images/system/<?php echo $video_alt; ?>" class="w3-image w3-grayscale w3-opacity-min" alt="Video Alternate" style="height:100%;width:100%;"/>
 	
 	<video autoplay muted loop id="myVideo" class="w3-grayscale">
-		<source src="../images/system/welcome.mp4" type="video/mp4"><img src="../images/system/video_alt.jpg" class="w3-image w3-grayscale w3-opacity-min" alt="Video Alternate" style="height:100%;width:100%;"/>
+		<source src="../images/system/<?php echo $video; ?>" type="video/mp4"><img src="../images/system/<?php echo $video_alt; ?>" class="w3-image w3-grayscale w3-opacity-min" alt="Video Alternate" style="height:100%;width:100%;"/>
 	</video>
 	<?php 
 		if($caption!="")

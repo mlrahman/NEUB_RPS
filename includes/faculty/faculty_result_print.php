@@ -46,7 +46,9 @@
 			$web=$result_t[0][8];
 			$contact_email=$result_t[0][9];
 			$map=$result_t[0][10];
-			
+			$logo=$result[0][13];
+			$video_alt=$result[0][14];
+			$video=$result[0][15];
 			
 			
 			//Check details will insert into transaction
@@ -346,7 +348,7 @@
 					<div style="border-bottom: 3px solid black;">
 						<div style="height:75px;">
 							<div style="width:65px;padding:0px;margin:0px;float:left;">
-								<img src="../../images/system/logo.png" alt="NEUB LOGO" style="width:68px;height:70px;">
+								<img src="../../images/system/'.$logo.'" alt="NEUB LOGO" style="width:68px;height:70px;">
 							</div>
 							<div style="width:630px;float:left;padding:0px;margin:0px;">
 								<p style="padding: 0px;margin:10px 0px 5px 0px;font-size:25px;font-weight:bold;margin-left:8px;">NORTH EAST UNIVERSITY BANGLADESH (NEUB)</p>

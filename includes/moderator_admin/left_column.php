@@ -15,7 +15,7 @@
 		
 		<div class="w3-bar w3-black w3-card w3-padding">
 			<a href="https://<?php echo $web; ?>" class="w3-bar-item" target="_blank" style="padding: 8px 5px;">
-				<image src="../images/system/logo.png" alt="NEUB LOGO" class="w3-image" style="width:100%;max-width:30px;">
+				<image src="../images/system/<?php echo $logo; ?>" alt="NEUB LOGO" class="w3-image" style="width:100%;max-width:30px;">
 			</a>
 			<a href="sa_index.php" class="w3-bar-item w3-xlarge w3-decoration-null" style="padding: 8px 3px;"><?php echo $title; ?></a>
 			
