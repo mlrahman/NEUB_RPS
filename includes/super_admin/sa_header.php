@@ -74,7 +74,48 @@ Email: mlrahman@neub.edu.bd
 		<script src="../js/main.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+		<script>
+			n_c=1;
+			function check_login()
+			{
+				//console.log('clicked');
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function() {
+						
+					if (this.readyState == 4 && this.status == 200) {
+						if(this.responseText.trim()=='Ok')
+						{
+							//session available
+							
+							if(n_c==0) //checking network
+							{
+								n_c=1;
+								document.getElementById('valid_msg').style.display='block';
+								document.getElementById('v_msg').innerHTML='Network connected.';
+								setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);	
+					
+							}
+						}
+						else
+						{
+							//session destroyed
+							window.location.replace("index.php");
+						}
+					}
+					if (this.readyState == 4 && (this.status == 403 || this.status == 404 || this.status == 0)) {
+						//network error
+						n_c=0;
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Network disconnected (Please Wait.. trying to reconnect in 8s)';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);	
+					}
+					
+				};
+				xmlhttp.open("GET", "../includes/super_admin/check_login.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&login_check=yes", true);
+				xmlhttp.send();
+			}
+			setInterval(check_login, 8000);
+		</script>
 		
 	</head>
 	<body class="w3-black">

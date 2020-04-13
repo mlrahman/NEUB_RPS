@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2020 at 11:08 AM
+-- Generation Time: Apr 13, 2020 at 02:40 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -84,31 +84,6 @@ CREATE TABLE `nr_admin_login_transaction` (
   `nr_suadlotr_time` varchar(100) NOT NULL,
   `nr_suadlotr_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
-
---
--- Dumping data for table `nr_admin_login_transaction`
---
-
-INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address`, `nr_suadlotr_country`, `nr_suadlotr_city`, `nr_suadlotr_lat`, `nr_suadlotr_lng`, `nr_suadlotr_timezone`, `nr_suadlotr_date`, `nr_suadlotr_time`, `nr_suadlotr_status`) VALUES
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '10:02 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '10:07 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '10:08 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '10:12 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '10:21 PM', 'Active'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-10', '03:15 PM', 'Active'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-10', '03:19 PM', 'Active'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-10', '03:20 PM', 'Active'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-10', '03:24 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-11', '06:13 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:24 PM', 'Active'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '03:41 PM', 'Active'),
-(2, '192.168.0.102', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '03:43 PM', 'Active'),
-(1, '192.168.0.102', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '03:46 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '03:51 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-13', '02:34 PM', 'Active'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-13', '02:35 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-13', '03:04 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-13', '03:05 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -225,7 +200,7 @@ CREATE TABLE `nr_faculty` (
 --
 
 INSERT INTO `nr_faculty` (`nr_faculty_id`, `nr_faculty_name`, `nr_faculty_designation`, `nr_faculty_join_date`, `nr_faculty_resign_date`, `nr_faculty_type`, `nr_dept_id`, `nr_faculty_password`, `nr_faculty_email`, `nr_faculty_cell_no`, `nr_faculty_photo`, `nr_faculty_status`, `nr_faculty_two_factor`, `nr_faculty_gender`) VALUES
-(1, 'Noushad Sojib', 'Assistant Professor', '2016-04-20', '', 'Permanent', 1, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'mlrahman@neub.edu.bd', '01739213886', '158525084315852508436143.jpg', 'Active', 0, 'Male');
+(1, 'Noushad Sojib', 'Assistant Professor', '2016-04-20', '', 'Permanent', 1, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'mlrahman@neub.edu.bd', '01739213886', '158677029315867702938237.jpg', 'Active', 0, 'Male');
 
 -- --------------------------------------------------------
 
@@ -260,22 +235,6 @@ CREATE TABLE `nr_faculty_login_transaction` (
   `nr_falotr_time` varchar(100) NOT NULL,
   `nr_falotr_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
-
---
--- Dumping data for table `nr_faculty_login_transaction`
---
-
-INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_address`, `nr_falotr_country`, `nr_falotr_city`, `nr_falotr_lat`, `nr_falotr_lng`, `nr_falotr_timezone`, `nr_falotr_date`, `nr_falotr_time`, `nr_falotr_status`) VALUES
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '10:13 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '10:14 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '10:17 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-11', '06:09 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-11', '09:26 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-11', '09:48 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:13 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '06:45 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '10:27 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '10:50 PM', 'Active');
 
 -- --------------------------------------------------------
 

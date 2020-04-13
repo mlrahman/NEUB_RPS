@@ -9,6 +9,7 @@
 		die();
 	}
 ?>
+
 <!-- Right Column -->
 <div class="w3-twothird w3-margin-top">
 
