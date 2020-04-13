@@ -6,11 +6,16 @@
 	<video autoplay muted loop id="myVideo" class="w3-grayscale">
 		<source src="../images/system/welcome.mp4" type="video/mp4"><img src="../images/system/video_alt.jpg" class="w3-image w3-grayscale w3-opacity-min" alt="Video Alternate" style="height:100%;width:100%;"/>
 	</video>
-	
-	<div class="w3-display-bottomleft w3-container w3-padding-16 w3-black">
-		<?php echo $caption; ?>
-	</div>
-	
+	<?php 
+		if($caption!="")
+		{
+	?>
+			<div class="w3-display-bottomleft w3-container w3-padding-16 w3-black">
+				<?php echo $caption; ?>
+			</div>
+	<?php
+		}
+	?>
 	<div class="w3-display-middle w3-center w3-cursor">
 		<div class="w3-container w3-round-large w3-hide-small" style="width: 700px;padding:0px;margin-top:-90px;">
 			<p class="w3-left-align w3-bold" style="padding: 0px; margin:0px 0px 5px 55px; font-size:22px;">Search Your Result:</p>

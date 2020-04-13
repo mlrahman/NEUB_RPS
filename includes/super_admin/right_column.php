@@ -188,9 +188,7 @@
 		<!-- page10 starts here -->
 		<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
 		<div id="page10" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
-			
-			
-			
+			<?php include("../includes/super_admin/system_components.php"); ?>
 		</div>
 		<?php } ?>
 		<!-- page11 starts here -->

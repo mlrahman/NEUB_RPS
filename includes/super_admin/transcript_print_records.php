@@ -4,7 +4,7 @@
 	}
 	catch(Exception $e)
 	{
-		header("location:index.php");
+		header("location: index.php");
 		die();
 	}
 ?>
