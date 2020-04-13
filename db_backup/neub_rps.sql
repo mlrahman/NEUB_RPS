@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 12, 2020 at 11:26 AM
+-- Generation Time: Apr 13, 2020 at 11:08 AM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -48,8 +48,8 @@ CREATE TABLE `nr_admin` (
 --
 
 INSERT INTO `nr_admin` (`nr_admin_id`, `nr_admin_name`, `nr_admin_email`, `nr_admin_password`, `nr_admin_cell_no`, `nr_admin_photo`, `nr_admin_type`, `nr_admin_designation`, `nr_admin_status`, `nr_admin_two_factor`, `nr_admin_resign_date`, `nr_admin_gender`) VALUES
-(1, 'Shams Elahi Rasel', 'mirlutfur.rahman@gmail.com', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '', '', 'Super Admin', 'Controller of Examination, NEUB', 'Active', 1, '', 'Male'),
-(2, 'Fahad Ahmed', 'mlrahman@neub.edu.bd', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '', '', 'Moderator', 'Assistant Controller of NEUB', 'Active', 1, '', 'Male');
+(1, 'Shams Elahi Rasel', 'mirlutfur.rahman@gmail.com', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '', '', 'Super Admin', 'Controller of Examination, NEUB', 'Active', 0, '', 'Male'),
+(2, 'Fahad Ahmed', 'mlrahman@neub.edu.bd', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '', '', 'Moderator', 'Assistant Controller of NEUB', 'Active', 0, '', 'Male');
 
 -- --------------------------------------------------------
 
@@ -100,7 +100,15 @@ INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address
 (2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-10', '03:20 PM', 'Active'),
 (2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-10', '03:24 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-11', '06:13 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:24 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:24 PM', 'Active'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '03:41 PM', 'Active'),
+(2, '192.168.0.102', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '03:43 PM', 'Active'),
+(1, '192.168.0.102', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '03:46 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '03:51 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-13', '02:34 PM', 'Active'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-13', '02:35 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-13', '03:04 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-13', '03:05 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -264,7 +272,10 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-11', '06:09 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-11', '09:26 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-11', '09:48 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:13 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:13 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '06:45 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '10:27 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '10:50 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -418,7 +429,8 @@ INSERT INTO `nr_faculty_result_check_transaction` (`nr_stud_id`, `nr_faculty_id`
 (140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '07:56 PM', 'Active'),
 (140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '09:33 PM', 'Active'),
 (140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-11', '06:10 PM', 'Active'),
-(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:23 PM', 'Active');
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:23 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '11:49 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1205,7 +1217,7 @@ CREATE TABLE `nr_system_component` (
   `nr_syco_mobile` varchar(50) NOT NULL,
   `nr_syco_web` varchar(50) NOT NULL,
   `nr_syco_contact_email` varchar(50) NOT NULL,
-  `nr_syco_map_link` varchar(200) NOT NULL,
+  `nr_syco_map_link` varchar(250) NOT NULL,
   `nr_syco_date` varchar(20) NOT NULL,
   `nr_syco_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;

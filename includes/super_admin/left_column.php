@@ -63,13 +63,15 @@
 			<a onclick="get_page(4)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-book"></i> Course List</a> 
 			<a onclick="get_page(5)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-sitemap"></i> Course Offer List</a> 
 			<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
-			<a onclick="get_page(15)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-key"></i> Admins</a>
+				<a onclick="get_page(15)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-key"></i> Admins</a>
 			<?php } ?>
 			<a onclick="get_page(6)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-id-card-o"></i> Moderators</a>
 			<a onclick="get_page(7)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-id-badge"></i> Faculties</a>
 			<a onclick="get_page(8)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-users"></i> Students</a>
 			<a onclick="get_page(9)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-database"></i> Results</a>
-			<a onclick="get_page(10)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-cogs"></i> System Components</a> 
+			<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
+				<a onclick="get_page(10)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-cogs"></i> System Components</a> 
+			<?php } ?>
 			<a onclick="get_page(11)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-history"></i> Result Search Records</a>
 			<a onclick="get_page(12)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-ticket"></i> Transcript Print Records</a>
 			<a onclick="get_page(13)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-unlock-alt"></i> User Login Records</a>
@@ -88,13 +90,15 @@
 				document.getElementById('page7').style.display='none';
 				document.getElementById('page8').style.display='none';
 				document.getElementById('page9').style.display='none';
-				document.getElementById('page10').style.display='none';
+				<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
+					document.getElementById('page10').style.display='none';
+				<?php } ?>
 				document.getElementById('page11').style.display='none';
 				document.getElementById('page12').style.display='none';
 				document.getElementById('page13').style.display='none';
 				document.getElementById('page14').style.display='none';
 				<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
-				document.getElementById('page15').style.display='none';
+					document.getElementById('page15').style.display='none';
 				<?php } ?>
 				if(a==1)
 				{
@@ -141,11 +145,13 @@
 					document.getElementById('page_title').innerHTML='<i class="fa fa-database"></i> Results';
 					document.getElementById('page9').style.display='block';
 				}
+				<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
 				else if(a==10)
 				{
 					document.getElementById('page_title').innerHTML='<i class="fa fa-cogs"></i> System Components';
 					document.getElementById('page10').style.display='block';
 				}
+				<?php } ?>
 				else if(a==11)
 				{
 					document.getElementById('page_title').innerHTML='<i class="fa fa-history"></i> Result Search Records';
