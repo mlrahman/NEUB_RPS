@@ -100,12 +100,12 @@
 				<i class="w3-text-red w3-small w3-bold" id="cl_msg" style="display: none;">*Upload DP with (120X100)px</i>
 				
 				<label class="w3-margin-top" style="display:inline-block;"><b>Change Display Image</b></label><a class="w3-right w3-decoration-null w3-cursor w3-margin-top w3-text-blue"><i class="fa fa-desktop"></i> View</a>
-				<input class="w3-input w3-border w3-round-large" onclick="document.getElementById('cdi_msg').style.display='block'" type="file" id="video_alt" title="Please upload Dispaly Image (450X1326)px"  onchange="syco_form_change()">
-				<i class="w3-text-red w3-small w3-bold" id="cdi_msg" style="display: none;">*Upload Display Image with (450X1326)px</i>
+				<input class="w3-input w3-border w3-round-large" onclick="document.getElementById('cdi_msg').style.display='block'" type="file" id="video_alt" title="Please upload Dispaly Image (450X1500)px"  onchange="syco_form_change()">
+				<i class="w3-text-red w3-small w3-bold" id="cdi_msg" style="display: none;">*Upload Display Image with (450X1500)px</i>
 				
 				<label class="w3-margin-top" style="display:inline-block;"><b>Change Display Video</b></label><a class="w3-right w3-decoration-null w3-cursor w3-text-blue  w3-margin-top"><i class="fa fa-desktop"></i> View</a>
-				<input class="w3-input w3-border w3-round-large" onclick="document.getElementById('cdv_msg').style.display='block'" type="file" id="welcome" title="Please upload Dispaly Video (450X1326)px"  onchange="syco_form_change()">
-				<i class="w3-text-red w3-small w3-bold" id="cdv_msg" style="display: none;">*Upload Display Video with (450X1326)px</i>
+				<input class="w3-input w3-border w3-round-large" onclick="document.getElementById('cdv_msg').style.display='block'" type="file" id="welcome" title="Please upload Dispaly Video (450X1500)px"  onchange="syco_form_change()">
+				<i class="w3-text-red w3-small w3-bold" id="cdv_msg" style="display: none;">*Upload Display Video with (450X1500)px</i>
 				
 				
 			</div>

@@ -153,5 +153,5 @@ Email: mlrahman@neub.edu.bd
 			<i class="fa fa-bell-o"></i> Your message sent successfully.
 		</div>
 		
-		<div class="w3-content w3-white" style="max-width:2000px;">
+		<div class="w3-content w3-white" style="max-width:1450px;">
 		
