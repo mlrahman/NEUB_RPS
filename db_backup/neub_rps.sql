@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2020 at 02:40 PM
+-- Generation Time: Apr 13, 2020 at 05:19 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -84,6 +84,13 @@ CREATE TABLE `nr_admin_login_transaction` (
   `nr_suadlotr_time` varchar(100) NOT NULL,
   `nr_suadlotr_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Dumping data for table `nr_admin_login_transaction`
+--
+
+INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address`, `nr_suadlotr_country`, `nr_suadlotr_city`, `nr_suadlotr_lat`, `nr_suadlotr_lng`, `nr_suadlotr_timezone`, `nr_suadlotr_date`, `nr_suadlotr_time`, `nr_suadlotr_status`) VALUES
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-13', '06:42 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1178,15 +1185,18 @@ CREATE TABLE `nr_system_component` (
   `nr_syco_contact_email` varchar(50) NOT NULL,
   `nr_syco_map_link` varchar(250) NOT NULL,
   `nr_syco_date` varchar(20) NOT NULL,
-  `nr_syco_status` enum('Active','Inactive') NOT NULL
+  `nr_syco_status` enum('Active','Inactive') NOT NULL,
+  `nr_syco_logo` varchar(150) NOT NULL,
+  `nr_syco_video_alt` varchar(150) NOT NULL,
+  `nr_syco_video` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 --
 -- Dumping data for table `nr_system_component`
 --
 
-INSERT INTO `nr_system_component` (`nr_syco_id`, `nr_admin_id`, `nr_syco_title`, `nr_syco_caption`, `nr_syco_address`, `nr_syco_tel`, `nr_syco_email`, `nr_syco_mobile`, `nr_syco_web`, `nr_syco_contact_email`, `nr_syco_map_link`, `nr_syco_date`, `nr_syco_status`) VALUES
-(1, 1, 'NEUB Result Portal', 'Permanent Campus', 'Telihaor, Sheikhghat, Sylhet-3100', '0821 710221-2', 'info@neub.edu.bd', '01755566994', 'www.neub.edu.bd', 'mirlutfur.rahman@gmail.com', 'https://maps.google.com/maps?q=north%20east%20university%20bangladesh&t=&z=15&ie=UTF8&iwloc=&output=embed', '2020-01-25', 'Active');
+INSERT INTO `nr_system_component` (`nr_syco_id`, `nr_admin_id`, `nr_syco_title`, `nr_syco_caption`, `nr_syco_address`, `nr_syco_tel`, `nr_syco_email`, `nr_syco_mobile`, `nr_syco_web`, `nr_syco_contact_email`, `nr_syco_map_link`, `nr_syco_date`, `nr_syco_status`, `nr_syco_logo`, `nr_syco_video_alt`, `nr_syco_video`) VALUES
+(1, 1, 'NEUB Result Portal', 'Permanent Campus', 'Telihaor, Sheikhghat, Sylhet-3100', '0821 710221-2', 'info@neub.edu.bd', '01755566994', 'www.neub.edu.bd', 'mirlutfur.rahman@gmail.com', 'https://maps.google.com/maps?q=north%20east%20university%20bangladesh&t=&z=15&ie=UTF8&iwloc=&output=embed', '2020-01-25', 'Active', 'logo.png', 'video_alt.jpg', 'welcome.mp4');
 
 -- --------------------------------------------------------
 
