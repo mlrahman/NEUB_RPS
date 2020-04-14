@@ -101,7 +101,42 @@ Email: mlrahman@neub.edu.bd
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<script src="../js/main.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+		<script>
+			n_c=1;
+			function check_online()
+			{
+				//console.log('clicked');
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function() {
+						
+					if (this.readyState == 4 && this.status == 200) {
+						if(this.responseText.trim()=='Ok')
+						{
+							if(n_c==0) //checking network
+							{
+								n_c=1;
+								document.getElementById('valid_msg').style.display='block';
+								document.getElementById('v_msg').innerHTML='Network connected.';
+								setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);	
+					
+							}
+						}
+						
+					}
+					if (this.readyState == 4 && (this.status == 403 || this.status == 404 || this.status == 0)) {
+						//network error
+						n_c=0;
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Network disconnected (Please Wait.. trying to reconnect in 5s)';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);	
+					}
+					
+				};
+				xmlhttp.open("GET", "../includes/general/check_online.php?online_check=yes", true);
+				xmlhttp.send();
+			}
+			setInterval(check_online, 5000);
+		</script>
 		
 	</head>
 	<body class="w3-black">
@@ -151,6 +186,14 @@ Email: mlrahman@neub.edu.bd
 		
 		<div id="y_sent" class="w3-container w3-animate-top w3-center w3-green w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
 			<i class="fa fa-bell-o"></i> Your message sent successfully.
+		</div>
+		
+		<div id="invalid_msg" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:999999999;display:none;">
+			<i class="fa fa-bell-o"></i> <p id="i_msg" class="w3-margin-0 w3-padding-0" style="display: inline;"></p>
+		</div>
+		
+		<div id="valid_msg" class="w3-container w3-animate-top w3-center w3-green w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:999999999;display:none;">
+			<i class="fa fa-bell-o"></i> <p id="v_msg" class="w3-margin-0 w3-padding-0" style="display: inline;"></p>
 		</div>
 		
 		<div class="w3-content w3-white" style="max-width:1450px;">

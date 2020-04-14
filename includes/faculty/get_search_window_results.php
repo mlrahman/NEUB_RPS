@@ -610,13 +610,15 @@
 							<table style="width:96%;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar w3-margin">
 								<tr class="w3-black w3-bold w3-padding-small">
 									<td colspan="2" valign="top" class="w3-padding-small">Fail Courses</td>
-									<td colspan="2" class="w3-padding-small" valign="top">Credit: <?php echo number_format($fail_credit,2); ?></td>
+									<td colspan="3" class="w3-padding-small" valign="top">Credit: <?php echo number_format($fail_credit,2); ?></td>
 								</tr>
 								<tr class="w3-teal w3-bold">
 									<td valign="top" style="width:20%;" class="w3-padding-small">Course Code</td>
 									<td valign="top" style="width:45%;" class="w3-padding-small">Course Title</td>
 									<td valign="top" style="width:15%;" class="w3-padding-small">Credit</td>
 									<td valign="top" style="width:20%;" class="w3-padding-small">Semester</td>
+									<td valign="top" style="width:9%;" class="w3-padding-small">Remarks</td>
+								
 								</tr>
 								<?php
 									foreach($fail_re as $cge)
@@ -627,6 +629,8 @@
 											<td valign="top" class="w3-padding-small"><?php echo $cge['course_title']; ?></td>
 											<td valign="top" class="w3-padding-small"><?php echo number_format($cge['course_credit'],2); ?></td>
 											<td valign="top" class="w3-padding-small"><?php echo $cge['semester'].'-'.$cge['year']; ?></td>
+											<td valign="top" class="w3-padding-small  <?php if($cge['remarks']!=""){ echo 'w3-text-blue'; } ?>"><?php echo $cge['remarks']; ?></td>
+										
 										</tr>
 								
 								<?php
@@ -675,7 +679,7 @@
 											<td valign="top" class="w3-padding-small"><?php echo $cge['grade']; ?></td>
 											<td valign="top" class="w3-padding-small"><?php echo number_format($cge['grade_point'],2); ?></td>
 											<td valign="top" class="w3-padding-small"><?php echo $cge['semester'].'-'.$cge['year']; ?></td>
-											<td valign="top" class="w3-padding-small"><?php echo $cge['remarks']; ?></td>
+											<td valign="top" class="w3-padding-small <?php if($cge['remarks']!=""){ echo 'w3-text-blue'; } ?>"><?php echo $cge['remarks']; ?></td>
 										</tr>
 								
 								<?php

@@ -31,7 +31,7 @@
 				<select onchange="reload_dashboard()" id="program_id" style="max-width:150px;">
 					<option value="-1">All</option>
 					<?php
-						$stmt = $conn->prepare("SELECT * FROM nr_program where nr_dept_id=:dept_id and nr_prog_status='Active' order by nr_prog_id asc");
+						$stmt = $conn->prepare("SELECT * FROM nr_program where nr_dept_id=:dept_id order by nr_prog_id asc");
 						$stmt->bindParam(':dept_id', $_SESSION['faculty_dept_id']);
 						$stmt->execute();
 						$stud_result=$stmt->fetchAll();
@@ -118,7 +118,7 @@
 				<select onchange="reload_dashboard2()" id="program_id2" style="max-width:150px;">
 					<option value="-1">All</option>
 					<?php
-						$stmt = $conn->prepare("SELECT * FROM nr_program where nr_dept_id=:dept_id and nr_prog_status='Active' order by nr_prog_id asc");
+						$stmt = $conn->prepare("SELECT * FROM nr_program where nr_dept_id=:dept_id order by nr_prog_id asc");
 						$stmt->bindParam(':dept_id', $_SESSION['faculty_dept_id']);
 						$stmt->execute();
 						$stud_result=$stmt->fetchAll();

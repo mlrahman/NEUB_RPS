@@ -46,9 +46,9 @@
 			$web=$result_t[0][8];
 			$contact_email=$result_t[0][9];
 			$map=$result_t[0][10];
-			$logo=$result[0][13];
-			$video_alt=$result[0][14];
-			$video=$result[0][15];
+			$logo=$result_t[0][13];
+			$video_alt=$result_t[0][14];
+			$video=$result_t[0][15];
 			
 			
 			//Check details will insert into transaction

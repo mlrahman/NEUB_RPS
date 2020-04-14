@@ -13,7 +13,7 @@
 			$password=password_encrypt(trim($_REQUEST['faculty_password']));
 			
 			
-			$stmt = $conn->prepare("select * from nr_faculty where nr_faculty_email=:email and nr_faculty_password=:password ");
+			$stmt = $conn->prepare("select * from nr_faculty a,nr_department b where a.nr_dept_id=b.nr_dept_id and nr_faculty_email=:email and nr_faculty_password=:password ");
 			$stmt->bindParam(':email', $email);
 			$stmt->bindParam(':password', $password);
 			$stmt->execute();
@@ -27,7 +27,7 @@
 			}
 			else
 			{
-				if($result[0][11]=='Active')
+				if($result[0][11]=='Active' && $result[0][17]=='Active')
 				{
 					if($result[0][4]=='')
 					{
