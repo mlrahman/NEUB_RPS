@@ -387,4 +387,43 @@ function photo_resize($updir, $img, $id, $dir, $sz1, $sz2)
 }
 
 
+function video_upload($file,$i,$max_foto_size,$photo_extention,$folder_name,$path='')
+{
+		if($file['tmp_name']=="")
+		{
+			return "1";
+		}
+		if($file['tmp_name']!="")
+		{
+				$p=$file['name'];
+				$pos=strrpos($p,".");
+				$ph=strtolower(substr($p,$pos+1,strlen($p)-$pos));
+				$im_size =  round($file['size']/1024,2);
+
+				if($im_size > $max_foto_size)
+				   {
+						//echo "Image is Too Large";
+						return "1";
+				   }
+				$photo_extention = explode(",",$photo_extention);
+				if(!in_array($ph,$photo_extention ))
+				   {
+						//echo "Upload Correct Image";
+
+						return "1";
+				   }
+		}
+		$ran=date(time());
+		$c=$ran.rand(1,10000);
+		$ran.=$c.".".$ph;
+
+		if(isset($file['tmp_name']) && is_uploaded_file($file['tmp_name']))
+		{
+			$ff = $folder_name."/".$ran;
+			move_uploaded_file($file['tmp_name'], $ff );
+			chmod($ff, 0777);
+		}
+	   return  $ran;
+}
+
 ?>

@@ -66,8 +66,8 @@ Email: mlrahman@neub.edu.bd
 		<meta name="generator" content="<?php echo $title; ?>"/>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="shortcut icon" href="../images/system/<?php echo $logo; ?>">
-		<title><?php echo $title; ?></title>
+		<link rel="shortcut icon" id="site_logo_link" href="../images/system/<?php echo $logo; ?>">
+		<title id="site_title_link"><?php echo $title; ?></title>
 		<link rel="stylesheet" href="../css/w3.css">
 		<link rel="stylesheet" href="../css/style.css">
 		<link rel="stylesheet" href="../css/welcome_video.css">

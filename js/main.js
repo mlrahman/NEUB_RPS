@@ -22,3 +22,22 @@ function file_validate(dataaa) {
 	}
 	return true;
 }
+
+var _validFileExtensions2 = [".mp4", ".ogg", ".webm"];    
+function file_validate2(dataaa) {
+	var sFileName = dataaa;
+	if (sFileName.length > 0) {
+		var blnValid = false;
+		for (var j = 0; j < _validFileExtensions2.length; j++) {
+			var sCurExtension = _validFileExtensions2[j];
+			if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+				blnValid = true;
+				break;
+			}
+		}
+		if (!blnValid) {
+			 return false;
+		}
+	}
+	return true;
+}

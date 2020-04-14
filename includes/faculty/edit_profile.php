@@ -277,6 +277,12 @@
 						{
 							if(file_validate(faculty_image)==true)
 							{
+								c_pass.setCustomValidity('');
+								pass.setCustomValidity('');
+								n_cell_phone.setCustomValidity('');
+								reservation_captcha5.setCustomValidity('');
+								document.getElementById('faculty_image').setCustomValidity('');
+								
 								document.getElementById('edit_loading').style.display='block';
 								document.getElementById('faculty_image').setCustomValidity('');
 								var image=document.getElementById('faculty_image').files[0];
@@ -303,10 +309,11 @@
 											
 											document.getElementById('image_progress_id').style.width='0%';
 											document.getElementById('image_progress_id').innerHTML='0%';
-											document.getElementById('edit_loading').style.display='none';
-										
+											
 											faculty_cell_no = document.getElementById('new_cell_phone').value;
 											otp = document.getElementById('new_otp').value;
+											document.getElementById('edit_loading').style.display='none';
+										
 											clear_edit_profile();
 											
 											document.getElementById('valid_msg').style.display='block';
@@ -353,12 +360,18 @@
 							}
 							else
 							{
-								document.getElementById('faculty_image').setCustomValidity('Upload valid .jpg, .jpeg, .png, .bmp file');
+								document.getElementById('faculty_image').setCustomValidity('Upload valid DP .jpg, .jpeg, .png, .bmp file');
 							}
 							
 						}
 						else
 						{
+							c_pass.setCustomValidity('');
+							pass.setCustomValidity('');
+							n_cell_phone.setCustomValidity('');
+							reservation_captcha5.setCustomValidity('');
+							document.getElementById('faculty_image').setCustomValidity('');
+					
 							document.getElementById('edit_loading').style.display='block';
 							//upload without image
 							var xhttp1 = new XMLHttpRequest();
@@ -377,11 +390,12 @@
 										
 										faculty_cell_no = document.getElementById('new_cell_phone').value;
 										otp = document.getElementById('new_otp').value;
-										clear_edit_profile();
 										
 										document.getElementById('valid_msg').style.display='block';
 										document.getElementById('v_msg').innerHTML='Profile Successfully updated.';
 										setTimeout(function(){ document.getElementById('valid_msg').style.display='none';},2000);
+										clear_edit_profile();
+										
 									}
 									else
 									{
@@ -389,6 +403,8 @@
 										document.getElementById('image_progress_id').innerHTML='0%';
 										document.getElementById('edit_loading').style.display='none';
 										clear_edit_profile();
+										
+										
 										document.getElementById('invalid_msg').style.display='block';
 										document.getElementById('i_msg').innerHTML='Unknown Error Occured.';
 										setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
@@ -399,9 +415,17 @@
 								}
 								else if(this.readyState==4 && (this.status==404 || this.status==403))
 								{
+									document.getElementById('image_progress_id').style.width='0%';
+									document.getElementById('image_progress_id').innerHTML='0%';
+									document.getElementById('edit_loading').style.display='none';
+									clear_edit_profile();
+									
+									
 									document.getElementById('invalid_msg').style.display='block';
 									document.getElementById('i_msg').innerHTML='Network error occured.';
 									setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+									
+									
 								}
 							};
 							xhttp1.upload.onprogress = function(e) {
@@ -441,6 +465,13 @@
 					document.getElementById("pass").value='';
 					document.getElementById("dp_msg").style.display='none';
 					document.getElementById("edit_btn").disabled = true;
+				
+					c_pass.setCustomValidity('');
+					pass.setCustomValidity('');
+					n_cell_phone.setCustomValidity('');
+					reservation_captcha5.setCustomValidity('');
+					document.getElementById('faculty_image').setCustomValidity('');
+					
 				}
 			</script>
 		</div>
