@@ -187,15 +187,27 @@
 				<button id="up_syco_btn" onclick="update_system_components()" class="w3-button w3-black w3-right w3-hover-teal w3-round-large" disabled><i class="fa fa-save"></i> Save Changes</button>
 				
 				<div class="w3-clear" style="margin-bottom: 23px;"></div>
-				<label><b>Change Logo</b></label><a class="w3-right w3-decoration-null w3-cursor w3-text-blue w3-margin-top" title="Click for view the logo"><i class="fa fa-desktop"></i> View</a>
+				
+				<div id="syco_window10" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
+					<i onclick="close_syco_window10()" title="Close window" class=" w3-cursor w3-right w3-margin-top w3-large w3-hover-text-teal w3-round fa fa-close w3-text-red w3-xlarge"></i>
+					<p class="w3-bold w3-left w3-large w3-text-teal" style="margin:10px 0px 15px 0px;width:270px;"><i class="fa fa-eye"></i> <span id="syco_window10_title"></span></p>
+					<div id="syco_window10_details" class="w3-container w3-padding-0" style="margin:0px 0px 20px 0px;">
+						<i class="fa fa-refresh w3-large w3-spin w3-center w3-margin-top w3-margin-bottom"  title="loading" id="syco_window10_loading"></i>
+						<img src="" id="syco_window_img" style="max-height:150px;max-width:328px;display:none;margin: 0 auto;"/>
+						<video autoplay muted loop id="syco_window_vid" class="w3-grayscale" style="display:none;max-height:150px;max-width:328px;margin: 0 auto;">
+						</video>
+					</div>
+				</div>
+				
+				<label><b>Change Logo</b></label><a class="w3-right w3-decoration-null w3-cursor w3-text-blue w3-margin-top" title="Click for view the logo" onclick="view_syco_window(1)"><i class="fa fa-desktop"></i> View</a>
 				<input class="w3-input w3-border w3-round-large" onclick="document.getElementById('cl_msg').style.display='block'" type="file" id="logo" title="Please upload LOGO (204X180)px"  onchange="syco_form_change()">
 				<i class="w3-text-red w3-small w3-bold" id="cl_msg" style="display: none;">*Upload Logo with (204X180)px</i>
 				
-				<label class="w3-margin-top" style="display:inline-block;"><b>Change Display Image</b></label><a class="w3-right w3-decoration-null w3-cursor w3-text-blue w3-margin-top" title="Click for view the display image"><i class="fa fa-desktop"></i> View</a>
+				<label class="w3-margin-top" style="display:inline-block;"><b>Change Display Image</b></label><a class="w3-right w3-decoration-null w3-cursor w3-text-blue w3-margin-top" title="Click for view the display image" onclick="view_syco_window(2)"><i class="fa fa-desktop"></i> View</a>
 				<input class="w3-input w3-border w3-round-large" onclick="document.getElementById('cdi_msg').style.display='block'" type="file" id="video_alt" title="Please upload Dispaly Image (450X1500)px"  onchange="syco_form_change()">
 				<i class="w3-text-red w3-small w3-bold" id="cdi_msg" style="display: none;">*Upload Display Image with (450X1500)px</i>
 				
-				<label class="w3-margin-top" style="display:inline-block;"><b>Change Display Video</b></label><a class="w3-right w3-decoration-null w3-cursor w3-text-blue w3-margin-left w3-margin-top" style="<?php if($video==""){ echo 'display:none;'; } ?>" id="syco_vvi_btn" title="Click for view the display video"><i class="fa fa-desktop"></i> View</a><a class="w3-right w3-decoration-null w3-cursor w3-text-red  w3-margin-top" style="<?php if($video==""){ echo 'display:none;'; } ?>" id="syco_vre_btn" onclick="document.getElementById('syco_re_confirmation').style.display='block'" title="Click for delete the display video"><i class="fa fa-minus-circle"></i> Remove</a>
+				<label class="w3-margin-top" style="display:inline-block;"><b>Change Display Video</b></label><a class="w3-right w3-decoration-null w3-cursor w3-text-blue w3-margin-left w3-margin-top" style="<?php if($video==""){ echo 'display:none;'; } ?>" id="syco_vvi_btn" title="Click for view the display video" onclick="view_syco_window(3)"><i class="fa fa-desktop"></i> View</a><a class="w3-right w3-decoration-null w3-cursor w3-text-red  w3-margin-top" style="<?php if($video==""){ echo 'display:none;'; } ?>" id="syco_vre_btn" onclick="document.getElementById('syco_re_confirmation').style.display='block'" title="Click for delete the display video"><i class="fa fa-minus-circle"></i> Remove</a>
 				<input class="w3-input w3-border w3-round-large" onclick="document.getElementById('cdv_msg').style.display='block'" type="file" id="video" title="Please upload Dispaly Video (450X1500)px"  onchange="syco_form_change()">
 				<i class="w3-text-red w3-small w3-bold" id="cdv_msg" style="display: none;">*Upload Display Video with (450X1500)px</i>
 				
@@ -249,6 +261,101 @@
 
 
 	<script>
+		
+		
+		function close_syco_window10()
+		{
+			document.getElementById('syco_window_img').src='';
+			document.getElementById('syco_window_img').style.display='none';
+			document.getElementById('syco_window_vid').style.display='none';
+			document.getElementById('syco_window10').style.display='none';
+			document.getElementById('syco_window10_loading').style.display='none';
+			document.getElementById('syco_window10_title').innerHTML='';
+			
+		}
+		
+		function view_syco_window(id)
+		{
+			close_syco_window10();
+			document.getElementById('syco_window10').style.display='block';
+			document.getElementById('syco_window10_loading').style.display='block';
+						
+			var xhttp1 = new XMLHttpRequest();
+			xhttp1.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					str=this.responseText.trim();
+					
+					var msg3='',i=0;
+					for(;i<str.length;i++)
+					{
+						if(str[i]=='@')
+							break;
+						else
+							msg3=msg3+str[i];
+					}
+					i++;
+					var dat='';
+					for(;i<str.length;i++)
+					{
+						if(str[i]=='@')
+							break;
+						else
+							dat=dat+str[i];
+					}
+					document.getElementById('syco_window10_loading').style.display='none';
+			
+					if(msg3=='Ok')
+					{
+						if(id==1)
+						{
+							document.getElementById('syco_window10_title').innerHTML='Logo';
+						}
+						else if(id==2)
+						{
+							document.getElementById('syco_window10_title').innerHTML='Display Image';
+							
+						}
+						else if(id==3)
+						{
+							document.getElementById('syco_window10_title').innerHTML='Display Video';
+			
+						}
+						if(id==1 || id==2)
+						{
+							document.getElementById('syco_window_img').style.display='block';
+							document.getElementById('syco_window_img').src='../images/system/'+dat;
+						}
+						else
+						{
+							document.getElementById('syco_window_vid').style.display='block';
+							document.getElementById('syco_window_vid').innerHTML='<source src="../images/system/'+dat+'" type="video/mp4">'+'<source src="../images/system/'+dat+'" type="video/ogg">'+'<source src="../images/system/'+dat+'" type="video/webm">'+'Browser does not support';
+						}
+			
+					}
+					else
+					{
+						close_syco_window10();
+					
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unknown error occured.';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					
+					}
+				
+				}
+				else if(this.readyState==4 && (this.status==404 || this.status==403))
+				{
+					close_syco_window10();
+					document.getElementById('invalid_msg').style.display='block';
+					document.getElementById('i_msg').innerHTML='Network error occured.';
+					setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					
+				}
+			};
+			xhttp1.open("POST", "../includes/super_admin/syco_view.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&id="+id, true);
+			xhttp1.send();
+		}
+		
 		
 		var sycotitle=<?php echo '"'.$title.'"'; ?>;
 		var sycocaption=<?php echo '"'.$caption.'"'; ?>;
@@ -1758,6 +1865,7 @@
 		
 		function reset_system_components()
 		{
+			close_syco_window10();
 			document.getElementById('title').value=sycotitle;
 			document.getElementById('caption').value=sycocaption;
 			document.getElementById('address').value=sycoaddress;

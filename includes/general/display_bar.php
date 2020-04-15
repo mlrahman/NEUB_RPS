@@ -4,7 +4,10 @@
 	<img src="../images/system/<?php echo $video_alt; ?>" class="w3-image w3-grayscale w3-opacity-min" alt="Video Alternate" style="height:100%;width:100%;"/>
 	
 	<video autoplay muted loop id="myVideo" class="w3-grayscale">
-		<source src="../images/system/<?php echo $video; ?>" type="video/mp4"><img src="../images/system/<?php echo $video_alt; ?>" class="w3-image w3-grayscale w3-opacity-min" alt="Video Alternate" style="height:100%;width:100%;"/>
+		<source src="../images/system/<?php echo $video; ?>" type="video/mp4">
+		<source src="../images/system/<?php echo $video; ?>" type="video/ogg">
+		<source src="../images/system/<?php echo $video; ?>" type="video/webm">
+		<img src="../images/system/<?php echo $video_alt; ?>" class="w3-image w3-grayscale w3-opacity-min" alt="Video Alternate" style="height:100%;width:100%;"/>
 	</video>
 	<?php 
 		if($caption!="")
