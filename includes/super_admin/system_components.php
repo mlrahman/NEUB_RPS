@@ -373,7 +373,7 @@
 									}
 									
 									
-									console.log(admin_name+' '+admin_designation);
+									//console.log(admin_name+' '+admin_designation);
 									
 									
 									
@@ -456,7 +456,159 @@
 						}
 						else if(new_video=="") //text,logo,video_alt
 						{
+							document.getElementById('video').setCustomValidity('');
+							document.getElementById('logo').setCustomValidity('');
+							document.getElementById('video_alt').setCustomValidity('');
+							document.getElementById('captcha_syco').setCustomValidity('');
+							n_mobile.setCustomValidity('');
 							
+							document.getElementById('syco_loading').style.display='block';
+				
+							//logo
+							var image1=document.getElementById('logo').files[0];
+							var fd_image=new FormData();
+							var link1='logo';
+							fd_image.append(link1, image1);
+							
+							//video_alt
+							var image2=document.getElementById('video_alt').files[0];
+							var link2='video_alt';
+							fd_image.append(link2, image2);
+							
+														
+							//Ajax for image upload
+							var xhttp1 = new XMLHttpRequest();
+							xhttp1.onreadystatechange = function() {
+								if (this.readyState == 4 && this.status == 200) {
+								
+									//response of 3
+									var str=this.responseText.trim();
+									//console.log(str);
+									var msg1='',i;
+									for(i=0;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											msg1=msg1+str[i];
+									}
+									i++;
+									var msg2='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											msg2=msg2+str[i];
+									}
+									i++;
+									
+									var dat='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											dat=dat+str[i];
+									}
+									i++;
+									var admin_name='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											admin_name=admin_name+str[i];
+									}
+									i++;
+									var admin_designation='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											admin_designation=admin_designation+str[i];
+									}
+									
+									
+									//console.log(admin_name+' '+admin_designation);
+									
+									
+									
+									document.getElementById('syco_progress_id').style.width='0%';
+									document.getElementById('syco_progress_id').innerHTML='0%';
+									document.getElementById('syco_loading').style.display='none';
+									
+									
+									if(msg1=='Ok' && msg2=='Ok')
+									{
+										var tmppath = URL.createObjectURL(image1);
+										$("#site_logo").fadeIn("fast").attr('src',tmppath);
+										$("#site_logo_link").fadeIn("fast").attr('href',tmppath);
+										
+										document.getElementById('site_title').innerHTML=new_sycotitle;
+										document.getElementById('site_title_link').innerHTML=new_sycotitle;
+										document.getElementById('updated_on').value=dat;
+										document.getElementById('updated_by').value=admin_name+', '+admin_designation;
+										
+										sycotitle=new_sycotitle;
+										sycocaption=new_sycocaption;
+										sycoaddress=new_sycoaddress;
+										sycoemail=new_sycoemail;
+										sycocontact_email=new_sycocontact_email;
+										sycomap_link=new_sycomap_link;
+										sycomobile=new_sycomobile;
+										sycotelephone=new_sycotelephone;
+										sycoweb=new_sycoweb;
+										
+										reset_system_components();
+										document.getElementById('valid_msg').style.display='block';
+										document.getElementById('v_msg').innerHTML='System components Successfully updated.';
+										setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
+										
+									}
+									else
+									{
+										reset_system_components();
+										document.getElementById('invalid_msg').style.display='block';
+										document.getElementById('i_msg').innerHTML='Unknown Error Occured.';
+										setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+										
+									}
+									
+									
+								}
+								else if(this.readyState==4 && (this.status==404 || this.status==403))
+								{
+									document.getElementById('syco_progress_id').style.width='0%';
+									document.getElementById('syco_progress_id').innerHTML='0%';
+									document.getElementById('syco_loading').style.display='none';
+									reset_system_components();
+									
+									document.getElementById('invalid_msg').style.display='block';
+									document.getElementById('i_msg').innerHTML='Network error occured.';
+									setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+									
+								}
+							};
+							xhttp1.upload.onprogress = function(e) {
+								if (e.lengthComputable) {
+								  var percentComplete = Math.round((e.loaded / e.total) * 100);
+								  percentComplete=percentComplete.toFixed(2);
+								  if(percentComplete==100)
+								  {
+									 document.getElementById('syco_progress_id').style.width=percentComplete+'%';
+									 document.getElementById('syco_progress_id').innerHTML= percentComplete+'%';
+								  }
+								  else
+								  {
+									 document.getElementById('syco_progress_id').style.width=percentComplete+'%';
+									 document.getElementById('syco_progress_id').innerHTML= percentComplete+'%';
+								  }
+								}
+							};
+							xhttp1.open("POST", "../includes/super_admin/syco_update2.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&logo="+link1+"&video_alt="+link2+"&title="+new_sycotitle+"&caption="+new_sycocaption+"&address="+new_sycoaddress+"&web="+new_sycoweb+"&email="+new_sycoemail+"&contact_email="+new_sycocontact_email+"&map_link="+new_sycomap_link+"&telephone="+new_sycotelephone+"&mobile="+new_sycomobile, true);
+							xhttp1.send(fd_image);
 						}
 						else //invalid
 						{
@@ -467,10 +619,301 @@
 					{
 						if(new_video!="" && file_validate2(new_video)==true) //text,logo,video
 						{
+							document.getElementById('video').setCustomValidity('');
+							document.getElementById('logo').setCustomValidity('');
+							document.getElementById('video_alt').setCustomValidity('');
+							document.getElementById('captcha_syco').setCustomValidity('');
+							n_mobile.setCustomValidity('');
+							
+							document.getElementById('syco_loading').style.display='block';
+				
+							//logo
+							var image1=document.getElementById('logo').files[0];
+							var fd_image=new FormData();
+							var link1='logo';
+							fd_image.append(link1, image1);
+							
+							
+							//video
+							var image3=document.getElementById('video').files[0];
+							var link3='video';
+							fd_image.append(link3, image3);
+							
+							//Ajax for image upload
+							var xhttp1 = new XMLHttpRequest();
+							xhttp1.onreadystatechange = function() {
+								if (this.readyState == 4 && this.status == 200) {
+								
+									//response of 3
+									var str=this.responseText.trim();
+									//console.log(str);
+									var msg1='',i;
+									for(i=0;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											msg1=msg1+str[i];
+									}
+									i++;
+									
+									var msg3='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											msg3=msg3+str[i];
+									}
+									i++;
+									var dat='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											dat=dat+str[i];
+									}
+									i++;
+									var admin_name='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											admin_name=admin_name+str[i];
+									}
+									i++;
+									var admin_designation='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											admin_designation=admin_designation+str[i];
+									}
+									
+									
+									//console.log(admin_name+' '+admin_designation);
+									
+									
+									
+									document.getElementById('syco_progress_id').style.width='0%';
+									document.getElementById('syco_progress_id').innerHTML='0%';
+									document.getElementById('syco_loading').style.display='none';
+									
+									
+									if(msg1=='Ok' && msg3=='Ok')
+									{
+										var tmppath = URL.createObjectURL(image1);
+										$("#site_logo").fadeIn("fast").attr('src',tmppath);
+										$("#site_logo_link").fadeIn("fast").attr('href',tmppath);
+										
+										document.getElementById('site_title').innerHTML=new_sycotitle;
+										document.getElementById('site_title_link').innerHTML=new_sycotitle;
+										document.getElementById('updated_on').value=dat;
+										document.getElementById('updated_by').value=admin_name+', '+admin_designation;
+										
+										sycotitle=new_sycotitle;
+										sycocaption=new_sycocaption;
+										sycoaddress=new_sycoaddress;
+										sycoemail=new_sycoemail;
+										sycocontact_email=new_sycocontact_email;
+										sycomap_link=new_sycomap_link;
+										sycomobile=new_sycomobile;
+										sycotelephone=new_sycotelephone;
+										sycoweb=new_sycoweb;
+										
+										reset_system_components();
+										document.getElementById('valid_msg').style.display='block';
+										document.getElementById('v_msg').innerHTML='System components Successfully updated.';
+										setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
+										
+									}
+									else
+									{
+										reset_system_components();
+										document.getElementById('invalid_msg').style.display='block';
+										document.getElementById('i_msg').innerHTML='Unknown Error Occured.';
+										setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+										
+									}
+									
+									
+								}
+								else if(this.readyState==4 && (this.status==404 || this.status==403))
+								{
+									document.getElementById('syco_progress_id').style.width='0%';
+									document.getElementById('syco_progress_id').innerHTML='0%';
+									document.getElementById('syco_loading').style.display='none';
+									reset_system_components();
+									
+									document.getElementById('invalid_msg').style.display='block';
+									document.getElementById('i_msg').innerHTML='Network error occured.';
+									setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+									
+								}
+							};
+							xhttp1.upload.onprogress = function(e) {
+								if (e.lengthComputable) {
+								  var percentComplete = Math.round((e.loaded / e.total) * 100);
+								  percentComplete=percentComplete.toFixed(2);
+								  if(percentComplete==100)
+								  {
+									 document.getElementById('syco_progress_id').style.width=percentComplete+'%';
+									 document.getElementById('syco_progress_id').innerHTML= percentComplete+'%';
+								  }
+								  else
+								  {
+									 document.getElementById('syco_progress_id').style.width=percentComplete+'%';
+									 document.getElementById('syco_progress_id').innerHTML= percentComplete+'%';
+								  }
+								}
+							};
+							xhttp1.open("POST", "../includes/super_admin/syco_update3.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&logo="+link1+"&video="+link3+"&title="+new_sycotitle+"&caption="+new_sycocaption+"&address="+new_sycoaddress+"&web="+new_sycoweb+"&email="+new_sycoemail+"&contact_email="+new_sycocontact_email+"&map_link="+new_sycomap_link+"&telephone="+new_sycotelephone+"&mobile="+new_sycomobile, true);
+							xhttp1.send(fd_image);
 							
 						}
 						else if(new_video=="") //text,logo
 						{
+							document.getElementById('video').setCustomValidity('');
+							document.getElementById('logo').setCustomValidity('');
+							document.getElementById('video_alt').setCustomValidity('');
+							document.getElementById('captcha_syco').setCustomValidity('');
+							n_mobile.setCustomValidity('');
+							
+							document.getElementById('syco_loading').style.display='block';
+				
+							//logo
+							var image1=document.getElementById('logo').files[0];
+							var fd_image=new FormData();
+							var link1='logo';
+							fd_image.append(link1, image1);
+							
+							
+							//Ajax for image upload
+							var xhttp1 = new XMLHttpRequest();
+							xhttp1.onreadystatechange = function() {
+								if (this.readyState == 4 && this.status == 200) {
+								
+									//response of 3
+									var str=this.responseText.trim();
+									//console.log(str);
+									var msg1='',i;
+									for(i=0;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											msg1=msg1+str[i];
+									}
+									i++;
+									var dat='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											dat=dat+str[i];
+									}
+									i++;
+									var admin_name='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											admin_name=admin_name+str[i];
+									}
+									i++;
+									var admin_designation='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											admin_designation=admin_designation+str[i];
+									}
+									
+									
+									//console.log(admin_name+' '+admin_designation);
+									
+									
+									
+									document.getElementById('syco_progress_id').style.width='0%';
+									document.getElementById('syco_progress_id').innerHTML='0%';
+									document.getElementById('syco_loading').style.display='none';
+									
+									
+									if(msg1=='Ok')
+									{
+										var tmppath = URL.createObjectURL(image1);
+										$("#site_logo").fadeIn("fast").attr('src',tmppath);
+										$("#site_logo_link").fadeIn("fast").attr('href',tmppath);
+										
+										document.getElementById('site_title').innerHTML=new_sycotitle;
+										document.getElementById('site_title_link').innerHTML=new_sycotitle;
+										document.getElementById('updated_on').value=dat;
+										document.getElementById('updated_by').value=admin_name+', '+admin_designation;
+										
+										sycotitle=new_sycotitle;
+										sycocaption=new_sycocaption;
+										sycoaddress=new_sycoaddress;
+										sycoemail=new_sycoemail;
+										sycocontact_email=new_sycocontact_email;
+										sycomap_link=new_sycomap_link;
+										sycomobile=new_sycomobile;
+										sycotelephone=new_sycotelephone;
+										sycoweb=new_sycoweb;
+										
+										reset_system_components();
+										document.getElementById('valid_msg').style.display='block';
+										document.getElementById('v_msg').innerHTML='System components Successfully updated.';
+										setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
+										
+									}
+									else
+									{
+										reset_system_components();
+										document.getElementById('invalid_msg').style.display='block';
+										document.getElementById('i_msg').innerHTML='Unknown Error Occured.';
+										setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+										
+									}
+									
+									
+								}
+								else if(this.readyState==4 && (this.status==404 || this.status==403))
+								{
+									document.getElementById('syco_progress_id').style.width='0%';
+									document.getElementById('syco_progress_id').innerHTML='0%';
+									document.getElementById('syco_loading').style.display='none';
+									reset_system_components();
+									
+									document.getElementById('invalid_msg').style.display='block';
+									document.getElementById('i_msg').innerHTML='Network error occured.';
+									setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+									
+								}
+							};
+							xhttp1.upload.onprogress = function(e) {
+								if (e.lengthComputable) {
+								  var percentComplete = Math.round((e.loaded / e.total) * 100);
+								  percentComplete=percentComplete.toFixed(2);
+								  if(percentComplete==100)
+								  {
+									 document.getElementById('syco_progress_id').style.width=percentComplete+'%';
+									 document.getElementById('syco_progress_id').innerHTML= percentComplete+'%';
+								  }
+								  else
+								  {
+									 document.getElementById('syco_progress_id').style.width=percentComplete+'%';
+									 document.getElementById('syco_progress_id').innerHTML= percentComplete+'%';
+								  }
+								}
+							};
+							xhttp1.open("POST", "../includes/super_admin/syco_update4.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&logo="+link1+"&title="+new_sycotitle+"&caption="+new_sycocaption+"&address="+new_sycoaddress+"&web="+new_sycoweb+"&email="+new_sycoemail+"&contact_email="+new_sycocontact_email+"&map_link="+new_sycomap_link+"&telephone="+new_sycotelephone+"&mobile="+new_sycomobile, true);
+							xhttp1.send(fd_image);
 							
 						}
 						else //invalid
@@ -489,11 +932,297 @@
 					{
 						if(new_video!="" && file_validate2(new_video)==true) //text video_alt and video available
 						{
+							document.getElementById('video').setCustomValidity('');
+							document.getElementById('logo').setCustomValidity('');
+							document.getElementById('video_alt').setCustomValidity('');
+							document.getElementById('captcha_syco').setCustomValidity('');
+							n_mobile.setCustomValidity('');
+							
+							document.getElementById('syco_loading').style.display='block';
+				
+							//video_alt
+							var image2=document.getElementById('video_alt').files[0];
+							var fd_image=new FormData();
+							
+							var link2='video_alt';
+							fd_image.append(link2, image2);
+							
+							//video
+							var image3=document.getElementById('video').files[0];
+							var link3='video';
+							fd_image.append(link3, image3);
+							
+							//Ajax for image upload
+							var xhttp1 = new XMLHttpRequest();
+							xhttp1.onreadystatechange = function() {
+								if (this.readyState == 4 && this.status == 200) {
+								
+									//response of 3
+									var str=this.responseText.trim();
+									//console.log(str);
+									
+									var msg2='',i=0;
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											msg2=msg2+str[i];
+									}
+									i++;
+									var msg3='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											msg3=msg3+str[i];
+									}
+									i++;
+									var dat='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											dat=dat+str[i];
+									}
+									i++;
+									var admin_name='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											admin_name=admin_name+str[i];
+									}
+									i++;
+									var admin_designation='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											admin_designation=admin_designation+str[i];
+									}
+									
+									
+									//console.log(admin_name+' '+admin_designation);
+									
+									
+									
+									document.getElementById('syco_progress_id').style.width='0%';
+									document.getElementById('syco_progress_id').innerHTML='0%';
+									document.getElementById('syco_loading').style.display='none';
+									
+									
+									if(msg2=='Ok' && msg3=='Ok')
+									{
+										
+										document.getElementById('site_title').innerHTML=new_sycotitle;
+										document.getElementById('site_title_link').innerHTML=new_sycotitle;
+										document.getElementById('updated_on').value=dat;
+										document.getElementById('updated_by').value=admin_name+', '+admin_designation;
+										
+										sycotitle=new_sycotitle;
+										sycocaption=new_sycocaption;
+										sycoaddress=new_sycoaddress;
+										sycoemail=new_sycoemail;
+										sycocontact_email=new_sycocontact_email;
+										sycomap_link=new_sycomap_link;
+										sycomobile=new_sycomobile;
+										sycotelephone=new_sycotelephone;
+										sycoweb=new_sycoweb;
+										
+										reset_system_components();
+										document.getElementById('valid_msg').style.display='block';
+										document.getElementById('v_msg').innerHTML='System components Successfully updated.';
+										setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
+										
+									}
+									else
+									{
+										reset_system_components();
+										document.getElementById('invalid_msg').style.display='block';
+										document.getElementById('i_msg').innerHTML='Unknown Error Occured.';
+										setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+										
+									}
+									
+									
+								}
+								else if(this.readyState==4 && (this.status==404 || this.status==403))
+								{
+									document.getElementById('syco_progress_id').style.width='0%';
+									document.getElementById('syco_progress_id').innerHTML='0%';
+									document.getElementById('syco_loading').style.display='none';
+									reset_system_components();
+									
+									document.getElementById('invalid_msg').style.display='block';
+									document.getElementById('i_msg').innerHTML='Network error occured.';
+									setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+									
+								}
+							};
+							xhttp1.upload.onprogress = function(e) {
+								if (e.lengthComputable) {
+								  var percentComplete = Math.round((e.loaded / e.total) * 100);
+								  percentComplete=percentComplete.toFixed(2);
+								  if(percentComplete==100)
+								  {
+									 document.getElementById('syco_progress_id').style.width=percentComplete+'%';
+									 document.getElementById('syco_progress_id').innerHTML= percentComplete+'%';
+								  }
+								  else
+								  {
+									 document.getElementById('syco_progress_id').style.width=percentComplete+'%';
+									 document.getElementById('syco_progress_id').innerHTML= percentComplete+'%';
+								  }
+								}
+							};
+							xhttp1.open("POST", "../includes/super_admin/syco_update5.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&video_alt="+link2+"&video="+link3+"&title="+new_sycotitle+"&caption="+new_sycocaption+"&address="+new_sycoaddress+"&web="+new_sycoweb+"&email="+new_sycoemail+"&contact_email="+new_sycocontact_email+"&map_link="+new_sycomap_link+"&telephone="+new_sycotelephone+"&mobile="+new_sycomobile, true);
+							xhttp1.send(fd_image);
 							
 						}
 						else if(new_video=="") //only text with video_alt 
 						{
+							document.getElementById('video').setCustomValidity('');
+							document.getElementById('logo').setCustomValidity('');
+							document.getElementById('video_alt').setCustomValidity('');
+							document.getElementById('captcha_syco').setCustomValidity('');
+							n_mobile.setCustomValidity('');
 							
+							document.getElementById('syco_loading').style.display='block';
+				
+							//video_alt
+							var image2=document.getElementById('video_alt').files[0];
+							var fd_image=new FormData();
+							
+							var link2='video_alt';
+							fd_image.append(link2, image2);
+							
+							
+							//Ajax for image upload
+							var xhttp1 = new XMLHttpRequest();
+							xhttp1.onreadystatechange = function() {
+								if (this.readyState == 4 && this.status == 200) {
+								
+									//response of 3
+									var str=this.responseText.trim();
+									//console.log(str);
+									
+									var msg2='',i=0;
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											msg2=msg2+str[i];
+									}
+									i++;
+									var dat='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											dat=dat+str[i];
+									}
+									i++;
+									var admin_name='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											admin_name=admin_name+str[i];
+									}
+									i++;
+									var admin_designation='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											admin_designation=admin_designation+str[i];
+									}
+									
+									
+									//console.log(admin_name+' '+admin_designation);
+									
+									
+									
+									document.getElementById('syco_progress_id').style.width='0%';
+									document.getElementById('syco_progress_id').innerHTML='0%';
+									document.getElementById('syco_loading').style.display='none';
+									
+									
+									if(msg2=='Ok')
+									{
+										
+										document.getElementById('site_title').innerHTML=new_sycotitle;
+										document.getElementById('site_title_link').innerHTML=new_sycotitle;
+										document.getElementById('updated_on').value=dat;
+										document.getElementById('updated_by').value=admin_name+', '+admin_designation;
+										
+										sycotitle=new_sycotitle;
+										sycocaption=new_sycocaption;
+										sycoaddress=new_sycoaddress;
+										sycoemail=new_sycoemail;
+										sycocontact_email=new_sycocontact_email;
+										sycomap_link=new_sycomap_link;
+										sycomobile=new_sycomobile;
+										sycotelephone=new_sycotelephone;
+										sycoweb=new_sycoweb;
+										
+										reset_system_components();
+										document.getElementById('valid_msg').style.display='block';
+										document.getElementById('v_msg').innerHTML='System components Successfully updated.';
+										setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
+										
+									}
+									else
+									{
+										reset_system_components();
+										document.getElementById('invalid_msg').style.display='block';
+										document.getElementById('i_msg').innerHTML='Unknown Error Occured.';
+										setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+										
+									}
+									
+									
+								}
+								else if(this.readyState==4 && (this.status==404 || this.status==403))
+								{
+									document.getElementById('syco_progress_id').style.width='0%';
+									document.getElementById('syco_progress_id').innerHTML='0%';
+									document.getElementById('syco_loading').style.display='none';
+									reset_system_components();
+									
+									document.getElementById('invalid_msg').style.display='block';
+									document.getElementById('i_msg').innerHTML='Network error occured.';
+									setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+									
+								}
+							};
+							xhttp1.upload.onprogress = function(e) {
+								if (e.lengthComputable) {
+								  var percentComplete = Math.round((e.loaded / e.total) * 100);
+								  percentComplete=percentComplete.toFixed(2);
+								  if(percentComplete==100)
+								  {
+									 document.getElementById('syco_progress_id').style.width=percentComplete+'%';
+									 document.getElementById('syco_progress_id').innerHTML= percentComplete+'%';
+								  }
+								  else
+								  {
+									 document.getElementById('syco_progress_id').style.width=percentComplete+'%';
+									 document.getElementById('syco_progress_id').innerHTML= percentComplete+'%';
+								  }
+								}
+							};
+							xhttp1.open("POST", "../includes/super_admin/syco_update6.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&video_alt="+link2+"&title="+new_sycotitle+"&caption="+new_sycocaption+"&address="+new_sycoaddress+"&web="+new_sycoweb+"&email="+new_sycoemail+"&contact_email="+new_sycocontact_email+"&map_link="+new_sycomap_link+"&telephone="+new_sycotelephone+"&mobile="+new_sycomobile, true);
+							xhttp1.send(fd_image);
 						}
 						else //invalid
 						{
@@ -504,11 +1233,276 @@
 					{
 						if(new_video!="" && file_validate2(new_video)==true) //only text with video
 						{
+							document.getElementById('video').setCustomValidity('');
+							document.getElementById('logo').setCustomValidity('');
+							document.getElementById('video_alt').setCustomValidity('');
+							document.getElementById('captcha_syco').setCustomValidity('');
+							n_mobile.setCustomValidity('');
 							
+							document.getElementById('syco_loading').style.display='block';
+				
+							var fd_image=new FormData();
+							
+							//video
+							var image3=document.getElementById('video').files[0];
+							var link3='video';
+							fd_image.append(link3, image3);
+							
+							//Ajax for image upload
+							var xhttp1 = new XMLHttpRequest();
+							xhttp1.onreadystatechange = function() {
+								if (this.readyState == 4 && this.status == 200) {
+								
+									//response of 3
+									var str=this.responseText.trim();
+									//console.log(str);
+									
+									
+									var msg3='',i=0;
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											msg3=msg3+str[i];
+									}
+									i++;
+									var dat='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											dat=dat+str[i];
+									}
+									i++;
+									var admin_name='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											admin_name=admin_name+str[i];
+									}
+									i++;
+									var admin_designation='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											admin_designation=admin_designation+str[i];
+									}
+									
+									
+									//console.log(admin_name+' '+admin_designation);
+									
+									
+									
+									document.getElementById('syco_progress_id').style.width='0%';
+									document.getElementById('syco_progress_id').innerHTML='0%';
+									document.getElementById('syco_loading').style.display='none';
+									
+									
+									if(msg3=='Ok')
+									{
+										
+										document.getElementById('site_title').innerHTML=new_sycotitle;
+										document.getElementById('site_title_link').innerHTML=new_sycotitle;
+										document.getElementById('updated_on').value=dat;
+										document.getElementById('updated_by').value=admin_name+', '+admin_designation;
+										
+										sycotitle=new_sycotitle;
+										sycocaption=new_sycocaption;
+										sycoaddress=new_sycoaddress;
+										sycoemail=new_sycoemail;
+										sycocontact_email=new_sycocontact_email;
+										sycomap_link=new_sycomap_link;
+										sycomobile=new_sycomobile;
+										sycotelephone=new_sycotelephone;
+										sycoweb=new_sycoweb;
+										
+										reset_system_components();
+										document.getElementById('valid_msg').style.display='block';
+										document.getElementById('v_msg').innerHTML='System components Successfully updated.';
+										setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
+										
+									}
+									else
+									{
+										reset_system_components();
+										document.getElementById('invalid_msg').style.display='block';
+										document.getElementById('i_msg').innerHTML='Unknown Error Occured.';
+										setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+										
+									}
+									
+									
+								}
+								else if(this.readyState==4 && (this.status==404 || this.status==403))
+								{
+									document.getElementById('syco_progress_id').style.width='0%';
+									document.getElementById('syco_progress_id').innerHTML='0%';
+									document.getElementById('syco_loading').style.display='none';
+									reset_system_components();
+									
+									document.getElementById('invalid_msg').style.display='block';
+									document.getElementById('i_msg').innerHTML='Network error occured.';
+									setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+									
+								}
+							};
+							xhttp1.upload.onprogress = function(e) {
+								if (e.lengthComputable) {
+								  var percentComplete = Math.round((e.loaded / e.total) * 100);
+								  percentComplete=percentComplete.toFixed(2);
+								  if(percentComplete==100)
+								  {
+									 document.getElementById('syco_progress_id').style.width=percentComplete+'%';
+									 document.getElementById('syco_progress_id').innerHTML= percentComplete+'%';
+								  }
+								  else
+								  {
+									 document.getElementById('syco_progress_id').style.width=percentComplete+'%';
+									 document.getElementById('syco_progress_id').innerHTML= percentComplete+'%';
+								  }
+								}
+							};
+							xhttp1.open("POST", "../includes/super_admin/syco_update7.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&video="+link3+"&title="+new_sycotitle+"&caption="+new_sycocaption+"&address="+new_sycoaddress+"&web="+new_sycoweb+"&email="+new_sycoemail+"&contact_email="+new_sycocontact_email+"&map_link="+new_sycomap_link+"&telephone="+new_sycotelephone+"&mobile="+new_sycomobile, true);
+							xhttp1.send(fd_image);
 						}
 						else if(new_video=="") //only text
 						{
+							document.getElementById('video').setCustomValidity('');
+							document.getElementById('logo').setCustomValidity('');
+							document.getElementById('video_alt').setCustomValidity('');
+							document.getElementById('captcha_syco').setCustomValidity('');
+							n_mobile.setCustomValidity('');
 							
+							document.getElementById('syco_loading').style.display='block';
+				
+							//Ajax for image upload
+							var xhttp1 = new XMLHttpRequest();
+							xhttp1.onreadystatechange = function() {
+								if (this.readyState == 4 && this.status == 200) {
+								
+									//response of 3
+									var str=this.responseText.trim();
+									//console.log(str);
+									
+									
+									var msg3='',i=0;
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											msg3=msg3+str[i];
+									}
+									i++;
+									var dat='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											dat=dat+str[i];
+									}
+									i++;
+									var admin_name='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											admin_name=admin_name+str[i];
+									}
+									i++;
+									var admin_designation='';
+									for(;i<str.length;i++)
+									{
+										if(str[i]=='@')
+											break;
+										else
+											admin_designation=admin_designation+str[i];
+									}
+									
+									
+									//console.log(admin_name+' '+admin_designation);
+									
+									
+									
+									document.getElementById('syco_progress_id').style.width='0%';
+									document.getElementById('syco_progress_id').innerHTML='0%';
+									document.getElementById('syco_loading').style.display='none';
+									
+									
+									if(msg3=='Ok')
+									{
+										
+										document.getElementById('site_title').innerHTML=new_sycotitle;
+										document.getElementById('site_title_link').innerHTML=new_sycotitle;
+										document.getElementById('updated_on').value=dat;
+										document.getElementById('updated_by').value=admin_name+', '+admin_designation;
+										
+										sycotitle=new_sycotitle;
+										sycocaption=new_sycocaption;
+										sycoaddress=new_sycoaddress;
+										sycoemail=new_sycoemail;
+										sycocontact_email=new_sycocontact_email;
+										sycomap_link=new_sycomap_link;
+										sycomobile=new_sycomobile;
+										sycotelephone=new_sycotelephone;
+										sycoweb=new_sycoweb;
+										
+										reset_system_components();
+										document.getElementById('valid_msg').style.display='block';
+										document.getElementById('v_msg').innerHTML='System components Successfully updated.';
+										setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
+										
+									}
+									else
+									{
+										reset_system_components();
+										document.getElementById('invalid_msg').style.display='block';
+										document.getElementById('i_msg').innerHTML='Unknown Error Occured.';
+										setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+										
+									}
+									
+									
+								}
+								else if(this.readyState==4 && (this.status==404 || this.status==403))
+								{
+									document.getElementById('syco_progress_id').style.width='0%';
+									document.getElementById('syco_progress_id').innerHTML='0%';
+									document.getElementById('syco_loading').style.display='none';
+									reset_system_components();
+									
+									document.getElementById('invalid_msg').style.display='block';
+									document.getElementById('i_msg').innerHTML='Network error occured.';
+									setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+									
+								}
+							};
+							xhttp1.upload.onprogress = function(e) {
+								if (e.lengthComputable) {
+								  var percentComplete = Math.round((e.loaded / e.total) * 100);
+								  percentComplete=percentComplete.toFixed(2);
+								  if(percentComplete==100)
+								  {
+									 document.getElementById('syco_progress_id').style.width=percentComplete+'%';
+									 document.getElementById('syco_progress_id').innerHTML= percentComplete+'%';
+								  }
+								  else
+								  {
+									 document.getElementById('syco_progress_id').style.width=percentComplete+'%';
+									 document.getElementById('syco_progress_id').innerHTML= percentComplete+'%';
+								  }
+								}
+							};
+							xhttp1.open("POST", "../includes/super_admin/syco_update8.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&title="+new_sycotitle+"&caption="+new_sycocaption+"&address="+new_sycoaddress+"&web="+new_sycoweb+"&email="+new_sycoemail+"&contact_email="+new_sycocontact_email+"&map_link="+new_sycomap_link+"&telephone="+new_sycotelephone+"&mobile="+new_sycomobile, true);
+							xhttp1.send();
 						}
 						else //invalid
 						{
