@@ -60,7 +60,7 @@
 			$stmt->bindParam(':admin_id', $_SESSION['admin_id']);
 			$stmt->execute();
 			
-			$return_msg='Ok@'.$date.'@'.$admin_name.'@'.$admin_designation.'@';
+			$return_msg='Ok@'.get_date($date).'@'.$admin_name.'@'.$admin_designation.'@';
 			
 		}
 		else //available so update
@@ -82,7 +82,7 @@
 			$stmt->bindParam(':admin_id', $_SESSION['admin_id']);
 			$stmt->execute();
 			
-			$return_msg='Ok@'.$date.'@'.$admin_name.'@'.$admin_designation.'@';
+			$return_msg='Ok@'.get_date($date).'@'.$admin_name.'@'.$admin_designation.'@';
 			
 		}
 		echo $return_msg;

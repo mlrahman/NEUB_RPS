@@ -105,7 +105,7 @@
 				}
 				
 			}
-			$return_msg=$return_msg.$date.'@'.$admin_name.'@'.$admin_designation.'@';
+			$return_msg=$return_msg.get_date($date).'@'.$admin_name.'@'.$admin_designation.'@';
 			
 		}
 		else //available so update
