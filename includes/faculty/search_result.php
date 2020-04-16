@@ -13,9 +13,11 @@
 	
 	<div class="w3-container" style="margin: 12px 0px 25px 0px;padding:0px;position:relative;">
 	
-		<div class="w3-container w3-topbar w3-bottombar w3-round-large w3-rightbar w3-leftbar w3-padding" style="margin:0 auto; width:50%;min-width:300px;">
+		<div class="w3-container w3-topbar w3-bottombar w3-round-large w3-rightbar w3-leftbar w3-padding" style="margin:0 auto; width:50%;min-width:310px;">
 			<i class="fa fa-search w3-text-teal"></i> 
-			<input type="text" id="search_text" oninput="get_suggestions()" class="w3-input w3-border-teal" style="width:92%;min-width:230px;display:inline;" placeholder="Enter Student Name or ID for Search">
+			<input type="text" id="search_text" oninput="if(this.value!=''){ document.getElementById('search_clear_btn').style.display='inline-block'; } else { document.getElementById('search_clear_btn').style.display='none'; } get_suggestions()" class="w3-input w3-border-teal" style="width:89%;min-width:220px;display:inline;" placeholder="Enter Student Name or ID for Search">
+			<i class="fa fa-close w3-text-red w3-hover-text-teal w3-cursor w3-large" style="display:none;" id="search_clear_btn" title="Clear search box" onclick="document.getElementById('search_text').value=''; document.getElementById('search_clear_btn').style.display='none';get_suggestions();"></i>
+		
 		</div>
 		
 		<script>
@@ -38,8 +40,7 @@
 	<script>
 		function view_result(s_id)
 		{
-			document.getElementById('search_text').value='';
-			get_suggestions();
+			
 			document.getElementById('search_window').style.display='block';
 			var page2=document.getElementById('page2');
 			page2.scrollTop = 20;
