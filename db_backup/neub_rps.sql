@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2020 at 03:59 PM
+-- Generation Time: Apr 16, 2020 at 02:01 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -99,7 +99,8 @@ INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address
 (2, '192.168.0.102', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '11:37 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '01:21 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:43 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '06:26 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '06:26 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '03:20 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -216,7 +217,11 @@ CREATE TABLE `nr_faculty` (
 --
 
 INSERT INTO `nr_faculty` (`nr_faculty_id`, `nr_faculty_name`, `nr_faculty_designation`, `nr_faculty_join_date`, `nr_faculty_resign_date`, `nr_faculty_type`, `nr_dept_id`, `nr_faculty_password`, `nr_faculty_email`, `nr_faculty_cell_no`, `nr_faculty_photo`, `nr_faculty_status`, `nr_faculty_two_factor`, `nr_faculty_gender`) VALUES
-(1, 'Noushad Sojib', 'Assistant Professor', '2016-04-20', '', 'Permanent', 1, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'mlrahman@neub.edu.bd', '01739213886', '158677029315867702938237.jpg', 'Active', 0, 'Male');
+(1, 'Noushad Sojib', 'Assistant Professor', '2016-04-20', '', 'Permanent', 1, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'mlrahman@neub.edu.bd', '01739213886', '158677029315867702938237.jpg', 'Active', 0, 'Male'),
+(2, 'Al Mehdi Saadat Chowdhury', 'Assistant Professor', '2013-01-15', '', 'Permanent', 1, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'amsc@yoo.com', '01711224455', '', 'Active', 0, 'Male'),
+(3, 'Tasnim Zahan Tithi', 'Assistant Professor', '2014-01-15', '', 'Permanent', 1, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'tithi@gml.com', '01711224455', '', 'Active', 0, 'Female'),
+(4, 'Mir Lutfur Rahman', 'Lecturer', '2018-05-26', '', 'Permanent', 1, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'raihan.testing@gmial.com', '017139213886', '', 'Active', 0, 'Male'),
+(5, 'Pranta Sarker', 'Lecturer', '2018-05-26', '', 'Permanent', 1, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'ps@ne', '01680929776', '', 'Active', 0, 'Male');
 
 -- --------------------------------------------------------
 
@@ -265,7 +270,14 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '07:10 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '07:11 PM', 'Active'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '08:27 PM', 'Active'),
-(1, '192.168.0.102', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '11:38 PM', 'Active');
+(1, '192.168.0.102', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '11:38 PM', 'Active'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:39 PM', 'Active'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:40 PM', 'Active'),
+(3, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:40 PM', 'Active'),
+(4, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:41 PM', 'Active'),
+(5, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:42 PM', 'Active'),
+(4, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:42 PM', 'Active'),
+(5, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:43 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1297,6 +1309,7 @@ INSERT INTO `nr_transcript_print_reference` (`nr_stud_id`, `nr_trprre_printed_by
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '07:57 PM', '0279203103571149', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '01:57 PM', '0283203109572421', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:45 PM', '0289201501455226', 'Active'),
+(140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '03:39 PM', '0296201611391419', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '06:52 PM', '0299203102523693', 'Active'),
 (140203020004, 'Student', 140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '12:51 PM', '0445201408512649', 'Active'),
 (140203020004, 'Student', 140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '12:52 PM', '0451201408523243', 'Active'),
@@ -1466,7 +1479,7 @@ ALTER TABLE `nr_drop`
 -- AUTO_INCREMENT for table `nr_faculty`
 --
 ALTER TABLE `nr_faculty`
-  MODIFY `nr_faculty_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `nr_faculty_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `nr_program`
