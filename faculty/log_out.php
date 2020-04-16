@@ -11,6 +11,12 @@
 		$stmt->bindParam(':f_id', $faculty_id);
 		$stmt->execute();
 		
+		$status='Inactive';
+		$stmt = $conn->prepare("update nr_faculty_login_transaction set nr_falotr_status=:status where nr_faculty_id=:u_id ");
+		$stmt->bindParam(':status', $status);
+		$stmt->bindParam(':u_id', $faculty_id);
+		$stmt->execute();
+		
 		unset($_SESSION['faculty_id']);
 		unset($_SESSION['faculty_email']);
 		unset($_SESSION['faculty_password']);

@@ -85,6 +85,11 @@
 							
 						}							
 						
+						$status='Inactive';
+						$stmt = $conn->prepare("update nr_admin_login_transaction set nr_suadlotr_status=:status where nr_admin_id=:u_id ");
+						$stmt->bindParam(':status', $status);
+						$stmt->bindParam(':u_id', $admin_id);
+						$stmt->execute();
 						
 						//inserting login record
 						$stmt = $conn->prepare("insert into nr_admin_login_transaction values(:sa_id,'$vis_ip','$country','$city','$lat','$lng','$timezone','$date','$time','Active') ");

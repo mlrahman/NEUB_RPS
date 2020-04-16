@@ -288,15 +288,15 @@ function get_date($date)
 	{
 		$month='Sep';
 	}
-	else if($date[5]=='0' && $date[6]=='10')
+	else if($date[5]=='1' && $date[6]=='0')
 	{
 		$month='Oct';
 	}
-	else if($date[5]=='0' && $date[6]=='11')
+	else if($date[5]=='1' && $date[6]=='1')
 	{
 		$month='Nov';
 	}
-	else if($date[5]=='0' && $date[6]=='12')
+	else if($date[5]=='1' && $date[6]=='2')
 	{
 		$month='Dec';
 	}

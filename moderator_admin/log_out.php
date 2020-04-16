@@ -11,6 +11,12 @@
 		$stmt->bindParam(':sa_id', $moderator_id);
 		$stmt->execute();
 		
+		$status='Inactive';
+		$stmt = $conn->prepare("update nr_admin_login_transaction set nr_suadlotr_status=:status where nr_admin_id=:u_id ");
+		$stmt->bindParam(':status', $status);
+		$stmt->bindParam(':u_id', $moderator_id);
+		$stmt->execute();
+		
 		unset($_SESSION['moderator_id']);
 		unset($_SESSION['moderator_email']);
 		unset($_SESSION['moderator_password']);

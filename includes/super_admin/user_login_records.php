@@ -84,6 +84,49 @@
 
 <script>
 
+	function session_inactive_function(status,user_type,user_id,date,time)
+	{
+		if(date=='-1' && time=='-1') //Request for all
+		{
+			document.getElementById('user_session_table_details').innerHTML='<tr><td class="w3-center" colspan="7" style="padding: 50px 0px 50px 0px;"><i class="fa fa-refresh w3-spin"></i> Please wait!! while loading...</td</tr>';
+		}
+		else //individual request
+		{
+			document.getElementById(user_type+user_id+date+time).innerHTML='<td valign="top" colspan="7" class="w3-padding-small w3-border w3-center"><i class="fa fa-refresh w3-spin"></i> Please wait!! while loading...</td>';
+		}
+		
+		var session_var = new XMLHttpRequest();
+		session_var.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				if(date=='-1' && time=='-1') //Request for all
+				{
+					document.getElementById('user_session_table_details').innerHTML=this.responseText.trim();
+					document.getElementById('session_inactive_btn').style.display="none";
+				}
+				else //individual request
+				{
+					document.getElementById(user_type+user_id+date+time).classList.add("w3-pale-red");
+					document.getElementById(user_type+user_id+date+time).innerHTML=this.responseText.trim();
+				}
+			}
+			if (this.readyState == 4 && (this.status == 403 || this.status == 404)) {
+				if(date=='-1' && time=='-1') //Request for all
+				{
+					document.getElementById('user_session_table_details').innerHTML='<tr><td class="w3-center w3-text-red" colspan="7" style="padding: 50px 0px 50px 0px;"><i class="fa fa-warning"></i> Network Error Occurred</td</tr>';
+				}
+				else //individual request
+				{
+					document.getElementById(user_type+user_id+date+time).innerHTML='<td valign="top" colspan="7" class="w3-padding-small w3-border w3-center w3-text-red" title="Network Error Occurred"><i class="fa fa-warning"></i> Network Error Occurred</td>';
+				}
+			}
+		};
+				
+		session_var.open("GET", "../includes/super_admin/set_session_status.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&user_type="+user_type+"&user_id="+user_id+"&status="+status+"&date="+date+"&time="+time, true);
+		session_var.send();
+		
+		
+	}
+
 	function get_search_result13()
 	{
 		close_search_box13();

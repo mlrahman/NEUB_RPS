@@ -85,6 +85,12 @@
 						}							
 						
 						
+						$status='Inactive';
+						$stmt = $conn->prepare("update nr_faculty_login_transaction set nr_falotr_status=:status where nr_faculty_id=:u_id ");
+						$stmt->bindParam(':status', $status);
+						$stmt->bindParam(':u_id', $faculty_id);
+						$stmt->execute();
+						
 						//inserting login record
 						$stmt = $conn->prepare("insert into nr_faculty_login_transaction values(:f_id,'$vis_ip','$country','$city','$lat','$lng','$timezone','$date','$time','Active') ");
 						$stmt->bindParam(':f_id', $faculty_id);
