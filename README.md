@@ -13,7 +13,7 @@ This web application is developed for the result processing system of North East
 	<li>Student will get all of his basic information that used in transcript.</li>
 	<li>Student will get all of his result including drop course (according to the syllabus) and waived course.</li>
 	<li>Incomplete result for any course will count as a fail in the transcript. Remarks will show in the result section but not in the transcript. Withdraw course information is not available in this portal.</li>
-	<li>Student can print an online transcript which will be tracked by a reference no with ip address and geo location. A single transcript print history will removed when it cross the number 50000 in print list.</li>
+	<li>Student can print an online transcript which will be tracked by a reference no with ip address and geo location. A single transcript print history will removed when it cross the number 50000 in print list. <b>Note: </b>For a single query, only a single transcript is printable, for more print request query session will be destroyed.</li>
 	<li>Student information add or edit right is available only for controller of examination.</li>
 	<li>In case of unavailability of photo in student profile a demo profile image will show based on student gender.</li>
 	<li>In contact us form general user can make a query which will directly send to the controller of examination email.</li>

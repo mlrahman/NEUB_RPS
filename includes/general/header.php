@@ -12,6 +12,12 @@ Email: mlrahman@neub.edu.bd
 -->
 <?php 
 	ob_start();
+	session_start();
+	if(isset($_SESSION['student_id']) && isset($_SESSION['dob']))
+	{
+		unset($_SESSION['student_id']);
+		unset($_SESSION['dob']);
+	}
 	require("../includes/db_connection.php"); 
 	require("../includes/function.php"); 
 	try
@@ -139,6 +145,7 @@ Email: mlrahman@neub.edu.bd
 		</script>
 		
 	</head>
+	
 	<body class="w3-black">
 		<!-- Notification messages -->
 		<div id="rs_blank" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
@@ -197,4 +204,5 @@ Email: mlrahman@neub.edu.bd
 		</div>
 		
 		<div class="w3-content w3-white" style="max-width:1450px;">
+		
 		

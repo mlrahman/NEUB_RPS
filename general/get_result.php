@@ -5,6 +5,7 @@
 			$s_id=$_GET['s_id'];
 			$dob=$_GET['dob'];
 			ob_start();
+			session_start();
 			require("../includes/db_connection.php");
 			require("../includes/function.php");
 			$stmt = $conn->prepare("select * from nr_student where nr_stud_id=:s_id and nr_stud_dob=:dob and nr_stud_status='Active' limit 1 ");
@@ -18,6 +19,9 @@
 				echo 'not_found';
 				die();
 			}
+			
+			$_SESSION['student_id']=$s_id;
+			$_SESSION['dob']=$dob;
 			
 			//Check details will insert into transaction
 			$vis_ip = getVisIPAddr();
@@ -307,7 +311,7 @@
 			if($waived_credit==0) $waived_credit='N/A';
 			
 			
-			
+			session_write_close();
 			
 		}catch(PDOException $e)
 		{
@@ -413,7 +417,7 @@
 							<tr>
 								<td valign="top">Degree Status</td>
 								<td valign="top" class="w3-bold">: <?php echo $degree_status; ?></td>
-								<td valign="top"><a onclick="window.open('print.php?s_id=<?php echo $s_id; ?>&dob=<?php echo $dob; ?>')" target="_blank" class="w3-button w3-round-large w3-black w3-hover-teal w3-padding-small w3-right"><i class="fa fa-print"></i> Print</a></td>
+								<td valign="top"><a onclick="window.open('print.php?s_id=<?php echo password_encrypt($s_id.get_current_date()); ?>&dob=<?php echo password_encrypt($dob.get_current_date()); ?>')" target="_blank" class="w3-button w3-round-large w3-black w3-hover-teal w3-padding-small w3-right"><i class="fa fa-print"></i> Print</a></td>
 							</tr>
 						</table>
 					</div>
