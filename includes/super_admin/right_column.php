@@ -27,7 +27,7 @@
 			
 			
 			
-			<p class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 7px;z-index: 99999;">
+			<p class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 0px;z-index: 99999;">
 				
 				<i class="fa fa-folder-open-o"></i> Program: 
 				<select onchange="reload_dashboard()" id="program_id" style="max-width:150px;">
@@ -194,9 +194,7 @@
 		<?php } ?>
 		<!-- page11 starts here -->
 		<div id="page11" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
-			
-			
-			
+			<?php include("../includes/super_admin/result_search_records.php"); ?>
 		</div>
 		<!-- page12 starts here -->
 		<div id="page12" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">

@@ -10,10 +10,11 @@
 		header("location:index.php");
 		die();
 	}
-	if(isset($_REQUEST['dept_id']) && isset($_REQUEST['program_id']) && isset($_REQUEST['search_text']) && isset($_REQUEST['sort']) && isset($_REQUEST['search_results_from']) && isset($_REQUEST['admin_id']) &&  $_REQUEST['admin_id']==$_SESSION['admin_id'])
+	if(isset($_REQUEST['user_type']) && isset($_REQUEST['dept_id']) && isset($_REQUEST['program_id']) && isset($_REQUEST['search_text']) && isset($_REQUEST['sort']) && isset($_REQUEST['search_results_from']) && isset($_REQUEST['admin_id']) &&  $_REQUEST['admin_id']==$_SESSION['admin_id'])
 	{
 		$admin_id=trim($_REQUEST['admin_id']);
 		$search_text=trim($_REQUEST['search_text']);
+		$user_type=trim($_REQUEST['user_type']);
 		$page=trim($_REQUEST['search_results_from']);
 		$sort=trim($_REQUEST['sort']);
 		if($sort==1)
@@ -41,26 +42,163 @@
 		$dept_id=trim($_REQUEST['dept_id']);
 		$program_id=trim($_REQUEST['program_id']);
 		
-		if($program_id==-1 && $dept_id==-1)
+		$filter='';
+		if($_SESSION['admin_type']!='Super Admin')
 		{
-			$stmt = $conn->prepare("select * from nr_transcript_print_reference where nr_trprre_status='Active' order by ".$order_by." ".$order." ");
+			$filter=" and nr_trprre_printed_by!='Super Admin' ";
 		}
-		else if($program_id==-1 && $dept_id!=-1)
+		
+		if($user_type==-1) //all
 		{
-			$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_dept_id=:dept_id and a.nr_trprre_status='Active' order by ".$order_by." ".$order." ");
-			$stmt->bindParam(':dept_id', $dept_id);
+		
+			if($program_id==-1 && $dept_id==-1)
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference where nr_trprre_status='Active' ".$filter." order by ".$order_by." ".$order." ");
+			}
+			else if($program_id==-1 && $dept_id!=-1)
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_dept_id=:dept_id and a.nr_trprre_status='Active' ".$filter." order by ".$order_by." ".$order." ");
+				$stmt->bindParam(':dept_id', $dept_id);
+			}
+			else if($program_id!=-1 && $dept_id==-1)
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_prog_id=:prog_id and a.nr_trprre_status='Active' ".$filter." order by ".$order_by." ".$order." ");
+				$stmt->bindParam(':prog_id', $program_id);
+			}
+			else
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_dept_id=:dept_id and c.nr_prog_id=:prog_id and a.nr_trprre_status='Active' ".$filter." order by ".$order_by." ".$order." ");
+				$stmt->bindParam(':dept_id', $dept_id);
+				$stmt->bindParam(':prog_id', $program_id);
+			}
+			
 		}
-		else if($program_id!=-1 && $dept_id==-1)
+		else if($user_type==1) //student
 		{
-			$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_prog_id=:prog_id and a.nr_trprre_status='Active' order by ".$order_by." ".$order." ");
-			$stmt->bindParam(':prog_id', $program_id);
+			$user_ty='Student';
+			if($program_id==-1 && $dept_id==-1)
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference where nr_trprre_status='Active' and nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+			}
+			else if($program_id==-1 && $dept_id!=-1)
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_dept_id=:dept_id and a.nr_trprre_status='Active' and a.nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+				$stmt->bindParam(':dept_id', $dept_id);
+			}
+			else if($program_id!=-1 && $dept_id==-1)
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_prog_id=:prog_id and a.nr_trprre_status='Active' and a.nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+				$stmt->bindParam(':prog_id', $program_id);
+			}
+			else
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_dept_id=:dept_id and c.nr_prog_id=:prog_id and a.nr_trprre_status='Active' and a.nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+				$stmt->bindParam(':dept_id', $dept_id);
+				$stmt->bindParam(':prog_id', $program_id);
+			}
+			$stmt->bindParam(':user_type', $user_ty);
 		}
-		else
+		else if($user_type==2) //Faculty
 		{
-			$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_dept_id=:dept_id and c.nr_prog_id=:prog_id and a.nr_trprre_status='Active' order by ".$order_by." ".$order." ");
-			$stmt->bindParam(':dept_id', $dept_id);
-			$stmt->bindParam(':prog_id', $program_id);
+			$user_ty='Faculty';
+			if($program_id==-1 && $dept_id==-1)
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference where nr_trprre_status='Active' and nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+			}
+			else if($program_id==-1 && $dept_id!=-1)
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_dept_id=:dept_id and a.nr_trprre_status='Active' and a.nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+				$stmt->bindParam(':dept_id', $dept_id);
+			}
+			else if($program_id!=-1 && $dept_id==-1)
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_prog_id=:prog_id and a.nr_trprre_status='Active' and a.nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+				$stmt->bindParam(':prog_id', $program_id);
+			}
+			else
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_dept_id=:dept_id and c.nr_prog_id=:prog_id and a.nr_trprre_status='Active' and a.nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+				$stmt->bindParam(':dept_id', $dept_id);
+				$stmt->bindParam(':prog_id', $program_id);
+			}
+			$stmt->bindParam(':user_type', $user_ty);
 		}
+		else if($user_type==3) //Moderator
+		{
+			$user_ty='Moderator';
+			if($program_id==-1 && $dept_id==-1)
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference where nr_trprre_status='Active' and nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+			}
+			else if($program_id==-1 && $dept_id!=-1)
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_dept_id=:dept_id and a.nr_trprre_status='Active' and a.nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+				$stmt->bindParam(':dept_id', $dept_id);
+			}
+			else if($program_id!=-1 && $dept_id==-1)
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_prog_id=:prog_id and a.nr_trprre_status='Active' and a.nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+				$stmt->bindParam(':prog_id', $program_id);
+			}
+			else
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_dept_id=:dept_id and c.nr_prog_id=:prog_id and a.nr_trprre_status='Active' and a.nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+				$stmt->bindParam(':dept_id', $dept_id);
+				$stmt->bindParam(':prog_id', $program_id);
+			}
+			$stmt->bindParam(':user_type', $user_ty);
+		}
+		else if($user_type==4) //Admin
+		{
+			$user_ty='Admin';
+			if($program_id==-1 && $dept_id==-1)
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference where nr_trprre_status='Active' and nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+			}
+			else if($program_id==-1 && $dept_id!=-1)
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_dept_id=:dept_id and a.nr_trprre_status='Active' and a.nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+				$stmt->bindParam(':dept_id', $dept_id);
+			}
+			else if($program_id!=-1 && $dept_id==-1)
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_prog_id=:prog_id and a.nr_trprre_status='Active' and a.nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+				$stmt->bindParam(':prog_id', $program_id);
+			}
+			else
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_dept_id=:dept_id and c.nr_prog_id=:prog_id and a.nr_trprre_status='Active' and a.nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+				$stmt->bindParam(':dept_id', $dept_id);
+				$stmt->bindParam(':prog_id', $program_id);
+			}
+			$stmt->bindParam(':user_type', $user_ty);
+		}
+		else if($user_type==5  && $_SESSION['admin_type']=='Super Admin') //super admin
+		{
+			$user_ty='Super Admin';
+			if($program_id==-1 && $dept_id==-1)
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference where nr_trprre_status='Active' and nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+			}
+			else if($program_id==-1 && $dept_id!=-1)
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_dept_id=:dept_id and a.nr_trprre_status='Active' and a.nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+				$stmt->bindParam(':dept_id', $dept_id);
+			}
+			else if($program_id!=-1 && $dept_id==-1)
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_prog_id=:prog_id and a.nr_trprre_status='Active' and a.nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+				$stmt->bindParam(':prog_id', $program_id);
+			}
+			else
+			{
+				$stmt = $conn->prepare("select * from nr_transcript_print_reference a,nr_student b,nr_program c where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and c.nr_dept_id=:dept_id and c.nr_prog_id=:prog_id and a.nr_trprre_status='Active' and a.nr_trprre_printed_by=:user_type order by ".$order_by." ".$order." ");
+				$stmt->bindParam(':dept_id', $dept_id);
+				$stmt->bindParam(':prog_id', $program_id);
+			}
+			$stmt->bindParam(':user_type', $user_ty);
+		}
+		
 		$stmt->execute();
 		$result = $stmt->fetchAll();
 		if(count($result)>0)

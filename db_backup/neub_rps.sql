@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2020 at 05:40 PM
+-- Generation Time: Apr 17, 2020 at 09:13 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -50,7 +50,8 @@ CREATE TABLE `nr_admin` (
 
 INSERT INTO `nr_admin` (`nr_admin_id`, `nr_admin_name`, `nr_admin_email`, `nr_admin_password`, `nr_admin_cell_no`, `nr_admin_photo`, `nr_admin_type`, `nr_admin_designation`, `nr_admin_status`, `nr_admin_two_factor`, `nr_admin_resign_date`, `nr_admin_gender`, `nr_admin_join_date`) VALUES
 (1, 'Shams Elahi Rasel', 'mirlutfur.rahman@gmail.com', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '', '158677029315867702938237.jpg', 'Super Admin', 'Controller of Examination, NEUB', 'Active', 0, '', 'Male', '2012-11-03'),
-(2, 'Fahad Ahmed', 'mlrahman@neub.edu.bd', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '', '15867702931586770293823.jpg', 'Moderator', 'Assistant Controller of NEUB', 'Active', 0, '', 'Male', '2013-01-01');
+(2, 'Fahad Ahmed', 'mlrahman@neub.edu.bd', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '', '15867702931586770293823.jpg', 'Moderator', 'Assistant Controller of NEUB', 'Active', 0, '', 'Male', '2013-01-01'),
+(3, 'Sonjoy Roy', 'sr@sr.sr', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '', '', 'Admin', 'Associate Controller of Examination', 'Active', 0, '', 'Male', '2019-11-10');
 
 -- --------------------------------------------------------
 
@@ -91,17 +92,45 @@ CREATE TABLE `nr_admin_login_transaction` (
 --
 
 INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address`, `nr_suadlotr_country`, `nr_suadlotr_city`, `nr_suadlotr_lat`, `nr_suadlotr_lng`, `nr_suadlotr_timezone`, `nr_suadlotr_date`, `nr_suadlotr_time`, `nr_suadlotr_status`) VALUES
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-13', '06:42 PM', 'Active'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:22 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:24 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '06:32 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '10:05 PM', 'Active'),
-(1, '192.168.0.102', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '11:35 PM', 'Active'),
-(2, '192.168.0.102', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '11:37 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '01:21 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:43 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '06:26 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '03:20 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-13', '06:42 PM', 'Inactive'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:22 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:24 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '06:32 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '10:05 PM', 'Inactive'),
+(1, '192.168.0.102', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '11:35 PM', 'Inactive'),
+(2, '192.168.0.102', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '11:37 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '01:21 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:43 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '06:26 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '03:20 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '10:34 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '10:46 PM', 'Inactive'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:02 PM', 'Inactive'),
+(3, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:07 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:47 PM', 'Inactive'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:52 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:39 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '09:50 PM', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nr_admin_result_check_transaction`
+--
+
+CREATE TABLE `nr_admin_result_check_transaction` (
+  `nr_stud_id` bigint(20) NOT NULL,
+  `nr_admin_id` bigint(20) NOT NULL,
+  `nr_rechtr_ip_address` varchar(100) NOT NULL,
+  `nr_rechtr_country` varchar(50) NOT NULL,
+  `nr_rechtr_city` varchar(50) NOT NULL,
+  `nr_rechtr_lat` varchar(100) NOT NULL,
+  `nr_rechtr_lng` varchar(100) NOT NULL,
+  `nr_rechtr_timezone` varchar(100) NOT NULL,
+  `nr_rechtr_date` varchar(100) NOT NULL,
+  `nr_rechtr_time` varchar(100) NOT NULL,
+  `nr_rechtr_status` enum('Active','Inactive') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 -- --------------------------------------------------------
 
@@ -263,25 +292,36 @@ CREATE TABLE `nr_faculty_login_transaction` (
 --
 
 INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_address`, `nr_falotr_country`, `nr_falotr_city`, `nr_falotr_lat`, `nr_falotr_lng`, `nr_falotr_timezone`, `nr_falotr_date`, `nr_falotr_time`, `nr_falotr_status`) VALUES
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:03 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:08 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:15 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:26 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '07:08 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '07:10 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '07:11 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '08:27 PM', 'Active'),
-(1, '192.168.0.102', 'Bangladesh', 'Sylhet', '24.896670', '91.871670', 'N/A', '2020-04-14', '11:38 PM', 'Active'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:39 PM', 'Active'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:40 PM', 'Active'),
-(3, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:40 PM', 'Active'),
-(4, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:41 PM', 'Active'),
-(5, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:42 PM', 'Active'),
-(4, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:42 PM', 'Active'),
-(5, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:43 PM', 'Active'),
-(4, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '06:29 PM', 'Active'),
-(4, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '07:56 PM', 'Active'),
-(4, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '08:28 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:03 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:08 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:15 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:26 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '07:08 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '07:10 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '07:11 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '08:27 PM', 'Inactive'),
+(1, '192.168.0.102', 'Bangladesh', 'Sylhet', '24.896670', '91.871670', 'N/A', '2020-04-14', '11:38 PM', 'Inactive'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:39 PM', 'Inactive'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:40 PM', 'Inactive'),
+(3, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:40 PM', 'Inactive'),
+(4, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:41 PM', 'Inactive'),
+(5, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:42 PM', 'Inactive'),
+(4, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:42 PM', 'Inactive'),
+(5, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:43 PM', 'Inactive'),
+(4, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '06:29 PM', 'Inactive'),
+(4, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '07:56 PM', 'Inactive'),
+(4, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '08:28 PM', 'Inactive'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:09 PM', 'Inactive'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:52 PM', 'Inactive'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:28 PM', 'Inactive'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:03 PM', 'Inactive'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:39 PM', 'Inactive'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:39 PM', 'Inactive'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:39 PM', 'Inactive'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:44 PM', 'Inactive'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '12:55 AM', 'Inactive'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Inactive'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Inactive');
 
 -- --------------------------------------------------------
 
@@ -441,9 +481,23 @@ INSERT INTO `nr_faculty_result_check_transaction` (`nr_stud_id`, `nr_faculty_id`
 (140203020004, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:05 PM', 'Active'),
 (140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:16 PM', 'Active'),
 (140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:27 PM', 'Active'),
-(140203020002, 4, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '06:29 PM', 'Active'),
-(140203020002, 4, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '07:57 PM', 'Active'),
-(140203020002, 4, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '08:28 PM', 'Active');
+(140203020002, 4, '::1', 'Bangladesh', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '06:29 PM', 'Active'),
+(140203020002, 4, '::1', 'Bangladesh', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '07:57 PM', 'Active'),
+(140203020002, 4, '::1', 'Bangladesh', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '08:28 PM', 'Active'),
+(140203020002, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:09 PM', 'Active'),
+(140203020002, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:53 PM', 'Active'),
+(140203020002, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:54 PM', 'Active'),
+(140203020006, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '12:21 AM', 'Active'),
+(140203020002, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:29 PM', 'Active'),
+(140203020002, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:04 PM', 'Active'),
+(140203020003, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:04 PM', 'Active'),
+(140203020009, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:04 PM', 'Active'),
+(140203020006, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:06 AM', 'Active'),
+(140203020009, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:06 AM', 'Active'),
+(140203020002, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Active'),
+(140203020003, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Active'),
+(140203020004, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Active'),
+(140203020005, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1177,7 +1231,17 @@ INSERT INTO `nr_result_check_transaction` (`nr_stud_id`, `nr_rechtr_ip_address`,
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:42 PM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:51 PM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:59 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '06:28 PM', 'Active');
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '06:28 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '02:22 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:03 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:06 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:13 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:15 PM', 'Active'),
+(140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:24 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:28 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:48 PM', 'Active'),
+(140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:49 PM', 'Active'),
+(140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:49 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1272,7 +1336,7 @@ INSERT INTO `nr_system_component` (`nr_syco_id`, `nr_admin_id`, `nr_syco_title`,
 
 CREATE TABLE `nr_transcript_print_reference` (
   `nr_stud_id` bigint(20) NOT NULL,
-  `nr_trprre_printed_by` enum('Student','Faculty','Moderator','Admin') NOT NULL,
+  `nr_trprre_printed_by` enum('Student','Faculty','Moderator','Admin','Super Admin') NOT NULL,
   `nr_trprre_user_id` bigint(20) NOT NULL,
   `nr_trprre_ip_address` varchar(100) NOT NULL,
   `nr_trprre_country` varchar(50) NOT NULL,
@@ -1295,35 +1359,49 @@ INSERT INTO `nr_transcript_print_reference` (`nr_stud_id`, `nr_trprre_printed_by
 (150102040001, 'Student', 150102040001, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:12 PM', '0131201210123742', 'Active'),
 (150102040001, 'Student', 150102040001, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '12:50 PM', '0143201408500047', 'Active'),
 (150102040001, 'Student', 150102040001, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '12:46 PM', '0184201408464963', 'Active'),
-(150102040001, 'Student', 150102040001, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '12:46 PM', '0196201408465420', 'Active'),
-(140203020002, 'Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:07 PM', '0211201409072838', 'Active'),
+(150102040001, 'Admin', 3, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '12:46 PM', '0196201408465420', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:07 PM', '0211201409072838', 'Active'),
 (140203020002, 'Moderator', 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:50 PM', '0214201501504338', 'Active'),
+(140203020002, 'Faculty', 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:04 PM', '0216201712040779', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:56 PM', '0222201501562928', 'Active'),
+(140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:48 PM', '0222201711484259', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:27 PM', '0225201409271714', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:42 PM', '0227201501425111', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:59 PM', '0230201501595372', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-09', '09:39 PM', '0234200905393013', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:51 PM', '0236201501512567', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '07:34 PM', '0236202903340580', 'Active'),
+(140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:13 PM', '0238201711131825', 'Active'),
+(140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:15 PM', '0238201711155183', 'Active'),
+(140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:03 PM', '0239201711031352', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:37 PM', '0241201210371642', 'Active'),
+(140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:06 PM', '0242201711063510', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:14 PM', '0245201409145364', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '07:56 PM', '0248203103563025', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '07:40 PM', '0250202903405318', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:56 PM', '0254201501561830', 'Active'),
+(140203020002, 'Faculty', 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:29 PM', '0254201711293738', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '02:48 PM', '0254203110482865', 'Active'),
+(140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:28 PM', '0257201711281885', 'Active'),
+(140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '02:22 PM', '0261201710223865', 'Active'),
+(140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '02:22 PM', '0263201710225269', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '01:56 PM', '0263203109565166', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '07:32 PM', '0264202903321638', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '06:28 PM', '0267201602283388', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:08 PM', '0272201409081999', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '07:57 PM', '0279203103571149', 'Active'),
+(140203020002, 'Faculty', 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:29 PM', '0283201711291247', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '01:57 PM', '0283203109572421', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:45 PM', '0289201501455226', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '03:39 PM', '0296201611391419', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '06:52 PM', '0299203102523693', 'Active'),
+(140203020003, 'Faculty', 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:04 PM', '0320201712043951', 'Active'),
 (140203020004, 'Student', 140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '12:51 PM', '0445201408512649', 'Active'),
 (140203020004, 'Student', 140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '12:52 PM', '0451201408523243', 'Active'),
 (140203020004, 'Student', 140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:51 PM', '0454201409515965', 'Active'),
 (140203020004, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:05 PM', '0467201409053793', 'Active'),
+(140203020009, 'Faculty', 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:05 PM', '0915201712050155', 'Active'),
+(140203020009, 'Student', 140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:49 PM', '0939201711494370', 'Active'),
 (140203020009, 'Student', 140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '01:58 PM', '0983203109585812', 'Active');
 
 --
@@ -1347,6 +1425,13 @@ ALTER TABLE `nr_admin_link_token`
 --
 ALTER TABLE `nr_admin_login_transaction`
   ADD KEY `nr_admin_login_transaction_ibfk_1` (`nr_admin_id`);
+
+--
+-- Indexes for table `nr_admin_result_check_transaction`
+--
+ALTER TABLE `nr_admin_result_check_transaction`
+  ADD KEY `nr_stud_id` (`nr_stud_id`),
+  ADD KEY `nr_admin_id` (`nr_admin_id`);
 
 --
 -- Indexes for table `nr_course`
@@ -1464,7 +1549,7 @@ ALTER TABLE `nr_transcript_print_reference`
 -- AUTO_INCREMENT for table `nr_admin`
 --
 ALTER TABLE `nr_admin`
-  MODIFY `nr_admin_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `nr_admin_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `nr_course`
@@ -1535,6 +1620,13 @@ ALTER TABLE `nr_admin_link_token`
 --
 ALTER TABLE `nr_admin_login_transaction`
   ADD CONSTRAINT `nr_admin_login_transaction_ibfk_1` FOREIGN KEY (`nr_admin_id`) REFERENCES `nr_admin` (`nr_admin_id`);
+
+--
+-- Constraints for table `nr_admin_result_check_transaction`
+--
+ALTER TABLE `nr_admin_result_check_transaction`
+  ADD CONSTRAINT `nr_admin_result_check_transaction_ibfk_1` FOREIGN KEY (`nr_stud_id`) REFERENCES `nr_student` (`nr_stud_id`),
+  ADD CONSTRAINT `nr_admin_result_check_transaction_ibfk_2` FOREIGN KEY (`nr_admin_id`) REFERENCES `nr_admin` (`nr_admin_id`);
 
 --
 -- Constraints for table `nr_course`

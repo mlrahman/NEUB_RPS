@@ -12,7 +12,7 @@
 <i onclick="pa12_topFunction()" id="pa12_btn" class="fa fa-chevron-circle-up w3-cursor w3-text-black w3-hover-text-teal w3-xxlarge" title="Go to top" style="display:none;bottom: 95px;right:45px;z-index: 99999;position:fixed;"></i>
 
 
-<p class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 7px;z-index: 99999;">
+<p class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 0px;z-index: 99999;">
 				
 	<i class="fa fa-folder-open-o"></i> Program: 
 	<select onchange="get_search_result12();" id="program_id12" style="max-width:150px;">
@@ -20,7 +20,7 @@
 	</select>
 	
 </p>
-<p class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 7px;z-index: 99999;">
+<p class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 0px;z-index: 99999;">
 	
 	<i class="fa fa-folder-open-o"></i> Department: 
 	<select onchange="reload_dept12()" id="dept_id12" style="max-width:150px;">
@@ -40,6 +40,19 @@
 				}
 			}
 		?>
+	</select>
+</p>
+<p class="w3-right w3-white w3-padding w3-text-teal w3-bold w3-leftbar w3-bottombar" style="position: -webkit-sticky;   position: sticky;  top: 0; margin: 0px 0px 14px 0px;border-radius:0px 0px 0px 7px;z-index: 99999;">
+	<i class="fa fa-folder-open-o"></i> User Role: 
+	<select onchange="get_search_result12();" id="user_type12" style="max-width:150px;">
+		<option value="-1">All</option>
+		<option value="1">Student</option>
+		<option value="2">Faculty</option>
+		<option value="3">Moderator</option>
+		<option value="4">Admin</option>
+		<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
+		<option value="5">Super Admin</option>
+		<?php } ?>
 	</select>
 </p>
 
@@ -175,6 +188,7 @@
 		var search_text=document.getElementById('search_text12').value.trim();
 		var dept_id=document.getElementById('dept_id12').value;
 		var prog_id=document.getElementById('program_id12').value;
+		var user_type=document.getElementById('user_type12').value;
 		
 		
 		var total12_results = new XMLHttpRequest();
@@ -191,7 +205,7 @@
 		};
 		document.getElementById('search_data_label12').innerHTML='<i class="fa fa-refresh w3-spin"></i>';
 		
-		total12_results.open("GET", "../includes/super_admin/get_total_search_results12.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&search_text="+search_text+"&program_id="+prog_id+"&dept_id="+dept_id, true);
+		total12_results.open("GET", "../includes/super_admin/get_total_search_results12.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&search_text="+search_text+"&program_id="+prog_id+"&dept_id="+dept_id+"&user_type="+user_type, true);
 		total12_results.send();
 		
 	}
@@ -209,6 +223,7 @@
 			var search_text=document.getElementById('search_text12').value.trim();
 			var dept_id=document.getElementById('dept_id12').value;
 			var prog_id=document.getElementById('program_id12').value;
+			var user_type=document.getElementById('user_type12').value;
 		
 		
 			document.getElementById("show_more_btn_search_result12").style.display='none';
@@ -242,7 +257,7 @@
 			var search_results_from=page12;
 			page12=page12+5;
 			
-			search_results.open("GET", "../includes/super_admin/get_search_results12.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&search_results_from="+search_results_from+"&sort="+r_sort+"&search_text="+search_text+"&program_id="+prog_id+"&dept_id="+dept_id, true);
+			search_results.open("GET", "../includes/super_admin/get_search_results12.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&search_results_from="+search_results_from+"&sort="+r_sort+"&search_text="+search_text+"&program_id="+prog_id+"&dept_id="+dept_id+"&user_type="+user_type, true);
 			search_results.send();
 		}
 		else

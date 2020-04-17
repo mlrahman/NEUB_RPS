@@ -65,7 +65,7 @@
 			<td style="width:8%;" valign="top" class="w3-padding-small">S.L. No</td>
 			<td style="width:28%;" valign="top" class="w3-padding-small">Name</td>
 			<td style="width:19%;" valign="top" class="w3-padding-small">Designation</td>
-			<td style="width:10%;" valign="top" class="w3-padding-small">User Role</td>
+			<td style="width:10%;" valign="top" class="w3-padding-small">User Type</td>
 			<td style="width:9%;" valign="top" class="w3-padding-small">Total Session</td>
 			<td style="width:15%;" valign="top" class="w3-padding-small">Last Session</td>
 			<td style="width:12%;" valign="top" class="w3-padding-small">Action</td>

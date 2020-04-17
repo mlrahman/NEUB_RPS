@@ -76,7 +76,7 @@
 									<td valign="top" class="w3-bold">: <?php echo $name; ?></td>
 								</tr>
 								<tr>
-									<td valign="top">Role</td>
+									<td valign="top">User Type</td>
 									<td valign="top" class="w3-bold">: <?php echo $role; ?></td>
 								</tr>
 								<tr>
