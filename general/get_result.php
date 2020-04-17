@@ -19,7 +19,11 @@
 				echo 'not_found';
 				die();
 			}
-			
+			if(isset($_SESSION['student_id']) || isset($_SESSION['dob']))
+			{
+				unset($_SESSION['student_id']);
+				unset($_SESSION['dob']);
+			}
 			$_SESSION['student_id']=$s_id;
 			$_SESSION['dob']=$dob;
 			
