@@ -10,12 +10,12 @@
 		header("location:index.php");
 		die();
 	}
-	if(isset($_REQUEST['s_id']) && isset($_REQUEST['faculty_dept_id']) && isset($_REQUEST['faculty_id']) && $_REQUEST['faculty_dept_id']==$_SESSION['faculty_dept_id'] && $_REQUEST['faculty_id']==$_SESSION['faculty_id'])
+	if(isset($_REQUEST['s_id']) && isset($_REQUEST['faculty_dept_id']) && isset($_REQUEST['faculty_id']) && $_REQUEST['s_id']==password_encrypt($_SESSION['student_id'].get_current_date()) && $_REQUEST['faculty_dept_id']==password_encrypt($_SESSION['faculty_dept_id'].get_current_date()) && $_REQUEST['faculty_id']==password_encrypt($_SESSION['faculty_id'].get_current_date()))
 	{
 		
 		try{
-			$s_id=$_REQUEST['s_id'];
-			$faculty_id=$_REQUEST['faculty_id'];
+			$s_id=$_SESSION['student_id'];
+			$faculty_id=$_SESSION['faculty_id'];
 			$stmt = $conn->prepare("select * from nr_student where nr_stud_id=:s_id and nr_stud_status='Active' limit 1 ");
 			$stmt->bindParam(':s_id', $s_id);
 			$stmt->execute();

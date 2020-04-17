@@ -35,6 +35,7 @@
 					unset($_SESSION['faculty_dept_id']);
 					unset($_SESSION['faculty_name']);
 					unset($_SESSION['otp_count']);
+					unset($_SESSION['student_id']);
 					header("location: index.php");
 					die();
 				}
@@ -51,6 +52,7 @@
 				unset($_SESSION['faculty_dept_id']);
 				unset($_SESSION['faculty_name']);
 				unset($_SESSION['otp_count']);
+				unset($_SESSION['student_id']);
 				header("location: index.php");
 				die();
 			}
@@ -67,6 +69,7 @@
 			unset($_SESSION['faculty_dept_id']);
 			unset($_SESSION['faculty_name']);
 			unset($_SESSION['otp_count']);
+			unset($_SESSION['student_id']);
 			header("location: index.php");
 			die();
 		}				
@@ -83,6 +86,7 @@
 		unset($_SESSION['faculty_dept_id']);
 		unset($_SESSION['faculty_name']);
 		unset($_SESSION['otp_count']);
+		unset($_SESSION['student_id']);
 		header("location: index.php");
 		die();
 	}

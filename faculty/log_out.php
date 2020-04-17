@@ -27,6 +27,7 @@
 		unset($_SESSION['faculty_dept_id']);
 		unset($_SESSION['faculty_name']);
 		unset($_SESSION['otp_count']);
+		unset($_SESSION['student_id']);
 		session_write_close();
 		header("location: index.php");
 		die();
