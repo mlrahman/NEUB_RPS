@@ -131,7 +131,7 @@
 							$designation=$result3[0][2];
 							$type=$result3[0][5];
 							$department=$result3[0][15];
-							echo '<span class="w3-text-blue w3-bold">'.$name.'</span> ('.$type.')';
+							echo '<span class="w3-text-blue w3-bold">'.$name.'</span> ('.$type.' Faculty)';
 						}
 						else
 						{

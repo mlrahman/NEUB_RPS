@@ -32,7 +32,7 @@
 			}
 			$photo=$result[0][10];
 			$name=$result[0][1];
-			$role='Faculty';
+			$role=$result[0][5].' Faculty';
 			$designation='<b>'.$result[0][2].'</b></br>&nbsp;&nbsp;Department of '.$result[0][15];
 			$gender=$result[0][13];
 			$join_date=$result[0][3];
@@ -125,7 +125,7 @@
 									$result = $stmt->fetchAll();
 									if($result[0][0]!=0)
 									{
-										echo '<i class="w3-red w3-button w3-round-large w3-padding w3-hover-teal w3-cursor fa fa-circle-o w3-right" onclick="session_inactive_function(\'Inactive\',\''.$role.'\',\''.$user_id.'\',\'-1\',\'-1\')" title="Click here for inactive all the session" id="session_inactive_btn"> Inactive All</i>';
+										echo '<i class="w3-red w3-button w3-round-large w3-padding w3-hover-teal w3-cursor fa fa-circle-o w3-right" onclick="session_inactive_function(\'Inactive\',\'Faculty\',\''.$user_id.'\',\'-1\',\'-1\')" title="Click here for inactive all the session" id="session_inactive_btn"> Inactive All</i>';
 									}
 								?>
 							</td>
