@@ -27,7 +27,7 @@
 		{
 			$data=array();
 			
-			$stmt = $conn->prepare("select distinct(b.nr_faculty_id),b.nr_faculty_name,b.nr_faculty_designation,(select count(c.nr_faculty_id) from nr_faculty_login_transaction c where c.nr_faculty_id=b.nr_faculty_id),(select d.nr_falotr_date from nr_faculty_login_transaction d where d.nr_faculty_id=b.nr_faculty_id order by d.nr_falotr_date desc,d.nr_falotr_time desc limit 1),(select e.nr_falotr_time from nr_faculty_login_transaction e where e.nr_faculty_id=b.nr_faculty_id order by e.nr_falotr_date desc,e.nr_falotr_time desc limit 1),(select d.nr_falotr_date from nr_faculty_login_transaction d where d.nr_faculty_id=b.nr_faculty_id order by d.nr_falotr_date asc,d.nr_falotr_time asc limit 1),(select e.nr_falotr_time from nr_faculty_login_transaction e where e.nr_faculty_id=b.nr_faculty_id order by e.nr_falotr_date asc,e.nr_falotr_time asc limit 1) from nr_faculty_login_transaction a,nr_faculty b where a.nr_faculty_id=b.nr_faculty_id and b.nr_faculty_name like concat('%',:search_text,'%') ");
+			$stmt = $conn->prepare("select distinct(b.nr_faculty_id),b.nr_faculty_name,b.nr_faculty_designation,(select count(c.nr_faculty_id) from nr_faculty_login_transaction c where c.nr_faculty_id=b.nr_faculty_id),(select d.nr_falotr_date from nr_faculty_login_transaction d where d.nr_faculty_id=b.nr_faculty_id order by d.nr_falotr_date desc,d.nr_falotr_time desc limit 1),(select e.nr_falotr_time from nr_faculty_login_transaction e where e.nr_faculty_id=b.nr_faculty_id order by e.nr_falotr_date desc,e.nr_falotr_time desc limit 1),(select d.nr_falotr_date from nr_faculty_login_transaction d where d.nr_faculty_id=b.nr_faculty_id order by d.nr_falotr_date asc,d.nr_falotr_time asc limit 1),(select e.nr_falotr_time from nr_faculty_login_transaction e where e.nr_faculty_id=b.nr_faculty_id order by e.nr_falotr_date asc,e.nr_falotr_time asc limit 1),(select count(f.nr_faculty_id) from nr_faculty_login_transaction f where f.nr_faculty_id=b.nr_faculty_id and f.nr_falotr_status='Active') from nr_faculty_login_transaction a,nr_faculty b where a.nr_faculty_id=b.nr_faculty_id and b.nr_faculty_name like concat('%',:search_text,'%') ");
 			$stmt->bindParam(':search_text', $search_text);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
@@ -36,11 +36,11 @@
 				$sz=count($result);
 				for($i=0;$i<$sz;$i++)
 				{
-					$data[count($data)-1]=array('user_id'=>$result[$i][0],'user_type'=>'Faculty','user_name'=>$result[$i][1],'user_designation'=>$result[$i][2],'user_total_session'=>$result[$i][3],'user_last_session_date'=>$result[$i][4],'user_last_session_time'=>$result[$i][5],'user_first_session_date'=>$result[$i][6],'user_first_session_time'=>$result[$i][7]);
+					$data[count($data)-1]=array('user_id'=>$result[$i][0],'user_type'=>'Faculty','user_name'=>$result[$i][1],'user_designation'=>$result[$i][2],'user_total_session'=>$result[$i][3],'user_last_session_date'=>$result[$i][4],'user_last_session_time'=>$result[$i][5],'user_first_session_date'=>$result[$i][6],'user_first_session_time'=>$result[$i][7],'on'=>$result[$i][8]);
 				}
 			}
 			
-			$stmt = $conn->prepare("select distinct(b.nr_admin_id),b.nr_admin_name,b.nr_admin_designation,(select count(c.nr_admin_id) from nr_admin_login_transaction c where c.nr_admin_id=b.nr_admin_id),(select d.nr_suadlotr_date from nr_admin_login_transaction d where d.nr_admin_id=b.nr_admin_id order by d.nr_suadlotr_date desc,d.nr_suadlotr_time desc limit 1),(select e.nr_suadlotr_time from nr_admin_login_transaction e where e.nr_admin_id=b.nr_admin_id order by e.nr_suadlotr_date desc,e.nr_suadlotr_time desc limit 1),(select d.nr_suadlotr_date from nr_admin_login_transaction d where d.nr_admin_id=b.nr_admin_id order by d.nr_suadlotr_date asc,d.nr_suadlotr_time asc limit 1),(select e.nr_suadlotr_time from nr_admin_login_transaction e where e.nr_admin_id=b.nr_admin_id order by e.nr_suadlotr_date asc,e.nr_suadlotr_time asc limit 1),b.nr_admin_type from nr_admin_login_transaction a,nr_admin b where a.nr_admin_id=b.nr_admin_id and b.nr_admin_name like concat('%',:search_text,'%') ".$filter);
+			$stmt = $conn->prepare("select distinct(b.nr_admin_id),b.nr_admin_name,b.nr_admin_designation,(select count(c.nr_admin_id) from nr_admin_login_transaction c where c.nr_admin_id=b.nr_admin_id),(select d.nr_suadlotr_date from nr_admin_login_transaction d where d.nr_admin_id=b.nr_admin_id order by d.nr_suadlotr_date desc,d.nr_suadlotr_time desc limit 1),(select e.nr_suadlotr_time from nr_admin_login_transaction e where e.nr_admin_id=b.nr_admin_id order by e.nr_suadlotr_date desc,e.nr_suadlotr_time desc limit 1),(select d.nr_suadlotr_date from nr_admin_login_transaction d where d.nr_admin_id=b.nr_admin_id order by d.nr_suadlotr_date asc,d.nr_suadlotr_time asc limit 1),(select e.nr_suadlotr_time from nr_admin_login_transaction e where e.nr_admin_id=b.nr_admin_id order by e.nr_suadlotr_date asc,e.nr_suadlotr_time asc limit 1),b.nr_admin_type,(select count(f.nr_admin_id) from nr_admin_login_transaction f where f.nr_admin_id=b.nr_admin_id and f.nr_suadlotr_status='Active') from nr_admin_login_transaction a,nr_admin b where a.nr_admin_id=b.nr_admin_id and b.nr_admin_name like concat('%',:search_text,'%') ".$filter);
 			$stmt->bindParam(':search_text', $search_text);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
@@ -49,7 +49,7 @@
 				$sz=count($result);
 				for($i=0;$i<$sz;$i++)
 				{
-					$data[count($data)-1]=array('user_id'=>$result[$i][0],'user_type'=>$result[$i][8],'user_name'=>$result[$i][1],'user_designation'=>$result[$i][2],'user_total_session'=>$result[$i][3],'user_last_session_date'=>$result[$i][4],'user_last_session_time'=>$result[$i][5],'user_first_session_date'=>$result[$i][6],'user_first_session_time'=>$result[$i][7]);
+					$data[count($data)-1]=array('user_id'=>$result[$i][0],'user_type'=>$result[$i][8],'user_name'=>$result[$i][1],'user_designation'=>$result[$i][2],'user_total_session'=>$result[$i][3],'user_last_session_date'=>$result[$i][4],'user_last_session_time'=>$result[$i][5],'user_first_session_date'=>$result[$i][6],'user_first_session_time'=>$result[$i][7],'on'=>$result[$i][9]);
 				}
 			}
 			if($sort==2)
@@ -108,9 +108,12 @@
 				if($count<=$page) continue;
 				$count2++;
 				if($count2>5) break;
+				$on='';
+				if($r['on']>0)
+					$on='<i class="fa fa-circle w3-text-light-green w3-cursor" style="font-size:9px;" title="Active session is available"></i> ';
 				echo '<tr>
 						<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
-						<td valign="top" class="w3-padding-small w3-border">'.$r['user_name'].'</td>
+						<td valign="top" class="w3-padding-small w3-border">'.$on.$r['user_name'].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$r['user_designation'].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$r['user_type'].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$r['user_total_session'].'</td>
@@ -124,7 +127,7 @@
 		{
 			$data=array();
 			
-			$stmt = $conn->prepare("select distinct(b.nr_faculty_id),b.nr_faculty_name,b.nr_faculty_designation,(select count(c.nr_faculty_id) from nr_faculty_login_transaction c where c.nr_faculty_id=b.nr_faculty_id),(select d.nr_falotr_date from nr_faculty_login_transaction d where d.nr_faculty_id=b.nr_faculty_id order by d.nr_falotr_date desc,d.nr_falotr_time desc limit 1),(select e.nr_falotr_time from nr_faculty_login_transaction e where e.nr_faculty_id=b.nr_faculty_id order by e.nr_falotr_date desc,e.nr_falotr_time desc limit 1),(select d.nr_falotr_date from nr_faculty_login_transaction d where d.nr_faculty_id=b.nr_faculty_id order by d.nr_falotr_date asc,d.nr_falotr_time asc limit 1),(select e.nr_falotr_time from nr_faculty_login_transaction e where e.nr_faculty_id=b.nr_faculty_id order by e.nr_falotr_date asc,e.nr_falotr_time asc limit 1) from nr_faculty_login_transaction a,nr_faculty b where a.nr_faculty_id=b.nr_faculty_id and b.nr_faculty_name like concat('%',:search_text,'%') ");
+			$stmt = $conn->prepare("select distinct(b.nr_faculty_id),b.nr_faculty_name,b.nr_faculty_designation,(select count(c.nr_faculty_id) from nr_faculty_login_transaction c where c.nr_faculty_id=b.nr_faculty_id),(select d.nr_falotr_date from nr_faculty_login_transaction d where d.nr_faculty_id=b.nr_faculty_id order by d.nr_falotr_date desc,d.nr_falotr_time desc limit 1),(select e.nr_falotr_time from nr_faculty_login_transaction e where e.nr_faculty_id=b.nr_faculty_id order by e.nr_falotr_date desc,e.nr_falotr_time desc limit 1),(select d.nr_falotr_date from nr_faculty_login_transaction d where d.nr_faculty_id=b.nr_faculty_id order by d.nr_falotr_date asc,d.nr_falotr_time asc limit 1),(select e.nr_falotr_time from nr_faculty_login_transaction e where e.nr_faculty_id=b.nr_faculty_id order by e.nr_falotr_date asc,e.nr_falotr_time asc limit 1),(select count(f.nr_faculty_id) from nr_faculty_login_transaction f where f.nr_faculty_id=b.nr_faculty_id and f.nr_falotr_status='Active') from nr_faculty_login_transaction a,nr_faculty b where a.nr_faculty_id=b.nr_faculty_id and b.nr_faculty_name like concat('%',:search_text,'%') ");
 			$stmt->bindParam(':search_text', $search_text);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
@@ -133,7 +136,7 @@
 				$sz=count($result);
 				for($i=0;$i<$sz;$i++)
 				{
-					$data[count($data)-1]=array('user_id'=>$result[$i][0],'user_type'=>'Faculty','user_name'=>$result[$i][1],'user_designation'=>$result[$i][2],'user_total_session'=>$result[$i][3],'user_last_session_date'=>$result[$i][4],'user_last_session_time'=>$result[$i][5],'user_first_session_date'=>$result[$i][6],'user_first_session_time'=>$result[$i][7]);
+					$data[count($data)-1]=array('user_id'=>$result[$i][0],'user_type'=>'Faculty','user_name'=>$result[$i][1],'user_designation'=>$result[$i][2],'user_total_session'=>$result[$i][3],'user_last_session_date'=>$result[$i][4],'user_last_session_time'=>$result[$i][5],'user_first_session_date'=>$result[$i][6],'user_first_session_time'=>$result[$i][7],'on'=>$result[$i][8]);
 				}
 			}
 			
@@ -194,9 +197,13 @@
 				if($count<=$page) continue;
 				$count2++;
 				if($count2>5) break;
+				$on='';
+				if($r['on']>0)
+					$on='<i class="fa fa-circle w3-text-light-green w3-cursor" style="font-size:9px;" title="Active session is available"></i> ';
+				
 				echo '<tr>
 						<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
-						<td valign="top" class="w3-padding-small w3-border">'.$r['user_name'].'</td>
+						<td valign="top" class="w3-padding-small w3-border">'.$on.$r['user_name'].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$r['user_designation'].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$r['user_type'].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$r['user_total_session'].'</td>
@@ -209,7 +216,7 @@
 		else if($user_type==2) //moderator
 		{
 			$data=array();
-			$stmt = $conn->prepare("select distinct(b.nr_admin_id),b.nr_admin_name,b.nr_admin_designation,(select count(c.nr_admin_id) from nr_admin_login_transaction c where c.nr_admin_id=b.nr_admin_id),(select d.nr_suadlotr_date from nr_admin_login_transaction d where d.nr_admin_id=b.nr_admin_id order by d.nr_suadlotr_date desc,d.nr_suadlotr_time desc limit 1),(select e.nr_suadlotr_time from nr_admin_login_transaction e where e.nr_admin_id=b.nr_admin_id order by e.nr_suadlotr_date desc,e.nr_suadlotr_time desc limit 1),(select d.nr_suadlotr_date from nr_admin_login_transaction d where d.nr_admin_id=b.nr_admin_id order by d.nr_suadlotr_date asc,d.nr_suadlotr_time asc limit 1),(select e.nr_suadlotr_time from nr_admin_login_transaction e where e.nr_admin_id=b.nr_admin_id order by e.nr_suadlotr_date asc,e.nr_suadlotr_time asc limit 1),b.nr_admin_type from nr_admin_login_transaction a,nr_admin b where a.nr_admin_id=b.nr_admin_id and b.nr_admin_name like concat('%',:search_text,'%') and b.nr_admin_type='Moderator' ".$filter);
+			$stmt = $conn->prepare("select distinct(b.nr_admin_id),b.nr_admin_name,b.nr_admin_designation,(select count(c.nr_admin_id) from nr_admin_login_transaction c where c.nr_admin_id=b.nr_admin_id),(select d.nr_suadlotr_date from nr_admin_login_transaction d where d.nr_admin_id=b.nr_admin_id order by d.nr_suadlotr_date desc,d.nr_suadlotr_time desc limit 1),(select e.nr_suadlotr_time from nr_admin_login_transaction e where e.nr_admin_id=b.nr_admin_id order by e.nr_suadlotr_date desc,e.nr_suadlotr_time desc limit 1),(select d.nr_suadlotr_date from nr_admin_login_transaction d where d.nr_admin_id=b.nr_admin_id order by d.nr_suadlotr_date asc,d.nr_suadlotr_time asc limit 1),(select e.nr_suadlotr_time from nr_admin_login_transaction e where e.nr_admin_id=b.nr_admin_id order by e.nr_suadlotr_date asc,e.nr_suadlotr_time asc limit 1),b.nr_admin_type,(select count(f.nr_admin_id) from nr_admin_login_transaction f where f.nr_admin_id=b.nr_admin_id and f.nr_suadlotr_status='Active') from nr_admin_login_transaction a,nr_admin b where a.nr_admin_id=b.nr_admin_id and b.nr_admin_name like concat('%',:search_text,'%') and b.nr_admin_type='Moderator' ".$filter);
 			$stmt->bindParam(':search_text', $search_text);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
@@ -218,7 +225,7 @@
 				$sz=count($result);
 				for($i=0;$i<$sz;$i++)
 				{
-					$data[count($data)-1]=array('user_id'=>$result[$i][0],'user_type'=>$result[$i][8],'user_name'=>$result[$i][1],'user_designation'=>$result[$i][2],'user_total_session'=>$result[$i][3],'user_last_session_date'=>$result[$i][4],'user_last_session_time'=>$result[$i][5],'user_first_session_date'=>$result[$i][6],'user_first_session_time'=>$result[$i][7]);
+					$data[count($data)-1]=array('user_id'=>$result[$i][0],'user_type'=>$result[$i][8],'user_name'=>$result[$i][1],'user_designation'=>$result[$i][2],'user_total_session'=>$result[$i][3],'user_last_session_date'=>$result[$i][4],'user_last_session_time'=>$result[$i][5],'user_first_session_date'=>$result[$i][6],'user_first_session_time'=>$result[$i][7],'on'=>$result[$i][9]);
 				}
 			}
 			if($sort==2)
@@ -277,9 +284,13 @@
 				if($count<=$page) continue;
 				$count2++;
 				if($count2>5) break;
+				$on='';
+				if($r['on']>0)
+					$on='<i class="fa fa-circle w3-text-light-green w3-cursor" style="font-size:9px;" title="Active session is available"></i> ';
+				
 				echo '<tr>
 						<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
-						<td valign="top" class="w3-padding-small w3-border">'.$r['user_name'].'</td>
+						<td valign="top" class="w3-padding-small w3-border">'.$on.$r['user_name'].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$r['user_designation'].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$r['user_type'].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$r['user_total_session'].'</td>
@@ -292,7 +303,7 @@
 		else if($user_type==3) //admin
 		{
 			$data=array();
-			$stmt = $conn->prepare("select distinct(b.nr_admin_id),b.nr_admin_name,b.nr_admin_designation,(select count(c.nr_admin_id) from nr_admin_login_transaction c where c.nr_admin_id=b.nr_admin_id),(select d.nr_suadlotr_date from nr_admin_login_transaction d where d.nr_admin_id=b.nr_admin_id order by d.nr_suadlotr_date desc,d.nr_suadlotr_time desc limit 1),(select e.nr_suadlotr_time from nr_admin_login_transaction e where e.nr_admin_id=b.nr_admin_id order by e.nr_suadlotr_date desc,e.nr_suadlotr_time desc limit 1),(select d.nr_suadlotr_date from nr_admin_login_transaction d where d.nr_admin_id=b.nr_admin_id order by d.nr_suadlotr_date asc,d.nr_suadlotr_time asc limit 1),(select e.nr_suadlotr_time from nr_admin_login_transaction e where e.nr_admin_id=b.nr_admin_id order by e.nr_suadlotr_date asc,e.nr_suadlotr_time asc limit 1),b.nr_admin_type from nr_admin_login_transaction a,nr_admin b where a.nr_admin_id=b.nr_admin_id and b.nr_admin_name like concat('%',:search_text,'%') and b.nr_admin_type='Admin' ".$filter);
+			$stmt = $conn->prepare("select distinct(b.nr_admin_id),b.nr_admin_name,b.nr_admin_designation,(select count(c.nr_admin_id) from nr_admin_login_transaction c where c.nr_admin_id=b.nr_admin_id),(select d.nr_suadlotr_date from nr_admin_login_transaction d where d.nr_admin_id=b.nr_admin_id order by d.nr_suadlotr_date desc,d.nr_suadlotr_time desc limit 1),(select e.nr_suadlotr_time from nr_admin_login_transaction e where e.nr_admin_id=b.nr_admin_id order by e.nr_suadlotr_date desc,e.nr_suadlotr_time desc limit 1),(select d.nr_suadlotr_date from nr_admin_login_transaction d where d.nr_admin_id=b.nr_admin_id order by d.nr_suadlotr_date asc,d.nr_suadlotr_time asc limit 1),(select e.nr_suadlotr_time from nr_admin_login_transaction e where e.nr_admin_id=b.nr_admin_id order by e.nr_suadlotr_date asc,e.nr_suadlotr_time asc limit 1),b.nr_admin_type,(select count(f.nr_admin_id) from nr_admin_login_transaction f where f.nr_admin_id=b.nr_admin_id and f.nr_suadlotr_status='Active') from nr_admin_login_transaction a,nr_admin b where a.nr_admin_id=b.nr_admin_id and b.nr_admin_name like concat('%',:search_text,'%') and b.nr_admin_type='Admin' ".$filter);
 			$stmt->bindParam(':search_text', $search_text);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
@@ -301,7 +312,7 @@
 				$sz=count($result);
 				for($i=0;$i<$sz;$i++)
 				{
-					$data[count($data)-1]=array('user_id'=>$result[$i][0],'user_type'=>$result[$i][8],'user_name'=>$result[$i][1],'user_designation'=>$result[$i][2],'user_total_session'=>$result[$i][3],'user_last_session_date'=>$result[$i][4],'user_last_session_time'=>$result[$i][5],'user_first_session_date'=>$result[$i][6],'user_first_session_time'=>$result[$i][7]);
+					$data[count($data)-1]=array('user_id'=>$result[$i][0],'user_type'=>$result[$i][8],'user_name'=>$result[$i][1],'user_designation'=>$result[$i][2],'user_total_session'=>$result[$i][3],'user_last_session_date'=>$result[$i][4],'user_last_session_time'=>$result[$i][5],'user_first_session_date'=>$result[$i][6],'user_first_session_time'=>$result[$i][7],'on'=>$result[$i][9]);
 				}
 			}
 			if($sort==2)
@@ -360,9 +371,13 @@
 				if($count<=$page) continue;
 				$count2++;
 				if($count2>5) break;
+				$on='';
+				if($r['on']>0)
+					$on='<i class="fa fa-circle w3-text-light-green w3-cursor" style="font-size:9px;" title="Active session is available"></i> ';
+				
 				echo '<tr>
 						<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
-						<td valign="top" class="w3-padding-small w3-border">'.$r['user_name'].'</td>
+						<td valign="top" class="w3-padding-small w3-border">'.$on.$r['user_name'].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$r['user_designation'].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$r['user_type'].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$r['user_total_session'].'</td>
@@ -374,7 +389,7 @@
 		else if($user_type==4 && $_SESSION['admin_type']=='Super Admin') //super admin
 		{
 			$data=array();
-			$stmt = $conn->prepare("select distinct(b.nr_admin_id),b.nr_admin_name,b.nr_admin_designation,(select count(c.nr_admin_id) from nr_admin_login_transaction c where c.nr_admin_id=b.nr_admin_id),(select d.nr_suadlotr_date from nr_admin_login_transaction d where d.nr_admin_id=b.nr_admin_id order by d.nr_suadlotr_date desc,d.nr_suadlotr_time desc limit 1),(select e.nr_suadlotr_time from nr_admin_login_transaction e where e.nr_admin_id=b.nr_admin_id order by e.nr_suadlotr_date desc,e.nr_suadlotr_time desc limit 1),(select d.nr_suadlotr_date from nr_admin_login_transaction d where d.nr_admin_id=b.nr_admin_id order by d.nr_suadlotr_date asc,d.nr_suadlotr_time asc limit 1),(select e.nr_suadlotr_time from nr_admin_login_transaction e where e.nr_admin_id=b.nr_admin_id order by e.nr_suadlotr_date asc,e.nr_suadlotr_time asc limit 1),b.nr_admin_type from nr_admin_login_transaction a,nr_admin b where a.nr_admin_id=b.nr_admin_id and b.nr_admin_name like concat('%',:search_text,'%') and b.nr_admin_type='Super Admin' ".$filter);
+			$stmt = $conn->prepare("select distinct(b.nr_admin_id),b.nr_admin_name,b.nr_admin_designation,(select count(c.nr_admin_id) from nr_admin_login_transaction c where c.nr_admin_id=b.nr_admin_id),(select d.nr_suadlotr_date from nr_admin_login_transaction d where d.nr_admin_id=b.nr_admin_id order by d.nr_suadlotr_date desc,d.nr_suadlotr_time desc limit 1),(select e.nr_suadlotr_time from nr_admin_login_transaction e where e.nr_admin_id=b.nr_admin_id order by e.nr_suadlotr_date desc,e.nr_suadlotr_time desc limit 1),(select d.nr_suadlotr_date from nr_admin_login_transaction d where d.nr_admin_id=b.nr_admin_id order by d.nr_suadlotr_date asc,d.nr_suadlotr_time asc limit 1),(select e.nr_suadlotr_time from nr_admin_login_transaction e where e.nr_admin_id=b.nr_admin_id order by e.nr_suadlotr_date asc,e.nr_suadlotr_time asc limit 1),b.nr_admin_type,(select count(f.nr_admin_id) from nr_admin_login_transaction f where f.nr_admin_id=b.nr_admin_id and f.nr_suadlotr_status='Active') from nr_admin_login_transaction a,nr_admin b where a.nr_admin_id=b.nr_admin_id and b.nr_admin_name like concat('%',:search_text,'%') and b.nr_admin_type='Super Admin' ".$filter);
 			$stmt->bindParam(':search_text', $search_text);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
@@ -383,7 +398,7 @@
 				$sz=count($result);
 				for($i=0;$i<$sz;$i++)
 				{
-					$data[count($data)-1]=array('user_id'=>$result[$i][0],'user_type'=>$result[$i][8],'user_name'=>$result[$i][1],'user_designation'=>$result[$i][2],'user_total_session'=>$result[$i][3],'user_last_session_date'=>$result[$i][4],'user_last_session_time'=>$result[$i][5],'user_first_session_date'=>$result[$i][6],'user_first_session_time'=>$result[$i][7]);
+					$data[count($data)-1]=array('user_id'=>$result[$i][0],'user_type'=>$result[$i][8],'user_name'=>$result[$i][1],'user_designation'=>$result[$i][2],'user_total_session'=>$result[$i][3],'user_last_session_date'=>$result[$i][4],'user_last_session_time'=>$result[$i][5],'user_first_session_date'=>$result[$i][6],'user_first_session_time'=>$result[$i][7],'on'=>$result[$i][9]);
 				}
 			}
 			if($sort==2)
@@ -442,9 +457,13 @@
 				if($count<=$page) continue;
 				$count2++;
 				if($count2>5) break;
+				$on='';
+				if($r['on']>0)
+					$on='<i class="fa fa-circle w3-text-light-green w3-cursor" style="font-size:9px;" title="Active session is available"></i> ';
+				
 				echo '<tr>
 						<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
-						<td valign="top" class="w3-padding-small w3-border">'.$r['user_name'].'</td>
+						<td valign="top" class="w3-padding-small w3-border">'.$on.$r['user_name'].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$r['user_designation'].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$r['user_type'].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$r['user_total_session'].'</td>
