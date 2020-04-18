@@ -387,8 +387,8 @@
 												<input type="hidden" id="sub_s_id" value="<?php echo $reg_no; ?>">
 												<input type="hidden" id="sub_dob" value="<?php echo $birthdate; ?>">
 												<input type="hidden" id="sub_email" value="<?php echo $subscription_email; ?>">
-												<i class="w3-green fa fa-check-square-o w3-large" onclick="enable_subscribe(2)"></i> 
-												<i class="w3-red fa fa-times-circle-o w3-large" onclick="enable_subscribe(0)"></i>
+												<i class="w3-text-green w3-cursor fa fa-check-square-o w3-large" onclick="enable_subscribe(2)"></i> 
+												<i class="w3-text-red w3-cursor fa fa-times-circle-o w3-large" onclick="enable_subscribe(0)"></i>
 											</div>
 										</td>
 									</tr>

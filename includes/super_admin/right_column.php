@@ -139,9 +139,7 @@
 		
 		<!-- page2 starts here -->
 		<div id="page2" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
-			
-			
-			
+			<?php include("../includes/super_admin/departments.php"); ?>
 		</div>
 		
 		<!-- page3 starts here -->
