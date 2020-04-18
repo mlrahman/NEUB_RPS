@@ -57,6 +57,7 @@
 			$prog_id = $result[0][7];
 			$prcr_id = $result[0][8];
 			
+			
 			//Search for student program
 			$stmt = $conn->prepare("select * from nr_program where nr_prog_id=$prog_id");
 			$stmt->execute();
@@ -333,7 +334,7 @@
 	<div class=" w3-modal-content w3-round-large w3-animate-bottom w3-card-4 w3-leftbar w3-rightbar w3-bottombar w3-topbar w3-border-white">
 		<header class="w3-container w3-black w3-bottombar w3-border-teal w3-round-top-large"> 
 			<span onclick="document.getElementById('result_popup').style.display='none';document.getElementById('result_popup').innerHTML ='Oops..'" class="w3-button w3-display-topright w3-large w3-hover-teal w3-round" style="padding:2px 12px;margin: 15px 10px;"><i class="fa fa-close"></i> Close</span>
-			<p class="w3-xxlarge" style="margin:5px 0px;">Fetched Result</p>
+			<p class="w3-xxlarge" style="margin:5px 0px;" id="window_title"><?php if($subscription_email==""){ echo 'Fetched Result'; } else { echo 'Two Factor Authentication'; } ?></p>
 		</header>
 		<div id="sub_loading" class="w3-container w3-margin-0 w3-padding-0 w3-black w3-animate-top w3-center" style="width:100%;height:100%;opacity:0.75;z-index:111;padding-top:150px;top:0;left:0;position:absolute;display:none;">
 			<p class="w3-bold">Please wait while setting subscription email..</p>
@@ -341,7 +342,7 @@
 		</div>
 		<div class="w3-container w3-row w3-round-bottom-large w3-padding w3-border w3-border-teal" style="height:100%;">
 			
-			<div class="w3-container w3-padding-small" style="margin:0px;padding:0px;width:100%;min-height:200px;height:auto;">
+			<div id="box1" class="w3-container w3-padding-small" style="<?php if($subscription_email==""){ echo 'display:block;'; } else { echo 'display:none;'; } ?>margin:0px;padding:0px;width:100%;min-height:200px;height:auto;">
 				<div class="w3-row w3-bottombar w3-border-teal">
 					<!--part 1 -->
 					<div class="w3-half w3-container w3-padding-0">
@@ -380,7 +381,7 @@
 									<tr>
 										<td colspan="2" class="w3-text-blue">
 											<input type="checkbox" id="subscription" onclick="enable_subscribe(1)" value="checked-subscription" <?php if($subscription_email!="") { echo 'checked disabled'; } ?>/> 
-											<font onclick="enable_subscribe(1)" class="w3-cursor">Subscribe Notification</font>
+											<font onclick="enable_subscribe(1)" class="w3-cursor">Subscribe Notification and 2FA <i class="fa fa-exclamation-circle w3-text-black" title="By inserting email your ID will be protected by two factor authentication system. For each query we will sent you an OTP in your email and you have to insert it for the access. Also you will get all the update news of your ID in your email. For any query please contact with the controller of examination."></i></font>
 											<div class="w3-margin-0 w3-padding-0" id="edit_subscription" style="display:none;">
 												<input type="email" placeholder=" Email Address" value="<?php if($subscription_email!="") { echo $subscription_email; } ?>" id="subscription_email" class="w3-round-large"> 
 												<input type="hidden" id="sub_s_id" value="<?php echo $reg_no; ?>">
@@ -994,11 +995,81 @@
 					?>
 				</div>
 			</div>
+			<div id="box2" class="w3-container w3-padding-small" style="<?php if($subscription_email!=""){ echo 'display:block;'; } else { echo 'display:none;'; } ?>margin:0px;padding:0px;width:100%;min-height:200px;height:auto;">
+			
+				<div class="w3-container w3-row w3-round-bottom-large w3-padding w3-border w3-border-teal w3-margin" style="height:100%;">
+						<div class="w3-section w3-padding w3-center w3-bold w3-text-red">
+							*We have sent you an OTP to your email. Please insert the OTP to pass the two factor authentication.<font class="w3-text-blue"> Wrong OTP submission will destroy this session.</font> 
+						</div>
+						<div class="w3-section w3-border w3-round-large w3-padding w3-text-black w3-justify">
+							<label><b>Your OTP</b></label>
+							<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="number" placeholder="Enter your OTP"  autocomplete="off" id="student_otp" required>
+							<?php 
+								//spam Check 
+								$aaa=rand(1,20);
+								$bbb=rand(1,20);
+								$ccc=$aaa+$bbb;
+								
+								$st_otp='';
+								if($subscription_email!=""){
+									$st_otp=get_otp();
+									
+									$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
+									$stmt->execute();
+									$result = $stmt->fetchAll();
+									if(count($result)==0)
+									{
+										echo 'System not ready';
+										die();
+									}
+									$title=$result[0][2];
+									$contact_email=$result[0][9];//for sending message from contact us form
+		
+									
+									//sending new OTP to user
+									$msg="Dear ".$name.", Your Two Factor Authentication OTP is: ".$st_otp;
+									$message = '<html><body>';
+									$message .= '<h1>Two Factor Authentication OTP From - '.$title.'</h1><p>  </p>';
+									$message .= '<p><b>Message Details:</b></p>';
+									$message .= '<p>'.$msg.'</p></body></html>';
+									
+									
+									sent_mail($subscription_email,$title.' - OTP for Two Factor Authentication',$message,$title,$contact_email);
+									
+									
+								}
+							?>
+							<label><b>Captcha</b></label>
+							<div class="w3-row" style="margin:0px;padding:0px;">
+								<div class="w3-col" style="width:40%;">
+									<input class="w3-input w3-border w3-center w3-round-large" type="text" value="<?php echo $aaa.' + '.$bbb.' = '; ?>" disabled>
+								</div>
+								<div class="w3-col" style="margin-left:2%;width:58%;">
+									<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"   placeholder=" * " id="captcha10" autocomplete="off" required>
+								</div>
+							</div>
+							<input type="hidden" id="sol10" value="<?php echo $ccc; ?>"/>
+							<input type="hidden" id="otp" value="<?php echo $st_otp; ?>"/>
+							<input type="hidden" id="name" value="<?php echo $name; ?>"/>
+							<div class="w3-row" style="margin:0px;padding:0px;">
+								
+								
+								<div class="w3-col" style="width:50%;padding: 0px 5px 0px 0px;">
+									<a onclick="document.getElementById('result_popup').style.display='none';document.getElementById('result_popup').innerHTML ='Oops..'" class="w3-button w3-block w3-black w3-hover-teal w3-margin-top w3-padding w3-round-large"><i class="fa fa-close"></i> Cancel</a>
+								</div>
+								
+								<div class="w3-col" style="width:50%;padding: 0px 0px 0px 5px;">
+									<button onclick="check_student_otp()" class="w3-button w3-block w3-black w3-hover-teal w3-margin-top w3-padding w3-round-large" type="submit" id="student_two_check"><i class="fa fa-sign-in"></i> Submit</button>
+								</div>
+								
+							</div>
+						</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
 <?php	
-		
 	}
 	else
 		header("location: index.php");

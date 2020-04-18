@@ -28,20 +28,28 @@
 			$to=$contact_email;
 			$from=$email;
 			
-			$message = '<html><body>';
-			$message .= '<h1>Contact Us Message From - '.$title.'</h1><p>  </p>';
-			$message .= '<p><b>Message Details:</b></p>';
-			$message .= '<p>'.$msg.'</p></body></html>';
-			
-			$ch=sent_mail_personal($to,$from,$name,$subject,$message);
-			if($ch==false)
+			if(email_check($from)==true)
 			{
-				echo 'error';
-				die();
+			
+				$message = '<html><body>';
+				$message .= '<h1>Contact Us Message From - '.$title.'</h1><p>  </p>';
+				$message .= '<p><b>Message Details:</b></p>';
+				$message .= '<p>'.$msg.'</p></body></html>';
+				
+				$ch=sent_mail_personal($to,$from,$name,$subject,$message);
+				if($ch==false)
+				{
+					echo 'error';
+					die();
+				}
+				else
+				{
+					echo 'done';
+					die();
+				}
 			}
 			else
-				echo 'done';
-			
+				echo 'email_error';
 			
 		}
 		catch(PDOException $e)

@@ -84,26 +84,32 @@
 						}
 						else
 						{
-							document.getElementById('y_name1').value='';
-							document.getElementById('y_email1').value='';
-							document.getElementById('y_msg1').value='';
-							document.getElementById('y_name2').value='';
-							document.getElementById('y_email2').value='';
-							document.getElementById('y_msg2').value='';
 								
 							document.getElementById('y_loading').style.display='block';
 							var xmlhttp3 = new XMLHttpRequest();
 							xmlhttp3.onreadystatechange = function() {
 								if (this.readyState == 4 && this.status == 200) {
 									document.getElementById('y_loading').style.display='none';
-									console.log(this.responseText.trim());
+									//console.log(this.responseText.trim());
 									if(this.responseText.trim()=="done")
 									{
+										document.getElementById('y_name1').value='';
+										document.getElementById('y_email1').value='';
+										document.getElementById('y_msg1').value='';
+										document.getElementById('y_name2').value='';
+										document.getElementById('y_email2').value='';
+										document.getElementById('y_msg2').value='';
+										
 										document.getElementById('y_sent').style.display='block';
 										setTimeout(function(){ document.getElementById('y_sent').style.display='none'; }, 1500);
 					
 									}
-									else if(this.responseText.trim()!="done")
+									else if(this.responseText.trim()=="email_error")
+									{
+										document.getElementById('sub_invalid').style.display='block';
+										setTimeout(function(){ document.getElementById('sub_invalid').style.display='none'; }, 1500);
+									}
+									else
 									{
 										document.getElementById("rs_system_failed").style.display="block";
 										setTimeout(function(){ document.getElementById("rs_system_failed").style.display="none"; }, 1500);

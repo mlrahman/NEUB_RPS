@@ -43,6 +43,8 @@
 </header>
 <script>
 
+	
+	
 	function show_result_div(y)
 	{
 		var z=document.getElementById(y+'_icon').className;
@@ -110,9 +112,17 @@
 						//console.log(this.responseText);
 						if(this.responseText.trim()=="not_done")
 						{
+							document.getElementById('subscription_email').value=p_sub_email;
 							document.getElementById('sub_failed').style.display='block';
 							setTimeout(function(){ document.getElementById('sub_failed').style.display='none'; }, 1500);
 					
+						}
+						else if(this.responseText.trim()=="email_error")
+						{
+							document.getElementById('subscription_email').value=p_sub_email;
+							document.getElementById('sub_invalid').style.display='block';
+							setTimeout(function(){ document.getElementById('sub_invalid').style.display='none'; }, 1500);
+									
 						}
 						else if(this.responseText.trim()=="done")
 						{
@@ -189,6 +199,7 @@
 					{	
 						document.getElementById("result_popup").innerHTML = this.responseText;
 						document.getElementById('result_popup').style.display='block';
+						
 					}
 				}
 				else if(this.status==403 || this.status==404)
@@ -226,4 +237,55 @@
 			document.getElementById('se_re_btn_'+id).classList.remove("w3-white");
 		document.getElementById('se_re_div_'+id).style.display='block';
 	}
+	
+	function check_student_otp()
+	{
+		var stu_otp=document.getElementById('student_otp').value.trim();
+		var otp=document.getElementById('otp').value.trim();
+		var name=document.getElementById('name').value.trim();
+		var sol10=document.getElementById("sol10").value.trim();
+		var captcha10=document.getElementById("captcha10").value.trim();
+		
+		if(stu_otp=="")
+		{
+			document.getElementById('invalid_msg').style.display='block';
+			document.getElementById('i_msg').innerHTML='Please insert valid OTP from your email.';
+			setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);	
+			
+		}
+		else if(captcha10=="" || sol10!=captcha10)
+		{
+			document.getElementById('invalid_msg').style.display='block';
+			document.getElementById('i_msg').innerHTML='Please insert valid and correct captcha.';
+			setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);	
+		}
+		else if(stu_otp==otp)
+		{
+			document.getElementById('student_otp').value='';
+			document.getElementById('captcha10').value='';
+			document.getElementById('window_title').innerHTML='Fetched Result';
+			
+			document.getElementById('valid_msg').style.display='block';
+			document.getElementById('v_msg').innerHTML='Hi '+name+'. Here is your fetched result.';
+			setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);	
+		
+			
+			document.getElementById('box1').style.display='block';
+			document.getElementById('box2').style.display='none';
+		}
+		else if(stu_otp!=otp)
+		{
+			document.getElementById('student_otp').value='';
+			document.getElementById('captcha10').value='';
+					
+			document.getElementById('result_popup').style.display='none';
+			document.getElementById('result_popup').innerHTML ='Oops..';
+			
+			document.getElementById('invalid_msg').style.display='block';
+			document.getElementById('i_msg').innerHTML='Sorry you have entered invalid OTP. Please try again.';
+			setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);	
+			
+		}
+	}
+	
 </script>

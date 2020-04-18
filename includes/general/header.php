@@ -148,58 +148,58 @@ Email: mlrahman@neub.edu.bd
 	
 	<body class="w3-black">
 		<!-- Notification messages -->
-		<div id="rs_blank" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
+		<div id="rs_blank" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999999999999;display:none;">
 			<i class="fa fa-bell-o"></i> Please fill up the fields properly.
 		</div>
 		
-		<div id="rs_not_found" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
+		<div id="rs_not_found" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999999999999;display:none;">
 			<i class="fa fa-bell-o"></i> Sorry! No data available.
 		</div>
 		
-		<div id="rs_server_failed" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
+		<div id="rs_server_failed" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999999999999;display:none;">
 			<i class="fa fa-bell-o"></i> Sorry! Internal server error occurred.
 		</div>
 		
-		<div id="rs_system_failed" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
+		<div id="rs_system_failed" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999999999999;display:none;">
 			<i class="fa fa-bell-o"></i> Sorry! System error occurred.
 		</div>
 		
-		<div id="rs_loading" title="Fetching result, please wait.." class="w3-container w3-animate-top w3-text-white w3-center" style="display:none;width:100%;height:100%;background:black;opacity:0.6;top:0;left:0;position:fixed;z-index:9999;padding-top:170px;">
+		<div id="rs_loading" title="Fetching result, please wait.." class="w3-container w3-animate-top w3-text-white w3-center" style="display:none;width:100%;height:100%;background:black;opacity:0.6;top:0;left:0;position:fixed;z-index:9999999999999;padding-top:170px;">
 			<p style="font-size:15px;font-weight:bold;">Please wait while fetching result..</p>
 			<i class="fa fa-spinner w3-spin" style="font-size:180px;"></i>
 		</div>
 		
-		<div id="y_loading" title="Sending message, please wait.." class="w3-container w3-animate-top w3-text-white w3-center" style="display:none;width:100%;height:100%;background:black;opacity:0.6;top:0;left:0;position:fixed;z-index:9999;padding-top:170px;">
+		<div id="y_loading" title="Sending message, please wait.." class="w3-container w3-animate-top w3-text-white w3-center" style="display:none;width:100%;height:100%;background:black;opacity:0.6;top:0;left:0;position:fixed;z-index:9999999999999;padding-top:170px;">
 			<p style="font-size:15px;font-weight:bold;">Please wait while sending message..</p>
 			<i class="fa fa-spinner w3-spin" style="font-size:180px;"></i>
 		</div>
 		
 		
-		<div id="sub_no_change" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
+		<div id="sub_no_change" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999999999999;display:none;">
 			<i class="fa fa-bell-o"></i> No changes made.
 		</div>
 		
-		<div id="sub_invalid" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
+		<div id="sub_invalid" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999999999999;display:none;">
 			<i class="fa fa-bell-o"></i> Please check your email.
 		</div>
 		
-		<div id="sub_failed" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
+		<div id="sub_failed" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999999999999;display:none;">
 			<i class="fa fa-bell-o"></i> Sorry! Failed to made the changes.
 		</div>
 		
-		<div id="sub_change_done" class="w3-container w3-animate-top w3-center w3-green w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
+		<div id="sub_change_done" class="w3-container w3-animate-top w3-center w3-green w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999999999999;display:none;">
 			<i class="fa fa-bell-o"></i> Subscription email changed successfully.
 		</div>
 		
-		<div id="y_sent" class="w3-container w3-animate-top w3-center w3-green w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999;display:none;">
+		<div id="y_sent" class="w3-container w3-animate-top w3-center w3-green w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999999999999;display:none;">
 			<i class="fa fa-bell-o"></i> Your message sent successfully.
 		</div>
 		
-		<div id="invalid_msg" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:999999999;display:none;">
+		<div id="invalid_msg" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:999999999999999999;display:none;">
 			<i class="fa fa-bell-o"></i> <p id="i_msg" class="w3-margin-0 w3-padding-0" style="display: inline;"></p>
 		</div>
 		
-		<div id="valid_msg" class="w3-container w3-animate-top w3-center w3-green w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:999999999;display:none;">
+		<div id="valid_msg" class="w3-container w3-animate-top w3-center w3-green w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:999999999999999999;display:none;">
 			<i class="fa fa-bell-o"></i> <p id="v_msg" class="w3-margin-0 w3-padding-0" style="display: inline;"></p>
 		</div>
 		

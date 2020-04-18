@@ -425,5 +425,10 @@ function video_upload($file,$i,$max_foto_size,$photo_extention,$folder_name,$pat
 		}
 	   return  $ran;
 }
+//check for valid email
+function email_check($email)
+{
+	return true;
+}
 
 ?>

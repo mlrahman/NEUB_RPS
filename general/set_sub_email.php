@@ -18,6 +18,11 @@
 			echo 'not_done';
 			die();
 		}
+		else if(email_check($email)==false)
+		{
+			echo 'email_error';
+			die();
+		}
 		else
 		{
 			$stmt = $conn->prepare("update nr_student set nr_stud_email=:email where nr_stud_id=:s_id and nr_stud_dob=:dob ");
