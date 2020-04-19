@@ -28,7 +28,7 @@
 	<div class="w3-container" style="margin: 13px 0px 25px 0px;padding:0px;position:relative;">
 		<div class="w3-container w3-topbar w3-bottombar w3-round-large w3-rightbar w3-leftbar w3-padding" style="margin:0 auto; width:50%;min-width:310px;">
 			<i class="fa fa-search w3-text-teal"></i> 
-			<input type="text" id="search_text13" oninput="if(this.value!=''){ document.getElementById('search_clear_btn_13').style.display='inline-block'; } else { document.getElementById('search_clear_btn_13').style.display='none'; } get_search_result13();  " class="w3-input w3-border-teal" style="width:89%;min-width:220px;display:inline;" placeholder="Enter User Name for Search the Session">
+			<input type="text" id="search_text13" oninput="if(this.value!=''){ document.getElementById('search_clear_btn_13').style.display='inline-block'; } else { document.getElementById('search_clear_btn_13').style.display='none'; } get_search_result13();  " class="w3-input w3-border-teal" style="width:89%;min-width:220px;display:inline;" placeholder="Enter User Name for Search the Session"  autocomplete="off">
 			<i class="fa fa-close w3-text-red w3-hover-text-teal w3-cursor w3-large" style="display:none;" id="search_clear_btn_13" title="Clear search box" onclick="document.getElementById('search_text13').value=''; document.getElementById('search_clear_btn_13').style.display='none';get_search_result13();"></i>
 		</div>
 	</div>
