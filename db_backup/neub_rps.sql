@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2020 at 09:13 PM
+-- Generation Time: Apr 19, 2020 at 06:41 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -110,7 +110,8 @@ INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:47 PM', 'Inactive'),
 (2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:52 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:39 PM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '09:50 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '09:50 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-19', '10:38 PM', 'Inactive');
 
 -- --------------------------------------------------------
 
@@ -321,7 +322,9 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:44 PM', 'Inactive'),
 (2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '12:55 AM', 'Inactive'),
 (2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Inactive'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Inactive');
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-19', '09:16 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-19', '09:29 PM', 'Inactive');
 
 -- --------------------------------------------------------
 
@@ -1326,7 +1329,7 @@ CREATE TABLE `nr_system_component` (
 --
 
 INSERT INTO `nr_system_component` (`nr_syco_id`, `nr_admin_id`, `nr_syco_title`, `nr_syco_caption`, `nr_syco_address`, `nr_syco_tel`, `nr_syco_email`, `nr_syco_mobile`, `nr_syco_web`, `nr_syco_contact_email`, `nr_syco_map_link`, `nr_syco_date`, `nr_syco_status`, `nr_syco_logo`, `nr_syco_video_alt`, `nr_syco_video`) VALUES
-(1, 1, 'NEUB Result Portal', 'Permanent Campus', 'Telihaor, Sheikhghat, Sylhet-3100', '0821 710221-2', 'info@neub.edu.bd', '01755566994', 'www.neub.edu.bd', 'mirlutfur.rahman@gmail.com', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3619.2310196389903!2d91.85876681464518!3d24.89010035019967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3751aacd70cd7665:0xc8ae330ad72490dd!2z4Kao4Kaw4KeN4KalIOCmh-CmuOCnjeCmnyDgpofgpongpqjgpr_gpq3gpr7gprDgp43gprjgpr_gpp_gpr8g4Kas4Ka-4KaC4Kay4Ka-4Kam4KeH4Ka2!5e0!3m2!1sbn!2sbd!4v1586958839029!5m2!1sbn!2sbd', '2020-04-15', 'Active', '158695222115869522214968.png', '158694047915869404792493.jpg', '158695895215869589522023.mp4');
+(1, 1, 'NEUB Result Portal', 'Permanent Campus', 'Telihaor, Sheikhghat, Sylhet-3100', '0821 710221-2', 'info@neub.edu.bd', '01755566994', 'www.neub.edu.bd', 'mirlutfur.rahman@gmail.com', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3619.2310196389903!2d91.85876681464518!3d24.89010035019967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3751aacd70cd7665:0xc8ae330ad72490dd!2z4Kao4Kaw4KeN4KalIOCmh-CmuOCnjeCmnyDgpofgpongpqjgpr_gpq3gpr7gprDgp43gprjgpr_gpp_gpr8g4Kas4Ka-4KaC4Kay4Ka-4Kam4KeH4Ka2!5e0!3m2!1sbn!2sbd!4v1586958839029!5m2!1sbn!2sbd', '2020-04-15', 'Active', '158715436115871543616948.png', '158694047915869404792493.jpg', '158695895215869589522023.mp4');
 
 -- --------------------------------------------------------
 
