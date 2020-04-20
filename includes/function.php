@@ -37,8 +37,9 @@ function sent_mail($to,$subject,$msg,$website_title,$website_email)
 		$headers[]= 'X-Priority: 3';
 		$headers[]= 'X-Mailer: PHP'. phpversion();
 		
-		
+		//smtp_mail($to,$subject,$website_email,$website_title,$msg);
 		mail($to, $subject, $msg, implode("\r\n", $headers));
+		
 		return true;
 	}
 	catch(Exception $e)
@@ -70,6 +71,9 @@ function sent_mail_personal($to,$from,$name,$subject,$msg)
 		$headers[]= 'X-Mailer: PHP'. phpversion();
 		
 		mail($to, $subject, $msg, implode("\r\n", $headers));
+		//smtp_mail($to,$subject,$from,$name,$msg);
+		
+		
 		return true;
 	}
 	catch(Exception $e)
@@ -799,6 +803,40 @@ function get_student_semester_cgpa($s_id,$semester,$year) //will return semester
 		$cgpa='N/A'; //error occured
 	}
 	return $cgpa;
+}
+
+function smtp_mail($to,$subject,$from,$title,$msg)	
+{
+	//smtp server using gmail
+	require("library/smtp_server/class.phpmailer.php");
+	$mailer = new PHPMailer();
+	$mailer->IsSMTP();
+	$mailer->Host = 'ssl://smtp.gmail.com';
+	$mailer->Port = 465; //can be 587
+	$mailer->SMTPAuth = TRUE;
+	// Change this to your gmail address
+	$mailer->Username = '';  
+	// Change this to your gmail password
+	$mailer->Password = '';  
+	// Change this to your gmail address
+	$mailer->From = $from;  
+	// This will reflect as from name in the email to be sent
+	$mailer->IsHTML(true);
+	
+	$mailer->FromName = $title;
+	
+	$mailer->Body = $msg;
+	$mailer->Subject = $subject;
+	// This is where you want your email to be sent
+	$mailer->AddAddress($to);  
+	if(!$mailer->Send())
+	{
+		throw new Exception('Email failed to send.');
+	}
+	else
+	{
+		return true;
+	}
 }
 
 //check for valid email
