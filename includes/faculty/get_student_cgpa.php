@@ -23,11 +23,11 @@
 			$program_id=trim($_REQUEST['program_id']);
 			if($program_id==-1)
 			{
-				$stmt = $conn->prepare("select * from nr_result a,nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_result_status='Active' and a.nr_course_id=b.nr_course_id and a.nr_result_semester='$semester' and a.nr_result_year='$year' order by a.nr_stud_id asc");
+				$stmt = $conn->prepare("select max(a.nr_studsc_cgpa) from nr_student_semester_cgpa a,nr_student b where b.nr_stud_status='Active' and a.nr_stud_id=b.nr_stud_id and b.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and a.nr_studsc_semester='$semester' and a.nr_studsc_year='$year' ");
 			}
 			else
 			{
-				$stmt = $conn->prepare("select * from nr_result a,nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and nr_result_status='Active' and a.nr_course_id=b.nr_course_id and a.nr_result_semester='$semester' and a.nr_result_year='$year' order by a.nr_stud_id asc");
+				$stmt = $conn->prepare("select max(a.nr_studsc_cgpa) from nr_student_semester_cgpa a,nr_student b where b.nr_stud_status='Active' and a.nr_stud_id=b.nr_stud_id and b.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and b.nr_prog_id=:prog_id and a.nr_studsc_semester='$semester' and a.nr_studsc_year='$year' ");
 				$stmt->bindParam(':prog_id', $program_id);
 			}
 			$stmt->bindParam(':f_d_id', $_REQUEST['faculty_dept_id']);
@@ -35,35 +35,10 @@
 			$result = $stmt->fetchAll();
 			if(count($result)>=1)
 			{
-				$cg=array();
-				$sz=count($result);
-				for($i=0;$i<$sz;$i++)
-				{
-					$s_id=$result[$i][1];
-					$gpa=grade_point_decrypt($s_id,$result[$i][5]);
-					$credit=$result[$i][16];
-					if(array_key_exists($s_id,$cg))
-					{
-						if($gpa>0.00)
-						{
-							$cg[$s_id]=array('gp'=>($cg[$s_id]['gp']+($gpa*$credit)),'tc'=>($cg[$s_id]['tc']+$credit));
-						}
-					}
-					else
-					{
-						if($gpa>0.00)
-						{
-							$cg[$s_id]=array('gp'=>($gpa*$credit),'tc'=>$credit);							
-						}	
-					}
-				}
-				$max_cgpa=0.00;
-				foreach($cg as $cge)
-				{
-					if(($cge['gp']/$cge['tc'])>$max_cgpa)
-						$max_cgpa=($cge['gp']/$cge['tc']);
-				}
-				return (number_format($max_cgpa, 2).'-');
+				if($result[0][0]=='')
+					return '0.00-';
+				else
+					return number_format($result[0][0],2).'-';
 			}
 			else
 				return '0.00-';
@@ -76,11 +51,11 @@
 			$program_id=trim($_REQUEST['program_id']);
 			if($program_id==-1)
 			{
-				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_stud_status='Active' ");
+				$stmt = $conn->prepare("select max(b.nr_studi_cgpa) from nr_student a,nr_student_info b where a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and a.nr_stud_status='Active' and b.nr_studi_graduated=1 and a.nr_stud_id=b.nr_stud_id  and b.nr_studi_last_semester='$semester' and b.nr_studi_last_year='$year' ");
 			}
 			else
 			{
-				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_prog_id=:prog_id and nr_stud_status='Active' ");
+				$stmt = $conn->prepare("select max(b.nr_studi_cgpa) from nr_student a,nr_student_info b where a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and a.nr_stud_status='Active' and b.nr_studi_graduated=1 and a.nr_stud_id=b.nr_stud_id  and b.nr_studi_last_semester='$semester' and b.nr_studi_last_year='$year' ");
 				$stmt->bindParam(':prog_id', $program_id);
 			}
 			$stmt->bindParam(':f_d_id', $_REQUEST['faculty_dept_id']);
@@ -88,34 +63,10 @@
 			$result = $stmt->fetchAll();
 			if(count($result)>=1)
 			{
-				$y=count($result);
-				$grad_max_cgpa=0.00;
-				for($index=0;$index<$y;$index++) //per student
-				{
-					$s_id=$result[$index][0];
-					$prcr_id = $result[$index][8];
-					
-					$x=get_cgpa($s_id,$prcr_id);
-					
-					if($x!=0.00)
-					{
-						$stmt = $conn->prepare("select * from nr_result where nr_stud_id=:s_id and nr_result_status='Active' order by nr_result_year desc, nr_result_semester desc"); 
-						$stmt->bindParam(':s_id', $s_id);
-						$stmt->execute();
-						$stud_result=$stmt->fetchAll();
-						if(count($stud_result)!=0)  //check for students who have results in db
-						{
-							$last_semester=$stud_result[0][6];
-							$last_year=$stud_result[0][7];
-						}
-						if($last_semester==$semester && $last_year==$year)//'Graduated in the given semester'
-						{
-							if($x>$grad_max_cgpa)
-								$grad_max_cgpa=$x;
-						}
-					}
-				}
-				return (number_format($grad_max_cgpa, 2).'-');
+				if($result[0][0]=='')
+					return '0.00-';
+				else
+					return number_format($result[0][0],2).'-';
 			}
 			else
 			{

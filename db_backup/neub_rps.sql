@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2020 at 06:41 PM
+-- Generation Time: Apr 20, 2020 at 03:38 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -111,7 +111,9 @@ INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address
 (2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:52 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:39 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '09:50 PM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-19', '10:38 PM', 'Inactive');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-19', '10:38 PM', 'Inactive'),
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '04:32 PM', 'Active'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '04:32 PM', 'Inactive');
 
 -- --------------------------------------------------------
 
@@ -324,7 +326,8 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Inactive'),
 (2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-19', '09:16 PM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-19', '09:29 PM', 'Inactive');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-19', '09:29 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '03:46 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -500,7 +503,8 @@ INSERT INTO `nr_faculty_result_check_transaction` (`nr_stud_id`, `nr_faculty_id`
 (140203020002, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Active'),
 (140203020003, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Active'),
 (140203020004, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Active'),
-(140203020005, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Active');
+(140203020005, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '06:33 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1244,7 +1248,9 @@ INSERT INTO `nr_result_check_transaction` (`nr_stud_id`, `nr_rechtr_ip_address`,
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:28 PM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:48 PM', 'Active'),
 (140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:49 PM', 'Active'),
-(140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:49 PM', 'Active');
+(140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:49 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '06:50 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '06:51 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1270,13 +1276,76 @@ CREATE TABLE `nr_student` (
 --
 
 INSERT INTO `nr_student` (`nr_stud_id`, `nr_stud_name`, `nr_stud_dob`, `nr_stud_gender`, `nr_stud_email`, `nr_stud_cell_no`, `nr_stud_photo`, `nr_prog_id`, `nr_prcr_id`, `nr_stud_status`) VALUES
-(140203020002, 'Mir Lutfur Rahman', '1996-07-02', 'Male', 'mlrahman@gmail.com', '', '', 1, 1, 'Active'),
+(140203020002, 'Mir Lutfur Rahman', '1996-07-02', 'Male', '', '', '', 1, 1, 'Active'),
 (140203020003, 'Rocksar Sultana Smriti', '1990-07-02', 'Female', '', '', '', 1, 1, 'Active'),
 (140203020004, 'Pranta Sarkar', '1990-07-02', 'Male', 'psarkar@gmail.com', '', '', 1, 1, 'Active'),
 (140203020005, 'Topu Dash Roy', '1994-12-31', 'Male', 'topucse05@gmail.com', '', '', 1, 1, 'Active'),
 (140203020006, 'Shamima Khatun', '1990-07-02', 'Female', '', '', '', 1, 1, 'Active'),
 (140203020009, 'Nusrat Hoque', '1990-07-02', 'Female', '', '', '', 1, 1, 'Active'),
 (150102040001, 'Rahat Mahmud', '1994-07-02', 'Male', '', '', '', 3, 3, 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nr_student_info`
+--
+
+CREATE TABLE `nr_student_info` (
+  `nr_stud_id` bigint(20) NOT NULL,
+  `nr_studi_dropout` int(11) NOT NULL,
+  `nr_studi_graduated` int(11) NOT NULL,
+  `nr_studi_cgpa` float NOT NULL,
+  `nr_studi_last_semester` enum('Spring','Summer','Fall') NOT NULL,
+  `nr_studi_last_year` year(4) NOT NULL,
+  `nr_studi_publish_date` varchar(20) NOT NULL,
+  `nr_studi_status` enum('Active','Inactive') NOT NULL,
+  `nr_studi_drop_semester` enum('Spring','Summer','Fall') NOT NULL,
+  `nr_studi_drop_year` year(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `nr_student_info`
+--
+
+INSERT INTO `nr_student_info` (`nr_stud_id`, `nr_studi_dropout`, `nr_studi_graduated`, `nr_studi_cgpa`, `nr_studi_last_semester`, `nr_studi_last_year`, `nr_studi_publish_date`, `nr_studi_status`, `nr_studi_drop_semester`, `nr_studi_drop_year`) VALUES
+(140203020002, 1, 0, 3.11, 'Fall', 2016, '2020-04-20', 'Active', 'Summer', 2017),
+(140203020003, 1, 0, 0, 'Summer', 2014, '2020-04-20', 'Active', 'Spring', 2015),
+(140203020004, 1, 0, 3.5, 'Spring', 2016, '2020-04-20', 'Active', 'Fall', 2016),
+(140203020005, 1, 0, 0, 'Summer', 2014, '2020-04-20', 'Active', 'Spring', 2015),
+(140203020006, 1, 0, 0, 'Summer', 2014, '2020-04-20', 'Active', 'Spring', 2015),
+(140203020009, 1, 0, 0, 'Summer', 2014, '2020-04-20', 'Active', 'Spring', 2015),
+(150102040001, 1, 0, 3.5, 'Summer', 2015, '2020-04-20', 'Active', 'Spring', 2016);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nr_student_semester_cgpa`
+--
+
+CREATE TABLE `nr_student_semester_cgpa` (
+  `nr_stud_id` bigint(20) NOT NULL,
+  `nr_studsc_semester` enum('Spring','Summer','Fall') NOT NULL,
+  `nr_studsc_year` year(4) NOT NULL,
+  `nr_studsc_cgpa` float NOT NULL,
+  `nr_studsc_status` enum('Active','Inactive') NOT NULL,
+  `nr_studsc_publish_date` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `nr_student_semester_cgpa`
+--
+
+INSERT INTO `nr_student_semester_cgpa` (`nr_stud_id`, `nr_studsc_semester`, `nr_studsc_year`, `nr_studsc_cgpa`, `nr_studsc_status`, `nr_studsc_publish_date`) VALUES
+(140203020002, 'Spring', 2015, 3, 'Active', '2020-04-20'),
+(140203020002, 'Summer', 2014, 0, 'Active', '2020-04-20'),
+(140203020002, 'Summer', 2015, 4, 'Active', '2020-04-20'),
+(140203020002, 'Summer', 2016, 2, 'Active', '2020-04-20'),
+(140203020002, 'Fall', 2014, 3.5, 'Active', '2020-04-20'),
+(140203020002, 'Fall', 2015, 3.5, 'Active', '2020-04-20'),
+(140203020002, 'Fall', 2016, 3.25, 'Active', '2020-04-20'),
+(140203020004, 'Spring', 2015, 3.5, 'Active', '2020-04-20'),
+(140203020004, 'Spring', 2016, 0, 'Active', '2020-04-20'),
+(150102040001, 'Summer', 2015, 3.5, 'Active', '2020-04-20');
 
 -- --------------------------------------------------------
 
@@ -1523,6 +1592,18 @@ ALTER TABLE `nr_student`
   ADD KEY `nr_prcr_id` (`nr_prcr_id`);
 
 --
+-- Indexes for table `nr_student_info`
+--
+ALTER TABLE `nr_student_info`
+  ADD PRIMARY KEY (`nr_stud_id`);
+
+--
+-- Indexes for table `nr_student_semester_cgpa`
+--
+ALTER TABLE `nr_student_semester_cgpa`
+  ADD PRIMARY KEY (`nr_stud_id`,`nr_studsc_semester`,`nr_studsc_year`);
+
+--
 -- Indexes for table `nr_student_waived_credit`
 --
 ALTER TABLE `nr_student_waived_credit`
@@ -1703,6 +1784,18 @@ ALTER TABLE `nr_result_check_transaction`
 ALTER TABLE `nr_student`
   ADD CONSTRAINT `nr_student_ibfk_1` FOREIGN KEY (`nr_prog_id`) REFERENCES `nr_program` (`nr_prog_id`),
   ADD CONSTRAINT `nr_student_ibfk_2` FOREIGN KEY (`nr_prcr_id`) REFERENCES `nr_program_credit` (`nr_prcr_id`);
+
+--
+-- Constraints for table `nr_student_info`
+--
+ALTER TABLE `nr_student_info`
+  ADD CONSTRAINT `nr_student_info_ibfk_1` FOREIGN KEY (`nr_stud_id`) REFERENCES `nr_student` (`nr_stud_id`);
+
+--
+-- Constraints for table `nr_student_semester_cgpa`
+--
+ALTER TABLE `nr_student_semester_cgpa`
+  ADD CONSTRAINT `nr_student_semester_cgpa_ibfk_1` FOREIGN KEY (`nr_stud_id`) REFERENCES `nr_student` (`nr_stud_id`);
 
 --
 -- Constraints for table `nr_student_waived_credit`

@@ -50,11 +50,11 @@
 			$program_id=trim($_REQUEST['program_id']);
 			if($program_id==-1)
 			{
-				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_stud_status='Active' ");
+				$stmt = $conn->prepare("select count(a.nr_stud_id) from nr_student a,nr_student_info b where a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and a.nr_stud_status='Active' and b.nr_studi_graduated=1 and a.nr_stud_id=b.nr_stud_id and b.nr_studi_last_semester='$semester' and b.nr_studi_last_year='$year' ");
 			}
 			else
 			{
-				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_prog_id=:prog_id and nr_stud_status='Active' ");
+				$stmt = $conn->prepare("select count(a.nr_stud_id) from nr_student a,nr_student_info b where a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and a.nr_stud_status='Active' and b.nr_studi_graduated=1 and a.nr_stud_id=b.nr_stud_id and b.nr_studi_last_semester='$semester' and b.nr_studi_last_year='$year'");
 				$stmt->bindParam(':prog_id', $program_id);
 			}
 			$stmt->bindParam(':f_d_id', $_REQUEST['faculty_dept_id']);
@@ -62,29 +62,10 @@
 			$result = $stmt->fetchAll();
 			if(count($result)>=1)
 			{
-				$y=count($result);
-				$grad=0;
-				for($index=0;$index<$y;$index++) //per student
-				{
-					$s_id=$result[$index][0];
-					$prcr_id = $result[$index][8];
-					
-					if(check_graduate($s_id,$prcr_id)==true)
-					{
-						$stmt = $conn->prepare("select * from nr_result where nr_stud_id=:s_id and nr_result_status='Active' order by nr_result_year desc, nr_result_semester desc"); 
-						$stmt->bindParam(':s_id', $s_id);
-						$stmt->execute();
-						$stud_result=$stmt->fetchAll();
-						if(count($stud_result)!=0)  //check for students who have results in db
-						{
-							$last_semester=$stud_result[0][6];
-							$last_year=$stud_result[0][7];
-						}
-						if($last_semester==$semester && $last_year==$year)
-							$grad++;  //'Graduated'
-					}
-				}
-				return ($grad.'-');
+				if($result[0][0]=='')
+					return '0-';
+				else
+					return $result[0][0].'-';
 			}
 			else
 			{
@@ -100,11 +81,11 @@
 			$program_id=trim($_REQUEST['program_id']);
 			if($program_id==-1)
 			{
-				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_stud_status='Active' ");
+				$stmt = $conn->prepare("select count(a.nr_stud_id) from nr_student a,nr_student_info b where a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and a.nr_stud_status='Active' and b.nr_studi_dropout=1 and a.nr_stud_id=b.nr_stud_id and b.nr_studi_drop_semester='$semester' and b.nr_studi_drop_year='$year' ");
 			}
 			else
 			{
-				$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and nr_prog_id=:prog_id and nr_stud_status='Active' ");
+				$stmt = $conn->prepare("select count(a.nr_stud_id) from nr_student a,nr_student_info b where a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:f_d_id) and a.nr_prog_id=:prog_id and a.nr_stud_status='Active' and b.nr_studi_dropout=1 and a.nr_stud_id=b.nr_stud_id and b.nr_studi_drop_semester='$semester' and b.nr_studi_drop_year='$year' ");
 				$stmt->bindParam(':prog_id', $program_id);
 			}
 			$stmt->bindParam(':f_d_id', $_REQUEST['faculty_dept_id']);
@@ -112,99 +93,10 @@
 			$result = $stmt->fetchAll();
 			if(count($result)>=1)
 			{
-				$c_y=count($result);
-				$drop=0;
-				for($index=0;$index<$c_y;$index++)
-				{
-					$s_id=$result[$index][0];
-					$prcr_id = $result[$index][8];
-					
-					if(check_graduate($s_id,$prcr_id)==false)
-					{
-						$stmt = $conn->prepare("SELECT * FROM nr_result where nr_stud_id=:s_id and nr_result_status='Active' order by nr_result_year desc, nr_result_semester desc");
-						$stmt->bindParam(':s_id', $s_id);
-						$stmt->execute();
-						$stud_result=$stmt->fetchAll();
-						if(count($stud_result)!=0)  //check for students who have results in db
-						{
-							$last_semester=$stud_result[0][6];
-							$last_year=$stud_result[0][7];
-							$current_semester=$semester;
-							$current_year=$year;
-							if($last_year<=$current_year && ((($current_semester="Spring" || $current_semester="Fall" || $current_semester="Summer") && $last_semester="Fall") || (($current_semester="Spring" || $current_semester="Summer") && $last_semester="Summer") || (($current_semester="Spring") && $last_semester="Spring")))
-							{
-								$gap=0;
-								for($y=$last_year;$y<=$current_year;$y++)
-								{
-									if($y==$last_year)
-									{
-										if($last_semester=='Spring')
-										{
-											if(('Spring-'.$last_year)!=($current_semester.'-'.$current_year))
-												$gap++;
-											else
-												break;
-											
-											if(('Summer-'.$last_year)!=($current_semester.'-'.$current_year))
-												$gap++;
-											else 
-												break;
-												
-											if(('Fall-'.$last_year)!=($current_semester.'-'.$current_year))
-												$gap++;
-											else
-												break;
-										}
-										else if($last_semester=='Summer')
-										{
-											if(('Summer-'.$last_year)!=($current_semester.'-'.$current_year))
-												$gap++;
-											else 
-												break;
-												
-											if(('Fall-'.$last_year)!=($current_semester.'-'.$current_year))
-												$gap++;
-											else
-												break;
-										}
-										else if($last_semester=='Fall')
-										{
-																					
-											if(('Fall-'.$last_year)!=($current_semester.'-'.$current_year))
-												$gap++;
-											else
-												break;
-										}
-									}
-									else
-									{
-										if(('Spring-'.$y)!=($current_semester.'-'.$current_year))
-												$gap++;
-										else
-											break;
-										
-										if(('Summer-'.$y)!=($current_semester.'-'.$current_year))
-											$gap++;
-										else 
-											break;
-											
-										if(('Fall-'.$y)!=($current_semester.'-'.$current_year))
-											$gap++;
-										else
-											break;
-									}
-								}
-								
-								if($gap==2)  //last available semester result and student available semester result difference 
-								{
-									$drop++;
-								}
-							}
-						}
-						
-					}
-				}
-				return $drop.'-';
+				if($result[0][0]=='')
+					return '0-';
+				else
+					return $result[0][0].'-';
 			}
 			else
 			{

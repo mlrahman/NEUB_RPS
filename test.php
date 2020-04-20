@@ -2,9 +2,21 @@
 
 include("includes/function.php");
 
+//echo get_student_semester_cgpa(140203020002,'Fall',2016);
+
 //echo get_reference('140203020002');
+/*
+$ttr=get_student_info(150102040001,3);
+echo 'Graduated: '.$ttr['graduated'].'</br>';
+echo 'Dropout: '.$ttr['dropout'].'</br>';
+echo 'CGPA: '.$ttr['cgpa'].'</br>';
+echo 'Last Semester: '.$ttr['last_semester'].'</br>';
+echo 'Last Year: '.$ttr['last_year'].'</br>';
+echo 'Drop Semester: '.$ttr['drop_semester'].'</br>';
+echo 'Drop Year: '.$ttr['drop_year'].'</br>';
 
 
+/*
 $s_id=150102040001;
 $marks=70;
 $gpa=3.50;

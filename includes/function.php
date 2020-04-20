@@ -426,100 +426,23 @@ function video_upload($file,$i,$max_foto_size,$photo_extention,$folder_name,$pat
 	   return  $ran;
 }
 
-function check_graduate($s_id,$prcr_id)  //will return true if graduated
-{
-	try
-	{
-		require("db_connection.php"); 	
-		//Fetching student result
-		$stmt = $conn->prepare("select * from nr_result where nr_stud_id=:s_id and nr_result_status='Active' order by nr_result_year asc, nr_result_semester asc"); 
-		$stmt->bindParam(':s_id', $s_id);
-		$stmt->execute();
-		$stud_result=$stmt->fetchAll();
-		$cg=array();
-		$se_re=array();
-		$sz1=count($stud_result);
-		for($i = 0; $i < $sz1; $i++) {
-			
-			$stud_course_id=$stud_result[$i][2];
-			$stud_grade_point=grade_point_decrypt($s_id,$stud_result[$i][5]);
-			$stmt = $conn->prepare("select * from nr_course where nr_course_id='$stud_course_id'"); 
-			$stmt->execute();
-			$course_result=$stmt->fetchAll();
-			$stud_course_code=$course_result[0][1];
-			$stud_course_credit=$course_result[0][3];
-								
-			//Calculating cg and credits by checking unique and best result
-			if(array_key_exists($stud_course_code,$cg))
-			{
-				$prev_grade_point=$cg[$stud_course_code]['gpa'];
-				if($stud_grade_point>=$prev_grade_point)
-					$cg[$stud_course_code]=array('credit'=>$stud_course_credit,'gpa'=>$stud_grade_point);
-			}
-			else
-			{
-				if($stud_grade_point>0.0)
-					$cg[$stud_course_code]=array('credit'=>$stud_course_credit,'gpa'=>$stud_grade_point);
-			}
-		}
-		
-		//calculating earned credit
-		$earned_credit=0.0;
-		foreach($cg as $cge)
-		{
-			$earned_credit=$earned_credit+$cge['credit'];
-		}
-		$earned_credit=number_format($earned_credit, 2);
-		
-		//fetching waived course credits
-		$stmt = $conn->prepare("select * from nr_student_waived_credit where nr_stud_id=:s_id and nr_stwacr_status='Active' "); 
-		$stmt->bindParam(':s_id', $s_id);
-		$stmt->execute();
-		$stud_result=$stmt->fetchAll();
-		$waived_credit=0.0;
-		$sz2=count($stud_result);
-		for($i = 0; $i < $sz2; $i++) {
-			
-			$stud_course_id=$stud_result[$i][2];
-			$stmt = $conn->prepare("select * from nr_course where nr_course_id='$stud_course_id'"); 
-			$stmt->execute();
-			$course_result=$stmt->fetchAll();
-			$stud_course_credit=$course_result[0][3];
-			
-			$waived_credit=$waived_credit+$stud_course_credit;
-		}
-		$waived_credit=number_format($waived_credit, 2);
-		
-		
-		//Search for student program credit
-		$stmt = $conn->prepare("select * from nr_program_credit where nr_prcr_id=$prcr_id");
-		$stmt->execute();
-		$prcr_result = $stmt->fetchAll();
-		if(count($prcr_result)==0)
-		{
-			return false;
-		}
-		$total_credit=$prcr_result[0][2];
-		
-		
-		
-		$degree_status=$total_credit-($earned_credit+$waived_credit);
-		if($degree_status==0)
-			return true;
-		else 
-			return false;
-	}
-	catch(Exception $e)
-	{
-		return false;
-	}
-}
-
-function get_cgpa($s_id,$prcr_id)  //will return cgpa if drop
+function get_student_info($s_id,$prcr_id)  //will return drop status, grad_status, cgpa, last_semester, last_year
 {
 	try
 	{
 		require("db_connection.php");
+		
+		$st_info=array();
+		$st_info['error']=0;
+		$st_info['dropout']=0;
+		$st_info['graduated']=0;
+		$st_info['cgpa']=0.00;
+		$st_info['last_semester']='';
+		$st_info['last_year']='';
+		$st_info['drop_semester']='N/A';
+		$st_info['drop_year']='N/A';
+		
+		
 		//Fetching student result
 		$stmt = $conn->prepare("select * from nr_result where nr_stud_id=:s_id and nr_result_status='Active' order by nr_result_year asc, nr_result_semester asc"); 
 		$stmt->bindParam(':s_id', $s_id);
@@ -593,106 +516,19 @@ function get_cgpa($s_id,$prcr_id)  //will return cgpa if drop
 		$prcr_result = $stmt->fetchAll();
 		if(count($prcr_result)==0)
 		{
-			return 0.00;
+			$st_info['error']=1; //error occured
 		}
 		$total_credit=$prcr_result[0][2];
 		
 		$degree_status=$total_credit-($earned_credit+$waived_credit);
+		
+		$st_info['cgpa']=$total_cgpa;
+		
 		if($degree_status==0)
 		{
-			return $total_cgpa;
-		}
-		else
-		{
-			return 0.00;
-		}
-	}catch(Exception $e)
-	{
-		return 0.00;
-	}
-}
-
-function check_dropout($s_id,$prcr_id) //will return true if drop
-{
-	try{
-		require("db_connection.php");
-		//Fetching student result
-		$stmt = $conn->prepare("select * from nr_result where nr_stud_id=:s_id and nr_result_status='Active' order by nr_result_year asc, nr_result_semester asc"); 
-		$stmt->bindParam(':s_id', $s_id);
-		$stmt->execute();
-		$stud_result=$stmt->fetchAll();
-		$cg=array();
-		$se_re=array();
-		$sz1=count($stud_result);
-		for($i = 0; $i < $sz1; $i++) {
+			$st_info['graduated']=1;
 			
-			$stud_course_id=$stud_result[$i][2];
-			$stud_grade_point=grade_point_decrypt($s_id,$stud_result[$i][5]);
-			$stmt = $conn->prepare("select * from nr_course where nr_course_id='$stud_course_id'"); 
-			$stmt->execute();
-			$course_result=$stmt->fetchAll();
-			$stud_course_code=$course_result[0][1];
-			$stud_course_credit=$course_result[0][3];
-								
-			//Calculating cg and credits by checking unique and best result
-			if(array_key_exists($stud_course_code,$cg))
-			{
-				$prev_grade_point=$cg[$stud_course_code]['gpa'];
-				if($stud_grade_point>=$prev_grade_point)
-					$cg[$stud_course_code]=array('credit'=>$stud_course_credit,'gpa'=>$stud_grade_point);
-			}
-			else
-			{
-				if($stud_grade_point>0.0)
-					$cg[$stud_course_code]=array('credit'=>$stud_course_credit,'gpa'=>$stud_grade_point);
-			}
-		}
-		
-		//calculating earned credit
-		$earned_credit=0.0;
-		foreach($cg as $cge)
-		{
-			$earned_credit=$earned_credit+$cge['credit'];
-		}
-		$earned_credit=number_format($earned_credit, 2);
-		
-		//fetching waived course credits
-		$stmt = $conn->prepare("select * from nr_student_waived_credit where nr_stud_id=:s_id and nr_stwacr_status='Active' "); 
-		$stmt->bindParam(':s_id', $s_id);
-		$stmt->execute();
-		$stud_result=$stmt->fetchAll();
-		$waived_credit=0.0;
-		$sz2=count($stud_result);
-		for($i = 0; $i < $sz2; $i++) {
-			
-			$stud_course_id=$stud_result[$i][2];
-			$stmt = $conn->prepare("select * from nr_course where nr_course_id='$stud_course_id'"); 
-			$stmt->execute();
-			$course_result=$stmt->fetchAll();
-			$stud_course_credit=$course_result[0][3];
-			
-			$waived_credit=$waived_credit+$stud_course_credit;
-		}
-		$waived_credit=number_format($waived_credit, 2);
-		
-		
-		//Search for student program credit
-		$stmt = $conn->prepare("select * from nr_program_credit where nr_prcr_id=$prcr_id");
-		$stmt->execute();
-		$prcr_result = $stmt->fetchAll();
-		if(count($prcr_result)==0)
-		{
-			echo '<i class="fa fa-warning w3-text-red" title="Error occured!!"> Error</i>';
-			die();
-		}
-		$total_credit=$prcr_result[0][2];
-		
-		
-		
-		$degree_status=$total_credit-($earned_credit+$waived_credit);
-		if($degree_status!=0)  //not graduated
-		{
-			$stmt = $conn->prepare("SELECT * FROM nr_result where nr_stud_id=:s_id and nr_result_status='Active' order by nr_result_year desc, nr_result_semester desc");
+			$stmt = $conn->prepare("SELECT * FROM nr_result where nr_stud_id=:s_id and nr_result_status='Active' order by nr_result_year desc, nr_result_semester desc limit 1");
 			$stmt->bindParam(':s_id', $s_id);
 			$stmt->execute();
 			$stud_result=$stmt->fetchAll();
@@ -700,86 +536,270 @@ function check_dropout($s_id,$prcr_id) //will return true if drop
 			{
 				$last_semester=$stud_result[0][6];
 				$last_year=$stud_result[0][7];
-				$current_semester=get_current_semester();
-				$current_year=get_current_year();
-				$gap=0;
-				for($y=$last_year;$y<=$current_year;$y++)
+				$st_info['last_semester']=$last_semester;
+				$st_info['last_year']=$last_year;
+				
+			}
+			else
+			{
+				$st_info['last_semester']='N/A';
+				$st_info['last_year']='N/A';
+			}
+		}
+		else
+		{
+			$stmt = $conn->prepare("SELECT * FROM nr_result where nr_stud_id=:s_id and nr_result_status='Active' order by nr_result_year desc, nr_result_semester desc limit 1");
+			$stmt->bindParam(':s_id', $s_id);
+			$stmt->execute();
+			$stud_result=$stmt->fetchAll();
+			if(count($stud_result)!=0)  //check for students who have results in db
+			{
+				$last_semester=$stud_result[0][6];
+				$last_year=$stud_result[0][7];
+			}
+			else
+			{
+				$last_semester=get_session_semester($s_id);
+				$last_year=get_year($s_id);
+				$st_info['last_semester']='N/A';
+				$st_info['last_year']='N/A';
+			}
+			$st_info['last_semester']=$last_semester;
+			$st_info['last_year']=$last_year;
+			$current_semester=get_current_semester();
+			$current_year=get_current_year();
+			$gap=0;
+			$drop_semester='';
+			$drop_year='';
+			$allowed_gap=3; //number of drop semester for drop count
+			for($y=$last_year;$y<=$current_year;$y++)
+			{
+				if($y==$last_year)
 				{
-					if($y==$last_year)
+					if($last_semester=='Spring')
 					{
-						if($last_semester=='Spring')
+						if(('Spring-'.$last_year)!=($current_semester.'-'.$current_year))
 						{
-							if(('Spring-'.$last_year)!=($current_semester.'-'.$current_year))
-								$gap++;
-							else
-								break;
-							
-							if(('Summer-'.$last_year)!=($current_semester.'-'.$current_year))
-								$gap++;
-							else 
-								break;
-								
-							if(('Fall-'.$last_year)!=($current_semester.'-'.$current_year))
-								$gap++;
-							else
-								break;
+							$drop_semester='Spring';
+							$drop_year=$y;
+							$gap++;
+							//echo $drop_semester.' '.$drop_year.'</br>';
 						}
-						else if($last_semester=='Summer')
-						{
-							if(('Summer-'.$last_year)!=($current_semester.'-'.$current_year))
-								$gap++;
-							else 
-								break;
-								
-							if(('Fall-'.$last_year)!=($current_semester.'-'.$current_year))
-								$gap++;
-							else
-								break;
-						}
-						else if($last_semester=='Fall')
-						{
-																	
-							if(('Fall-'.$last_year)!=($current_semester.'-'.$current_year))
-								$gap++;
-							else
-								break;
-						}
-					}
-					else
-					{
-						if(('Spring-'.$y)!=($current_semester.'-'.$current_year))
-								$gap++;
 						else
 							break;
 						
-						if(('Summer-'.$y)!=($current_semester.'-'.$current_year))
+						if($gap>=$allowed_gap)   //no of semester for drop count
+						{
+							$st_info['dropout']=1;
+							$st_info['drop_semester']=$drop_semester;
+							$st_info['drop_year']=$drop_year;
+							break;
+						}
+						
+						if(('Summer-'.$last_year)!=($current_semester.'-'.$current_year))
+						{
+							$drop_semester='Summer';
+							$drop_year=$y;
 							$gap++;
+							//echo $drop_semester.' '.$drop_year.'</br>';
+						}
 						else 
 							break;
 							
-						if(('Fall-'.$y)!=($current_semester.'-'.$current_year))
+						if($gap>=$allowed_gap)   //no of semester for drop count
+						{
+							$st_info['dropout']=1;
+							$st_info['drop_semester']=$drop_semester;
+							$st_info['drop_year']=$drop_year;
+							break;
+						}	
+							
+							
+						if(('Fall-'.$last_year)!=($current_semester.'-'.$current_year))
+						{
+							$drop_semester='Fall';
+							$drop_year=$y;
 							$gap++;
+							//echo $drop_semester.' '.$drop_year.'</br>';
+						}
 						else
 							break;
+						
+						if($gap>=$allowed_gap)   //no of semester for drop count
+						{
+							$st_info['dropout']=1;
+							$st_info['drop_semester']=$drop_semester;
+							$st_info['drop_year']=$drop_year;
+							break;
+						}
+					}
+					else if($last_semester=='Summer')
+					{
+						if(('Summer-'.$last_year)!=($current_semester.'-'.$current_year))
+						{
+							$drop_semester='Summer';
+							$drop_year=$y;
+							$gap++;
+							//echo $drop_semester.' '.$drop_year.'</br>';
+						}
+						else 
+							break;
+						
+						if($gap>=$allowed_gap)   //no of semester for drop count
+						{
+							$st_info['dropout']=1;
+							$st_info['drop_semester']=$drop_semester;
+							$st_info['drop_year']=$drop_year;
+							break;
+						}
+							
+						if(('Fall-'.$last_year)!=($current_semester.'-'.$current_year))
+						{
+							$drop_semester='Fall';
+							$drop_year=$y;
+							$gap++;
+							//echo $drop_semester.' '.$drop_year.'</br>';
+						}
+						else
+							break;
+						
+						if($gap>=$allowed_gap)   //no of semester for drop count
+						{
+							$st_info['dropout']=1;
+							$st_info['drop_semester']=$drop_semester;
+							$st_info['drop_year']=$drop_year;
+							break;
+						}
+					}
+					else if($last_semester=='Fall')
+					{
+																
+						if(('Fall-'.$last_year)!=($current_semester.'-'.$current_year))
+						{
+							$drop_semester='Fall';
+							$drop_year=$y;
+							$gap++;
+							//echo $drop_semester.' '.$drop_year.'</br>';
+						}
+						else
+							break;
+						if($gap>=$allowed_gap)   //no of semester for drop count
+						{
+							$st_info['dropout']=1;
+							$st_info['drop_semester']=$drop_semester;
+							$st_info['drop_year']=$drop_year;
+							break;
+						}
+					}
+				}
+				else
+				{
+					if(('Spring-'.$y)!=($current_semester.'-'.$current_year))
+					{
+						$drop_semester='Spring';
+						$drop_year=$y;
+						$gap++;
+						//echo $drop_semester.' '.$drop_year.'</br>';
+					}
+					else
+						break;
+					
+					if($gap>=$allowed_gap)   //no of semester for drop count
+					{
+						$st_info['dropout']=1;
+						$st_info['drop_semester']=$drop_semester;
+						$st_info['drop_year']=$drop_year;
+						break;
+					}
+					
+					if(('Summer-'.$y)!=($current_semester.'-'.$current_year))
+					{
+						$drop_semester='Summer';
+						$drop_year=$y;
+						$gap++;
+						//echo $drop_semester.' '.$drop_year.'</br>';
+					}
+					else 
+						break;
+					
+					if($gap>=$allowed_gap)   //no of semester for drop count
+					{
+						$st_info['dropout']=1;
+						$st_info['drop_semester']=$drop_semester;
+						$st_info['drop_year']=$drop_year;
+						break;
+					}
+						
+					if(('Fall-'.$y)!=($current_semester.'-'.$current_year))
+					{
+						$drop_semester='Fall';
+						$drop_year=$y;
+						$gap++;
+						//echo $drop_semester.' '.$drop_year.'</br>';
+					}
+					else
+						break;
+					
+					if($gap>=$allowed_gap)   //no of semester for drop count
+					{
+						$st_info['dropout']=1;
+						$st_info['drop_semester']=$drop_semester;
+						$st_info['drop_year']=$drop_year;
+						break;
 					}
 				}
 				
-				if($gap>2)   //no of semester for drop count
-					return true;
 			}
-			else
-				return false;
+			
 			
 		}
-		else
-			return false;
 		
 	}catch(Exception $e)
 	{
-		return false;
+		$st_info['error']=1; //error occured
 	}
+	return $st_info;
 }
 
+function get_student_semester_cgpa($s_id,$semester,$year) //will return semester top cgpa
+{
+	try
+	{
+		require("db_connection.php");
+		$stmt = $conn->prepare("select * from nr_result a,nr_course b,nr_student c where c.nr_stud_id=a.nr_stud_id and c.nr_stud_status='Active' and nr_result_status='Active' and a.nr_course_id=b.nr_course_id and a.nr_result_semester='$semester' and a.nr_result_year='$year' and a.nr_stud_id='$s_id' ");
+		$stmt->execute();
+		$result = $stmt->fetchAll();
+		if(count($result)>=1)
+		{
+			$sz=count($result);
+			$tc=0;
+			$gp=0;
+			for($i=0;$i<$sz;$i++)
+			{
+				
+				$gpa=grade_point_decrypt($s_id,$result[$i][5]);
+				$credit=$result[$i][16];
+				$gp=$gp+($gpa*$credit);
+				if($gpa!=0.00)
+					$tc=$tc+$credit;
+				
+				//echo $result[$i][15].' GPA: '.$gpa.' Credit:'.$credit.' Total GP:'.$gp.' Total Credit:'.$tc.'</br>';
+				
+			}
+			if($tc==0.00)
+				$cgpa='0.00';
+			else
+				$cgpa=number_format(($gp/$tc),2);
+		}
+		else
+			$cgpa='N/A';
+			
+	}catch(Exception $e)
+	{
+		$cgpa='N/A'; //error occured
+	}
+	return $cgpa;
+}
 
 //check for valid email
 function email_check($email)

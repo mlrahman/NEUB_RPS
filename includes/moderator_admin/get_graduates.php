@@ -17,21 +17,21 @@
 		$dept_id=trim($_REQUEST['dept_id']);
 		if($program_id==-1 && $dept_id==-1)
 		{
-			$stmt = $conn->prepare("select * from nr_student where nr_stud_status='Active' ");
+			$stmt = $conn->prepare("select count(a.nr_stud_id) from nr_student a,nr_student_info b where a.nr_stud_status='Active' and b.nr_studi_graduated=1 and a.nr_stud_id=b.nr_stud_id ");
 		}
 		else if($program_id==-1 && $dept_id!=-1)
 		{
-			$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:dept_id) and nr_stud_status='Active' ");
+			$stmt = $conn->prepare("select count(a.nr_stud_id) from nr_student a,nr_student_info b where a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:dept_id) and a.nr_stud_status='Active' and b.nr_studi_graduated=1 and a.nr_stud_id=b.nr_stud_id ");
 			$stmt->bindParam(':dept_id', $dept_id);
 		}
 		else if($program_id!=-1 && $dept_id==-1)
 		{
-			$stmt = $conn->prepare("select * from nr_student where nr_prog_id=:prog_id and nr_stud_status='Active' ");
+			$stmt = $conn->prepare("select count(a.nr_stud_id) from nr_student a,nr_student_info b where a.nr_prog_id=:prog_id and a.nr_stud_status='Active' and b.nr_studi_graduated=1 and a.nr_stud_id=b.nr_stud_id ");
 			$stmt->bindParam(':prog_id', $program_id);
 		}
 		else
 		{
-			$stmt = $conn->prepare("select * from nr_student where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:dept_id) and nr_prog_id=:prog_id and nr_stud_status='Active' ");
+			$stmt = $conn->prepare("select count(a.nr_stud_id) from nr_student a,nr_student_info b where a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:dept_id) and a.nr_prog_id=:prog_id and a.nr_stud_status='Active' and b.nr_studi_graduated=1 and a.nr_stud_id=b.nr_stud_id ");
 			$stmt->bindParam(':dept_id', $dept_id);
 			$stmt->bindParam(':prog_id', $program_id);
 		}
@@ -39,17 +39,10 @@
 		$result = $stmt->fetchAll();
 		if(count($result)>=1)
 		{
-			$y=count($result);
-			$grad=0;
-			for($index=0;$index<$y;$index++)
-			{
-				$s_id=$result[$index][0];
-				$prcr_id = $result[$index][8];
-				
-				if(check_graduate($s_id,$prcr_id)==true)
-					$grad++;  //'Graduated'
-			}
-			echo $grad;
+			if($result[0][0]=='')
+				echo 'N/A';
+			else
+				echo $result[0][0];
 		}
 		else
 		{
