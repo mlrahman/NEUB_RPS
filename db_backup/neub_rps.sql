@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2020 at 03:38 PM
+-- Generation Time: Apr 20, 2020 at 08:43 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -112,8 +112,10 @@ INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:39 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '09:50 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-19', '10:38 PM', 'Inactive'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '04:32 PM', 'Active'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '04:32 PM', 'Inactive');
+(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '04:32 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '04:32 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '08:09 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '09:39 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -327,7 +329,7 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-19', '09:16 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-19', '09:29 PM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '03:46 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '03:46 PM', 'Inactive');
 
 -- --------------------------------------------------------
 

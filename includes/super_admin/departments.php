@@ -24,7 +24,6 @@
 				<a href="#" class="w3-bar-item w3-button w3-hover-teal">Multiple</a>
 			</div>
 		</div>
-		<button class="w3-button w3-black w3-round-large w3-hover-teal w3-margin-left"><i class="fa fa-edit"></i> Edit Multiple Department</button>
 			
 	</div>
 	
