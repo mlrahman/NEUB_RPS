@@ -1,4 +1,5 @@
 <?php
+
 function password_encrypt($x)
 {
 	$x='rps'.$x.'rps';

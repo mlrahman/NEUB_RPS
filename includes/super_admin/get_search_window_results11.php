@@ -210,7 +210,7 @@
 				</tr>
 				<tr>
 					<td valign="top">(Lat, Lng)</td>
-					<td valign="top" class="">: <?php echo '('.$lat.', '.$lng.')'; ?></td>
+					<td valign="top" class="">: <a title="Click here to view it on google map." href="https://www.google.com/maps?q=<?php echo $lat; ?>,<?php echo $lng; ?>" target="_blank" class="w3-decoration-null w3-bold w3-text-blue"><?php echo '('.$lat.', '.$lng.')'; ?></a></td>
 				</tr>
 				<tr>
 					<td valign="top">Timezone</td>

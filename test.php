@@ -1,6 +1,30 @@
 <?php
 
 include("includes/function.php");
+include("includes/library/excel_reader/SimpleXLS.php");
+
+/*
+if ( $xlsx = SimpleXLSX::parse( 'excel_files/uploaded/insert_multiple_department.xlsx' ) ) {
+	$c=0;
+	foreach ( $xlsx->rows() as $r => $row ) {
+		$c++;
+		if($c==1) continue;
+		if($row[0]=='') break;
+		echo $row[0].' - '.$row[1];
+		
+		echo '<br/>';
+	}
+} else {
+	echo SimpleXLSX::parseError();
+}
+
+
+
+
+
+
+
+
 
 //echo get_student_semester_cgpa(140203020002,'Fall',2016);
 

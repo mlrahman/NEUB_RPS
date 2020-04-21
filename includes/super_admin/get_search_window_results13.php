@@ -159,7 +159,7 @@
 							<td valign="top" class="w3-padding-small w3-border"><?php echo $result[$i][1]; ?></td>
 							<td valign="top" class="w3-padding-small w3-border"><?php echo $result[$i][2]; ?></td>
 							<td valign="top" class="w3-padding-small w3-border"><?php echo $result[$i][3]; ?></td>
-							<td valign="top" class="w3-padding-small w3-border"><?php echo '('.$result[$i][4].', '.$result[$i][5].')'; ?></td>
+							<td valign="top" class="w3-padding-small w3-border"><a title="Click here to view it on google map." href="https://www.google.com/maps?q=<?php echo $result[$i][4]; ?>,<?php echo $result[$i][5]; ?>" target="_blank" class="w3-decoration-null w3-bold w3-text-blue"><?php echo '('.$result[$i][4].', '.$result[$i][5].')'; ?></a></td>
 							<td valign="top" class="w3-padding-small w3-border"><?php echo get_date($result[$i][7]); ?></td>
 							<td valign="top" class="w3-padding-small w3-border"><?php echo $result[$i][8]; ?></td>
 							<td valign="top" class="w3-padding-small w3-border"><?php if($result[$i][9]=='Active'){ echo '<i class="w3-text-red w3-hover-text-teal w3-cursor fa fa-circle-o" onclick="session_inactive_function(\'Inactive\',\'Faculty\',\''.$user_id.'\',\''.$result[$i][7].'\',\''.$result[$i][8].'\')" title="Click here for inactive this session"> Inactive</i>'; } ?></td>
@@ -313,7 +313,7 @@
 							<td valign="top" class="w3-padding-small w3-border"><?php echo $result[$i][1]; ?></td>
 							<td valign="top" class="w3-padding-small w3-border"><?php echo $result[$i][2]; ?></td>
 							<td valign="top" class="w3-padding-small w3-border"><?php echo $result[$i][3]; ?></td>
-							<td valign="top" class="w3-padding-small w3-border"><?php echo '('.$result[$i][4].', '.$result[$i][5].')'; ?></td>
+							<td valign="top" class="w3-padding-small w3-border"><a title="Click here to view it on google map." href="https://www.google.com/maps?q=<?php echo $result[$i][4]; ?>,<?php echo $result[$i][5]; ?>" target="_blank" class="w3-decoration-null w3-bold w3-text-blue"><?php echo '('.$result[$i][4].', '.$result[$i][5].')'; ?></a></td>
 							<td valign="top" class="w3-padding-small w3-border"><?php echo get_date($result[$i][7]); ?></td>
 							<td valign="top" class="w3-padding-small w3-border"><?php echo $result[$i][8]; ?></td>
 							<td valign="top" class="w3-padding-small w3-border"><?php if($result[$i][9]=='Active'){ echo '<i class="w3-text-red w3-hover-text-teal w3-cursor fa fa-circle-o" onclick="session_inactive_function(\'Inactive\',\''.$role.'\',\''.$user_id.'\',\''.$result[$i][7].'\',\''.$result[$i][8].'\')" title="Click here for inactive this session"> Inactive</i>'; }  ?></td>
