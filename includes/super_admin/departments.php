@@ -11,7 +11,49 @@
 
 <i onclick="pa2_topFunction()" id="pa2_btn" class="fa fa-chevron-circle-up w3-cursor w3-text-black w3-hover-text-teal w3-xxlarge" title="Go to top" style="display:none;bottom: 95px;right:45px;z-index: 99999;position:fixed;"></i>
 
-<!-- Confirmation modal -->
+
+<!-- Confirmation modal for add single delete -->
+<div id="dept_single_add_re_confirmation" class="w3-modal" style="padding-top:100px;">
+	<div class="w3-modal-content w3-card-4 w3-animate-zoom w3-round-large w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border w3-border-black" style="max-width:700px;width:80%;">
+		<header class="w3-container w3-black"> 
+			<p class="w3-xxlarge" style="margin:0px 0px 10px 0px;">Confirmation</p>
+		</header>
+		<form onsubmit="return false">
+			
+		<div class="w3-container w3-padding">
+			<p class="w3-large w3-bold w3-text-brown">Are you sure you want to add the department?</p>
+			
+			<label><i class="w3-text-red">*</i> <b>Enter your password</b></label>
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large w3-margin-bottom" type="password" id="dept_single_add_pass" placeholder="Enter your password" autocomplete="off">
+			
+		</div>
+		<div class="w3-container w3-light-grey w3-padding w3-black">
+			<button class="w3-button w3-right w3-green w3-border w3-round-large" onclick="dept_single_add_form_save()">Yes</button>
+			<button class="w3-button w3-right w3-red w3-border w3-round-large w3-margin-right" onclick="document.getElementById('dept_single_add_re_confirmation').style.display='none';document.getElementById('dept_single_add_pass').value='';">No</button>
+		</div>
+		</form>
+	</div>
+	<script>
+		var pass_dept_single_add_confirm = document.getElementById("dept_single_add_pass");
+		function dept_single_add_pass_co_fu()
+		{
+			if(pass_dept_single_add_confirm.value.trim()!="")
+			{
+				pass_dept_single_add_confirm.setCustomValidity('');
+				return true;
+			}
+			else
+			{
+				pass_dept_single_add_confirm.setCustomValidity('Enter valid password');
+				return false;
+			}
+		}
+		pass_dept_single_add_confirm.onchange=dept_single_add_pass_co_fu;
+		
+	</script>
+</div>
+
+<!-- Confirmation modal for dept delete -->
 <div id="dept_view_re_confirmation" class="w3-modal" style="padding-top:100px;">
 	<div class="w3-modal-content w3-card-4 w3-animate-zoom w3-round-large w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border w3-border-black" style="max-width:700px;width:80%;">
 		<header class="w3-container w3-black"> 
@@ -87,17 +129,90 @@
 
 <div class="w3-container w3-margin-bottom w3-margin-top">
 	
+	<!-- Menu for dept add -->
+
 	<div class="w3-container w3-padding-0" style="margin:0px 0px 20px 0px;">
 		<div class="w3-dropdown-hover w3-round-large">
 			<button class="w3-button w3-black w3-round-large w3-hover-teal"><i class="fa fa-plus"></i> Add Department</button>
 			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-animate-zoom">
-				<a href="#" class="w3-bar-item w3-button w3-hover-teal">Single</a>
-				<a href="#" class="w3-bar-item w3-button w3-hover-teal">Multiple</a>
+				<a onclick="document.getElementById('add_single_window2').style.display='block';document.getElementById('add_multiple_window2').style.display='none';" class="w3-cursor w3-bar-item w3-button w3-hover-teal">Single</a>
+				<a onclick="document.getElementById('add_multiple_window2').style.display='block';document.getElementById('add_single_window2').style.display='none';" class=" w3-cursor w3-bar-item w3-button w3-hover-teal">Multiple</a>
 			</div>
 		</div>
 			
 	</div>
 	
+	<!-- Window for add single dept -->
+
+	<div id="add_single_window2" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
+		<span onclick="add_single_window2_close()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
+		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:325px;"><i class="fa fa-plus"></i> Add Single Department</p>
+		<div class="w3-container w3-margin-0 w3-padding-0" id="dept_single_add_box1">
+			<p class="w3-text-red w3-small w3-bold" style="margin: 2px 0px 0px 12px;padding:0px;">Note: (*) marked fields are mandatory.</p>
+			<div class="w3-container w3-border w3-round-large w3-padding w3-margin-bottom" style="margin: 0px 12px 12px 12px;">
+				<div class="w3-row w3-margin-0 w3-padding-0">
+					<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 0px;">
+						<label><i class="w3-text-red">*</i> <b>Department Title</b></label>
+						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="dept_single_add_title" placeholder="Enter Department Title" autocomplete="off" onkeyup="dept_single_add_form_change()">
+						
+						<label><i class="w3-text-red">*</i> <b>Department Code</b></label>
+						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="dept_single_add_code" placeholder="Enter Department Code" autocomplete="off" onkeyup="dept_single_add_form_change()">
+						
+						<label><i class="w3-text-red">*</i> <b>Status</b></label>
+						<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="dept_single_add_status" onchange="dept_single_add_form_change()">
+							<option value="">Select</option>
+							<option value="Active" class="w3-pale-green">Active</option>
+							<option value="Inactive" class="w3-pale-red">Inactive</option>
+						</select>
+						<?php
+							//spam Check 
+							$aaa=rand(1,20);
+							$bbb=rand(1,20);
+							$ccc=$aaa+$bbb;
+						?>
+						
+						<label><i class="w3-text-red">*</i> <b>Captcha</b></label>
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:40%;">
+								<input class="w3-input w3-border w3-center w3-round-large" type="text" value="<?php echo $aaa.' + '.$bbb.' = '; ?>" disabled>
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:58%;">
+								<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="dept_single_add_captcha" autocomplete="off" onkeyup="dept_single_add_form_change()">
+								<input type="hidden" value="<?php echo $ccc; ?>" id="dept_single_add_old_captcha">
+							</div>
+						</div>
+						
+						
+					</div>
+					<div class="w3-col w3-margin-0" style="width:30%;padding:0px 6px 0px 6px;">
+						
+						<button onclick="dept_single_add_form_reset()" class="w3-button w3-margin-top w3-red w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;"><i class="fa fa-eye-slash"></i> Clear</button>
+						
+						<button onclick="document.getElementById('dept_single_add_re_confirmation').style.display='block';" id="dept_single_add_save_btn" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" disabled><i class="fa fa-save"></i> Save</button>
+					
+					
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="w3-container w3-margin-0 w3-padding-0 w3-center" style="display:none;" id="dept_single_add_box2">
+			<p style="font-size:15px;font-weight:bold;">Please wait while making changes..</p>
+			<i class="fa fa-spinner w3-spin w3-margin-bottom w3-margin-top" style="font-size:50px;"></i>
+		</div>
+	</div>
+	
+	<!-- Window for add multiple dept -->
+
+	<div id="add_multiple_window2" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
+		<span onclick="document.getElementById('add_multiple_window2').style.display='none';" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
+		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:355px;"><i class="fa fa-plus"></i> Add Multiple Department</p>
+		<div class="w3-container w3-margin-0 w3-padding-0">
+			
+		</div>
+	</div>
+	
+	<!-- Search box -->
+
 	<div class="w3-container" style="margin: 2px 0px 25px 0px;padding:0px;position:relative;">
 		<div class="w3-container w3-topbar w3-bottombar w3-round-large w3-rightbar w3-leftbar w3-padding" style="margin:0 auto; width:50%;min-width:310px;">
 			<i class="fa fa-search w3-text-teal"></i> 
@@ -106,6 +221,7 @@
 		</div>
 	</div>
 	
+	<!-- Wndow for view result -->
 
 	<div id="search_window2" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
 		<span onclick="close_search_box2()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
@@ -115,8 +231,11 @@
 		</div>
 	</div>
 	
-	<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:0px 0px 15px 0px;width:205px;"><i class="fa fa-server"></i> Departments</p>
+	
 
+	<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:0px 0px 15px 0px;width:205px;"><i class="fa fa-server"></i> Departments</p>
+	
+	<!-- sort options for dept list -->
 	<p class="w3-right w3-padding w3-margin-0 w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-round-large">
 		<span>
 			Sort By: 
@@ -132,7 +251,7 @@
 	
 	<div class="w3-clear"></div>
 		
-		
+	<!-- filter for dept list -->
 	<div class="w3-container w3-padding w3-margin-0 w3-padding-0 w3-topbar w3-right w3-leftbar w3-bottombar w3-rightbar w3-round-large" id="filter2" style="display:none;">
 		Status: 
 		<select id="filter_status" onchange="get_total_search_results2(0,0)" type="w3-input w3-round-large">
@@ -147,7 +266,8 @@
 	</div>
 	
 	<div class="w3-clear"></div>
-		
+	
+	<!-- table for dept list -->
 	<p class="w3-margin-0 w3-padding-0 w3-medium">Total Data: <span class="w3-text-red" id="search_data_label2"></span></p>		
 	<table style="width:100%;margin:0px;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar">
 		<tr class="w3-teal w3-bold">
@@ -173,6 +293,226 @@
 
 <script>
 
+	function add_single_window2_close()
+	{
+		document.getElementById('dept_single_add_box1').style.display='block';
+		document.getElementById('dept_single_add_box2').style.display='none';
+			
+		document.getElementById('dept_single_add_title').value='';
+		document.getElementById('dept_single_add_code').value='';
+		document.getElementById('dept_single_add_status').value='';
+		document.getElementById('dept_single_add_captcha').value='';
+		
+		if(dept_single_add_status=='Active')
+		{
+			if(document.getElementById('dept_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('dept_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('dept_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('dept_single_add_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('dept_single_add_status').classList.add('w3-pale-green');
+		}
+		else if(dept_single_add_status=='Inactive')
+		{
+			if(document.getElementById('dept_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('dept_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('dept_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('dept_single_add_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('dept_single_add_status').classList.add('w3-pale-red');
+		}
+		else
+		{
+			if(document.getElementById('dept_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('dept_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('dept_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('dept_single_add_status').classList.remove('w3-pale-red');
+			}
+		}
+		
+		document.getElementById('add_single_window2').style.display='none';
+		
+		document.getElementById("dept_single_add_save_btn").disabled = true;
+		
+	}
+	
+	function dept_single_add_form_change()
+	{
+		dept_view_title=document.getElementById('dept_single_add_title').value.trim();
+		dept_view_code=document.getElementById('dept_single_add_code').value.trim();
+		dept_view_captcha=document.getElementById('dept_single_add_captcha').value.trim();
+		dept_view_status=document.getElementById('dept_single_add_status').value.trim();
+		
+		if(dept_single_add_status=='Active')
+		{
+			if(document.getElementById('dept_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('dept_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('dept_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('dept_single_add_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('dept_single_add_status').classList.add('w3-pale-green');
+		}
+		else if(dept_single_add_status=='Inactive')
+		{
+			if(document.getElementById('dept_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('dept_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('dept_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('dept_single_add_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('dept_single_add_status').classList.add('w3-pale-red');
+		}
+		else
+		{
+			if(document.getElementById('dept_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('dept_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('dept_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('dept_single_add_status').classList.remove('w3-pale-red');
+			}
+		}
+		if(dept_view_title=="" || dept_view_code=="" || dept_view_status=="")
+		{
+			document.getElementById("dept_single_add_save_btn").disabled = true;
+		}
+		else
+		{
+			document.getElementById("dept_single_add_save_btn").disabled = false;
+		}
+	}
+
+	function dept_single_add_form_reset()
+	{
+		document.getElementById('dept_single_add_title').value='';
+		document.getElementById('dept_single_add_code').value='';
+		document.getElementById('dept_single_add_status').value='';
+		document.getElementById('dept_single_add_captcha').value='';
+						
+		document.getElementById("dept_single_add_save_btn").disabled = true;
+	}
+	
+	function dept_single_add_form_save()
+	{
+		dept_view_title=document.getElementById('dept_single_add_title').value.trim();
+		dept_view_code=document.getElementById('dept_single_add_code').value.trim();
+		dept_view_captcha=document.getElementById('dept_single_add_captcha').value.trim();
+		dept_view_old_captcha=document.getElementById('dept_single_add_old_captcha').value.trim();
+		dept_view_status=document.getElementById('dept_single_add_status').value.trim();
+		
+		if(dept_view_title=="" || dept_view_code=="" || dept_view_status=="")
+		{
+			document.getElementById('dept_single_add_pass').value='';
+			
+			document.getElementById('dept_single_add_re_confirmation').style.display='none';
+			
+			document.getElementById('invalid_msg').style.display='block';
+			document.getElementById('i_msg').innerHTML='Please fill up all the fields.';
+			setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		}
+		else if(dept_view_captcha=="" || dept_view_captcha!=dept_view_old_captcha)
+		{
+			document.getElementById('dept_single_add_pass').value='';
+			
+			document.getElementById('dept_single_add_re_confirmation').style.display='none';
+			
+			document.getElementById('invalid_msg').style.display='block';
+			document.getElementById('i_msg').innerHTML='Please insert valid captcha.';
+			setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		}
+		else if(dept_single_add_pass_co_fu()==true)
+		{
+			
+			
+			var pass=document.getElementById('dept_single_add_pass').value.trim();
+			
+			document.getElementById('dept_single_add_pass').value='';
+			
+			document.getElementById('dept_single_add_re_confirmation').style.display='none';
+			
+			
+			document.getElementById('dept_single_add_box1').style.display='none';
+			document.getElementById('dept_single_add_box2').style.display='block';
+			
+			var xhttp1 = new XMLHttpRequest();
+			xhttp1.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					
+					//console.log(this.responseText);
+					if(this.responseText.trim()=='Ok')
+					{
+						add_single_window2_close();
+						
+						get_search_result2();
+						
+						document.getElementById('valid_msg').style.display='block';
+						document.getElementById('v_msg').innerHTML='Department successfully added.';
+						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
+					
+						
+					}
+					else if(this.responseText.trim()=='pass_error')
+					{
+						document.getElementById('dept_single_add_box1').style.display='block';
+						document.getElementById('dept_single_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry password doesn\'t match.';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					else if(this.responseText.trim()=='unable')
+					{
+						document.getElementById('dept_single_add_box1').style.display='block';
+						document.getElementById('dept_single_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add this department (duplicate detected).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					else
+					{
+						document.getElementById('dept_single_add_box1').style.display='block';
+						document.getElementById('dept_single_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unknown error occurred.';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					
+					}
+				}
+				else if(this.readyState==4 && (this.status==404 || this.status==403))
+				{
+					document.getElementById('dept_single_add_box1').style.display='block';
+					document.getElementById('dept_single_add_box2').style.display='none';
+					
+					document.getElementById('invalid_msg').style.display='block';
+					document.getElementById('i_msg').innerHTML='Network error occurred.';
+					setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+				}
+				
+			};
+			xhttp1.open("POST", "../includes/super_admin/add_single_department.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&dept_title="+dept_view_title+"&dept_code="+dept_view_code+"&dept_status="+dept_view_status, true);
+			xhttp1.send();
+		}
+	
+	}
+	
+	
 	var dept_view_old_title;
 	var dept_view_old_code;
 	var dept_view_old_captcha;
@@ -196,10 +536,13 @@
 			var dept_id=document.getElementById('dept_view_id').value.trim();
 			
 			document.getElementById('dept_view_box1').style.display='none';
+			document.getElementById('dept_view_box3').style.display='none';
 			document.getElementById('dept_view_box2').style.display='block';
 			var xhttp1 = new XMLHttpRequest();
 			xhttp1.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
+					
+					//console.log(this.responseText);
 					if(this.responseText.trim()=='Ok')
 					{
 						get_search_result2();
@@ -214,6 +557,7 @@
 					{
 						document.getElementById('dept_view_box1').style.display='block';
 						document.getElementById('dept_view_box2').style.display='none';
+						document.getElementById('dept_view_box3').style.display='none';
 						
 						document.getElementById('invalid_msg').style.display='block';
 						document.getElementById('i_msg').innerHTML='Sorry password doesn\'t match.';
@@ -222,6 +566,7 @@
 					else if(this.responseText.trim()=='unable')
 					{
 						document.getElementById('dept_view_box1').style.display='block';
+						document.getElementById('dept_view_box3').style.display='none';
 						document.getElementById('dept_view_box2').style.display='none';
 						
 						document.getElementById('invalid_msg').style.display='block';
@@ -232,6 +577,7 @@
 					{
 						document.getElementById('dept_view_box1').style.display='block';
 						document.getElementById('dept_view_box2').style.display='none';
+						document.getElementById('dept_view_box3').style.display='none';
 						
 						document.getElementById('invalid_msg').style.display='block';
 						document.getElementById('i_msg').innerHTML='Unknown error occurred.';
@@ -243,6 +589,7 @@
 				{
 					document.getElementById('dept_view_box1').style.display='block';
 					document.getElementById('dept_view_box2').style.display='none';
+					document.getElementById('dept_view_box3').style.display='none';
 					
 					document.getElementById('invalid_msg').style.display='block';
 					document.getElementById('i_msg').innerHTML='Network error occurred.';
@@ -345,44 +692,15 @@
 		else
 		{
 			document.getElementById('dept_view_box1').style.display='none';
+			document.getElementById('dept_view_box3').style.display='none';
 			document.getElementById('dept_view_box2').style.display='block';
 			var xhttp1 = new XMLHttpRequest();
 			xhttp1.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					if(this.responseText.trim()=='Ok')
 					{
-						document.getElementById('dept_view_box1').style.display='block';
-						document.getElementById('dept_view_box2').style.display='none';
-						document.getElementById('dept_view_old_title').value=dept_view_title;
-						document.getElementById('dept_view_old_code').value=dept_view_code;
-						document.getElementById('dept_view_old_status').value=dept_view_status;
-						document.getElementById('dept_view_captcha').value='';
-						document.getElementById("dept_view_save_btn").disabled = true;
-						
-						if(dept_view_status=='Active')
-						{
-							if(document.getElementById('dept_view_status').classList.contains('w3-pale-green'))
-							{
-								document.getElementById('dept_view_status').classList.remove('w3-pale-green');
-							}
-							if(document.getElementById('dept_view_status').classList.contains('w3-pale-red'))
-							{
-								document.getElementById('dept_view_status').classList.remove('w3-pale-red');
-							}
-							document.getElementById('dept_view_status').classList.add('w3-pale-green');
-						}
-						else
-						{
-							if(document.getElementById('dept_view_status').classList.contains('w3-pale-green'))
-							{
-								document.getElementById('dept_view_status').classList.remove('w3-pale-green');
-							}
-							if(document.getElementById('dept_view_status').classList.contains('w3-pale-red'))
-							{
-								document.getElementById('dept_view_status').classList.remove('w3-pale-red');
-							}
-							document.getElementById('dept_view_status').classList.add('w3-pale-red');
-						}
+						close_search_box2();
+						view_result2(dept_id);
 						
 						get_total_search_results2(0,0);
 						
@@ -395,6 +713,7 @@
 					{
 						document.getElementById('dept_view_box1').style.display='block';
 						document.getElementById('dept_view_box2').style.display='none';
+						document.getElementById('dept_view_box3').style.display='none';
 						
 						document.getElementById('invalid_msg').style.display='block';
 						document.getElementById('i_msg').innerHTML='Unknown error occurred.';
@@ -406,6 +725,7 @@
 				{
 					document.getElementById('dept_view_box1').style.display='block';
 					document.getElementById('dept_view_box2').style.display='none';
+					document.getElementById('dept_view_box3').style.display='none';
 					
 					document.getElementById('invalid_msg').style.display='block';
 					document.getElementById('i_msg').innerHTML='Network error occurred.';
@@ -449,6 +769,7 @@
 		
 		
 	}
+	
 	function close_search_box2()
 	{
 		document.getElementById('search_window_details2').innerHTML='';

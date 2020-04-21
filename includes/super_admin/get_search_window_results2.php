@@ -46,6 +46,7 @@
 		
 ?>
 	<div class="w3-container w3-margin-0 w3-padding-0" id="dept_view_box1">
+		<p class="w3-margin-0 w3-right w3-text-purple w3-cursor" style="margin: 0px 12px 5px 0px;" onclick="document.getElementById('dept_view_box1').style.display='none';document.getElementById('dept_view_box2').style.display='none';document.getElementById('dept_view_box3').style.display='block';"><i class="fa fa-history"></i> Department History</p>
 		<p class="w3-text-red w3-small w3-bold" style="margin: 2px 0px 0px 12px;padding:0px;">Note: (*) marked fields are mandatory.</p>
 		<div class="w3-container w3-border w3-round-large w3-padding w3-margin-bottom" style="margin: 0px 12px 12px 12px;">
 			<div class="w3-row w3-margin-0 w3-padding-0">
@@ -116,6 +117,50 @@
 		<p style="font-size:15px;font-weight:bold;">Please wait while making changes..</p>
 		<i class="fa fa-spinner w3-spin w3-margin-bottom w3-margin-top" style="font-size:50px;"></i>
 	
+	</div>
+	<div class="w3-container w3-margin-0 w3-padding-0 w3-center" id="dept_view_box3" style="display:none;">
+		<p class="w3-margin-0 w3-left-align w3-text-purple w3-cursor" style="margin: 0px 0px 0px 12px;" onclick="document.getElementById('dept_view_box1').style.display='block';document.getElementById('dept_view_box2').style.display='none';document.getElementById('dept_view_box3').style.display='none';"><i class="fa fa-mail-reply"></i> Back</p>
+		<div class="w3-container w3-border w3-round-large w3-padding" style="margin: 0px 12px 12px 12px;">
+			<table style="width:100%;margin:5px 0px;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar">
+				<tr class="w3-teal w3-bold">
+					<td style="width:10%;" valign="top" class="w3-padding-small">S.L. No</td>
+					<td style="width:40%;" valign="top" class="w3-padding-small">Performed Action</td>
+					<td style="width:20%;" valign="top" class="w3-padding-small">Performed By</td>
+					<td style="width:15%;" valign="top" class="w3-padding-small">Date</td>
+					<td style="width:15%;" valign="top" class="w3-padding-small">Time</td>
+				</tr>
+				<?php
+					$stmt = $conn->prepare("select * from nr_department_history a,nr_admin b where a.nr_admin_id=b.nr_admin_id and a.nr_dept_id=:dept_id order by a.nr_depth_date desc,a.nr_depth_time desc ");
+					$stmt->bindParam(':dept_id', $dept_id);
+					$stmt->execute();
+					$result = $stmt->fetchAll();
+					if(count($result)==0)
+					{
+						echo '<tr>
+							<td colspan="5"> <p class="w3-center w3-margin"><i class="fa fa-warning w3-text-red" title="No Data Available"> No Data Available.</i></p></td>
+						</tr>';
+					}
+					else
+					{
+						$sz=count($result);
+						for($i=0;$i<$sz;$i++)
+						{
+				
+				?>
+							<tr>
+								<td valign="top" class="w3-padding-small w3-border"><?php echo $i+1; ?></td>
+								<td valign="top" class="w3-padding-small w3-border"><?php echo $result[$i][2]; ?></td>
+								<td valign="top" class="w3-padding-small w3-border"><?php echo $result[$i][7].' <b>('.$result[$i][12].')</b>, '.$result[$i][13]; ?></td>
+								<td valign="top" class="w3-padding-small w3-border"><?php echo get_date($result[$i][3]); ?></td>
+								<td valign="top" class="w3-padding-small w3-border"><?php echo $result[$i][4]; ?></td>
+							</tr>
+				
+				<?php
+						}
+					}
+				?>
+			</table>
+		</div>
 	</div>
 <?php		
 	}

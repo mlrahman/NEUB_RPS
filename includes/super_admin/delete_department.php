@@ -49,9 +49,16 @@
 				die();
 			}
 			
+			$stmt = $conn->prepare("delete from nr_department_history where nr_dept_id=:dept_id ");
+			$stmt->bindParam(':dept_id', $dept_id);
+			$stmt->execute();
+			
+			
 			$stmt = $conn->prepare("delete from nr_department where nr_dept_id=:dept_id ");
 			$stmt->bindParam(':dept_id', $dept_id);
 			$stmt->execute();
+
+			
 			echo 'Ok';
 			
 		}
@@ -65,8 +72,6 @@
 			echo 'Error';
 			die();
 		}
-		
-		
 		
 		
 	}
