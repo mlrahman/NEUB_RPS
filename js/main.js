@@ -41,3 +41,22 @@ function file_validate2(dataaa) {
 	}
 	return true;
 }
+
+var _validFileExtensions3 = [".xlsx"];    
+function file_validate3(dataaa) {
+	var sFileName = dataaa;
+	if (sFileName.length > 0) {
+		var blnValid = false;
+		for (var j = 0; j < _validFileExtensions3.length; j++) {
+			var sCurExtension = _validFileExtensions3[j];
+			if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+				blnValid = true;
+				break;
+			}
+		}
+		if (!blnValid) {
+			 return false;
+		}
+	}
+	return true;
+}
