@@ -335,8 +335,14 @@
 					}
 				}
 			}
+			if($count==0)
+				echo '<tr><td colspan="7"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+		
 			
 		}
+		else
+			echo '<tr><td colspan="7"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+		
 		
 	}
 	else

@@ -156,6 +156,9 @@
 							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result('.$st['s_id'].')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 						</tr>';
 					}
+					if($count==0)
+						echo '<tr><td colspan="9"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+		
 				}
 				else if($sort==6)
 				{
@@ -185,6 +188,9 @@
 							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result('.$st['s_id'].')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 						</tr>';
 					}
+					if($count==0)
+						echo '<tr><td colspan="9"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+		
 				}
 				else if($sort==7)
 				{
@@ -214,6 +220,9 @@
 							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result('.$st['s_id'].')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 						</tr>';
 					}
+					if($count==0)
+						echo '<tr><td colspan="9"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+		
 				}
 				else if($sort==8)
 				{
@@ -243,6 +252,9 @@
 							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result('.$st['s_id'].')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 						</tr>';
 					}
+					if($count==0)
+						echo '<tr><td colspan="9"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+		
 				}
 				else if($sort==9)
 				{
@@ -272,6 +284,9 @@
 							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result('.$st['s_id'].')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 						</tr>';
 					}
+					if($count==0)
+						echo '<tr><td colspan="9"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+		
 				}
 				else if($sort==10)
 				{
@@ -301,6 +316,9 @@
 							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result('.$st['s_id'].')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 						</tr>';
 					}
+					if($count==0)
+						echo '<tr><td colspan="9"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+		
 				}
 				
 				
@@ -444,7 +462,9 @@
 						</tr>';
 				}
 			}
-			
+			else
+				echo '<tr><td colspan="9"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+		
 		}
 		
 		

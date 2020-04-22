@@ -217,7 +217,13 @@
 					<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result2('.$xy['r_id'].')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 				</tr>';
 			}
+			if($count==0)
+				echo '<tr><td colspan="8"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+		
 		}
+		else
+			echo '<tr><td colspan="8"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+		
 		
 	}
 	else

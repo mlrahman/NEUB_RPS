@@ -397,6 +397,9 @@
 					<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result11(\''.$r['user_type'].'\',\''.$r['user_id'].'\',\''.$r['student_id'].'\',\''.$r['user_search_date'].'\',\''.$r['user_search_time'].'\')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 				</tr>';				
 		}
+		if($count==0)
+			echo '<tr><td colspan="7"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+		
 	}
 	else
 	{

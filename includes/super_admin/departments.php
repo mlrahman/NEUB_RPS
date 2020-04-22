@@ -354,7 +354,7 @@
 	<!-- filter for dept list -->
 	<div class="w3-container w3-padding w3-margin-0 w3-padding-0 w3-topbar w3-right w3-leftbar w3-bottombar w3-rightbar w3-round-large" id="filter2" style="display:none;">
 		Status: 
-		<select id="filter_status" onchange="get_total_search_results2(0,0)" type="w3-input w3-round-large">
+		<select id="filter_status2" onchange="get_total_search_results2(0,0)" type="w3-input w3-round-large">
 			<option value="-1">All</option>
 			<option value="1">Active</option>
 			<option value="2">Inactive</option>
@@ -1115,7 +1115,7 @@
 			
 		var r_sort=document.getElementById('search_result_sort2').value;
 		var search_text=document.getElementById('search_text2').value.trim();
-		var filter_status=document.getElementById('filter_status').value.trim();
+		var filter_status2=document.getElementById('filter_status2').value.trim();
 		
 		
 		var total2_results = new XMLHttpRequest();
@@ -1132,7 +1132,7 @@
 		};
 		document.getElementById('search_data_label2').innerHTML='<i class="fa fa-refresh w3-spin"></i>';
 		
-		total2_results.open("GET", "../includes/super_admin/get_total_search_results2.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&search_text="+search_text+"&filter_status="+filter_status, true);
+		total2_results.open("GET", "../includes/super_admin/get_total_search_results2.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&search_text="+search_text+"&filter_status2="+filter_status2, true);
 		total2_results.send();
 		
 	}
@@ -1148,7 +1148,7 @@
 		{
 			var r_sort=document.getElementById('search_result_sort2').value;
 			var search_text=document.getElementById('search_text2').value.trim();
-			var filter_status=document.getElementById('filter_status').value.trim();
+			var filter_status2=document.getElementById('filter_status2').value.trim();
 			
 		
 			document.getElementById("show_more_btn_search_result2").style.display='none';
@@ -1182,7 +1182,7 @@
 			var search_results_from=page2;
 			page2=page2+5;
 			
-			search_results.open("GET", "../includes/super_admin/get_search_results2.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&search_results_from="+search_results_from+"&sort="+r_sort+"&search_text="+search_text+"&filter_status="+filter_status, true);
+			search_results.open("GET", "../includes/super_admin/get_search_results2.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&search_results_from="+search_results_from+"&sort="+r_sort+"&search_text="+search_text+"&filter_status2="+filter_status2, true);
 			search_results.send();
 		}
 		else

@@ -121,6 +121,10 @@
 						<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result13(\''.$r['user_type'].'\',\''.$r['user_id'].'\')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 					</tr>';				
 			}
+			if($count==0)
+			{
+				echo '<tr><td colspan="7"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+			}
 		
 		}
 		else if($user_type==1) //Faculty
@@ -211,7 +215,8 @@
 						<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result13(\''.$r['user_type'].'\',\''.$r['user_id'].'\')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 					</tr>';				
 			}
-			
+			if($count==0)
+				echo '<tr><td colspan="7"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
 		}
 		else if($user_type==2) //moderator
 		{
@@ -298,7 +303,9 @@
 						<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result13(\''.$r['user_type'].'\',\''.$r['user_id'].'\')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 					</tr>';				
 			}
-			
+			if($count==0)
+				echo '<tr><td colspan="7"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+		
 		}
 		else if($user_type==3) //admin
 		{
@@ -385,6 +392,9 @@
 						<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result13(\''.$r['user_type'].'\',\''.$r['user_id'].'\')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 					</tr>';				
 			}
+			if($count==0)
+				echo '<tr><td colspan="7"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+		
 		}
 		else if($user_type==4 && $_SESSION['admin_type']=='Super Admin') //super admin
 		{
@@ -471,6 +481,9 @@
 						<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result13(\''.$r['user_type'].'\',\''.$r['user_id'].'\')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 					</tr>';				
 			}
+			if($count==0)
+				echo '<tr><td colspan="7"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+		
 		}
 
 

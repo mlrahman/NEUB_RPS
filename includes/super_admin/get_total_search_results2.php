@@ -10,16 +10,16 @@
 		header("location:index.php");
 		die();
 	}
-	if(isset($_REQUEST['filter_status']) && isset($_REQUEST['search_text']) && isset($_REQUEST['admin_id']) &&  $_REQUEST['admin_id']==$_SESSION['admin_id'])
+	if(isset($_REQUEST['filter_status2']) && isset($_REQUEST['search_text']) && isset($_REQUEST['admin_id']) &&  $_REQUEST['admin_id']==$_SESSION['admin_id'])
 	{
 		$admin_id=trim($_REQUEST['admin_id']);
 		$search_text=trim($_REQUEST['search_text']);
-		$filter_status=trim($_REQUEST['filter_status']);
+		$filter_status2=trim($_REQUEST['filter_status2']);
 		
 		$filter='';
-		if($filter_status==1)
+		if($filter_status2==1)
 			$filter=' and nr_dept_status="Active" ';
-		if($filter_status==2)
+		if($filter_status2==2)
 			$filter=' and nr_dept_status="Inactive" ';
 		
 		$stmt = $conn->prepare("select count(nr_dept_id) from nr_department where (nr_dept_title like concat('%',:search_text,'%') or nr_dept_code like concat('%',:search_text,'%')) ".$filter);

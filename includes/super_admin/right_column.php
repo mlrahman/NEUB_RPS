@@ -144,9 +144,7 @@
 		
 		<!-- page3 starts here -->
 		<div id="page3" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
-			
-			
-			
+			<?php include("../includes/super_admin/programs.php"); ?>
 		</div>
 		<!-- page4 starts here -->
 		<div id="page4" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">

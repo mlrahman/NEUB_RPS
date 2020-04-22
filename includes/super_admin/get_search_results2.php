@@ -10,11 +10,11 @@
 		header("location:index.php");
 		die();
 	}
-	if(isset($_REQUEST['sort']) && isset($_REQUEST['search_results_from']) && isset($_REQUEST['filter_status']) && isset($_REQUEST['search_text']) && isset($_REQUEST['admin_id']) &&  $_REQUEST['admin_id']==$_SESSION['admin_id'])
+	if(isset($_REQUEST['sort']) && isset($_REQUEST['search_results_from']) && isset($_REQUEST['filter_status2']) && isset($_REQUEST['search_text']) && isset($_REQUEST['admin_id']) &&  $_REQUEST['admin_id']==$_SESSION['admin_id'])
 	{
 		$admin_id=trim($_REQUEST['admin_id']);
 		$search_text=trim($_REQUEST['search_text']);
-		$filter_status=trim($_REQUEST['filter_status']);
+		$filter_status2=trim($_REQUEST['filter_status2']);
 		$page=trim($_REQUEST['search_results_from']);
 		$sort=trim($_REQUEST['sort']);
 		
@@ -40,9 +40,9 @@
 		}
 		
 		$filter='';
-		if($filter_status==1)
+		if($filter_status2==1)
 			$filter=' and nr_dept_status="Active" ';
-		if($filter_status==2)
+		if($filter_status2==2)
 			$filter=' and nr_dept_status="Inactive" ';
 		
 		$stmt = $conn->prepare("select nr_dept_id,nr_dept_title,nr_dept_code,nr_dept_status,(select count(b.nr_prog_id) from nr_program b where b.nr_dept_id=a.nr_dept_id),(select count(c.nr_stud_id) from nr_student c where c.nr_prog_id in (select d.nr_prog_id from nr_program d where d.nr_dept_id=a.nr_dept_id))  from nr_department a where (nr_dept_title like concat('%',:search_text,'%') or nr_dept_code like concat('%',:search_text,'%')) ".$filter." order by ".$order_by." ".$order." limit $page,5 ");
@@ -69,7 +69,9 @@
 			}
 		}
 		else
-			echo '0';
+			echo '<tr><td colspan="6"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+		
+		
 	}
 	else
 	{
