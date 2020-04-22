@@ -225,8 +225,27 @@
 						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="prog_single_add_code" placeholder="Enter Program Code" autocomplete="off" onkeyup="prog_single_add_form_change()">
 						
 						<label><i class="w3-text-red">*</i> <b>Program Credit</b></label>
-						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="prog_single_add_credit" placeholder="Enter Program Credit" autocomplete="off" onkeyup="prog_single_add_form_change()">
+						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="number" id="prog_single_add_credit" placeholder="Enter Program Credit" autocomplete="off" onkeyup="prog_single_add_form_change()">
 						
+						<label><i class="w3-text-red">*</i> <b>Department</b></label>
+						<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="prog_single_add_dept" onchange="prog_single_add_form_change()">
+							<option value="">Select</option>
+							<?php
+								$stmt = $conn->prepare("SELECT * FROM nr_department order by nr_dept_title asc");
+								$stmt->execute();
+								$stud_result=$stmt->fetchAll();
+								if(count($stud_result)>0)
+								{
+									$sz=count($stud_result);
+									for($k=0;$k<$sz;$k++)
+									{
+										$dept_id=$stud_result[$k][0];
+										$dept_title=$stud_result[$k][1];
+										echo '<option value="'.$dept_id.'">'.$dept_title.'</option>';
+									}
+								}
+							?>
+						</select>
 						
 						<label><i class="w3-text-red">*</i> <b>Status</b></label>
 						<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="prog_single_add_status" onchange="prog_single_add_form_change()">
@@ -282,13 +301,34 @@
 				<ol>
 					<li>First download the formatted excel file from <a href="../excel_files/demo/insert_multiple_program.xlsx" target="_blank" class="w3-text-blue">here</a>.</li>
 					<li>In this excel file (<span class="w3-text-red">*</span>) marked columns are mandatory for each row (not valid for blank row). Very carefully fill up the rows with your data. <b>Don't put gap</b> between two rows. Also <b>ignore duplicated data</b> for consistent input.</li>
-					<li>After filling the necessary rows you have to <b>submit it from the below form</b>. You can insert at most <b>50 programs</b> in a single upload.</li>
+					<li>After filling the necessary rows you have to <b>submit it from the below form</b>. Don't forget to select a department. You can insert at most <b>50 programs</b> in a single upload under a single department.</li>
 					<li>This process may take <b>up to two minutes</b> so keep patience. After finishing the process you will get a logs.</li>
 				</ol>
 			</div>
 			
 			<div class="w3-row w3-margin-top w3-margin-bottom w3-round-large w3-border w3-padding">
 				<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 6px;">
+					<label><i class="w3-text-red">*</i> <b>Department</b></label>
+					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="prog_multiple_add_dept" onchange="prog_single_add_form_change()">
+						<option value="">Select</option>
+						<?php
+							$stmt = $conn->prepare("SELECT * FROM nr_department order by nr_dept_title asc");
+							$stmt->execute();
+							$stud_result=$stmt->fetchAll();
+							if(count($stud_result)>0)
+							{
+								$sz=count($stud_result);
+								for($k=0;$k<$sz;$k++)
+								{
+									$dept_id=$stud_result[$k][0];
+									$dept_title=$stud_result[$k][1];
+									echo '<option value="'.$dept_id.'">'.$dept_title.'</option>';
+								}
+							}
+						?>
+					</select>
+						
+					
 					<label><i class="w3-text-red">*</i> <b>Upload Excel File</b></label>
 					<input class="w3-input w3-border w3-round-large" type="file" id="prog_excel_file" title="Please upload the formatted and filled up excel file."  onchange="prog_multiple_add_form_change()">
 					

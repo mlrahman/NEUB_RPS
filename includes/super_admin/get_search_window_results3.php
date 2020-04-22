@@ -66,7 +66,7 @@
 			$fl4=1;
 		}
 		
-		$stmt = $conn->prepare("select a.nr_prog_id,a.nr_prog_title,a.nr_prog_code,(select c.nr_prcr_total from nr_program_credit c where c.nr_prog_id=a.nr_prog_id and c.nr_prcr_ex_date='' order by c.nr_prcr_id desc limit 1) from nr_program a where a.nr_prog_id=:prog_id");
+		$stmt = $conn->prepare("select a.nr_prog_id,a.nr_prog_title,a.nr_prog_code,(select c.nr_prcr_total from nr_program_credit c where c.nr_prog_id=a.nr_prog_id and c.nr_prcr_ex_date='' order by c.nr_prcr_id desc limit 1),a.nr_prog_status,a.nr_dept_id,b.nr_dept_title from nr_program a,nr_department b where a.nr_prog_id=:prog_id and a.nr_dept_id=b.nr_dept_id ");
 		$stmt->bindParam(':prog_id', $prog_id);
 		$stmt->execute();
 		$result = $stmt->fetchAll();
@@ -74,6 +74,8 @@
 		$prog_code=$result[0][2];
 		$credit=$result[0][3];
 		$status=$result[0][4];
+		$dept_id=$result[0][5];
+		$dept_title=$result[0][6];
 		
 ?>
 	<div class="w3-container w3-margin-0 w3-padding-0" id="prog_view_box1">
@@ -91,8 +93,30 @@
 					<input type="hidden" value="<?php echo $prog_code; ?>" id="prog_view_old_code">
 					
 					<label><i class="w3-text-red">*</i> <b>Program Credit</b></label>
-					<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $credit; ?>" id="prog_view_credit" placeholder="Enter Program Credit" autocomplete="off" onkeyup="prog_view_form_change()">
+					<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="number" value="<?php echo $credit; ?>" id="prog_view_credit" placeholder="Enter Program Credit" autocomplete="off" onkeyup="prog_view_form_change()">
 					<input type="hidden" value="<?php echo $credit; ?>" id="prog_view_old_credit">
+					
+					<label><i class="w3-text-red">*</i> <b>Department</b></label>
+					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="prog_view_dept" onchange="prog_view_form_change()">
+						<option value="<?php echo $dept_id; ?>"><?php echo $dept_title; ?></option>
+						<?php
+							$stmt = $conn->prepare("SELECT * FROM nr_department where nr_dept_id!=:dept_id order by nr_dept_title asc");
+							$stmt->bindParam(':dept_id', $dept_id);
+							$stmt->execute();
+							$stud_result=$stmt->fetchAll();
+							if(count($stud_result)>0)
+							{
+								$sz=count($stud_result);
+								for($k=0;$k<$sz;$k++)
+								{
+									$dept_id=$stud_result[$k][0];
+									$dept_title=$stud_result[$k][1];
+									echo '<option value="'.$dept_id.'">'.$dept_title.'</option>';
+								}
+							}
+						?>
+						
+					</select>
 					
 					
 					<label><i class="w3-text-red">*</i> <b>Status</b></label>
