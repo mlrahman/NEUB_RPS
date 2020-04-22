@@ -603,11 +603,13 @@
 			xhttp1.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					var str=this.responseText.trim();
+					
+					
 					var status=str[0]+str[1];
 					
 					if(status=='Ok')
 					{
-						var success='',i=2;
+						var success='',i=3;
 						for(;i<str.length;i++)
 						{
 							if(str[i]=='@')
@@ -643,6 +645,7 @@
 								logs=logs+str[i];
 						}
 						
+						
 						document.getElementById('dept_multiple_progress_id').style.width='0%';
 						document.getElementById('dept_multiple_progress_id').innerHTML='0%';
 						
@@ -655,8 +658,8 @@
 						document.getElementById('dept_multiple_failed').innerHTML=failed;
 						document.getElementById('dept_multiple_logs').innerHTML=logs;
 			
-						get_search_result2();
-						
+						dept_multiple_add_form_clear();
+						get_total_search_results2(0,0);
 						
 						document.getElementById('valid_msg').style.display='block';
 						document.getElementById('v_msg').innerHTML='Process Successfully finished';
