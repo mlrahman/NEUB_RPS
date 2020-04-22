@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2020 at 02:41 PM
+-- Generation Time: Apr 22, 2020 at 04:44 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -117,7 +117,10 @@ INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '08:09 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '09:39 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-21', '01:40 AM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-21', '11:52 AM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-21', '11:52 AM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-21', '09:10 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-22', '03:11 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-22', '04:14 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -190,7 +193,10 @@ CREATE TABLE `nr_department` (
 
 INSERT INTO `nr_department` (`nr_dept_id`, `nr_dept_title`, `nr_dept_code`, `nr_dept_status`) VALUES
 (8, 'Computer Science and Engineering', 3, 'Active'),
-(9, 'Business Administration', 2, 'Active');
+(9, 'Business Administration', 2, 'Active'),
+(17, 'English', 1, 'Inactive'),
+(18, 'Law and Justice', 4, 'Active'),
+(19, 'Applied Sociology and Social Work', 5, 'Inactive');
 
 -- --------------------------------------------------------
 
@@ -217,7 +223,10 @@ INSERT INTO `nr_department_history` (`nr_dept_id`, `nr_admin_id`, `nr_depth_task
 (9, 1, 'Edited Department Title: Business Administration, Department Code: 2, Department Status: Inactive', '2020-04-21', '06:18 PM', 'Active'),
 (9, 1, 'Edited Department Title: Business Administration, Department Code: 2, Department Status: Active', '2020-04-21', '06:22 PM', 'Active'),
 (8, 1, 'Edited Department Title: Computer Science and Engineering, Department Code: 3, Department Status: Inactive', '2020-04-21', '06:35 PM', 'Active'),
-(8, 1, 'Edited Department Title: Computer Science and Engineering, Department Code: 3, Department Status: Active', '2020-04-21', '06:35 PM', 'Active');
+(8, 1, 'Edited Department Title: Computer Science and Engineering, Department Code: 3, Department Status: Active', '2020-04-21', '06:35 PM', 'Active'),
+(17, 1, 'Added Department Title: English, Department Code: 1, Department Status: Inactive', '2020-04-22', '06:25 PM', 'Active'),
+(18, 1, 'Added Department Title: Law and Justice, Department Code: 4, Department Status: Active', '2020-04-22', '06:25 PM', 'Active'),
+(19, 1, 'Added Department Title: Applied Sociology and Social Work, Department Code: 5, Department Status: Inactive', '2020-04-22', '06:25 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -300,13 +309,6 @@ CREATE TABLE `nr_faculty_link_token` (
   `nr_falito_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
---
--- Dumping data for table `nr_faculty_link_token`
---
-
-INSERT INTO `nr_faculty_link_token` (`nr_faculty_id`, `nr_falito_token`, `nr_falito_type`, `nr_falito_date`, `nr_falito_time`, `nr_falito_status`) VALUES
-(1, '446bc70e8a437c9065337bc18243d9b8d9c8b29a', 'Forget Password', '2020-04-21', '01:26 AM', 'Active');
-
 -- --------------------------------------------------------
 
 --
@@ -363,7 +365,8 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-19', '09:16 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-19', '09:29 PM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '03:46 PM', 'Inactive');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '03:46 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-21', '09:35 PM', 'Inactive');
 
 -- --------------------------------------------------------
 
@@ -540,7 +543,8 @@ INSERT INTO `nr_faculty_result_check_transaction` (`nr_stud_id`, `nr_faculty_id`
 (140203020003, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Active'),
 (140203020004, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Active'),
 (140203020005, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Active'),
-(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '06:33 PM', 'Active');
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '06:33 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-21', '09:35 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -588,6 +592,21 @@ INSERT INTO `nr_program_credit` (`nr_prcr_id`, `nr_prog_id`, `nr_prcr_total`, `n
 (1, 1, 160, '2012-01-01', '', 'Active'),
 (2, 2, 36, '2020-03-26', '', 'Active'),
 (3, 3, 127, '2020-04-11', '', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nr_program_history`
+--
+
+CREATE TABLE `nr_program_history` (
+  `nr_prog_id` bigint(20) NOT NULL,
+  `nr_admin_id` bigint(20) NOT NULL,
+  `nr_progh_task` text NOT NULL,
+  `nr_progh_date` varchar(20) NOT NULL,
+  `nr_progh_time` varchar(20) NOT NULL,
+  `nr_progh_status` enum('Active','Inactive') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1611,6 +1630,13 @@ ALTER TABLE `nr_program_credit`
   ADD KEY `nr_prog_id` (`nr_prog_id`);
 
 --
+-- Indexes for table `nr_program_history`
+--
+ALTER TABLE `nr_program_history`
+  ADD KEY `nr_prog_id` (`nr_prog_id`),
+  ADD KEY `nr_admin_id` (`nr_admin_id`);
+
+--
 -- Indexes for table `nr_result`
 --
 ALTER TABLE `nr_result`
@@ -1688,7 +1714,7 @@ ALTER TABLE `nr_course`
 -- AUTO_INCREMENT for table `nr_department`
 --
 ALTER TABLE `nr_department`
-  MODIFY `nr_dept_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `nr_dept_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `nr_drop`
@@ -1812,6 +1838,13 @@ ALTER TABLE `nr_program`
 --
 ALTER TABLE `nr_program_credit`
   ADD CONSTRAINT `nr_program_credit_ibfk_1` FOREIGN KEY (`nr_prog_id`) REFERENCES `nr_program` (`nr_prog_id`);
+
+--
+-- Constraints for table `nr_program_history`
+--
+ALTER TABLE `nr_program_history`
+  ADD CONSTRAINT `nr_program_history_ibfk_1` FOREIGN KEY (`nr_prog_id`) REFERENCES `nr_program` (`nr_prog_id`),
+  ADD CONSTRAINT `nr_program_history_ibfk_2` FOREIGN KEY (`nr_admin_id`) REFERENCES `nr_admin` (`nr_admin_id`);
 
 --
 -- Constraints for table `nr_result`
