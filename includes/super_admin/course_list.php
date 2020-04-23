@@ -1012,7 +1012,7 @@
 						get_search_result4();
 						
 						document.getElementById('valid_msg').style.display='block';
-						document.getElementById('v_msg').innerHTML='courseram successfully removed.';
+						document.getElementById('v_msg').innerHTML='Course successfully removed.';
 						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
 					
 						
@@ -1034,7 +1034,7 @@
 						document.getElementById('course_view_box2').style.display='none';
 						
 						document.getElementById('invalid_msg').style.display='block';
-						document.getElementById('i_msg').innerHTML='Sorry unable to remove this courseram.';
+						document.getElementById('i_msg').innerHTML='Sorry unable to remove this course.';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					}
 					else
@@ -1061,7 +1061,7 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/delete_courseram.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&course_id="+course_id+"&pass="+pass, true);
+			xhttp1.open("POST", "../includes/super_admin/delete_course.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&course_id="+course_id+"&pass="+pass, true);
 			xhttp1.send();
 		}
 	}

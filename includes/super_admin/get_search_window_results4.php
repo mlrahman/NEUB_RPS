@@ -66,24 +66,24 @@
 		<div class="w3-container w3-border w3-round-large w3-padding w3-margin-bottom" style="margin: 0px 12px 12px 12px;">
 			<div class="w3-row w3-margin-0 w3-padding-0">
 				<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 0px;">
-					<label><i class="w3-text-red">*</i> <b>Program Title</b></label>
+					<label><i class="w3-text-red">*</i> <b>Course Title</b></label>
 					<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $prog_title; ?>" id="course_view_title" placeholder="Enter Course Title" autocomplete="off" onkeyup="course_view_form_change()">
 					<input type="hidden" value="<?php echo $prog_title; ?>" id="course_view_old_title">
 					
-					<label><i class="w3-text-red">*</i> <b>Program Code</b></label>
+					<label><i class="w3-text-red">*</i> <b>Course Code</b></label>
 					<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $prog_code; ?>" id="course_view_code" placeholder="Enter Course Code" autocomplete="off" onkeyup="course_view_form_change()">
 					<input type="hidden" value="<?php echo $prog_code; ?>" id="course_view_old_code">
 					
-					<label><i class="w3-text-red">*</i> <b>Program Credit</b></label>
+					<label><i class="w3-text-red">*</i> <b>Course Credit</b></label>
 					<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="number" value="<?php echo $credit; ?>" id="course_view_credit" placeholder="Enter Course Credit" autocomplete="off" onkeyup="course_view_form_change()">
 					<input type="hidden" value="<?php echo $credit; ?>" id="course_view_old_credit">
 					<input type="hidden" value="<?php echo $prog_id; ?>" id="course_view_old_dept">
 					
-					<label><i class="w3-text-red">*</i> <b>Program</b></label>
+					<label><i class="w3-text-red">*</i> <b>Course Program</b></label>
 					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="course_view_prog" onchange="course_view_form_change()">
 						<option value="<?php echo $prog_id; ?>"><?php echo $prog_title; ?></option>
 						<?php
-							$stmt = $conn->prepare("SELECT * FROM nr_program where nr_prog_id!=:prog_id order by nr_prog_title asc");
+							$stmt = $conn->prepare("SELECT * FROM nr_program where nr_prog_id!=:prog_id and nr_prog_status='Active' order by nr_prog_title asc");
 							$stmt->bindParam(':prog_id', $prog_id);
 							$stmt->execute();
 							$stud_result=$stmt->fetchAll();

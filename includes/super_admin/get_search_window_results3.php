@@ -91,7 +91,7 @@
 					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="prog_view_dept" onchange="prog_view_form_change()">
 						<option value="<?php echo $dept_id; ?>"><?php echo $dept_title; ?></option>
 						<?php
-							$stmt = $conn->prepare("SELECT * FROM nr_department where nr_dept_id!=:dept_id order by nr_dept_title asc");
+							$stmt = $conn->prepare("SELECT * FROM nr_department where nr_dept_id!=:dept_id and nr_dept_status='Active' order by nr_dept_title asc");
 							$stmt->bindParam(':dept_id', $dept_id);
 							$stmt->execute();
 							$stud_result=$stmt->fetchAll();
