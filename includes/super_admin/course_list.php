@@ -318,7 +318,7 @@
 			<div class="w3-row w3-margin-top w3-margin-bottom w3-round-large w3-border w3-padding">
 				<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 6px;">
 					<label><i class="w3-text-red">*</i> <b>Program</b></label>
-					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="course_multiple_add_prog" onchange="course_single_add_form_change()">
+					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="course_multiple_add_prog" onchange="course_multiple_add_form_change()">
 						<option value="">Select</option>
 						<?php
 							$stmt = $conn->prepare("SELECT * FROM nr_program where nr_prog_status='Active' order by nr_prog_title asc");
@@ -510,9 +510,9 @@
 	function course_multiple_add_form_change()
 	{
 		var course_excel_file=document.getElementById('course_excel_file').value;
-		var course_dept=document.getElementById('course_multiple_add_prog').value;
+		var course_prog=document.getElementById('course_multiple_add_prog').value;
 		
-		if(course_excel_file=="" || course_dept=="")
+		if(course_excel_file=="" || course_prog=="")
 		{
 			document.getElementById("course_multiple_add_save_btn").disabled = true;
 		}
@@ -655,11 +655,11 @@
 	function course_multiple_add_form_save()
 	{
 		var course_excel_file=document.getElementById('course_excel_file').value;
-		var course_dept=document.getElementById('course_multiple_add_prog').value;
+		var course_prog=document.getElementById('course_multiple_add_prog').value;
 		course_view_captcha=document.getElementById('course_multiple_add_captcha').value.trim();
 		course_view_old_captcha=document.getElementById('course_multiple_add_old_captcha').value.trim();
 		
-		if(course_dept=="" || course_excel_file=="" || file_validate3(course_excel_file)==false)
+		if(course_prog=="" || course_excel_file=="" || file_validate3(course_excel_file)==false)
 		{
 			document.getElementById('course_multiple_add_pass').value='';
 			
@@ -709,7 +709,7 @@
 				if (this.readyState == 4 && this.status == 200) {
 					var str=this.responseText.trim();
 					
-					
+					//console.log(str);
 					var status=str[0]+str[1];
 					
 					if(status=='Ok')
@@ -851,7 +851,7 @@
 				  }
 				}
 			};
-			xhttp1.open("POST", "../includes/super_admin/add_multiple_courses.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&excel="+link+"&pass="+pass+"&course_dept="+course_dept, true);
+			xhttp1.open("POST", "../includes/super_admin/add_multiple_courses.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&excel="+link+"&pass="+pass+"&course_prog="+course_prog, true);
 			xhttp1.send(fd_excel);
 		}
 	}

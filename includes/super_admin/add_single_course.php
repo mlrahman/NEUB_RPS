@@ -26,7 +26,7 @@
 				die();
 			}
 			
-			//checking if prog is add able or not
+			//checking if course is add able or not
 			$stmt = $conn->prepare("select * from nr_course where nr_course_title=:course_title or nr_course_code=:course_code");
 			$stmt->bindParam(':course_title', $course_title);
 			$stmt->bindParam(':course_code', $course_code);
