@@ -40,3 +40,5 @@ This web application is developed for the result processing system of North East
     <li>By clicking sign out session will be destroyed and faculty will sign out from the access.</li>
     <li>In every 8 seconds, an automatic network connection and session check will be done. Admin has the right to destroy any faculty member session.</li>
 </ul>
+
+
