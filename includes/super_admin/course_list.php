@@ -467,6 +467,7 @@
 </div>
 
 <script>
+
 	function reload_dept4()
 	{
 		var dept_id=document.getElementById('dept_id4').value;
@@ -850,7 +851,7 @@
 				  }
 				}
 			};
-			xhttp1.open("POST", "../includes/super_admin/add_multiple_courserams.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&excel="+link+"&pass="+pass+"&course_dept="+course_dept, true);
+			xhttp1.open("POST", "../includes/super_admin/add_multiple_courses.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&excel="+link+"&pass="+pass+"&course_dept="+course_dept, true);
 			xhttp1.send(fd_excel);
 		}
 	}
@@ -912,7 +913,7 @@
 						get_search_result4();
 						
 						document.getElementById('valid_msg').style.display='block';
-						document.getElementById('v_msg').innerHTML='courseram successfully added.';
+						document.getElementById('v_msg').innerHTML='Course successfully added.';
 						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
 					
 						
@@ -932,7 +933,7 @@
 						document.getElementById('course_single_add_box2').style.display='none';
 						
 						document.getElementById('invalid_msg').style.display='block';
-						document.getElementById('i_msg').innerHTML='Sorry unable to add this courseram (duplicate detected).';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add this course (duplicate detected).';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					}
 					else if(this.responseText.trim()=='unable2')
@@ -941,7 +942,7 @@
 						document.getElementById('course_single_add_box2').style.display='none';
 						
 						document.getElementById('invalid_msg').style.display='block';
-						document.getElementById('i_msg').innerHTML='Sorry unable to add this courseram (department inactive).';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add this course (program inactive).';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					}
 					else
@@ -966,7 +967,7 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/add_single_courseram.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&course_title="+course_view_title+"&course_code="+course_view_code+"&course_credit="+course_view_credit+"&course_dept="+course_view_prog+"&course_status="+course_view_status, true);
+			xhttp1.open("POST", "../includes/super_admin/add_single_course.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&course_title="+course_view_title+"&course_code="+course_view_code+"&course_credit="+course_view_credit+"&course_prog="+course_view_prog+"&course_status="+course_view_status, true);
 			xhttp1.send();
 		}
 	
