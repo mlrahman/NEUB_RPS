@@ -1,5 +1,4 @@
 # NEUB_RPS
-<body style="text-align:justify;">
 This web application is developed for the result processing system of North East University Bangladesh.
 
 <h2>Student Panel (General User)</h2>
@@ -43,4 +42,3 @@ This web application is developed for the result processing system of North East
 </ul>
 
 
-</body>
