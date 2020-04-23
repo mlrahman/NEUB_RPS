@@ -148,9 +148,7 @@
 		</div>
 		<!-- page4 starts here -->
 		<div id="page4" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
-			
-			
-			
+			<?php include("../includes/super_admin/course_list.php"); ?>
 		</div>
 		<!-- page5 starts here -->
 		<div id="page5" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">

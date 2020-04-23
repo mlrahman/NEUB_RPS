@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2020 at 12:50 PM
+-- Generation Time: Apr 23, 2020 at 06:49 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -121,7 +121,8 @@ INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-21', '09:10 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-22', '03:11 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-22', '04:14 PM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-23', '02:26 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-23', '02:26 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-23', '09:05 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -174,6 +175,21 @@ INSERT INTO `nr_course` (`nr_course_id`, `nr_course_code`, `nr_course_title`, `n
 (9, 'CSE 212', 'Object Oriented Programming Language Lab', 1.5, 1, 'Active'),
 (10, 'CSE 455', 'Bioinformatics', 3, 1, 'Active'),
 (11, 'BBA 201', 'Cost Management and Accounting', 3, 3, 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nr_course_history`
+--
+
+CREATE TABLE `nr_course_history` (
+  `nr_course_id` bigint(20) NOT NULL,
+  `nr_admin_id` bigint(20) NOT NULL,
+  `nr_courseh_task` text NOT NULL,
+  `nr_courseh_date` varchar(20) NOT NULL,
+  `nr_courseh_time` varchar(20) NOT NULL,
+  `nr_courseh_status` enum('Active','Inactive') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1586,6 +1602,13 @@ ALTER TABLE `nr_course`
   ADD KEY `nr_prog_id` (`nr_prog_id`);
 
 --
+-- Indexes for table `nr_course_history`
+--
+ALTER TABLE `nr_course_history`
+  ADD KEY `nr_course_id` (`nr_course_id`),
+  ADD KEY `nr_admin_id` (`nr_admin_id`);
+
+--
 -- Indexes for table `nr_department`
 --
 ALTER TABLE `nr_department`
@@ -1804,6 +1827,13 @@ ALTER TABLE `nr_admin_result_check_transaction`
 --
 ALTER TABLE `nr_course`
   ADD CONSTRAINT `nr_course_ibfk_1` FOREIGN KEY (`nr_prog_id`) REFERENCES `nr_program` (`nr_prog_id`);
+
+--
+-- Constraints for table `nr_course_history`
+--
+ALTER TABLE `nr_course_history`
+  ADD CONSTRAINT `nr_course_history_ibfk_1` FOREIGN KEY (`nr_course_id`) REFERENCES `nr_course` (`nr_course_id`),
+  ADD CONSTRAINT `nr_course_history_ibfk_2` FOREIGN KEY (`nr_admin_id`) REFERENCES `nr_admin` (`nr_admin_id`);
 
 --
 -- Constraints for table `nr_department_history`
