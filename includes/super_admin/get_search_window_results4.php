@@ -52,8 +52,8 @@
 		$stmt->bindParam(':course_id', $course_id);
 		$stmt->execute();
 		$result = $stmt->fetchAll();
-		$prog_title=$result[0][1];
-		$prog_code=$result[0][2];
+		$course_title=$result[0][1];
+		$course_code=$result[0][2];
 		$credit=$result[0][3];
 		$status=$result[0][4];
 		$prog_id=$result[0][5];
@@ -67,12 +67,12 @@
 			<div class="w3-row w3-margin-0 w3-padding-0">
 				<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 0px;">
 					<label><i class="w3-text-red">*</i> <b>Course Title</b></label>
-					<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $prog_title; ?>" id="course_view_title" placeholder="Enter Course Title" autocomplete="off" onkeyup="course_view_form_change()">
-					<input type="hidden" value="<?php echo $prog_title; ?>" id="course_view_old_title">
+					<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $course_title; ?>" id="course_view_title" placeholder="Enter Course Title" autocomplete="off" onkeyup="course_view_form_change()">
+					<input type="hidden" value="<?php echo $course_title; ?>" id="course_view_old_title">
 					
 					<label><i class="w3-text-red">*</i> <b>Course Code</b></label>
-					<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $prog_code; ?>" id="course_view_code" placeholder="Enter Course Code" autocomplete="off" onkeyup="course_view_form_change()">
-					<input type="hidden" value="<?php echo $prog_code; ?>" id="course_view_old_code">
+					<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $course_code; ?>" id="course_view_code" placeholder="Enter Course Code" autocomplete="off" onkeyup="course_view_form_change()">
+					<input type="hidden" value="<?php echo $course_code; ?>" id="course_view_old_code">
 					
 					<label><i class="w3-text-red">*</i> <b>Course Credit</b></label>
 					<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="number" value="<?php echo $credit; ?>" id="course_view_credit" placeholder="Enter Course Credit" autocomplete="off" onkeyup="course_view_form_change()">
@@ -80,7 +80,7 @@
 					<input type="hidden" value="<?php echo $prog_id; ?>" id="course_view_old_dept">
 					
 					<label><i class="w3-text-red">*</i> <b>Course Program</b></label>
-					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="course_view_prog" onchange="course_view_form_change()">
+					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="course_view_prog" onchange="course_view_form_change()" <?php if($fl==1 || $fl2==1 || $fl3==1){ echo 'title="Sorry you can not change it." disabled'; } ?>>
 						<option value="<?php echo $prog_id; ?>"><?php echo $prog_title; ?></option>
 						<?php
 							$stmt = $conn->prepare("SELECT * FROM nr_program where nr_prog_id!=:prog_id and nr_prog_status='Active' order by nr_prog_title asc");

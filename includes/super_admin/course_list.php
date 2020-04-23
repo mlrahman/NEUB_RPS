@@ -1173,6 +1173,7 @@
 			var xhttp1 = new XMLHttpRequest();
 			xhttp1.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
+					//console.log(this.responseText);
 					if(this.responseText.trim()=='Ok')
 					{
 						close_search_box4();
@@ -1209,7 +1210,7 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/edit_courseram.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&course_title="+course_view_title+"&course_code="+course_view_code+"&course_status="+course_view_status+"&course_credit="+course_view_credit+"&course_dept="+course_view_prog+"&course_id="+course_id, true);
+			xhttp1.open("POST", "../includes/super_admin/edit_course.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&course_title="+course_view_title+"&course_code="+course_view_code+"&course_status="+course_view_status+"&course_credit="+course_view_credit+"&course_prog="+course_view_prog+"&course_id="+course_id, true);
 			xhttp1.send();
 		}
 		
