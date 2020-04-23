@@ -8,19 +8,19 @@
 							<p style="margin:0px 15px;width:50px;" class="w3-bottombar w3-border-teal"> </p>
 							<table class="w3-table " style="width:100%;max-width:350px;">
 								<tr>
-									<td>Address:</td><td><?php echo $address; ?></td>
+									<td>Address</td><td>: <?php echo $address; ?></td>
 								</tr>
 								<tr>
-									<td>Tel:</td><td><?php echo $telephone; ?></td>
+									<td>Telephone</td><td>: <?php echo $telephone; ?></td>
 								</tr>
 								<tr>
-									<td>Email:</td><td><a href="mailto:<?php echo $email; ?>" title="<?php echo $title; ?>" target="_blank" class="w3-hover-text-teal w3-decoration-null"><?php echo $email; ?></a></td>
+									<td>Email</td><td>: <a href="mailto:<?php echo $email; ?>" title="<?php echo $title; ?>" target="_blank" class="w3-hover-text-teal w3-decoration-null"><?php echo $email; ?></a></td>
 								</tr>
 								<tr>
-									<td>Mobile:</td><td><?php echo $mobile; ?></td>
+									<td>Mobile</td><td>: <?php echo $mobile; ?></td>
 								</tr>
 								<tr>
-									<td>Web:</td><td><a href="https://<?php echo $web; ?>" title="<?php echo $title; ?>" target="_blank" class="w3-hover-text-teal w3-decoration-null"><?php echo $web; ?></a></td>
+									<td>Web</td><td>: <a href="https://<?php echo $web; ?>" title="<?php echo $title; ?>" target="_blank" class="w3-hover-text-teal w3-decoration-null"><?php echo $web; ?></a></td>
 								</tr>
 							</table>
 						</div>
