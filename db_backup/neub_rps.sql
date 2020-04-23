@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2020 at 04:44 PM
+-- Generation Time: Apr 23, 2020 at 12:50 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -120,7 +120,8 @@ INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-21', '11:52 AM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-21', '09:10 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-22', '03:11 PM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-22', '04:14 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-22', '04:14 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-23', '02:26 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -366,7 +367,9 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-19', '09:16 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-19', '09:29 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '03:46 PM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-21', '09:35 PM', 'Inactive');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-21', '09:35 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-22', '11:51 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-23', '03:16 PM', 'Inactive');
 
 -- --------------------------------------------------------
 
@@ -567,7 +570,9 @@ CREATE TABLE `nr_program` (
 INSERT INTO `nr_program` (`nr_prog_id`, `nr_prog_title`, `nr_prog_code`, `nr_dept_id`, `nr_prog_status`) VALUES
 (1, 'B.Sc. (Engg.) in CSE', 2, 8, 'Active'),
 (2, 'M.Sc. (Engg.) in CSE', 3, 8, 'Active'),
-(3, 'BBA', 4, 9, 'Active');
+(3, 'BBA', 4, 9, 'Active'),
+(11, 'LLB', 5, 18, 'Active'),
+(12, 'LLM', 6, 18, 'Inactive');
 
 -- --------------------------------------------------------
 
@@ -591,7 +596,9 @@ CREATE TABLE `nr_program_credit` (
 INSERT INTO `nr_program_credit` (`nr_prcr_id`, `nr_prog_id`, `nr_prcr_total`, `nr_prcr_date`, `nr_prcr_ex_date`, `nr_prcr_status`) VALUES
 (1, 1, 160, '2012-01-01', '', 'Active'),
 (2, 2, 36, '2020-03-26', '', 'Active'),
-(3, 3, 127, '2020-04-11', '', 'Active');
+(3, 3, 127, '2020-04-11', '', 'Active'),
+(13, 11, 117, '2020-04-23', '', 'Active'),
+(14, 12, 28, '2020-04-23', '', 'Active');
 
 -- --------------------------------------------------------
 
@@ -607,6 +614,17 @@ CREATE TABLE `nr_program_history` (
   `nr_progh_time` varchar(20) NOT NULL,
   `nr_progh_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `nr_program_history`
+--
+
+INSERT INTO `nr_program_history` (`nr_prog_id`, `nr_admin_id`, `nr_progh_task`, `nr_progh_date`, `nr_progh_time`, `nr_progh_status`) VALUES
+(1, 1, 'Edited Program Title: B.Sc. (Engg.) in CSE, Program Code: 2, Program Credit: 160, Program Department: Computer Science and Engineering, Program Status: Active', '2020-04-23', '03:21 PM', 'Active'),
+(1, 1, 'Edited Program Title: B.Sc. (Engg.) in CSE, Program Code: 2, Program Credit: 13.5, Program Department: Computer Science and Engineering, Program Status: Active', '2020-04-23', '03:26 PM', 'Active'),
+(1, 1, 'Edited Program Title: B.Sc. (Engg.) in CSE, Program Code: 2, Program Credit: 160, Program Department: Computer Science and Engineering, Program Status: Active', '2020-04-23', '03:28 PM', 'Active'),
+(11, 1, 'Added program Title: LLB, program Code: 5, Program Credit: 117, Program Department: Law and Justice, program Status: Active', '2020-04-23', '04:35 PM', 'Active'),
+(12, 1, 'Added program Title: LLM, program Code: 6, Program Credit: 28, Program Department: Law and Justice, program Status: Inactive', '2020-04-23', '04:35 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1732,13 +1750,13 @@ ALTER TABLE `nr_faculty`
 -- AUTO_INCREMENT for table `nr_program`
 --
 ALTER TABLE `nr_program`
-  MODIFY `nr_prog_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `nr_prog_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `nr_program_credit`
 --
 ALTER TABLE `nr_program_credit`
-  MODIFY `nr_prcr_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `nr_prcr_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `nr_result`

@@ -149,8 +149,8 @@
 				?>
 							<tr>
 								<td valign="top" class="w3-padding-small w3-border"><?php echo $i+1; ?></td>
-								<td valign="top" class="w3-padding-small w3-border"><?php echo $result[$i][2]; ?></td>
-								<td valign="top" class="w3-padding-small w3-border"><?php echo $result[$i][7].' <b>('.$result[$i][12].')</b>, '.$result[$i][13]; ?></td>
+								<td valign="top" class="w3-padding-small w3-border w3-small"><?php echo $result[$i][2]; ?></td>
+								<td valign="top" class="w3-padding-small w3-border w3-small"><?php echo $result[$i][7].' <b>('.$result[$i][12].')</b>, '.$result[$i][13]; ?></td>
 								<td valign="top" class="w3-padding-small w3-border"><?php echo get_date($result[$i][3]); ?></td>
 								<td valign="top" class="w3-padding-small w3-border"><?php echo $result[$i][4]; ?></td>
 							</tr>

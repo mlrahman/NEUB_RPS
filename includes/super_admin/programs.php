@@ -231,7 +231,7 @@
 						<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="prog_single_add_dept" onchange="prog_single_add_form_change()">
 							<option value="">Select</option>
 							<?php
-								$stmt = $conn->prepare("SELECT * FROM nr_department order by nr_dept_title asc");
+								$stmt = $conn->prepare("SELECT * FROM nr_department where nr_dept_status='Active' order by nr_dept_title asc");
 								$stmt->execute();
 								$stud_result=$stmt->fetchAll();
 								if(count($stud_result)>0)
@@ -312,7 +312,7 @@
 					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="prog_multiple_add_dept" onchange="prog_single_add_form_change()">
 						<option value="">Select</option>
 						<?php
-							$stmt = $conn->prepare("SELECT * FROM nr_department order by nr_dept_title asc");
+							$stmt = $conn->prepare("SELECT * FROM nr_department where nr_dept_status='Active' order by nr_dept_title asc");
 							$stmt->execute();
 							$stud_result=$stmt->fetchAll();
 							if(count($stud_result)>0)
@@ -466,6 +466,7 @@
 		document.getElementById('prog_multiple_add_box3').style.display='none';
 		document.getElementById('prog_multiple_add_captcha').value='';
 		document.getElementById('prog_excel_file').value='';
+		document.getElementById('prog_multiple_add_dept').value='';
 		
 		document.getElementById('prog_multiple_total').innerHTML='';
 		document.getElementById('prog_multiple_success').innerHTML='';
@@ -480,8 +481,9 @@
 	function prog_multiple_add_form_change()
 	{
 		var prog_excel_file=document.getElementById('prog_excel_file').value;
+		var prog_dept=document.getElementById('prog_multiple_add_dept').value;
 		
-		if(prog_excel_file=="")
+		if(prog_excel_file=="" || prog_dept=="")
 		{
 			document.getElementById("prog_multiple_add_save_btn").disabled = true;
 		}
@@ -495,6 +497,7 @@
 	{
 		document.getElementById('prog_multiple_add_captcha').value='';
 		document.getElementById('prog_excel_file').value='';
+		document.getElementById('prog_multiple_add_dept').value='';
 						
 		document.getElementById("prog_multiple_add_save_btn").disabled = true;
 		
@@ -507,6 +510,8 @@
 			
 		document.getElementById('prog_single_add_title').value='';
 		document.getElementById('prog_single_add_code').value='';
+		document.getElementById('prog_single_add_credit').value='';
+		document.getElementById('prog_single_add_dept').value='';
 		document.getElementById('prog_single_add_status').value='';
 		document.getElementById('prog_single_add_captcha').value='';
 		
@@ -556,6 +561,8 @@
 	{
 		prog_view_title=document.getElementById('prog_single_add_title').value.trim();
 		prog_view_code=document.getElementById('prog_single_add_code').value.trim();
+		prog_view_credit=document.getElementById('prog_single_add_credit').value.trim();
+		prog_view_dept=document.getElementById('prog_single_add_dept').value.trim();
 		prog_view_captcha=document.getElementById('prog_single_add_captcha').value.trim();
 		prog_view_status=document.getElementById('prog_single_add_status').value.trim();
 		
@@ -594,7 +601,7 @@
 				document.getElementById('prog_single_add_status').classList.remove('w3-pale-red');
 			}
 		}
-		if(prog_view_title=="" || prog_view_code=="" || prog_view_status=="")
+		if(prog_view_title=="" || prog_view_code=="" || prog_view_credit=="" || prog_view_dept=="" || prog_view_status=="")
 		{
 			document.getElementById("prog_single_add_save_btn").disabled = true;
 		}
@@ -608,6 +615,8 @@
 	{
 		document.getElementById('prog_single_add_title').value='';
 		document.getElementById('prog_single_add_code').value='';
+		document.getElementById('prog_single_add_credit').value='';
+		document.getElementById('prog_single_add_dept').value='';
 		document.getElementById('prog_single_add_status').value='';
 		document.getElementById('prog_single_add_captcha').value='';
 						
@@ -617,10 +626,11 @@
 	function prog_multiple_add_form_save()
 	{
 		var prog_excel_file=document.getElementById('prog_excel_file').value;
+		var prog_dept=document.getElementById('prog_multiple_add_dept').value;
 		prog_view_captcha=document.getElementById('prog_multiple_add_captcha').value.trim();
 		prog_view_old_captcha=document.getElementById('prog_multiple_add_old_captcha').value.trim();
 		
-		if(prog_excel_file=="" || file_validate3(prog_excel_file)==false)
+		if(prog_dept=="" || prog_excel_file=="" || file_validate3(prog_excel_file)==false)
 		{
 			document.getElementById('prog_multiple_add_pass').value='';
 			
@@ -748,6 +758,21 @@
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					
 					}
+					else if(status=='unable2')
+					{
+						document.getElementById('prog_multiple_progress_id').style.width='0%';
+						document.getElementById('prog_multiple_progress_id').innerHTML='0%';
+						
+						document.getElementById('prog_multiple_add_box1').style.display='block';
+						document.getElementById('prog_multiple_add_box3').style.display='none';
+						document.getElementById('prog_multiple_add_box2').style.display='none';
+				
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add (department inactive).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					
+					}
 					else
 					{
 						document.getElementById('prog_multiple_progress_id').style.width='0%';
@@ -797,7 +822,7 @@
 				  }
 				}
 			};
-			xhttp1.open("POST", "../includes/super_admin/add_multiple_programs.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&excel="+link+"&pass="+pass, true);
+			xhttp1.open("POST", "../includes/super_admin/add_multiple_programs.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&excel="+link+"&pass="+pass+"&prog_dept="+prog_dept, true);
 			xhttp1.send(fd_excel);
 		}
 	}
@@ -807,11 +832,13 @@
 	{
 		prog_view_title=document.getElementById('prog_single_add_title').value.trim();
 		prog_view_code=document.getElementById('prog_single_add_code').value.trim();
+		prog_view_credit=document.getElementById('prog_single_add_credit').value.trim();
+		prog_view_dept=document.getElementById('prog_single_add_dept').value.trim();
 		prog_view_captcha=document.getElementById('prog_single_add_captcha').value.trim();
 		prog_view_old_captcha=document.getElementById('prog_single_add_old_captcha').value.trim();
 		prog_view_status=document.getElementById('prog_single_add_status').value.trim();
 		
-		if(prog_view_title=="" || prog_view_code=="" || prog_view_status=="")
+		if(prog_view_title=="" || prog_view_code=="" || prog_view_credit=="" || prog_view_dept=="" || prog_view_status=="")
 		{
 			document.getElementById('prog_single_add_pass').value='';
 			
@@ -857,7 +884,7 @@
 						get_search_result3();
 						
 						document.getElementById('valid_msg').style.display='block';
-						document.getElementById('v_msg').innerHTML='program successfully added.';
+						document.getElementById('v_msg').innerHTML='Program successfully added.';
 						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
 					
 						
@@ -878,6 +905,15 @@
 						
 						document.getElementById('invalid_msg').style.display='block';
 						document.getElementById('i_msg').innerHTML='Sorry unable to add this program (duplicate detected).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					else if(this.responseText.trim()=='unable2')
+					{
+						document.getElementById('prog_single_add_box1').style.display='block';
+						document.getElementById('prog_single_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add this program (department inactive).';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					}
 					else
@@ -902,7 +938,7 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/add_single_program.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&prog_title="+prog_view_title+"&prog_code="+prog_view_code+"&prog_status="+prog_view_status, true);
+			xhttp1.open("POST", "../includes/super_admin/add_single_program.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&prog_title="+prog_view_title+"&prog_code="+prog_view_code+"&prog_credit="+prog_view_credit+"&prog_dept="+prog_view_dept+"&prog_status="+prog_view_status, true);
 			xhttp1.send();
 		}
 	
@@ -911,11 +947,15 @@
 	
 	var prog_view_old_title;
 	var prog_view_old_code;
+	var prog_view_old_dept;
+	var prog_view_old_credit;
 	var prog_view_old_captcha;
 	var prog_view_old_status;
 	
 	var prog_view_title;
 	var prog_view_code;
+	var prog_view_dept;
+	var prog_view_credit;
 	var prog_view_captcha;
 	var prog_view_status;
 	
@@ -944,7 +984,7 @@
 						get_search_result3();
 						
 						document.getElementById('valid_msg').style.display='block';
-						document.getElementById('v_msg').innerHTML='program successfully removed.';
+						document.getElementById('v_msg').innerHTML='Program successfully removed.';
 						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
 					
 						
@@ -1002,11 +1042,15 @@
 	{
 		prog_view_title=document.getElementById('prog_view_title').value.trim();
 		prog_view_code=document.getElementById('prog_view_code').value.trim();
+		prog_view_credit=document.getElementById('prog_view_credit').value.trim();
+		prog_view_dept=document.getElementById('prog_view_dept').value.trim();
 		prog_view_captcha=document.getElementById('prog_view_captcha').value.trim();
 		prog_view_status=document.getElementById('prog_view_status').value.trim();
 		
 		prog_view_old_title=document.getElementById('prog_view_old_title').value.trim();
 		prog_view_old_code=document.getElementById('prog_view_old_code').value.trim();
+		prog_view_old_credit=document.getElementById('prog_view_old_credit').value.trim();
+		prog_view_old_dept=document.getElementById('prog_view_old_dept').value.trim();
 		prog_view_old_captcha=document.getElementById('prog_view_old_captcha').value.trim();
 		prog_view_old_status=document.getElementById('prog_view_old_status').value.trim();
 		
@@ -1035,11 +1079,11 @@
 			document.getElementById('prog_view_status').classList.add('w3-pale-red');
 		}
 		
-		if(prog_view_title=="" || prog_view_code=="" || prog_view_status=="" || (prog_view_title==prog_view_old_title && prog_view_code==prog_view_old_code && prog_view_status==prog_view_old_status))
+		if(prog_view_title=="" || prog_view_code=="" || prog_view_status=="" || prog_view_dept=="" || prog_view_credit=="" || (prog_view_title==prog_view_old_title && prog_view_code==prog_view_old_code && prog_view_credit==prog_view_old_credit && prog_view_dept==prog_view_old_dept && prog_view_status==prog_view_old_status))
 		{
 			document.getElementById("prog_view_save_btn").disabled = true;
 		}
-		else if(prog_view_title!=prog_view_old_title || prog_view_code!=prog_view_old_code || prog_view_status!=prog_view_old_status)
+		else if(prog_view_title!=prog_view_old_title || prog_view_code!=prog_view_old_code || prog_view_status!=prog_view_old_status || prog_view_credit!=prog_view_old_credit || prog_view_dept!=prog_view_old_dept)
 		{
 			document.getElementById("prog_view_save_btn").disabled = false;
 		}
@@ -1049,11 +1093,15 @@
 	{
 		prog_view_old_title=document.getElementById('prog_view_old_title').value.trim();
 		prog_view_old_code=document.getElementById('prog_view_old_code').value.trim();
+		prog_view_old_credit=document.getElementById('prog_view_old_credit').value.trim();
+		prog_view_old_dept=document.getElementById('prog_view_old_dept').value.trim();
 		prog_view_old_captcha=document.getElementById('prog_view_old_captcha').value.trim();
 		prog_view_old_status=document.getElementById('prog_view_old_status').value.trim();
 		
 		document.getElementById('prog_view_title').value=prog_view_old_title;
 		document.getElementById('prog_view_code').value=prog_view_old_code;
+		document.getElementById('prog_view_credit').value=prog_view_old_credit;
+		document.getElementById('prog_view_dept').value=prog_view_old_dept;
 		document.getElementById('prog_view_captcha').value='';
 		document.getElementById('prog_view_status').value=prog_view_old_status;
 		
@@ -1064,16 +1112,20 @@
 	{
 		prog_view_title=document.getElementById('prog_view_title').value.trim();
 		prog_view_code=document.getElementById('prog_view_code').value.trim();
+		prog_view_credit=document.getElementById('prog_view_credit').value.trim();
+		prog_view_dept=document.getElementById('prog_view_dept').value.trim();
 		prog_view_captcha=document.getElementById('prog_view_captcha').value.trim();
 		prog_view_status=document.getElementById('prog_view_status').value.trim();
 		
 		prog_view_old_title=document.getElementById('prog_view_old_title').value.trim();
 		prog_view_old_code=document.getElementById('prog_view_old_code').value.trim();
+		prog_view_old_credit=document.getElementById('prog_view_old_credit').value.trim();
+		prog_view_old_dept=document.getElementById('prog_view_old_dept').value.trim();
 		prog_view_old_captcha=document.getElementById('prog_view_old_captcha').value.trim();
 		prog_view_old_status=document.getElementById('prog_view_old_status').value.trim();
 		
 		
-		if(prog_view_title=="" || prog_view_code=="" || prog_view_status=="")
+		if(prog_view_title=="" || prog_view_code=="" || prog_view_status=="" || prog_view_credit=="" || prog_view_dept=="")
 		{
 			document.getElementById('invalid_msg').style.display='block';
 			document.getElementById('i_msg').innerHTML='Please fill up all the fields.';
@@ -1129,7 +1181,7 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/edit_program.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&prog_title="+prog_view_title+"&prog_code="+prog_view_code+"&prog_status="+prog_view_status+"&prog_id="+prog_id, true);
+			xhttp1.open("POST", "../includes/super_admin/edit_program.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&prog_title="+prog_view_title+"&prog_code="+prog_view_code+"&prog_status="+prog_view_status+"&prog_credit="+prog_view_credit+"&prog_dept="+prog_view_dept+"&prog_id="+prog_id, true);
 			xhttp1.send();
 		}
 		

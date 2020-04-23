@@ -15,7 +15,7 @@
 		$admin_id=trim($_REQUEST['admin_id']);
 		$prog_id=trim($_REQUEST['prog_id']);
 		
-		$fl=0; $fl1=0; $fl2=0; $fl3=0; $fl4=0;
+		$fl=0; $fl2=0; $fl3=0; $fl4=0;
 		//checking if prog is delete able or not
 		$stmt = $conn->prepare("select * from nr_course where nr_prog_id=:prog_id");
 		$stmt->bindParam(':prog_id', $prog_id);
@@ -24,16 +24,6 @@
 		if(count($result)>=1)
 		{
 			$fl=1;
-		}
-		
-		//checking if prog is delete able or not
-		$stmt = $conn->prepare("select * from nr_program_credit where nr_prog_id=:prog_id");
-		$stmt->bindParam(':prog_id', $prog_id);
-		$stmt->execute();
-		$result = $stmt->fetchAll();
-		if(count($result)>=1)
-		{
-			$fl1=1;
 		}
 		
 		//checking if prog is delete able or not
@@ -95,6 +85,7 @@
 					<label><i class="w3-text-red">*</i> <b>Program Credit</b></label>
 					<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="number" value="<?php echo $credit; ?>" id="prog_view_credit" placeholder="Enter Program Credit" autocomplete="off" onkeyup="prog_view_form_change()">
 					<input type="hidden" value="<?php echo $credit; ?>" id="prog_view_old_credit">
+					<input type="hidden" value="<?php echo $dept_id; ?>" id="prog_view_old_dept">
 					
 					<label><i class="w3-text-red">*</i> <b>Department</b></label>
 					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="prog_view_dept" onchange="prog_view_form_change()">
@@ -164,7 +155,7 @@
 					
 					<button onclick="prog_view_form_reset()" class="w3-button w3-margin-top w3-red w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;"><i class="fa fa-eye-slash"></i> Reset</button>
 					
-					<button onclick="document.getElementById('prog_view_re_confirmation').style.display='block';" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" <?php if($fl==1 || $fl1==1 || $fl2==1 || $fl3==1 || $fl4==1){ echo 'title="Sorry you can not delete it." disabled'; } ?>><i class="fa fa-eraser"></i> Remove</button>
+					<button onclick="document.getElementById('prog_view_re_confirmation').style.display='block';" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" <?php if($fl==1 || $fl2==1 || $fl3==1 || $fl4==1){ echo 'title="Sorry you can not delete it." disabled'; } ?>><i class="fa fa-eraser"></i> Remove</button>
 				
 					<button onclick="prog_view_form_save_changes('<?php echo $prog_id; ?>')" id="prog_view_save_btn" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" disabled><i class="fa fa-save"></i> Save Changes</button>
 				
@@ -209,8 +200,8 @@
 				?>
 							<tr>
 								<td valign="top" class="w3-padding-small w3-border"><?php echo $i+1; ?></td>
-								<td valign="top" class="w3-padding-small w3-border"><?php echo $result[$i][2]; ?></td>
-								<td valign="top" class="w3-padding-small w3-border"><?php echo $result[$i][7].' <b>('.$result[$i][12].')</b>, '.$result[$i][13]; ?></td>
+								<td valign="top" class="w3-padding-small w3-border w3-small"><?php echo $result[$i][2]; ?></td>
+								<td valign="top" class="w3-padding-small w3-border w3-small"><?php echo $result[$i][7].' <b>('.$result[$i][12].')</b>, '.$result[$i][13]; ?></td>
 								<td valign="top" class="w3-padding-small w3-border"><?php echo get_date($result[$i][3]); ?></td>
 								<td valign="top" class="w3-padding-small w3-border"><?php echo $result[$i][4]; ?></td>
 							</tr>
