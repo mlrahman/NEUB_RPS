@@ -1,4 +1,5 @@
 # NEUB_RPS
+<body style="text-align:justify;">
 This web application is developed for the result processing system of North East University Bangladesh.
 
 <h2>Student Panel (General User)</h2>
@@ -40,3 +41,6 @@ This web application is developed for the result processing system of North East
     <li>By clicking sign out session will be destroyed and faculty will sign out from the access.</li>
     <li>In every 8 seconds, an automatic network connection and session check will be done. Admin has the right to destroy any faculty member session.</li>
 </ul>
+
+
+</body>
