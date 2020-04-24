@@ -233,15 +233,15 @@ function get_current_semester()
 	{
 		$semester='Fall';
 	}
-	else if($date[5]=='0' && $date[6]=='10')
+	else if($date[5]=='1' && $date[6]=='0')
 	{
 		$semester='Fall';
 	}
-	else if($date[5]=='0' && $date[6]=='11')
+	else if($date[5]=='1' && $date[6]=='1')
 	{
 		$semester='Fall';
 	}
-	else if($date[5]=='0' && $date[6]=='12')
+	else if($date[5]=='1' && $date[6]=='2')
 	{
 		$semester='Fall';
 	}
@@ -482,6 +482,8 @@ function get_student_info($s_id,$prcr_id)  //will return drop status, grad_statu
 		$st_info['dropout']=0;
 		$st_info['graduated']=0;
 		$st_info['cgpa']=0.00;
+		$st_info['earned_credit']=0.00;
+		$st_info['waived_credit']=0.00;
 		$st_info['last_semester']='';
 		$st_info['last_year']='';
 		$st_info['drop_semester']='N/A';
@@ -528,6 +530,7 @@ function get_student_info($s_id,$prcr_id)  //will return drop status, grad_statu
 			$earned_gpa=$earned_gpa+($cge['credit']*$cge['gpa']);
 		}
 		$earned_credit=number_format($earned_credit, 2);
+		$st_info['earned_credit']=$earned_credit;
 		
 		//Calculating cgpa from earned_credit
 		if($earned_credit==0)
@@ -553,7 +556,7 @@ function get_student_info($s_id,$prcr_id)  //will return drop status, grad_statu
 			$waived_credit=$waived_credit+$stud_course_credit;
 		}
 		$waived_credit=number_format($waived_credit, 2);
-		
+		$st_info['waived_credit']=$waived_credit;
 		
 		//Search for student program credit
 		$stmt = $conn->prepare("select * from nr_program_credit where nr_prcr_id=$prcr_id");

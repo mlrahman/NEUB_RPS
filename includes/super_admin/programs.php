@@ -205,6 +205,8 @@
 				<a onclick="document.getElementById('add_multiple_window3').style.display='block';document.getElementById('add_single_window3').style.display='none';" class=" w3-cursor w3-bar-item w3-button w3-hover-teal">Multiple</a>
 			</div>
 		</div>
+		<button onclick="get_prog_delete_history()" class="w3-button w3-black w3-round-large w3-hover-teal w3-margin-left"><i class="fa fa-history"></i> Remove History</button>
+		
 			
 	</div>
 	
@@ -377,6 +379,16 @@
 		</div>
 	</div>
 	
+	
+	<!-- window for delete history -->
+	<div id="prog_delete_history_window" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
+		<span onclick="prog_delete_history_window_close()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
+		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:355px;"><i class="fa fa-history"></i> Program Remove History</p>
+		<div class="w3-container w3-margin-0 w3-padding-0"  id="prog_delete_history_window_box">
+			
+		</div>
+	</div>
+	
 	<!-- Search box -->
 
 	<div class="w3-container" style="margin: 2px 0px 25px 0px;padding:0px;position:relative;">
@@ -458,6 +470,33 @@
 </div>
 
 <script>
+	
+	function prog_delete_history_window_close()
+	{
+		document.getElementById('prog_delete_history_window_box').innerHTML='';
+		document.getElementById('prog_delete_history_window').style.display='none';
+	}
+	
+	function get_prog_delete_history()
+	{
+		document.getElementById('prog_delete_history_window').style.display='block';
+		document.getElementById('prog_delete_history_window_box').innerHTML='<p class="w3-center" style="margin: 50px 0px 50px 0px;"><i class="fa fa-refresh w3-spin"></i> Please wait!! while loading...</p>';
+		var xhttp1 = new XMLHttpRequest();
+		xhttp1.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById('prog_delete_history_window_box').innerHTML=this.responseText;
+			}
+			else if(this.readyState==4 && (this.status==404 || this.status==403))
+			{
+				prog_delete_history_window_close();
+				document.getElementById('invalid_msg').style.display='block';
+				document.getElementById('i_msg').innerHTML='Network error occurred.';
+				setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+			}
+		};
+		xhttp1.open("POST", "../includes/super_admin/get_prog_delete_history.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>, true);
+		xhttp1.send();
+	}
 	
 	function add_multiple_window3_close()
 	{

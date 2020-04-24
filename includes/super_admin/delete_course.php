@@ -59,6 +59,27 @@
 				die();
 			}
 			
+			
+			/********** Inserting delete history ******/
+			$stmt = $conn->prepare("select a.nr_course_title,a.nr_course_code,a.nr_course_credit,a.nr_course_status,b.nr_prog_title from nr_course a,nr_program b where a.nr_prog_id=b.nr_prog_id and a.nr_course_id=:course_id");
+			$stmt->bindParam(':course_id', $course_id);
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			
+			$course_title=$result[0][1];
+			$course_code=$result[0][2];
+			$course_credit=$result[0][2];
+			$course_status=$result[0][3];
+			$prog_title=$result[0][3];
+			$t=get_current_time();
+			$d=get_current_date();
+			$task='Deleted Course Title: '.$course_title.', Course Code: '.$course_code.', Course Credit: '.$course_credit.', Course Program: '.$prog_title.', Course Status: '.$course_status;
+			$stmt = $conn->prepare("insert into nr_delete_history(nr_admin_id,nr_deleteh_task,nr_deleteh_date,nr_deleteh_time,nr_deleteh_status,nr_deleteh_type) values(:admin_id,'$task','$d','$t','Active','Course List') ");
+			$stmt->bindParam(':admin_id', $_SESSION['admin_id']);
+			$stmt->execute();
+			
+			/***********************/
+			
 			$stmt = $conn->prepare("delete from nr_course_history where nr_course_id=:course_id ");
 			$stmt->bindParam(':course_id', $course_id);
 			$stmt->execute();

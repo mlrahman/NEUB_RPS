@@ -49,6 +49,24 @@
 				die();
 			}
 			
+			/********** Inserting delete history ******/
+			$stmt = $conn->prepare("select * from nr_department where nr_dept_id=:dept_id");
+			$stmt->bindParam(':dept_id', $dept_id);
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			
+			$dept_title=$result[0][1];
+			$dept_code=$result[0][2];
+			$dept_status=$result[0][3];
+			$t=get_current_time();
+			$d=get_current_date();
+			$task='Deleted Department Title: '.$dept_title.', Department Code: '.$dept_code.', Department Status: '.$dept_status;
+			$stmt = $conn->prepare("insert into nr_delete_history(nr_admin_id,nr_deleteh_task,nr_deleteh_date,nr_deleteh_time,nr_deleteh_status,nr_deleteh_type) values(:admin_id,'$task','$d','$t','Active','Department') ");
+			$stmt->bindParam(':admin_id', $_SESSION['admin_id']);
+			$stmt->execute();
+			
+			/***********************/
+			
 			$stmt = $conn->prepare("delete from nr_department_history where nr_dept_id=:dept_id ");
 			$stmt->bindParam(':dept_id', $dept_id);
 			$stmt->execute();

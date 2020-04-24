@@ -38,6 +38,12 @@
 	//echo $last_semester.'-'.$last_year;
 	
 	//getting initial from semester
+	if($first_semester==$last_semester && $first_year==$last_year)
+	{
+		$from_semester=$first_semester;
+		$first_year-=1;
+		$from_year=$first_year;
+	}
 	$ct=0;
 	for($q=$last_year;$q>=$first_year;$q--)
 	{

@@ -69,6 +69,26 @@
 				die();
 			}
 			
+			/********** Inserting delete history ******/
+			$stmt = $conn->prepare("select a.nr_prog_title,a.nr_prog_code,a.nr_prog_status,b.nr_dept_title from nr_program a,nr_department b where a.nr_dept_id=b.nr_dept_id and a.nr_prog_id=:prog_id");
+			$stmt->bindParam(':prog_id', $prog_id);
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			
+			$prog_title=$result[0][0];
+			$prog_code=$result[0][1];
+			$prog_status=$result[0][2];
+			$dept_title=$result[0][3];
+			$t=get_current_time();
+			$d=get_current_date();
+			$task='Deleted Program Title: '.$prog_title.', Program Code: '.$prog_code.', Department Title: '.$dept_title.', Program Status: '.$prog_status;
+			$stmt = $conn->prepare("insert into nr_delete_history(nr_admin_id,nr_deleteh_task,nr_deleteh_date,nr_deleteh_time,nr_deleteh_status,nr_deleteh_type) values(:admin_id,'$task','$d','$t','Active','Program') ");
+			$stmt->bindParam(':admin_id', $_SESSION['admin_id']);
+			$stmt->execute();
+			
+			/***********************/
+			
+			
 			$stmt = $conn->prepare("delete from nr_program_history where nr_prog_id=:prog_id ");
 			$stmt->bindParam(':prog_id', $prog_id);
 			$stmt->execute();

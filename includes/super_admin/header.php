@@ -74,6 +74,23 @@ Email: mlrahman@neub.edu.bd
 			}
 		}
 		
+		//clearing delete history
+		$trx=3000;
+		$stmt = $conn->prepare("select * from nr_delete_history order by nr_deleteh_date desc, nr_deleteh_time desc ");
+		$stmt->execute();
+		$re_trx = $stmt->fetchAll();
+		$sz=count($re_trx);
+		for($i=0;$i<$sz;$i++)
+		{
+			if($i>$trx)
+			{
+				$re_date=$re_trx[$i][2];
+				$re_time=$re_trx[$i][3];
+				$stmt = $conn->prepare("delete from nr_delete_history where nr_deleteh_date='$re_date' and nr_deleteh_time='$re_time' ");
+				$stmt->execute();
+			}
+		}
+		
 		//deleting print transaction
 		$trx=50000;
 		$stmt = $conn->prepare("select * from nr_transcript_print_reference order by nr_trprre_date desc, nr_trprre_time desc ");
