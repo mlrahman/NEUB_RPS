@@ -1228,6 +1228,17 @@
 						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
 		
 					}
+					else if(this.responseText.trim()=='unable')
+					{
+						document.getElementById('course_view_box1').style.display='block';
+						document.getElementById('course_view_box2').style.display='none';
+						document.getElementById('course_view_box3').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unable to make change (duplicate detected).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		
+					}
 					else
 					{
 						document.getElementById('course_view_box1').style.display='block';

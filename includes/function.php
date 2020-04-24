@@ -1,4 +1,11 @@
 <?php
+function get_semester_format($x)
+{
+	if($x==1) return '1st';
+	if($x==2) return '2nd';
+	if($x==3) return '3rd';
+	if($x>=4) return $x.'th';
+}
 
 function password_encrypt($x)
 {

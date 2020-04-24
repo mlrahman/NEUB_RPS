@@ -68,8 +68,9 @@
 						{
 							
 							//checking if course is add able or not
-							$stmt = $conn->prepare("select * from nr_course where nr_course_title=:course_title or nr_course_code=:course_code");
+							$stmt = $conn->prepare("select * from nr_course where and nr_prog_id=:course_prog and (nr_course_title=:course_title or nr_course_code=:course_code) ");
 							$stmt->bindParam(':course_title', $course_title);
+							$stmt->bindParam(':course_prog', $course_prog);
 							$stmt->bindParam(':course_code', $course_code);
 							$stmt->execute();
 							$result = $stmt->fetchAll();

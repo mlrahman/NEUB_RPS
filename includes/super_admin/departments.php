@@ -1067,6 +1067,7 @@
 			var xhttp1 = new XMLHttpRequest();
 			xhttp1.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
+					//console.log(this.responseText.trim());
 					if(this.responseText.trim()=='Ok')
 					{
 						close_search_box2();
@@ -1077,6 +1078,17 @@
 						document.getElementById('valid_msg').style.display='block';
 						document.getElementById('v_msg').innerHTML='Changes saved successfully.';
 						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
+		
+					}
+					else if(this.responseText.trim()=='unable')
+					{
+						document.getElementById('dept_view_box1').style.display='block';
+						document.getElementById('dept_view_box2').style.display='none';
+						document.getElementById('dept_view_box3').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unable to make change (duplicate detected).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 		
 					}
 					else

@@ -20,6 +20,20 @@
 			$course_prog=trim($_REQUEST['course_prog']);
 			$course_status=trim($_REQUEST['course_status']);
 			
+			//checking if course is add able or not
+			$stmt = $conn->prepare("select * from nr_course where nr_prog_id=:course_prog and nr_course_id!=:course_id and (nr_course_title=:course_title or nr_course_code=:course_code) ");
+			$stmt->bindParam(':course_id', $course_id);
+			$stmt->bindParam(':course_title', $course_title);
+			$stmt->bindParam(':course_prog', $course_prog);
+			$stmt->bindParam(':course_code', $course_code);
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			if(count($result)>=1)
+			{
+				echo 'unable';
+				die();
+			}
+			
 			
 			$stmt = $conn->prepare("update nr_course set nr_course_title=:course_title, nr_course_code=:course_code, nr_course_credit=:course_credit, nr_course_status=:course_status, nr_prog_id=:course_prog where nr_course_id=:course_id ");
 			$stmt->bindParam(':course_title', $course_title);
@@ -54,6 +68,7 @@
 		}
 		catch(PDOException $e)
 		{
+			
 			echo 'Error';
 			die();
 		}

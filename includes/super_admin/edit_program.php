@@ -20,6 +20,18 @@
 			$prog_dept=trim($_REQUEST['prog_dept']);
 			$prog_status=trim($_REQUEST['prog_status']);
 			
+			//checking if prog is add able or not
+			$stmt = $conn->prepare("select * from nr_program where (nr_prog_title=:prog_title or nr_prog_code=:prog_code) and nr_prog_id!=:prog_id");
+			$stmt->bindParam(':prog_id', $prog_id);
+			$stmt->bindParam(':prog_title', $prog_title);
+			$stmt->bindParam(':prog_code', $prog_code);
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			if(count($result)>=1)
+			{
+				echo 'unable';
+				die();
+			}
 			
 			$stmt = $conn->prepare("update nr_program set nr_prog_title=:prog_title, nr_prog_code=:prog_code, nr_prog_status=:prog_status, nr_dept_id=:prog_dept where nr_prog_id=:prog_id ");
 			$stmt->bindParam(':prog_title', $prog_title);

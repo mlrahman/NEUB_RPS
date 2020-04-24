@@ -152,9 +152,7 @@
 		</div>
 		<!-- page5 starts here -->
 		<div id="page5" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
-			
-			
-			
+			<?php include("../includes/super_admin/course_offer_list.php"); ?>
 		</div>
 		<!-- page6 starts here -->
 		<div id="page6" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">

@@ -19,6 +19,19 @@
 			$dept_status=trim($_REQUEST['dept_status']);
 			
 			
+			//checking if dept is add able or not
+			$stmt = $conn->prepare("select * from nr_department where (nr_dept_title=:dept_title or nr_dept_code=:dept_code) and nr_dept_id!=:dept_id");
+			$stmt->bindParam(':dept_id', $dept_id);
+			$stmt->bindParam(':dept_title', $dept_title);
+			$stmt->bindParam(':dept_code', $dept_code);
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			if(count($result)>=1)
+			{
+				echo 'unable';
+				die();
+			}
+			
 			$stmt = $conn->prepare("update nr_department set nr_dept_title=:dept_title, nr_dept_code=:dept_code, nr_dept_status=:dept_status where nr_dept_id=:dept_id ");
 			$stmt->bindParam(':dept_title', $dept_title);
 			$stmt->bindParam(':dept_code', $dept_code);
@@ -40,11 +53,13 @@
 		}
 		catch(PDOException $e)
 		{
+			echo $e;
 			echo 'Error';
 			die();
 		}
 		catch(Exception $e)
 		{
+			echo $e;
 			echo 'Error';
 			die();
 		}
