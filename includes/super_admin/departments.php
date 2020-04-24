@@ -1031,6 +1031,33 @@
 		document.getElementById('dept_view_captcha').value='';
 		document.getElementById('dept_view_status').value=dept_view_old_status;
 		
+		dept_view_status=document.getElementById('dept_view_status').value.trim();
+		
+		if(dept_view_status=='Active')
+		{
+			if(document.getElementById('dept_view_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('dept_view_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('dept_view_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('dept_view_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('dept_view_status').classList.add('w3-pale-green');
+		}
+		else
+		{
+			if(document.getElementById('dept_view_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('dept_view_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('dept_view_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('dept_view_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('dept_view_status').classList.add('w3-pale-red');
+		}
+		
 		document.getElementById("dept_view_save_btn").disabled = true;
 	}
 	

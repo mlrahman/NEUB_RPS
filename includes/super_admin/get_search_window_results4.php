@@ -77,9 +77,9 @@
 					<label><i class="w3-text-red">*</i> <b>Course Credit</b></label>
 					<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="number" value="<?php echo $credit; ?>" id="course_view_credit" placeholder="Enter Course Credit" autocomplete="off" onkeyup="course_view_form_change()">
 					<input type="hidden" value="<?php echo $credit; ?>" id="course_view_old_credit">
-					<input type="hidden" value="<?php echo $prog_id; ?>" id="course_view_old_dept">
+					<input type="hidden" value="<?php echo $prog_id; ?>" id="course_view_old_prog">
 					
-					<label><i class="w3-text-red">*</i> <b>Course Program</b></label>
+					<label><?php if($fl==0 && $fl2==0 && $fl3==0){ ?><i class="w3-text-red">*</i><?php } ?> <b>Course Program</b></label>
 					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="course_view_prog" onchange="course_view_form_change()" <?php if($fl==1 || $fl2==1 || $fl3==1){ echo 'title="Sorry you can not change it." disabled'; } ?>>
 						<option value="<?php echo $prog_id; ?>"><?php echo $prog_title; ?></option>
 						<?php

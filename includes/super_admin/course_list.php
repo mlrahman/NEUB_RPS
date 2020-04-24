@@ -1017,7 +1017,7 @@
 	
 	var course_view_old_title;
 	var course_view_old_code;
-	var course_view_old_dept;
+	var course_view_old_prog;
 	var course_view_old_credit;
 	var course_view_old_captcha;
 	var course_view_old_status;
@@ -1120,7 +1120,7 @@
 		course_view_old_title=document.getElementById('course_view_old_title').value.trim();
 		course_view_old_code=document.getElementById('course_view_old_code').value.trim();
 		course_view_old_credit=document.getElementById('course_view_old_credit').value.trim();
-		course_view_old_dept=document.getElementById('course_view_old_dept').value.trim();
+		course_view_old_prog=document.getElementById('course_view_old_prog').value.trim();
 		course_view_old_captcha=document.getElementById('course_view_old_captcha').value.trim();
 		course_view_old_status=document.getElementById('course_view_old_status').value.trim();
 		
@@ -1149,11 +1149,11 @@
 			document.getElementById('course_view_status').classList.add('w3-pale-red');
 		}
 		
-		if(course_view_title=="" || course_view_code=="" || course_view_status=="" || course_view_prog=="" || course_view_credit=="" || (course_view_title==course_view_old_title && course_view_code==course_view_old_code && course_view_credit==course_view_old_credit && course_view_prog==course_view_old_dept && course_view_status==course_view_old_status))
+		if(course_view_title=="" || course_view_code=="" || course_view_status=="" || course_view_prog=="" || course_view_credit=="" || (course_view_title==course_view_old_title && course_view_code==course_view_old_code && course_view_credit==course_view_old_credit && course_view_prog==course_view_old_prog && course_view_status==course_view_old_status))
 		{
 			document.getElementById("course_view_save_btn").disabled = true;
 		}
-		else if(course_view_title!=course_view_old_title || course_view_code!=course_view_old_code || course_view_status!=course_view_old_status || course_view_credit!=course_view_old_credit || course_view_prog!=course_view_old_dept)
+		else if(course_view_title!=course_view_old_title || course_view_code!=course_view_old_code || course_view_status!=course_view_old_status || course_view_credit!=course_view_old_credit || course_view_prog!=course_view_old_prog)
 		{
 			document.getElementById("course_view_save_btn").disabled = false;
 		}
@@ -1164,16 +1164,43 @@
 		course_view_old_title=document.getElementById('course_view_old_title').value.trim();
 		course_view_old_code=document.getElementById('course_view_old_code').value.trim();
 		course_view_old_credit=document.getElementById('course_view_old_credit').value.trim();
-		course_view_old_dept=document.getElementById('course_view_old_dept').value.trim();
+		course_view_old_prog=document.getElementById('course_view_old_prog').value.trim();
 		course_view_old_captcha=document.getElementById('course_view_old_captcha').value.trim();
 		course_view_old_status=document.getElementById('course_view_old_status').value.trim();
 		
 		document.getElementById('course_view_title').value=course_view_old_title;
 		document.getElementById('course_view_code').value=course_view_old_code;
 		document.getElementById('course_view_credit').value=course_view_old_credit;
-		document.getElementById('course_view_prog').value=course_view_old_dept;
+		document.getElementById('course_view_prog').value=course_view_old_prog;
 		document.getElementById('course_view_captcha').value='';
 		document.getElementById('course_view_status').value=course_view_old_status;
+		
+		course_view_status=document.getElementById('course_view_status').value.trim();
+		
+		if(course_view_status=='Active')
+		{
+			if(document.getElementById('course_view_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('course_view_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('course_view_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('course_view_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('course_view_status').classList.add('w3-pale-green');
+		}
+		else
+		{
+			if(document.getElementById('course_view_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('course_view_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('course_view_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('course_view_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('course_view_status').classList.add('w3-pale-red');
+		}
 		
 		document.getElementById("course_view_save_btn").disabled = true;
 	}
@@ -1190,7 +1217,7 @@
 		course_view_old_title=document.getElementById('course_view_old_title').value.trim();
 		course_view_old_code=document.getElementById('course_view_old_code').value.trim();
 		course_view_old_credit=document.getElementById('course_view_old_credit').value.trim();
-		course_view_old_dept=document.getElementById('course_view_old_dept').value.trim();
+		course_view_old_prog=document.getElementById('course_view_old_prog').value.trim();
 		course_view_old_captcha=document.getElementById('course_view_old_captcha').value.trim();
 		course_view_old_status=document.getElementById('course_view_old_status').value.trim();
 		

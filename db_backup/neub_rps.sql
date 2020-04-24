@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2020 at 01:25 PM
+-- Generation Time: Apr 24, 2020 at 08:38 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -123,7 +123,10 @@ INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-22', '04:14 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-23', '02:26 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-23', '09:05 PM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '03:40 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '03:40 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:21 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:24 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:41 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -228,7 +231,8 @@ INSERT INTO `nr_delete_history` (`nr_admin_id`, `nr_deleteh_task`, `nr_deleteh_d
 (1, 'Deleted Program Title: M.Sc. (Engg.) in CSE, Program Code: 3, Department Title: Computer Science and Engineering, Program Status: Active', '2020-04-24', '04:40 PM', 'Active', 'Program'),
 (1, 'Deleted Department Title: yvgbhkn, Department Code: 0, Department Status: Active', '2020-04-24', '04:44 PM', 'Active', 'Department'),
 (1, 'Deleted Program Title: cfghgv, Program Code: dtrfygu, Department Title: Business Administration, Program Status: Active', '2020-04-24', '04:57 PM', 'Active', 'Program'),
-(1, 'Deleted Course Title: dcf, Course Code: 4, Course Credit: 4, Course Program: Active, Course Status: Active', '2020-04-24', '04:59 PM', 'Active', 'Course List');
+(1, 'Deleted Course Title: dcf, Course Code: 4, Course Credit: 4, Course Program: Active, Course Status: Active', '2020-04-24', '04:59 PM', 'Active', 'Course List'),
+(1, 'Deleted Offer Course Title: Database System, Course Code: CSE 313, Course Credit: 3, Course Type: Compulsory, Offer Semester: 5, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Active', '2020-04-25', '12:10 AM', 'Active', 'Course Offer List');
 
 -- --------------------------------------------------------
 
@@ -280,7 +284,11 @@ INSERT INTO `nr_department_history` (`nr_dept_id`, `nr_admin_id`, `nr_depth_task
 (8, 1, 'Edited Department Title: Computer Science and Engineering, Department Code: 3, Department Status: Inactive', '2020-04-21', '06:35 PM', 'Active'),
 (8, 1, 'Edited Department Title: Computer Science and Engineering, Department Code: 3, Department Status: Active', '2020-04-21', '06:35 PM', 'Active'),
 (17, 1, 'Added Department Title: English, Department Code: 1, Department Status: Inactive', '2020-04-22', '06:25 PM', 'Active'),
-(18, 1, 'Added Department Title: Law and Justice, Department Code: 4, Department Status: Active', '2020-04-22', '06:25 PM', 'Active');
+(18, 1, 'Added Department Title: Law and Justice, Department Code: 4, Department Status: Active', '2020-04-22', '06:25 PM', 'Active'),
+(17, 1, 'Edited Department Title: English P, Department Code: 1, Department Status: Inactive', '2020-04-24', '07:40 PM', 'Active'),
+(17, 1, 'Edited Department Title: English, Department Code: 1, Department Status: Inactive', '2020-04-24', '07:44 PM', 'Active'),
+(18, 1, 'Edited Department Title: Law and Justice, Department Code: 4, Department Status: Inactive', '2020-04-24', '10:34 PM', 'Active'),
+(18, 1, 'Edited Department Title: Law and Justice, Department Code: 4, Department Status: Active', '2020-04-24', '10:35 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -309,10 +317,24 @@ INSERT INTO `nr_drop` (`nr_drop_id`, `nr_prcr_id`, `nr_prog_id`, `nr_course_id`,
 (4, 1, 1, 3, '2', 'Compulsory', 'Active'),
 (5, 1, 1, 8, '4', 'Compulsory', 'Active'),
 (6, 1, 1, 9, '4', 'Compulsory', 'Active'),
-(7, 1, 1, 5, '5', 'Compulsory', 'Active'),
 (8, 1, 1, 6, '5', 'Compulsory', 'Active'),
 (9, 1, 1, 4, '3', 'Optional I', 'Active'),
 (10, 1, 1, 10, '3', 'Optional I', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nr_drop_history`
+--
+
+CREATE TABLE `nr_drop_history` (
+  `nr_drop_id` bigint(20) NOT NULL,
+  `nr_admin_id` bigint(20) NOT NULL,
+  `nr_droph_task` mediumtext NOT NULL,
+  `nr_droph_date` varchar(20) NOT NULL,
+  `nr_droph_time` varchar(20) NOT NULL,
+  `nr_droph_status` enum('Active','Inactive') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -424,7 +446,11 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-22', '11:51 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-23', '03:16 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '05:00 PM', 'Inactive'),
-(5, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '05:07 PM', 'Active');
+(5, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '05:07 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:00 PM', 'Inactive'),
+(5, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:17 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:18 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:25 PM', 'Inactive');
 
 -- --------------------------------------------------------
 
@@ -602,7 +628,8 @@ INSERT INTO `nr_faculty_result_check_transaction` (`nr_stud_id`, `nr_faculty_id`
 (140203020004, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Active'),
 (140203020005, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Active'),
 (140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '06:33 PM', 'Active'),
-(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-21', '09:35 PM', 'Active');
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-21', '09:35 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:26 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1676,6 +1703,13 @@ ALTER TABLE `nr_drop`
   ADD KEY `nr_course_id` (`nr_course_id`);
 
 --
+-- Indexes for table `nr_drop_history`
+--
+ALTER TABLE `nr_drop_history`
+  ADD KEY `nr_drop_id` (`nr_drop_id`),
+  ADD KEY `nr_admin_id` (`nr_admin_id`);
+
+--
 -- Indexes for table `nr_faculty`
 --
 ALTER TABLE `nr_faculty`
@@ -1824,7 +1858,7 @@ ALTER TABLE `nr_program`
 -- AUTO_INCREMENT for table `nr_program_credit`
 --
 ALTER TABLE `nr_program_credit`
-  MODIFY `nr_prcr_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `nr_prcr_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `nr_result`
@@ -1900,6 +1934,13 @@ ALTER TABLE `nr_drop`
   ADD CONSTRAINT `nr_drop_ibfk_1` FOREIGN KEY (`nr_prcr_id`) REFERENCES `nr_program_credit` (`nr_prcr_id`),
   ADD CONSTRAINT `nr_drop_ibfk_2` FOREIGN KEY (`nr_prog_id`) REFERENCES `nr_program` (`nr_prog_id`),
   ADD CONSTRAINT `nr_drop_ibfk_3` FOREIGN KEY (`nr_course_id`) REFERENCES `nr_course` (`nr_course_id`);
+
+--
+-- Constraints for table `nr_drop_history`
+--
+ALTER TABLE `nr_drop_history`
+  ADD CONSTRAINT `nr_drop_history_ibfk_1` FOREIGN KEY (`nr_drop_id`) REFERENCES `nr_drop` (`nr_drop_id`),
+  ADD CONSTRAINT `nr_drop_history_ibfk_2` FOREIGN KEY (`nr_admin_id`) REFERENCES `nr_admin` (`nr_admin_id`);
 
 --
 -- Constraints for table `nr_faculty`

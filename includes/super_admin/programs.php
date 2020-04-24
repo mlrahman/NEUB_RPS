@@ -1144,6 +1144,33 @@
 		document.getElementById('prog_view_captcha').value='';
 		document.getElementById('prog_view_status').value=prog_view_old_status;
 		
+		prog_view_status=document.getElementById('prog_view_status').value.trim();
+		
+		if(prog_view_status=='Active')
+		{
+			if(document.getElementById('prog_view_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('prog_view_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('prog_view_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('prog_view_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('prog_view_status').classList.add('w3-pale-green');
+		}
+		else
+		{
+			if(document.getElementById('prog_view_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('prog_view_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('prog_view_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('prog_view_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('prog_view_status').classList.add('w3-pale-red');
+		}
+		
 		document.getElementById("prog_view_save_btn").disabled = true;
 	}
 	

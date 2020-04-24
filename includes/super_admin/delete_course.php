@@ -73,7 +73,7 @@
 			$prog_title=$result[0][3];
 			$t=get_current_time();
 			$d=get_current_date();
-			$task='Deleted Course Title: '.$course_title.', Course Code: '.$course_code.', Course Credit: '.$course_credit.', Course Program: '.$prog_title.', Course Status: '.$course_status;
+			$task='Deleted Course Title: '.$course_title.', Course Code: '.$course_code.', Course Credit: '.number_format($course_credit,2).', Course Program: '.$prog_title.', Course Status: '.$course_status;
 			$stmt = $conn->prepare("insert into nr_delete_history(nr_admin_id,nr_deleteh_task,nr_deleteh_date,nr_deleteh_time,nr_deleteh_status,nr_deleteh_type) values(:admin_id,'$task','$d','$t','Active','Course List') ");
 			$stmt->bindParam(':admin_id', $_SESSION['admin_id']);
 			$stmt->execute();

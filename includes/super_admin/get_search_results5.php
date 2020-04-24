@@ -98,11 +98,11 @@
 			for($i=0;$i<$sz;$i++)
 			{
 				$col='';
-				if($result[$i][7]=='Inactive')
+				if($result[$i][8]=='Inactive')
 				{
 					$col='w3-pale-red';
 				}
-				echo '<tr class="'.$col.'" title="Status '.$result[$i][7].'">
+				echo '<tr class="'.$col.'" title="Status '.$result[$i][8].'">
 						<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$result[$i][1].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$result[$i][2].'</td>
