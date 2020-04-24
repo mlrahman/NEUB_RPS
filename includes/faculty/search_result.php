@@ -131,7 +131,22 @@
 			<option value="9">CGPA ASC</option>
 			<option value="10">CGPA DESC</option>
 		</select>
+		<i class="fa fa-filter w3-button w3-black w3-hover-teal w3-round-large" onclick="document.getElementById('filter2').style.display='block'" style="margin:0px 0px 0px 8px;" > Filter</i>
 	</p>
+	
+	<div class="w3-clear"></div>
+	
+	<div class="w3-container w3-padding w3-margin-0 w3-padding-0 w3-topbar w3-right w3-leftbar w3-bottombar w3-rightbar w3-round-large" id="filter2" style="display:none;">
+		Degree Status: 
+		<select id="filter_degree" onchange="get_total2_search_results(0,0)" type="w3-input w3-round-large">
+			<option value="-1">All</option>
+			<option value="1">Graduated</option>
+			<option value="2">Dropout</option>
+			
+		</select>
+		<span onclick="document.getElementById('filter2').style.display='none';" title="Close filter" class="w3-button w3-medium w3-red w3-hover-teal w3-round w3-margin-0" style="padding:0px 4px; margin:0px 0px 0px 8px;"><i class="fa fa-minus w3-margin-0 w3-padding-0"></i></span>
+	</div>
+	
 	
 	<div class="w3-clear"></div>
 	
@@ -169,6 +184,7 @@
 			var prog_id=document.getElementById('program_id2').value;
 			var r_sort=document.getElementById('search_result_sort').value;
 			var search_text=document.getElementById('search_text').value.trim();
+			var filter_degree=document.getElementById('filter_degree').value;
 			
 			
 			var total2_results = new XMLHttpRequest();
@@ -186,7 +202,7 @@
 			document.getElementById('search_data_label').innerHTML='<i class="fa fa-refresh w3-spin"></i>';
 			
 		
-			total2_results.open("GET", "../includes/faculty/get_total2_search_results.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id2="+prog_id+"&search_text="+search_text, true);
+			total2_results.open("GET", "../includes/faculty/get_total2_search_results.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id2="+prog_id+"&search_text="+search_text+"&filter_degree="+filter_degree, true);
 			total2_results.send();
 			
 		}
@@ -204,6 +220,7 @@
 				var prog_id=document.getElementById('program_id2').value;
 				var r_sort=document.getElementById('search_result_sort').value;
 				var search_text=document.getElementById('search_text').value.trim();
+				var filter_degree=document.getElementById('filter_degree').value;
 			
 			
 				document.getElementById("show_more_btn_search_result").style.display='none';
@@ -234,7 +251,7 @@
 				var search_results_from=page2;
 				page2=page2+5;
 				
-				search_results.open("GET", "../includes/faculty/get_search_results.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&search_results_from="+search_results_from+"&program_id2="+prog_id+"&sort="+r_sort+"&search_text="+search_text, true);
+				search_results.open("GET", "../includes/faculty/get_search_results.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&search_results_from="+search_results_from+"&program_id2="+prog_id+"&sort="+r_sort+"&search_text="+search_text+"&filter_degree="+filter_degree, true);
 				search_results.send();
 			}
 			else
