@@ -338,7 +338,7 @@
 			<div class="w3-container w3-margin-top w3-margin-bottom w3-sand w3-justify w3-round-large w3-padding">
 				<p class="w3-bold w3-margin-0"><u>Steps</u>:</p>
 				<ol>
-					<li>First download the formatted excel file from <a href="../excel_files/demo/insert_multiple_course.xlsx" target="_blank" class="w3-text-blue">here</a>.</li>
+					<li>First download the formatted excel file from <a href="../excel_files/demo/insert_multiple_course_offer.xlsx" target="_blank" class="w3-text-blue">here</a>.</li>
 					<li>In this excel file (<span class="w3-text-red">*</span>) marked columns are mandatory for each row (not valid for blank row). Very carefully fill up the rows with your data. <b>Don't put gap</b> between two rows. Also <b>ignore duplicated data</b> for consistent input.</li>
 					<li>After filling the necessary rows you have to <b>submit it from the below form</b>. Don't forget to select a offer program. You can insert at most <b>100 courses</b> in the offer list by a single upload under a single program.</li>
 					<li>This process may take <b>up to two minutes</b> so keep patience. After finishing the process you will get a logs.</li>
@@ -1171,7 +1171,7 @@
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					
 					}
-					else if(status=='unable2')
+					else if(status=='un')
 					{
 						document.getElementById('course_offer_multiple_courseress_id').style.width='0%';
 						document.getElementById('course_offer_multiple_courseress_id').innerHTML='0%';
@@ -1182,7 +1182,22 @@
 				
 						
 						document.getElementById('invalid_msg').style.display='block';
-						document.getElementById('i_msg').innerHTML='Sorry unable to add (department inactive).';
+						document.getElementById('i_msg').innerHTML='Sorry unable to offer this course (program inactive).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					
+					}
+					else if(status=='u2')
+					{
+						document.getElementById('course_offer_multiple_courseress_id').style.width='0%';
+						document.getElementById('course_offer_multiple_courseress_id').innerHTML='0%';
+						
+						document.getElementById('course_offer_multiple_add_box1').style.display='block';
+						document.getElementById('course_offer_multiple_add_box3').style.display='none';
+						document.getElementById('course_offer_multiple_add_box2').style.display='none';
+				
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry unable to offer this course (program credit not available).';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					
 					}
@@ -1235,7 +1250,7 @@
 				  }
 				}
 			};
-			xhttp1.open("POST", "../includes/super_admin/add_multiple_courses.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&excel="+link+"&pass="+pass+"&course_offer_prog="+course_offer_prog, true);
+			xhttp1.open("POST", "../includes/super_admin/add_multiple_courses_offer.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&excel="+link+"&pass="+pass+"&course_prog="+course_offer_prog, true);
 			xhttp1.send(fd_excel);
 		}
 	}

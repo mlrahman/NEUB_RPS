@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2020 at 08:38 PM
+-- Generation Time: Apr 25, 2020 at 05:05 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -126,7 +126,8 @@ INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '03:40 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:21 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:24 PM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:41 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:41 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '02:26 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -232,7 +233,11 @@ INSERT INTO `nr_delete_history` (`nr_admin_id`, `nr_deleteh_task`, `nr_deleteh_d
 (1, 'Deleted Department Title: yvgbhkn, Department Code: 0, Department Status: Active', '2020-04-24', '04:44 PM', 'Active', 'Department'),
 (1, 'Deleted Program Title: cfghgv, Program Code: dtrfygu, Department Title: Business Administration, Program Status: Active', '2020-04-24', '04:57 PM', 'Active', 'Program'),
 (1, 'Deleted Course Title: dcf, Course Code: 4, Course Credit: 4, Course Program: Active, Course Status: Active', '2020-04-24', '04:59 PM', 'Active', 'Course List'),
-(1, 'Deleted Offer Course Title: Database System, Course Code: CSE 313, Course Credit: 3, Course Type: Compulsory, Offer Semester: 5, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Active', '2020-04-25', '12:10 AM', 'Active', 'Course Offer List');
+(1, 'Deleted Offer Course Title: Database System, Course Code: CSE 313, Course Credit: 3, Course Type: Compulsory, Offer Semester: 5, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Active', '2020-04-25', '12:10 AM', 'Active', 'Course Offer List'),
+(1, 'Deleted Offer Course Title: Cost Management and Accounting, Course Code: BBA 201, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 2nd, Offer Program: BBA, Program Credit: 127, Offer Status: Active', '2020-04-25', '04:38 PM', 'Active', 'Course Offer List'),
+(1, 'Deleted Offer Course Title: Cost Management and Accounting, Course Code: BBA 201, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 2nd, Offer Program: BBA, Program Credit: 127, Offer Status: Active', '2020-04-25', '04:41 PM', 'Active', 'Course Offer List'),
+(1, 'Deleted Offer Course Title: Cost Management and Accounting, Course Code: BBA 201, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 3rd, Offer Program: BBA, Program Credit: 127, Offer Status: Active', '2020-04-25', '04:44 PM', 'Active', 'Course Offer List'),
+(1, 'Deleted Offer Course Title: Fundamentals of Computers, Course Code: CSE 111, Course Credit: 3.00, Course Type: Optional IV, Offer Semester: 4th, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 157, Offer Status: Active', '2020-04-25', '04:49 PM', 'Active', 'Course Offer List');
 
 -- --------------------------------------------------------
 
@@ -319,7 +324,11 @@ INSERT INTO `nr_drop` (`nr_drop_id`, `nr_prcr_id`, `nr_prog_id`, `nr_course_id`,
 (6, 1, 1, 9, '4', 'Compulsory', 'Active'),
 (8, 1, 1, 6, '5', 'Compulsory', 'Active'),
 (9, 1, 1, 4, '3', 'Optional I', 'Active'),
-(10, 1, 1, 10, '3', 'Optional I', 'Active');
+(10, 1, 1, 10, '3', 'Optional I', 'Active'),
+(14, 3, 3, 11, '5', 'Compulsory', 'Active'),
+(16, 1, 1, 5, '7', 'Compulsory', 'Inactive'),
+(17, 1, 1, 14, '3', 'Optional II', 'Active'),
+(18, 1, 1, 15, '3', 'Compulsory', 'Active');
 
 -- --------------------------------------------------------
 
@@ -335,6 +344,24 @@ CREATE TABLE `nr_drop_history` (
   `nr_droph_time` varchar(20) NOT NULL,
   `nr_droph_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `nr_drop_history`
+--
+
+INSERT INTO `nr_drop_history` (`nr_drop_id`, `nr_admin_id`, `nr_droph_task`, `nr_droph_date`, `nr_droph_time`, `nr_droph_status`) VALUES
+(10, 1, 'Edited Offer Course Title: Bioinformatics, Course Code: CSE 455, Course Credit: 3.00, Course Type: Optional I, Offer Semester: 3rd, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Inactive', '2020-04-25', '12:40 AM', 'Active'),
+(9, 1, 'Edited Offer Course Title: Computer Architecture, Course Code: CSE 311, Course Credit: 3.00, Course Type: Optional I, Offer Semester: 3rd, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Inactive', '2020-04-25', '12:42 AM', 'Active'),
+(10, 1, 'Edited Offer Course Title: Bioinformatics, Course Code: CSE 455, Course Credit: 3.00, Course Type: Optional I, Offer Semester: 3rd, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Active', '2020-04-25', '12:43 AM', 'Active'),
+(9, 1, 'Edited Offer Course Title: Computer Architecture, Course Code: CSE 311, Course Credit: 3.00, Course Type: Optional I, Offer Semester: 3rd, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Active', '2020-04-25', '12:44 AM', 'Active'),
+(5, 1, 'Edited Offer Course Title: Object Oriented Programming Language, Course Code: CSE 211, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 4th, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Inactive', '2020-04-25', '12:45 AM', 'Active'),
+(5, 1, 'Edited Offer Course Title: Object Oriented Programming Language, Course Code: CSE 211, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 12th, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Active', '2020-04-25', '12:47 AM', 'Active'),
+(5, 1, 'Edited Offer Course Title: Object Oriented Programming Language, Course Code: CSE 211, Course Credit: 3.00, Course Type: Optional II, Offer Semester: 12th, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Active', '2020-04-25', '12:47 AM', 'Active'),
+(5, 1, 'Edited Offer Course Title: Object Oriented Programming Language, Course Code: CSE 211, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 4th, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Active', '2020-04-25', '12:48 AM', 'Active'),
+(14, 1, 'Added Course Title: Cost Management and Accounting, Course Code: BBA 201, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 5, Offer Program: BBA, Program Credit: 127, Offer Status: Active', '2020-04-25', '04:45 PM', 'Active'),
+(16, 1, 'Added Course Title: Database System, Course Code: CSE 313, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 7, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Inactive', '2020-04-25', '09:01 PM', 'Active'),
+(17, 1, 'Added Course Title: Algorithm Design and Analysis, Course Code: CSE 221, Course Credit: 3.00, Course Type: Optional II, Offer Semester: 3, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Active', '2020-04-25', '09:01 PM', 'Active'),
+(18, 1, 'Added Course Title: Algorithm Design and Analysis Lab, Course Code: CSE 222, Course Credit: 1.50, Course Type: Compulsory, Offer Semester: 3, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Active', '2020-04-25', '09:01 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1403,7 +1430,14 @@ INSERT INTO `nr_result_check_transaction` (`nr_stud_id`, `nr_rechtr_ip_address`,
 (140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:49 PM', 'Active'),
 (140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:49 PM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '06:50 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '06:51 PM', 'Active');
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '06:51 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '12:41 AM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '12:43 AM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '12:44 AM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '12:45 AM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '12:46 AM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '12:47 AM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '12:48 AM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1840,7 +1874,7 @@ ALTER TABLE `nr_department`
 -- AUTO_INCREMENT for table `nr_drop`
 --
 ALTER TABLE `nr_drop`
-  MODIFY `nr_drop_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `nr_drop_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `nr_faculty`
@@ -1858,7 +1892,7 @@ ALTER TABLE `nr_program`
 -- AUTO_INCREMENT for table `nr_program_credit`
 --
 ALTER TABLE `nr_program_credit`
-  MODIFY `nr_prcr_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `nr_prcr_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `nr_result`

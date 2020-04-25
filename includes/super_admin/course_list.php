@@ -839,7 +839,7 @@
 				
 						
 						document.getElementById('invalid_msg').style.display='block';
-						document.getElementById('i_msg').innerHTML='Sorry unable to add (department inactive).';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add (program inactive).';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					
 					}
