@@ -225,21 +225,12 @@
 		<span onclick="add_single_window5_close()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
 		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:275px;"><i class="fa fa-plus"></i> Offer Single Course</p>
 		<div class="w3-container w3-margin-0 w3-padding-0" id="course_offer_single_add_box1">
-			<p class="w3-text-red w3-small w3-bold" style="margin: 2px 0px 0px 12px;padding:0px;">Note: (*) marked fields are mandatory.</p>
+			<p class="w3-text-red w3-small w3-bold" style="margin: 2px 0px 0px 12px;padding:0px;">Note: (*) marked fields are mandatory. Choose a progam first to enable all other options.</p>
 			<div class="w3-container w3-border w3-round-large w3-padding w3-margin-bottom" style="margin: 0px 12px 12px 12px;">
 				<div class="w3-row w3-margin-0 w3-padding-0">
 					<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 0px;">
-						<label><i class="w3-text-red">*</i> <b>Course Title</b></label>
-						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="course_offer_single_add_title" placeholder="Enter Course Title" autocomplete="off" onkeyup="course_offer_single_add_form_change()">
-						
-						<label><i class="w3-text-red">*</i> <b>Course Code</b></label>
-						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="course_offer_single_add_code" placeholder="Enter Course Code" autocomplete="off" onkeyup="course_offer_single_add_form_change()">
-						
-						<label><i class="w3-text-red">*</i> <b>Course Credit</b></label>
-						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="number" id="course_offer_single_add_credit" placeholder="Enter Course Credit" autocomplete="off" onkeyup="course_offer_single_add_form_change()">
-						
-						<label><i class="w3-text-red">*</i> <b>Program</b></label>
-						<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="course_offer_single_add_prog" onchange="course_offer_single_add_form_change()">
+						<label><i class="w3-text-red">*</i> <b>Offer Program</b></label>
+						<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="course_offer_single_add_prog" onchange="course_offer_single_add_program_change()">
 							<option value="">Select</option>
 							<?php
 								$stmt = $conn->prepare("SELECT * FROM nr_program where nr_prog_status='Active' order by nr_prog_title asc");
@@ -258,8 +249,45 @@
 							?>
 						</select>
 						
+						<label><i class="w3-text-red">*</i> <b>Select Course</b></label>
+						<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="course_offer_single_add_course" onchange="course_offer_single_add_form_change()" disabled>
+							<option value="">Select</option>
+						</select>
+						
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:49%;">
+								<label><i class="w3-text-red">*</i> <b>Course Type</b></label>
+								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="course_offer_single_add_type" onchange="course_offer_single_add_form_change()" disabled>
+									<option value="">Select</option>
+									<option value="Compulsory">Compulsory</option>
+									<option value="Optional I">Optional I</option>
+									<option value="Optional II">Optional II</option>
+									<option value="Optional III">Optional III</option>
+									<option value="Optional IV">Optional IV</option>
+									<option value="Optional V">Optional V</option>
+								</select>
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:49%;">
+								<label><i class="w3-text-red">*</i> <b>Offer Semester</b></label>
+								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="course_offer_single_add_semester" onchange="course_offer_single_add_form_change()" disabled>
+									<option value="">Select</option>
+									<option value="1">1st</option>
+									<option value="2">2nd</option>
+									<option value="3">3rd</option>
+									<option value="4">4th</option>
+									<option value="5">5th</option>
+									<option value="6">6th</option>
+									<option value="7">7th</option>
+									<option value="8">8th</option>
+									<option value="9">9th</option>
+									<option value="10">10th</option>
+									<option value="11">11th</option>
+									<option value="12">12th</option>
+								</select>
+							</div>
+						</div>
 						<label><i class="w3-text-red">*</i> <b>Status</b></label>
-						<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="course_offer_single_add_status" onchange="course_offer_single_add_form_change()">
+						<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="course_offer_single_add_status" onchange="course_offer_single_add_form_change()" disabled>
 							<option value="">Select</option>
 							<option value="Active" class="w3-pale-green">Active</option>
 							<option value="Inactive" class="w3-pale-red">Inactive</option>
@@ -277,7 +305,7 @@
 								<input class="w3-input w3-border w3-center w3-round-large" type="text" value="<?php echo $aaa.' + '.$bbb.' = '; ?>" disabled>
 							</div>
 							<div class="w3-col" style="margin-left:2%;width:58%;">
-								<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="course_offer_single_add_captcha" autocomplete="off" onkeyup="course_offer_single_add_form_change()">
+								<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="course_offer_single_add_captcha" autocomplete="off" onkeyup="course_offer_single_add_form_change()" disabled>
 								<input type="hidden" value="<?php echo $ccc; ?>" id="course_offer_single_add_old_captcha">
 							</div>
 						</div>
@@ -511,6 +539,241 @@
 
 <script>
 
+	
+	function course_offer_single_add_program_change()
+	{
+		var prog_id=document.getElementById('course_offer_single_add_prog').value;
+		if(prog_id=='')
+		{
+			document.getElementById('course_offer_single_add_course').value='';
+			document.getElementById('course_offer_single_add_course').disabled=true;
+			document.getElementById('course_offer_single_add_type').value='';
+			document.getElementById('course_offer_single_add_type').disabled=true;
+			document.getElementById('course_offer_single_add_semester').value='';
+			document.getElementById('course_offer_single_add_semester').disabled=true;
+			document.getElementById('course_offer_single_add_status').value='';
+			document.getElementById('course_offer_single_add_status').disabled=true;
+			document.getElementById('course_offer_single_add_captcha').value='';
+			document.getElementById('course_offer_single_add_captcha').disabled=true;
+			course_offer_view_status=document.getElementById('course_offer_single_add_status').value.trim();
+		
+			if(course_offer_view_status=='Active')
+			{
+				if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-green'))
+				{
+					document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-green');
+				}
+				if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-red'))
+				{
+					document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-red');
+				}
+				document.getElementById('course_offer_single_add_status').classList.add('w3-pale-green');
+			}
+			else if(course_offer_view_status=='Inactive')
+			{
+				if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-green'))
+				{
+					document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-green');
+				}
+				if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-red'))
+				{
+					document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-red');
+				}
+				document.getElementById('course_offer_single_add_status').classList.add('w3-pale-red');
+			}
+			else
+			{
+				if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-green'))
+				{
+					document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-green');
+				}
+				if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-red'))
+				{
+					document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-red');
+				}
+			}
+			document.getElementById('course_offer_single_add_save_btn').disabled=true;
+
+		}
+		else
+		{
+			var xhttp1 = new XMLHttpRequest();
+			xhttp1.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					if(this.responseText.trim()=="")
+					{
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry no course available to offer in this program.';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+				
+						document.getElementById('course_offer_single_add_course').value='';
+						document.getElementById('course_offer_single_add_course').disabled=true;
+						document.getElementById('course_offer_single_add_type').value='';
+						document.getElementById('course_offer_single_add_type').disabled=true;
+						document.getElementById('course_offer_single_add_semester').value='';
+						document.getElementById('course_offer_single_add_semester').disabled=true;
+						document.getElementById('course_offer_single_add_status').value='';
+						document.getElementById('course_offer_single_add_status').disabled=true;
+						document.getElementById('course_offer_single_add_captcha').value='';
+						document.getElementById('course_offer_single_add_captcha').disabled=true;
+						
+						course_offer_view_status=document.getElementById('course_offer_single_add_status').value.trim();
+						
+						if(course_offer_view_status=='Active')
+						{
+							if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-green'))
+							{
+								document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-green');
+							}
+							if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-red'))
+							{
+								document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-red');
+							}
+							document.getElementById('course_offer_single_add_status').classList.add('w3-pale-green');
+						}
+						else if(course_offer_view_status=='Inactive')
+						{
+							if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-green'))
+							{
+								document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-green');
+							}
+							if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-red'))
+							{
+								document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-red');
+							}
+							document.getElementById('course_offer_single_add_status').classList.add('w3-pale-red');
+						}
+						else
+						{
+							if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-green'))
+							{
+								document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-green');
+							}
+							if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-red'))
+							{
+								document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-red');
+							}
+						}
+						
+						document.getElementById('course_offer_single_add_save_btn').disabled=true;
+					}
+					else
+					{
+						document.getElementById('course_offer_single_add_course').innerHTML=this.responseText;
+						document.getElementById('course_offer_single_add_course').value='';
+						document.getElementById('course_offer_single_add_course').disabled=false;
+						document.getElementById('course_offer_single_add_type').value='';
+						document.getElementById('course_offer_single_add_type').disabled=false;
+						document.getElementById('course_offer_single_add_semester').value='';
+						document.getElementById('course_offer_single_add_semester').disabled=false;
+						document.getElementById('course_offer_single_add_status').value='';
+						document.getElementById('course_offer_single_add_status').disabled=false;
+						document.getElementById('course_offer_single_add_captcha').value='';
+						document.getElementById('course_offer_single_add_captcha').disabled=false;
+						
+						course_offer_view_status=document.getElementById('course_offer_single_add_status').value.trim();
+		
+						if(course_offer_view_status=='Active')
+						{
+							if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-green'))
+							{
+								document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-green');
+							}
+							if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-red'))
+							{
+								document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-red');
+							}
+							document.getElementById('course_offer_single_add_status').classList.add('w3-pale-green');
+						}
+						else if(course_offer_view_status=='Inactive')
+						{
+							if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-green'))
+							{
+								document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-green');
+							}
+							if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-red'))
+							{
+								document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-red');
+							}
+							document.getElementById('course_offer_single_add_status').classList.add('w3-pale-red');
+						}
+						else
+						{
+							if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-green'))
+							{
+								document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-green');
+							}
+							if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-red'))
+							{
+								document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-red');
+							}
+						}
+						
+						document.getElementById('course_offer_single_add_save_btn').disabled=true;
+					}
+				}
+				else if(this.readyState==4 && (this.status==404 || this.status==403))
+				{
+					document.getElementById('course_offer_single_add_course').value='';
+					document.getElementById('course_offer_single_add_course').disabled=true;
+					document.getElementById('course_offer_single_add_type').value='';
+					document.getElementById('course_offer_single_add_type').disabled=true;
+					document.getElementById('course_offer_single_add_semester').value='';
+					document.getElementById('course_offer_single_add_semester').disabled=true;
+					document.getElementById('course_offer_single_add_status').value='';
+					document.getElementById('course_offer_single_add_status').disabled=true;
+					document.getElementById('course_offer_single_add_captcha').value='';
+					document.getElementById('course_offer_single_add_captcha').disabled=true;
+					
+					course_offer_view_status=document.getElementById('course_offer_single_add_status').value.trim();
+		
+					if(course_offer_view_status=='Active')
+					{
+						if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-green'))
+						{
+							document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-green');
+						}
+						if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-red'))
+						{
+							document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-red');
+						}
+						document.getElementById('course_offer_single_add_status').classList.add('w3-pale-green');
+					}
+					else if(course_offer_view_status=='Inactive')
+					{
+						if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-green'))
+						{
+							document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-green');
+						}
+						if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-red'))
+						{
+							document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-red');
+						}
+						document.getElementById('course_offer_single_add_status').classList.add('w3-pale-red');
+					}
+					else
+					{
+						if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-green'))
+						{
+							document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-green');
+						}
+						if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-red'))
+						{
+							document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-red');
+						}
+					}
+					
+					document.getElementById('course_offer_single_add_save_btn').disabled=true;
+					document.getElementById('invalid_msg').style.display='block';
+					document.getElementById('i_msg').innerHTML='Network error occurred.';
+					setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+				
+				}
+			};
+			xhttp1.open("POST", "../includes/super_admin/get_course_offer_courses.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&prog_id="+prog_id, true);
+			xhttp1.send();
+		}
+	}
 
 	function course_offer_delete_history_window_close()
 	{
@@ -608,14 +871,20 @@
 	{
 		document.getElementById('course_offer_single_add_box1').style.display='block';
 		document.getElementById('course_offer_single_add_box2').style.display='none';
-			
-		document.getElementById('course_offer_single_add_title').value='';
-		document.getElementById('course_offer_single_add_code').value='';
-		document.getElementById('course_offer_single_add_credit').value='';
-		document.getElementById('course_offer_single_add_prog').value='';
-		document.getElementById('course_offer_single_add_status').value='';
-		document.getElementById('course_offer_single_add_captcha').value='';
 		
+		document.getElementById('course_offer_single_add_prog').value='';		
+		document.getElementById('course_offer_single_add_course').value='';
+		document.getElementById('course_offer_single_add_course').disabled=true;
+		document.getElementById('course_offer_single_add_type').value='';
+		document.getElementById('course_offer_single_add_type').disabled=true;
+		document.getElementById('course_offer_single_add_semester').value='';
+		document.getElementById('course_offer_single_add_semester').disabled=true;
+		document.getElementById('course_offer_single_add_status').value='';
+		document.getElementById('course_offer_single_add_status').disabled=true;
+		document.getElementById('course_offer_single_add_captcha').value='';
+		document.getElementById('course_offer_single_add_captcha').disabled=true;
+		course_offer_view_status=document.getElementById('course_offer_single_add_status').value.trim();
+	
 		if(course_offer_single_add_status=='Active')
 		{
 			if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-green'))
@@ -660,12 +929,14 @@
 	
 	function course_offer_single_add_form_change()
 	{
-		course_offer_view_semester=document.getElementById('course_offer_single_add_title').value.trim();
-		course_offer_view_type=document.getElementById('course_offer_single_add_code').value.trim();
+		course_offer_view_semester=document.getElementById('course_offer_single_add_semester').value.trim();
+		course_offer_view_prog=document.getElementById('course_offer_single_add_prog').value.trim();
+		course_offer_view_course=document.getElementById('course_offer_single_add_course').value.trim();
+		course_offer_view_type=document.getElementById('course_offer_single_add_type').value.trim();
 		course_offer_view_captcha=document.getElementById('course_offer_single_add_captcha').value.trim();
 		course_offer_view_status=document.getElementById('course_offer_single_add_status').value.trim();
 		
-		if(course_offer_single_add_status=='Active')
+		if(course_offer_view_status=='Active')
 		{
 			if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-green'))
 			{
@@ -677,7 +948,7 @@
 			}
 			document.getElementById('course_offer_single_add_status').classList.add('w3-pale-green');
 		}
-		else if(course_offer_single_add_status=='Inactive')
+		else if(course_offer_view_status=='Inactive')
 		{
 			if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-green'))
 			{
@@ -700,7 +971,7 @@
 				document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-red');
 			}
 		}
-		if(course_offer_view_semester=="" || course_offer_view_type=="" || course_offer_view_status=="")
+		if(course_offer_view_prog=="" || course_offer_view_course=="" || course_offer_view_semester=="" || course_offer_view_type=="" || course_offer_view_status=="")
 		{
 			document.getElementById("course_offer_single_add_save_btn").disabled = true;
 		}
@@ -712,14 +983,57 @@
 
 	function course_offer_single_add_form_reset()
 	{
-		document.getElementById('course_offer_single_add_title').value='';
-		document.getElementById('course_offer_single_add_code').value='';
-		document.getElementById('course_offer_single_add_credit').value='';
+		
 		document.getElementById('course_offer_single_add_prog').value='';
+		document.getElementById('course_offer_single_add_course').value='';
+		document.getElementById('course_offer_single_add_course').disabled=true;
+		document.getElementById('course_offer_single_add_type').value='';
+		document.getElementById('course_offer_single_add_type').disabled=true;
+		document.getElementById('course_offer_single_add_semester').value='';
+		document.getElementById('course_offer_single_add_semester').disabled=true;
 		document.getElementById('course_offer_single_add_status').value='';
+		document.getElementById('course_offer_single_add_status').disabled=true;
 		document.getElementById('course_offer_single_add_captcha').value='';
-						
-		document.getElementById("course_offer_single_add_save_btn").disabled = true;
+		document.getElementById('course_offer_single_add_captcha').disabled=true;
+		
+		course_offer_view_status=document.getElementById('course_offer_single_add_status').value.trim();
+		
+		if(course_offer_view_status=='Active')
+		{
+			if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('course_offer_single_add_status').classList.add('w3-pale-green');
+		}
+		else if(course_offer_view_status=='Inactive')
+		{
+			if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('course_offer_single_add_status').classList.add('w3-pale-red');
+		}
+		else
+		{
+			if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('course_offer_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('course_offer_single_add_status').classList.remove('w3-pale-red');
+			}
+		}
+		document.getElementById('course_offer_single_add_save_btn').disabled=true;
 	}
 	
 	function course_offer_multiple_add_form_save()
@@ -929,13 +1243,15 @@
 	
 	function course_offer_single_add_form_save()
 	{
-		course_offer_view_semester=document.getElementById('course_offer_single_add_title').value.trim();
-		course_offer_view_type=document.getElementById('course_offer_single_add_code').value.trim();
+		course_offer_view_semester=document.getElementById('course_offer_single_add_semester').value.trim();
+		course_offer_view_prog=document.getElementById('course_offer_single_add_prog').value.trim();
+		course_offer_view_course=document.getElementById('course_offer_single_add_course').value.trim();
+		course_offer_view_type=document.getElementById('course_offer_single_add_type').value.trim();
 		course_offer_view_captcha=document.getElementById('course_offer_single_add_captcha').value.trim();
 		course_offer_view_old_captcha=document.getElementById('course_offer_single_add_old_captcha').value.trim();
 		course_offer_view_status=document.getElementById('course_offer_single_add_status').value.trim();
 		
-		if(course_offer_view_semester=="" || course_offer_view_type=="" || course_offer_view_status=="")
+		if(course_offer_view_course=="" || course_offer_view_prog=="" || course_offer_view_semester=="" || course_offer_view_type=="" || course_offer_view_status=="")
 		{
 			document.getElementById('course_offer_single_add_pass').value='';
 			
@@ -981,7 +1297,7 @@
 						get_search_result5();
 						
 						document.getElementById('valid_msg').style.display='block';
-						document.getElementById('v_msg').innerHTML='Course successfully added.';
+						document.getElementById('v_msg').innerHTML='Course successfully added in the offer list.';
 						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
 					
 						
@@ -1001,7 +1317,7 @@
 						document.getElementById('course_offer_single_add_box2').style.display='none';
 						
 						document.getElementById('invalid_msg').style.display='block';
-						document.getElementById('i_msg').innerHTML='Sorry unable to add this course (duplicate detected).';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add this course in the offer list (duplicate detected).';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					}
 					else if(this.responseText.trim()=='unable2')
@@ -1011,6 +1327,15 @@
 						
 						document.getElementById('invalid_msg').style.display='block';
 						document.getElementById('i_msg').innerHTML='Sorry unable to add this course (program inactive).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					else if(this.responseText.trim()=='unable3')
+					{
+						document.getElementById('course_offer_single_add_box1').style.display='block';
+						document.getElementById('course_offer_single_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add this course (program credit not available).';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					}
 					else
@@ -1035,7 +1360,7 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/add_single_course.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&course_offer_title="+course_offer_view_semester+"&course_offer_code="+course_offer_view_type+"&course_offer_status="+course_offer_view_status, true);
+			xhttp1.open("POST", "../includes/super_admin/add_single_course_offer.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&course_offer_semester="+course_offer_view_semester+"&course_offer_type="+course_offer_view_type+"&course_offer_status="+course_offer_view_status+"&course_offer_course="+course_offer_view_course+"&course_offer_prog="+course_offer_view_prog, true);
 			xhttp1.send();
 		}
 	
@@ -1051,6 +1376,8 @@
 	var course_offer_view_type;
 	var course_offer_view_captcha;
 	var course_offer_view_status;
+	var course_offer_view_prog;
+	var course_offer_view_course;
 	
 	function remove_course_offer_view()
 	{

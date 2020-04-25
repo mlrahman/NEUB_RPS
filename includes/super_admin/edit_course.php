@@ -57,7 +57,7 @@
 			if(count($result)!=0)
 				$prog_title=$result[0][0];
 			
-			$task='Edited Course Title: '.$course_title.', Course Code: '.$course_code.', Course Credit: '.$course_credit.', Course Program: '.$prog_title.', Course Status: '.$course_status;
+			$task='Edited Course Title: '.$course_title.', Course Code: '.$course_code.', Course Credit: '.number_format($course_credit,2).', Course Program: '.$prog_title.', Course Status: '.$course_status;
 			$stmt = $conn->prepare("insert into nr_course_history(nr_course_id,nr_admin_id,nr_courseh_task,nr_courseh_date,nr_courseh_time,nr_courseh_status) values(:course_id,:admin_id,'$task','$d','$t','Active') ");
 			$stmt->bindParam(':course_id', $course_id);
 			$stmt->bindParam(':admin_id', $_SESSION['admin_id']);

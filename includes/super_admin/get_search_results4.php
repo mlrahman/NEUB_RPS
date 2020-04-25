@@ -88,7 +88,7 @@
 						<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$result[$i][1].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$result[$i][2].'</td>
-						<td valign="top" class="w3-padding-small w3-border">'.$result[$i][4].'</td>
+						<td valign="top" class="w3-padding-small w3-border">'.number_format($result[$i][4],2).'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$result[$i][5].'</td>
 						<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor w3-decoration-null w3-bold" onclick="view_result4(\''.$result[$i][0].'\')"><i class="fa fa-envelope-open-o"></i> View</a></td>
 					</tr>';				

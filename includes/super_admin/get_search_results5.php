@@ -106,7 +106,7 @@
 						<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$result[$i][1].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$result[$i][2].'</td>
-						<td valign="top" class="w3-padding-small w3-border">'.$result[$i][3].'</td>
+						<td valign="top" class="w3-padding-small w3-border">'.number_format($result[$i][3],2).'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$result[$i][4].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.get_semester_format($result[$i][5]).'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$result[$i][6].'</td>
