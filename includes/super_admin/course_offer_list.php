@@ -340,14 +340,14 @@
 				<ol>
 					<li>First download the formatted excel file from <a href="../excel_files/demo/insert_multiple_course.xlsx" target="_blank" class="w3-text-blue">here</a>.</li>
 					<li>In this excel file (<span class="w3-text-red">*</span>) marked columns are mandatory for each row (not valid for blank row). Very carefully fill up the rows with your data. <b>Don't put gap</b> between two rows. Also <b>ignore duplicated data</b> for consistent input.</li>
-					<li>After filling the necessary rows you have to <b>submit it from the below form</b>. Don't forget to select a program. You can insert at most <b>100 courses</b> in a single upload under a single program.</li>
+					<li>After filling the necessary rows you have to <b>submit it from the below form</b>. Don't forget to select a offer program. You can insert at most <b>100 courses</b> in the offer list by a single upload under a single program.</li>
 					<li>This process may take <b>up to two minutes</b> so keep patience. After finishing the process you will get a logs.</li>
 				</ol>
 			</div>
 			
 			<div class="w3-row w3-margin-top w3-margin-bottom w3-round-large w3-border w3-padding">
 				<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 6px;">
-					<label><i class="w3-text-red">*</i> <b>Program</b></label>
+					<label><i class="w3-text-red">*</i> <b>Offer Program</b></label>
 					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="course_offer_multiple_add_prog" onchange="course_offer_multiple_add_form_change()">
 						<option value="">Select</option>
 						<?php
