@@ -75,7 +75,7 @@ Email: mlrahman@neub.edu.bd
 		}
 		
 		//clearing delete history
-		$trx=3000;
+		$trx=5000;
 		$stmt = $conn->prepare("select * from nr_delete_history order by nr_deleteh_date desc, nr_deleteh_time desc ");
 		$stmt->execute();
 		$re_trx = $stmt->fetchAll();

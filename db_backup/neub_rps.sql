@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2020 at 05:05 PM
+-- Generation Time: Apr 26, 2020 at 03:40 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -127,7 +127,8 @@ INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:21 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:24 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:41 PM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '02:26 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '02:26 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-26', '04:00 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -237,7 +238,12 @@ INSERT INTO `nr_delete_history` (`nr_admin_id`, `nr_deleteh_task`, `nr_deleteh_d
 (1, 'Deleted Offer Course Title: Cost Management and Accounting, Course Code: BBA 201, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 2nd, Offer Program: BBA, Program Credit: 127, Offer Status: Active', '2020-04-25', '04:38 PM', 'Active', 'Course Offer List'),
 (1, 'Deleted Offer Course Title: Cost Management and Accounting, Course Code: BBA 201, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 2nd, Offer Program: BBA, Program Credit: 127, Offer Status: Active', '2020-04-25', '04:41 PM', 'Active', 'Course Offer List'),
 (1, 'Deleted Offer Course Title: Cost Management and Accounting, Course Code: BBA 201, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 3rd, Offer Program: BBA, Program Credit: 127, Offer Status: Active', '2020-04-25', '04:44 PM', 'Active', 'Course Offer List'),
-(1, 'Deleted Offer Course Title: Fundamentals of Computers, Course Code: CSE 111, Course Credit: 3.00, Course Type: Optional IV, Offer Semester: 4th, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 157, Offer Status: Active', '2020-04-25', '04:49 PM', 'Active', 'Course Offer List');
+(1, 'Deleted Offer Course Title: Fundamentals of Computers, Course Code: CSE 111, Course Credit: 3.00, Course Type: Optional IV, Offer Semester: 4th, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 157, Offer Status: Active', '2020-04-25', '04:49 PM', 'Active', 'Course Offer List'),
+(1, 'Deleted Offer Course Title: Algorithm Design and Analysis, Course Code: CSE 221, Course Credit: 3.00, Course Type: Optional II, Offer Semester: 3rd, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 122, Offer Status: Active', '2020-04-25', '09:24 PM', 'Active', 'Course Offer List'),
+(1, 'Deleted Offer Course Title: Algorithm Design and Analysis Lab, Course Code: CSE 222, Course Credit: 1.50, Course Type: Compulsory, Offer Semester: 3rd, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 122, Offer Status: Active', '2020-04-25', '09:25 PM', 'Active', 'Course Offer List'),
+(1, 'Deleted Offer Course Title: Database System, Course Code: CSE 313, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 7th, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 122, Offer Status: Inactive', '2020-04-25', '09:25 PM', 'Active', 'Course Offer List'),
+(1, 'Deleted Offer Course Title: Fundamentals of Computers, Course Code: CSE 111, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 1st, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 122, Offer Status: Active', '2020-04-25', '09:25 PM', 'Active', 'Course Offer List'),
+(1, 'Deleted Offer Course Title: Structured Programming Language, Course Code: CSE 113, Course Credit: 3.00, Course Type: Optional I, Offer Semester: 3rd, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 122, Offer Status: Active', '2020-04-25', '09:27 PM', 'Active', 'Course Offer List');
 
 -- --------------------------------------------------------
 
@@ -400,6 +406,21 @@ INSERT INTO `nr_faculty` (`nr_faculty_id`, `nr_faculty_name`, `nr_faculty_design
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `nr_faculty_history`
+--
+
+CREATE TABLE `nr_faculty_history` (
+  `nr_faculty_id` bigint(20) NOT NULL,
+  `nr_admin_id` bigint(20) NOT NULL,
+  `nr_facultyh_task` mediumtext NOT NULL,
+  `nr_facultyh_date` varchar(20) NOT NULL,
+  `nr_facultyh_time` varchar(20) NOT NULL,
+  `nr_facultyh_status` enum('Active','Inactive') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `nr_faculty_link_token`
 --
 
@@ -477,7 +498,9 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:00 PM', 'Inactive'),
 (5, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:17 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:18 PM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:25 PM', 'Inactive');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:25 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '09:26 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-26', '04:00 PM', 'Inactive');
 
 -- --------------------------------------------------------
 
@@ -656,7 +679,8 @@ INSERT INTO `nr_faculty_result_check_transaction` (`nr_stud_id`, `nr_faculty_id`
 (140203020005, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Active'),
 (140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '06:33 PM', 'Active'),
 (140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-21', '09:35 PM', 'Active'),
-(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:26 PM', 'Active');
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:26 PM', 'Active'),
+(140203020004, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '09:26 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1437,7 +1461,8 @@ INSERT INTO `nr_result_check_transaction` (`nr_stud_id`, `nr_rechtr_ip_address`,
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '12:45 AM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '12:46 AM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '12:47 AM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '12:48 AM', 'Active');
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '12:48 AM', 'Active'),
+(140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '09:26 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1751,6 +1776,13 @@ ALTER TABLE `nr_faculty`
   ADD KEY `nr_dept_id` (`nr_dept_id`);
 
 --
+-- Indexes for table `nr_faculty_history`
+--
+ALTER TABLE `nr_faculty_history`
+  ADD KEY `nr_faculty_id` (`nr_faculty_id`),
+  ADD KEY `nr_admin_id` (`nr_admin_id`);
+
+--
 -- Indexes for table `nr_faculty_link_token`
 --
 ALTER TABLE `nr_faculty_link_token`
@@ -1874,7 +1906,7 @@ ALTER TABLE `nr_department`
 -- AUTO_INCREMENT for table `nr_drop`
 --
 ALTER TABLE `nr_drop`
-  MODIFY `nr_drop_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `nr_drop_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `nr_faculty`
@@ -1892,7 +1924,7 @@ ALTER TABLE `nr_program`
 -- AUTO_INCREMENT for table `nr_program_credit`
 --
 ALTER TABLE `nr_program_credit`
-  MODIFY `nr_prcr_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `nr_prcr_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `nr_result`
@@ -1981,6 +2013,13 @@ ALTER TABLE `nr_drop_history`
 --
 ALTER TABLE `nr_faculty`
   ADD CONSTRAINT `nr_faculty_ibfk_1` FOREIGN KEY (`nr_dept_id`) REFERENCES `nr_department` (`nr_dept_id`);
+
+--
+-- Constraints for table `nr_faculty_history`
+--
+ALTER TABLE `nr_faculty_history`
+  ADD CONSTRAINT `nr_faculty_history_ibfk_1` FOREIGN KEY (`nr_faculty_id`) REFERENCES `nr_faculty` (`nr_faculty_id`),
+  ADD CONSTRAINT `nr_faculty_history_ibfk_2` FOREIGN KEY (`nr_admin_id`) REFERENCES `nr_admin` (`nr_admin_id`);
 
 --
 -- Constraints for table `nr_faculty_link_token`

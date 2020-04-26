@@ -199,7 +199,7 @@
 
 	<div class="w3-container w3-padding-0" style="margin:0px 0px 20px 0px;">
 		<div class="w3-dropdown-hover w3-round-large">
-			<button class="w3-button w3-black w3-round-large w3-hover-teal"><i class="fa fa-plus"></i> Add program</button>
+			<button class="w3-button w3-black w3-round-large w3-hover-teal"><i class="fa fa-plus"></i> Add Program</button>
 			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-animate-zoom">
 				<a onclick="document.getElementById('add_single_window3').style.display='block';document.getElementById('add_multiple_window3').style.display='none';" class="w3-cursor w3-bar-item w3-button w3-hover-teal">Single</a>
 				<a onclick="document.getElementById('add_multiple_window3').style.display='block';document.getElementById('add_single_window3').style.display='none';" class=" w3-cursor w3-bar-item w3-button w3-hover-teal">Multiple</a>

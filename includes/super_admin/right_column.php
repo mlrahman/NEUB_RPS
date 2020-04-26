@@ -162,9 +162,7 @@
 		</div>
 		<!-- page7 starts here -->
 		<div id="page7" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
-			
-			
-			
+			<?php include("../includes/super_admin/faculties.php"); ?>
 		</div>
 		<!-- page8 starts here -->
 		<div id="page8" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
