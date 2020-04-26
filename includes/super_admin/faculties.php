@@ -559,8 +559,8 @@
 	
 	function faculty_single_add_form_change()
 	{
-		faculty_view_title=document.getElementById('faculty_single_add_title').value.trim();
-		faculty_view_code=document.getElementById('faculty_single_add_code').value.trim();
+		faculty_view_name=document.getElementById('faculty_single_add_title').value.trim();
+		faculty_view_designation=document.getElementById('faculty_single_add_code').value.trim();
 		faculty_view_captcha=document.getElementById('faculty_single_add_captcha').value.trim();
 		faculty_view_status=document.getElementById('faculty_single_add_status').value.trim();
 		
@@ -599,7 +599,7 @@
 				document.getElementById('faculty_single_add_status').classList.remove('w3-pale-red');
 			}
 		}
-		if(faculty_view_title=="" || faculty_view_code=="" || faculty_view_status=="")
+		if(faculty_view_name=="" || faculty_view_designation=="" || faculty_view_status=="")
 		{
 			document.getElementById("faculty_single_add_save_btn").disabled = true;
 		}
@@ -810,13 +810,13 @@
 	
 	function faculty_single_add_form_save()
 	{
-		faculty_view_title=document.getElementById('faculty_single_add_title').value.trim();
-		faculty_view_code=document.getElementById('faculty_single_add_code').value.trim();
+		faculty_view_name=document.getElementById('faculty_single_add_title').value.trim();
+		faculty_view_designation=document.getElementById('faculty_single_add_code').value.trim();
 		faculty_view_captcha=document.getElementById('faculty_single_add_captcha').value.trim();
 		faculty_view_old_captcha=document.getElementById('faculty_single_add_old_captcha').value.trim();
 		faculty_view_status=document.getElementById('faculty_single_add_status').value.trim();
 		
-		if(faculty_view_title=="" || faculty_view_code=="" || faculty_view_status=="")
+		if(faculty_view_name=="" || faculty_view_designation=="" || faculty_view_status=="")
 		{
 			document.getElementById('faculty_single_add_pass').value='';
 			
@@ -907,20 +907,34 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/add_single_faculty.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&faculty_title="+faculty_view_title+"&faculty_code="+faculty_view_code+"&faculty_status="+faculty_view_status, true);
+			xhttp1.open("POST", "../includes/super_admin/add_single_faculty.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&faculty_title="+faculty_view_name+"&faculty_code="+faculty_view_designation+"&faculty_status="+faculty_view_status, true);
 			xhttp1.send();
 		}
 	
 	}
 	
 	
-	var faculty_view_old_title;
-	var faculty_view_old_code;
+	var faculty_view_old_name;
+	var faculty_view_old_email;
+	var faculty_view_old_mobile;
+	var faculty_view_old_dept;
+	var faculty_view_old_type;
+	var faculty_view_old_gender;
+	var faculty_view_old_join_date;
+	var faculty_view_old_resign_date
+	var faculty_view_old_designation;
 	var faculty_view_old_captcha;
 	var faculty_view_old_status;
 	
-	var faculty_view_title;
-	var faculty_view_code;
+	var faculty_view_name;
+	var faculty_view_email;
+	var faculty_view_mobile;
+	var faculty_view_dept;
+	var faculty_view_type;
+	var faculty_view_gender;
+	var faculty_view_join_date;
+	var faculty_view_resign_date
+	var faculty_view_designation;
 	var faculty_view_captcha;
 	var faculty_view_status;
 	
@@ -1005,13 +1019,27 @@
 	
 	function faculty_view_form_change()
 	{
-		faculty_view_title=document.getElementById('faculty_view_title').value.trim();
-		faculty_view_code=document.getElementById('faculty_view_code').value.trim();
+		faculty_view_name=document.getElementById('faculty_view_name').value.trim();
+		faculty_view_designation=document.getElementById('faculty_view_designation').value.trim();
+		faculty_view_email=document.getElementById('faculty_view_email').value.trim();
+		faculty_view_mobile=document.getElementById('faculty_view_mobile').value.trim();
+		faculty_view_join_date=document.getElementById('faculty_view_join_date').value.trim();
+		faculty_view_resign_date=document.getElementById('faculty_view_resign_date').value.trim();
+		faculty_view_dept=document.getElementById('faculty_view_dept').value.trim();
+		faculty_view_type=document.getElementById('faculty_view_type').value.trim();
+		faculty_view_gender=document.getElementById('faculty_view_gender').value.trim();
 		faculty_view_captcha=document.getElementById('faculty_view_captcha').value.trim();
 		faculty_view_status=document.getElementById('faculty_view_status').value.trim();
 		
-		faculty_view_old_title=document.getElementById('faculty_view_old_title').value.trim();
-		faculty_view_old_code=document.getElementById('faculty_view_old_code').value.trim();
+		faculty_view_old_name=document.getElementById('faculty_view_old_name').value.trim();
+		faculty_view_old_designation=document.getElementById('faculty_view_old_designation').value.trim();
+		faculty_view_old_email=document.getElementById('faculty_view_old_email').value.trim();
+		faculty_view_old_mobile=document.getElementById('faculty_view_old_mobile').value.trim();
+		faculty_view_old_join_date=document.getElementById('faculty_view_old_join_date').value.trim();
+		faculty_view_old_resign_date=document.getElementById('faculty_view_old_resign_date').value.trim();
+		faculty_view_old_dept=document.getElementById('faculty_view_old_dept').value.trim();
+		faculty_view_old_type=document.getElementById('faculty_view_old_type').value.trim();
+		faculty_view_old_gender=document.getElementById('faculty_view_old_gender').value.trim();
 		faculty_view_old_captcha=document.getElementById('faculty_view_old_captcha').value.trim();
 		faculty_view_old_status=document.getElementById('faculty_view_old_status').value.trim();
 		
@@ -1040,11 +1068,11 @@
 			document.getElementById('faculty_view_status').classList.add('w3-pale-red');
 		}
 		
-		if(faculty_view_title=="" || faculty_view_code=="" || faculty_view_status=="" || (faculty_view_title==faculty_view_old_title && faculty_view_code==faculty_view_old_code && faculty_view_status==faculty_view_old_status))
+		if(faculty_view_name=="" || faculty_view_designation=="" || faculty_view_status=="" || faculty_view_join_date=="" || faculty_view_dept=="" || faculty_view_type=="" || faculty_view_gender=="" || (faculty_view_name==faculty_view_old_name && faculty_view_designation==faculty_view_old_designation && faculty_view_status==faculty_view_old_status && faculty_view_join_date==faculty_view_old_join_date && faculty_view_dept==faculty_view_old_dept && faculty_view_type==faculty_view_old_type && faculty_view_gender==faculty_view_old_gender && faculty_view_email==faculty_view_old_email && faculty_view_mobile==faculty_view_old_mobile && faculty_view_resign_date==faculty_view_old_resign_date))
 		{
 			document.getElementById("faculty_view_save_btn").disabled = true;
 		}
-		else if(faculty_view_title!=faculty_view_old_title || faculty_view_code!=faculty_view_old_code || faculty_view_status!=faculty_view_old_status)
+		else if(faculty_view_resign_date!=faculty_view_old_resign_date || faculty_view_mobile!=faculty_view_old_mobile || faculty_view_email!=faculty_view_old_email || faculty_view_name!=faculty_view_old_name || faculty_view_designation!=faculty_view_old_designation || faculty_view_status!=faculty_view_old_status || faculty_view_join_date!=faculty_view_old_join_date || faculty_view_dept!=faculty_view_old_dept || faculty_view_type!=faculty_view_old_type || faculty_view_gender!=faculty_view_old_gender)
 		{
 			document.getElementById("faculty_view_save_btn").disabled = false;
 		}
@@ -1052,13 +1080,27 @@
 	
 	function faculty_view_form_reset()
 	{
-		faculty_view_old_title=document.getElementById('faculty_view_old_title').value.trim();
-		faculty_view_old_code=document.getElementById('faculty_view_old_code').value.trim();
+		faculty_view_old_name=document.getElementById('faculty_view_old_name').value.trim();
+		faculty_view_old_designation=document.getElementById('faculty_view_old_designation').value.trim();
+		faculty_view_old_email=document.getElementById('faculty_view_old_email').value.trim();
+		faculty_view_old_mobile=document.getElementById('faculty_view_old_mobile').value.trim();
+		faculty_view_old_join_date=document.getElementById('faculty_view_old_join_date').value.trim();
+		faculty_view_old_resign_date=document.getElementById('faculty_view_old_resign_date').value.trim();
+		faculty_view_old_dept=document.getElementById('faculty_view_old_dept').value.trim();
+		faculty_view_old_type=document.getElementById('faculty_view_old_type').value.trim();
+		faculty_view_old_gender=document.getElementById('faculty_view_old_gender').value.trim();
 		faculty_view_old_captcha=document.getElementById('faculty_view_old_captcha').value.trim();
 		faculty_view_old_status=document.getElementById('faculty_view_old_status').value.trim();
 		
-		document.getElementById('faculty_view_title').value=faculty_view_old_title;
-		document.getElementById('faculty_view_code').value=faculty_view_old_code;
+		document.getElementById('faculty_view_name').value=faculty_view_old_name;
+		document.getElementById('faculty_view_dept').value=faculty_view_old_dept;
+		document.getElementById('faculty_view_type').value=faculty_view_old_type;
+		document.getElementById('faculty_view_gender').value=faculty_view_old_gender;
+		document.getElementById('faculty_view_designation').value=faculty_view_old_designation;
+		document.getElementById('faculty_view_email').value=faculty_view_old_email;
+		document.getElementById('faculty_view_mobile').value=faculty_view_old_mobile;
+		document.getElementById('faculty_view_join_date').value=faculty_view_old_join_date;
+		document.getElementById('faculty_view_resign_date').value=faculty_view_old_resign_date;
 		document.getElementById('faculty_view_captcha').value='';
 		document.getElementById('faculty_view_status').value=faculty_view_old_status;
 		
@@ -1094,18 +1136,32 @@
 	
 	function faculty_view_form_save_changes(faculty_id)
 	{
-		faculty_view_title=document.getElementById('faculty_view_title').value.trim();
-		faculty_view_code=document.getElementById('faculty_view_code').value.trim();
+		faculty_view_name=document.getElementById('faculty_view_name').value.trim();
+		faculty_view_designation=document.getElementById('faculty_view_designation').value.trim();
+		faculty_view_email=document.getElementById('faculty_view_email').value.trim();
+		faculty_view_mobile=document.getElementById('faculty_view_mobile').value.trim();
+		faculty_view_join_date=document.getElementById('faculty_view_join_date').value.trim();
+		faculty_view_resign_date=document.getElementById('faculty_view_resign_date').value.trim();
+		faculty_view_dept=document.getElementById('faculty_view_dept').value.trim();
+		faculty_view_type=document.getElementById('faculty_view_type').value.trim();
+		faculty_view_gender=document.getElementById('faculty_view_gender').value.trim();
 		faculty_view_captcha=document.getElementById('faculty_view_captcha').value.trim();
 		faculty_view_status=document.getElementById('faculty_view_status').value.trim();
 		
-		faculty_view_old_title=document.getElementById('faculty_view_old_title').value.trim();
-		faculty_view_old_code=document.getElementById('faculty_view_old_code').value.trim();
+		faculty_view_old_name=document.getElementById('faculty_view_old_name').value.trim();
+		faculty_view_old_designation=document.getElementById('faculty_view_old_designation').value.trim();
+		faculty_view_old_email=document.getElementById('faculty_view_old_email').value.trim();
+		faculty_view_old_mobile=document.getElementById('faculty_view_old_mobile').value.trim();
+		faculty_view_old_join_date=document.getElementById('faculty_view_old_join_date').value.trim();
+		faculty_view_old_resign_date=document.getElementById('faculty_view_old_resign_date').value.trim();
+		faculty_view_old_dept=document.getElementById('faculty_view_old_dept').value.trim();
+		faculty_view_old_type=document.getElementById('faculty_view_old_type').value.trim();
+		faculty_view_old_gender=document.getElementById('faculty_view_old_gender').value.trim();
 		faculty_view_old_captcha=document.getElementById('faculty_view_old_captcha').value.trim();
 		faculty_view_old_status=document.getElementById('faculty_view_old_status').value.trim();
 		
 		
-		if(faculty_view_title=="" || faculty_view_code=="" || faculty_view_status=="")
+		if(faculty_view_name=="" || faculty_view_designation=="" || faculty_view_status=="" || faculty_view_join_date=="" || faculty_view_dept=="" || faculty_view_type=="" || faculty_view_gender=="")
 		{
 			document.getElementById('invalid_msg').style.display='block';
 			document.getElementById('i_msg').innerHTML='Please fill up all the fields.';
@@ -1116,6 +1172,13 @@
 			document.getElementById('invalid_msg').style.display='block';
 			document.getElementById('i_msg').innerHTML='Please insert valid captcha.';
 			setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		}
+		else if(faculty_view_mobile!="" && check_mobile_no(faculty_view_mobile)==false)
+		{
+			document.getElementById('invalid_msg').style.display='block';
+			document.getElementById('i_msg').innerHTML='Please insert valid mobile no.';
+			setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		
 		}
 		else
 		{
@@ -1149,6 +1212,28 @@
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 		
 					}
+					else if(this.responseText.trim()=='unable2')
+					{
+						document.getElementById('faculty_view_box1').style.display='block';
+						document.getElementById('faculty_view_box2').style.display='none';
+						document.getElementById('faculty_view_box3').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unable to make change (Department Inactive).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		
+					}
+					else if(this.responseText.trim()=='unable3')
+					{
+						document.getElementById('faculty_view_box1').style.display='block';
+						document.getElementById('faculty_view_box2').style.display='none';
+						document.getElementById('faculty_view_box3').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unable to make change (Invalid Email).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		
+					}
 					else
 					{
 						document.getElementById('faculty_view_box1').style.display='block';
@@ -1173,7 +1258,7 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/edit_faculty.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&faculty_title="+faculty_view_title+"&faculty_code="+faculty_view_code+"&faculty_status="+faculty_view_status+"&faculty_id="+faculty_id, true);
+			xhttp1.open("POST", "../includes/super_admin/edit_faculty.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&faculty_name="+faculty_view_name+"&faculty_designation="+faculty_view_designation+"&faculty_email="+faculty_view_email+"&faculty_mobile="+faculty_view_mobile+"&faculty_join_date="+faculty_view_join_date+"&faculty_resign_date="+faculty_view_resign_date+"&faculty_dept="+faculty_view_dept+"&faculty_type="+faculty_view_type+"&faculty_gender="+faculty_view_gender+"&faculty_status="+faculty_view_status+"&faculty_id="+faculty_id, true);
 			xhttp1.send();
 		}
 		

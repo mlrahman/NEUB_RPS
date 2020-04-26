@@ -60,3 +60,24 @@ function file_validate3(dataaa) {
 	}
 	return true;
 }
+
+function check_mobile_no(str)
+{
+	if(str.length==11)
+	{
+		var c=0;
+		for(var i=0;i<str.length;i++)
+		{
+			if(str[i]>='0' && str[i]<='9')
+				c++;
+		}
+		if(c==11)
+			return true;
+		else 
+			return false;
+		
+	}
+	else
+		return false;
+	
+}
