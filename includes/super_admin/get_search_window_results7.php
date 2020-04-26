@@ -26,7 +26,7 @@
 			$fl=1;
 		}
 		
-		$stmt = $conn->prepare("select a.nr_faculty_id,a.nr_faculty_name, a.nr_faculty_designation,a.nr_faculty_join_date,a.nr_faculty_resign_date,a.nr_faculty_type,b.nr_dept_id,b.nr_Dept_title,a.nr_faculty_email,a.nr_faculty_status,a.nr_faculty_gender,a.nr_faculty_photo from nr_faculty a,nr_department b where a.nr_dept_id=b.nr_dept_id and nr_faculty_id=:faculty_id ");
+		$stmt = $conn->prepare("select a.nr_faculty_id,a.nr_faculty_name, a.nr_faculty_designation,a.nr_faculty_join_date,a.nr_faculty_resign_date,a.nr_faculty_type,b.nr_dept_id,b.nr_Dept_title,a.nr_faculty_email,a.nr_faculty_status,a.nr_faculty_gender,a.nr_faculty_photo,a.nr_faculty_cell_no from nr_faculty a,nr_department b where a.nr_dept_id=b.nr_dept_id and nr_faculty_id=:faculty_id ");
 		$stmt->bindParam(':faculty_id', $faculty_id);
 		$stmt->execute();
 		$result = $stmt->fetchAll();
@@ -42,6 +42,7 @@
 		$status=$result[0][9];
 		$faculty_gender=$result[0][10];
 		$photo=$result[0][11];
+		$faculty_mobile=$result[0][12];
 		
 ?>
 	<div class="w3-container w3-margin-0 w3-padding-0" id="faculty_view_box1">
@@ -56,12 +57,21 @@
 					
 					<label><i class="w3-text-red">*</i> <b>Faculty Designation</b></label>
 					<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $faculty_designation; ?>" id="faculty_view_designation" placeholder="Enter Faculty Designation" autocomplete="off" onkeyup="faculty_view_form_change()">
-					<input type="hidden" value="<?php echo $faculty_code; ?>" id="faculty_view_old_code">
+					<input type="hidden" value="<?php echo $faculty_designation; ?>" id="faculty_view_old_code">
 					
-					<label><b>Faculty Email</b></label>
-					<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="email" value="<?php echo $faculty_email; ?>" id="faculty_view_email" placeholder="Enter Faculty Email" autocomplete="off" onkeyup="faculty_view_form_change()">
-					<input type="hidden" value="<?php echo $faculty_email; ?>" id="faculty_view_old_email">
-					
+					<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+						<div class="w3-col" style="width:49%;">
+							<label><b>Faculty Email</b> <i class="fa fa-exclamation-circle w3-cursor" title="By inserting email you are giving the faculty panel access. This faculty can access all the features of faculty panel through this email. He will get an one time link to set his password for the faculty panel. He will get the access till inactive status or resign of his ID."></i> </label>
+							<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="email" value="<?php echo $faculty_email; ?>" id="faculty_view_email" placeholder="Enter Faculty Email" autocomplete="off" onkeyup="faculty_view_form_change()">
+							<input type="hidden" value="<?php echo $faculty_email; ?>" id="faculty_view_old_email">
+						</div>
+						<div class="w3-col" style="margin-left:2%;width:49%;">
+							<label><b>Faculty Mobile</b></label>
+							<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $faculty_mobile; ?>" id="faculty_view_mobile" placeholder="Enter Faculty Mobile" autocomplete="off" onkeyup="faculty_view_form_change()">
+							<input type="hidden" value="<?php echo $faculty_mobile; ?>" id="faculty_view_old_mobile">
+						</div>
+						
+					</div>
 					
 					<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
 						<div class="w3-col" style="width:49%;">
@@ -70,7 +80,7 @@
 							<input type="hidden" value="<?php echo $faculty_join_date; ?>" id="faculty_view_old_join_date">
 						</div>
 						<div class="w3-col" style="margin-left:2%;width:49%;">
-							<label><b>Resign Date</b></label>
+							<label><b>Resign Date</b> <i class="fa fa-exclamation-circle w3-cursor" title="By inserting resign date you are confirming that faculty resigned from NEUB and he will lose his access from faculty panel."></i> </label>
 							<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="date" value="<?php echo $faculty_resign_date; ?>" id="faculty_view_resign_date" placeholder="Enter Faculty Resign Date" autocomplete="off" onkeyup="faculty_view_form_change()">
 							<input type="hidden" value="<?php echo $faculty_resign_date; ?>" id="faculty_view_old_resign_date">
 						</div>
@@ -166,6 +176,17 @@
 					
 				</div>
 				<div class="w3-col w3-margin-0" style="width:30%;padding:0px 6px 0px 6px;">
+					
+					<div class="w3-col w3-margin-bottom w3-margin-left">			
+						<?php if($photo=="" && $faculty_gender=="Male"){ ?>
+							<img src="../images/system/male_profile.png" class="w3-image" style="border: 2px solid black;margin:22px 0px 0px 0px;padding:0px;width:100%;max-width:100px;height: 120px;" title="DP (120X100)px" alt="DP (120X100)px">
+						<?php } else if($photo==""){ ?>
+							<img src="../images/system/female_profile.png" class="w3-image" style="border: 2px solid black;10px 0px 0px 0px;padding:0px;width:100%;max-width:100px;height: 120px;" title="DP (120X100)px" alt="DP (120X100)px">
+						<?php } else { ?>
+							<img src="../images/faculty/<?php echo $photo; ?>" class="w3-image" style="border: 2px solid black;10px 0px 0px 0px;padding:0px;width:100%;max-width:100px;height: 120px;"  title="DP (120X100)px" alt="DP (120X100)px">
+						<?php } ?> 
+						<i class="fa fa-exclamation-circle w3-cursor" title="DP is updatable from faculty panel."></i>
+					</div>
 					
 					<button onclick="faculty_view_form_reset()" class="w3-button w3-margin-top w3-red w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;"><i class="fa fa-eye-slash"></i> Reset</button>
 					
