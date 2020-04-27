@@ -66,7 +66,7 @@
 				<a onclick="get_page(15)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-key"></i> Admins</a>
 			<?php } ?>
 			<a onclick="get_page(6)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-id-card-o"></i> Moderators</a>
-			<a onclick="get_page(7)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-id-badge"></i> Faculties</a>
+			<a onclick="get_page(7)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-id-badge"></i> Faculty Members</a>
 			<a onclick="get_page(8)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-users"></i> Students</a>
 			<a onclick="get_page(9)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-database"></i> Results</a>
 			<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
@@ -132,7 +132,7 @@
 				}
 				else if(a==7)
 				{
-					document.getElementById('page_title').innerHTML='<i class="fa fa-id-badge"></i> Faculties';
+					document.getElementById('page_title').innerHTML='<i class="fa fa-id-badge"></i> Faculty Members';
 					document.getElementById('page7').style.display='block';
 				}
 				else if(a==8)

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2020 at 03:40 PM
+-- Generation Time: Apr 27, 2020 at 04:00 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -128,7 +128,9 @@ INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:24 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:41 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '02:26 PM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-26', '04:00 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-26', '04:00 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-27', '12:25 AM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-27', '04:06 PM', 'Inactive');
 
 -- --------------------------------------------------------
 
@@ -243,7 +245,13 @@ INSERT INTO `nr_delete_history` (`nr_admin_id`, `nr_deleteh_task`, `nr_deleteh_d
 (1, 'Deleted Offer Course Title: Algorithm Design and Analysis Lab, Course Code: CSE 222, Course Credit: 1.50, Course Type: Compulsory, Offer Semester: 3rd, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 122, Offer Status: Active', '2020-04-25', '09:25 PM', 'Active', 'Course Offer List'),
 (1, 'Deleted Offer Course Title: Database System, Course Code: CSE 313, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 7th, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 122, Offer Status: Inactive', '2020-04-25', '09:25 PM', 'Active', 'Course Offer List'),
 (1, 'Deleted Offer Course Title: Fundamentals of Computers, Course Code: CSE 111, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 1st, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 122, Offer Status: Active', '2020-04-25', '09:25 PM', 'Active', 'Course Offer List'),
-(1, 'Deleted Offer Course Title: Structured Programming Language, Course Code: CSE 113, Course Credit: 3.00, Course Type: Optional I, Offer Semester: 3rd, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 122, Offer Status: Active', '2020-04-25', '09:27 PM', 'Active', 'Course Offer List');
+(1, 'Deleted Offer Course Title: Structured Programming Language, Course Code: CSE 113, Course Credit: 3.00, Course Type: Optional I, Offer Semester: 3rd, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 122, Offer Status: Active', '2020-04-25', '09:27 PM', 'Active', 'Course Offer List'),
+(1, 'Deleted Faculty Name: Al Mehdi Saadat Chowdhury, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2013-01-15, Faculty Resign Date: N/A, Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: amsc@yoo.com, Faculty Mobile: 01711224455, Faculty Status: Active', '2020-04-26', '08:41 PM', 'Active', 'Faculty'),
+(1, 'Deleted Faculty Name: Al Mehdi Saadat Chowdhury, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2013-04-16, Faculty Resign Date: N/A, Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: amsc@yahoo.com, Faculty Mobile: N/A, Faculty Status: Active', '2020-04-27', '05:59 PM', 'Active', 'Faculty'),
+(1, 'Deleted Faculty Name: Al Mehdi Saadat Chowdhury, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2013-04-17, Faculty Resign Date: N/A, Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: mirlutfur.rahman@gmail.com, Faculty Mobile: N/A, Faculty Status: Active', '2020-04-27', '06:06 PM', 'Active', 'Faculty'),
+(1, 'Deleted Faculty Name: Al Mehdi Saadat Chowdhury, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2013-11-24, Faculty Resign Date: N/A, Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: mirlutfur.rahman@gmail.com, Faculty Mobile: N/A, Faculty Status: Active', '2020-04-27', '07:56 PM', 'Active', 'Faculty'),
+(1, 'Deleted Faculty Name: gj, Faculty Designation: ghjhb, Faculty Gender: Female, Faculty Join Date: 2020-04-02, Faculty Resign Date: N/A, Faculty Department: Business Administration, Faculty Type: Permanent, Faculty Email: kj, Faculty Mobile: N/A, Faculty Status: Active', '2020-04-27', '07:57 PM', 'Active', 'Faculty'),
+(1, 'Deleted Faculty Name: kjkj, Faculty Designation: knjn, Faculty Gender: Male, Faculty Join Date: 2020-02-02, Faculty Resign Date: N/A, Faculty Department: Business Administration, Faculty Type: Adjunct, Faculty Email: sdfsdf, Faculty Mobile: N/A, Faculty Status: Active', '2020-04-27', '07:57 PM', 'Active', 'Faculty');
 
 -- --------------------------------------------------------
 
@@ -398,10 +406,10 @@ CREATE TABLE `nr_faculty` (
 
 INSERT INTO `nr_faculty` (`nr_faculty_id`, `nr_faculty_name`, `nr_faculty_designation`, `nr_faculty_join_date`, `nr_faculty_resign_date`, `nr_faculty_type`, `nr_dept_id`, `nr_faculty_password`, `nr_faculty_email`, `nr_faculty_cell_no`, `nr_faculty_photo`, `nr_faculty_status`, `nr_faculty_two_factor`, `nr_faculty_gender`) VALUES
 (1, 'Noushad Sojib', 'Assistant Professor', '2016-04-20', '', 'Permanent', 8, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'mlrahman@neub.edu.bd', '01739213886', '158677029315867702938237.jpg', 'Active', 0, 'Male'),
-(2, 'Al Mehdi Saadat Chowdhury', 'Assistant Professor', '2013-01-15', '', 'Permanent', 8, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'amsc@yoo.com', '01711224455', '', 'Active', 0, 'Male'),
 (3, 'Tasnim Zahan Tithi', 'Assistant Professor', '2014-01-15', '', 'Permanent', 8, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'tithi@gml.com', '01711224455', '', 'Active', 0, 'Female'),
-(4, 'Mir Lutfur Rahman', 'Lecturer', '2018-05-26', '', 'Permanent', 8, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'raihan.testing@gmial.com', '017139213886', '', 'Active', 0, 'Male'),
-(5, 'Pranta Sarker', 'Lecturer', '2018-05-26', '', 'Permanent', 9, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'ps@ne', '01680929776', '', 'Active', 0, 'Male');
+(4, 'Mir Lutfur Rahman', 'Lecturer', '2018-05-26', '', 'Adjunct', 8, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'raihan.testing@gmial.com', '01739213886', '', 'Active', 0, 'Male'),
+(5, 'Pranta Sarker', 'Lecturer', '2018-05-26', '', 'Permanent', 8, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'ps@ne', '01680929776', '', 'Active', 0, 'Male'),
+(9, 'Al Mehdi Saadat Chowdhury', 'Assistant Professor', '2013-11-24', '', 'Permanent', 8, '', 'mirlutfur.rahman@gmail.com', '', '', 'Active', 0, 'Male');
 
 -- --------------------------------------------------------
 
@@ -418,6 +426,25 @@ CREATE TABLE `nr_faculty_history` (
   `nr_facultyh_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `nr_faculty_history`
+--
+
+INSERT INTO `nr_faculty_history` (`nr_faculty_id`, `nr_admin_id`, `nr_facultyh_task`, `nr_facultyh_date`, `nr_facultyh_time`, `nr_facultyh_status`) VALUES
+(4, 1, 'Edited Faculty Name: Mir Lutfur Rahman, Faculty Designation: Lecturer, Faculty Gender: Male, Faculty Join Date: 2018-05-26, Faculty Resign Date: , Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: raihan.testing@gmial.com, Faculty Mobile: 01739213886, Faculty Status: Active', '2020-04-27', '12:47 AM', 'Active'),
+(4, 1, 'Edited Faculty Name: Mir Lutfur Rahman, Faculty Designation: Lecturer, Faculty Gender: Male, Faculty Join Date: 2018-05-26, Faculty Resign Date: , Faculty Department: Computer Science and Engineering, Faculty Type: Adjunct, Faculty Email: raihan.testing@gmial.com, Faculty Mobile: 01739213886, Faculty Status: Active', '2020-04-27', '12:47 AM', 'Active'),
+(3, 1, 'Edited Faculty Name: Tasnim Zahan Tithi, Faculty Designation: Assistant Professor, Faculty Gender: Female, Faculty Join Date: 2014-01-15, Faculty Resign Date: , Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: tithi@gml.com, Faculty Mobile: 01711224455, Faculty Status: Inactive', '2020-04-27', '12:48 AM', 'Active'),
+(5, 1, 'Edited Faculty Name: Pranta Sarker, Faculty Designation: Lecturer, Faculty Gender: Male, Faculty Join Date: 2018-05-26, Faculty Resign Date: , Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: ps@ne, Faculty Mobile: 01680929776, Faculty Status: Active', '2020-04-27', '04:07 PM', 'Active'),
+(1, 1, 'Edited Faculty Name: Noushad Sojib, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2016-04-20, Faculty Resign Date: , Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: mirlutfur.rahman@gmail.com, Faculty Mobile: 01739213886, Faculty Status: Active', '2020-04-27', '05:47 PM', 'Active'),
+(1, 1, 'Edited Faculty Name: Noushad Sojib, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2016-04-20, Faculty Resign Date: , Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: mlrahman@neub.edu.bd, Faculty Mobile: 01739213886, Faculty Status: Active', '2020-04-27', '05:49 PM', 'Active'),
+(1, 1, 'Edited Faculty Name: Noushad Sojib, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2016-04-20, Faculty Resign Date: , Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: mirlutfur.rahman@gmail.com, Faculty Mobile: 01739213886, Faculty Status: Active', '2020-04-27', '05:52 PM', 'Active'),
+(1, 1, 'Edited Faculty Name: Noushad Sojib, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2016-04-20, Faculty Resign Date: , Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: mlrahman@neub.edu.bd, Faculty Mobile: 01739213886, Faculty Status: Active', '2020-04-27', '05:57 PM', 'Active'),
+(3, 1, 'Edited Faculty Name: Tasnim Zahan Tithi, Faculty Designation: Assistant Professor, Faculty Gender: Female, Faculty Join Date: 2014-01-15, Faculty Resign Date: , Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: tithi@gml.com, Faculty Mobile: 01711224455, Faculty Status: Active', '2020-04-27', '06:11 PM', 'Active'),
+(1, 1, 'Edited Faculty Name: Noushad Sojib, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2016-04-20, Faculty Resign Date: , Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: mlrahman@neub.edu.bd, Faculty Mobile: 01739213886, Faculty Status: Inactive', '2020-04-27', '06:11 PM', 'Active'),
+(1, 1, 'Edited Faculty Name: Noushad Sojib, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2016-04-20, Faculty Resign Date: , Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: mlrahman@neub.edu.bd, Faculty Mobile: 01739213886, Faculty Status: Active', '2020-04-27', '06:11 PM', 'Active'),
+(9, 1, 'Added Faculty Name: Al Mehdi Saadat Chowdhury, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2013-11-24, Faculty Resign Date: , Faculty Department: Business Administration, Faculty Type: Permanent, Faculty Email: mirlutfur.rahman@gmail.com, Faculty Mobile: , Faculty Status: Active', '2020-04-27', '07:56 PM', 'Active'),
+(9, 1, 'Edited Faculty Name: Al Mehdi Saadat Chowdhury, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2013-11-24, Faculty Resign Date: , Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: mirlutfur.rahman@gmail.com, Faculty Mobile: , Faculty Status: Active', '2020-04-27', '07:58 PM', 'Active');
+
 -- --------------------------------------------------------
 
 --
@@ -432,6 +459,14 @@ CREATE TABLE `nr_faculty_link_token` (
   `nr_falito_time` varchar(20) NOT NULL,
   `nr_falito_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Dumping data for table `nr_faculty_link_token`
+--
+
+INSERT INTO `nr_faculty_link_token` (`nr_faculty_id`, `nr_falito_token`, `nr_falito_type`, `nr_falito_date`, `nr_falito_time`, `nr_falito_status`) VALUES
+(1, '6c5af67c9cfcdb3c8d0f5434eddf04352877a65d', 'Forget Password', '2020-04-27', '05:57 PM', 'Active'),
+(9, 'e3f9005ebd2c8acceda5cd259132213f6d8841e5', 'Forget Password', '2020-04-27', '07:56 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -466,8 +501,6 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '07:11 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '08:27 PM', 'Inactive'),
 (1, '192.168.0.102', 'Bangladesh', 'Sylhet', '24.896670', '91.871670', 'N/A', '2020-04-14', '11:38 PM', 'Inactive'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:39 PM', 'Inactive'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:40 PM', 'Inactive'),
 (3, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:40 PM', 'Inactive'),
 (4, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:41 PM', 'Inactive'),
 (5, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '04:42 PM', 'Inactive'),
@@ -476,17 +509,6 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (4, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '06:29 PM', 'Inactive'),
 (4, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '07:56 PM', 'Inactive'),
 (4, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '08:28 PM', 'Inactive'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:09 PM', 'Inactive'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:52 PM', 'Inactive'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:28 PM', 'Inactive'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:03 PM', 'Inactive'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:39 PM', 'Inactive'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:39 PM', 'Inactive'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:39 PM', 'Inactive'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:44 PM', 'Inactive'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '12:55 AM', 'Inactive'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Inactive'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-19', '09:16 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-19', '09:29 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '03:46 PM', 'Inactive'),
@@ -663,20 +685,6 @@ INSERT INTO `nr_faculty_result_check_transaction` (`nr_stud_id`, `nr_faculty_id`
 (140203020002, 4, '::1', 'Bangladesh', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '06:29 PM', 'Active'),
 (140203020002, 4, '::1', 'Bangladesh', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '07:57 PM', 'Active'),
 (140203020002, 4, '::1', 'Bangladesh', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '08:28 PM', 'Active'),
-(140203020002, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:09 PM', 'Active'),
-(140203020002, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:53 PM', 'Active'),
-(140203020002, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:54 PM', 'Active'),
-(140203020006, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '12:21 AM', 'Active'),
-(140203020002, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:29 PM', 'Active'),
-(140203020002, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:04 PM', 'Active'),
-(140203020003, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:04 PM', 'Active'),
-(140203020009, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:04 PM', 'Active'),
-(140203020006, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:06 AM', 'Active'),
-(140203020009, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:06 AM', 'Active'),
-(140203020002, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Active'),
-(140203020003, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Active'),
-(140203020004, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Active'),
-(140203020005, 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-18', '01:08 AM', 'Active'),
 (140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '06:33 PM', 'Active'),
 (140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-21', '09:35 PM', 'Active'),
 (140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:26 PM', 'Active'),
@@ -1462,7 +1470,8 @@ INSERT INTO `nr_result_check_transaction` (`nr_stud_id`, `nr_rechtr_ip_address`,
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '12:46 AM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '12:47 AM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '12:48 AM', 'Active'),
-(140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '09:26 PM', 'Active');
+(140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '09:26 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-26', '07:54 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1648,7 +1657,6 @@ INSERT INTO `nr_transcript_print_reference` (`nr_stud_id`, `nr_trprre_printed_by
 (150102040001, 'Admin', 3, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '12:46 PM', '0196201408465420', 'Active'),
 (140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:07 PM', '0211201409072838', 'Active'),
 (140203020002, 'Moderator', 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:50 PM', '0214201501504338', 'Active'),
-(140203020002, 'Faculty', 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:04 PM', '0216201712040779', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:56 PM', '0222201501562928', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:48 PM', '0222201711484259', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:27 PM', '0225201409271714', 'Active'),
@@ -1666,7 +1674,6 @@ INSERT INTO `nr_transcript_print_reference` (`nr_stud_id`, `nr_trprre_printed_by
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '07:56 PM', '0248203103563025', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-29', '07:40 PM', '0250202903405318', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:56 PM', '0254201501561830', 'Active'),
-(140203020002, 'Faculty', 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:29 PM', '0254201711293738', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '02:48 PM', '0254203110482865', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:28 PM', '0257201711281885', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '02:22 PM', '0261201710223865', 'Active'),
@@ -1676,17 +1683,14 @@ INSERT INTO `nr_transcript_print_reference` (`nr_stud_id`, `nr_trprre_printed_by
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '06:28 PM', '0267201602283388', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:08 PM', '0272201409081999', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '07:57 PM', '0279203103571149', 'Active'),
-(140203020002, 'Faculty', 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:29 PM', '0283201711291247', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '01:57 PM', '0283203109572421', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:45 PM', '0289201501455226', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '03:39 PM', '0296201611391419', 'Active'),
 (140203020002, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '06:52 PM', '0299203102523693', 'Active'),
-(140203020003, 'Faculty', 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:04 PM', '0320201712043951', 'Active'),
 (140203020004, 'Student', 140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '12:51 PM', '0445201408512649', 'Active'),
 (140203020004, 'Student', 140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '12:52 PM', '0451201408523243', 'Active'),
 (140203020004, 'Student', 140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:51 PM', '0454201409515965', 'Active'),
 (140203020004, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:05 PM', '0467201409053793', 'Active'),
-(140203020009, 'Faculty', 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '04:05 PM', '0915201712050155', 'Active'),
 (140203020009, 'Student', 140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:49 PM', '0939201711494370', 'Active'),
 (140203020009, 'Student', 140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '01:58 PM', '0983203109585812', 'Active');
 
@@ -1912,7 +1916,7 @@ ALTER TABLE `nr_drop`
 -- AUTO_INCREMENT for table `nr_faculty`
 --
 ALTER TABLE `nr_faculty`
-  MODIFY `nr_faculty_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `nr_faculty_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `nr_program`

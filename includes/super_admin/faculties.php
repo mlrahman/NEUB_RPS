@@ -199,7 +199,7 @@
 
 	<div class="w3-container w3-padding-0" style="margin:0px 0px 20px 0px;">
 		<div class="w3-dropdown-hover w3-round-large">
-			<button class="w3-button w3-black w3-round-large w3-hover-teal"><i class="fa fa-plus"></i> Add Faculty</button>
+			<button class="w3-button w3-black w3-round-large w3-hover-teal"><i class="fa fa-plus"></i> Add Faculty Member</button>
 			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-animate-zoom">
 				<a onclick="document.getElementById('add_single_window7').style.display='block';document.getElementById('add_multiple_window7').style.display='none';" class="w3-cursor w3-bar-item w3-button w3-hover-teal">Single</a>
 				<a onclick="document.getElementById('add_multiple_window7').style.display='block';document.getElementById('add_single_window7').style.display='none';" class=" w3-cursor w3-bar-item w3-button w3-hover-teal">Multiple</a>
@@ -215,18 +215,84 @@
 
 	<div id="add_single_window7" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
 		<span onclick="add_single_window7_close()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
-		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:325px;"><i class="fa fa-plus"></i> Add Single Faculty</p>
+		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:280px;"><i class="fa fa-plus"></i> Add Single Member</p>
 		<div class="w3-container w3-margin-0 w3-padding-0" id="faculty_single_add_box1">
 			<p class="w3-text-red w3-small w3-bold" style="margin: 2px 0px 0px 12px;padding:0px;">Note: (*) marked fields are mandatory.</p>
 			<div class="w3-container w3-border w3-round-large w3-padding w3-margin-bottom" style="margin: 0px 12px 12px 12px;">
 				<div class="w3-row w3-margin-0 w3-padding-0">
 					<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 0px;">
-						<label><i class="w3-text-red">*</i> <b>Faculty Title</b></label>
-						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="faculty_single_add_title" placeholder="Enter faculty Title" autocomplete="off" onkeyup="faculty_single_add_form_change()">
+						<label><i class="w3-text-red">*</i> <b>Faculty Name</b></label>
+						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="faculty_single_add_name" placeholder="Enter Faculty Name" autocomplete="off" oninput="faculty_single_add_form_change()">
 						
-						<label><i class="w3-text-red">*</i> <b>Faculty Code</b></label>
-						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="faculty_single_add_code" placeholder="Enter faculty Code" autocomplete="off" onkeyup="faculty_single_add_form_change()">
+						<label><i class="w3-text-red">*</i> <b>Faculty Designation</b></label>
+						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="faculty_single_add_designation" placeholder="Enter Faculty Designation" autocomplete="off" oninput="faculty_single_add_form_change()">
 						
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:49%;">
+								<label><b>Faculty Email</b> <i class="fa fa-exclamation-circle w3-cursor" title="By inserting email you are giving the faculty panel access. This faculty can access all the features of faculty panel through this email. He will get an one time link to set his password for the faculty panel. He will get the access till inactive status or resign of his ID."></i> </label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="email" id="faculty_single_add_email" placeholder="Enter Faculty Email" autocomplete="off" onchange="faculty_single_add_form_change()">
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:49%;">
+								<label><b>Faculty Mobile</b></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="faculty_single_add_mobile" placeholder="Enter Faculty Mobile" autocomplete="off" onchange="faculty_single_add_form_change()">
+							</div>
+							
+						</div>
+						
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:49%;">
+								<label><i class="w3-text-red">*</i> <b>Join Date</b></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="date" id="faculty_single_add_join_date" placeholder="Enter Faculty Join Date" autocomplete="off" onchange="faculty_single_add_form_change()">
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:49%;">
+								<label><b>Resign Date</b> <i class="fa fa-exclamation-circle w3-cursor" title="By inserting resign date you are confirming that faculty resigned from NEUB and he will lose his access from faculty panel."></i> </label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="date" id="faculty_single_add_resign_date" placeholder="Enter Faculty Resign Date" autocomplete="off" onchange="faculty_single_add_form_change()">
+							</div>
+						</div>
+						
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:32%;">
+								<label><i class="w3-text-red">*</i> <b>Department</b></label>
+								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="faculty_single_add_dept" onchange="faculty_single_add_form_change()">
+									<option value="">Select</option>
+									<?php
+										$stmt = $conn->prepare("SELECT * FROM nr_department where nr_dept_status='Active' order by nr_dept_title asc");
+										$stmt->execute();
+										$stud_result=$stmt->fetchAll();
+										if(count($stud_result)>0)
+										{
+											$sz=count($stud_result);
+											for($k=0;$k<$sz;$k++)
+											{
+												$dept_id=$stud_result[$k][0];
+												$dept_title=$stud_result[$k][1];
+												echo '<option value="'.$dept_id.'">'.$dept_title.'</option>';
+											}
+										}
+									?>
+									
+								</select>
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:32%;">
+								<label><i class="w3-text-red">*</i> <b>Faculty Type</b></label>
+								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="faculty_single_add_type" onchange="faculty_single_add_form_change()">
+									<option value="">Select</option>
+									<option value="Permanent">Permanent</option>
+									<option value="Adjunct">Adjunct</option>
+									<option value="Guest">Guest</option>
+								</select>
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:32%;">
+								<label><i class="w3-text-red">*</i> <b>Gender</b></label>
+								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="faculty_single_add_gender" onchange="faculty_single_add_form_change()">
+									<option value="">Select</option>
+									<option value="Male">Male</option>
+									<option value="Female">Female</option>
+									<option value="Other">Other</option>
+								</select>
+							</div>
+							
+						</div>
 						<label><i class="w3-text-red">*</i> <b>Status</b></label>
 						<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="faculty_single_add_status" onchange="faculty_single_add_form_change()">
 							<option value="">Select</option>
@@ -246,7 +312,7 @@
 								<input class="w3-input w3-border w3-center w3-round-large" type="text" value="<?php echo $aaa.' + '.$bbb.' = '; ?>" disabled>
 							</div>
 							<div class="w3-col" style="margin-left:2%;width:58%;">
-								<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="faculty_single_add_captcha" autocomplete="off" onkeyup="faculty_single_add_form_change()">
+								<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="faculty_single_add_captcha" autocomplete="off" onchange="faculty_single_add_form_change()">
 								<input type="hidden" value="<?php echo $ccc; ?>" id="faculty_single_add_old_captcha">
 							</div>
 						</div>
@@ -264,7 +330,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="w3-container w3-margin-0 w3-padding-0 w3-center" style="display:none;" id="faculty_single_add_box7">
+		<div class="w3-container w3-margin-0 w3-padding-0 w3-center" style="display:none;" id="faculty_single_add_box2">
 			<p style="font-size:15px;font-weight:bold;">Please wait while making changes..</p>
 			<i class="fa fa-spinner w3-spin w3-margin-bottom w3-margin-top" style="font-size:50px;"></i>
 		</div>
@@ -274,20 +340,42 @@
 
 	<div id="add_multiple_window7" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
 		<span onclick="add_multiple_window7_close()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
-		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:355px;"><i class="fa fa-plus"></i> Add Multiple Faculty</p>
+		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:325px;"><i class="fa fa-plus"></i> Add Multiple Members</p>
 		<div class="w3-container w3-margin-0 w3-padding-0"  id="faculty_multiple_add_box1">
 			<div class="w3-container w3-margin-top w3-margin-bottom w3-sand w3-justify w3-round-large w3-padding">
 				<p class="w3-bold w3-margin-0"><u>Steps</u>:</p>
 				<ol>
 					<li>First download the formatted excel file from <a href="../excel_files/demo/insert_multiple_faculty.xlsx" target="_blank" class="w3-text-blue">here</a>.</li>
 					<li>In this excel file (<span class="w3-text-red">*</span>) marked columns are mandatory for each row (not valid for blank row). Very carefully fill up the rows with your data. <b>Don't put gap</b> between two rows. Also <b>ignore duplicated data</b> for consistent input.</li>
-					<li>After filling the necessary rows you have to <b>submit it from the below form</b>. You can insert at most <b>50 facultys</b> in a single upload.</li>
-					<li>This process may take <b>up to two minutes</b> so keep patience. After finishing the process you will get a logs.</li>
+					<li>Input date according to the format <b>YYYY-MM-DD</b>. Inserting email will give the access of the faculty panel. Photo is uploadable from the faculty panel only.</li>
+					<li>After filling the necessary rows you have to <b>submit it from the below form</b>. Don't forget to select a department in the below form. You can insert at most <b>50 faculty members</b> in a single upload under a single department.</li>
+					<li>This process may take <b>up to three minutes</b> so keep patience. After finishing the process you will get a logs.</li>
 				</ol>
 			</div>
 			
 			<div class="w3-row w3-margin-top w3-margin-bottom w3-round-large w3-border w3-padding">
 				<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 6px;">
+					<label><i class="w3-text-red">*</i> <b>Faculty Department</b></label>
+					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="faculty_multiple_add_dept" onchange="faculty_multiple_add_form_change()">
+						<option value="">Select</option>
+						<?php
+							$stmt = $conn->prepare("SELECT * FROM nr_department where nr_dept_status='Active' order by nr_dept_title asc");
+							$stmt->execute();
+							$stud_result=$stmt->fetchAll();
+							if(count($stud_result)>0)
+							{
+								$sz=count($stud_result);
+								for($k=0;$k<$sz;$k++)
+								{
+									$dept_id=$stud_result[$k][0];
+									$dept_title=$stud_result[$k][1];
+									echo '<option value="'.$dept_id.'">'.$dept_title.'</option>';
+								}
+							}
+						?>
+						
+					</select>
+					
 					<label><i class="w3-text-red">*</i> <b>Upload Excel File</b></label>
 					<input class="w3-input w3-border w3-round-large" type="file" id="faculty_excel_file" title="Please upload the formatted and filled up excel file."  onchange="faculty_multiple_add_form_change()">
 					
@@ -314,7 +402,7 @@
 			</div>
 			
 		</div>
-		<div class="w3-container w3-margin-0 w3-padding-0 w3-center" style="display:none;" id="faculty_multiple_add_box7">
+		<div class="w3-container w3-margin-0 w3-padding-0 w3-center" style="display:none;" id="faculty_multiple_add_box2">
 			<p style="font-size:15px;font-weight:bold;">Please wait while making changes..</p>
 			<div class="w3-light-grey w3-round-xlarge w3-border w3-margin-top w3-margin-bottom" style="width:50%;margin:0 auto;">
 				<div class="w3-container w3-blue w3-round-xlarge w3-text-white w3-bold" id="faculty_multiple_progress_id" style="width:0%;">0%</div>
@@ -485,8 +573,9 @@
 	function faculty_multiple_add_form_change()
 	{
 		var faculty_excel_file=document.getElementById('faculty_excel_file').value;
+		var faculty_multiple_add_dept=document.getElementById('faculty_multiple_add_dept').value;
 		
-		if(faculty_excel_file=="")
+		if(faculty_excel_file=="" || faculty_multiple_add_dept=="")
 		{
 			document.getElementById("faculty_multiple_add_save_btn").disabled = true;
 		}
@@ -500,6 +589,7 @@
 	{
 		document.getElementById('faculty_multiple_add_captcha').value='';
 		document.getElementById('faculty_excel_file').value='';
+		document.getElementById('faculty_multiple_add_dept').value='';
 						
 		document.getElementById("faculty_multiple_add_save_btn").disabled = true;
 		
@@ -510,10 +600,20 @@
 		document.getElementById('faculty_single_add_box1').style.display='block';
 		document.getElementById('faculty_single_add_box2').style.display='none';
 			
-		document.getElementById('faculty_single_add_title').value='';
-		document.getElementById('faculty_single_add_code').value='';
-		document.getElementById('faculty_single_add_status').value='';
+		document.getElementById('faculty_single_add_name').value='';
+		document.getElementById('faculty_single_add_designation').value='';
+		document.getElementById('faculty_single_add_email').value='';
+		document.getElementById('faculty_single_add_mobile').value='';
+		document.getElementById('faculty_single_add_join_date').value='';
+		document.getElementById('faculty_single_add_resign_date').value='';
+		document.getElementById('faculty_single_add_dept').value='';
+		document.getElementById('faculty_single_add_type').value='';
+		document.getElementById('faculty_single_add_gender').value='';
 		document.getElementById('faculty_single_add_captcha').value='';
+		document.getElementById('faculty_single_add_status').value='';
+		var faculty_single_add_status=document.getElementById('faculty_single_add_status').value.trim();
+		
+		
 		
 		if(faculty_single_add_status=='Active')
 		{
@@ -559,10 +659,17 @@
 	
 	function faculty_single_add_form_change()
 	{
-		faculty_view_name=document.getElementById('faculty_single_add_title').value.trim();
-		faculty_view_designation=document.getElementById('faculty_single_add_code').value.trim();
-		faculty_view_captcha=document.getElementById('faculty_single_add_captcha').value.trim();
-		faculty_view_status=document.getElementById('faculty_single_add_status').value.trim();
+		var faculty_single_add_name=document.getElementById('faculty_single_add_name').value.trim();
+		var faculty_single_add_designation=document.getElementById('faculty_single_add_designation').value.trim();
+		var faculty_single_add_email=document.getElementById('faculty_single_add_email').value.trim();
+		var faculty_single_add_mobile=document.getElementById('faculty_single_add_mobile').value.trim();
+		var faculty_single_add_join_date=document.getElementById('faculty_single_add_join_date').value.trim();
+		var faculty_single_add_resign_date=document.getElementById('faculty_single_add_resign_date').value.trim();
+		var faculty_single_add_dept=document.getElementById('faculty_single_add_dept').value.trim();
+		var faculty_single_add_type=document.getElementById('faculty_single_add_type').value.trim();
+		var faculty_single_add_gender=document.getElementById('faculty_single_add_gender').value.trim();
+		var faculty_single_add_captcha=document.getElementById('faculty_single_add_captcha').value.trim();
+		var faculty_single_add_status=document.getElementById('faculty_single_add_status').value.trim();
 		
 		if(faculty_single_add_status=='Active')
 		{
@@ -599,7 +706,7 @@
 				document.getElementById('faculty_single_add_status').classList.remove('w3-pale-red');
 			}
 		}
-		if(faculty_view_name=="" || faculty_view_designation=="" || faculty_view_status=="")
+		if(faculty_single_add_name=="" || faculty_single_add_designation=="" || faculty_single_add_join_date=="" || faculty_single_add_dept=="" || faculty_single_add_type=="" || faculty_single_add_gender=="" || faculty_single_add_status=="")
 		{
 			document.getElementById("faculty_single_add_save_btn").disabled = true;
 		}
@@ -611,21 +718,70 @@
 
 	function faculty_single_add_form_reset()
 	{
-		document.getElementById('faculty_single_add_title').value='';
-		document.getElementById('faculty_single_add_code').value='';
-		document.getElementById('faculty_single_add_status').value='';
+		document.getElementById('faculty_single_add_name').value='';
+		document.getElementById('faculty_single_add_designation').value='';
+		document.getElementById('faculty_single_add_email').value='';
+		document.getElementById('faculty_single_add_mobile').value='';
+		document.getElementById('faculty_single_add_join_date').value='';
+		document.getElementById('faculty_single_add_resign_date').value='';
+		document.getElementById('faculty_single_add_dept').value='';
+		document.getElementById('faculty_single_add_type').value='';
+		document.getElementById('faculty_single_add_gender').value='';
 		document.getElementById('faculty_single_add_captcha').value='';
-						
+		document.getElementById('faculty_single_add_status').value='';
+		var faculty_single_add_status=document.getElementById('faculty_single_add_status').value.trim();
+		
+		
+		
+		if(faculty_single_add_status=='Active')
+		{
+			if(document.getElementById('faculty_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('faculty_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('faculty_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('faculty_single_add_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('faculty_single_add_status').classList.add('w3-pale-green');
+		}
+		else if(faculty_single_add_status=='Inactive')
+		{
+			if(document.getElementById('faculty_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('faculty_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('faculty_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('faculty_single_add_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('faculty_single_add_status').classList.add('w3-pale-red');
+		}
+		else
+		{
+			if(document.getElementById('faculty_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('faculty_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('faculty_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('faculty_single_add_status').classList.remove('w3-pale-red');
+			}
+		}
+		
+		
 		document.getElementById("faculty_single_add_save_btn").disabled = true;
+		
 	}
 	
 	function faculty_multiple_add_form_save()
 	{
 		var faculty_excel_file=document.getElementById('faculty_excel_file').value;
+		var faculty_multiple_add_dept=document.getElementById('faculty_multiple_add_dept').value;
 		faculty_view_captcha=document.getElementById('faculty_multiple_add_captcha').value.trim();
 		faculty_view_old_captcha=document.getElementById('faculty_multiple_add_old_captcha').value.trim();
 		
-		if(faculty_excel_file=="" || file_validate3(faculty_excel_file)==false)
+		if(faculty_excel_file=="" || faculty_multiple_add_dept=="" || file_validate3(faculty_excel_file)==false)
 		{
 			document.getElementById('faculty_multiple_add_pass').value='';
 			
@@ -753,6 +909,21 @@
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					
 					}
+					else if(status=='u2')
+					{
+						document.getElementById('faculty_multiple_progress_id').style.width='0%';
+						document.getElementById('faculty_multiple_progress_id').innerHTML='0%';
+						
+						document.getElementById('faculty_multiple_add_box1').style.display='block';
+						document.getElementById('faculty_multiple_add_box3').style.display='none';
+						document.getElementById('faculty_multiple_add_box2').style.display='none';
+				
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unable to make change (Department Inactive).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					
+					}
 					else
 					{
 						document.getElementById('faculty_multiple_progress_id').style.width='0%';
@@ -802,7 +973,7 @@
 				  }
 				}
 			};
-			xhttp1.open("POST", "../includes/super_admin/add_multiple_facultys.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&excel="+link+"&pass="+pass, true);
+			xhttp1.open("POST", "../includes/super_admin/add_multiple_facultys.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&excel="+link+"&pass="+pass+"&faculty_dept="+faculty_multiple_add_dept, true);
 			xhttp1.send(fd_excel);
 		}
 	}
@@ -810,13 +981,20 @@
 	
 	function faculty_single_add_form_save()
 	{
-		faculty_view_name=document.getElementById('faculty_single_add_title').value.trim();
-		faculty_view_designation=document.getElementById('faculty_single_add_code').value.trim();
-		faculty_view_captcha=document.getElementById('faculty_single_add_captcha').value.trim();
-		faculty_view_old_captcha=document.getElementById('faculty_single_add_old_captcha').value.trim();
-		faculty_view_status=document.getElementById('faculty_single_add_status').value.trim();
+		var faculty_single_add_name=document.getElementById('faculty_single_add_name').value.trim();
+		var faculty_single_add_designation=document.getElementById('faculty_single_add_designation').value.trim();
+		var faculty_single_add_email=document.getElementById('faculty_single_add_email').value.trim();
+		var faculty_single_add_mobile=document.getElementById('faculty_single_add_mobile').value.trim();
+		var faculty_single_add_join_date=document.getElementById('faculty_single_add_join_date').value.trim();
+		var faculty_single_add_resign_date=document.getElementById('faculty_single_add_resign_date').value.trim();
+		var faculty_single_add_dept=document.getElementById('faculty_single_add_dept').value.trim();
+		var faculty_single_add_type=document.getElementById('faculty_single_add_type').value.trim();
+		var faculty_single_add_gender=document.getElementById('faculty_single_add_gender').value.trim();
+		var faculty_single_add_captcha=document.getElementById('faculty_single_add_captcha').value.trim();
+		var faculty_single_add_old_captcha=document.getElementById('faculty_single_add_old_captcha').value.trim();
+		var faculty_single_add_status=document.getElementById('faculty_single_add_status').value.trim();
 		
-		if(faculty_view_name=="" || faculty_view_designation=="" || faculty_view_status=="")
+		if(faculty_single_add_name=="" || faculty_single_add_designation=="" || faculty_single_add_join_date=="" || faculty_single_add_dept=="" || faculty_single_add_type=="" || faculty_single_add_gender=="" || faculty_single_add_status=="")
 		{
 			document.getElementById('faculty_single_add_pass').value='';
 			
@@ -826,7 +1004,7 @@
 			document.getElementById('i_msg').innerHTML='Please fill up all the fields.';
 			setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 		}
-		else if(faculty_view_captcha=="" || faculty_view_captcha!=faculty_view_old_captcha)
+		else if(faculty_single_add_captcha=="" || faculty_single_add_captcha!=faculty_single_add_old_captcha)
 		{
 			document.getElementById('faculty_single_add_pass').value='';
 			
@@ -862,7 +1040,7 @@
 						get_search_result7();
 						
 						document.getElementById('valid_msg').style.display='block';
-						document.getElementById('v_msg').innerHTML='faculty successfully added.';
+						document.getElementById('v_msg').innerHTML='Faculty successfully added.';
 						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
 					
 						
@@ -883,6 +1061,24 @@
 						
 						document.getElementById('invalid_msg').style.display='block';
 						document.getElementById('i_msg').innerHTML='Sorry unable to add this faculty (duplicate detected).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					else if(this.responseText.trim()=='unable2')
+					{
+						document.getElementById('faculty_single_add_box1').style.display='block';
+						document.getElementById('faculty_single_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add this faculty (department inactive).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					else if(this.responseText.trim()=='unable3')
+					{
+						document.getElementById('faculty_single_add_box1').style.display='block';
+						document.getElementById('faculty_single_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add this faculty (invalid email).';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					}
 					else
@@ -907,7 +1103,7 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/add_single_faculty.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&faculty_title="+faculty_view_name+"&faculty_code="+faculty_view_designation+"&faculty_status="+faculty_view_status, true);
+			xhttp1.open("POST", "../includes/super_admin/add_single_faculty.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&faculty_name="+faculty_single_add_name+"&faculty_designation="+faculty_single_add_designation+"&faculty_status="+faculty_single_add_status+"&faculty_email="+faculty_single_add_email+"&faculty_mobile="+faculty_single_add_mobile+"&faculty_join_date="+faculty_single_add_join_date+"&faculty_resign_date="+faculty_single_add_resign_date+"&faculty_dept="+faculty_single_add_dept+"&faculty_type="+faculty_single_add_type+"&faculty_gender="+faculty_single_add_gender, true);
 			xhttp1.send();
 		}
 	

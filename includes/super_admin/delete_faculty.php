@@ -62,6 +62,34 @@
 				$base_directory = '../../images/faculty/';
 				unlink($base_directory.$photo);
 			}
+			
+			if($faculty_email!='')
+			{
+				//sent email with password reset link
+				$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
+				$stmt->execute();
+				$result = $stmt->fetchAll();
+				if(count($result)==0)
+				{
+					echo 'System not ready';
+					die();
+				}
+				$title=$result[0][2];
+				$contact_email=$result[0][9];//for sending message from contact us form
+				$f_name=$faculty_name;
+				//sending password recovery link to user
+				$msg="Dear ".$f_name.", Your ID with ".$faculty_email." is removed by the admin. You can not access the faculty panel of ".$title." anymore. <p>&nbsp;</p>For any query you can contact at: <a href='mailto:".$contact_email."' target='_blank'>".$contact_email."</a>";
+				$message = '<html><body>';
+				$message .= '<h1>ID Removed from - '.$title.'</h1><p>  </p>';
+				$message .= '<p><b>Message Details:</b></p>';
+				$message .= '<p>'.$msg.'</p></body></html>';
+				
+				
+				sent_mail($faculty_email,$title.' - ID Removed Notification',$message,$title,$contact_email);
+				
+				
+			}
+			
 		
 			$t=get_current_time();
 			$d=get_current_date();

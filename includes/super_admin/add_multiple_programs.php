@@ -34,7 +34,7 @@
 			$result = $stmt->fetchAll();
 			if(count($result)>=1)
 			{
-				echo 'unable2';
+				echo 'u2';
 				die();
 			}
 			

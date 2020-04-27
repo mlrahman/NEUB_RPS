@@ -53,10 +53,81 @@
 				die();
 			}
 			
-			if(email_check($faculty_email)==false)
+			if($faculty_email!='' && email_check($faculty_email)==false)
 			{
 				echo 'unable3';
 				die();
+			}
+			
+			
+			
+			$stmt = $conn->prepare("select nr_faculty_email from nr_faculty where nr_faculty_id=:faculty_id");
+			$stmt->bindParam(':faculty_id', $faculty_id);
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			$old_email='';
+			if(count($result)!=0)
+				$old_email=$result[0][0];
+			
+			if($faculty_email!='' && $faculty_email!=$old_email)
+			{
+				//sent email with password reset link
+				$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
+				$stmt->execute();
+				$result = $stmt->fetchAll();
+				if(count($result)==0)
+				{
+					echo 'System not ready';
+					die();
+				}
+				$title=$result[0][2];
+				$contact_email=$result[0][9];//for sending message from contact us form
+				$f_name=$faculty_name;
+				
+				if($old_email!='')//notify old email
+				{
+					//sending password recovery link to user
+					$msg="Dear ".$f_name.", Your email ".$old_email." is replaced by the admin. You can not login to the faculty panel of ".$title." using this email anymore. <p>&nbsp;</p>For any query you can contact at: <a href='mailto:".$contact_email."' target='_blank'>".$contact_email."</a>";
+					$message = '<html><body>';
+					$message .= '<h1>Email Change Notification from - '.$title.'</h1><p>  </p>';
+					$message .= '<p><b>Message Details:</b></p>';
+					$message .= '<p>'.$msg.'</p></body></html>';
+					
+					
+					sent_mail($old_email,$title.' - Email Change Notification',$message,$title,$contact_email);
+					
+				}
+				//notify new email
+				//sent email with password reset link
+				//Creating forget password link and sending to user
+				$ip_server = $_SERVER['SERVER_ADDR']; //root link 
+				$token=get_link();
+				$link=$ip_server.'/faculty/forget_password.php?token='.$token;
+				$d=get_current_date();
+				$t=get_current_time();
+				$main_link=$ip_server.'/faculty';
+				
+				//clearing previous links and otps
+				$stmt = $conn->prepare("delete from nr_faculty_link_token where nr_faculty_id=:f_id");
+				$stmt->bindParam(':f_id', $faculty_id);
+				$stmt->execute();
+				
+				//Inserting new OTPs
+				$stmt = $conn->prepare("insert into nr_faculty_link_token values(:f_id,'$token','Forget Password','$d','$t','Active') ");
+				$stmt->bindParam(':f_id', $faculty_id);
+				$stmt->execute();
+				
+				
+				//sending password recovery link to user
+				$msg="Dear ".$f_name.", Welcome to ".$title." faculty panel. Your eamil ".$faculty_email." is set for the login access in <a href='".$main_link."' target='_blank'>faculty panel</a> of ".$title.". You can set your password from the following link: <a href='https://".$link."' target='_blank'>".$link."</a><p>&nbsp;</p><b>Note:</b> It is an one time link so be careful during the access, do not reload the page. For any query you can contact at: <a href='mailto:".$contact_email."' target='_blank'>".$contact_email."</a>";
+				$message = '<html><body>';
+				$message .= '<h1>Log In Access from - '.$title.'</h1><p>  </p>';
+				$message .= '<p><b>Message Details:</b></p>';
+				$message .= '<p>'.$msg.'</p></body></html>';
+				
+				
+				sent_mail($faculty_email,$title.' - Log In Access',$message,$title,$contact_email);
+				
 			}
 			
 			$stmt = $conn->prepare("update nr_faculty set nr_faculty_name=:faculty_name, nr_faculty_designation=:faculty_designation,nr_faculty_email=:faculty_email,nr_faculty_cell_no=:faculty_mobile,nr_faculty_join_date=:faculty_join_date, nr_faculty_resign_date=:faculty_resign_date,nr_dept_id=:faculty_dept,nr_faculty_gender=:faculty_gender,nr_faculty_type=:faculty_type,nr_faculty_status=:faculty_status where nr_faculty_id=:faculty_id ");

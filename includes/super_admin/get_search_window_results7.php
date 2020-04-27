@@ -52,22 +52,22 @@
 			<div class="w3-row w3-margin-0 w3-padding-0">
 				<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 0px;">
 					<label><i class="w3-text-red">*</i> <b>Faculty Name</b></label>
-					<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $faculty_name; ?>" id="faculty_view_name" placeholder="Enter Faculty Name" autocomplete="off" onchange="faculty_view_form_change()">
+					<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $faculty_name; ?>" id="faculty_view_name" placeholder="Enter Faculty Name" autocomplete="off" oninput="faculty_view_form_change()">
 					<input type="hidden" value="<?php echo $faculty_name; ?>" id="faculty_view_old_name">
 					
 					<label><i class="w3-text-red">*</i> <b>Faculty Designation</b></label>
-					<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $faculty_designation; ?>" id="faculty_view_designation" placeholder="Enter Faculty Designation" autocomplete="off" onchange="faculty_view_form_change()">
+					<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $faculty_designation; ?>" id="faculty_view_designation" placeholder="Enter Faculty Designation" autocomplete="off" oninput="faculty_view_form_change()">
 					<input type="hidden" value="<?php echo $faculty_designation; ?>" id="faculty_view_old_designation">
 					
 					<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
 						<div class="w3-col" style="width:49%;">
 							<label><b>Faculty Email</b> <i class="fa fa-exclamation-circle w3-cursor" title="By inserting email you are giving the faculty panel access. This faculty can access all the features of faculty panel through this email. He will get an one time link to set his password for the faculty panel. He will get the access till inactive status or resign of his ID."></i> </label>
-							<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="email" value="<?php echo $faculty_email; ?>" id="faculty_view_email" placeholder="Enter Faculty Email" autocomplete="off" onchange="faculty_view_form_change()">
+							<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="email" value="<?php echo $faculty_email; ?>" id="faculty_view_email" placeholder="Enter Faculty Email" autocomplete="off" oninput="faculty_view_form_change()">
 							<input type="hidden" value="<?php echo $faculty_email; ?>" id="faculty_view_old_email">
 						</div>
 						<div class="w3-col" style="margin-left:2%;width:49%;">
 							<label><b>Faculty Mobile</b></label>
-							<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $faculty_mobile; ?>" id="faculty_view_mobile" placeholder="Enter Faculty Mobile" autocomplete="off" onchange="faculty_view_form_change()">
+							<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $faculty_mobile; ?>" id="faculty_view_mobile" placeholder="Enter Faculty Mobile" autocomplete="off" oninput="faculty_view_form_change()">
 							<input type="hidden" value="<?php echo $faculty_mobile; ?>" id="faculty_view_old_mobile">
 						</div>
 						
@@ -76,12 +76,12 @@
 					<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
 						<div class="w3-col" style="width:49%;">
 							<label><i class="w3-text-red">*</i> <b>Join Date</b></label>
-							<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="date" value="<?php echo $faculty_join_date; ?>" id="faculty_view_join_date" placeholder="Enter Faculty Join Date" autocomplete="off" onchange="faculty_view_form_change()">
+							<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="date" value="<?php echo $faculty_join_date; ?>" id="faculty_view_join_date" placeholder="Enter Faculty Join Date" autocomplete="off" oninput="faculty_view_form_change()">
 							<input type="hidden" value="<?php echo $faculty_join_date; ?>" id="faculty_view_old_join_date">
 						</div>
 						<div class="w3-col" style="margin-left:2%;width:49%;">
 							<label><b>Resign Date</b> <i class="fa fa-exclamation-circle w3-cursor" title="By inserting resign date you are confirming that faculty resigned from NEUB and he will lose his access from faculty panel."></i> </label>
-							<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="date" value="<?php echo $faculty_resign_date; ?>" id="faculty_view_resign_date" placeholder="Enter Faculty Resign Date" autocomplete="off" onchange="faculty_view_form_change()">
+							<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="date" value="<?php echo $faculty_resign_date; ?>" id="faculty_view_resign_date" placeholder="Enter Faculty Resign Date" autocomplete="off" oninput="faculty_view_form_change()">
 							<input type="hidden" value="<?php echo $faculty_resign_date; ?>" id="faculty_view_old_resign_date">
 						</div>
 					</div>
@@ -169,7 +169,7 @@
 							<input class="w3-input w3-border w3-center w3-round-large" type="text" value="<?php echo $aaa.' + '.$bbb.' = '; ?>" disabled>
 						</div>
 						<div class="w3-col" style="margin-left:2%;width:58%;">
-							<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="faculty_view_captcha" autocomplete="off" onchange="faculty_view_form_change()">
+							<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="faculty_view_captcha" autocomplete="off" oninput="faculty_view_form_change()">
 						</div>
 					</div>
 					

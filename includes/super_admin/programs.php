@@ -797,7 +797,7 @@
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					
 					}
-					else if(status=='unable2')
+					else if(status=='u2')
 					{
 						document.getElementById('prog_multiple_progress_id').style.width='0%';
 						document.getElementById('prog_multiple_progress_id').innerHTML='0%';
