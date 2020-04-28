@@ -1139,7 +1139,7 @@
 						get_search_result15();
 						
 						document.getElementById('valid_msg').style.display='block';
-						document.getElementById('v_msg').innerHTML='admin successfully removed.';
+						document.getElementById('v_msg').innerHTML='Admin successfully removed.';
 						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
 					
 						
@@ -1188,7 +1188,7 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/delete_admin.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&admin_id="+admin_id+"&pass="+pass, true);
+			xhttp1.open("POST", "../includes/super_admin/delete_admin.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&admin_member_id="+admin_id+"&pass="+pass, true);
 			xhttp1.send();
 		}
 	}

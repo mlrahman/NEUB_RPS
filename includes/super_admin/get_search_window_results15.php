@@ -118,6 +118,17 @@
 			$fl8=1;
 		}
 		
+		$fl9=0; 
+		//checking if admin is delete able or not
+		$stmt = $conn->prepare("select * from nr_admin_history where nr_admin_id=:admin_member_id");
+		$stmt->bindParam(':admin_member_id', $admin_member_id);
+		$stmt->execute();
+		$result = $stmt->fetchAll();
+		if(count($result)>=1)
+		{
+			$fl9=1;
+		}
+		
 		$stmt = $conn->prepare("select a.nr_admin_id,a.nr_admin_name, a.nr_admin_designation,a.nr_admin_join_date,a.nr_admin_resign_date,a.nr_admin_type,a.nr_admin_email,a.nr_admin_status,a.nr_admin_gender,a.nr_admin_photo,a.nr_admin_cell_no from nr_admin a where nr_admin_id=:admin_member_id ");
 		$stmt->bindParam(':admin_member_id', $admin_member_id);
 		$stmt->execute();
@@ -183,7 +194,6 @@
 								<option value="<?php echo $admin_type; ?>"><?php echo $admin_type; ?></option>
 								<?php if($admin_type!='Admin'){ ?><option value="Admin">Admin</option><?php } ?>
 								<?php if($admin_type!='Moderator'){ ?><option value="Moderator">Moderator</option><?php } ?>
-								<?php if($admin_type!='Super Admin'){ ?><option value="Super Admin">Super Admin</option><?php } ?>
 							</select>
 							<input type="hidden" value="<?php echo $admin_type; ?>" id="admin_view_old_type">
 						</div>
@@ -256,7 +266,7 @@
 					
 					<button onclick="admin_view_form_reset()" class="w3-button w3-margin-top w3-red w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" <?php if($admin_type=='Super Admin'){ echo 'disabled'; } ?>><i class="fa fa-eye-slash"></i> Reset</button>
 					
-					<button onclick="document.getElementById('admin_view_re_confirmation').style.display='block';" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" <?php if($admin_type=='Super Admin'){ echo 'disabled'; } ?> <?php if($fl==1 || $fl1==1 || $fl2==1 || $fl3==1 || $fl4==1 || $fl5==1 || $fl6==1 || $fl7==1 || $fl8==1){ echo 'title="Sorry you can not delete it." disabled'; } ?>><i class="fa fa-eraser"></i> Remove</button>
+					<button onclick="document.getElementById('admin_view_re_confirmation').style.display='block';" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" <?php if($admin_type=='Super Admin'){ echo 'disabled'; } ?> <?php if($fl==1 || $fl1==1 || $fl2==1 || $fl3==1 || $fl4==1 || $fl5==1 || $fl6==1 || $fl7==1 || $fl8==1 || $fl9==1){ echo 'title="Sorry you can not delete it." disabled'; } ?>><i class="fa fa-eraser"></i> Remove</button>
 				
 					<button onclick="admin_view_form_save_changes('<?php echo $admin_member_id; ?>')" id="admin_view_save_btn" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" disabled><i class="fa fa-save"></i> Save Changes</button>
 				
@@ -271,7 +281,8 @@
 	
 	</div>
 	<div class="w3-container w3-margin-0 w3-padding-0 w3-center" id="admin_view_box3" style="display:none;">
-		<p class="w3-margin-0 w3-left-align w3-text-purple w3-cursor" style="margin: 0px 0px 0px 12px;" onclick="document.getElementById('admin_view_box1').style.display='block';document.getElementById('admin_view_box2').style.display='none';document.getElementById('admin_view_box3').style.display='none';"><i class="fa fa-mail-reply"></i> Back</p>
+		<p class="w3-margin-0 w3-left w3-text-purple w3-cursor" style="margin: 0px 0px 0px 12px;" onclick="document.getElementById('admin_view_box1').style.display='block';document.getElementById('admin_view_box2').style.display='none';document.getElementById('admin_view_box3').style.display='none';"><i class="fa fa-mail-reply"></i> Back</p>
+		<div class="w3-clear"></div>
 		<div class="w3-container w3-border w3-round-large w3-padding" style="margin: 0px 12px 12px 12px;">
 			<table style="width:100%;margin:5px 0px;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar">
 				<tr class="w3-teal w3-bold">

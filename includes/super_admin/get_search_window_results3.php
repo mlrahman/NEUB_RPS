@@ -170,7 +170,8 @@
 	
 	</div>
 	<div class="w3-container w3-margin-0 w3-padding-0 w3-center" id="prog_view_box3" style="display:none;">
-		<p class="w3-margin-0 w3-left-align w3-text-purple w3-cursor" style="margin: 0px 0px 0px 12px;" onclick="document.getElementById('prog_view_box1').style.display='block';document.getElementById('prog_view_box2').style.display='none';document.getElementById('prog_view_box3').style.display='none';"><i class="fa fa-mail-reply"></i> Back</p>
+		<p class="w3-margin-0 w3-left w3-text-purple w3-cursor" style="margin: 0px 0px 0px 12px;" onclick="document.getElementById('prog_view_box1').style.display='block';document.getElementById('prog_view_box2').style.display='none';document.getElementById('prog_view_box3').style.display='none';"><i class="fa fa-mail-reply"></i> Back</p>
+		<div class="w3-clear"></div>
 		<div class="w3-container w3-border w3-round-large w3-padding" style="margin: 0px 12px 12px 12px;">
 			<table style="width:100%;margin:5px 0px;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar">
 				<tr class="w3-teal w3-bold">
