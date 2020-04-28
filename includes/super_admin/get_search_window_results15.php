@@ -293,7 +293,7 @@
 					<td style="width:15%;" valign="top" class="w3-padding-small">Time</td>
 				</tr>
 				<?php
-					$stmt = $conn->prepare("select * from nr_admin_history a,nr_admin b where a.nr_admin_id=b.nr_admin_id and a.nr_admin_id=:admin_member_id order by a.nr_adminh_date desc,a.nr_adminh_time desc ");
+					$stmt = $conn->prepare("select * from nr_admin_history a,nr_admin b where a.nr_admin_id=b.nr_admin_id and a.nr_admin_member_id=:admin_member_id order by a.nr_adminh_date desc,a.nr_adminh_time desc ");
 					$stmt->bindParam(':admin_member_id', $admin_member_id);
 					$stmt->execute();
 					$result = $stmt->fetchAll();

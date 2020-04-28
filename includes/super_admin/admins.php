@@ -1201,7 +1201,6 @@
 		admin_view_mobile=document.getElementById('admin_view_mobile').value.trim();
 		admin_view_join_date=document.getElementById('admin_view_join_date').value.trim();
 		admin_view_resign_date=document.getElementById('admin_view_resign_date').value.trim();
-		admin_view_dept=document.getElementById('admin_view_dept').value.trim();
 		admin_view_type=document.getElementById('admin_view_type').value.trim();
 		admin_view_gender=document.getElementById('admin_view_gender').value.trim();
 		admin_view_captcha=document.getElementById('admin_view_captcha').value.trim();
@@ -1213,7 +1212,6 @@
 		admin_view_old_mobile=document.getElementById('admin_view_old_mobile').value.trim();
 		admin_view_old_join_date=document.getElementById('admin_view_old_join_date').value.trim();
 		admin_view_old_resign_date=document.getElementById('admin_view_old_resign_date').value.trim();
-		admin_view_old_dept=document.getElementById('admin_view_old_dept').value.trim();
 		admin_view_old_type=document.getElementById('admin_view_old_type').value.trim();
 		admin_view_old_gender=document.getElementById('admin_view_old_gender').value.trim();
 		admin_view_old_captcha=document.getElementById('admin_view_old_captcha').value.trim();
@@ -1244,11 +1242,11 @@
 			document.getElementById('admin_view_status').classList.add('w3-pale-red');
 		}
 		
-		if(admin_view_name=="" || admin_view_designation=="" || admin_view_status=="" || admin_view_join_date=="" || admin_view_dept=="" || admin_view_type=="" || admin_view_gender=="" || (admin_view_name==admin_view_old_name && admin_view_designation==admin_view_old_designation && admin_view_status==admin_view_old_status && admin_view_join_date==admin_view_old_join_date && admin_view_dept==admin_view_old_dept && admin_view_type==admin_view_old_type && admin_view_gender==admin_view_old_gender && admin_view_email==admin_view_old_email && admin_view_mobile==admin_view_old_mobile && admin_view_resign_date==admin_view_old_resign_date))
+		if(admin_view_name=="" || admin_view_designation=="" || admin_view_status=="" || admin_view_join_date=="" || admin_view_type=="" || admin_view_gender=="" || (admin_view_name==admin_view_old_name && admin_view_designation==admin_view_old_designation && admin_view_status==admin_view_old_status && admin_view_join_date==admin_view_old_join_date && admin_view_type==admin_view_old_type && admin_view_gender==admin_view_old_gender && admin_view_email==admin_view_old_email && admin_view_mobile==admin_view_old_mobile && admin_view_resign_date==admin_view_old_resign_date))
 		{
 			document.getElementById("admin_view_save_btn").disabled = true;
 		}
-		else if(admin_view_resign_date!=admin_view_old_resign_date || admin_view_mobile!=admin_view_old_mobile || admin_view_email!=admin_view_old_email || admin_view_name!=admin_view_old_name || admin_view_designation!=admin_view_old_designation || admin_view_status!=admin_view_old_status || admin_view_join_date!=admin_view_old_join_date || admin_view_dept!=admin_view_old_dept || admin_view_type!=admin_view_old_type || admin_view_gender!=admin_view_old_gender)
+		else if(admin_view_resign_date!=admin_view_old_resign_date || admin_view_mobile!=admin_view_old_mobile || admin_view_email!=admin_view_old_email || admin_view_name!=admin_view_old_name || admin_view_designation!=admin_view_old_designation || admin_view_status!=admin_view_old_status || admin_view_join_date!=admin_view_old_join_date || admin_view_type!=admin_view_old_type || admin_view_gender!=admin_view_old_gender)
 		{
 			document.getElementById("admin_view_save_btn").disabled = false;
 		}
@@ -1262,14 +1260,12 @@
 		admin_view_old_mobile=document.getElementById('admin_view_old_mobile').value.trim();
 		admin_view_old_join_date=document.getElementById('admin_view_old_join_date').value.trim();
 		admin_view_old_resign_date=document.getElementById('admin_view_old_resign_date').value.trim();
-		admin_view_old_dept=document.getElementById('admin_view_old_dept').value.trim();
 		admin_view_old_type=document.getElementById('admin_view_old_type').value.trim();
 		admin_view_old_gender=document.getElementById('admin_view_old_gender').value.trim();
 		admin_view_old_captcha=document.getElementById('admin_view_old_captcha').value.trim();
 		admin_view_old_status=document.getElementById('admin_view_old_status').value.trim();
 		
 		document.getElementById('admin_view_name').value=admin_view_old_name;
-		document.getElementById('admin_view_dept').value=admin_view_old_dept;
 		document.getElementById('admin_view_type').value=admin_view_old_type;
 		document.getElementById('admin_view_gender').value=admin_view_old_gender;
 		document.getElementById('admin_view_designation').value=admin_view_old_designation;
@@ -1318,7 +1314,6 @@
 		admin_view_mobile=document.getElementById('admin_view_mobile').value.trim();
 		admin_view_join_date=document.getElementById('admin_view_join_date').value.trim();
 		admin_view_resign_date=document.getElementById('admin_view_resign_date').value.trim();
-		admin_view_dept=document.getElementById('admin_view_dept').value.trim();
 		admin_view_type=document.getElementById('admin_view_type').value.trim();
 		admin_view_gender=document.getElementById('admin_view_gender').value.trim();
 		admin_view_captcha=document.getElementById('admin_view_captcha').value.trim();
@@ -1330,14 +1325,13 @@
 		admin_view_old_mobile=document.getElementById('admin_view_old_mobile').value.trim();
 		admin_view_old_join_date=document.getElementById('admin_view_old_join_date').value.trim();
 		admin_view_old_resign_date=document.getElementById('admin_view_old_resign_date').value.trim();
-		admin_view_old_dept=document.getElementById('admin_view_old_dept').value.trim();
 		admin_view_old_type=document.getElementById('admin_view_old_type').value.trim();
 		admin_view_old_gender=document.getElementById('admin_view_old_gender').value.trim();
 		admin_view_old_captcha=document.getElementById('admin_view_old_captcha').value.trim();
 		admin_view_old_status=document.getElementById('admin_view_old_status').value.trim();
 		
 		
-		if(admin_view_name=="" || admin_view_designation=="" || admin_view_status=="" || admin_view_join_date=="" || admin_view_dept=="" || admin_view_type=="" || admin_view_gender=="")
+		if(admin_view_name=="" || admin_view_designation=="" || admin_view_status=="" || admin_view_join_date=="" || admin_view_type=="" || admin_view_gender=="")
 		{
 			document.getElementById('invalid_msg').style.display='block';
 			document.getElementById('i_msg').innerHTML='Please fill up all the fields.';
@@ -1395,17 +1389,6 @@
 						document.getElementById('admin_view_box3').style.display='none';
 						
 						document.getElementById('invalid_msg').style.display='block';
-						document.getElementById('i_msg').innerHTML='Unable to make change (Department Inactive).';
-						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
-		
-					}
-					else if(this.responseText.trim()=='unable3')
-					{
-						document.getElementById('admin_view_box1').style.display='block';
-						document.getElementById('admin_view_box2').style.display='none';
-						document.getElementById('admin_view_box3').style.display='none';
-						
-						document.getElementById('invalid_msg').style.display='block';
 						document.getElementById('i_msg').innerHTML='Unable to make change (Invalid Email).';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 		
@@ -1434,7 +1417,7 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/edit_admin.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&admin_name="+admin_view_name+"&admin_designation="+admin_view_designation+"&admin_email="+admin_view_email+"&admin_mobile="+admin_view_mobile+"&admin_join_date="+admin_view_join_date+"&admin_resign_date="+admin_view_resign_date+"&admin_dept="+admin_view_dept+"&admin_type="+admin_view_type+"&admin_gender="+admin_view_gender+"&admin_status="+admin_view_status+"&admin_id="+admin_id, true);
+			xhttp1.open("POST", "../includes/super_admin/edit_admin.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&admin_name="+admin_view_name+"&admin_designation="+admin_view_designation+"&admin_email="+admin_view_email+"&admin_mobile="+admin_view_mobile+"&admin_join_date="+admin_view_join_date+"&admin_resign_date="+admin_view_resign_date+"&admin_type="+admin_view_type+"&admin_gender="+admin_view_gender+"&admin_status="+admin_view_status+"&admin_member_id="+admin_id, true);
 			xhttp1.send();
 		}
 		
