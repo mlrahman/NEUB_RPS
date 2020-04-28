@@ -154,12 +154,6 @@
 		<div id="page5" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
 			<?php include("../includes/super_admin/course_offer_list.php"); ?>
 		</div>
-		<!-- page6 starts here -->
-		<div id="page6" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
-			
-			
-			
-		</div>
 		<!-- page7 starts here -->
 		<div id="page7" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
 			<?php include("../includes/super_admin/faculties.php"); ?>
@@ -202,9 +196,7 @@
 		<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
 		<!-- page15 starts here -->
 		<div id="page15" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
-			
-			
-			
+			<?php include("../includes/super_admin/admins.php"); ?>
 		</div>
 		<?php } ?>
 		

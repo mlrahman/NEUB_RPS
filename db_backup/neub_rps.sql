@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2020 at 04:00 PM
+-- Generation Time: Apr 28, 2020 at 12:53 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -52,6 +52,21 @@ INSERT INTO `nr_admin` (`nr_admin_id`, `nr_admin_name`, `nr_admin_email`, `nr_ad
 (1, 'Shams Elahi Rasel', 'mirlutfur.rahman@gmail.com', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '', '158677029315867702938237.jpg', 'Super Admin', 'Controller of Examination, NEUB', 'Active', 0, '', 'Male', '2012-11-03'),
 (2, 'Fahad Ahmed', 'mlrahman@neub.edu.bd', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '', '15867702931586770293823.jpg', 'Moderator', 'Assistant Controller of NEUB', 'Active', 0, '', 'Male', '2013-01-01'),
 (3, 'Sonjoy Roy', 'sr@sr.sr', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '', '', 'Admin', 'Associate Controller of Examination', 'Active', 0, '', 'Male', '2019-11-10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nr_admin_history`
+--
+
+CREATE TABLE `nr_admin_history` (
+  `nr_admin_member_id` bigint(20) NOT NULL,
+  `nr_admin_id` bigint(20) NOT NULL,
+  `nr_adminh_task` mediumtext NOT NULL,
+  `nr_adminh_date` varchar(20) NOT NULL,
+  `nr_adminh_time` varchar(20) NOT NULL,
+  `nr_adminh_status` enum('Active','Inactive') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -130,7 +145,9 @@ INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '02:26 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-26', '04:00 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-27', '12:25 AM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-27', '04:06 PM', 'Inactive');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-27', '04:06 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-27', '09:02 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-28', '03:41 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -172,7 +189,7 @@ CREATE TABLE `nr_course` (
 --
 
 INSERT INTO `nr_course` (`nr_course_id`, `nr_course_code`, `nr_course_title`, `nr_course_credit`, `nr_prog_id`, `nr_course_status`) VALUES
-(1, 'CSE 111', 'Fundamentals of Computers', 3, 1, 'Active'),
+(1, 'CSE 111', 'Fundamentals of Computers', 3, 1, 'Inactive'),
 (2, 'CSE 113', 'Structured Programming Language', 3, 1, 'Active'),
 (3, 'CSE 114', 'Structured Programming Language Lab', 1.5, 1, 'Active'),
 (4, 'CSE 311', 'Computer Architecture', 3, 1, 'Active'),
@@ -209,7 +226,8 @@ INSERT INTO `nr_course_history` (`nr_course_id`, `nr_admin_id`, `nr_courseh_task
 (10, 1, 'Edited Course Title: Bioinformatics, Course Code: CSE 455, Course Credit: 3, Course Program: B.Sc. (Engg.) in CSE, Course Status: Inactive', '2020-04-24', '12:26 AM', 'Active'),
 (10, 1, 'Edited Course Title: Bioinformatics, Course Code: CSE 455, Course Credit: 3, Course Program: B.Sc. (Engg.) in CSE, Course Status: Active', '2020-04-24', '12:27 AM', 'Active'),
 (14, 1, 'Edited Course Title: Algorithm Design and Analysis, Course Code: CSE 221, Course Credit: 3, Course Program: B.Sc. (Engg.) in CSE, Course Status: Active', '2020-04-24', '12:47 AM', 'Active'),
-(15, 1, 'Edited Course Title: Algorithm Design and Analysis Lab, Course Code: CSE 222, Course Credit: 1.5, Course Program: B.Sc. (Engg.) in CSE, Course Status: Inactive', '2020-04-24', '12:47 AM', 'Active');
+(15, 1, 'Edited Course Title: Algorithm Design and Analysis Lab, Course Code: CSE 222, Course Credit: 1.5, Course Program: B.Sc. (Engg.) in CSE, Course Status: Inactive', '2020-04-24', '12:47 AM', 'Active'),
+(1, 1, 'Edited Course Title: Fundamentals of Computers, Course Code: CSE 111, Course Credit: 3.00, Course Program: B.Sc. (Engg.) in CSE, Course Status: Inactive', '2020-04-28', '03:44 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -335,7 +353,7 @@ INSERT INTO `nr_drop` (`nr_drop_id`, `nr_prcr_id`, `nr_prog_id`, `nr_course_id`,
 (3, 1, 1, 2, '2', 'Compulsory', 'Active'),
 (4, 1, 1, 3, '2', 'Compulsory', 'Active'),
 (5, 1, 1, 8, '4', 'Compulsory', 'Active'),
-(6, 1, 1, 9, '4', 'Compulsory', 'Active'),
+(6, 1, 1, 9, '4', 'Compulsory', 'Inactive'),
 (8, 1, 1, 6, '5', 'Compulsory', 'Active'),
 (9, 1, 1, 4, '3', 'Optional I', 'Active'),
 (10, 1, 1, 10, '3', 'Optional I', 'Active'),
@@ -375,7 +393,8 @@ INSERT INTO `nr_drop_history` (`nr_drop_id`, `nr_admin_id`, `nr_droph_task`, `nr
 (14, 1, 'Added Course Title: Cost Management and Accounting, Course Code: BBA 201, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 5, Offer Program: BBA, Program Credit: 127, Offer Status: Active', '2020-04-25', '04:45 PM', 'Active'),
 (16, 1, 'Added Course Title: Database System, Course Code: CSE 313, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 7, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Inactive', '2020-04-25', '09:01 PM', 'Active'),
 (17, 1, 'Added Course Title: Algorithm Design and Analysis, Course Code: CSE 221, Course Credit: 3.00, Course Type: Optional II, Offer Semester: 3, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Active', '2020-04-25', '09:01 PM', 'Active'),
-(18, 1, 'Added Course Title: Algorithm Design and Analysis Lab, Course Code: CSE 222, Course Credit: 1.50, Course Type: Compulsory, Offer Semester: 3, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Active', '2020-04-25', '09:01 PM', 'Active');
+(18, 1, 'Added Course Title: Algorithm Design and Analysis Lab, Course Code: CSE 222, Course Credit: 1.50, Course Type: Compulsory, Offer Semester: 3, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Active', '2020-04-25', '09:01 PM', 'Active'),
+(6, 1, 'Edited Offer Course Title: Object Oriented Programming Language Lab, Course Code: CSE 212, Course Credit: 1.50, Course Type: Compulsory, Offer Semester: 4th, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Inactive', '2020-04-28', '03:42 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1471,7 +1490,26 @@ INSERT INTO `nr_result_check_transaction` (`nr_stud_id`, `nr_rechtr_ip_address`,
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '12:47 AM', 'Active'),
 (140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '12:48 AM', 'Active'),
 (140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '09:26 PM', 'Active'),
-(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-26', '07:54 PM', 'Active');
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-26', '07:54 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-28', '03:42 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-28', '03:42 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-28', '03:43 PM', 'Active'),
+(140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-28', '03:44 PM', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nr_result_history`
+--
+
+CREATE TABLE `nr_result_history` (
+  `nr_result_id` bigint(20) NOT NULL,
+  `nr_admin_id` bigint(20) NOT NULL,
+  `nr_resulth_task` mediumtext NOT NULL,
+  `nr_resulth_date` varchar(20) NOT NULL,
+  `nr_resulth_time` varchar(20) NOT NULL,
+  `nr_resulth_status` enum('Active','Inactive') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1504,6 +1542,21 @@ INSERT INTO `nr_student` (`nr_stud_id`, `nr_stud_name`, `nr_stud_dob`, `nr_stud_
 (140203020006, 'Shamima Khatun', '1990-07-02', 'Female', '', '', '', 1, 1, 'Active'),
 (140203020009, 'Nusrat Hoque', '1990-07-02', 'Female', '', '', '', 1, 1, 'Active'),
 (150102040001, 'Rahat Mahmud', '1994-07-02', 'Male', '', '', '', 3, 3, 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nr_student_history`
+--
+
+CREATE TABLE `nr_student_history` (
+  `nr_stud_id` bigint(20) NOT NULL,
+  `nr_admin_id` bigint(20) NOT NULL,
+  `nr_studh_task` mediumtext NOT NULL,
+  `nr_studh_date` varchar(20) NOT NULL,
+  `nr_studh_time` varchar(20) NOT NULL,
+  `nr_studh_status` enum('Active','Inactive') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1705,6 +1758,13 @@ ALTER TABLE `nr_admin`
   ADD PRIMARY KEY (`nr_admin_id`);
 
 --
+-- Indexes for table `nr_admin_history`
+--
+ALTER TABLE `nr_admin_history`
+  ADD KEY `nr_admin_member_id` (`nr_admin_member_id`),
+  ADD KEY `nr_admin_id` (`nr_admin_id`);
+
+--
 -- Indexes for table `nr_admin_link_token`
 --
 ALTER TABLE `nr_admin_link_token`
@@ -1843,12 +1903,26 @@ ALTER TABLE `nr_result_check_transaction`
   ADD KEY `nr_stud_id` (`nr_stud_id`);
 
 --
+-- Indexes for table `nr_result_history`
+--
+ALTER TABLE `nr_result_history`
+  ADD KEY `nr_admin_id` (`nr_admin_id`),
+  ADD KEY `nr_result_id` (`nr_result_id`);
+
+--
 -- Indexes for table `nr_student`
 --
 ALTER TABLE `nr_student`
   ADD PRIMARY KEY (`nr_stud_id`),
   ADD KEY `nr_prog_id` (`nr_prog_id`),
   ADD KEY `nr_prcr_id` (`nr_prcr_id`);
+
+--
+-- Indexes for table `nr_student_history`
+--
+ALTER TABLE `nr_student_history`
+  ADD KEY `nr_admin_id` (`nr_admin_id`),
+  ADD KEY `nr_stud_id` (`nr_stud_id`);
 
 --
 -- Indexes for table `nr_student_info`
@@ -1951,6 +2025,13 @@ ALTER TABLE `nr_system_component`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `nr_admin_history`
+--
+ALTER TABLE `nr_admin_history`
+  ADD CONSTRAINT `nr_admin_history_ibfk_1` FOREIGN KEY (`nr_admin_member_id`) REFERENCES `nr_admin` (`nr_admin_id`),
+  ADD CONSTRAINT `nr_admin_history_ibfk_2` FOREIGN KEY (`nr_admin_id`) REFERENCES `nr_admin` (`nr_admin_id`);
 
 --
 -- Constraints for table `nr_admin_link_token`
@@ -2079,11 +2160,25 @@ ALTER TABLE `nr_result_check_transaction`
   ADD CONSTRAINT `nr_result_check_transaction_ibfk_1` FOREIGN KEY (`nr_stud_id`) REFERENCES `nr_student` (`nr_stud_id`);
 
 --
+-- Constraints for table `nr_result_history`
+--
+ALTER TABLE `nr_result_history`
+  ADD CONSTRAINT `nr_result_history_ibfk_1` FOREIGN KEY (`nr_admin_id`) REFERENCES `nr_admin` (`nr_admin_id`),
+  ADD CONSTRAINT `nr_result_history_ibfk_2` FOREIGN KEY (`nr_result_id`) REFERENCES `nr_result` (`nr_result_id`);
+
+--
 -- Constraints for table `nr_student`
 --
 ALTER TABLE `nr_student`
   ADD CONSTRAINT `nr_student_ibfk_1` FOREIGN KEY (`nr_prog_id`) REFERENCES `nr_program` (`nr_prog_id`),
   ADD CONSTRAINT `nr_student_ibfk_2` FOREIGN KEY (`nr_prcr_id`) REFERENCES `nr_program_credit` (`nr_prcr_id`);
+
+--
+-- Constraints for table `nr_student_history`
+--
+ALTER TABLE `nr_student_history`
+  ADD CONSTRAINT `nr_student_history_ibfk_1` FOREIGN KEY (`nr_admin_id`) REFERENCES `nr_admin` (`nr_admin_id`),
+  ADD CONSTRAINT `nr_student_history_ibfk_2` FOREIGN KEY (`nr_stud_id`) REFERENCES `nr_student` (`nr_stud_id`);
 
 --
 -- Constraints for table `nr_student_info`

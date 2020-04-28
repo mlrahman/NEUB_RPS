@@ -63,9 +63,8 @@
 			<a onclick="get_page(4)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-book"></i> Course List</a> 
 			<a onclick="get_page(5)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-sitemap"></i> Course Offer List</a> 
 			<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
-				<a onclick="get_page(15)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-key"></i> Admins</a>
+				<a onclick="get_page(15)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-id-card-o"></i> Admin Members</a>
 			<?php } ?>
-			<a onclick="get_page(6)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-id-card-o"></i> Moderators</a>
 			<a onclick="get_page(7)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-id-badge"></i> Faculty Members</a>
 			<a onclick="get_page(8)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-users"></i> Students</a>
 			<a onclick="get_page(9)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-database"></i> Results</a>
@@ -86,7 +85,6 @@
 				document.getElementById('page3').style.display='none';
 				document.getElementById('page4').style.display='none';
 				document.getElementById('page5').style.display='none';
-				document.getElementById('page6').style.display='none';
 				document.getElementById('page7').style.display='none';
 				document.getElementById('page8').style.display='none';
 				document.getElementById('page9').style.display='none';
@@ -124,11 +122,6 @@
 				{
 					document.getElementById('page_title').innerHTML='<i class="fa fa-sitemap"></i> Course Offer List';
 					document.getElementById('page5').style.display='block';
-				}
-				else if(a==6)
-				{
-					document.getElementById('page_title').innerHTML='<i class="fa fa-id-card-o"></i> Moderators';
-					document.getElementById('page6').style.display='block';
 				}
 				else if(a==7)
 				{
@@ -175,7 +168,7 @@
 				<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
 				else if(a==15)
 				{
-					document.getElementById('page_title').innerHTML='<i class="fa fa-key"></i> Admins';
+					document.getElementById('page_title').innerHTML='<i class="fa fa-key"></i> Admin Members';
 					document.getElementById('page15').style.display='block';
 				}
 				<?php } ?>
