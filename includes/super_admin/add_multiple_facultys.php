@@ -67,12 +67,22 @@
 						
 						
 						//check required important fields
-						if($faculty_email=="" || $faculty_designation=="" || $faculty_join_date==""  || $faculty_type==""  || $faculty_gender==""  || $faculty_status=="")
+						if($faculty_name=="" || $faculty_designation=="" || $faculty_join_date==""  || $faculty_type==""  || $faculty_gender==""  || $faculty_status=="")
 							break;
 
 						$logs=$logs.'<li>'.$faculty_name.' - '.$faculty_designation.' - '.$faculty_join_date.' - '.$faculty_type.' - '.$faculty_gender.' - '.$faculty_status.' : ';
 						
-						if($faculty_status=='Active' || $faculty_status=='Inactive')
+						if($faculty_join_date!='' && check_date($faculty_join_date)==false)
+						{
+							$failed++;
+							$logs=$logs.' <span class="w3-text-red">Failed (Invalid Join Date)</span>';
+						}
+						else if($faculty_resign_date!='' && check_date($faculty_resign_date)==false)
+						{
+							$failed++;
+							$logs=$logs.' <span class="w3-text-red">Failed (Invalid Resign Date)</span>';
+						}
+						else if($faculty_status=='Active' || $faculty_status=='Inactive')
 						{
 							
 							$stmt = $conn->prepare("select * from nr_faculty where ((nr_faculty_email!='' and nr_faculty_email=:faculty_email) or (nr_faculty_name=:faculty_name and nr_faculty_designation=:faculty_designation and nr_faculty_join_date=:faculty_join_date))");

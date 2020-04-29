@@ -229,6 +229,9 @@
 			/***********************/
 			
 			
+			$stmt = $conn->prepare("delete from nr_admin_history where nr_admin_member_id=:admin_member_id ");
+			$stmt->bindParam(':admin_member_id', $admin_member_id);
+			$stmt->execute();
 		
 			$stmt = $conn->prepare("delete from nr_admin_link_token where nr_admin_id=:admin_member_id ");
 			$stmt->bindParam(':admin_member_id', $admin_member_id);

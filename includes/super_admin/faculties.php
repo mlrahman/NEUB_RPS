@@ -559,6 +559,7 @@
 		document.getElementById('faculty_multiple_add_box3').style.display='none';
 		document.getElementById('faculty_multiple_add_captcha').value='';
 		document.getElementById('faculty_excel_file').value='';
+		document.getElementById('faculty_multiple_add_dept').value='';
 		
 		document.getElementById('faculty_multiple_total').innerHTML='';
 		document.getElementById('faculty_multiple_success').innerHTML='';

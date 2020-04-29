@@ -24,7 +24,7 @@
 		<form onsubmit="return false">
 			
 		<div class="w3-container w3-padding">
-			<p class="w3-large w3-bold w3-text-brown">Are you sure you want to add all the admins?</p>
+			<p class="w3-large w3-bold w3-text-brown">Are you sure you want to add all the admin members?</p>
 			
 			<label><i class="w3-text-red">*</i> <b>Enter your password</b></label>
 			<input class="w3-input w3-border w3-margin-bottom w3-round-large w3-margin-bottom" type="password" id="admin_multiple_add_pass" placeholder="Enter your password" autocomplete="off">
@@ -66,7 +66,7 @@
 		<form onsubmit="return false">
 			
 		<div class="w3-container w3-padding">
-			<p class="w3-large w3-bold w3-text-brown">Are you sure you want to add the admin?</p>
+			<p class="w3-large w3-bold w3-text-brown">Are you sure you want to add this admin member?</p>
 			
 			<label><i class="w3-text-red">*</i> <b>Enter your password</b></label>
 			<input class="w3-input w3-border w3-margin-bottom w3-round-large w3-margin-bottom" type="password" id="admin_single_add_pass" placeholder="Enter your password" autocomplete="off">
@@ -202,19 +202,19 @@
 				<div class="w3-row w3-margin-0 w3-padding-0">
 					<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 0px;">
 						<label><i class="w3-text-red">*</i> <b>Admin Name</b></label>
-						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="admin_single_add_name" placeholder="Enter admin Name" autocomplete="off" oninput="admin_single_add_form_change()">
+						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="admin_single_add_name" placeholder="Enter Admin Name" autocomplete="off" oninput="admin_single_add_form_change()">
 						
 						<label><i class="w3-text-red">*</i> <b>Admin Designation</b></label>
-						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="admin_single_add_designation" placeholder="Enter admin Designation" autocomplete="off" oninput="admin_single_add_form_change()">
+						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="admin_single_add_designation" placeholder="Enter Admin Designation" autocomplete="off" oninput="admin_single_add_form_change()">
 						
 						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
 							<div class="w3-col" style="width:49%;">
-								<label><b>Admin Email</b> <i class="fa fa-exclamation-circle w3-cursor" title="By inserting email you are giving the admin panel access. This admin can access all the features of admin panel through this email. He will get an one time link to set his password for the admin panel. He will get the access till inactive status or resign of his ID."></i> </label>
-								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="email" id="admin_single_add_email" placeholder="Enter admin Email" autocomplete="off" onchange="admin_single_add_form_change()">
+								<label><b>Admin Email</b> <i class="fa fa-exclamation-circle w3-cursor" title="By inserting email you are giving the admin or moderator panel access. This admin can access all the features of admin or moderator panel through this email. He will get an one time link to set his password for the admin or moderator panel. He will get the access till inactive status or resign of his ID."></i> </label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="email" id="admin_single_add_email" placeholder="Enter Admin Email" autocomplete="off" onchange="admin_single_add_form_change()">
 							</div>
 							<div class="w3-col" style="margin-left:2%;width:49%;">
-								<label><b>admin Mobile</b></label>
-								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="admin_single_add_mobile" placeholder="Enter admin Mobile" autocomplete="off" onchange="admin_single_add_form_change()">
+								<label><b>Admin Mobile</b></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="admin_single_add_mobile" placeholder="Enter Admin Mobile" autocomplete="off" onchange="admin_single_add_form_change()">
 							</div>
 							
 						</div>
@@ -222,47 +222,24 @@
 						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
 							<div class="w3-col" style="width:49%;">
 								<label><i class="w3-text-red">*</i> <b>Join Date</b></label>
-								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="date" id="admin_single_add_join_date" placeholder="Enter admin Join Date" autocomplete="off" onchange="admin_single_add_form_change()">
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="date" id="admin_single_add_join_date" placeholder="Enter Admin Join Date" autocomplete="off" onchange="admin_single_add_form_change()">
 							</div>
 							<div class="w3-col" style="margin-left:2%;width:49%;">
-								<label><b>Resign Date</b> <i class="fa fa-exclamation-circle w3-cursor" title="By inserting resign date you are confirming that admin resigned from NEUB and he will lose his access from admin panel."></i> </label>
-								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="date" id="admin_single_add_resign_date" placeholder="Enter admin Resign Date" autocomplete="off" onchange="admin_single_add_form_change()">
+								<label><b>Resign Date</b> <i class="fa fa-exclamation-circle w3-cursor" title="By inserting resign date you are confirming that admin resigned from NEUB and he will lose his access from admin or moderator panel."></i> </label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="date" id="admin_single_add_resign_date" placeholder="Enter Admin Resign Date" autocomplete="off" onchange="admin_single_add_form_change()">
 							</div>
 						</div>
 						
 						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
-							<div class="w3-col" style="width:32%;">
-								<label><i class="w3-text-red">*</i> <b>Department</b></label>
-								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="admin_single_add_dept" onchange="admin_single_add_form_change()">
-									<option value="">Select</option>
-									<?php
-										$stmt = $conn->prepare("SELECT * FROM nr_department where nr_dept_status='Active' order by nr_dept_title asc");
-										$stmt->execute();
-										$stud_result=$stmt->fetchAll();
-										if(count($stud_result)>0)
-										{
-											$sz=count($stud_result);
-											for($k=0;$k<$sz;$k++)
-											{
-												$dept_id=$stud_result[$k][0];
-												$dept_title=$stud_result[$k][1];
-												echo '<option value="'.$dept_id.'">'.$dept_title.'</option>';
-											}
-										}
-									?>
-									
-								</select>
-							</div>
-							<div class="w3-col" style="margin-left:2%;width:32%;">
-								<label><i class="w3-text-red">*</i> <b>admin Type</b></label>
+							<div class="w3-col" style="width:49%;">
+								<label><i class="w3-text-red">*</i> <b>Admin Type</b></label>
 								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="admin_single_add_type" onchange="admin_single_add_form_change()">
 									<option value="">Select</option>
-									<option value="Permanent">Permanent</option>
-									<option value="Adjunct">Adjunct</option>
-									<option value="Guest">Guest</option>
+									<option value="Admin">Admin</option>
+									<option value="Moderator">Moderator</option>
 								</select>
 							</div>
-							<div class="w3-col" style="margin-left:2%;width:32%;">
+							<div class="w3-col" style="margin-left:2%;width:49%;">
 								<label><i class="w3-text-red">*</i> <b>Gender</b></label>
 								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="admin_single_add_gender" onchange="admin_single_add_form_change()">
 									<option value="">Select</option>
@@ -327,35 +304,14 @@
 				<ol>
 					<li>First download the formatted excel file from <a href="../excel_files/demo/insert_multiple_admin.xlsx" target="_blank" class="w3-text-blue">here</a>.</li>
 					<li>In this excel file (<span class="w3-text-red">*</span>) marked columns are mandatory for each row (not valid for blank row). Very carefully fill up the rows with your data. <b>Don't put gap</b> between two rows. Also <b>ignore duplicated data</b> for consistent input.</li>
-					<li>Input date according to the format <b>YYYY-MM-DD</b>. Inserting email will give the access of the admin panel. Photo is uploadable from the admin panel only.</li>
-					<li>After filling the necessary rows you have to <b>submit it from the below form</b>. Don't forget to select a department in the below form. You can insert at most <b>50 admin members</b> in a single upload under a single department.</li>
-					<li>This process may take <b>up to three minutes</b> so keep patience. After finishing the process you will get a logs.</li>
+					<li>Input date according to the format <b>YYYY-MM-DD</b>. Inserting email will give the access of the admin or moderator panel. Photo is uploadable from the admin or moderator panel only.</li>
+					<li>After filling the necessary rows you have to <b>submit it from the below form</b>. You can insert at most <b>50 admin or moderator members</b> in a single upload.</li>
+					<li>This process may take <b>up to five minutes</b> so keep patience. After finishing the process you will get a logs.</li>
 				</ol>
 			</div>
 			
 			<div class="w3-row w3-margin-top w3-margin-bottom w3-round-large w3-border w3-padding">
 				<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 6px;">
-					<label><i class="w3-text-red">*</i> <b>admin Department</b></label>
-					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="admin_multiple_add_dept" onchange="admin_multiple_add_form_change()">
-						<option value="">Select</option>
-						<?php
-							$stmt = $conn->prepare("SELECT * FROM nr_department where nr_dept_status='Active' order by nr_dept_title asc");
-							$stmt->execute();
-							$stud_result=$stmt->fetchAll();
-							if(count($stud_result)>0)
-							{
-								$sz=count($stud_result);
-								for($k=0;$k<$sz;$k++)
-								{
-									$dept_id=$stud_result[$k][0];
-									$dept_title=$stud_result[$k][1];
-									echo '<option value="'.$dept_id.'">'.$dept_title.'</option>';
-								}
-							}
-						?>
-						
-					</select>
-					
 					<label><i class="w3-text-red">*</i> <b>Upload Excel File</b></label>
 					<input class="w3-input w3-border w3-round-large" type="file" id="admin_excel_file" title="Please upload the formatted and filled up excel file."  onchange="admin_multiple_add_form_change()">
 					
@@ -553,9 +509,8 @@
 	function admin_multiple_add_form_change()
 	{
 		var admin_excel_file=document.getElementById('admin_excel_file').value;
-		var admin_multiple_add_dept=document.getElementById('admin_multiple_add_dept').value;
 		
-		if(admin_excel_file=="" || admin_multiple_add_dept=="")
+		if(admin_excel_file=="")
 		{
 			document.getElementById("admin_multiple_add_save_btn").disabled = true;
 		}
@@ -569,7 +524,6 @@
 	{
 		document.getElementById('admin_multiple_add_captcha').value='';
 		document.getElementById('admin_excel_file').value='';
-		document.getElementById('admin_multiple_add_dept').value='';
 						
 		document.getElementById("admin_multiple_add_save_btn").disabled = true;
 		
@@ -586,7 +540,6 @@
 		document.getElementById('admin_single_add_mobile').value='';
 		document.getElementById('admin_single_add_join_date').value='';
 		document.getElementById('admin_single_add_resign_date').value='';
-		document.getElementById('admin_single_add_dept').value='';
 		document.getElementById('admin_single_add_type').value='';
 		document.getElementById('admin_single_add_gender').value='';
 		document.getElementById('admin_single_add_captcha').value='';
@@ -645,7 +598,6 @@
 		var admin_single_add_mobile=document.getElementById('admin_single_add_mobile').value.trim();
 		var admin_single_add_join_date=document.getElementById('admin_single_add_join_date').value.trim();
 		var admin_single_add_resign_date=document.getElementById('admin_single_add_resign_date').value.trim();
-		var admin_single_add_dept=document.getElementById('admin_single_add_dept').value.trim();
 		var admin_single_add_type=document.getElementById('admin_single_add_type').value.trim();
 		var admin_single_add_gender=document.getElementById('admin_single_add_gender').value.trim();
 		var admin_single_add_captcha=document.getElementById('admin_single_add_captcha').value.trim();
@@ -686,7 +638,7 @@
 				document.getElementById('admin_single_add_status').classList.remove('w3-pale-red');
 			}
 		}
-		if(admin_single_add_name=="" || admin_single_add_designation=="" || admin_single_add_join_date=="" || admin_single_add_dept=="" || admin_single_add_type=="" || admin_single_add_gender=="" || admin_single_add_status=="")
+		if(admin_single_add_name=="" || admin_single_add_designation=="" || admin_single_add_join_date=="" || admin_single_add_type=="" || admin_single_add_gender=="" || admin_single_add_status=="")
 		{
 			document.getElementById("admin_single_add_save_btn").disabled = true;
 		}
@@ -704,7 +656,6 @@
 		document.getElementById('admin_single_add_mobile').value='';
 		document.getElementById('admin_single_add_join_date').value='';
 		document.getElementById('admin_single_add_resign_date').value='';
-		document.getElementById('admin_single_add_dept').value='';
 		document.getElementById('admin_single_add_type').value='';
 		document.getElementById('admin_single_add_gender').value='';
 		document.getElementById('admin_single_add_captcha').value='';
@@ -757,11 +708,10 @@
 	function admin_multiple_add_form_save()
 	{
 		var admin_excel_file=document.getElementById('admin_excel_file').value;
-		var admin_multiple_add_dept=document.getElementById('admin_multiple_add_dept').value;
 		admin_view_captcha=document.getElementById('admin_multiple_add_captcha').value.trim();
 		admin_view_old_captcha=document.getElementById('admin_multiple_add_old_captcha').value.trim();
 		
-		if(admin_excel_file=="" || admin_multiple_add_dept=="" || file_validate3(admin_excel_file)==false)
+		if(admin_excel_file=="" || file_validate3(admin_excel_file)==false)
 		{
 			document.getElementById('admin_multiple_add_pass').value='';
 			
@@ -889,21 +839,6 @@
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					
 					}
-					else if(status=='u2')
-					{
-						document.getElementById('admin_multiple_progress_id').style.width='0%';
-						document.getElementById('admin_multiple_progress_id').innerHTML='0%';
-						
-						document.getElementById('admin_multiple_add_box1').style.display='block';
-						document.getElementById('admin_multiple_add_box3').style.display='none';
-						document.getElementById('admin_multiple_add_box2').style.display='none';
-				
-						
-						document.getElementById('invalid_msg').style.display='block';
-						document.getElementById('i_msg').innerHTML='Unable to make change (Department Inactive).';
-						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
-					
-					}
 					else
 					{
 						document.getElementById('admin_multiple_progress_id').style.width='0%';
@@ -953,7 +888,7 @@
 				  }
 				}
 			};
-			xhttp1.open("POST", "../includes/super_admin/add_multiple_admins.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&excel="+link+"&pass="+pass+"&admin_dept="+admin_multiple_add_dept, true);
+			xhttp1.open("POST", "../includes/super_admin/add_multiple_admins.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&excel="+link+"&pass="+pass, true);
 			xhttp1.send(fd_excel);
 		}
 	}
@@ -967,14 +902,13 @@
 		var admin_single_add_mobile=document.getElementById('admin_single_add_mobile').value.trim();
 		var admin_single_add_join_date=document.getElementById('admin_single_add_join_date').value.trim();
 		var admin_single_add_resign_date=document.getElementById('admin_single_add_resign_date').value.trim();
-		var admin_single_add_dept=document.getElementById('admin_single_add_dept').value.trim();
 		var admin_single_add_type=document.getElementById('admin_single_add_type').value.trim();
 		var admin_single_add_gender=document.getElementById('admin_single_add_gender').value.trim();
 		var admin_single_add_captcha=document.getElementById('admin_single_add_captcha').value.trim();
 		var admin_single_add_old_captcha=document.getElementById('admin_single_add_old_captcha').value.trim();
 		var admin_single_add_status=document.getElementById('admin_single_add_status').value.trim();
 		
-		if(admin_single_add_name=="" || admin_single_add_designation=="" || admin_single_add_join_date=="" || admin_single_add_dept=="" || admin_single_add_type=="" || admin_single_add_gender=="" || admin_single_add_status=="")
+		if(admin_single_add_name=="" || admin_single_add_designation=="" || admin_single_add_join_date=="" || admin_single_add_type=="" || admin_single_add_gender=="" || admin_single_add_status=="")
 		{
 			document.getElementById('admin_single_add_pass').value='';
 			
@@ -1020,7 +954,7 @@
 						get_search_result15();
 						
 						document.getElementById('valid_msg').style.display='block';
-						document.getElementById('v_msg').innerHTML='admin successfully added.';
+						document.getElementById('v_msg').innerHTML='Admin successfully added.';
 						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
 					
 						
@@ -1041,15 +975,6 @@
 						
 						document.getElementById('invalid_msg').style.display='block';
 						document.getElementById('i_msg').innerHTML='Sorry unable to add this admin (duplicate detected).';
-						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
-					}
-					else if(this.responseText.trim()=='unable2')
-					{
-						document.getElementById('admin_single_add_box1').style.display='block';
-						document.getElementById('admin_single_add_box2').style.display='none';
-						
-						document.getElementById('invalid_msg').style.display='block';
-						document.getElementById('i_msg').innerHTML='Sorry unable to add this admin (department inactive).';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					}
 					else if(this.responseText.trim()=='unable3')
@@ -1083,7 +1008,7 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/add_single_admin.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&admin_name="+admin_single_add_name+"&admin_designation="+admin_single_add_designation+"&admin_status="+admin_single_add_status+"&admin_email="+admin_single_add_email+"&admin_mobile="+admin_single_add_mobile+"&admin_join_date="+admin_single_add_join_date+"&admin_resign_date="+admin_single_add_resign_date+"&admin_dept="+admin_single_add_dept+"&admin_type="+admin_single_add_type+"&admin_gender="+admin_single_add_gender, true);
+			xhttp1.open("POST", "../includes/super_admin/add_single_admin.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&admin_name="+admin_single_add_name+"&admin_designation="+admin_single_add_designation+"&admin_status="+admin_single_add_status+"&admin_email="+admin_single_add_email+"&admin_mobile="+admin_single_add_mobile+"&admin_join_date="+admin_single_add_join_date+"&admin_resign_date="+admin_single_add_resign_date+"&admin_type="+admin_single_add_type+"&admin_gender="+admin_single_add_gender, true);
 			xhttp1.send();
 		}
 	

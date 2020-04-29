@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2020 at 12:53 PM
+-- Generation Time: Apr 29, 2020 at 06:45 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -50,8 +50,7 @@ CREATE TABLE `nr_admin` (
 
 INSERT INTO `nr_admin` (`nr_admin_id`, `nr_admin_name`, `nr_admin_email`, `nr_admin_password`, `nr_admin_cell_no`, `nr_admin_photo`, `nr_admin_type`, `nr_admin_designation`, `nr_admin_status`, `nr_admin_two_factor`, `nr_admin_resign_date`, `nr_admin_gender`, `nr_admin_join_date`) VALUES
 (1, 'Shams Elahi Rasel', 'mirlutfur.rahman@gmail.com', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '', '158677029315867702938237.jpg', 'Super Admin', 'Controller of Examination, NEUB', 'Active', 0, '', 'Male', '2012-11-03'),
-(2, 'Fahad Ahmed', 'mlrahman@neub.edu.bd', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '', '15867702931586770293823.jpg', 'Moderator', 'Assistant Controller of NEUB', 'Active', 0, '', 'Male', '2013-01-01'),
-(3, 'Sonjoy Roy', 'sr@sr.sr', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '', '', 'Admin', 'Associate Controller of Examination', 'Active', 0, '', 'Male', '2019-11-10');
+(6, 'Fahad Ahmed', 'mlrahman@neub.edu.bd', '', '', '15867702931586770293823.jpg', 'Moderator', 'Moderator of Controller of Exam, NEUB', 'Active', 0, '', 'Male', '2013-05-01');
 
 -- --------------------------------------------------------
 
@@ -68,6 +67,16 @@ CREATE TABLE `nr_admin_history` (
   `nr_adminh_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `nr_admin_history`
+--
+
+INSERT INTO `nr_admin_history` (`nr_admin_member_id`, `nr_admin_id`, `nr_adminh_task`, `nr_adminh_date`, `nr_adminh_time`, `nr_adminh_status`) VALUES
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Assistant Controller of NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: , Admin Mobile: , Admin Status: Inactive', '2020-04-28', '11:17 PM', 'Active'),
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Assistant Controller of NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-04-28', '11:18 PM', 'Active'),
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Admin, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-04-28', '11:20 PM', 'Active'),
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-04-28', '11:28 PM', 'Active');
+
 -- --------------------------------------------------------
 
 --
@@ -82,6 +91,13 @@ CREATE TABLE `nr_admin_link_token` (
   `nr_suadlito_time` varchar(20) NOT NULL,
   `nr_suadlito_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Dumping data for table `nr_admin_link_token`
+--
+
+INSERT INTO `nr_admin_link_token` (`nr_admin_id`, `nr_suadlito_token`, `nr_suadlito_type`, `nr_suadlito_date`, `nr_suadlito_time`, `nr_suadlito_status`) VALUES
+(6, '01cf3d112f2f85d21e7ebd0e2c25b8ae4fe9e365', 'Forget Password', '2020-04-28', '11:27 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -108,26 +124,20 @@ CREATE TABLE `nr_admin_login_transaction` (
 
 INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address`, `nr_suadlotr_country`, `nr_suadlotr_city`, `nr_suadlotr_lat`, `nr_suadlotr_lng`, `nr_suadlotr_timezone`, `nr_suadlotr_date`, `nr_suadlotr_time`, `nr_suadlotr_status`) VALUES
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-13', '06:42 PM', 'Inactive'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:22 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:24 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '06:32 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '10:05 PM', 'Inactive'),
 (1, '192.168.0.102', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '11:35 PM', 'Inactive'),
-(2, '192.168.0.102', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '11:37 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '01:21 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:43 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '06:26 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '03:20 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '10:34 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '10:46 PM', 'Inactive'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:02 PM', 'Inactive'),
-(3, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:07 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:47 PM', 'Inactive'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-16', '11:52 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:39 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '09:50 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-19', '10:38 PM', 'Inactive'),
-(2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '04:32 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '04:32 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '08:09 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-20', '09:39 PM', 'Inactive'),
@@ -147,7 +157,8 @@ INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-27', '12:25 AM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-27', '04:06 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-27', '09:02 PM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-28', '03:41 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-28', '03:41 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-29', '07:31 PM', 'Inactive');
 
 -- --------------------------------------------------------
 
@@ -269,7 +280,19 @@ INSERT INTO `nr_delete_history` (`nr_admin_id`, `nr_deleteh_task`, `nr_deleteh_d
 (1, 'Deleted Faculty Name: Al Mehdi Saadat Chowdhury, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2013-04-17, Faculty Resign Date: N/A, Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: mirlutfur.rahman@gmail.com, Faculty Mobile: N/A, Faculty Status: Active', '2020-04-27', '06:06 PM', 'Active', 'Faculty'),
 (1, 'Deleted Faculty Name: Al Mehdi Saadat Chowdhury, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2013-11-24, Faculty Resign Date: N/A, Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: mirlutfur.rahman@gmail.com, Faculty Mobile: N/A, Faculty Status: Active', '2020-04-27', '07:56 PM', 'Active', 'Faculty'),
 (1, 'Deleted Faculty Name: gj, Faculty Designation: ghjhb, Faculty Gender: Female, Faculty Join Date: 2020-04-02, Faculty Resign Date: N/A, Faculty Department: Business Administration, Faculty Type: Permanent, Faculty Email: kj, Faculty Mobile: N/A, Faculty Status: Active', '2020-04-27', '07:57 PM', 'Active', 'Faculty'),
-(1, 'Deleted Faculty Name: kjkj, Faculty Designation: knjn, Faculty Gender: Male, Faculty Join Date: 2020-02-02, Faculty Resign Date: N/A, Faculty Department: Business Administration, Faculty Type: Adjunct, Faculty Email: sdfsdf, Faculty Mobile: N/A, Faculty Status: Active', '2020-04-27', '07:57 PM', 'Active', 'Faculty');
+(1, 'Deleted Faculty Name: kjkj, Faculty Designation: knjn, Faculty Gender: Male, Faculty Join Date: 2020-02-02, Faculty Resign Date: N/A, Faculty Department: Business Administration, Faculty Type: Adjunct, Faculty Email: sdfsdf, Faculty Mobile: N/A, Faculty Status: Active', '2020-04-27', '07:57 PM', 'Active', 'Faculty'),
+(1, 'Deleted Admin Name: Fahad Ahmed, Admin Designation: Assistant Controller of NEUB, Admin Gender: 15867702931586770293823.jpg, Admin Join Date: 2013-01-01, Admin Resign Date: N/A, Admin Type: Moderator, Admin Email: Active, Admin Mobile: N/A, Admin Status: Male', '2020-04-28', '10:11 PM', 'Active', 'Admin'),
+(1, 'Deleted Admin Name: Fahad Ahmed, Admin Designation: Assistant Controller of NEUB, Admin Gender: 15867702931586770293823.jpg, Admin Join Date: 2013-05-01, Admin Resign Date: N/A, Admin Type: Moderator, Admin Email: Active, Admin Mobile: N/A, Admin Status: Male', '2020-04-28', '10:20 PM', 'Active', 'Admin'),
+(1, 'Deleted Admin Name: Fahad Ahmed, Admin Designation: Assistant Controller of NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: N/A, Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: N/A, Admin Status: Active', '2020-04-28', '10:23 PM', 'Active', 'Admin'),
+(1, 'Deleted Admin Name: Sonjoy Roy, Admin Designation: Associate Controller of Examination, Admin Gender: Male, Admin Join Date: 2019-11-10, Admin Resign Date: N/A, Admin Type: Admin, Admin Email: sr@sr.sr, Admin Mobile: N/A, Admin Status: Active', '2020-04-28', '10:34 PM', 'Active', 'Admin'),
+(1, 'Deleted Admin Name: Sonjoy Roy, Admin Designation: Assistant Controller of Examination, Admin Gender: Male, Admin Join Date: 2018-03-02, Admin Resign Date: N/A, Admin Type: , Admin Email: raihan.testing@gmail.com, Admin Mobile: N/A, Admin Status: Active', '2020-04-29', '10:02 PM', 'Active', 'Admin'),
+(1, 'Deleted Admin Name: Sonjoy Roy, Admin Designation: Assistant Controller of Examination, Admin Gender: Male, Admin Join Date: 2018-03-02, Admin Resign Date: N/A, Admin Type: Admin, Admin Email: raihan.testing@gmail.com, Admin Mobile: N/A, Admin Status: Active', '2020-04-29', '10:03 PM', 'Active', 'Admin'),
+(1, 'Deleted Admin Name: Sonjoy Roy, Admin Designation: Assistant Controller of Examination, Admin Gender: Male, Admin Join Date: 2018-03-02, Admin Resign Date: N/A, Admin Type: Admin, Admin Email: raihan.testing@gmail.com, Admin Mobile: N/A, Admin Status: Active', '2020-04-29', '10:05 PM', 'Active', 'Admin'),
+(1, 'Deleted Admin Name: Sonjoy Roy, Admin Designation: Assistant Controller of Examination, Admin Gender: Male, Admin Join Date: 2018-03-02, Admin Resign Date: N/A, Admin Type: Admin, Admin Email: raihan.testing@gmail.com, Admin Mobile: N/A, Admin Status: Active', '2020-04-29', '10:07 PM', 'Active', 'Admin'),
+(1, 'Deleted Admin Name: ctvygbh, Admin Designation: fr6tgu, Admin Gender: Male, Admin Join Date: 2020-04-10, Admin Resign Date: N/A, Admin Type: Moderator, Admin Email: N/A, Admin Mobile: N/A, Admin Status: Inactive', '2020-04-29', '10:10 PM', 'Active', 'Admin'),
+(1, 'Deleted Admin Name: b, Admin Designation: ccc, Admin Gender: Female, Admin Join Date: 2020-01-02, Admin Resign Date: N/A, Admin Type: Moderator, Admin Email: N/A, Admin Mobile: N/A, Admin Status: Inactive', '2020-04-29', '10:41 PM', 'Active', 'Admin'),
+(1, 'Deleted Admin Name: c, Admin Designation: ddd, Admin Gender: Male, Admin Join Date: 2020-02-02, Admin Resign Date: N/A, Admin Type: Admin, Admin Email: raihan.testing@gmail.com, Admin Mobile: N/A, Admin Status: Active', '2020-04-29', '10:41 PM', 'Active', 'Admin'),
+(1, 'Deleted Admin Name: a, Admin Designation: bbb, Admin Gender: Male, Admin Join Date: 2020-01-01, Admin Resign Date: N/A, Admin Type: Admin, Admin Email: N/A, Admin Mobile: N/A, Admin Status: Active', '2020-04-29', '10:41 PM', 'Active', 'Admin');
 
 -- --------------------------------------------------------
 
@@ -1707,9 +1730,7 @@ INSERT INTO `nr_transcript_print_reference` (`nr_stud_id`, `nr_trprre_printed_by
 (150102040001, 'Student', 150102040001, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:12 PM', '0131201210123742', 'Active'),
 (150102040001, 'Student', 150102040001, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '12:50 PM', '0143201408500047', 'Active'),
 (150102040001, 'Student', 150102040001, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '12:46 PM', '0184201408464963', 'Active'),
-(150102040001, 'Admin', 3, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '12:46 PM', '0196201408465420', 'Active'),
 (140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:07 PM', '0211201409072838', 'Active'),
-(140203020002, 'Moderator', 2, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:50 PM', '0214201501504338', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-15', '05:56 PM', '0222201501562928', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:48 PM', '0222201711484259', 'Active'),
 (140203020002, 'Student', 140203020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:27 PM', '0225201409271714', 'Active'),
@@ -1966,7 +1987,7 @@ ALTER TABLE `nr_transcript_print_reference`
 -- AUTO_INCREMENT for table `nr_admin`
 --
 ALTER TABLE `nr_admin`
-  MODIFY `nr_admin_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `nr_admin_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `nr_course`
