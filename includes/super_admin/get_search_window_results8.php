@@ -10,11 +10,11 @@
 		header("location:index.php");
 		die();
 	}
-	if(isset($_REQUEST['s_id']) && isset($_REQUEST['faculty_dept_id']) && isset($_REQUEST['faculty_id']) && $_REQUEST['faculty_dept_id']==$_SESSION['faculty_dept_id'] && $_REQUEST['faculty_id']==$_SESSION['faculty_id'])
+	if(isset($_REQUEST['student_id']) && isset($_REQUEST['admin_id']) && $_REQUEST['admin_id']==$_SESSION['admin_id'])
 	{
 		try{
-			$s_id=$_REQUEST['s_id'];
-			$stmt = $conn->prepare("select * from nr_student where nr_stud_id=:s_id and nr_stud_status='Active' limit 1 ");
+			$s_id=$_REQUEST['student_id'];
+			$stmt = $conn->prepare("select * from nr_student where nr_stud_id=:s_id limit 1 ");
 			$stmt->bindParam(':s_id', $s_id);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
@@ -42,9 +42,9 @@
 			
 			$date=get_current_date();
 			$time=get_current_time();
-			$stmt = $conn->prepare("insert into nr_faculty_result_check_transaction values(:s_id,:f_id,'$vis_ip','$country','$city','$lat','$lng','$timezone','$date','$time','Active') ");
+			$stmt = $conn->prepare("insert into nr_admin_result_check_transaction values(:s_id,:f_id,'$vis_ip','$country','$city','$lat','$lng','$timezone','$date','$time','Active') ");
 			$stmt->bindParam(':s_id', $s_id);
-			$stmt->bindParam(':f_id', $_SESSION['faculty_id']);
+			$stmt->bindParam(':f_id', $_SESSION['admin_id']);
 			$stmt->execute();
 			
 			$name = $result[0][1];
@@ -307,17 +307,9 @@
 			else
 				$degree_status='Not Completed';
 			
-			
-			
 			$photo=$result[0][6];
 			
 			if($waived_credit==0) $waived_credit='N/A';
-			
-			if(isset($_SESSION['student_id']))
-			{
-				unset($_SESSION['student_id']);
-			}
-			$_SESSION['student_id']=$s_id;
 			
 		}catch(PDOException $e)
 		{
@@ -402,7 +394,7 @@
 							<tr>
 								<td valign="top">Degree Status</td>
 								<td valign="top" class="w3-bold">: <?php echo $degree_status; ?></td>
-								<td valign="top"><a onclick="faculty_print_result('<?php echo password_encrypt($s_id.get_current_date()); ?>','<?php echo password_encrypt($_REQUEST['faculty_id'].get_current_date()); ?>','<?php echo password_encrypt($_REQUEST['faculty_dept_id'].get_current_date()); ?>')" target="_blank" class="w3-button w3-round-large w3-black w3-hover-teal w3-padding-small w3-right"><i class="fa fa-print"></i> Print</a></td>
+								<td valign="top"><a onclick="admin_print_result('<?php echo password_encrypt($s_id.get_current_date()); ?>','<?php echo password_encrypt($_REQUEST['admin_id'].get_current_date()); ?>')" target="_blank" class="w3-button w3-round-large w3-black w3-hover-teal w3-padding-small w3-right"><i class="fa fa-print"></i> Print</a></td>
 							</tr>
 						</table>
 					</div>

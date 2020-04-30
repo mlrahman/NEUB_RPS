@@ -199,7 +199,7 @@
 		}
 		else if($user_type==3) //moderator
 		{
-			$filter=" and d.nr_admin_type=='Moderator' ";
+			$filter=" and d.nr_admin_type='Moderator' ";
 			if($program_id==-1 && $dept_id==-1)
 			{
 				$stmt = $conn->prepare("select * from nr_admin_result_check_transaction a,nr_student b,nr_program c,nr_admin d where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and a.nr_admin_id=d.nr_admin_id ".$filter." and (a.nr_stud_id like concat('%',:search_text,'%') or d.nr_admin_name like concat('%',:search_text,'%')) ");
@@ -233,7 +233,7 @@
 		}
 		else if($user_type==4) //admin
 		{
-			$filter=" and d.nr_admin_type=='Admin' ";
+			$filter=" and d.nr_admin_type='Admin' ";
 			if($program_id==-1 && $dept_id==-1)
 			{
 				$stmt = $conn->prepare("select * from nr_admin_result_check_transaction a,nr_student b,nr_program c,nr_admin d where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and a.nr_admin_id=d.nr_admin_id ".$filter." and (a.nr_stud_id like concat('%',:search_text,'%') or d.nr_admin_name like concat('%',:search_text,'%')) ");
@@ -267,7 +267,7 @@
 		}
 		else if($user_type==5 && $_SESSION['admin_type']=='Super Admin') //super admin
 		{
-			$filter=" and d.nr_admin_type=='Super Admin' ";
+			$filter=" and d.nr_admin_type='Super Admin' ";
 			if($program_id==-1 && $dept_id==-1)
 			{
 				$stmt = $conn->prepare("select * from nr_admin_result_check_transaction a,nr_student b,nr_program c,nr_admin d where a.nr_stud_id=b.nr_stud_id and c.nr_prog_id=b.nr_prog_id and a.nr_admin_id=d.nr_admin_id ".$filter." and (a.nr_stud_id like concat('%',:search_text,'%') or d.nr_admin_name like concat('%',:search_text,'%')) ");

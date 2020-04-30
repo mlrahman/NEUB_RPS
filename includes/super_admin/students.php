@@ -412,7 +412,7 @@
 
 	<div id="search_window8" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
 		<span onclick="close_search_box8()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
-		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:225px;"><i class="fa fa-eye"></i> Student Details</p>
+		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:235px;"><i class="fa fa-eye"></i> Student Details</p>
 		<div id="search_window_details8" class="w3-container w3-margin-0 w3-padding-0">
 		
 		</div>
@@ -1317,6 +1317,53 @@
 	{
 		close_search_box8();
 		get_total_search_results8(0,0);
+	}
+	
+	
+	function search_result_button(id)
+	{
+		for(var i=1;i<=5;i++)
+		{
+			if(i!=parseInt(id))
+			{
+				document.getElementById('se_re_div_'+i).style.display='none';
+				//console.log(document.getElementById('se_re_btn_'+i).classList);
+				if(document.getElementById('se_re_btn_'+i).classList.contains("w3-teal"))
+					document.getElementById('se_re_btn_'+i).classList.remove("w3-teal");
+				if(document.getElementById('se_re_btn_'+i).classList.contains("w3-border-teal"))
+					document.getElementById('se_re_btn_'+i).classList.remove("w3-border-teal");
+				document.getElementById('se_re_btn_'+i).classList.add("w3-white");
+			}
+		}
+		document.getElementById('se_re_btn_'+id).classList.add("w3-teal");
+		document.getElementById('se_re_btn_'+id).classList.add("w3-border-teal");
+		if(document.getElementById('se_re_btn_'+id).classList.contains("w3-white"))
+			document.getElementById('se_re_btn_'+id).classList.remove("w3-white");
+		document.getElementById('se_re_div_'+id).style.display='block';
+	}
+		
+	function show_result_div(y)
+	{
+		var z=document.getElementById(y+'_icon').className;
+		//console.log(z);
+		if(z=="fa fa-plus-square")
+		{
+			document.getElementById(y+'_icon').classList.remove("fa-plus-square");
+			document.getElementById(y+'_icon').classList.add("fa-minus-square");
+			document.getElementById(y).style.display='block';
+		}
+		else if(z=="fa fa-minus-square")
+		{
+			document.getElementById(y+'_icon').classList.remove("fa-minus-square");
+			document.getElementById(y+'_icon').classList.add("fa-plus-square");
+			document.getElementById(y).style.display='none';
+			
+		}
+	}
+
+	function admin_print_result(s_id,a_id)
+	{
+		window.open('../includes/super_admin/admin_result_print.php?student_id='+s_id+'&admin_id='+a_id);		
 	}
 	
 	function view_result8(student_id)
