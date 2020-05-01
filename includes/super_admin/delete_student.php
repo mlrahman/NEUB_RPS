@@ -30,8 +30,11 @@
 			if(count($result)!=0)
 			{
 				$flll=$result[0][0];
-				echo 'unable';
-				die();
+				if($flll==1)
+				{
+					echo 'unable';
+					die();
+				}
 			}
 			
 			$stmt = $conn->prepare("select count(nr_stud_id) from nr_result where nr_stud_id=:s_id ");
@@ -63,7 +66,7 @@
 			
 			
 			//inserting delete history
-			$stmt = $conn->prepare("select a.nr_stud_name,a.nr_stud_dob,a.nr_stud_gender,a.nr_stud_email,a.nr_stud_cell_no,a.nr_stud_photo,b.nr_studi_earned_credit,b.nr_studi_waived_credit,b.nr_studi_cgpa,c.nr_prog_title,a.nr_stud_status from nr_student a,nr_student_info b,nr_program c where a.nr_prog_id=c.nr_prog_id and a.nr_stud_id=b.nr_stud_id and nr_stud_id=:s_id ");
+			$stmt = $conn->prepare("select a.nr_stud_name,a.nr_stud_dob,a.nr_stud_gender,a.nr_stud_email,a.nr_stud_cell_no,a.nr_stud_photo,b.nr_studi_earned_credit,b.nr_studi_waived_credit,b.nr_studi_cgpa,c.nr_prog_title,a.nr_stud_status from nr_student a,nr_student_info b,nr_program c where a.nr_prog_id=c.nr_prog_id and a.nr_stud_id=b.nr_stud_id and a.nr_stud_id=:s_id ");
 			$stmt->bindParam(':s_id', $student_id);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
