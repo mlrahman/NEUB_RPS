@@ -646,9 +646,9 @@
 	
 	function student_single_add_form_change()
 	{
-		student_view_title=document.getElementById('student_single_add_title').value.trim();
-		student_view_code=document.getElementById('student_single_add_code').value.trim();
-		student_view_credit=document.getElementById('student_single_add_credit').value.trim();
+		student_view_name=document.getElementById('student_single_add_title').value.trim();
+		student_view_id=document.getElementById('student_single_add_code').value.trim();
+		student_view_birth_date=document.getElementById('student_single_add_credit').value.trim();
 		student_view_prog=document.getElementById('student_single_add_prog').value.trim();
 		student_view_captcha=document.getElementById('student_single_add_captcha').value.trim();
 		student_view_status=document.getElementById('student_single_add_status').value.trim();
@@ -688,7 +688,7 @@
 				document.getElementById('student_single_add_status').classList.remove('w3-pale-red');
 			}
 		}
-		if(student_view_title=="" || student_view_code=="" || student_view_credit=="" || student_view_prog=="" || student_view_status=="")
+		if(student_view_name=="" || student_view_id=="" || student_view_birth_date=="" || student_view_prog=="" || student_view_status=="")
 		{
 			document.getElementById("student_single_add_save_btn").disabled = true;
 		}
@@ -917,15 +917,15 @@
 	
 	function student_single_add_form_save()
 	{
-		student_view_title=document.getElementById('student_single_add_title').value.trim();
-		student_view_code=document.getElementById('student_single_add_code').value.trim();
-		student_view_credit=document.getElementById('student_single_add_credit').value.trim();
+		student_view_name=document.getElementById('student_single_add_title').value.trim();
+		student_view_id=document.getElementById('student_single_add_code').value.trim();
+		student_view_birth_date=document.getElementById('student_single_add_credit').value.trim();
 		student_view_prog=document.getElementById('student_single_add_prog').value.trim();
 		student_view_captcha=document.getElementById('student_single_add_captcha').value.trim();
 		student_view_old_captcha=document.getElementById('student_single_add_old_captcha').value.trim();
 		student_view_status=document.getElementById('student_single_add_status').value.trim();
 		
-		if(student_view_title=="" || student_view_code=="" || student_view_credit=="" || student_view_prog=="" || student_view_status=="")
+		if(student_view_name=="" || student_view_id=="" || student_view_birth_date=="" || student_view_prog=="" || student_view_status=="")
 		{
 			document.getElementById('student_single_add_pass').value='';
 			
@@ -1025,26 +1025,33 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/add_single_student.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&student_title="+student_view_title+"&student_code="+student_view_code+"&student_credit="+student_view_credit+"&student_prog="+student_view_prog+"&student_status="+student_view_status, true);
+			xhttp1.open("POST", "../includes/super_admin/add_single_student.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&student_title="+student_view_name+"&student_code="+student_view_id+"&student_credit="+student_view_birth_date+"&student_prog="+student_view_prog+"&student_status="+student_view_status, true);
 			xhttp1.send();
 		}
 	
 	}
 	
 	
-	var student_view_old_title;
-	var student_view_old_code;
+	var student_view_old_name;
+	var student_view_old_id;
 	var student_view_old_prog;
-	var student_view_old_credit;
+	var student_view_old_birth_date;
 	var student_view_old_captcha;
 	var student_view_old_status;
+	var student_view_old_gender;
+	var student_view_old_email;
+	var student_view_old_mobile;
 	
-	var student_view_title;
-	var student_view_code;
+	var student_view_name;
+	var student_view_id;
 	var student_view_prog;
-	var student_view_credit;
+	var student_view_birth_date;
 	var student_view_captcha;
 	var student_view_status;
+	var student_view_gender;
+	var student_view_email;
+	var student_view_mobile;
+	var student_view_dp;
 	
 	function remove_student_view()
 	{
@@ -1137,16 +1144,23 @@
 	
 	function student_view_form_change()
 	{
-		student_view_title=document.getElementById('student_view_title').value.trim();
-		student_view_code=document.getElementById('student_view_code').value.trim();
-		student_view_credit=document.getElementById('student_view_credit').value.trim();
+		student_view_name=document.getElementById('student_view_name').value.trim();
+		student_view_id=document.getElementById('student_view_id').value.trim();
+		student_view_birth_date=document.getElementById('student_view_birth_date').value.trim();
+		student_view_gender=document.getElementById('student_view_gender').value.trim();
+		student_view_email=document.getElementById('student_view_email').value.trim();
+		student_view_mobile=document.getElementById('student_view_mobile').value.trim();
 		student_view_prog=document.getElementById('student_view_prog').value.trim();
 		student_view_captcha=document.getElementById('student_view_captcha').value.trim();
 		student_view_status=document.getElementById('student_view_status').value.trim();
+		student_view_dp=document.getElementById('student_view_dp').value.trim();
 		
-		student_view_old_title=document.getElementById('student_view_old_title').value.trim();
-		student_view_old_code=document.getElementById('student_view_old_code').value.trim();
-		student_view_old_credit=document.getElementById('student_view_old_credit').value.trim();
+		student_view_old_name=document.getElementById('student_view_old_name').value.trim();
+		student_view_old_id=document.getElementById('student_view_old_id').value.trim();
+		student_view_old_birth_date=document.getElementById('student_view_old_birth_date').value.trim();
+		student_view_old_gender=document.getElementById('student_view_old_gender').value.trim();
+		student_view_old_email=document.getElementById('student_view_old_email').value.trim();
+		student_view_old_mobile=document.getElementById('student_view_old_mobile').value.trim();
 		student_view_old_prog=document.getElementById('student_view_old_prog').value.trim();
 		student_view_old_captcha=document.getElementById('student_view_old_captcha').value.trim();
 		student_view_old_status=document.getElementById('student_view_old_status').value.trim();
@@ -1176,11 +1190,11 @@
 			document.getElementById('student_view_status').classList.add('w3-pale-red');
 		}
 		
-		if(student_view_title=="" || student_view_code=="" || student_view_status=="" || student_view_prog=="" || student_view_credit=="" || (student_view_title==student_view_old_title && student_view_code==student_view_old_code && student_view_credit==student_view_old_credit && student_view_prog==student_view_old_prog && student_view_status==student_view_old_status))
+		if(student_view_name=="" || student_view_id=="" || student_view_status=="" || student_view_prog=="" || student_view_birth_date==""  || student_view_gender=="" || (student_view_gender==student_view_old_gender && student_view_name==student_view_old_name  && student_view_email==student_view_old_email  && student_view_mobile==student_view_old_mobile && student_view_id==student_view_old_id && student_view_birth_date==student_view_old_birth_date && student_view_prog==student_view_old_prog && student_view_status==student_view_old_status && student_view_dp==""))
 		{
 			document.getElementById("student_view_save_btn").disabled = true;
 		}
-		else if(student_view_title!=student_view_old_title || student_view_code!=student_view_old_code || student_view_status!=student_view_old_status || student_view_credit!=student_view_old_credit || student_view_prog!=student_view_old_prog)
+		else if(student_view_dp!="" || student_view_name!=student_view_old_name || student_view_id!=student_view_old_id || student_view_status!=student_view_old_status || student_view_birth_date!=student_view_old_birth_date || student_view_prog!=student_view_old_prog || student_view_gender!=student_view_old_gender || student_view_email!=student_view_old_email || student_view_mobile!=student_view_old_mobile)
 		{
 			document.getElementById("student_view_save_btn").disabled = false;
 		}
@@ -1188,19 +1202,27 @@
 	
 	function student_view_form_reset()
 	{
-		student_view_old_title=document.getElementById('student_view_old_title').value.trim();
-		student_view_old_code=document.getElementById('student_view_old_code').value.trim();
-		student_view_old_credit=document.getElementById('student_view_old_credit').value.trim();
+		student_view_old_name=document.getElementById('student_view_old_name').value.trim();
+		student_view_old_id=document.getElementById('student_view_old_id').value.trim();
+		student_view_old_birth_date=document.getElementById('student_view_old_birth_date').value.trim();
+		student_view_old_gender=document.getElementById('student_view_old_gender').value.trim();
+		student_view_old_email=document.getElementById('student_view_old_email').value.trim();
+		student_view_old_mobile=document.getElementById('student_view_old_mobile').value.trim();
 		student_view_old_prog=document.getElementById('student_view_old_prog').value.trim();
 		student_view_old_captcha=document.getElementById('student_view_old_captcha').value.trim();
 		student_view_old_status=document.getElementById('student_view_old_status').value.trim();
 		
-		document.getElementById('student_view_title').value=student_view_old_title;
-		document.getElementById('student_view_code').value=student_view_old_code;
-		document.getElementById('student_view_credit').value=student_view_old_credit;
+		document.getElementById('student_view_name').value=student_view_old_name;
+		document.getElementById('student_view_id').value=student_view_old_id;
+		document.getElementById('student_view_birth_date').value=student_view_old_birth_date;
+		document.getElementById('student_view_gender').value=student_view_old_gender;
+		document.getElementById('student_view_email').value=student_view_old_email;
+		document.getElementById('student_view_mobile').value=student_view_old_mobile;
 		document.getElementById('student_view_prog').value=student_view_old_prog;
 		document.getElementById('student_view_captcha').value='';
+		document.getElementById('student_view_dp').value='';
 		document.getElementById('student_view_status').value=student_view_old_status;
+		document.getElementById('student_dp_msg').style.display='none';
 		
 		student_view_status=document.getElementById('student_view_status').value.trim();
 		
@@ -1234,22 +1256,29 @@
 	
 	function student_view_form_save_changes(student_id)
 	{
-		student_view_title=document.getElementById('student_view_title').value.trim();
-		student_view_code=document.getElementById('student_view_code').value.trim();
-		student_view_credit=document.getElementById('student_view_credit').value.trim();
+		student_view_name=document.getElementById('student_view_name').value.trim();
+		student_view_id=document.getElementById('student_view_id').value.trim();
+		student_view_birth_date=document.getElementById('student_view_birth_date').value.trim();
+		student_view_gender=document.getElementById('student_view_gender').value.trim();
+		student_view_email=document.getElementById('student_view_email').value.trim();
+		student_view_mobile=document.getElementById('student_view_mobile').value.trim();
+		student_view_dp=document.getElementById('student_view_dp').value.trim();
 		student_view_prog=document.getElementById('student_view_prog').value.trim();
 		student_view_captcha=document.getElementById('student_view_captcha').value.trim();
 		student_view_status=document.getElementById('student_view_status').value.trim();
 		
-		student_view_old_title=document.getElementById('student_view_old_title').value.trim();
-		student_view_old_code=document.getElementById('student_view_old_code').value.trim();
-		student_view_old_credit=document.getElementById('student_view_old_credit').value.trim();
+		student_view_old_name=document.getElementById('student_view_old_name').value.trim();
+		student_view_old_id=document.getElementById('student_view_old_id').value.trim();
+		student_view_old_birth_date=document.getElementById('student_view_old_birth_date').value.trim();
+		student_view_old_gender=document.getElementById('student_view_old_gender').value.trim();
+		student_view_old_email=document.getElementById('student_view_old_email').value.trim();
+		student_view_old_mobile=document.getElementById('student_view_old_mobile').value.trim();
 		student_view_old_prog=document.getElementById('student_view_old_prog').value.trim();
 		student_view_old_captcha=document.getElementById('student_view_old_captcha').value.trim();
 		student_view_old_status=document.getElementById('student_view_old_status').value.trim();
 		
 		
-		if(student_view_title=="" || student_view_code=="" || student_view_status=="" || student_view_credit=="" || student_view_prog=="")
+		if(student_view_name=="" || student_view_id=="" || student_view_status=="" || student_view_birth_date=="" || student_view_prog=="" || student_view_gender=="")
 		{
 			document.getElementById('invalid_msg').style.display='block';
 			document.getElementById('i_msg').innerHTML='Please fill up all the fields.';
@@ -1261,10 +1290,19 @@
 			document.getElementById('i_msg').innerHTML='Please insert valid captcha.';
 			setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 		}
-		else
+		else if((student_view_dp!="" && file_validate(student_view_dp)==true) || student_view_dp=="")
 		{
+			
+			//DP
+			var image=document.getElementById('student_view_dp').files[0];
+			var fd_image=new FormData();
+			var link='student_view_dp';
+			fd_image.append(link, image);
+			
 			document.getElementById('student_view_box1').style.display='none';
 			document.getElementById('student_view_box3').style.display='none';
+			document.getElementById('student_view_box4').style.display='none';
+			document.getElementById('student_view_box5').style.display='none';
 			document.getElementById('student_view_box2').style.display='block';
 			var xhttp1 = new XMLHttpRequest();
 			xhttp1.onreadystatechange = function() {
@@ -1284,21 +1322,38 @@
 					}
 					else if(this.responseText.trim()=='unable')
 					{
-						document.getElementById('student_view_box1').style.display='block';
+						document.getElementById('student_view_box4').style.display='block';
 						document.getElementById('student_view_box2').style.display='none';
 						document.getElementById('student_view_box3').style.display='none';
-						
+						document.getElementById('student_view_box1').style.display='none';
+						document.getElementById('student_view_box5').style.display='none';
+					
 						document.getElementById('invalid_msg').style.display='block';
 						document.getElementById('i_msg').innerHTML='Unable to make change (duplicate detected).';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 		
 					}
-					else
+					else if(this.responseText.trim()=='unable2')
 					{
-						document.getElementById('student_view_box1').style.display='block';
+						document.getElementById('student_view_box4').style.display='block';
 						document.getElementById('student_view_box2').style.display='none';
 						document.getElementById('student_view_box3').style.display='none';
-						
+						document.getElementById('student_view_box1').style.display='none';
+						document.getElementById('student_view_box5').style.display='none';
+					
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unable to make change (invalid email).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		
+					}
+					else
+					{
+						document.getElementById('student_view_box4').style.display='block';
+						document.getElementById('student_view_box2').style.display='none';
+						document.getElementById('student_view_box3').style.display='none';
+						document.getElementById('student_view_box1').style.display='none';
+						document.getElementById('student_view_box5').style.display='none';
+					
 						document.getElementById('invalid_msg').style.display='block';
 						document.getElementById('i_msg').innerHTML='Unknown error occurred.';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
@@ -1307,9 +1362,11 @@
 				}
 				else if(this.readyState==4 && (this.status==404 || this.status==403))
 				{
-					document.getElementById('student_view_box1').style.display='block';
+					document.getElementById('student_view_box4').style.display='block';
 					document.getElementById('student_view_box2').style.display='none';
 					document.getElementById('student_view_box3').style.display='none';
+					document.getElementById('student_view_box1').style.display='none';
+					document.getElementById('student_view_box5').style.display='none';
 					
 					document.getElementById('invalid_msg').style.display='block';
 					document.getElementById('i_msg').innerHTML='Network error occurred.';
@@ -1317,10 +1374,16 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/edit_student.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&student_title="+student_view_title+"&student_code="+student_view_code+"&student_status="+student_view_status+"&student_credit="+student_view_credit+"&student_prog="+student_view_prog+"&student_id="+student_id, true);
-			xhttp1.send();
+			xhttp1.open("POST", "../includes/super_admin/edit_student.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&student_old_id="+student_view_old_id+"&student_dp="+student_view_dp+"&student_name="+student_view_name+"&student_id="+student_view_id+"&student_status="+student_view_status+"&student_birth_date="+student_view_birth_date+"&student_prog="+student_view_prog+"&student_gender="+student_view_gender+"&student_email="+student_view_email+"&student_mobile="+student_view_mobile, true);
+			xhttp1.send(fd_image);
 		}
+		else
+		{
+			document.getElementById('invalid_msg').style.display='block';
+			document.getElementById('i_msg').innerHTML='Please upload valid DP (.jpg,.png,.jpeg,.bmp).';
+			setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 		
+		}
 	}
 	
 	function get_search_result8()

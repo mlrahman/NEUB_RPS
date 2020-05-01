@@ -1079,6 +1079,11 @@
 			<div class="w3-container w3-border w3-round-large w3-padding w3-margin-bottom" style="margin: 0px 12px 12px 12px;">
 				<div class="w3-row w3-margin-0 w3-padding-0">
 					<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 0px;">
+						<label><b>Student ID</b></label>
+						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="number" value="<?php echo $s_id; ?>" id="student_view_id" placeholder="Enter Student ID" autocomplete="off" oninput="student_view_form_change()" disabled>
+						<input type="hidden" value="<?php echo $s_id; ?>" id="student_view_old_id">
+							
+						
 						<label><i class="w3-text-red">*</i> <b>Student Name</b></label>
 						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $name; ?>" id="student_view_name" placeholder="Enter Student Name" autocomplete="off" oninput="student_view_form_change()">
 						<input type="hidden" value="<?php echo $name; ?>" id="student_view_old_name">
@@ -1195,15 +1200,15 @@
 						</div>
 						<div class="w3-col w3-margin-bottom w3-margin-left">										
 							<label><b>Change DP</b></label>
-							<input class="w3-input w3-border w3-round-large" onclick="document.getElementById('student_msg').style.display='block'" type="file" id="logo" title="Please upload DP (240X200)px"  onchange="student_view_form_change()">
-							<i class="w3-text-red w3-small w3-bold" id="student_msg" style="display: none;">*Upload DP with (240X200)px</i>
+							<input class="w3-input w3-border w3-round-large" onclick="document.getElementById('student_dp_msg').style.display='block'" type="file" id="student_view_dp" title="Please upload DP (240X200)px"  onchange="student_view_form_change()">
+							<i class="w3-text-red w3-small w3-bold" id="student_dp_msg" style="display: none;">*Upload DP with (240X200)px</i>
 						</div>
 						
 						<button onclick="student_view_form_reset()" class="w3-button w3-margin-top w3-red w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;"><i class="fa fa-eye-slash"></i> Reset</button>
 						
 						<button onclick="document.getElementById('student_view_re_confirmation').style.display='block';" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" <?php if($flll==1 || $flll1==1 || $flll2==1){ echo 'title="Sorry you can not remove this student." disabled'; }?>><i class="fa fa-eraser"></i> Remove</button>
 					
-						<button onclick="student_view_form_save_changes('<?php echo $id; ?>')" id="student_view_save_btn" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" disabled><i class="fa fa-save"></i> Save Changes</button>
+						<button onclick="student_view_form_save_changes('<?php echo $s_id; ?>')" id="student_view_save_btn" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" disabled><i class="fa fa-save"></i> Save Changes</button>
 					
 					
 					</div>
