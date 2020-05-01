@@ -22,10 +22,10 @@
 				die();
 			}
 			
-			$fl=0; $fl2=0; $fl3=0; $fl4=0;
+			$fl=0; $fl2=0; $fl3=0;
 			//checking if prog is delete able or not
-			$stmt = $conn->prepare("select * from nr_course where nr_prog_id=:prog_id");
-			$stmt->bindParam(':prog_id', $prog_id);
+			$stmt = $conn->prepare("select * from nr_drop where nr_course_id=:course_id");
+			$stmt->bindParam(':course_id', $course_id);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
 			if(count($result)>=1)
@@ -34,8 +34,8 @@
 			}
 			
 			//checking if prog is delete able or not
-			$stmt = $conn->prepare("select * from nr_drop where nr_prog_id=:prog_id");
-			$stmt->bindParam(':prog_id', $prog_id);
+			$stmt = $conn->prepare("select * from nr_result where nr_course_id=:course_id");
+			$stmt->bindParam(':course_id', $course_id);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
 			if(count($result)>=1)
@@ -44,15 +44,14 @@
 			}
 			
 			//checking if prog is delete able or not
-			$stmt = $conn->prepare("select * from nr_result where nr_prog_id=:prog_id");
-			$stmt->bindParam(':prog_id', $prog_id);
+			$stmt = $conn->prepare("select * from nr_student_waived_credit where nr_course_id=:course_id");
+			$stmt->bindParam(':course_id', $course_id);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
 			if(count($result)>=1)
 			{
 				$fl3=1;
-			}
-				
+			}	
 			if($fl==1 || $fl2==1 || $fl3==1)
 			{
 				echo 'unable';
@@ -66,11 +65,11 @@
 			$stmt->execute();
 			$result = $stmt->fetchAll();
 			
-			$course_title=$result[0][1];
-			$course_code=$result[0][2];
+			$course_title=$result[0][0];
+			$course_code=$result[0][1];
 			$course_credit=$result[0][2];
 			$course_status=$result[0][3];
-			$prog_title=$result[0][3];
+			$prog_title=$result[0][4];
 			$t=get_current_time();
 			$d=get_current_date();
 			$task='Deleted Course Title: '.$course_title.', Course Code: '.$course_code.', Course Credit: '.number_format($course_credit,2).', Course Program: '.$prog_title.', Course Status: '.$course_status;

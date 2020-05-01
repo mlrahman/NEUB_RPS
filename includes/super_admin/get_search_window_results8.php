@@ -25,7 +25,7 @@
 				$flll=$result[0][0];
 			}
 			
-			$stmt = $conn->prepare("select count(nr_stud_id) from nr_result where nr_stud_id=:s_id limit 1 ");
+			$stmt = $conn->prepare("select count(nr_stud_id) from nr_result where nr_stud_id=:s_id ");
 			$stmt->bindParam(':s_id', $s_id);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
@@ -36,6 +36,16 @@
 				{
 					$flll1=1;
 				}
+			}
+			
+			$stmt = $conn->prepare("select * from nr_student_waived_credit where nr_stud_id=:s_id ");
+			$stmt->bindParam(':s_id', $s_id);
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			$flll2=0;
+			if(count($result)!=0)
+			{
+				$flll2=1;
 			}
 			
 			$stmt = $conn->prepare("select * from nr_student where nr_stud_id=:s_id limit 1 ");
@@ -1155,7 +1165,7 @@
 								?>
 								<input type="hidden" value="<?php echo $status; ?>" id="student_view_old_status">
 								<input type="hidden" value="<?php echo $ccc; ?>" id="student_view_old_captcha">
-								<input type="hidden" value="<?php echo $reg_no; ?>" id="student_view_id">
+								<input type="hidden" value="<?php echo $s_id; ?>" id="student_view_id">
 								
 							</div>
 						</div>
@@ -1183,14 +1193,15 @@
 								<img src="../images/student/<?php echo $photo; ?>" class="w3-image" style="border: 2px solid black;10px 0px 0px 0px;padding:0px;width:100%;max-width:100px;height: 120px;"  title="DP (120X100)px" alt="DP (120X100)px">
 							<?php } ?> 
 						</div>
-						<label><b>Change DP</b></label>
-						<input class="w3-input w3-border w3-round-large" onclick="document.getElementById('student_msg').style.display='block'" type="file" id="logo" title="Please upload DP (240X200)px"  onchange="student_view_form_change()">
-						<i class="w3-text-red w3-small w3-bold" id="student_msg" style="display: none;">*Upload DP with (240X200)px</i>
-				
+						<div class="w3-col w3-margin-bottom w3-margin-left">										
+							<label><b>Change DP</b></label>
+							<input class="w3-input w3-border w3-round-large" onclick="document.getElementById('student_msg').style.display='block'" type="file" id="logo" title="Please upload DP (240X200)px"  onchange="student_view_form_change()">
+							<i class="w3-text-red w3-small w3-bold" id="student_msg" style="display: none;">*Upload DP with (240X200)px</i>
+						</div>
 						
 						<button onclick="student_view_form_reset()" class="w3-button w3-margin-top w3-red w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;"><i class="fa fa-eye-slash"></i> Reset</button>
 						
-						<button onclick="document.getElementById('student_view_re_confirmation').style.display='block';" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" <?php if($flll==1 || $flll1==1){ echo 'title="Sorry you can not remove this student." disabled'; }?>><i class="fa fa-eraser"></i> Remove</button>
+						<button onclick="document.getElementById('student_view_re_confirmation').style.display='block';" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" <?php if($flll==1 || $flll1==1 || $flll2==1){ echo 'title="Sorry you can not remove this student." disabled'; }?>><i class="fa fa-eraser"></i> Remove</button>
 					
 						<button onclick="student_view_form_save_changes('<?php echo $id; ?>')" id="student_view_save_btn" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" disabled><i class="fa fa-save"></i> Save Changes</button>
 					
@@ -1200,11 +1211,51 @@
 				</div>
 			</div>
 		</div>
-		<div class="w3-container w3-margin-0 w3-padding-0 w3-center" id="student_view_box5" style="display:none;">
+		<div class="w3-container w3-margin-0 w3-padding-0" id="student_view_box5" style="display:none;">
 			<p class="w3-margin-0 w3-left w3-text-purple w3-cursor" style="margin: 0px 0px 0px 12px;" onclick="document.getElementById('student_view_box1').style.display='block';document.getElementById('student_view_box2').style.display='none';document.getElementById('student_view_box3').style.display='none';document.getElementById('student_view_box4').style.display='none';document.getElementById('student_view_box5').style.display='none';"><i class="fa fa-mail-reply"></i> Back</p>
 			<div class="w3-clear"></div>
 			<div class="w3-container w3-border w3-round-large w3-padding" style="margin: 0px 12px 12px 12px;">
-			
+				<table style="width:100%;margin:5px 0px;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar">
+					<tr class="w3-black w3-bold">
+						<td colspan="4" class="w3-padding-small">Waived Courses</td>
+						<td colspan="2" class="w3-padding-small">Credit: <?php echo $waived_credit; ?></td>
+					</tr>
+					<tr class="w3-teal w3-bold">
+						<td style="width:10%;" valign="top" class="w3-padding-small">S.L. No</td>
+						<td style="width:35%;" valign="top" class="w3-padding-small">Course Title</td>
+						<td style="width:14%;" valign="top" class="w3-padding-small">Course Code</td>
+						<td style="width:10%;" valign="top" class="w3-padding-small">Course Credit</td>
+						<td style="width:16%;" valign="top" class="w3-padding-small">Added Date</td>
+						<td style="width:15%;" valign="top" class="w3-padding-small">Action</td>
+					</tr>
+					<?php
+						$stmt = $conn->prepare("select a.nr_stwacr_id,b.nr_course_title,b.nr_course_code,b.nr_course_credit,a.nr_stwacr_date from nr_student_waived_credit a,nr_course b where a.nr_course_id=b.nr_course_id and a.nr_stud_id=:s_id and a.nr_stwacr_status='Active' "); 
+						$stmt->bindParam(':s_id', $s_id);
+						$stmt->execute();
+						$stud_result=$stmt->fetchAll();
+						$sz=count($stud_result);
+						if($sz==0)
+						{
+							echo '<tr>
+								<td colspan="6"> <p class="w3-center w3-margin"><i class="fa fa-warning w3-text-red" title="No Data Available"> No Data Available.</i></p></td>
+							</tr>';
+						}
+						for($i=0;$i<$sz;$i++)
+						{
+					?>
+						<tr class="">
+							<td valign="top" class="w3-padding-small w3-border"><?php echo $i+1; ?></td>
+							<td valign="top" class="w3-padding-small w3-border"><?php echo $stud_result[$i][1]; ?></td>
+							<td valign="top" class="w3-padding-small w3-border"><?php echo $stud_result[$i][2]; ?></td>
+							<td valign="top" class="w3-padding-small w3-border"><?php echo number_format($stud_result[$i][3],2); ?></td>
+							<td valign="top" class="w3-padding-small w3-border"><?php echo get_date($stud_result[$i][4]); ?></td>
+							<td valign="top" class="w3-padding-small w3-border"><a class="w3-text-blue w3-cursor" <?php if($flll==1){ echo 'title="unable to delete it" disabled'; } ?>><i class="fa fa-eraser"></i> Remove</a></td>
+						</tr>
+					
+					<?php
+						}
+					?>
+				</table>
 			</div>
 		</div>
 <?php	

@@ -1061,26 +1061,30 @@
 			document.getElementById('student_view_box1').style.display='none';
 			document.getElementById('student_view_box3').style.display='none';
 			document.getElementById('student_view_box2').style.display='block';
+			document.getElementById('student_view_box4').style.display='none';
+			document.getElementById('student_view_box5').style.display='none';
 			var xhttp1 = new XMLHttpRequest();
 			xhttp1.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					
-					//console.log(this.responseText);
+					console.log(this.responseText);
 					if(this.responseText.trim()=='Ok')
 					{
 						get_search_result8();
 						
 						document.getElementById('valid_msg').style.display='block';
-						document.getElementById('v_msg').innerHTML='student successfully removed.';
+						document.getElementById('v_msg').innerHTML='Student successfully removed.';
 						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
 					
 						
 					}
 					else if(this.responseText.trim()=='pass_error')
 					{
-						document.getElementById('student_view_box1').style.display='block';
+						document.getElementById('student_view_box1').style.display='none';
 						document.getElementById('student_view_box2').style.display='none';
 						document.getElementById('student_view_box3').style.display='none';
+						document.getElementById('student_view_box4').style.display='block';
+						document.getElementById('student_view_box5').style.display='none';
 						
 						document.getElementById('invalid_msg').style.display='block';
 						document.getElementById('i_msg').innerHTML='Sorry password doesn\'t match.';
@@ -1088,9 +1092,11 @@
 					}
 					else if(this.responseText.trim()=='unable')
 					{
-						document.getElementById('student_view_box1').style.display='block';
+						document.getElementById('student_view_box1').style.display='none';
 						document.getElementById('student_view_box3').style.display='none';
 						document.getElementById('student_view_box2').style.display='none';
+						document.getElementById('student_view_box4').style.display='block';
+						document.getElementById('student_view_box5').style.display='none';
 						
 						document.getElementById('invalid_msg').style.display='block';
 						document.getElementById('i_msg').innerHTML='Sorry unable to remove this student.';
@@ -1098,9 +1104,11 @@
 					}
 					else
 					{
-						document.getElementById('student_view_box1').style.display='block';
+						document.getElementById('student_view_box1').style.display='none';
 						document.getElementById('student_view_box2').style.display='none';
 						document.getElementById('student_view_box3').style.display='none';
+						document.getElementById('student_view_box4').style.display='block';
+						document.getElementById('student_view_box5').style.display='none';
 						
 						document.getElementById('invalid_msg').style.display='block';
 						document.getElementById('i_msg').innerHTML='Unknown error occurred.';
@@ -1110,9 +1118,11 @@
 				}
 				else if(this.readyState==4 && (this.status==404 || this.status==403))
 				{
-					document.getElementById('student_view_box1').style.display='block';
+					document.getElementById('student_view_box1').style.display='none';
 					document.getElementById('student_view_box2').style.display='none';
 					document.getElementById('student_view_box3').style.display='none';
+					document.getElementById('student_view_box4').style.display='block';
+					document.getElementById('student_view_box5').style.display='none';
 					
 					document.getElementById('invalid_msg').style.display='block';
 					document.getElementById('i_msg').innerHTML='Network error occurred.';

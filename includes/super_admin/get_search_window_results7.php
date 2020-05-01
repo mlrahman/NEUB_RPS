@@ -16,7 +16,7 @@
 		$faculty_id=trim($_REQUEST['faculty_id']);
 		
 		$fl=0; 
-		//checking if prog is delete able or not
+		//checking if faculty is delete able or not
 		$stmt = $conn->prepare("select * from nr_result where nr_faculty_id=:faculty_id");
 		$stmt->bindParam(':faculty_id', $faculty_id);
 		$stmt->execute();
