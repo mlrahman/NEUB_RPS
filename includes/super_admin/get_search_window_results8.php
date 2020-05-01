@@ -14,6 +14,30 @@
 	{
 		try{
 			$s_id=$_REQUEST['student_id'];
+			
+			$stmt = $conn->prepare("select nr_studi_graduated from nr_student_info where nr_stud_id=:s_id limit 1 ");
+			$stmt->bindParam(':s_id', $s_id);
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			$flll=0;
+			if(count($result)!=0)
+			{
+				$flll=$result[0][0];
+			}
+			
+			$stmt = $conn->prepare("select count(nr_stud_id) from nr_result where nr_stud_id=:s_id limit 1 ");
+			$stmt->bindParam(':s_id', $s_id);
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			$flll1=0;
+			if(count($result)!=0)
+			{
+				if($result[0][0]>=1)
+				{
+					$flll1=1;
+				}
+			}
+			
 			$stmt = $conn->prepare("select * from nr_student where nr_stud_id=:s_id limit 1 ");
 			$stmt->bindParam(':s_id', $s_id);
 			$stmt->execute();
@@ -53,8 +77,10 @@
 			$gender = $result[0][3];
 			$birthdate = $result[0][2];
 			$subscription_email = $result[0][4];
+			$mobile = $result[0][5];
 			$prog_id = $result[0][7];
 			$prcr_id = $result[0][8];
+			$status = $result[0][9];
 			
 			//Search for student program
 			$stmt = $conn->prepare("select * from nr_program where nr_prog_id=$prog_id");
@@ -311,6 +337,12 @@
 			
 			if($waived_credit==0) $waived_credit='N/A';
 			
+			if(isset($_SESSION['student_id']))
+			{
+				unset($_SESSION['student_id']);
+			}
+			$_SESSION['student_id']=$s_id;
+			
 		}catch(PDOException $e)
 		{
 			echo '<i class="fa fa-warning w3-text-red" title="Network Network Error Occurred Occurred!!"> Network Error Occurred</i>';
@@ -325,9 +357,12 @@
 ?>
 
 	
-		<div class="w3-container w3-row w3-padding" style="height:100%;">
-			
-			<div class="w3-container w3-padding-small" style="margin:0px;padding:0px;width:100%;min-height:200px;height:auto;">
+		<div class="w3-container w3-row" style="height:100%;padding: 0px 12px 10px 12px;" id="student_view_box1" >
+			<p class="w3-margin-0 w3-left w3-text-indigo w3-cursor" style="margin: 0px 12px 5px 0px;" onclick="document.getElementById('student_view_box1').style.display='none';document.getElementById('student_view_box2').style.display='none';document.getElementById('student_view_box3').style.display='none';document.getElementById('student_view_box4').style.display='block';document.getElementById('student_view_box5').style.display='none';"><i class="fa fa-edit"></i> Edit Student</p>
+			<p class="w3-margin-0 w3-left w3-text-indigo w3-cursor" style="margin: 0px 12px 5px 0px;" onclick="document.getElementById('student_view_box1').style.display='none';document.getElementById('student_view_box2').style.display='none';document.getElementById('student_view_box3').style.display='none';document.getElementById('student_view_box4').style.display='none';document.getElementById('student_view_box5').style.display='block';"><i class="fa fa-pencil-square"></i> Modify Waived Courses</p>
+			<p class="w3-margin-0 w3-right w3-text-purple w3-cursor" style="margin: 0px 12px 5px 0px;" onclick="document.getElementById('student_view_box1').style.display='none';document.getElementById('student_view_box2').style.display='none';document.getElementById('student_view_box3').style.display='block';document.getElementById('student_view_box4').style.display='none';document.getElementById('student_view_box5').style.display='none';"><i class="fa fa-history"></i> Student History</p>
+			<div class="w3-clear"></div>
+			<div class="w3-container w3-padding-small w3-border w3-round-large" style="margin:0px;padding:0px;width:100%;min-height:200px;height:auto;">
 				<div class="w3-row w3-bottombar w3-border-teal">
 					<!--part 1 -->
 					<div class="w3-half w3-container w3-padding-0">
@@ -394,7 +429,15 @@
 							<tr>
 								<td valign="top">Degree Status</td>
 								<td valign="top" class="w3-bold">: <?php echo $degree_status; ?></td>
-								<td valign="top"><a onclick="admin_print_result('<?php echo password_encrypt($s_id.get_current_date()); ?>','<?php echo password_encrypt($_REQUEST['admin_id'].get_current_date()); ?>')" target="_blank" class="w3-button w3-round-large w3-black w3-hover-teal w3-padding-small w3-right"><i class="fa fa-print"></i> Print</a></td>
+								<td valign="top">
+									<div class="w3-dropdown-hover w3-round-large w3-right">
+										<button class="w3-button w3-black w3-round-large w3-hover-teal w3-padding-small"><i class="fa fa-print"></i> Print</button>
+										<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-animate-zoom">
+											<a onclick="admin_print_result('<?php echo password_encrypt($s_id.get_current_date()); ?>','<?php echo password_encrypt($_REQUEST['admin_id'].get_current_date()); ?>')" class="w3-cursor w3-bar-item w3-button w3-hover-teal">Online Transcript</a>
+											<a onclick="" class=" w3-cursor w3-bar-item w3-button w3-hover-teal">Official Transcript</a>
+										</div>
+									</div>
+								</td>
 							</tr>
 						</table>
 					</div>
@@ -969,8 +1012,201 @@
 				</div>
 			</div>
 		</div>
-	
-
+		<div class="w3-container w3-margin-0 w3-padding-0 w3-center" id="student_view_box2" style="display:none;">
+			<p style="font-size:15px;font-weight:bold;">Please wait while making changes..</p>
+			<i class="fa fa-spinner w3-spin w3-margin-bottom w3-margin-top" style="font-size:50px;"></i>
+		
+		</div>
+		<div class="w3-container w3-margin-0 w3-padding-0 w3-center" id="student_view_box3" style="display:none;">
+			<p class="w3-margin-0 w3-left w3-text-purple w3-cursor" style="margin: 0px 0px 0px 12px;" onclick="document.getElementById('student_view_box1').style.display='block';document.getElementById('student_view_box2').style.display='none';document.getElementById('student_view_box3').style.display='none';document.getElementById('student_view_box4').style.display='none';document.getElementById('student_view_box5').style.display='none';"><i class="fa fa-mail-reply"></i> Back</p>
+			<div class="w3-clear"></div>
+			<div class="w3-container w3-border w3-round-large w3-padding" style="margin: 0px 12px 12px 12px;">
+				<table style="width:100%;margin:5px 0px;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar">
+					<tr class="w3-teal w3-bold">
+						<td style="width:10%;" valign="top" class="w3-padding-small">S.L. No</td>
+						<td style="width:40%;" valign="top" class="w3-padding-small">Performed Action</td>
+						<td style="width:20%;" valign="top" class="w3-padding-small">Performed By</td>
+						<td style="width:15%;" valign="top" class="w3-padding-small">Date</td>
+						<td style="width:15%;" valign="top" class="w3-padding-small">Time</td>
+					</tr>
+					<?php
+						$stmt = $conn->prepare("select * from nr_student_history a,nr_admin b where a.nr_admin_id=b.nr_admin_id and a.nr_stud_id=:student_id order by a.nr_studh_date desc,a.nr_studh_time desc ");
+						$stmt->bindParam(':student_id', $s_id);
+						$stmt->execute();
+						$result = $stmt->fetchAll();
+						if(count($result)==0)
+						{
+							echo '<tr>
+								<td colspan="5"> <p class="w3-center w3-margin"><i class="fa fa-warning w3-text-red" title="No Data Available"> No Data Available.</i></p></td>
+							</tr>';
+						}
+						else
+						{
+							$sz=count($result);
+							for($i=0;$i<$sz;$i++)
+							{
+					
+					?>
+								<tr>
+									<td valign="top" class="w3-padding-small w3-border"><?php echo $i+1; ?></td>
+									<td valign="top" class="w3-padding-small w3-border w3-small"><?php echo $result[$i][2]; ?></td>
+									<td valign="top" class="w3-padding-small w3-border w3-small"><?php echo $result[$i][7].' <b>('.$result[$i][12].')</b>, '.$result[$i][13]; ?></td>
+									<td valign="top" class="w3-padding-small w3-border"><?php echo get_date($result[$i][3]); ?></td>
+									<td valign="top" class="w3-padding-small w3-border"><?php echo $result[$i][4]; ?></td>
+								</tr>
+					
+					<?php
+							}
+						}
+					?>
+				</table>
+			</div>
+		</div>
+		<div class="w3-container w3-margin-0 w3-padding-0" id="student_view_box4" style="display:none;">
+			<p class="w3-margin-0 w3-left w3-text-purple w3-cursor" style="margin: 0px 0px 0px 12px;" onclick="document.getElementById('student_view_box1').style.display='block';document.getElementById('student_view_box2').style.display='none';document.getElementById('student_view_box3').style.display='none';document.getElementById('student_view_box4').style.display='none';document.getElementById('student_view_box5').style.display='none';"><i class="fa fa-mail-reply"></i> Back</p>
+			<div class="w3-clear"></div>
+			<p class="w3-text-red w3-small w3-bold" style="margin: 2px 0px 0px 12px;padding:0px;">Note: (*) marked fields are mandatory.</p>
+			<div class="w3-container w3-border w3-round-large w3-padding w3-margin-bottom" style="margin: 0px 12px 12px 12px;">
+				<div class="w3-row w3-margin-0 w3-padding-0">
+					<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 0px;">
+						<label><i class="w3-text-red">*</i> <b>Student Name</b></label>
+						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $name; ?>" id="student_view_name" placeholder="Enter Student Name" autocomplete="off" oninput="student_view_form_change()">
+						<input type="hidden" value="<?php echo $name; ?>" id="student_view_old_name">
+							
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:49%;">
+								<label><i class="w3-text-red">*</i> <b>Date of Birth</b> <i class="fa fa-exclamation-circle w3-cursor" title="Be careful inserting date of birth (MM/DD/YYYY) cause it will require for fetch result in student panel."></i></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="date" value="<?php echo $birthdate; ?>" id="student_view_birth_date" placeholder="Enter Student Birth Date" autocomplete="off" oninput="student_view_form_change()">
+								<input type="hidden" value="<?php echo $birthdate; ?>" id="student_view_old_birth_date">
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:49%;">
+								<label><i class="w3-text-red">*</i> <b>Student Gender</b></label>
+								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="student_view_gender" onchange="student_view_form_change()">
+									<option value="<?php echo $gender; ?>"><?php echo $gender; ?></option>
+									<?php if($gender!='Male'){ ?><option value="Male">Male</option><?php } ?>
+									<?php if($gender!='Female'){ ?><option value="Female">Female</option><?php } ?>
+									<?php if($gender!='Other'){ ?><option value="Other">Other</option><?php } ?>
+								</select>
+								<input type="hidden" value="<?php echo $gender; ?>" id="student_view_old_gender">
+						
+							</div>
+						</div>	
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:49%;">
+								<label><b>Student Email</b> <i class="fa fa-exclamation-circle w3-cursor" title="By inserting email notification and two factor authentication service will be enabled for this student."></i></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="email" value="<?php echo $subscription_email; ?>" id="student_view_email" placeholder="Enter Student Email" autocomplete="off" oninput="student_view_form_change()">
+								<input type="hidden" value="<?php echo $subscription_email; ?>" id="student_view_old_email">
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:49%;">
+								<label><b>Student Mobile</b></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $mobile; ?>" id="student_view_mobile" placeholder="Enter Student Mobile No" autocomplete="off" oninput="student_view_form_change()">
+								<input type="hidden" value="<?php echo $mobile; ?>" id="student_view_old_mobile">
+							</div>
+						</div>
+						<input type="hidden" value="<?php echo $prog_id; ?>" id="student_view_old_prog">
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:49%;">
+								<label><i class="w3-text-red">*</i> <b>Enrolled Program</b> <i class="fa fa-exclamation-circle w3-cursor" title="Be careful to change the program cause it will delete all the result and records of this student for current program."></i></label>
+								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="student_view_prog" onchange="student_view_form_change()">
+									<option value="<?php echo $prog_id; ?>"><?php echo $degree; ?></option>
+									<?php
+										$stmt = $conn->prepare("SELECT * FROM nr_program where nr_prog_id!=:prog_id and nr_prog_status='Active' order by nr_prog_title asc");
+										$stmt->bindParam(':prog_id', $prog_id);
+										$stmt->execute();
+										$stud_result=$stmt->fetchAll();
+										if(count($stud_result)>0)
+										{
+											$sz=count($stud_result);
+											for($k=0;$k<$sz;$k++)
+											{
+												$prog_id=$stud_result[$k][0];
+												$prog_title=$stud_result[$k][1];
+												echo '<option value="'.$prog_id.'">'.$prog_title.'</option>';
+											}
+										}
+									?>
+									
+								</select>
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:49%;">
+								<label><i class="w3-text-red">*</i> <b>Status</b></label>
+								<?php
+									if($status=='Active') 
+									{
+								?>
+										<select class="w3-input w3-border w3-margin-bottom w3-round-large w3-pale-green" id="student_view_status" onchange="student_view_form_change()">
+											<option value="Active" class="w3-pale-green">Active</option>
+											<option value="Inactive" class="w3-pale-red">Inactive</option>
+										</select>
+								<?php
+									} else {
+								?>
+										<select class="w3-input w3-border w3-margin-bottom w3-round-large w3-pale-red" id="student_view_status" onchange="student_view_form_change()">
+											<option value="Inactive" class="w3-pale-red">Inactive</option>
+											<option value="Active" class="w3-pale-green">Active</option>
+										</select>
+								<?php
+									}
+								
+									//spam Check 
+									$aaa=rand(1,20);
+									$bbb=rand(1,20);
+									$ccc=$aaa+$bbb;
+								?>
+								<input type="hidden" value="<?php echo $status; ?>" id="student_view_old_status">
+								<input type="hidden" value="<?php echo $ccc; ?>" id="student_view_old_captcha">
+								<input type="hidden" value="<?php echo $reg_no; ?>" id="student_view_id">
+								
+							</div>
+						</div>
+						<label><i class="w3-text-red">*</i> <b>Captcha</b></label>
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:40%;">
+								<input class="w3-input w3-border w3-center w3-round-large" type="text" value="<?php echo $aaa.' + '.$bbb.' = '; ?>" disabled>
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:58%;">
+								<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="student_view_captcha" autocomplete="off" oninput="student_view_form_change()">
+							</div>
+						</div>
+						
+							
+					</div>
+					
+					<div class="w3-col w3-margin-0" style="width:30%;padding:0px 6px 0px 6px;">
+					
+						<div class="w3-col w3-margin-bottom w3-margin-left">			
+							<?php if($photo=="" && $gender=="Male"){ ?>
+								<img src="../images/system/male_profile.png" class="w3-image" style="border: 2px solid black;margin:22px 0px 0px 0px;padding:0px;width:100%;max-width:100px;height: 120px;" title="DP (120X100)px" alt="DP (120X100)px">
+							<?php } else if($photo==""){ ?>
+								<img src="../images/system/female_profile.png" class="w3-image" style="border: 2px solid black;10px 0px 0px 0px;padding:0px;width:100%;max-width:100px;height: 120px;" title="DP (120X100)px" alt="DP (120X100)px">
+							<?php } else { ?>
+								<img src="../images/student/<?php echo $photo; ?>" class="w3-image" style="border: 2px solid black;10px 0px 0px 0px;padding:0px;width:100%;max-width:100px;height: 120px;"  title="DP (120X100)px" alt="DP (120X100)px">
+							<?php } ?> 
+						</div>
+						<label><b>Change DP</b></label>
+						<input class="w3-input w3-border w3-round-large" onclick="document.getElementById('student_msg').style.display='block'" type="file" id="logo" title="Please upload DP (240X200)px"  onchange="student_view_form_change()">
+						<i class="w3-text-red w3-small w3-bold" id="student_msg" style="display: none;">*Upload DP with (240X200)px</i>
+				
+						
+						<button onclick="student_view_form_reset()" class="w3-button w3-margin-top w3-red w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;"><i class="fa fa-eye-slash"></i> Reset</button>
+						
+						<button onclick="document.getElementById('student_view_re_confirmation').style.display='block';" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" <?php if($flll==1 || $flll1==1){ echo 'title="Sorry you can not remove this student." disabled'; }?>><i class="fa fa-eraser"></i> Remove</button>
+					
+						<button onclick="student_view_form_save_changes('<?php echo $id; ?>')" id="student_view_save_btn" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" disabled><i class="fa fa-save"></i> Save Changes</button>
+					
+					
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<div class="w3-container w3-margin-0 w3-padding-0 w3-center" id="student_view_box5" style="display:none;">
+			<p class="w3-margin-0 w3-left w3-text-purple w3-cursor" style="margin: 0px 0px 0px 12px;" onclick="document.getElementById('student_view_box1').style.display='block';document.getElementById('student_view_box2').style.display='none';document.getElementById('student_view_box3').style.display='none';document.getElementById('student_view_box4').style.display='none';document.getElementById('student_view_box5').style.display='none';"><i class="fa fa-mail-reply"></i> Back</p>
+			<div class="w3-clear"></div>
+			<div class="w3-container w3-border w3-round-large w3-padding" style="margin: 0px 12px 12px 12px;">
+			
+			</div>
+		</div>
 <?php	
 	}
 	else

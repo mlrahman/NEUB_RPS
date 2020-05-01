@@ -95,7 +95,7 @@
 		<form onsubmit="return false">
 			
 		<div class="w3-container w3-padding">
-			<p class="w3-large w3-bold w3-text-brown">Are you sure you want to add the course?</p>
+			<p class="w3-large w3-bold w3-text-brown">Are you sure you want to add the student?</p>
 			
 			<label><i class="w3-text-red">*</i> <b>Enter your password</b></label>
 			<input class="w3-input w3-border w3-margin-bottom w3-round-large w3-margin-bottom" type="password" id="student_single_add_pass" placeholder="Enter your password" autocomplete="off">
@@ -128,7 +128,7 @@
 </div>
 
 
-<!-- Confirmation modal for course delete -->
+<!-- Confirmation modal for student delete -->
 <div id="student_view_re_confirmation" class="w3-modal" style="padding-top:100px;">
 	<div class="w3-modal-content w3-card-4 w3-animate-zoom w3-round-large w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border w3-border-black" style="max-width:700px;width:80%;">
 		<header class="w3-container w3-black"> 
@@ -219,7 +219,7 @@
 			
 	</div>
 	
-	<!-- Window for add single course -->
+	<!-- Window for add single student -->
 
 	<div id="add_single_window8" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
 		<span onclick="add_single_window8_close()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
@@ -229,14 +229,14 @@
 			<div class="w3-container w3-border w3-round-large w3-padding w3-margin-bottom" style="margin: 0px 12px 12px 12px;">
 				<div class="w3-row w3-margin-0 w3-padding-0">
 					<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 0px;">
-						<label><i class="w3-text-red">*</i> <b>Course Title</b></label>
-						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="student_single_add_title" placeholder="Enter Course Title" autocomplete="off" onkeyup="student_single_add_form_change()">
+						<label><i class="w3-text-red">*</i> <b>student Title</b></label>
+						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="student_single_add_title" placeholder="Enter student Title" autocomplete="off" onkeyup="student_single_add_form_change()">
 						
-						<label><i class="w3-text-red">*</i> <b>Course Code</b></label>
-						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="student_single_add_code" placeholder="Enter Course Code" autocomplete="off" onkeyup="student_single_add_form_change()">
+						<label><i class="w3-text-red">*</i> <b>student Code</b></label>
+						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="student_single_add_code" placeholder="Enter student Code" autocomplete="off" onkeyup="student_single_add_form_change()">
 						
-						<label><i class="w3-text-red">*</i> <b>Course Credit</b></label>
-						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="number" id="student_single_add_credit" placeholder="Enter Course Credit" autocomplete="off" onkeyup="student_single_add_form_change()">
+						<label><i class="w3-text-red">*</i> <b>student Credit</b></label>
+						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="number" id="student_single_add_credit" placeholder="Enter student Credit" autocomplete="off" onkeyup="student_single_add_form_change()">
 						
 						<label><i class="w3-text-red">*</i> <b>Program</b></label>
 						<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="student_single_add_prog" onchange="student_single_add_form_change()">
@@ -301,7 +301,7 @@
 		</div>
 	</div>
 	
-	<!-- Window for add multiple course -->
+	<!-- Window for add multiple student -->
 
 	<div id="add_multiple_window8" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
 		<span onclick="add_multiple_window8_close()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
@@ -310,9 +310,9 @@
 			<div class="w3-container w3-margin-top w3-margin-bottom w3-sand w3-justify w3-round-large w3-padding">
 				<p class="w3-bold w3-margin-0"><u>Steps</u>:</p>
 				<ol>
-					<li>First download the formatted excel file from <a href="../excel_files/demo/insert_multiple_course.xlsx" target="_blank" class="w3-text-blue">here</a>.</li>
+					<li>First download the formatted excel file from <a href="../excel_files/demo/insert_multiple_student.xlsx" target="_blank" class="w3-text-blue">here</a>.</li>
 					<li>In this excel file (<span class="w3-text-red">*</span>) marked columns are mandatory for each row (not valid for blank row). Very carefully fill up the rows with your data. <b>Don't put gap</b> between two rows. Also <b>ignore duplicated data</b> for consistent input.</li>
-					<li>After filling the necessary rows you have to <b>submit it from the below form</b>. Don't forget to select a program. You can insert at most <b>100 courses</b> in a single upload under a single program.</li>
+					<li>After filling the necessary rows you have to <b>submit it from the below form</b>. Don't forget to select a program. You can insert at most <b>100 students</b> in a single upload under a single program.</li>
 					<li>This process may take <b>up to two minutes</b> so keep patience. After finishing the process you will get a logs.</li>
 				</ol>
 			</div>
@@ -369,7 +369,7 @@
 		<div class="w3-container w3-margin-0 w3-padding-0 w3-center" style="display:none;" id="student_multiple_add_box2">
 			<p style="font-size:15px;font-weight:bold;">Please wait while making changes..</p>
 			<div class="w3-light-grey w3-round-xlarge w3-border w3-margin-top w3-margin-bottom" style="width:50%;margin:0 auto;">
-				<div class="w3-container w3-blue w3-round-xlarge w3-text-white w3-bold" id="student_multiple_courseress_id" style="width:0%;">0%</div>
+				<div class="w3-container w3-blue w3-round-xlarge w3-text-white w3-bold" id="student_multiple_studentress_id" style="width:0%;">0%</div>
 			</div>
 			<i class="fa fa-spinner w3-spin w3-margin-bottom w3-margin-top" style="font-size:50px;"></i>
 		</div>
@@ -422,7 +422,7 @@
 
 	<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:0px 0px 15px 0px;width:155px;"><i class="fa fa-server"></i> Students</p>
 	
-	<!-- sort options for course list -->
+	<!-- sort options for student list -->
 	<p class="w3-right w3-padding w3-margin-0 w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-round-large">
 		<span>
 			Sort By: 
@@ -444,7 +444,7 @@
 	
 	<div class="w3-clear"></div>
 		
-	<!-- filter for course list -->
+	<!-- filter for student list -->
 	<div class="w3-container w3-padding w3-margin-0 w3-padding-0 w3-topbar w3-right w3-leftbar w3-bottombar w3-rightbar w3-round-large" id="filter8" style="display:none;">
 		Status: 
 		<select id="filter_status8" onchange="get_total_search_results8(0,0)" type="w3-input w3-round-large">
@@ -468,7 +468,7 @@
 	
 	<div class="w3-clear"></div>
 	
-	<!-- table for course list -->
+	<!-- table for student list -->
 	<p class="w3-margin-0 w3-padding-0 w3-medium">Total Data: <span class="w3-text-red" id="search_data_label8"></span></p>		
 	<table style="width:100%;margin:0px;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar">
 		<tr class="w3-teal w3-bold">
@@ -809,8 +809,8 @@
 						}
 						
 						
-						document.getElementById('student_multiple_courseress_id').style.width='0%';
-						document.getElementById('student_multiple_courseress_id').innerHTML='0%';
+						document.getElementById('student_multiple_studentress_id').style.width='0%';
+						document.getElementById('student_multiple_studentress_id').innerHTML='0%';
 						
 						document.getElementById('student_multiple_add_box1').style.display='none';
 						document.getElementById('student_multiple_add_box3').style.display='block';
@@ -832,8 +832,8 @@
 					}
 					else if(status=='PE')
 					{
-						document.getElementById('student_multiple_courseress_id').style.width='0%';
-						document.getElementById('student_multiple_courseress_id').innerHTML='0%';
+						document.getElementById('student_multiple_studentress_id').style.width='0%';
+						document.getElementById('student_multiple_studentress_id').innerHTML='0%';
 						
 						document.getElementById('student_multiple_add_box1').style.display='block';
 						document.getElementById('student_multiple_add_box3').style.display='none';
@@ -847,8 +847,8 @@
 					}
 					else if(status=='unable2')
 					{
-						document.getElementById('student_multiple_courseress_id').style.width='0%';
-						document.getElementById('student_multiple_courseress_id').innerHTML='0%';
+						document.getElementById('student_multiple_studentress_id').style.width='0%';
+						document.getElementById('student_multiple_studentress_id').innerHTML='0%';
 						
 						document.getElementById('student_multiple_add_box1').style.display='block';
 						document.getElementById('student_multiple_add_box3').style.display='none';
@@ -862,8 +862,8 @@
 					}
 					else
 					{
-						document.getElementById('student_multiple_courseress_id').style.width='0%';
-						document.getElementById('student_multiple_courseress_id').innerHTML='0%';
+						document.getElementById('student_multiple_studentress_id').style.width='0%';
+						document.getElementById('student_multiple_studentress_id').innerHTML='0%';
 						
 						document.getElementById('student_multiple_add_box1').style.display='block';
 						document.getElementById('student_multiple_add_box3').style.display='none';
@@ -879,8 +879,8 @@
 				}
 				else if(this.readyState==4 && (this.status==404 || this.status==403))
 				{
-					document.getElementById('student_multiple_courseress_id').style.width='0%';
-					document.getElementById('student_multiple_courseress_id').innerHTML='0%';
+					document.getElementById('student_multiple_studentress_id').style.width='0%';
+					document.getElementById('student_multiple_studentress_id').innerHTML='0%';
 					
 					document.getElementById('student_multiple_add_box1').style.display='block';
 					document.getElementById('student_multiple_add_box3').style.display='none';
@@ -893,23 +893,23 @@
 					
 				}
 			};
-			xhttp1.upload.oncourseress = function(e) {
+			xhttp1.upload.onstudentress = function(e) {
 				if (e.lengthComputable) {
 				  var percentComplete = Math.round((e.loaded / e.total) * 100);
 				  percentComplete=percentComplete.toFixed(2);
 				  if(percentComplete==100)
 				  {
-					 document.getElementById('student_multiple_courseress_id').style.width=percentComplete+'%';
-					 document.getElementById('student_multiple_courseress_id').innerHTML= percentComplete+'%';
+					 document.getElementById('student_multiple_studentress_id').style.width=percentComplete+'%';
+					 document.getElementById('student_multiple_studentress_id').innerHTML= percentComplete+'%';
 				  }
 				  else
 				  {
-					 document.getElementById('student_multiple_courseress_id').style.width=percentComplete+'%';
-					 document.getElementById('student_multiple_courseress_id').innerHTML= percentComplete+'%';
+					 document.getElementById('student_multiple_studentress_id').style.width=percentComplete+'%';
+					 document.getElementById('student_multiple_studentress_id').innerHTML= percentComplete+'%';
 				  }
 				}
 			};
-			xhttp1.open("POST", "../includes/super_admin/add_multiple_courses.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&excel="+link+"&pass="+pass+"&student_prog="+student_prog, true);
+			xhttp1.open("POST", "../includes/super_admin/add_multiple_students.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&excel="+link+"&pass="+pass+"&student_prog="+student_prog, true);
 			xhttp1.send(fd_excel);
 		}
 	}
@@ -971,7 +971,7 @@
 						get_search_result8();
 						
 						document.getElementById('valid_msg').style.display='block';
-						document.getElementById('v_msg').innerHTML='Course successfully added.';
+						document.getElementById('v_msg').innerHTML='student successfully added.';
 						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
 					
 						
@@ -991,7 +991,7 @@
 						document.getElementById('student_single_add_box2').style.display='none';
 						
 						document.getElementById('invalid_msg').style.display='block';
-						document.getElementById('i_msg').innerHTML='Sorry unable to add this course (duplicate detected).';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add this student (duplicate detected).';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					}
 					else if(this.responseText.trim()=='unable2')
@@ -1000,7 +1000,7 @@
 						document.getElementById('student_single_add_box2').style.display='none';
 						
 						document.getElementById('invalid_msg').style.display='block';
-						document.getElementById('i_msg').innerHTML='Sorry unable to add this course (program inactive).';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add this student (program inactive).';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					}
 					else
@@ -1025,7 +1025,7 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/add_single_course.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&student_title="+student_view_title+"&student_code="+student_view_code+"&student_credit="+student_view_credit+"&student_prog="+student_view_prog+"&student_status="+student_view_status, true);
+			xhttp1.open("POST", "../includes/super_admin/add_single_student.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&student_title="+student_view_title+"&student_code="+student_view_code+"&student_credit="+student_view_credit+"&student_prog="+student_view_prog+"&student_status="+student_view_status, true);
 			xhttp1.send();
 		}
 	
@@ -1071,7 +1071,7 @@
 						get_search_result8();
 						
 						document.getElementById('valid_msg').style.display='block';
-						document.getElementById('v_msg').innerHTML='Course successfully removed.';
+						document.getElementById('v_msg').innerHTML='student successfully removed.';
 						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
 					
 						
@@ -1093,7 +1093,7 @@
 						document.getElementById('student_view_box2').style.display='none';
 						
 						document.getElementById('invalid_msg').style.display='block';
-						document.getElementById('i_msg').innerHTML='Sorry unable to remove this course.';
+						document.getElementById('i_msg').innerHTML='Sorry unable to remove this student.';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					}
 					else
@@ -1120,7 +1120,7 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/delete_course.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&student_id="+student_id+"&pass="+pass, true);
+			xhttp1.open("POST", "../includes/super_admin/delete_student.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&student_id="+student_id+"&pass="+pass, true);
 			xhttp1.send();
 		}
 	}
@@ -1307,7 +1307,7 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/edit_course.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&student_title="+student_view_title+"&student_code="+student_view_code+"&student_status="+student_view_status+"&student_credit="+student_view_credit+"&student_prog="+student_view_prog+"&student_id="+student_id, true);
+			xhttp1.open("POST", "../includes/super_admin/edit_student.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&student_title="+student_view_title+"&student_code="+student_view_code+"&student_status="+student_view_status+"&student_credit="+student_view_credit+"&student_prog="+student_view_prog+"&student_id="+student_id, true);
 			xhttp1.send();
 		}
 		
