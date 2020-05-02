@@ -1074,7 +1074,7 @@
 			xhttp1.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					
-					console.log(this.responseText);
+					//console.log(this.responseText);
 					if(this.responseText.trim()=='Ok')
 					{
 						get_search_result8();
@@ -1400,7 +1400,7 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/edit_student.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&student_old_email="+student_view_old_email+"&student_old_id="+student_view_old_id+"&student_dp="+student_view_dp+"&student_name="+student_view_name+"&student_id="+student_view_id+"&student_status="+student_view_status+"&student_birth_date="+student_view_birth_date+"&student_prog="+student_view_prog+"&student_old_prog="+student_view_old_prog+"&student_gender="+student_view_gender+"&student_email="+student_view_email+"&student_mobile="+student_view_mobile, true);
+			xhttp1.open("POST", "../includes/super_admin/edit_student.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&student_old_email="+student_view_old_email+"&student_old_id="+student_view_old_id+"&student_dp="+student_view_dp+"&student_dp_2="+link+"&student_name="+student_view_name+"&student_id="+student_view_id+"&student_status="+student_view_status+"&student_birth_date="+student_view_birth_date+"&student_prog="+student_view_prog+"&student_old_prog="+student_view_old_prog+"&student_gender="+student_view_gender+"&student_email="+student_view_email+"&student_mobile="+student_view_mobile, true);
 			xhttp1.send(fd_image);
 		}
 		else

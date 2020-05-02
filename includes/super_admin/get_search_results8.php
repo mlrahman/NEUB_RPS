@@ -91,21 +91,21 @@
 		
 		if($program_id==-1 && $dept_id==-1)
 		{
-			$stmt = $conn->prepare("select a.nr_stud_id,a.nr_stud_name,b.nr_studi_earned_credit,b.nr_studi_waived_credit,c.nr_prcr_total,b.nr_studi_cgpa from nr_student a,nr_student_info b,nr_program_credit c where a.nr_stud_id=b.nr_stud_id ".$filter." and a.nr_prcr_id=c.nr_prcr_id and (a.nr_stud_id LIKE CONCAT('%',:search_text,'%') or a.nr_stud_name LIKE CONCAT('%',:search_text,'%')) order by ".$order_by." ".$order." limit $page,5 ");
+			$stmt = $conn->prepare("select a.nr_stud_id,a.nr_stud_name,b.nr_studi_earned_credit,b.nr_studi_waived_credit,c.nr_prcr_total,b.nr_studi_cgpa,a.nr_stud_status from nr_student a,nr_student_info b,nr_program_credit c where a.nr_stud_id=b.nr_stud_id ".$filter." and a.nr_prcr_id=c.nr_prcr_id and (a.nr_stud_id LIKE CONCAT('%',:search_text,'%') or a.nr_stud_name LIKE CONCAT('%',:search_text,'%')) order by ".$order_by." ".$order." limit $page,5 ");
 		}
 		else if($program_id==-1 && $dept_id!=-1)
 		{
-			$stmt = $conn->prepare("select a.nr_stud_id,a.nr_stud_name,b.nr_studi_earned_credit,b.nr_studi_waived_credit,c.nr_prcr_total,b.nr_studi_cgpa from nr_student a,nr_student_info b,nr_program_credit c where a.nr_stud_id=b.nr_stud_id ".$filter." and a.nr_prcr_id=c.nr_prcr_id and a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:dept_id) and (a.nr_stud_id LIKE CONCAT('%',:search_text,'%') or a.nr_stud_name LIKE CONCAT('%',:search_text,'%')) order by ".$order_by." ".$order." limit $page,5 ");
+			$stmt = $conn->prepare("select a.nr_stud_id,a.nr_stud_name,b.nr_studi_earned_credit,b.nr_studi_waived_credit,c.nr_prcr_total,b.nr_studi_cgpa,a.nr_stud_status from nr_student a,nr_student_info b,nr_program_credit c where a.nr_stud_id=b.nr_stud_id ".$filter." and a.nr_prcr_id=c.nr_prcr_id and a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:dept_id) and (a.nr_stud_id LIKE CONCAT('%',:search_text,'%') or a.nr_stud_name LIKE CONCAT('%',:search_text,'%')) order by ".$order_by." ".$order." limit $page,5 ");
 			$stmt->bindParam(':dept_id', $dept_id);
 		}
 		else if($program_id!=-1 && $dept_id==-1)
 		{
-			$stmt = $conn->prepare("select a.nr_stud_id,a.nr_stud_name,b.nr_studi_earned_credit,b.nr_studi_waived_credit,c.nr_prcr_total,b.nr_studi_cgpa from nr_student a,nr_student_info b,nr_program_credit c where a.nr_prog_id=:prog_id ".$filter." and a.nr_stud_id=b.nr_stud_id and a.nr_prcr_id=c.nr_prcr_id and (a.nr_stud_id LIKE CONCAT('%',:search_text,'%') or a.nr_stud_name LIKE CONCAT('%',:search_text,'%')) order by ".$order_by." ".$order." limit $page,5 ");
+			$stmt = $conn->prepare("select a.nr_stud_id,a.nr_stud_name,b.nr_studi_earned_credit,b.nr_studi_waived_credit,c.nr_prcr_total,b.nr_studi_cgpa,a.nr_stud_status from nr_student a,nr_student_info b,nr_program_credit c where a.nr_prog_id=:prog_id ".$filter." and a.nr_stud_id=b.nr_stud_id and a.nr_prcr_id=c.nr_prcr_id and (a.nr_stud_id LIKE CONCAT('%',:search_text,'%') or a.nr_stud_name LIKE CONCAT('%',:search_text,'%')) order by ".$order_by." ".$order." limit $page,5 ");
 			$stmt->bindParam(':prog_id', $program_id);
 		}
 		else
 		{
-			$stmt = $conn->prepare("select a.nr_stud_id,a.nr_stud_name,b.nr_studi_earned_credit,b.nr_studi_waived_credit,c.nr_prcr_total,b.nr_studi_cgpa from nr_student a,nr_student_info b,nr_program_credit c where a.nr_prog_id=:prog_id ".$filter." and a.nr_stud_id=b.nr_stud_id and a.nr_prcr_id=c.nr_prcr_id and a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:dept_id) and (a.nr_stud_id LIKE CONCAT('%',:search_text,'%') or a.nr_stud_name LIKE CONCAT('%',:search_text,'%')) order by ".$order_by." ".$order." limit $page,5 ");
+			$stmt = $conn->prepare("select a.nr_stud_id,a.nr_stud_name,b.nr_studi_earned_credit,b.nr_studi_waived_credit,c.nr_prcr_total,b.nr_studi_cgpa,a.nr_stud_status from nr_student a,nr_student_info b,nr_program_credit c where a.nr_prog_id=:prog_id ".$filter." and a.nr_stud_id=b.nr_stud_id and a.nr_prcr_id=c.nr_prcr_id and a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:dept_id) and (a.nr_stud_id LIKE CONCAT('%',:search_text,'%') or a.nr_stud_name LIKE CONCAT('%',:search_text,'%')) order by ".$order_by." ".$order." limit $page,5 ");
 			$stmt->bindParam(':dept_id', $dept_id);
 			$stmt->bindParam(':prog_id', $program_id);
 		}
@@ -120,7 +120,10 @@
 				$wc=$result[$i][3];
 				if($wc==0)
 					$wc='N/A';
-				echo '<tr>
+				$col='';
+				if($result[$i][6]=='Inactive')
+					$col='w3-pale-red';
+				echo '<tr class="'.$col.'">
 						<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$result[$i][0].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$result[$i][1].'</td>

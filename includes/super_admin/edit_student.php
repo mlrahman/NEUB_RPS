@@ -10,7 +10,7 @@
 		header("location:index.php");
 		die();
 	}
-	if(isset($_REQUEST['student_old_email']) && isset($_REQUEST['student_old_id']) && isset($_REQUEST['student_status']) && isset($_REQUEST['student_gender']) && isset($_REQUEST['student_birth_date']) && isset($_REQUEST['student_id']) && isset($_REQUEST['student_name']) && isset($_REQUEST['student_dp']) && isset($_REQUEST['student_email']) && isset($_REQUEST['student_mobile']) && isset($_REQUEST['student_prog']) && isset($_REQUEST['student_old_prog']) && isset($_REQUEST['admin_id']) && $_REQUEST['admin_id']==$_SESSION['admin_id'])
+	if(isset($_REQUEST['student_old_email']) && isset($_REQUEST['student_old_id']) && isset($_REQUEST['student_status']) && isset($_REQUEST['student_gender']) && isset($_REQUEST['student_birth_date']) && isset($_REQUEST['student_id']) && isset($_REQUEST['student_name']) && isset($_REQUEST['student_dp']) && isset($_REQUEST['student_dp_2']) && isset($_REQUEST['student_email']) && isset($_REQUEST['student_mobile']) && isset($_REQUEST['student_prog']) && isset($_REQUEST['student_old_prog']) && isset($_REQUEST['admin_id']) && $_REQUEST['admin_id']==$_SESSION['admin_id'])
 	{
 		try
 		{
@@ -18,6 +18,7 @@
 			$student_old_id=trim($_REQUEST['student_old_id']);
 			$student_name=trim($_REQUEST['student_name']);
 			$student_dp=trim($_REQUEST['student_dp']);
+			$student_dp_2=trim($_REQUEST['student_dp_2']);
 			$student_email=trim($_REQUEST['student_email']);
 			$old_email=trim($_REQUEST['student_old_email']);
 			$student_mobile=trim($_REQUEST['student_mobile']);
@@ -235,7 +236,7 @@
 			if($student_dp!="")
 			{
 				//uploading student photo
-				$link=$student_dp;
+				$link=$student_dp_2;
 				$file=$_FILES[$link];
 				$image_name=photo_upload($file,0,100000,"jpg,gif,png,jpeg,bmp,heic",'../../images/student',$path='');
 				if($image_name!="1")
@@ -256,6 +257,10 @@
 			if($image_name!="" && $photo!="")
 			{
 				unlink($base_directory.$photo);
+			}
+			else if($photo!="" && $image_name=="")
+			{
+				$image_name=$photo;
 			}
 			
 			$stmt = $conn->prepare("update nr_student set nr_stud_name=:student_name, nr_stud_dob=:student_birth_date,nr_stud_email=:student_email,nr_stud_cell_no=:student_mobile,nr_prog_id=:student_prog,nr_prcr_id=:prcr_id,nr_stud_gender=:student_gender,nr_stud_status=:student_status,nr_stud_photo=:student_dp where nr_stud_id=:student_id ");
