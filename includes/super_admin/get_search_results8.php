@@ -123,7 +123,7 @@
 				$col='';
 				if($result[$i][6]=='Inactive')
 					$col='w3-pale-red';
-				echo '<tr class="'.$col.'">
+				echo '<tr class="'.$col.'" title="Status '.$result[$i][6].'">
 						<td valign="top" class="w3-padding-small w3-border">'.++$page.'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$result[$i][0].'</td>
 						<td valign="top" class="w3-padding-small w3-border">'.$result[$i][1].'</td>
