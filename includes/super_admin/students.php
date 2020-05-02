@@ -1346,6 +1346,32 @@
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 		
 					}
+					else if(this.responseText.trim()=='unable3')
+					{
+						document.getElementById('student_view_box4').style.display='block';
+						document.getElementById('student_view_box2').style.display='none';
+						document.getElementById('student_view_box3').style.display='none';
+						document.getElementById('student_view_box1').style.display='none';
+						document.getElementById('student_view_box5').style.display='none';
+					
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unable to make change (program inactive).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		
+					}
+					else if(this.responseText.trim()=='unable4')
+					{
+						document.getElementById('student_view_box4').style.display='block';
+						document.getElementById('student_view_box2').style.display='none';
+						document.getElementById('student_view_box3').style.display='none';
+						document.getElementById('student_view_box1').style.display='none';
+						document.getElementById('student_view_box5').style.display='none';
+					
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unable to make change in program (student graduated).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		
+					}
 					else
 					{
 						document.getElementById('student_view_box4').style.display='block';
@@ -1374,7 +1400,7 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/edit_student.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&student_old_id="+student_view_old_id+"&student_dp="+student_view_dp+"&student_name="+student_view_name+"&student_id="+student_view_id+"&student_status="+student_view_status+"&student_birth_date="+student_view_birth_date+"&student_prog="+student_view_prog+"&student_gender="+student_view_gender+"&student_email="+student_view_email+"&student_mobile="+student_view_mobile, true);
+			xhttp1.open("POST", "../includes/super_admin/edit_student.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&student_old_email="+student_view_old_email+"&student_old_id="+student_view_old_id+"&student_dp="+student_view_dp+"&student_name="+student_view_name+"&student_id="+student_view_id+"&student_status="+student_view_status+"&student_birth_date="+student_view_birth_date+"&student_prog="+student_view_prog+"&student_old_prog="+student_view_old_prog+"&student_gender="+student_view_gender+"&student_email="+student_view_email+"&student_mobile="+student_view_mobile, true);
 			xhttp1.send(fd_image);
 		}
 		else

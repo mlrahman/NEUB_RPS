@@ -1122,7 +1122,7 @@
 						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
 							<div class="w3-col" style="width:49%;">
 								<label><i class="w3-text-red">*</i> <b>Enrolled Program</b> <i class="fa fa-exclamation-circle w3-cursor" title="Be careful to change the program cause it will delete all the result and records of this student for current program."></i></label>
-								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="student_view_prog" onchange="student_view_form_change()">
+								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="student_view_prog" onchange="student_view_form_change()" <?php if($flll==1){ echo 'disabled'; } ?> >
 									<option value="<?php echo $prog_id; ?>"><?php echo $degree; ?></option>
 									<?php
 										$stmt = $conn->prepare("SELECT * FROM nr_program where nr_prog_id!=:prog_id and nr_prog_status='Active' order by nr_prog_title asc");

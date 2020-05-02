@@ -127,6 +127,9 @@
 						else if(this.responseText.trim()=="done")
 						{
 							//console.log('kjhg');
+							document.getElementById('edit_subscription').style.display='none';
+							document.getElementById('subscription').checked=true;
+							document.getElementById('subscription').disabled=true;
 							document.getElementById('sub_email').value=sub_email;
 							document.getElementById('sub_change_done').style.display='block';
 							setTimeout(function(){ document.getElementById('sub_change_done').style.display='none'; }, 1500);

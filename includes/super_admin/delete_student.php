@@ -120,7 +120,7 @@
 		
 			$t=get_current_time();
 			$d=get_current_date();
-			$task='Deleted Student Name: '.$student_name.', Student DOB: '.$student_dob.', Student Gender: '.$student_gender.', Student Email: '.$student_email.', Student Mobile: '.$student_mobile.', Earned Credit: '.$earned_credit.', Waived Credit: '.$waived_credit.', Student Status: '.$student_status;
+			$task='Deleted Student Name: '.$student_name.', Student DOB: '.$student_dob.', Student Gender: '.$student_gender.', Student Email: '.$student_email.', Student Mobile: '.$student_mobile.', Student Program: '.$prog_title.', Student CGPA: '.number_format($cgpa,2).', Earned Credit: '.$earned_credit.', Waived Credit: '.$waived_credit.', Student Status: '.$student_status;
 			$stmt = $conn->prepare("insert into nr_delete_history(nr_admin_id,nr_deleteh_task,nr_deleteh_date,nr_deleteh_time,nr_deleteh_status,nr_deleteh_type) values(:admin_id,'$task','$d','$t','Active','Student') ");
 			$stmt->bindParam(':admin_id', $_SESSION['admin_id']);
 			$stmt->execute();
