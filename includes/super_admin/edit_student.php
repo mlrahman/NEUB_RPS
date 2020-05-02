@@ -303,6 +303,14 @@
 			$stmt->execute();
 			
 			
+			//dealing with photo
+			$stmt = $conn->prepare("select b.nr_prog_title from nr_student a,nr_program b where a.nr_stud_id=:student_id and a.nr_prog_id=b.nr_prog_id ");
+			$stmt->bindParam(':student_id', $student_id);
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			$prog_title=$result[0][0];
+			
+			
 			if($student_email=='') $student_email='N/A';
 			if($student_mobile=='') $student_mobile='N/A';
 			$task='Edited Student Name: '.$student_name.', Student DOB: '.$student_birth_date.', Student Gender: '.$student_gender.', Student Email: '.$student_email.', Student Mobile: '.$student_mobile.', Student Program: '.$prog_title.', Student CGPA: '.number_format($cgpa,2).', Earned Credit: '.$earned_credit.', Waived Credit: '.$waived_credit.', Student Status: '.$student_status;
