@@ -128,6 +128,82 @@
 </div>
 
 
+<!-- Confirmation modal for remove waive course -->
+<div id="student_waive2_confirmation" class="w3-modal" style="padding-top:100px;">
+	<div class="w3-modal-content w3-card-4 w3-animate-zoom w3-round-large w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border w3-border-black" style="max-width:700px;width:80%;">
+		<header class="w3-container w3-black"> 
+			<p class="w3-xxlarge" style="margin:0px 0px 10px 0px;">Confirmation</p>
+		</header>
+		<form onsubmit="return false">
+			
+		<div class="w3-container w3-padding">
+			<p class="w3-large w3-bold w3-text-brown">Are you sure you want to remove this course from waived list?</p>
+			
+			<label><i class="w3-text-red">*</i> <b>Enter your password</b></label>
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="password" id="waive2_pass" placeholder="Enter your password" autocomplete="off">
+			
+			<input type="hidden" id="remove_waived_course_id" value="-1">
+			<?php 
+				//spam Check 
+				$aaa=rand(1,20);
+				$bbb=rand(1,20);
+				$ccc=$aaa+$bbb;
+			?>
+			<label><i class="w3-text-red">*</i> <b>Captcha</b></label>
+			<div class="w3-row" style="margin:0px 0px 10px 0px;padding:0px;">
+				<div class="w3-col" style="width:40%;">
+					<input class="w3-input w3-border w3-center w3-round-large" type="text" value="<?php echo $aaa.' + '.$bbb.' = '; ?>" disabled>
+				</div>
+				<div class="w3-col" style="margin-left:2%;width:58%;">
+					<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="captcha_waive2_confirm" autocomplete="off">
+				</div>
+			</div>
+		</div>
+		<div class="w3-container w3-light-grey w3-padding w3-black">
+			<button class="w3-button w3-right w3-green w3-border w3-round-large" onclick="remove_waive2()">Yes</button>
+			<button class="w3-button w3-right w3-red w3-border w3-round-large w3-margin-right" onclick="document.getElementById('student_waive2_confirmation').style.display='none';document.getElementById('captcha_waive2_confirm').value='';document.getElementById('waive2_pass').value='';">No</button>
+		</div>
+		</form>
+	</div>
+	<script>
+		//Captcha Validation for create new password
+		var reservation_captcha_waive2_confirm = document.getElementById("captcha_waive2_confirm");
+		var sol_waive2_confirm=<?php echo $ccc; ?>;
+		function reservation_captcha_val_waive2_confirm(){
+		  
+		  //console.log(reservation_captcha.value);
+		  //console.log(sol);
+		  if(reservation_captcha_waive2_confirm.value != sol_waive2_confirm) {
+			reservation_captcha_waive2_confirm.setCustomValidity("Please Enter Valid Answer.");
+			return false;
+		  } else {
+			reservation_captcha_waive2_confirm.setCustomValidity('');
+			return true;
+		  }
+		}
+		reservation_captcha_waive2_confirm.onchange=reservation_captcha_val_waive2_confirm;
+	
+	
+		var pass_waive2_confirm = document.getElementById("waive2_pass");
+		function waive2_pass_co_fu()
+		{
+			if(pass_waive2_confirm.value.trim()!="")
+			{
+				pass_waive2_confirm.setCustomValidity('');
+				return true;
+			}
+			else
+			{
+				pass_waive2_confirm.setCustomValidity('Enter valid password');
+				return false;
+			}
+		}
+		pass_waive2_confirm.onchange=waive2_pass_co_fu;
+		
+	</script>
+</div>
+
+
 <!-- Confirmation modal for add waive course-->
 <div id="student_waive_re_confirmation" class="w3-modal" style="padding-top:100px;">
 	<div class="w3-modal-content w3-card-4 w3-animate-zoom w3-round-large w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border w3-border-black" style="max-width:700px;width:80%;">
@@ -1094,6 +1170,97 @@
 	var student_view_mobile;
 	var student_view_dp;
 	var student_waive_course,student_waive_captcha,student_waive_old_captcha;
+	
+	function remove_waive2()
+	{
+		var waive_course_id=document.getElementById('remove_waived_course_id').value.trim();
+		if(waive_course_id!=-1)
+		{
+			var pass=document.getElementById('waive2_pass').value.trim();
+			
+			if(reservation_captcha_val_waive2_confirm()==true && waive2_pass_co_fu()==true)
+			{
+				document.getElementById('waive2_pass').value='';
+				document.getElementById('captcha_waive2_confirm').value='';
+				student_view_id=document.getElementById('student_view_id').value.trim();
+			
+				document.getElementById('student_waive2_confirmation').style.display='none';
+				
+				document.getElementById('student_view_box1').style.display='none';
+				document.getElementById('student_view_box3').style.display='none';
+				document.getElementById('student_view_box4').style.display='none';
+				document.getElementById('student_view_box5').style.display='none';
+				document.getElementById('student_view_box2').style.display='block';
+				
+				var xhttp1 = new XMLHttpRequest();
+				xhttp1.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						//console.log(this.responseText.trim());
+						if(this.responseText.trim()=='Ok')
+						{
+							close_search_box8();
+							view_result8(student_view_id);
+						
+							get_total_search_results8(0,0);
+							
+							
+							document.getElementById('valid_msg').style.display='block';
+							document.getElementById('v_msg').innerHTML='Course successfully removed from waived list.';
+							setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
+			
+						}
+						else if(this.responseText.trim()=='pass_error')
+						{
+							document.getElementById('student_view_box4').style.display='none';
+							document.getElementById('student_view_box2').style.display='none';
+							document.getElementById('student_view_box3').style.display='none';
+							document.getElementById('student_view_box1').style.display='none';
+							document.getElementById('student_view_box5').style.display='block';
+							
+							document.getElementById('invalid_msg').style.display='block';
+							document.getElementById('i_msg').innerHTML='Sorry password doesn\'t match.';
+							setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+						}
+						else
+						{
+							document.getElementById('student_view_box4').style.display='none';
+							document.getElementById('student_view_box2').style.display='none';
+							document.getElementById('student_view_box3').style.display='none';
+							document.getElementById('student_view_box1').style.display='none';
+							document.getElementById('student_view_box5').style.display='block';
+							
+							document.getElementById('invalid_msg').style.display='block';
+							document.getElementById('i_msg').innerHTML='Unknown error occurred.';
+							setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+						}
+						
+						
+					}
+					else if(this.readyState==4 && (this.status==404 || this.status==403))
+					{
+						document.getElementById('student_view_box4').style.display='none';
+						document.getElementById('student_view_box2').style.display='none';
+						document.getElementById('student_view_box3').style.display='none';
+						document.getElementById('student_view_box1').style.display='none';
+						document.getElementById('student_view_box5').style.display='block';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Network error occurred.';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					
+				};
+				xhttp1.open("POST", "../includes/super_admin/remove_student_waive_course.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&course_id="+waive_course_id+"&student_id="+student_view_id, true);
+				xhttp1.send();
+			}
+		}
+	}
+	
+	function delete_student_waived_credit(waive_course_id)
+	{
+		document.getElementById('remove_waived_course_id').value=waive_course_id;
+		document.getElementById('student_waive2_confirmation').style.display='block';
+	}
 	
 	function student_waive_form_save()
 	{

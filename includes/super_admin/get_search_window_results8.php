@@ -1223,7 +1223,7 @@
 			<div class="w3-container w3-border w3-round-large w3-padding" style="margin: 0px 12px 12px 12px;">
 				<div class="w3-row w3-margin-top w3-margin-bottom w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-padding w3-border w3-round-large">
 					<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 0px;">
-						<p class="w3-xlarge w3-bold w3-text-teal w3-margin-0">Add Waived Course</p>
+						<p class="w3-xlarge w3-bold w3-text-teal w3-margin-0 w3-bottombar" style="width:277px;"><i class="fa fa-plus"></i> Add Waived Course</p>
 						<label><i class="w3-text-red">*</i> <b>Course</b> </label>
 						<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="student_waive_course" onchange="student_waive_form_change()" <?php if($flll==1){ echo 'disabled'; } ?> >
 							<option value="">Select</option>
@@ -1306,7 +1306,7 @@
 							<td valign="top" class="w3-padding-small w3-border"><?php echo $stud_result[$i][2]; ?></td>
 							<td valign="top" class="w3-padding-small w3-border"><?php echo number_format($stud_result[$i][3],2); ?></td>
 							<td valign="top" class="w3-padding-small w3-border"><?php echo get_date($stud_result[$i][4]); ?></td>
-							<td valign="top" class="w3-padding-small w3-border"><a onclick="" class="w3-text-blue w3-cursor" <?php if($flll==1){ echo 'title="unable to delete it" disabled'; } ?>><i class="fa fa-eraser"></i> Remove</a></td>
+							<td valign="top" class="w3-padding-small w3-border"><a onclick="delete_student_waived_credit(<?php echo $stud_result[$i][0]; ?>)" class="w3-text-blue w3-cursor" <?php if($flll==1){ echo 'title="unable to delete it" disabled'; } ?>><i class="fa fa-eraser"></i> Remove</a></td>
 						</tr>
 					
 					<?php
