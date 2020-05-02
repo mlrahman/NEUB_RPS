@@ -128,6 +128,47 @@
 </div>
 
 
+<!-- Confirmation modal for add waive course-->
+<div id="student_waive_re_confirmation" class="w3-modal" style="padding-top:100px;">
+	<div class="w3-modal-content w3-card-4 w3-animate-zoom w3-round-large w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border w3-border-black" style="max-width:700px;width:80%;">
+		<header class="w3-container w3-black"> 
+			<p class="w3-xxlarge" style="margin:0px 0px 10px 0px;">Confirmation</p>
+		</header>
+		<form onsubmit="return false">
+			
+		<div class="w3-container w3-padding">
+			<p class="w3-large w3-bold w3-text-brown">Are you sure you want to add this course in waived list?</p>
+			
+			<label><i class="w3-text-red">*</i> <b>Enter your password</b></label>
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large w3-margin-bottom" type="password" id="student_waive_pass" placeholder="Enter your password" autocomplete="off">
+			
+		</div>
+		<div class="w3-container w3-light-grey w3-padding w3-black">
+			<button class="w3-button w3-right w3-green w3-border w3-round-large" onclick="student_waive_form_save()">Yes</button>
+			<button class="w3-button w3-right w3-red w3-border w3-round-large w3-margin-right" onclick="document.getElementById('student_waive_re_confirmation').style.display='none';document.getElementById('student_waive_pass').value='';">No</button>
+		</div>
+		</form>
+	</div>
+	<script>
+		var pass_student_waive_confirm = document.getElementById("student_waive_pass");
+		function student_waive_pass_co_fu()
+		{
+			if(pass_student_waive_confirm.value.trim()!="")
+			{
+				pass_student_waive_confirm.setCustomValidity('');
+				return true;
+			}
+			else
+			{
+				pass_student_waive_confirm.setCustomValidity('Enter valid password');
+				return false;
+			}
+		}
+		pass_student_waive_confirm.onchange=student_waive_pass_co_fu;
+		
+	</script>
+</div>
+
 <!-- Confirmation modal for student delete -->
 <div id="student_view_re_confirmation" class="w3-modal" style="padding-top:100px;">
 	<div class="w3-modal-content w3-card-4 w3-animate-zoom w3-round-large w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border w3-border-black" style="max-width:700px;width:80%;">
@@ -1052,6 +1093,142 @@
 	var student_view_email;
 	var student_view_mobile;
 	var student_view_dp;
+	var student_waive_course,student_waive_captcha,student_waive_old_captcha;
+	
+	function student_waive_form_save()
+	{
+		student_waive_course=document.getElementById('student_waive_course').value.trim();
+		student_view_id=document.getElementById('student_view_id').value.trim();
+		student_waive_captcha=document.getElementById('student_waive_captcha').value.trim();
+		student_waive_old_captcha=document.getElementById('student_waive_old_captcha').value.trim();
+		
+		if(student_waive_course=="")
+		{
+			document.getElementById('student_waive_pass').value='';
+			
+			document.getElementById('student_waive_re_confirmation').style.display='none';
+			
+			document.getElementById('invalid_msg').style.display='block';
+			document.getElementById('i_msg').innerHTML='Please fill up all the fields.';
+			setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		}
+		else if(student_waive_captcha=="" || student_waive_captcha!=student_waive_old_captcha)
+		{
+			document.getElementById('student_waive_pass').value='';
+			
+			document.getElementById('student_waive_re_confirmation').style.display='none';
+			
+			document.getElementById('invalid_msg').style.display='block';
+			document.getElementById('i_msg').innerHTML='Please insert valid captcha.';
+			setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		}
+		else if(student_waive_pass_co_fu()==true)
+		{
+			var pass=document.getElementById('student_waive_pass').value.trim();
+			
+			document.getElementById('student_waive_pass').value='';
+			
+			document.getElementById('student_waive_re_confirmation').style.display='none';
+			
+			document.getElementById('student_view_box1').style.display='none';
+			document.getElementById('student_view_box3').style.display='none';
+			document.getElementById('student_view_box4').style.display='none';
+			document.getElementById('student_view_box5').style.display='none';
+			document.getElementById('student_view_box2').style.display='block';
+			
+			var xhttp1 = new XMLHttpRequest();
+			xhttp1.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					//console.log(this.responseText.trim());
+					if(this.responseText.trim()=='Ok')
+					{
+						close_search_box8();
+						view_result8(student_view_id);
+					
+						get_total_search_results8(0,0);
+						
+						
+						document.getElementById('valid_msg').style.display='block';
+						document.getElementById('v_msg').innerHTML='Course successfully added in waived list.';
+						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
+		
+					}
+					else if(this.responseText.trim()=='pass_error')
+					{
+						document.getElementById('student_view_box4').style.display='none';
+						document.getElementById('student_view_box2').style.display='none';
+						document.getElementById('student_view_box3').style.display='none';
+						document.getElementById('student_view_box1').style.display='none';
+						document.getElementById('student_view_box5').style.display='block';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry password doesn\'t match.';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					else if(this.responseText.trim()=='unable')
+					{
+						document.getElementById('student_view_box4').style.display='none';
+						document.getElementById('student_view_box2').style.display='none';
+						document.getElementById('student_view_box3').style.display='none';
+						document.getElementById('student_view_box1').style.display='none';
+						document.getElementById('student_view_box5').style.display='block';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add this course in waived list.';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					else
+					{
+						document.getElementById('student_view_box4').style.display='none';
+						document.getElementById('student_view_box2').style.display='none';
+						document.getElementById('student_view_box3').style.display='none';
+						document.getElementById('student_view_box1').style.display='none';
+						document.getElementById('student_view_box5').style.display='block';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unknown error occurred.';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					
+					
+				}
+				else if(this.readyState==4 && (this.status==404 || this.status==403))
+				{
+					document.getElementById('student_view_box4').style.display='none';
+					document.getElementById('student_view_box2').style.display='none';
+					document.getElementById('student_view_box3').style.display='none';
+					document.getElementById('student_view_box1').style.display='none';
+					document.getElementById('student_view_box5').style.display='block';
+					
+					document.getElementById('invalid_msg').style.display='block';
+					document.getElementById('i_msg').innerHTML='Network error occurred.';
+					setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+				}
+				
+			};
+			xhttp1.open("POST", "../includes/super_admin/add_student_waive_course.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&student_waive_course="+student_waive_course+"&student_id="+student_view_id, true);
+			xhttp1.send();
+		}
+			
+	}
+	
+	function student_waive_form_reset()
+	{
+		document.getElementById('student_waive_course').value='';
+		document.getElementById('student_waive_captcha').value='';
+		document.getElementById("student_waive_save_btn").disabled = true;
+	}
+	
+	function student_waive_form_change()
+	{
+		student_waive_course=document.getElementById('student_waive_course').value.trim();
+		student_waive_captcha=document.getElementById('student_waive_captcha').value.trim();
+		if(student_waive_course=="")
+			document.getElementById("student_waive_save_btn").disabled = true;
+		else
+			document.getElementById("student_waive_save_btn").disabled = false;
+		
+	}
 	
 	function remove_student_view()
 	{
@@ -1312,8 +1489,9 @@
 					{
 						close_search_box8();
 						view_result8(student_id);
-						
+					
 						get_total_search_results8(0,0);
+						
 						
 						document.getElementById('valid_msg').style.display='block';
 						document.getElementById('v_msg').innerHTML='Changes saved successfully.';

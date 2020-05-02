@@ -46,14 +46,16 @@ Email: mlrahman@neub.edu.bd
 		$stmt->execute();
 		$re_trx = $stmt->fetchAll();
 		$sz=count($re_trx);
-		for($i=0;$i<$sz;$i++)
-		{
-			if($i>$trx)
+		if($sz>$trx){
+			for($i=0;$i<$sz;$i++)
 			{
-				$fa_date=$re_trx[$i][7];
-				$fa_time=$re_trx[$i][8];
-				$stmt = $conn->prepare("delete from nr_admin_login_transaction where nr_suadlotr_date='$fa_date' and nr_suadlotr_time='$fa_time' ");
-				$stmt->execute();
+				if($i>$trx)
+				{
+					$fa_date=$re_trx[$i][7];
+					$fa_time=$re_trx[$i][8];
+					$stmt = $conn->prepare("delete from nr_admin_login_transaction where nr_suadlotr_date='$fa_date' and nr_suadlotr_time='$fa_time' ");
+					$stmt->execute();
+				}
 			}
 		}
 		
@@ -63,16 +65,19 @@ Email: mlrahman@neub.edu.bd
 		$stmt->execute();
 		$re_trx = $stmt->fetchAll();
 		$sz=count($re_trx);
-		for($i=0;$i<$sz;$i++)
-		{
-			if($i>$trx)
+		if($sz>$trx){
+			for($i=0;$i<$sz;$i++)
 			{
-				$re_date=$re_trx[$i][7];
-				$re_time=$re_trx[$i][8];
-				$stmt = $conn->prepare("delete from nr_admin_result_check_transaction where nr_rechtr_date='$re_date' and nr_rechtr_time='$re_time' ");
-				$stmt->execute();
+				if($i>$trx)
+				{
+					$re_date=$re_trx[$i][7];
+					$re_time=$re_trx[$i][8];
+					$stmt = $conn->prepare("delete from nr_admin_result_check_transaction where nr_rechtr_date='$re_date' and nr_rechtr_time='$re_time' ");
+					$stmt->execute();
+				}
 			}
 		}
+		
 		
 		//clearing delete history
 		$trx=5000;
@@ -80,14 +85,169 @@ Email: mlrahman@neub.edu.bd
 		$stmt->execute();
 		$re_trx = $stmt->fetchAll();
 		$sz=count($re_trx);
-		for($i=0;$i<$sz;$i++)
-		{
-			if($i>$trx)
+		if($sz>$trx){
+			for($i=0;$i<$sz;$i++)
 			{
-				$re_date=$re_trx[$i][2];
-				$re_time=$re_trx[$i][3];
-				$stmt = $conn->prepare("delete from nr_delete_history where nr_deleteh_date='$re_date' and nr_deleteh_time='$re_time' ");
-				$stmt->execute();
+				if($i>$trx)
+				{
+					$re_date=$re_trx[$i][2];
+					$re_time=$re_trx[$i][3];
+					$stmt = $conn->prepare("delete from nr_delete_history where nr_deleteh_date='$re_date' and nr_deleteh_time='$re_time' ");
+					$stmt->execute();
+				}
+			}
+		}
+		
+		//clearing admin history
+		$trx=3000;
+		$stmt = $conn->prepare("select * from nr_admin_history order by nr_adminh_date desc, nr_adminh_time desc ");
+		$stmt->execute();
+		$re_trx = $stmt->fetchAll();
+		$sz=count($re_trx);
+		if($sz>$trx){
+			for($i=0;$i<$sz;$i++)
+			{
+				if($i>$trx)
+				{
+					$re_date=$re_trx[$i][2];
+					$re_time=$re_trx[$i][3];
+					$stmt = $conn->prepare("delete from nr_admin_history where nr_adminh_date='$re_date' and nr_adminh_time='$re_time' ");
+					$stmt->execute();
+				}
+			}
+		}
+		
+		//clearing course history
+		$trx=3000;
+		$stmt = $conn->prepare("select * from nr_course_history order by nr_courseh_date desc, nr_courseh_time desc ");
+		$stmt->execute();
+		$re_trx = $stmt->fetchAll();
+		$sz=count($re_trx);
+		if($sz>$trx){
+			for($i=0;$i<$sz;$i++)
+			{
+				if($i>$trx)
+				{
+					$re_date=$re_trx[$i][2];
+					$re_time=$re_trx[$i][3];
+					$stmt = $conn->prepare("delete from nr_course_history where nr_courseh_date='$re_date' and nr_courseh_time='$re_time' ");
+					$stmt->execute();
+				}
+			}
+		}
+		
+		//clearing department history
+		$trx=3000;
+		$stmt = $conn->prepare("select * from nr_department_history order by nr_depth_date desc, nr_depth_time desc ");
+		$stmt->execute();
+		$re_trx = $stmt->fetchAll();
+		$sz=count($re_trx);
+		if($sz>$trx){
+			for($i=0;$i<$sz;$i++)
+			{
+				if($i>$trx)
+				{
+					$re_date=$re_trx[$i][2];
+					$re_time=$re_trx[$i][3];
+					$stmt = $conn->prepare("delete from nr_department_history where nr_depth_date='$re_date' and nr_depth_time='$re_time' ");
+					$stmt->execute();
+				}
+			}
+		}
+		
+		//clearing drop history
+		$trx=3000;
+		$stmt = $conn->prepare("select * from nr_drop_history order by nr_droph_date desc, nr_droph_time desc ");
+		$stmt->execute();
+		$re_trx = $stmt->fetchAll();
+		$sz=count($re_trx);
+		if($sz>$trx){
+			for($i=0;$i<$sz;$i++)
+			{
+				if($i>$trx)
+				{
+					$re_date=$re_trx[$i][2];
+					$re_time=$re_trx[$i][3];
+					$stmt = $conn->prepare("delete from nr_drop_history where nr_droph_date='$re_date' and nr_droph_time='$re_time' ");
+					$stmt->execute();
+				}
+			}
+		}
+		
+		//clearing faculty history
+		$trx=3000;
+		$stmt = $conn->prepare("select * from nr_faculty_history order by nr_facultyh_date desc, nr_facultyh_time desc ");
+		$stmt->execute();
+		$re_trx = $stmt->fetchAll();
+		$sz=count($re_trx);
+		if($sz>$trx){
+			for($i=0;$i<$sz;$i++)
+			{
+				if($i>$trx)
+				{
+					$re_date=$re_trx[$i][2];
+					$re_time=$re_trx[$i][3];
+					$stmt = $conn->prepare("delete from nr_faculty_history where nr_facultyh_date='$re_date' and nr_facultyh_time='$re_time' ");
+					$stmt->execute();
+				}
+			}
+		}
+		
+		
+		//clearing program history
+		$trx=3000;
+		$stmt = $conn->prepare("select * from nr_program_history order by nr_progh_date desc, nr_progh_time desc ");
+		$stmt->execute();
+		$re_trx = $stmt->fetchAll();
+		$sz=count($re_trx);
+		if($sz>$trx){
+			for($i=0;$i<$sz;$i++)
+			{
+				if($i>$trx)
+				{
+					$re_date=$re_trx[$i][2];
+					$re_time=$re_trx[$i][3];
+					$stmt = $conn->prepare("delete from nr_program_history where nr_progh_date='$re_date' and nr_progh_time='$re_time' ");
+					$stmt->execute();
+				}
+			}
+		}
+		
+		//clearing result history
+		$trx=3000;
+		$stmt = $conn->prepare("select * from nr_result_history order by nr_resulth_date desc, nr_resulth_time desc ");
+		$stmt->execute();
+		$re_trx = $stmt->fetchAll();
+		$sz=count($re_trx);
+		if($sz>$trx){
+			for($i=0;$i<$sz;$i++)
+			{
+				if($i>$trx)
+				{
+					$re_date=$re_trx[$i][2];
+					$re_time=$re_trx[$i][3];
+					$stmt = $conn->prepare("delete from nr_result_history where nr_resulth_date='$re_date' and nr_resulth_time='$re_time' ");
+					$stmt->execute();
+				}
+			}
+		}
+		
+		//clearing student history
+		$trx=3000;
+		$stmt = $conn->prepare("select * from nr_student_history order by nr_studh_date desc, nr_studh_time desc ");
+		$stmt->execute();
+		$re_trx = $stmt->fetchAll();
+		$sz=count($re_trx);
+		if($sz>$trx){
+			for($i=0;$i<$sz;$i++)
+			{
+				if($i>$trx)
+				{
+					$re_date=$re_trx[$i][2];
+					$re_time=$re_trx[$i][3];
+					$stmt = $conn->prepare("delete from nr_student_history where nr_studh_date='$re_date' and nr_studh_time='$re_time' ");
+					$stmt->execute();
+				}
 			}
 		}
 		
@@ -97,14 +257,16 @@ Email: mlrahman@neub.edu.bd
 		$stmt->execute();
 		$re_trx = $stmt->fetchAll();
 		$sz=count($re_trx);
-		for($i=0;$i<$sz;$i++)
-		{
-			if($i>$trx)
+		if($sz>$trx){
+			for($i=0;$i<$sz;$i++)
 			{
-				$re_date=$re_trx[$i][7];
-				$re_time=$re_trx[$i][8];
-				$stmt = $conn->prepare("delete from nr_transcript_print_reference where nr_trprre_date='$re_date' and nr_trprre_time='$re_time' ");
-				$stmt->execute();
+				if($i>$trx)
+				{
+					$re_date=$re_trx[$i][7];
+					$re_time=$re_trx[$i][8];
+					$stmt = $conn->prepare("delete from nr_transcript_print_reference where nr_trprre_date='$re_date' and nr_trprre_time='$re_time' ");
+					$stmt->execute();
+				}
 			}
 		}
 	}

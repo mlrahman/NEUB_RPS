@@ -46,14 +46,16 @@ Email: mlrahman@neub.edu.bd
 		$stmt->execute();
 		$re_trx = $stmt->fetchAll();
 		$sz=count($re_trx);
-		for($i=0;$i<$sz;$i++)
-		{
-			if($i>$trx)
+		if($sz>$trx){
+			for($i=0;$i<$sz;$i++)
 			{
-				$fa_date=$re_trx[$i][7];
-				$fa_time=$re_trx[$i][8];
-				$stmt = $conn->prepare("delete from nr_admin_login_transaction where nr_suadlotr_date='$fa_date' and nr_suadlotr_time='$fa_time' ");
-				$stmt->execute();
+				if($i>$trx)
+				{
+					$fa_date=$re_trx[$i][7];
+					$fa_time=$re_trx[$i][8];
+					$stmt = $conn->prepare("delete from nr_admin_login_transaction where nr_suadlotr_date='$fa_date' and nr_suadlotr_time='$fa_time' ");
+					$stmt->execute();
+				}
 			}
 		}
 		
@@ -63,14 +65,16 @@ Email: mlrahman@neub.edu.bd
 		$stmt->execute();
 		$re_trx = $stmt->fetchAll();
 		$sz=count($re_trx);
-		for($i=0;$i<$sz;$i++)
-		{
-			if($i>$trx)
+		if($sz>$trx){
+			for($i=0;$i<$sz;$i++)
 			{
-				$re_date=$re_trx[$i][7];
-				$re_time=$re_trx[$i][8];
-				$stmt = $conn->prepare("delete from nr_admin_result_check_transaction where nr_rechtr_date='$re_date' and nr_rechtr_time='$re_time' ");
-				$stmt->execute();
+				if($i>$trx)
+				{
+					$re_date=$re_trx[$i][7];
+					$re_time=$re_trx[$i][8];
+					$stmt = $conn->prepare("delete from nr_admin_result_check_transaction where nr_rechtr_date='$re_date' and nr_rechtr_time='$re_time' ");
+					$stmt->execute();
+				}
 			}
 		}
 		
@@ -80,17 +84,18 @@ Email: mlrahman@neub.edu.bd
 		$stmt->execute();
 		$re_trx = $stmt->fetchAll();
 		$sz=count($re_trx);
-		for($i=0;$i<$sz;$i++)
-		{
-			if($i>$trx)
+		if($sz>$trx){
+			for($i=0;$i<$sz;$i++)
 			{
-				$re_date=$re_trx[$i][7];
-				$re_time=$re_trx[$i][8];
-				$stmt = $conn->prepare("delete from nr_transcript_print_reference where nr_trprre_date='$re_date' and nr_trprre_time='$re_time' ");
-				$stmt->execute();
+				if($i>$trx)
+				{
+					$re_date=$re_trx[$i][7];
+					$re_time=$re_trx[$i][8];
+					$stmt = $conn->prepare("delete from nr_transcript_print_reference where nr_trprre_date='$re_date' and nr_trprre_time='$re_time' ");
+					$stmt->execute();
+				}
 			}
-		}
-		
+		}		
 	}
 	catch(PDOException $e)
 	{
