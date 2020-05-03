@@ -845,7 +845,7 @@ function get_student_info($s_id,$prcr_id)  //will return drop status, grad_statu
 	return $st_info;
 }
 
-function get_student_semester_cgpa($s_id,$semester,$year) //will return semester top cgpa
+function get_student_semester_cgpa($s_id,$semester,$year) //will return semester cgpa
 {
 	try
 	{

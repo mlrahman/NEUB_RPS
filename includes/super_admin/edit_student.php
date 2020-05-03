@@ -79,8 +79,8 @@
 			}
 			
 			//getting old program credit id
-			$stmt = $conn->prepare("select nr_prcr_id from nr_program_credit where nr_prog_id=:prog_id order by nr_prcr_id desc limit 1");
-			$stmt->bindParam(':prog_id', $student_old_prog);
+			$stmt = $conn->prepare("select nr_prcr_id from nr_student where nr_stud_id=:stud_id order by nr_stud_id desc limit 1");
+			$stmt->bindParam(':stud_id', $student_id);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
 			if(count($result)==0)
@@ -303,7 +303,6 @@
 			$stmt->execute();
 			
 			
-			//dealing with photo
 			$stmt = $conn->prepare("select b.nr_prog_title from nr_student a,nr_program b where a.nr_stud_id=:student_id and a.nr_prog_id=b.nr_prog_id ");
 			$stmt->bindParam(':student_id', $student_id);
 			$stmt->execute();

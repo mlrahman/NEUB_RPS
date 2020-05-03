@@ -1109,7 +1109,7 @@
 						</div>	
 						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
 							<div class="w3-col" style="width:49%;">
-								<label><b>Student Email</b> <i class="fa fa-exclamation-circle w3-cursor" title="By inserting email notification and two factor authentication service will be enabled for this student."></i></label>
+								<label><b>Student Email</b> <i class="fa fa-exclamation-circle w3-cursor" title="By inserting email the notification and two factor authentication service will be enabled for this student."></i></label>
 								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="email" value="<?php echo $subscription_email; ?>" id="student_view_email" placeholder="Enter Student Email" autocomplete="off" oninput="student_view_form_change()">
 								<input type="hidden" value="<?php echo $subscription_email; ?>" id="student_view_old_email">
 							</div>

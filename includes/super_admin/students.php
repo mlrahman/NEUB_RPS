@@ -331,8 +331,16 @@
 				<a onclick="document.getElementById('add_multiple_window8').style.display='block';document.getElementById('add_single_window8').style.display='none';" class=" w3-cursor w3-bar-item w3-button w3-hover-teal">Multiple</a>
 			</div>
 		</div>
+		
 		<button onclick="get_student_delete_history()" class="w3-button w3-black w3-round-large w3-hover-teal w3-margin-left"><i class="fa fa-history"></i> Remove History</button>
 		
+		<div class="w3-dropdown-hover w3-round-large w3-margin-left">
+			<button class="w3-button w3-black w3-round-large w3-hover-teal"><i class="fa fa-plus"></i> Add Waived Course</button>
+			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-animate-zoom">
+				<a onclick="document.getElementById('add_single_window_waive8').style.display='block';document.getElementById('add_multiple_window_waive8').style.display='none';" class="w3-cursor w3-bar-item w3-button w3-hover-teal">Single</a>
+				<a onclick="document.getElementById('add_multiple_window_waive8').style.display='block';document.getElementById('add_single_window_waive8').style.display='none';" class=" w3-cursor w3-bar-item w3-button w3-hover-teal">Multiple</a>
+			</div>
+		</div>
 			
 	</div>
 	
@@ -340,62 +348,92 @@
 
 	<div id="add_single_window8" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
 		<span onclick="add_single_window8_close()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
-		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:265px;"><i class="fa fa-plus"></i> Add Single Student</p>
+		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:275px;"><i class="fa fa-plus"></i> Add Single Student</p>
 		<div class="w3-container w3-margin-0 w3-padding-0" id="student_single_add_box1">
 			<p class="w3-text-red w3-small w3-bold" style="margin: 2px 0px 0px 12px;padding:0px;">Note: (*) marked fields are mandatory.</p>
 			<div class="w3-container w3-border w3-round-large w3-padding w3-margin-bottom" style="margin: 0px 12px 12px 12px;">
 				<div class="w3-row w3-margin-0 w3-padding-0">
 					<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 0px;">
-						<label><i class="w3-text-red">*</i> <b>student Title</b></label>
-						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="student_single_add_title" placeholder="Enter student Title" autocomplete="off" onkeyup="student_single_add_form_change()">
+						<label><i class="w3-text-red">*</i> <b>Student ID</b></label>
+						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="number" id="student_single_add_id" placeholder="Enter Student ID" autocomplete="off" oninput="student_single_add_form_change()">
+							
 						
-						<label><i class="w3-text-red">*</i> <b>student Code</b></label>
-						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="student_single_add_code" placeholder="Enter student Code" autocomplete="off" onkeyup="student_single_add_form_change()">
-						
-						<label><i class="w3-text-red">*</i> <b>student Credit</b></label>
-						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="number" id="student_single_add_credit" placeholder="Enter student Credit" autocomplete="off" onkeyup="student_single_add_form_change()">
-						
-						<label><i class="w3-text-red">*</i> <b>Program</b></label>
-						<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="student_single_add_prog" onchange="student_single_add_form_change()">
-							<option value="">Select</option>
-							<?php
-								$stmt = $conn->prepare("SELECT * FROM nr_program where nr_prog_status='Active' order by nr_prog_title asc");
-								$stmt->execute();
-								$stud_result=$stmt->fetchAll();
-								if(count($stud_result)>0)
-								{
-									$sz=count($stud_result);
-									for($k=0;$k<$sz;$k++)
-									{
-										$prog_id=$stud_result[$k][0];
-										$prog_title=$stud_result[$k][1];
-										echo '<option value="'.$prog_id.'">'.$prog_title.'</option>';
-									}
-								}
-							?>
-						</select>
-						
-						<label><i class="w3-text-red">*</i> <b>Status</b></label>
-						<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="student_single_add_status" onchange="student_single_add_form_change()">
-							<option value="">Select</option>
-							<option value="Active" class="w3-pale-green">Active</option>
-							<option value="Inactive" class="w3-pale-red">Inactive</option>
-						</select>
-						<?php
-							//spam Check 
-							$aaa=rand(1,20);
-							$bbb=rand(1,20);
-							$ccc=$aaa+$bbb;
-						?>
-						
+						<label><i class="w3-text-red">*</i> <b>Student Name</b></label>
+						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="student_single_add_name" placeholder="Enter Student Name" autocomplete="off" oninput="student_single_add_form_change()">
+							
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:49%;">
+								<label><i class="w3-text-red">*</i> <b>Date of Birth</b> <i class="fa fa-exclamation-circle w3-cursor" title="Be careful inserting date of birth (MM/DD/YYYY) cause it will require for fetch result in student panel."></i></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="date" id="student_single_add_birth_date" placeholder="Enter Student Birth Date" autocomplete="off" oninput="student_single_add_form_change()">
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:49%;">
+								<label><i class="w3-text-red">*</i> <b>Student Gender</b></label>
+								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="student_single_add_gender" onchange="student_single_add_form_change()">
+									<option value="">Select</option>
+									<option value="Male">Male</option>
+									<option value="Female">Female</option>
+									<option value="Other">Other</option>
+								</select>
+							</div>
+						</div>	
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:49%;">
+								<label><b>Student Email</b> <i class="fa fa-exclamation-circle w3-cursor" title="By inserting email the notification and two factor authentication service will be enabled for this student."></i></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="email" id="student_single_add_email" placeholder="Enter Student Email" autocomplete="off" oninput="student_single_add_form_change()">
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:49%;">
+								<label><b>Student Mobile</b></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="student_single_add_mobile" placeholder="Enter Student Mobile No" autocomplete="off" oninput="student_single_add_form_change()">
+							</div>
+						</div>
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:49%;">
+								<label><i class="w3-text-red">*</i> <b>Enrolled Program</b></label>
+								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="student_single_add_prog" onchange="student_single_add_form_change()" <?php if($flll==1){ echo 'disabled'; } ?> >
+									<option value="">Select</option>
+									<?php
+										$stmt = $conn->prepare("SELECT * FROM nr_program where nr_prog_status='Active' order by nr_prog_title asc");
+										$stmt->execute();
+										$stud_result=$stmt->fetchAll();
+										if(count($stud_result)>0)
+										{
+											$sz=count($stud_result);
+											for($k=0;$k<$sz;$k++)
+											{
+												$prog_id=$stud_result[$k][0];
+												$prog_title=$stud_result[$k][1];
+												echo '<option value="'.$prog_id.'">'.$prog_title.'</option>';
+											}
+										}
+									?>
+									
+								</select>
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:49%;">
+								<label><i class="w3-text-red">*</i> <b>Status</b></label>
+								<select class="w3-input w3-border w3-margin-bottom w3-round-large w3-pale-green" id="student_single_add_status" onchange="student_single_add_form_change()">
+									<option value="" class="w3-pale-green">Select</option>
+									<option value="Active" class="w3-pale-green">Active</option>
+									<option value="Inactive" class="w3-pale-red">Inactive</option>
+								</select>
+								<?php
+									
+									//spam Check 
+									$aaa=rand(1,20);
+									$bbb=rand(1,20);
+									$ccc=$aaa+$bbb;
+								?>
+								
+							</div>
+						</div>
+						<input type="hidden" id="student_single_add_old_captcha" value="<?php echo $ccc; ?>">
 						<label><i class="w3-text-red">*</i> <b>Captcha</b></label>
 						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
 							<div class="w3-col" style="width:40%;">
 								<input class="w3-input w3-border w3-center w3-round-large" type="text" value="<?php echo $aaa.' + '.$bbb.' = '; ?>" disabled>
 							</div>
 							<div class="w3-col" style="margin-left:2%;width:58%;">
-								<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="student_single_add_captcha" autocomplete="off" onkeyup="student_single_add_form_change()">
-								<input type="hidden" value="<?php echo $ccc; ?>" id="student_single_add_old_captcha">
+								<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="student_single_add_captcha" autocomplete="off" oninput="student_single_add_form_change()">
 							</div>
 						</div>
 						
@@ -429,8 +467,9 @@
 				<ol>
 					<li>First download the formatted excel file from <a href="../excel_files/demo/insert_multiple_student.xlsx" target="_blank" class="w3-text-blue">here</a>.</li>
 					<li>In this excel file (<span class="w3-text-red">*</span>) marked columns are mandatory for each row (not valid for blank row). Very carefully fill up the rows with your data. <b>Don't put gap</b> between two rows. Also <b>ignore duplicated data</b> for consistent input.</li>
-					<li>After filling the necessary rows you have to <b>submit it from the below form</b>. Don't forget to select a program. You can insert at most <b>100 students</b> in a single upload under a single program.</li>
-					<li>This process may take <b>up to two minutes</b> so keep patience. After finishing the process you will get a logs.</li>
+					<li>Input date according to the format <b>YYYY-MM-DD</b>. Inserting email will subscribe the notification and 2FA service for a student. Photo is uploadable from the edit option only.</li>
+					<li>After filling the necessary rows you have to <b>submit it from the below form</b>. Don't forget to select a program in the below form. You can insert at most <b>300 students</b> in a single upload under a single program.</li>
+					<li>This process may take <b>up to five minutes</b> so keep patience. After finishing the process you will get a logs.</li>
 				</ol>
 			</div>
 			
@@ -712,9 +751,12 @@
 		document.getElementById('student_single_add_box1').style.display='block';
 		document.getElementById('student_single_add_box2').style.display='none';
 			
-		document.getElementById('student_single_add_title').value='';
-		document.getElementById('student_single_add_code').value='';
-		document.getElementById('student_single_add_credit').value='';
+		document.getElementById('student_single_add_name').value='';
+		document.getElementById('student_single_add_id').value='';
+		document.getElementById('student_single_add_birth_date').value='';
+		document.getElementById('student_single_add_gender').value='';
+		document.getElementById('student_single_add_email').value='';
+		document.getElementById('student_single_add_mobile').value='';
 		document.getElementById('student_single_add_prog').value='';
 		document.getElementById('student_single_add_status').value='';
 		document.getElementById('student_single_add_captcha').value='';
@@ -763,12 +805,15 @@
 	
 	function student_single_add_form_change()
 	{
-		student_view_name=document.getElementById('student_single_add_title').value.trim();
-		student_view_id=document.getElementById('student_single_add_code').value.trim();
-		student_view_birth_date=document.getElementById('student_single_add_credit').value.trim();
+		student_view_name=document.getElementById('student_single_add_name').value.trim();
+		student_view_id=document.getElementById('student_single_add_id').value.trim();
+		student_view_birth_date=document.getElementById('student_single_add_birth_date').value.trim();
+		student_view_gender=document.getElementById('student_single_add_gender').value.trim();
+		student_view_email=document.getElementById('student_single_add_email').value.trim();
+		student_view_mobile=document.getElementById('student_single_add_mobile').value.trim();
 		student_view_prog=document.getElementById('student_single_add_prog').value.trim();
-		student_view_captcha=document.getElementById('student_single_add_captcha').value.trim();
 		student_view_status=document.getElementById('student_single_add_status').value.trim();
+		student_view_captcha=document.getElementById('student_single_add_captcha').value.trim();
 		
 		if(student_single_add_status=='Active')
 		{
@@ -805,7 +850,7 @@
 				document.getElementById('student_single_add_status').classList.remove('w3-pale-red');
 			}
 		}
-		if(student_view_name=="" || student_view_id=="" || student_view_birth_date=="" || student_view_prog=="" || student_view_status=="")
+		if(student_view_name=="" || student_view_id=="" || student_view_birth_date=="" || student_view_prog=="" || student_view_status=="" || student_view_gender=="")
 		{
 			document.getElementById("student_single_add_save_btn").disabled = true;
 		}
@@ -817,13 +862,16 @@
 
 	function student_single_add_form_reset()
 	{
-		document.getElementById('student_single_add_title').value='';
-		document.getElementById('student_single_add_code').value='';
-		document.getElementById('student_single_add_credit').value='';
+		document.getElementById('student_single_add_name').value='';
+		document.getElementById('student_single_add_id').value='';
+		document.getElementById('student_single_add_birth_date').value='';
+		document.getElementById('student_single_add_gender').value='';
+		document.getElementById('student_single_add_email').value='';
+		document.getElementById('student_single_add_mobile').value='';
 		document.getElementById('student_single_add_prog').value='';
 		document.getElementById('student_single_add_status').value='';
 		document.getElementById('student_single_add_captcha').value='';
-						
+					
 		document.getElementById("student_single_add_save_btn").disabled = true;
 	}
 	
@@ -1034,15 +1082,18 @@
 	
 	function student_single_add_form_save()
 	{
-		student_view_name=document.getElementById('student_single_add_title').value.trim();
-		student_view_id=document.getElementById('student_single_add_code').value.trim();
-		student_view_birth_date=document.getElementById('student_single_add_credit').value.trim();
+		student_view_name=document.getElementById('student_single_add_name').value.trim();
+		student_view_id=document.getElementById('student_single_add_id').value.trim();
+		student_view_birth_date=document.getElementById('student_single_add_birth_date').value.trim();
+		student_view_gender=document.getElementById('student_single_add_gender').value.trim();
+		student_view_email=document.getElementById('student_single_add_email').value.trim();
+		student_view_mobile=document.getElementById('student_single_add_mobile').value.trim();
 		student_view_prog=document.getElementById('student_single_add_prog').value.trim();
+		student_view_status=document.getElementById('student_single_add_status').value.trim();
 		student_view_captcha=document.getElementById('student_single_add_captcha').value.trim();
 		student_view_old_captcha=document.getElementById('student_single_add_old_captcha').value.trim();
-		student_view_status=document.getElementById('student_single_add_status').value.trim();
 		
-		if(student_view_name=="" || student_view_id=="" || student_view_birth_date=="" || student_view_prog=="" || student_view_status=="")
+		if(student_view_name=="" || student_view_id=="" || student_view_birth_date=="" || student_view_prog=="" || student_view_status=="" || student_view_gender=="")
 		{
 			document.getElementById('student_single_add_pass').value='';
 			
@@ -1088,7 +1139,7 @@
 						get_search_result8();
 						
 						document.getElementById('valid_msg').style.display='block';
-						document.getElementById('v_msg').innerHTML='student successfully added.';
+						document.getElementById('v_msg').innerHTML='Student successfully added.';
 						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
 					
 						
@@ -1120,6 +1171,15 @@
 						document.getElementById('i_msg').innerHTML='Sorry unable to add this student (program inactive).';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					}
+					else if(this.responseText.trim()=='unable3')
+					{
+						document.getElementById('student_single_add_box1').style.display='block';
+						document.getElementById('student_single_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add this student (invalid email).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
 					else
 					{
 						document.getElementById('student_single_add_box1').style.display='block';
@@ -1142,7 +1202,7 @@
 				}
 				
 			};
-			xhttp1.open("POST", "../includes/super_admin/add_single_student.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&student_title="+student_view_name+"&student_code="+student_view_id+"&student_credit="+student_view_birth_date+"&student_prog="+student_view_prog+"&student_status="+student_view_status, true);
+			xhttp1.open("POST", "../includes/super_admin/add_single_student.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&student_name="+student_view_name+"&student_mobile="+student_view_mobile+"&student_email="+student_view_email+"&student_gender="+student_view_gender+"&student_id="+student_view_id+"&student_birth_date="+student_view_birth_date+"&student_prog="+student_view_prog+"&student_status="+student_view_status, true);
 			xhttp1.send();
 		}
 	
