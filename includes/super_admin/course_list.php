@@ -828,7 +828,7 @@
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					
 					}
-					else if(status=='unable2')
+					else if(status=='u2')
 					{
 						document.getElementById('course_multiple_courseress_id').style.width='0%';
 						document.getElementById('course_multiple_courseress_id').innerHTML='0%';
