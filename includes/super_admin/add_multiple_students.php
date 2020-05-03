@@ -74,6 +74,12 @@
 							$logs=$logs.' <span class="w3-text-red">Failed (Invalid Birth Date)</span>';
 						}
 						
+						else if(strlen($student_id)!=12)
+						{
+							$failed++;
+							$logs=$logs.' <span class="w3-text-red">Failed (Invalid Student ID)</span>';
+						}
+						
 						else if($student_status=='Active' || $student_status=='Inactive')
 						{
 							$stmt = $conn->prepare("select * from nr_student where ((nr_stud_id=:student_id) or (nr_stud_email!='' and nr_stud_email=:student_email) or (nr_stud_name=:student_name and nr_stud_dob=:student_birth_date and nr_stud_gender=:student_gender and nr_prog_id=:student_prog))");

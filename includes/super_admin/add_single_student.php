@@ -78,6 +78,11 @@
 				die();
 			}
 			
+			if(strlen($student_id)!=12)
+			{
+				echo 'unable4';
+				die();
+			}
 			
 			if($student_email!='')
 			{

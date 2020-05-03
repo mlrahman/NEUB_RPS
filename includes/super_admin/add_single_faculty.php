@@ -69,7 +69,7 @@
 			
 			
 			
-			$stmt = $conn->prepare("insert into nr_faculty (nr_faculty_name, nr_faculty_designation, nr_faculty_email, nr_faculty_cell_no, nr_faculty_join_date, nr_faculty_resign_date, nr_dept_id, nr_faculty_gender, nr_faculty_type, nr_faculty_status) values(:faculty_name, :faculty_designation, :faculty_email, :faculty_mobile, :faculty_join_date, :faculty_resign_date, :faculty_dept, :faculty_gender, :faculty_type, :faculty_status) ");
+			$stmt = $conn->prepare("insert into nr_faculty (nr_faculty_name, nr_faculty_designation, nr_faculty_email, nr_faculty_cell_no, nr_faculty_join_date, nr_faculty_resign_date, nr_dept_id, nr_faculty_gender, nr_faculty_type, nr_faculty_status,nr_faculty_two_factor) values(:faculty_name, :faculty_designation, :faculty_email, :faculty_mobile, :faculty_join_date, :faculty_resign_date, :faculty_dept, :faculty_gender, :faculty_type, :faculty_status, '1') ");
 			$stmt->bindParam(':faculty_name', $faculty_name);
 			$stmt->bindParam(':faculty_designation', $faculty_designation);
 			$stmt->bindParam(':faculty_email', $faculty_email);
@@ -137,6 +137,10 @@
 				sent_mail($faculty_email,$title.' - Log In Access',$message,$title,$contact_email);
 				
 			}
+			
+			if($faculty_resign_date=='') $faculty_resign_date='N/A';
+			if($faculty_email=='') $faculty_email='N/A';
+			if($faculty_mobile=='') $faculty_mobile='N/A';
 			
 			
 			

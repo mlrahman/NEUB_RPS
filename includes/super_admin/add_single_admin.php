@@ -58,7 +58,7 @@
 			
 			
 			
-			$stmt = $conn->prepare("insert into nr_admin (nr_admin_name, nr_admin_designation, nr_admin_email, nr_admin_cell_no, nr_admin_join_date, nr_admin_resign_date, nr_admin_gender, nr_admin_type, nr_admin_status) values(:admin_name, :admin_designation, :admin_email, :admin_mobile, :admin_join_date, :admin_resign_date, :admin_gender, :admin_type, :admin_status) ");
+			$stmt = $conn->prepare("insert into nr_admin (nr_admin_name, nr_admin_designation, nr_admin_email, nr_admin_cell_no, nr_admin_join_date, nr_admin_resign_date, nr_admin_gender, nr_admin_type, nr_admin_status,nr_admin_two_factor) values(:admin_name, :admin_designation, :admin_email, :admin_mobile, :admin_join_date, :admin_resign_date, :admin_gender, :admin_type, :admin_status, '1') ");
 			$stmt->bindParam(':admin_name', $admin_name);
 			$stmt->bindParam(':admin_designation', $admin_designation);
 			$stmt->bindParam(':admin_email', $admin_email);
@@ -132,6 +132,10 @@
 			}
 			
 			
+			
+			if($admin_resign_date=='') $admin_resign_date='N/A';
+			if($admin_email=='') $admin_email='N/A';
+			if($admin_mobile=='') $admin_mobile='N/A';
 			
 			$t=get_current_time();
 			$d=get_current_date();
