@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2020 at 01:19 PM
+-- Generation Time: May 04, 2020 at 04:09 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -162,7 +162,12 @@ INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-30', '03:57 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-01', '02:25 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-01', '09:59 PM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '02:27 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '02:27 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '10:37 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '01:49 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '09:54 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '11:34 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '04:20 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -206,12 +211,82 @@ INSERT INTO `nr_admin_result_check_transaction` (`nr_stud_id`, `nr_admin_id`, `n
 (140203020005, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-01', '10:13 PM', 'Active'),
 (140203020004, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-01', '10:25 PM', 'Active'),
 (140203020004, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '02:27 PM', 'Active'),
-(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '05:13 PM', 'Active'),
-(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '05:15 PM', 'Active'),
-(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '05:15 PM', 'Active'),
-(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '05:18 PM', 'Active'),
-(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '05:18 PM', 'Active'),
-(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '05:19 PM', 'Active');
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '05:27 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '10:38 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '10:56 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '10:57 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '10:57 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:03 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:04 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:06 PM', 'Active'),
+(140203020004, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:06 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:07 PM', 'Active'),
+(140203020004, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:07 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:10 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:13 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:14 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:16 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:16 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:20 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:22 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:38 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:38 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:39 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:39 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:40 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:40 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:41 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:42 PM', 'Active'),
+(140203020009, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:50 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:51 PM', 'Active'),
+(140203020009, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-02', '11:51 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '12:14 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '12:16 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '12:21 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '12:24 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '12:27 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '12:29 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '12:31 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '12:32 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '12:34 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '12:35 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '12:35 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '12:37 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '01:09 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '01:17 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '01:18 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '01:19 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '01:19 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '01:20 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '01:22 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '01:22 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '01:25 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '01:26 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '01:50 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '01:50 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '02:55 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '02:56 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '02:56 PM', 'Active'),
+(140203020003, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '03:20 PM', 'Active'),
+(130103020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '11:12 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '11:12 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '06:57 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '06:59 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '07:46 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '07:47 PM', 'Active'),
+(140203020004, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '07:50 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '07:50 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '07:55 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '07:56 PM', 'Active'),
+(130103020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '07:57 PM', 'Active'),
+(140203020003, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '07:57 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '07:58 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '07:59 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '08:01 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '08:02 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '08:04 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '08:08 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '08:08 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -233,10 +308,10 @@ CREATE TABLE `nr_course` (
 --
 
 INSERT INTO `nr_course` (`nr_course_id`, `nr_course_code`, `nr_course_title`, `nr_course_credit`, `nr_prog_id`, `nr_course_status`) VALUES
-(1, 'CSE 111', 'Fundamentals of Computers', 3, 1, 'Inactive'),
+(1, 'CSE 111', 'Fundamentals of Computers', 3, 1, 'Active'),
 (2, 'CSE 113', 'Structured Programming Language', 3, 1, 'Active'),
 (3, 'CSE 114', 'Structured Programming Language Lab', 1.5, 1, 'Active'),
-(4, 'CSE 311', 'Computer Architecture', 3, 1, 'Active'),
+(4, 'CSE 311', 'Computer Architecture', 3, 1, 'Inactive'),
 (5, 'CSE 313', 'Database System', 3, 1, 'Active'),
 (6, 'CSE 314', 'Database System Lab', 1.5, 1, 'Active'),
 (7, 'CSE 123', 'Discrete Mathematics', 3, 1, 'Active'),
@@ -267,7 +342,9 @@ CREATE TABLE `nr_course_history` (
 INSERT INTO `nr_course_history` (`nr_course_id`, `nr_admin_id`, `nr_courseh_task`, `nr_courseh_date`, `nr_courseh_time`, `nr_courseh_status`) VALUES
 (10, 1, 'Edited Course Title: Bioinformatics, Course Code: CSE 455, Course Credit: 3, Course Program: B.Sc. (Engg.) in CSE, Course Status: Inactive', '2020-04-24', '12:26 AM', 'Active'),
 (10, 1, 'Edited Course Title: Bioinformatics, Course Code: CSE 455, Course Credit: 3, Course Program: B.Sc. (Engg.) in CSE, Course Status: Active', '2020-04-24', '12:27 AM', 'Active'),
-(1, 1, 'Edited Course Title: Fundamentals of Computers, Course Code: CSE 111, Course Credit: 3.00, Course Program: B.Sc. (Engg.) in CSE, Course Status: Inactive', '2020-04-28', '03:44 PM', 'Active');
+(1, 1, 'Edited Course Title: Fundamentals of Computers, Course Code: CSE 111, Course Credit: 3.00, Course Program: B.Sc. (Engg.) in CSE, Course Status: Inactive', '2020-04-28', '03:44 PM', 'Active'),
+(1, 1, 'Edited Course Title: Fundamentals of Computers, Course Code: CSE 111, Course Credit: 3.00, Course Program: B.Sc. (Engg.) in CSE, Course Status: Active', '2020-05-02', '11:51 PM', 'Active'),
+(4, 1, 'Edited Course Title: Computer Architecture, Course Code: CSE 311, Course Credit: 3.00, Course Program: B.Sc. (Engg.) in CSE, Course Status: Inactive', '2020-05-04', '07:49 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -327,7 +404,11 @@ INSERT INTO `nr_delete_history` (`nr_admin_id`, `nr_deleteh_task`, `nr_deleteh_d
 (1, 'Deleted Offer Course Title: Algorithm Design and Analysis Lab, Course Code: CSE 222, Course Credit: 1.50, Course Type: Compulsory, Offer Semester: 3rd, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Active', '2020-05-01', '08:23 PM', 'Active', 'Course Offer List'),
 (1, 'Deleted Course Title: Algorithm Design and Analysis Lab, Course Code: CSE 222, Course Credit: 1.50, Course Program: B.Sc. (Engg.) in CSE, Course Status: Inactive', '2020-05-01', '08:23 PM', 'Active', 'Course List'),
 (1, 'Deleted Student Name: Rocksar Sultana Smriti, Student DOB: 1990-07-02, Student Gender: Female, Student Email: N/A, Student Mobile: N/A, Earned Credit: 0, Waived Credit: 0, Student Status: Active', '2020-05-01', '08:38 PM', 'Active', 'Student'),
-(1, 'Deleted Student Name: Shamima Khatun, Student DOB: 1990-07-02, Student Gender: Female, Student Email: N/A, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0, Waived Credit: 0, Student Status: Active', '2020-05-02', '04:54 PM', 'Active', 'Student');
+(1, 'Deleted Student Name: Shamima Khatun, Student DOB: 1990-07-02, Student Gender: Female, Student Email: N/A, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0, Waived Credit: 0, Student Status: Active', '2020-05-02', '04:54 PM', 'Active', 'Student'),
+(1, 'Deleted Admin Name: Kuddus, Admin Designation: kuddus, Admin Gender: Male, Admin Join Date: 2020-05-06, Admin Resign Date: N/A, Admin Type: Admin, Admin Email: kkr@kkr.kkr, Admin Mobile: N/A, Admin Status: Active', '2020-05-03', '11:35 PM', 'Active', 'Admin'),
+(1, 'Deleted Admin Name: teyj, Admin Designation: erty, Admin Gender: Female, Admin Join Date: 2020-05-04, Admin Resign Date: N/A, Admin Type: Moderator, Admin Email: N/A, Admin Mobile: N/A, Admin Status: Inactive', '2020-05-03', '11:35 PM', 'Active', 'Admin'),
+(1, 'Deleted Faculty Name: lihukgjy, Faculty Designation: drjvhbkj, Faculty Gender: Male, Faculty Join Date: 2020-05-04, Faculty Resign Date: N/A, Faculty Department: Law and Justice, Faculty Type: Permanent, Faculty Email: N/A, Faculty Mobile: N/A, Faculty Status: Active', '2020-05-03', '11:38 PM', 'Active', 'Faculty'),
+(1, 'Deleted Offer Course Title: Discrete Mathematics, Course Code: CSE 123, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 1st, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Active', '2020-05-04', '05:18 PM', 'Active', 'Course Offer List');
 
 -- --------------------------------------------------------
 
@@ -396,7 +477,7 @@ CREATE TABLE `nr_drop` (
   `nr_prcr_id` bigint(20) NOT NULL,
   `nr_prog_id` bigint(20) NOT NULL,
   `nr_course_id` bigint(20) NOT NULL,
-  `nr_drop_semester` enum('1','2','3','4','5','6','7','8','9','10','11','12') NOT NULL,
+  `nr_drop_semester` int(11) NOT NULL,
   `nr_drop_remarks` enum('Compulsory','Optional I','Optional II','Optional III','Optional IV','Optional V') NOT NULL,
   `nr_drop_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -406,17 +487,16 @@ CREATE TABLE `nr_drop` (
 --
 
 INSERT INTO `nr_drop` (`nr_drop_id`, `nr_prcr_id`, `nr_prog_id`, `nr_course_id`, `nr_drop_semester`, `nr_drop_remarks`, `nr_drop_status`) VALUES
-(1, 1, 1, 1, '1', 'Compulsory', 'Active'),
-(2, 1, 1, 7, '1', 'Compulsory', 'Active'),
-(3, 1, 1, 2, '2', 'Compulsory', 'Active'),
-(4, 1, 1, 3, '2', 'Compulsory', 'Active'),
-(5, 1, 1, 8, '4', 'Compulsory', 'Active'),
-(6, 1, 1, 9, '4', 'Compulsory', 'Inactive'),
-(8, 1, 1, 6, '5', 'Compulsory', 'Active'),
-(9, 1, 1, 4, '3', 'Optional I', 'Active'),
-(10, 1, 1, 10, '3', 'Optional I', 'Active'),
-(14, 3, 3, 11, '5', 'Compulsory', 'Active'),
-(16, 1, 1, 5, '7', 'Compulsory', 'Inactive');
+(1, 1, 1, 1, 1, 'Compulsory', 'Active'),
+(3, 1, 1, 2, 2, 'Compulsory', 'Active'),
+(4, 1, 1, 3, 2, 'Compulsory', 'Active'),
+(5, 1, 1, 8, 4, 'Compulsory', 'Active'),
+(6, 1, 1, 9, 4, 'Compulsory', 'Inactive'),
+(8, 1, 1, 6, 5, 'Compulsory', 'Active'),
+(9, 1, 1, 4, 3, 'Optional I', 'Active'),
+(10, 1, 1, 10, 3, 'Optional I', 'Active'),
+(14, 3, 3, 11, 5, 'Compulsory', 'Active'),
+(16, 1, 1, 5, 7, 'Compulsory', 'Inactive');
 
 -- --------------------------------------------------------
 
@@ -847,7 +927,10 @@ CREATE TABLE `nr_student` (
 --
 
 INSERT INTO `nr_student` (`nr_stud_id`, `nr_stud_name`, `nr_stud_dob`, `nr_stud_gender`, `nr_stud_email`, `nr_stud_cell_no`, `nr_stud_photo`, `nr_prog_id`, `nr_prcr_id`, `nr_stud_status`) VALUES
-(140203020002, 'Mir Lutfur Rahman', '1996-07-02', 'Male', 'mlrahman@neub.edu.bd', '', '158841812715884181276265.jpg', 1, 1, 'Inactive'),
+(130103020001, 'Muhith Miah', '1993-01-01', 'Male', '', '01712345611', '', 1, 1, 'Inactive'),
+(130103020002, 'Farjana Rahman', '1994-01-01', 'Female', '', '', '', 1, 1, 'Active'),
+(140203020002, 'Mir Lutfur Rahman', '1996-07-04', 'Male', 'mlrahman@neub.edu.bd', '', '158841812715884181276265.jpg', 1, 1, 'Active'),
+(140203020003, 'Rocksar Sultana Smriti', '1995-01-09', 'Female', 'mirlutfur.rahman@gmail.com', '', '', 1, 1, 'Active'),
 (140203020004, 'Pranta Sarkar', '1990-07-02', 'Male', 'psarkar@gmail.com', '', '', 1, 1, 'Active'),
 (140203020005, 'Topu Dash Roy', '1994-12-31', 'Male', 'topucse05@gmail.com', '', '', 1, 1, 'Active'),
 (140203020009, 'Nusrat Hoque', '1990-07-02', 'Female', '', '', '', 1, 1, 'Active'),
@@ -888,7 +971,29 @@ INSERT INTO `nr_student_history` (`nr_stud_id`, `nr_admin_id`, `nr_studh_task`, 
 (140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-02, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Active', '2020-05-02', '05:15 PM', 'Active'),
 (140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-02, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Inactive', '2020-05-02', '05:15 PM', 'Active'),
 (140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-02, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Active', '2020-05-02', '05:18 PM', 'Active'),
-(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-02, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Inactive', '2020-05-02', '05:19 PM', 'Active');
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-02, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Inactive', '2020-05-02', '05:19 PM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-02, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: BBA, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Active', '2020-05-02', '05:27 PM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-02, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Active', '2020-05-02', '05:27 PM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-02, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Inactive', '2020-05-02', '11:38 PM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-02, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Active', '2020-05-02', '11:39 PM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-02, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Inactive', '2020-05-02', '11:40 PM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-02, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Active', '2020-05-02', '11:41 PM', 'Active'),
+(140203020002, 1, 'Edited Student Name: , Student DOB: , Student Gender: , Student Email: N/A, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 3.00, Student Status: ', '2020-05-03', '12:24 AM', 'Active'),
+(140203020002, 1, 'Edited Student Name: , Student DOB: Mir Lutfur Rahman, Student Gender: 1996-07-02, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 4.50, Student Status: Active', '2020-05-03', '12:28 AM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-02, Student Gender: Active, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 7.50, Student Status: ', '2020-05-03', '12:30 AM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-02, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 10.50, Student Status: Active', '2020-05-03', '12:32 AM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-02, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 13.50, Student Status: Active', '2020-05-03', '12:33 AM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-02, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 16.50, Student Status: Active', '2020-05-03', '12:34 AM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-02, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 15.00, Student Status: Active', '2020-05-03', '01:22 AM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-02, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 12.00, Student Status: Active', '2020-05-03', '01:25 AM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-02, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 9.00, Student Status: Active', '2020-05-03', '01:26 AM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-02, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 6.00, Student Status: Active', '2020-05-03', '01:50 PM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-04, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 6.00, Student Status: Active', '2020-05-03', '02:56 PM', 'Active'),
+(140203020003, 1, 'Added Student Name: Rocksar Sultana Smriti, Student DOB: 1995-01-09, Student Gender: Female, Student Email: mirlutfur.rahman@gmail.com, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Active', '2020-05-03', '03:20 PM', 'Active'),
+(130103020001, 1, 'Added Student Name: Muhith Miah, Student DOB: 1993-01-01, Student Gender: Male, Student Email: N/A, Student Mobile: 01712345611, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Inactive', '2020-05-03', '11:11 PM', 'Active'),
+(130103020002, 1, 'Added Student Name: Farjana Rahman, Student DOB: 1994-01-01, Student Gender: Female, Student Email: N/A, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Active', '2020-05-03', '11:11 PM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-04, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 9.00, Student Status: Active', '2020-05-04', '06:58 PM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-04, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 12.00, Student Status: Active', '2020-05-04', '07:54 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -916,7 +1021,10 @@ CREATE TABLE `nr_student_info` (
 --
 
 INSERT INTO `nr_student_info` (`nr_stud_id`, `nr_studi_dropout`, `nr_studi_graduated`, `nr_studi_cgpa`, `nr_studi_last_semester`, `nr_studi_last_year`, `nr_studi_publish_date`, `nr_studi_status`, `nr_studi_drop_semester`, `nr_studi_drop_year`, `nr_studi_earned_credit`, `nr_studi_waived_credit`) VALUES
-(140203020002, 1, 0, 0, 'Summer', 2014, '2020-05-02', 'Active', 'Spring', 2015, 0, 0),
+(130103020001, 1, 0, 0, 'Spring', 2013, '2020-05-03', 'Active', 'Fall', 2013, 0, 0),
+(130103020002, 1, 0, 0, 'Spring', 2013, '2020-05-03', 'Active', 'Fall', 2013, 0, 0),
+(140203020002, 1, 0, 0, 'Summer', 2014, '2020-05-04', 'Active', 'Spring', 2015, 0, 12),
+(140203020003, 1, 0, 0, 'Summer', 2014, '2020-05-03', 'Active', 'Spring', 2015, 0, 0),
 (140203020004, 1, 0, 3.5, 'Spring', 2016, '2020-04-20', 'Active', 'Fall', 2016, 3, 0),
 (140203020005, 1, 0, 0, 'Summer', 2014, '2020-04-20', 'Active', 'Spring', 2015, 0, 0),
 (140203020009, 1, 0, 0, 'Summer', 2014, '2020-04-20', 'Active', 'Spring', 2015, 0, 3),
@@ -965,7 +1073,11 @@ CREATE TABLE `nr_student_waived_credit` (
 --
 
 INSERT INTO `nr_student_waived_credit` (`nr_stwacr_id`, `nr_stud_id`, `nr_course_id`, `nr_stwacr_date`, `nr_stwacr_status`) VALUES
-(3, 140203020009, 1, '2020-01-01', 'Active');
+(3, 140203020009, 1, '2020-01-01', 'Active'),
+(9, 140203020002, 5, '2020-05-03', 'Active'),
+(10, 140203020002, 2, '2020-05-03', 'Active'),
+(12, 140203020002, 8, '2020-05-04', 'Active'),
+(13, 140203020002, 1, '2020-05-04', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1257,7 +1369,7 @@ ALTER TABLE `nr_transcript_print_reference`
 -- AUTO_INCREMENT for table `nr_admin`
 --
 ALTER TABLE `nr_admin`
-  MODIFY `nr_admin_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `nr_admin_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `nr_course`
@@ -1281,7 +1393,7 @@ ALTER TABLE `nr_drop`
 -- AUTO_INCREMENT for table `nr_faculty`
 --
 ALTER TABLE `nr_faculty`
-  MODIFY `nr_faculty_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `nr_faculty_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `nr_program`
@@ -1305,7 +1417,7 @@ ALTER TABLE `nr_result`
 -- AUTO_INCREMENT for table `nr_student_waived_credit`
 --
 ALTER TABLE `nr_student_waived_credit`
-  MODIFY `nr_stwacr_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `nr_stwacr_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `nr_system_component`

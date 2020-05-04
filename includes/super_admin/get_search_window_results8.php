@@ -890,6 +890,7 @@
 								$drop_credit=0.0;
 								$optional=array();
 								$szz=count($stud_result);
+								//echo $szz;
 								for($p=0;$p<$szz;$p++)
 								{
 									$course_code=$stud_result[$p][1];
