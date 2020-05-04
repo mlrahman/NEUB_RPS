@@ -445,7 +445,7 @@
 										<button class="w3-button w3-black w3-round-large w3-hover-teal w3-padding-small"><i class="fa fa-print"></i> Print</button>
 										<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-animate-zoom">
 											<a onclick="admin_print_result('<?php echo password_encrypt($s_id.get_current_date()); ?>','<?php echo password_encrypt($_REQUEST['admin_id'].get_current_date()); ?>')" class="w3-cursor w3-bar-item w3-button w3-hover-teal">Online Transcript</a>
-											<a onclick="" class=" w3-cursor w3-bar-item w3-button w3-hover-teal">Official Transcript</a>
+											<a onclick="admin_print_result_official('<?php echo password_encrypt($s_id.get_current_date()); ?>','<?php echo password_encrypt($_REQUEST['admin_id'].get_current_date()); ?>')" class=" w3-cursor w3-bar-item w3-button w3-hover-teal">Official Transcript</a>
 										</div>
 									</div>
 								</td>

@@ -2502,6 +2502,10 @@
 	{
 		window.open('../includes/super_admin/admin_result_print.php?student_id='+s_id+'&admin_id='+a_id);		
 	}
+	function admin_print_result_official(s_id,a_id)
+	{
+		window.open('../includes/super_admin/admin_result_print_official.php?student_id='+s_id+'&admin_id='+a_id);		
+	}
 	
 	function view_result8(student_id)
 	{

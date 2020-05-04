@@ -19,13 +19,6 @@ if ( $xlsx = SimpleXLSX::parse( 'excel_files/uploaded/insert_multiple_department
 }
 
 
-
-
-
-
-
-
-
 //echo get_student_semester_cgpa(140203020002,'Fall',2016);
 
 //echo get_reference('140203020002');
@@ -117,7 +110,6 @@ echo 'Password: '.password_encrypt('1234');
 if(isset($_REQUEST['y']))
 	echo '</br>'.$_REQUEST['x'];
 */
-
 
 
 
