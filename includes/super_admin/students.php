@@ -417,7 +417,6 @@
 			</div>
 		</div>
 		
-		<button onclick="get_student_delete_history()" class="w3-button w3-black w3-round-large w3-hover-teal w3-margin-left"><i class="fa fa-history"></i> Remove History</button>
 		
 		<div class="w3-dropdown-hover w3-round-large w3-margin-left">
 			<button class="w3-button w3-black w3-round-large w3-hover-teal"><i class="fa fa-plus"></i> Add Waived Course</button>
@@ -426,7 +425,9 @@
 				<a onclick="document.getElementById('add_multiple_window_waive8').style.display='block';document.getElementById('add_single_window_waive8').style.display='none';" class=" w3-cursor w3-bar-item w3-button w3-hover-teal">Multiple</a>
 			</div>
 		</div>
-			
+		
+		<button onclick="get_student_delete_history()" class="w3-button w3-black w3-round-large w3-hover-teal w3-margin-left"><i class="fa fa-history"></i> Remove History</button>
+		
 	</div>
 	
 	<!-- Window for add single student -->
