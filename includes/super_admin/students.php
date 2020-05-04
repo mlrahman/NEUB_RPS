@@ -128,6 +128,48 @@
 </div>
 
 
+<!-- Confirmation modal for add single-->
+<div id="student_single_waive_add_re_confirmation" class="w3-modal" style="padding-top:100px;">
+	<div class="w3-modal-content w3-card-4 w3-animate-zoom w3-round-large w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border w3-border-black" style="max-width:700px;width:80%;">
+		<header class="w3-container w3-black"> 
+			<p class="w3-xxlarge" style="margin:0px 0px 10px 0px;">Confirmation</p>
+		</header>
+		<form onsubmit="return false">
+			
+		<div class="w3-container w3-padding">
+			<p class="w3-large w3-bold w3-text-brown">Are you sure you want to add this course in waived list?</p>
+			
+			<label><i class="w3-text-red">*</i> <b>Enter your password</b></label>
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large w3-margin-bottom" type="password" id="student_single_waive_add_pass" placeholder="Enter your password" autocomplete="off">
+			
+		</div>
+		<div class="w3-container w3-light-grey w3-padding w3-black">
+			<button class="w3-button w3-right w3-green w3-border w3-round-large" onclick="student_single_waive_add_form_save()">Yes</button>
+			<button class="w3-button w3-right w3-red w3-border w3-round-large w3-margin-right" onclick="document.getElementById('student_single_waive_add_re_confirmation').style.display='none';document.getElementById('student_single_waive_add_pass').value='';">No</button>
+		</div>
+		</form>
+	</div>
+	<script>
+		var pass_student_single_waive_add_confirm = document.getElementById("student_single_waive_add_pass");
+		function student_single_waive_add_pass_co_fu()
+		{
+			if(pass_student_single_waive_add_confirm.value.trim()!="")
+			{
+				pass_student_single_waive_add_confirm.setCustomValidity('');
+				return true;
+			}
+			else
+			{
+				pass_student_single_waive_add_confirm.setCustomValidity('Enter valid password');
+				return false;
+			}
+		}
+		pass_student_single_waive_add_confirm.onchange=student_single_waive_add_pass_co_fu;
+		
+	</script>
+</div>
+
+
 <!-- Confirmation modal for remove waive course -->
 <div id="student_waive2_confirmation" class="w3-modal" style="padding-top:100px;">
 	<div class="w3-modal-content w3-card-4 w3-animate-zoom w3-round-large w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border w3-border-black" style="max-width:700px;width:80%;">
@@ -557,7 +599,7 @@
 					<li>First download the formatted excel file from <a href="../excel_files/demo/insert_multiple_waive_course.xlsx" target="_blank" class="w3-text-blue">here</a>.</li>
 					<li>In this excel file (<span class="w3-text-red">*</span>) marked columns are mandatory for each row (not valid for blank row). Very carefully fill up the rows with your data. <b>Don't put gap</b> between two rows. Also <b>ignore duplicated data</b> for consistent input.</li>
 					<li>After filling the necessary rows you have to <b>submit it from the below form</b>. You can insert at most <b>300 waived courses</b> for students in a single upload.</li>
-					<li>This process may take <b>up to two minutes</b> so keep patience. After finishing the process you will get a logs.</li>
+					<li>This process may take <b>up to four minutes</b> so keep patience. After finishing the process you will get a logs.</li>
 				</ol>
 			</div>
 			
@@ -821,6 +863,155 @@
 		
 		document.getElementById('add_single_window_waive8').style.display='none';
 		
+	}
+	
+	
+	function student_single_waive_add_form_save()
+	{
+		student_view_id=document.getElementById('student_single_waive_add_id').value.trim();
+		student_view_course=document.getElementById('student_single_waive_add_course').value.trim();
+		student_view_captcha=document.getElementById('student_single_waive_add_captcha').value.trim();
+		student_view_old_captcha=document.getElementById('student_single_waive_add_old_captcha').value.trim();
+		
+		if(student_view_id=="" || student_view_course=="" || student_view_id.length!=12)
+		{
+			document.getElementById('student_single_waive_add_pass').value='';
+			
+			document.getElementById('student_single_waive_add_re_confirmation').style.display='none';
+			
+			document.getElementById('invalid_msg').style.display='block';
+			document.getElementById('i_msg').innerHTML='Please fill up all the fields.';
+			setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		}
+		else if(student_view_captcha=="" || student_view_captcha!=student_view_old_captcha)
+		{
+			document.getElementById('student_single_waive_add_pass').value='';
+			
+			document.getElementById('student_single_waive_add_re_confirmation').style.display='none';
+			
+			document.getElementById('invalid_msg').style.display='block';
+			document.getElementById('i_msg').innerHTML='Please insert valid captcha.';
+			setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		}
+		else if(student_single_waive_add_pass_co_fu()==true)
+		{
+			
+			
+			var pass=document.getElementById('student_single_waive_add_pass').value.trim();
+			
+			document.getElementById('student_single_waive_add_pass').value='';
+			
+			document.getElementById('student_single_waive_add_re_confirmation').style.display='none';
+			
+			
+			document.getElementById('student_single_waive_add_box1').style.display='none';
+			document.getElementById('student_single_waive_add_box2').style.display='block';
+			
+			var xhttp1 = new XMLHttpRequest();
+			xhttp1.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					
+					//console.log(this.responseText);
+					if(this.responseText.trim()=='Ok')
+					{
+						add_single_window_waive8_close();
+						
+						get_search_result8();
+						
+						document.getElementById('valid_msg').style.display='block';
+						document.getElementById('v_msg').innerHTML='Course successfully added in student course waived list.';
+						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
+					
+						
+					}
+					else if(this.responseText.trim()=='pass_error')
+					{
+						document.getElementById('student_single_waive_add_box1').style.display='block';
+						document.getElementById('student_single_waive_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry password doesn\'t match.';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					else if(this.responseText.trim()=='unable')
+					{
+						document.getElementById('student_single_waive_add_box1').style.display='block';
+						document.getElementById('student_single_waive_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add this course in student course waived list (duplicate detected).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					else if(this.responseText.trim()=='unable2')
+					{
+						document.getElementById('student_single_waive_add_box1').style.display='block';
+						document.getElementById('student_single_waive_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add this course in student course waived list (course inactive).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					else if(this.responseText.trim()=='unable3')
+					{
+						document.getElementById('student_single_waive_add_box1').style.display='block';
+						document.getElementById('student_single_waive_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add this course in student course waived list(invalid course ID).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					else if(this.responseText.trim()=='unable4')
+					{
+						document.getElementById('student_single_waive_add_box1').style.display='block';
+						document.getElementById('student_single_waive_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add this course in student course waived list (invalid student ID).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					else if(this.responseText.trim()=='unable5')
+					{
+						document.getElementById('student_single_waive_add_box1').style.display='block';
+						document.getElementById('student_single_waive_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add this course in student course waived list (student ID inactive).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					else if(this.responseText.trim()=='unable6')
+					{
+						document.getElementById('student_single_waive_add_box1').style.display='block';
+						document.getElementById('student_single_waive_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add this course in student course waived list (student graduated).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					else
+					{
+						document.getElementById('student_single_waive_add_box1').style.display='block';
+						document.getElementById('student_single_waive_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unknown error occurred.';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					
+					}
+				}
+				else if(this.readyState==4 && (this.status==404 || this.status==403))
+				{
+					document.getElementById('student_single_waive_add_box1').style.display='block';
+					document.getElementById('student_single_waive_add_box2').style.display='none';
+					
+					document.getElementById('invalid_msg').style.display='block';
+					document.getElementById('i_msg').innerHTML='Network error occurred.';
+					setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+				}
+				
+			};
+			xhttp1.open("POST", "../includes/super_admin/add_single_waived_course.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&student_id="+student_view_id+"&course_id="+student_view_course, true);
+			xhttp1.send();
+		}
 	}
 	
 	
