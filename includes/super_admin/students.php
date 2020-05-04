@@ -389,7 +389,7 @@
 						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
 							<div class="w3-col" style="width:49%;">
 								<label><i class="w3-text-red">*</i> <b>Enrolled Program</b></label>
-								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="student_single_add_prog" onchange="student_single_add_form_change()" <?php if($flll==1){ echo 'disabled'; } ?> >
+								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="student_single_add_prog" onchange="student_single_add_form_change()" >
 									<option value="">Select</option>
 									<?php
 										$stmt = $conn->prepare("SELECT * FROM nr_program where nr_prog_status='Active' order by nr_prog_title asc");
@@ -544,6 +544,146 @@
 		</div>
 	</div>
 	
+	
+	<!-- Window for add multiple waive courses -->
+
+	<div id="add_multiple_window_waive8" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
+		<span onclick="add_multiple_window_waive8_close()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
+		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:295px;"><i class="fa fa-plus"></i> Add Multiple Course</p>
+		<div class="w3-container w3-margin-0 w3-padding-0"  id="student_multiple_waive_add_box1">
+			<div class="w3-container w3-margin-top w3-margin-bottom w3-sand w3-justify w3-round-large w3-padding">
+				<p class="w3-bold w3-margin-0"><u>Steps</u>:</p>
+				<ol>
+					<li>First download the formatted excel file from <a href="../excel_files/demo/insert_multiple_waive_course.xlsx" target="_blank" class="w3-text-blue">here</a>.</li>
+					<li>In this excel file (<span class="w3-text-red">*</span>) marked columns are mandatory for each row (not valid for blank row). Very carefully fill up the rows with your data. <b>Don't put gap</b> between two rows. Also <b>ignore duplicated data</b> for consistent input.</li>
+					<li>After filling the necessary rows you have to <b>submit it from the below form</b>. You can insert at most <b>300 waived courses</b> for students in a single upload.</li>
+					<li>This process may take <b>up to two minutes</b> so keep patience. After finishing the process you will get a logs.</li>
+				</ol>
+			</div>
+			
+			<div class="w3-row w3-margin-top w3-margin-bottom w3-round-large w3-border w3-padding">
+				<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 6px;">
+					
+					<label><i class="w3-text-red">*</i> <b>Upload Excel File</b></label>
+					<input class="w3-input w3-border w3-round-large" type="file" id="student_waive_excel_file" title="Please upload the formatted and filled up excel file."  onchange="student_multiple_waive_add_form_change()">
+					
+					<label><i class="w3-text-red">*</i> <b>Captcha</b></label>
+					<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+						<div class="w3-col" style="width:40%;">
+							<input class="w3-input w3-border w3-center w3-round-large" type="text" value="<?php echo $aaa.' + '.$bbb.' = '; ?>" disabled>
+						</div>
+						<div class="w3-col" style="margin-left:2%;width:58%;">
+							<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="student_multiple_waive_add_captcha" autocomplete="off" onkeyup="student_multiple_waive_add_form_change()">
+							<input type="hidden" value="<?php echo $ccc; ?>" id="student_multiple_waive_add_old_captcha">
+						</div>
+					</div>
+				
+				</div>
+				<div class="w3-col w3-margin-0" style="width:30%;padding:10px 0px 0px 6px;">
+					
+					<button onclick="student_multiple_waive_add_form_clear()" class="w3-button w3-margin-top w3-red w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;"><i class="fa fa-eye-slash"></i> Clear</button>
+						
+					</br>	
+					<button onclick="document.getElementById('student_multiple_waive_add_re_confirmation').style.display='block';" id="student_multiple_waive_add_save_btn" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" disabled><i class="fa fa-save"></i> Save</button>
+					
+				</div>
+			</div>
+			
+		</div>
+		<div class="w3-container w3-margin-0 w3-padding-0 w3-center" style="display:none;" id="student_multiple_add_box2">
+			<p style="font-size:15px;font-weight:bold;">Please wait while making changes..</p>
+			<div class="w3-light-grey w3-round-xlarge w3-border w3-margin-top w3-margin-bottom" style="width:50%;margin:0 auto;">
+				<div class="w3-container w3-blue w3-round-xlarge w3-text-white w3-bold" id="student_multiple_studentress_id" style="width:0%;">0%</div>
+			</div>
+			<i class="fa fa-spinner w3-spin w3-margin-bottom w3-margin-top" style="font-size:50px;"></i>
+		</div>
+		<div class="w3-container w3-margin-0 w3-padding-0" id="student_multiple_add_box3" style="display: none;">
+			<p class="w3-margin-0 w3-left-align w3-text-purple w3-cursor" style="margin: 0px 0px 0px 12px;" onclick="document.getElementById('student_multiple_add_box1').style.display='block';document.getElementById('student_multiple_add_box3').style.display='none';document.getElementById('student_multiple_add_box2').style.display='none';"><i class="fa fa-mail-reply"></i> Back</p>
+			<div class="w3-container w3-border w3-round-large w3-padding" style="margin: 0px 12px 12px 12px;">
+				<p class="w3-bold w3-margin-0 w3-xlarge"><u>Process Complete</u> 
+					(<span id="student_multiple_total" class="w3-text-blue w3-margin-0 w3-large"></span>), 
+					(<span id="student_multiple_success" class="w3-text-green w3-margin-0 w3-large"></span>), 
+					(<span  id="student_multiple_failed" class="w3-text-red w3-margin-0 w3-large"></span>)
+				</p>
+				<div class="w3-container w3-margin-0 w3-justify w3-small w3-padding w3-round-large w3-light-gray" id="student_multiple_logs" style="height:auto;max-height: 250px;overflow:auto;">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	<!-- Window for add single waive course -->
+
+	<div id="add_single_window_waive8" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
+		<span onclick="add_single_window_waive8_close()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
+		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:265px;"><i class="fa fa-plus"></i> Add Single Course</p>
+		<div class="w3-container w3-margin-0 w3-padding-0" id="student_single_waive_add_box1">
+			<p class="w3-text-red w3-small w3-bold" style="margin: 2px 0px 0px 12px;padding:0px;">Note: (*) marked fields are mandatory.</p>
+			<div class="w3-container w3-border w3-round-large w3-padding w3-margin-bottom" style="margin: 0px 12px 12px 12px;">
+				<div class="w3-row w3-margin-0 w3-padding-0">
+					<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 0px;">
+						<label><i class="w3-text-red">*</i> <b>Student ID</b></label>
+						<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="number" id="student_single_waive_add_id" placeholder="Enter Student ID" autocomplete="off" oninput="student_single_waive_add_form_change()">
+							
+						<label><i class="w3-text-red">*</i> <b>Waive Course</b></label>
+						<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="student_single_waive_add_course" onchange="student_single_waive_add_form_change()" placeholder="Select Waived Course">
+							<option value="">Select</option>
+							<?php
+								$stmt = $conn->prepare("select nr_course_id,nr_course_code,nr_course_title from nr_course order by nr_course_code asc,nr_course_title asc");
+								$stmt->execute();
+								$stud_result=$stmt->fetchAll();
+								if(count($stud_result)>0)
+								{
+									$sz=count($stud_result);
+									for($k=0;$k<$sz;$k++)
+									{
+										$course_id=$stud_result[$k][0];
+										$course_code=$stud_result[$k][1];
+										$course_title=$stud_result[$k][2];
+										echo '<option value="'.$course_id.'">'.$course_code.' : '.$course_title.'</option>';
+									}
+								}
+							?>
+						</select>
+						<?php
+							//spam Check 
+							$aaa=rand(1,20);
+							$bbb=rand(1,20);
+							$ccc=$aaa+$bbb;
+						?>
+						<input type="hidden" id="student_single_waive_add_old_captcha" value="<?php echo $ccc; ?>">
+						<label><i class="w3-text-red">*</i> <b>Captcha</b></label>
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:40%;">
+								<input class="w3-input w3-border w3-center w3-round-large" type="text" value="<?php echo $aaa.' + '.$bbb.' = '; ?>" disabled>
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:58%;">
+								<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="student_single_waive_add_captcha" autocomplete="off" oninput="student_single_waive_add_form_change()">
+							</div>
+						</div>
+					</div>
+					<div class="w3-col w3-margin-0" style="width:30%;padding:0px 6px 0px 6px;">
+						
+						<button onclick="student_single_waive_add_form_reset()" class="w3-button w3-margin-top w3-red w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;"><i class="fa fa-eye-slash"></i> Clear</button>
+						
+						<button onclick="document.getElementById('student_single_waive_add_re_confirmation').style.display='block';" id="student_single_waive_add_save_btn" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" disabled><i class="fa fa-save"></i> Save</button>
+					
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="w3-container w3-margin-0 w3-padding-0 w3-center" style="display:none;" id="student_single_waive_add_box2">
+			<p style="font-size:15px;font-weight:bold;">Please wait while making changes..</p>
+			<i class="fa fa-spinner w3-spin w3-margin-bottom w3-margin-top" style="font-size:50px;"></i>
+		</div>
+	</div>
+
+	
+	
+	
 	<!-- window for delete history -->
 	<div id="student_delete_history_window" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
 		<span onclick="student_delete_history_window_close()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
@@ -653,6 +793,65 @@
 
 <script>
 
+	function student_single_waive_add_form_reset()
+	{
+		document.getElementById('student_single_waive_add_id').value='';
+		document.getElementById('student_single_waive_add_course').value='';
+		document.getElementById('student_single_waive_add_captcha').value='';
+		document.getElementById('student_single_waive_add_save_btn').disabled=true;
+	}
+	
+	function student_single_waive_add_form_change()
+	{
+		student_view_id=document.getElementById('student_single_waive_add_id').value.trim();
+		student_view_course=document.getElementById('student_single_waive_add_course').value.trim();
+		if(student_view_id=="" || student_view_course=="" || student_view_id.length!=12)
+			document.getElementById('student_single_waive_add_save_btn').disabled=true;
+		else
+			document.getElementById('student_single_waive_add_save_btn').disabled=false;
+		
+	}
+	
+	function add_single_window_waive8_close()
+	{
+		document.getElementById('student_single_waive_add_id').value='';
+		document.getElementById('student_single_waive_add_course').value='';
+		document.getElementById('student_single_waive_add_captcha').value='';
+		document.getElementById('student_single_waive_add_save_btn').disabled=true;
+		
+		document.getElementById('add_single_window_waive8').style.display='none';
+		
+	}
+	
+	
+	function student_multiple_waive_add_form_clear()
+	{
+		document.getElementById('student_waive_excel_file').value='';
+		document.getElementById('student_multiple_waive_add_captcha').value='';
+		document.getElementById('student_multiple_waive_add_save_btn').disabled=true;
+	}
+	
+	function student_multiple_waive_add_form_change()
+	{
+		var excel=document.getElementById('student_waive_excel_file').value.trim();
+		if(excel=="")
+			document.getElementById('student_multiple_waive_add_save_btn').disabled=true;
+		else
+			document.getElementById('student_multiple_waive_add_save_btn').disabled=false;
+	}
+	
+	function add_multiple_window_waive8_close()
+	{
+		document.getElementById('student_waive_excel_file').value='';
+		document.getElementById('student_multiple_waive_add_captcha').value='';
+		document.getElementById('student_multiple_waive_add_save_btn').disabled=true;
+		
+		document.getElementById('add_multiple_window_waive8').style.display='none';
+		
+	}
+	
+	
+	
 
 	function student_delete_history_window_close()
 	{
@@ -1227,6 +1426,7 @@
 	var student_view_old_gender;
 	var student_view_old_email;
 	var student_view_old_mobile;
+	var student_view_course;
 	
 	var student_view_name;
 	var student_view_id;
