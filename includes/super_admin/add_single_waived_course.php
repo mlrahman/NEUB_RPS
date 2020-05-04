@@ -56,7 +56,7 @@
 				die();
 			}
 			
-			$stmt = $conn->prepare("select * from nr_student where nr_stud_id=:student_id and nr_prog_id=(select nr_prog_id from nr_course where nr_course_id=:course_id)");
+			$stmt = $conn->prepare("select * from nr_student where nr_stud_id=:student_id and nr_prog_id in (select nr_prog_id from nr_course where nr_course_id=:course_id)");
 			$stmt->bindParam(':course_id', $course_id);
 			$stmt->bindParam(':student_id', $student_id);
 			$stmt->execute();
