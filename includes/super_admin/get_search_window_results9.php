@@ -42,6 +42,18 @@
 		$course_instructor_type=$result[0][24];
 		$course_instructor_department=$result[0][44];
 		$course_publish=get_date($result[0][11]);
+		$status=$result[0][9];
+		
+		$stmt = $conn->prepare("select nr_studi_graduated from nr_student_info where nr_stud_id=:s_id limit 1 ");
+		$stmt->bindParam(':s_id', $reg_no);
+		$stmt->execute();
+		$result = $stmt->fetchAll();
+		$flll=0;
+		if(count($result)!=0)
+		{
+			$flll=$result[0][0];
+		}
+			
 		
 ?>
 		<div class="w3-container w3-row" style="height:100%;padding: 0px 12px 10px 12px;" id="result_view_box1" >
@@ -201,7 +213,134 @@
 			<p class="w3-text-red w3-small w3-bold" style="margin: 2px 0px 0px 12px;padding:0px;">Note: (*) marked fields are mandatory.</p>
 			<div class="w3-container w3-border w3-round-large w3-padding w3-margin-bottom" style="margin: 0px 12px 12px 12px;">
 				<div class="w3-row w3-margin-0 w3-padding-0">
-				
+					<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 0px;">
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:35%;">
+								<label><b>Student ID</b></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $reg_no; ?>" placeholder="Enter Student ID" autocomplete="off" disabled>
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:63%;">
+								<label><b>Student Name</b></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $name; ?>" placeholder="Enter Student Name" autocomplete="off" disabled>
+							</div>
+						</div>
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:35%;">
+								<label><b>Course Code</b></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $course_code; ?>" placeholder="Enter Course Code" autocomplete="off" disabled>
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:63%;">
+								<label><b>Course Title</b></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $course_title; ?>" placeholder="Enter Course Title" autocomplete="off" disabled>
+							</div>
+						</div>
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:32%;">
+								<label><i class="w3-text-red">*</i> <b>Marks</b></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="number" value="<?php echo $course_marks; ?>" placeholder="Enter Marks" id="result_view_marks" autocomplete="off"  oninput="result_view_form_change()">
+								<input type="hidden" value="<?php echo $course_marks; ?>" id="result_view_old_marks">
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:32%;">
+								<label><b>Grade</b></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $course_grade; ?>" id="result_view_grade" placeholder="Enter Grade" autocomplete="off" disabled>
+								<input type="hidden" value="<?php echo $course_grade; ?>" id="result_view_old_grade">
+							
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:32%;">
+								<label><b>Grade Point</b></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo number_format($course_grade_point,2); ?>" id="result_view_grade_point" placeholder="Enter Grade Point" autocomplete="off" disabled>
+								<input type="hidden" value="<?php echo $course_grade_point; ?>" id="result_view_old_grade_point">
+							
+							</div>
+						</div>
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							
+							<div class="w3-col" style="width:49%;">
+								<label><i class="w3-text-red">*</i> <b>Remarks</b></label>
+								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="result_view_remarks" onchange="result_view_form_change()">
+									<option value="<?php echo $course_remarks; ?>"><?php if($course_remarks=="") { echo 'N/A'; } else { echo $course_remarks; } ?></option>
+										<?php if($course_remarks!=''){ ?><option value="">N/A</option><?php } ?>
+										<?php if($course_remarks!='Incomplete'){ ?><option value="Incomplete">Incomplete</option><?php } ?>
+										<?php if($course_remarks!='Expelled_Mid'){ ?><option value="Expelled_Mid">Expelled_Mid</option><?php } ?>
+										<?php if($course_remarks!='MakeUp_MS'){ ?><option value="MakeUp_MS">MakeUp_MS</option><?php } ?>
+										<?php if($course_remarks!='MakeUp_SF'){ ?><option value="MakeUp_SF">MakeUp_SF</option><?php } ?>
+										<?php if($course_remarks!='MakeUp_MS_SF'){ ?><option value="MakeUp_MS_SF">MakeUp_MS_SF</option><?php } ?>
+										<?php if($course_remarks!='Expelled_SF'){ ?><option value="Expelled_SF">Expelled_SF</option><?php } ?>
+										<?php if($course_remarks!='MakeUp_MS, Expelled_SF'){ ?><option value="MakeUp_MS, Expelled_SF">MakeUp_MS, Expelled_SF</option><?php } ?>
+										<?php if($course_remarks!='MakeUp_MS, Incomplete'){ ?><option value="MakeUp_MS, Incomplete">MakeUp_MS, Incomplete</option><?php } ?>
+										<?php if($course_remarks!='Improvement'){ ?><option value="Improvement">Improvement</option><?php } ?>
+										<?php if($course_remarks!='Retake'){ ?><option value="Retake">Retake</option><?php } ?>
+									</option>
+								</select>
+								<input type="hidden" value="<?php echo $course_remarks; ?>" id="result_view_old_remarks">
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:49%;">
+								<label><b>Semester</b></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $course_semester; ?>" placeholder="Enter Grade" autocomplete="off" disabled>
+							</div>
+						</div>
+						<label><i class="w3-text-red">*</i> <b>Status</b></label>
+						<?php
+							if($status=='Active') 
+							{
+						?>
+								<select class="w3-input w3-border w3-margin-bottom w3-round-large w3-pale-green" id="result_view_status" onchange="result_view_form_change()">
+									<option value="Active" class="w3-pale-green">Active</option>
+									<option value="Inactive" class="w3-pale-red">Inactive</option>
+								</select>
+						<?php
+							} else {
+						?>
+								<select class="w3-input w3-border w3-margin-bottom w3-round-large w3-pale-red" id="result_view_status" onchange="result_view_form_change()">
+									<option value="Inactive" class="w3-pale-red">Inactive</option>
+									<option value="Active" class="w3-pale-green">Active</option>
+								</select>
+						<?php
+							}
+						
+							//spam Check 
+							$aaa=rand(1,20);
+							$bbb=rand(1,20);
+							$ccc=$aaa+$bbb;
+						?>
+						<input type="hidden" value="<?php echo $status; ?>" id="result_view_old_status">
+						<input type="hidden" value="<?php echo $ccc; ?>" id="result_view_old_captcha">
+						<input type="hidden" value="<?php echo $r_id; ?>" id="result_view_id">
+						
+						<label><i class="w3-text-red">*</i> <b>Captcha</b></label>
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:40%;">
+								<input class="w3-input w3-border w3-center w3-round-large" type="text" value="<?php echo $aaa.' + '.$bbb.' = '; ?>" disabled>
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:58%;">
+								<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="result_view_captcha" autocomplete="off" oninput="result_view_form_change()">
+							</div>
+						</div>
+						
+					</div>
+					<div class="w3-col w3-margin-0" style="width:30%;padding:0px 6px 0px 6px;">
+						
+						<div class="w3-col w3-margin-bottom w3-margin-left">			
+							<?php if($photo=="" && $gender=="Male"){ ?>
+								<img src="../images/system/male_profile.png" class="w3-image" style="border: 2px solid black;margin:22px 0px 0px 0px;padding:0px;width:100%;max-width:100px;height: 120px;" title="DP (120X100)px" alt="DP (120X100)px">
+							<?php } else if($photo==""){ ?>
+								<img src="../images/system/female_profile.png" class="w3-image" style="border: 2px solid black;10px 0px 0px 0px;padding:0px;width:100%;max-width:100px;height: 120px;" title="DP (120X100)px" alt="DP (120X100)px">
+							<?php } else { ?>
+								<img src="../images/student/<?php echo $photo; ?>" class="w3-image" style="border: 2px solid black;10px 0px 0px 0px;padding:0px;width:100%;max-width:100px;height: 120px;"  title="DP (120X100)px" alt="DP (120X100)px">
+							<?php } ?> 
+							<i class="fa fa-exclamation-circle w3-cursor" title="DP is updatable from student page."></i>
+					
+						</div>
+						
+						
+						<button onclick="result_view_form_reset()" class="w3-button w3-margin-top w3-red w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;"><i class="fa fa-eye-slash"></i> Reset</button>
+						
+						<button onclick="document.getElementById('result_view_re_confirmation').style.display='block';" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" <?php if($flll==1){ echo 'title="Sorry you can not remove this result." disabled'; }?>><i class="fa fa-eraser"></i> Remove</button>
+					
+						<button onclick="result_view_form_save_changes('<?php echo $s_id; ?>')" id="result_view_save_btn" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" disabled><i class="fa fa-save"></i> Save Changes</button>
+					
+					
+					</div>
 				
 				</div>
 			</div>
