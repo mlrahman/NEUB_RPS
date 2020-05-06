@@ -69,6 +69,7 @@
 			$course_publish=get_date($result[0][11]);
 			$status=$result[0][9];
 			$student_email=$result[0][37];
+			$student_status=$result[0][42];
 			$prcr_id=$result[0][41];
 			$stmt = $conn->prepare("select b.nr_prog_title from nr_student a,nr_program b where a.nr_stud_id=:student_id and a.nr_prog_id=b.nr_prog_id ");
 			$stmt->bindParam(':student_id', $reg_no);
@@ -76,28 +77,28 @@
 			$result = $stmt->fetchAll();
 			$prog_title=$result[0][0];
 			
-			if($student_email!='')
+			if($student_email!='' && $student_status=='Active')
 			{
 				$data='<table border="2">
 							<tr>
-								<td><b>Student ID</b></td>
-								<td><b>Student Name</b></td>
-								<td><b>Course Code</b></td>
-								<td><b>Course Title</b></td>
-								<td><b>Semester</b></td>
-								<td><b>Grade</b></td>
-								<td><b>Grade Point</b></td>
-								<td><b>Remarks</b></td>
+								<td style="padding:1px;"><b>Student ID</b></td>
+								<td style="padding:1px;"><b>Student Name</b></td>
+								<td style="padding:1px;"><b>Course Code</b></td>
+								<td style="padding:1px;"><b>Course Title</b></td>
+								<td style="padding:1px;"><b>Semester</b></td>
+								<td style="padding:1px;"><b>Grade</b></td>
+								<td style="padding:1px;"><b>Grade Point</b></td>
+								<td style="padding:1px;"><b>Remarks</b></td>
 							</tr>
 							<tr>
-								<td>'.$reg_no.'</td>
-								<td>'.$name.'</td>
-								<td>'.$course_code.'</td>
-								<td>'.$course_title.'</td>
-								<td>'.$course_semester.'</td>
-								<td>'.$course_grade.'</td>
-								<td>'.$course_grade_point.'</td>
-								<td>'.$course_remarks.'</td>
+								<td style="padding:1px;">'.$reg_no.'</td>
+								<td style="padding:1px;">'.$name.'</td>
+								<td style="padding:1px;">'.$course_code.'</td>
+								<td style="padding:1px;">'.$course_title.'</td>
+								<td style="padding:1px;">'.$course_semester.'</td>
+								<td style="padding:1px;">'.$course_grade.'</td>
+								<td style="padding:1px;">'.number_format($course_grade_point,2).'</td>
+								<td style="padding:1px;">'.$course_remarks.'</td>
 							</tr>
 						</table>';
 				//sent email with password reset link
@@ -129,7 +130,7 @@
 		
 			$t=get_current_time();
 			$d=get_current_date();
-			$task='Deleted Result Student ID: '.$reg_no.', Student Name: '.$name.', Program: '.$prog_title.', Course Code: '.$course_code.', Course Title: '.$course_title.', Semester: '.$course_semester.', Marks: '.$course_marks.', Grade: '.$course_grade.', Grade Point: '.$course_grade_point.', Course Instructor: '.$course_instructor.', Instructor Designation: '.$course_instructor_designation.', Department of '.$course_instructor_department;
+			$task='Deleted Result Student ID: '.$reg_no.', Student Name: '.$name.', Program: '.$prog_title.', Course Code: '.$course_code.', Course Title: '.$course_title.', Semester: '.$course_semester.', Marks: '.$course_marks.', Grade: '.$course_grade.', Grade Point: '.$course_grade_point.', Remarks: '.$course_remarks.', Course Instructor: '.$course_instructor.', Instructor Designation: '.$course_instructor_designation.', Department of '.$course_instructor_department.', Result Status: '.$status;
 			$stmt = $conn->prepare("insert into nr_delete_history(nr_admin_id,nr_deleteh_task,nr_deleteh_date,nr_deleteh_time,nr_deleteh_status,nr_deleteh_type) values(:admin_id,'$task','$d','$t','Active','Result') ");
 			$stmt->bindParam(':admin_id', $_SESSION['admin_id']);
 			$stmt->execute();
@@ -155,8 +156,6 @@
 			$drop_year=$x['drop_year'];
 			$earned_credit=$x['earned_credit'];
 			$waived_credit=$x['waived_credit'];
-			$t=get_current_time();
-			$d=get_current_date();
 			
 			$stmt = $conn->prepare("update nr_student_info set nr_studi_dropout=:dropout, nr_studi_graduated=:graduated, nr_studi_cgpa=:cgpa,nr_studi_last_semester=:last_semester,nr_studi_last_year=:last_year,nr_studi_publish_date='$d',nr_studi_status='Active', nr_studi_drop_semester=:drop_semester,nr_studi_drop_year=:drop_year,nr_studi_earned_credit=:earned_credit,nr_studi_waived_credit=:waived_credit where nr_stud_id=:student_id ");
 			$stmt->bindParam(':student_id', $reg_no);
@@ -190,7 +189,7 @@
 			
 				$cg=get_student_semester_cgpa($reg_no,$s,$y);
 				if($cg=='N/A') $cg=0.00;
-				$stmt = $conn->prepare("update nr_student_semester_cgpa set nr_studsc_cgpa='$cg' where nr_stud_id=:student_id and nr_studsc_semester=:sem and nr_studsc_year=:yea");
+				$stmt = $conn->prepare("update nr_student_semester_cgpa set nr_studsc_cgpa='$cg', nr_studsc_publish_date='$d' where nr_stud_id=:student_id and nr_studsc_semester=:sem and nr_studsc_year=:yea");
 				$stmt->bindParam(':student_id', $reg_no);
 				$stmt->bindParam(':sem', $s);
 				$stmt->bindParam(':yea', $y);
@@ -203,12 +202,12 @@
 		}
 		catch(PDOException $e)
 		{
-			echo $e.'Error';
+			echo 'Error';
 			die();
 		}
 		catch(Exception $e)
 		{
-			echo $e.'Error';
+			echo 'Error';
 			die();
 		}
 		

@@ -592,7 +592,97 @@
 		get_total_search_results9(0,0);
 	}
 	
-	
+	function result_view_form_save_changes(result_id)
+	{
+		var result_view_status=document.getElementById('result_view_status').value.trim();
+		var result_view_old_status=document.getElementById('result_view_old_status').value.trim();
+		var result_view_marks=document.getElementById('result_view_marks').value.trim();
+		var result_view_old_marks=document.getElementById('result_view_old_marks').value.trim();
+		var result_view_remarks=document.getElementById('result_view_remarks').value.trim();
+		var result_view_old_remarks=document.getElementById('result_view_old_remarks').value.trim();
+		var result_view_captcha=document.getElementById('result_view_captcha').value.trim();
+		var result_view_old_captcha=document.getElementById('result_view_old_captcha').value.trim();
+		
+		if(result_view_status=="" || result_view_marks=="" || parseInt(result_view_marks)>100 || parseInt(result_view_marks)<0)
+		{
+			document.getElementById('invalid_msg').style.display='block';
+			document.getElementById('i_msg').innerHTML='Please fill up all the fields.';
+			setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		}
+		else if(result_view_captcha=="" || result_view_captcha!=result_view_old_captcha)
+		{
+			document.getElementById('invalid_msg').style.display='block';
+			document.getElementById('i_msg').innerHTML='Please insert valid captcha.';
+			setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		}
+		else
+		{
+			document.getElementById('result_view_box1').style.display='none';
+			document.getElementById('result_view_box3').style.display='none';
+			document.getElementById('result_view_box4').style.display='none';
+			document.getElementById('result_view_box2').style.display='block';
+			var xhttp1 = new XMLHttpRequest();
+			xhttp1.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					//console.log(this.responseText);
+					if(this.responseText.trim()=='Ok')
+					{
+						close_search_box9();
+						view_result9(result_id);
+					
+						get_total_search_results9(0,0);
+						
+						
+						document.getElementById('valid_msg').style.display='block';
+						document.getElementById('v_msg').innerHTML='Changes saved successfully.';
+						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
+		
+					}
+					
+					else if(this.responseText.trim()=='unable2')
+					{
+						document.getElementById('result_view_box4').style.display='block';
+						document.getElementById('result_view_box2').style.display='none';
+						document.getElementById('result_view_box3').style.display='none';
+						document.getElementById('result_view_box1').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unable to make change in result (invalid marks).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		
+					}
+					else
+					{
+						document.getElementById('result_view_box4').style.display='block';
+						document.getElementById('result_view_box2').style.display='none';
+						document.getElementById('result_view_box3').style.display='none';
+						document.getElementById('result_view_box1').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unknown error occurred.';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		
+					}
+				}
+				else if(this.readyState==4 && (this.status==404 || this.status==403))
+				{
+					document.getElementById('result_view_box4').style.display='block';
+					document.getElementById('result_view_box2').style.display='none';
+					document.getElementById('result_view_box3').style.display='none';
+					document.getElementById('result_view_box1').style.display='none';
+					
+					document.getElementById('invalid_msg').style.display='block';
+					document.getElementById('i_msg').innerHTML='Network error occurred.';
+					setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+				}
+				
+			};
+			xhttp1.open("POST", "../includes/super_admin/edit_result.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&result_id="+result_id+"&result_status="+result_view_status+"&result_remarks="+result_view_remarks+"&result_marks="+result_view_marks, true);
+			xhttp1.send();
+			
+		}
+	}
+
 	function view_result9(r_id)
 	{
 		

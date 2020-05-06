@@ -1,5 +1,111 @@
 <?php
 
+function get_grade($m)
+{
+	if($m>100)
+	{
+		$g="N/A";
+	}
+	else if($m<101 && $m>79)
+	{
+		$g="A+";
+	}
+	else if($m<80 && $m>74)
+	{
+		$g="A";
+	}
+	else if($m<75 && $m>69)
+	{
+		$g="A-";
+	}
+	else if($m<70 && $m>64)
+	{
+		$g="B+";
+	}
+	else if($m<65 && $m>59)
+	{
+		$g="B";
+	}
+	else if($m<60 && $m>54)
+	{
+		$g="B-";
+	}
+	else if($m<55 && $m>49)
+	{
+		$g="C+";
+	}
+	else if($m<50 && $m>44)
+	{
+		$g="C";
+	}
+	else if($m<45 && $m>39)
+	{
+		$g="D";
+	}
+	else if($m<40 && $m>-1)
+	{
+		$g="F";
+	}
+	else
+	{
+		$g="N/A";
+	}
+	return $g;
+}
+
+function get_grade_point($m)
+{
+	if($m>100)
+	{
+		$g="N/A";
+	}
+	else if($m<101 && $m>79)
+	{
+		$g=4.00;
+	}
+	else if($m<80 && $m>74)
+	{
+		$g=3.75;
+	}
+	else if($m<75 && $m>69)
+	{
+		$g=3.50;
+	}
+	else if($m<70 && $m>64)
+	{
+		$g=3.25;
+	}
+	else if($m<65 && $m>59)
+	{
+		$g=3.00;
+	}
+	else if($m<60 && $m>54)
+	{
+		$g=2.75;
+	}
+	else if($m<55 && $m>49)
+	{
+		$g=2.50;
+	}
+	else if($m<50 && $m>44)
+	{
+		$g=2.25;
+	}
+	else if($m<45 && $m>39)
+	{
+		$g=2.00;
+	}
+	else if($m<40 && $m>-1)
+	{
+		$g=0.00;
+	}
+	else
+	{
+		$g="N/A";
+	}
+	return $g;
+}
+
 function check_date($x)
 {
 	$y=0;

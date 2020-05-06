@@ -15,6 +15,9 @@
 				
 <p class="w3-right w3-padding w3-margin-0 w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-round-large">
 <?php
+	$first_semester='Spring';
+	$first_year=2012;
+	
 	$stmt = $conn->prepare("SELECT * FROM nr_result where nr_result_status='Active' order by nr_result_year asc, nr_result_semester asc");
 	$stmt->execute();
 	$stud_result=$stmt->fetchAll();
@@ -25,6 +28,8 @@
 	}
 	
 	//echo $first_semester.'-'.$first_year;
+	$last_semester=get_current_semester();
+	$last_year=get_current_year();
 	
 	$stmt = $conn->prepare("SELECT * FROM nr_result where nr_result_status='Active' order by nr_result_year desc, nr_result_semester desc");
 	$stmt->execute();

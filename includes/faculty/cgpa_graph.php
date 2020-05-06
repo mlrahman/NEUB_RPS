@@ -15,6 +15,9 @@
 				
 <p class="w3-right w3-padding w3-margin-0 w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-round-large">
 <?php
+	$first_semester='Spring';
+	$first_year=2012;
+	
 	$stmt = $conn->prepare("SELECT * FROM nr_result where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:dept_id) and nr_result_status='Active' order by nr_result_year asc, nr_result_semester asc");
 	$stmt->bindParam(':dept_id', $_SESSION['faculty_dept_id']);
 	$stmt->execute();
@@ -26,6 +29,8 @@
 	}
 	
 	//echo $first_semester.'-'.$first_year;
+	$last_semester=get_current_semester();
+	$last_year=get_current_year();
 	
 	$stmt = $conn->prepare("SELECT * FROM nr_result where nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:dept_id) and  nr_result_status='Active' order by nr_result_year desc, nr_result_semester desc");
 	$stmt->bindParam(':dept_id', $_SESSION['faculty_dept_id']);

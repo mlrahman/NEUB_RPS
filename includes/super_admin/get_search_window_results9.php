@@ -337,7 +337,7 @@
 						
 						<button onclick="document.getElementById('result_view_re_confirmation').style.display='block';" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" <?php if($flll==1){ echo 'title="Sorry you can not remove this result." disabled'; }?>><i class="fa fa-eraser"></i> Remove</button>
 					
-						<button onclick="result_view_form_save_changes('<?php echo $s_id; ?>')" id="result_view_save_btn" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" disabled><i class="fa fa-save"></i> Save Changes</button>
+						<button onclick="result_view_form_save_changes('<?php echo $r_id; ?>')" id="result_view_save_btn" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" disabled><i class="fa fa-save"></i> Save Changes</button>
 					
 					
 					</div>
