@@ -249,7 +249,7 @@
 							<div class="w3-col" style="margin-left:2%;width:32%;">
 								<label><b>Grade Point</b></label>
 								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo number_format($course_grade_point,2); ?>" id="result_view_grade_point" placeholder="Enter Grade Point" autocomplete="off" disabled>
-								<input type="hidden" value="<?php echo $course_grade_point; ?>" id="result_view_old_grade_point">
+								<input type="hidden" value="<?php echo number_format($course_grade_point,2); ?>" id="result_view_old_grade_point">
 							
 							</div>
 						</div>

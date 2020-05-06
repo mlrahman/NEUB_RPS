@@ -45,6 +45,82 @@
 </p>
 
 
+<!-- Confirmation modal for result delete -->
+<div id="result_view_re_confirmation" class="w3-modal" style="padding-top:100px;">
+	<div class="w3-modal-content w3-card-4 w3-animate-zoom w3-round-large w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border w3-border-black" style="max-width:700px;width:80%;">
+		<header class="w3-container w3-black"> 
+			<p class="w3-xxlarge" style="margin:0px 0px 10px 0px;">Confirmation</p>
+		</header>
+		<form onsubmit="return false">
+			
+		<div class="w3-container w3-padding">
+			<p class="w3-large w3-bold w3-text-brown">Are you sure you want to remove this result?</p>
+			
+			<label><i class="w3-text-red">*</i> <b>Enter your password</b></label>
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="password" id="result_view_pass" placeholder="Enter your password" autocomplete="off">
+			
+			<?php 
+				//spam Check 
+				$aaa=rand(1,20);
+				$bbb=rand(1,20);
+				$ccc=$aaa+$bbb;
+			?>
+			<label><i class="w3-text-red">*</i> <b>Captcha</b></label>
+			<div class="w3-row" style="margin:0px 0px 10px 0px;padding:0px;">
+				<div class="w3-col" style="width:40%;">
+					<input class="w3-input w3-border w3-center w3-round-large" type="text" value="<?php echo $aaa.' + '.$bbb.' = '; ?>" disabled>
+				</div>
+				<div class="w3-col" style="margin-left:2%;width:58%;">
+					<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="captcha_result_view_confirm" autocomplete="off">
+				</div>
+			</div>
+		</div>
+		<div class="w3-container w3-light-grey w3-padding w3-black">
+			<button class="w3-button w3-right w3-green w3-border w3-round-large" onclick="remove_result_view()">Yes</button>
+			<button class="w3-button w3-right w3-red w3-border w3-round-large w3-margin-right" onclick="document.getElementById('result_view_re_confirmation').style.display='none';document.getElementById('captcha_result_view_confirm').value='';document.getElementById('result_view_pass').value='';">No</button>
+		</div>
+		</form>
+	</div>
+	<script>
+		//Captcha Validation for create new password
+		var reservation_captcha_result_view_confirm = document.getElementById("captcha_result_view_confirm");
+		var sol_result_view_confirm=<?php echo $ccc; ?>;
+		function reservation_captcha_val_result_view_confirm(){
+		  
+		  //console.log(reservation_captcha.value);
+		  //console.log(sol);
+		  if(reservation_captcha_result_view_confirm.value != sol_result_view_confirm) {
+			reservation_captcha_result_view_confirm.setCustomValidity("Please Enter Valid Answer.");
+			return false;
+		  } else {
+			reservation_captcha_result_view_confirm.setCustomValidity('');
+			return true;
+		  }
+		}
+		reservation_captcha_result_view_confirm.onchange=reservation_captcha_val_result_view_confirm;
+	
+	
+		var pass_result_view_confirm = document.getElementById("result_view_pass");
+		function result_view_pass_co_fu()
+		{
+			if(pass_result_view_confirm.value.trim()!="")
+			{
+				pass_result_view_confirm.setCustomValidity('');
+				return true;
+			}
+			else
+			{
+				pass_result_view_confirm.setCustomValidity('Enter valid password');
+				return false;
+			}
+		}
+		pass_result_view_confirm.onchange=result_view_pass_co_fu;
+		
+	</script>
+</div>
+
+
+
 <div class="w3-container w3-margin-bottom w3-margin-top">
 	
 	<!-- Menu -->
@@ -205,6 +281,263 @@
 
 
 <script>
+	
+	
+	function remove_result_view()
+	{
+		var pass=document.getElementById('result_view_pass').value.trim();
+		if(reservation_captcha_val_result_view_confirm()==true && result_view_pass_co_fu()==true)
+		{
+			document.getElementById('captcha_result_view_confirm').value='';
+			document.getElementById('result_view_pass').value='';
+			
+			document.getElementById('result_view_re_confirmation').style.display='none';
+			
+			var result_id=document.getElementById('result_view_id').value.trim();
+			
+			document.getElementById('result_view_box1').style.display='none';
+			document.getElementById('result_view_box3').style.display='none';
+			document.getElementById('result_view_box2').style.display='block';
+			document.getElementById('result_view_box4').style.display='none';
+			var xhttp1 = new XMLHttpRequest();
+			xhttp1.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					
+					//console.log(this.responseText);
+					if(this.responseText.trim()=='Ok')
+					{
+						get_search_result9();
+						
+						document.getElementById('valid_msg').style.display='block';
+						document.getElementById('v_msg').innerHTML='Result successfully removed.';
+						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
+					
+						
+					}
+					else if(this.responseText.trim()=='pass_error')
+					{
+						document.getElementById('result_view_box1').style.display='none';
+						document.getElementById('result_view_box2').style.display='none';
+						document.getElementById('result_view_box3').style.display='none';
+						document.getElementById('result_view_box4').style.display='block';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry password doesn\'t match.';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					else if(this.responseText.trim()=='unable')
+					{
+						document.getElementById('result_view_box1').style.display='none';
+						document.getElementById('result_view_box3').style.display='none';
+						document.getElementById('result_view_box2').style.display='none';
+						document.getElementById('result_view_box4').style.display='block';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry unable to remove this result.';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					else
+					{
+						document.getElementById('result_view_box1').style.display='none';
+						document.getElementById('result_view_box2').style.display='none';
+						document.getElementById('result_view_box3').style.display='none';
+						document.getElementById('result_view_box4').style.display='block';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unknown error occurred.';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					
+					}
+				}
+				else if(this.readyState==4 && (this.status==404 || this.status==403))
+				{
+					document.getElementById('result_view_box1').style.display='none';
+					document.getElementById('result_view_box2').style.display='none';
+					document.getElementById('result_view_box3').style.display='none';
+					document.getElementById('result_view_box4').style.display='block';
+					
+					document.getElementById('invalid_msg').style.display='block';
+					document.getElementById('i_msg').innerHTML='Network error occurred.';
+					setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+				}
+				
+			};
+			xhttp1.open("POST", "../includes/super_admin/delete_result.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&result_id="+result_id+"&pass="+pass, true);
+			xhttp1.send();
+		}
+	}
+	
+	function result_view_form_change()
+	{
+		var result_view_status=document.getElementById('result_view_status').value.trim();
+		var result_view_old_status=document.getElementById('result_view_old_status').value.trim();
+		var result_view_marks=document.getElementById('result_view_marks').value.trim();
+		var result_view_old_marks=document.getElementById('result_view_old_marks').value.trim();
+		var result_view_remarks=document.getElementById('result_view_remarks').value.trim();
+		var result_view_old_remarks=document.getElementById('result_view_old_remarks').value.trim();
+		
+		if(result_view_status=='Active')
+		{
+			if(document.getElementById('result_view_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('result_view_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('result_view_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('result_view_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('result_view_status').classList.add('w3-pale-green');
+		}
+		else if(result_view_status=='Inactive')
+		{
+			if(document.getElementById('result_view_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('result_view_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('result_view_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('result_view_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('result_view_status').classList.add('w3-pale-red');
+		}
+		else
+		{
+			if(document.getElementById('result_view_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('result_view_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('result_view_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('result_view_status').classList.remove('w3-pale-red');
+			}
+		}
+		
+		if(parseInt(result_view_marks)!=parseInt(result_view_old_marks))
+		{
+			if(parseInt(result_view_marks)>100)
+			{
+				document.getElementById('invalid_msg').style.display='block';
+				document.getElementById('i_msg').innerHTML='Please insert valid marks.';
+				setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+			}
+			else if(parseInt(result_view_marks)<101 && parseInt(result_view_marks)>79)
+			{
+				document.getElementById('result_view_grade').value="A+";
+				document.getElementById('result_view_grade_point').value="4.00";
+			}
+			else if(parseInt(result_view_marks)<80 && parseInt(result_view_marks)>74)
+			{
+				document.getElementById('result_view_grade').value="A";
+				document.getElementById('result_view_grade_point').value="3.75";
+			}
+			else if(parseInt(result_view_marks)<75 && parseInt(result_view_marks)>69)
+			{
+				document.getElementById('result_view_grade').value="A-";
+				document.getElementById('result_view_grade_point').value="3.50";
+			}
+			else if(parseInt(result_view_marks)<70 && parseInt(result_view_marks)>64)
+			{
+				document.getElementById('result_view_grade').value="B+";
+				document.getElementById('result_view_grade_point').value="3.25";
+			}
+			else if(parseInt(result_view_marks)<65 && parseInt(result_view_marks)>59)
+			{
+				document.getElementById('result_view_grade').value="B";
+				document.getElementById('result_view_grade_point').value="3.00";
+			}
+			else if(parseInt(result_view_marks)<60 && parseInt(result_view_marks)>54)
+			{
+				document.getElementById('result_view_grade').value="B-";
+				document.getElementById('result_view_grade_point').value="2.75";
+			}
+			else if(parseInt(result_view_marks)<55 && parseInt(result_view_marks)>49)
+			{
+				document.getElementById('result_view_grade').value="C+";
+				document.getElementById('result_view_grade_point').value="2.50";
+			}
+			else if(parseInt(result_view_marks)<50 && parseInt(result_view_marks)>44)
+			{
+				document.getElementById('result_view_grade').value="C";
+				document.getElementById('result_view_grade_point').value="2.25";
+			}
+			else if(parseInt(result_view_marks)<45 && parseInt(result_view_marks)>39)
+			{
+				document.getElementById('result_view_grade').value="D";
+				document.getElementById('result_view_grade_point').value="2.00";
+			}
+			else if(parseInt(result_view_marks)<40 && parseInt(result_view_marks)>-1)
+			{
+				document.getElementById('result_view_grade').value="F";
+				document.getElementById('result_view_grade_point').value="0.00";
+			}
+			else
+			{
+				document.getElementById('invalid_msg').style.display='block';
+				document.getElementById('i_msg').innerHTML='Please insert valid marks.';
+				setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		
+			}
+		}
+		
+		if(parseInt(result_view_marks)>100 || parseInt(result_view_marks)<0 || result_view_status=="" || result_view_marks=="" || (result_view_status==result_view_old_status && result_view_marks==result_view_old_marks && result_view_remarks==result_view_old_remarks))
+		{
+			document.getElementById('result_view_save_btn').disabled=true;
+		}
+		else
+		{
+			document.getElementById('result_view_save_btn').disabled=false;
+		}
+	}
+	
+	function result_view_form_reset()
+	{
+		document.getElementById('result_view_captcha').value='';
+		document.getElementById('result_view_status').value=document.getElementById('result_view_old_status').value.trim();
+		document.getElementById('result_view_remarks').value=document.getElementById('result_view_old_remarks').value.trim();
+		document.getElementById('result_view_grade_point').value=document.getElementById('result_view_old_grade_point').value.trim();
+		document.getElementById('result_view_grade').value=document.getElementById('result_view_old_grade').value.trim();
+		document.getElementById('result_view_marks').value=document.getElementById('result_view_old_marks').value.trim();
+		var result_view_status=document.getElementById('result_view_status').value.trim();
+		
+		if(result_view_status=='Active')
+		{
+			if(document.getElementById('result_view_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('result_view_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('result_view_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('result_view_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('result_view_status').classList.add('w3-pale-green');
+		}
+		else if(result_view_status=='Inactive')
+		{
+			if(document.getElementById('result_view_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('result_view_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('result_view_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('result_view_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('result_view_status').classList.add('w3-pale-red');
+		}
+		else
+		{
+			if(document.getElementById('result_view_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('result_view_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('result_view_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('result_view_status').classList.remove('w3-pale-red');
+			}
+		}
+		
+		document.getElementById('result_view_save_btn').disabled=true;
+		
+	}
 	
 	function result_delete_history_window_close()
 	{
