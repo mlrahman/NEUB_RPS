@@ -169,7 +169,6 @@
 				<script>
 					function reload_dashboard3()
 					{
-						get_filter_semester();
 						get_total_search_results2(0);
 						close_search_box2();
 					}

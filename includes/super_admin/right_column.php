@@ -164,9 +164,7 @@
 		</div>
 		<!-- page9 starts here -->
 		<div id="page9" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
-			
-			
-			
+			<?php include("../includes/super_admin/results.php"); ?>
 		</div>
 		<!-- page10 starts here -->
 		<?php if($_SESSION['admin_type']=='Super Admin'){ ?>

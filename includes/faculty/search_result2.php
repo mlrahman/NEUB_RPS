@@ -14,7 +14,7 @@
 	<div class="w3-container" style="margin: 12px 0px 25px 0px;padding:0px;position:relative;">
 		<div class="w3-container w3-topbar w3-bottombar w3-round-large w3-rightbar w3-leftbar w3-padding" style="margin:0 auto; width:50%;min-width:310px;">
 			<i class="fa fa-search w3-text-teal"></i> 
-			<input type="text" id="search_text2" oninput="if(this.value!=''){ document.getElementById('search_clear_btn_2').style.display='inline-block'; } else { document.getElementById('search_clear_btn_2').style.display='none'; } get_search_result2()" class="w3-input w3-border-teal" style="width:89%;min-width:220px;display:inline;" placeholder="Enter Course Name or Code for Search"  autocomplete="off">
+			<input type="text" id="search_text2" oninput="if(this.value!=''){ document.getElementById('search_clear_btn_2').style.display='inline-block'; } else { document.getElementById('search_clear_btn_2').style.display='none'; } get_search_result2()" class="w3-input w3-border-teal" style="width:89%;min-width:220px;display:inline;" placeholder="Enter Student or Course Info for Search"  autocomplete="off">
 			<i class="fa fa-close w3-text-red w3-hover-text-teal w3-cursor w3-large" style="display:none;" id="search_clear_btn_2" title="Clear search box" onclick="document.getElementById('search_text2').value=''; document.getElementById('search_clear_btn_2').style.display='none';get_search_result2();"></i>
 		
 		</div>
@@ -95,7 +95,15 @@
 		Semester: 
 		<select id="filter_semester" onchange="get_total_search_results2(0,0)" type="w3-input w3-round-large">
 			<option value="-1">All</option>
+			<?php 
 			
+				for($year=2012;$year<=Date("Y");$year++)
+				{
+					echo '<option value="Spring-'.$year.'">Spring-'.$year.'</option>';
+					echo '<option value="Summer-'.$year.'">Summer-'.$year.'</option>';
+					echo '<option value="Fall-'.$year.'">Fall-'.$year.'</option>';	
+				}
+			?>
 		</select>
 		Grade: 
 		<select id="filter_grade" onchange="get_total_search_results2(0,0)" type="w3-input w3-round-large">
@@ -113,27 +121,6 @@
 		</select>
 		 
 		<span onclick="document.getElementById('filter').style.display='none';" title="Close filter" class="w3-button w3-medium w3-red w3-hover-teal w3-round w3-margin-0" style="padding:0px 4px; margin:0px 0px 0px 8px;"><i class="fa fa-minus w3-margin-0 w3-padding-0"></i></span>
-		
-		<script>
-			function get_filter_semester()
-			{
-				var prog_id=document.getElementById('program_id3').value;
-			
-				var fi_sem = new XMLHttpRequest();
-				fi_sem.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-						
-						document.getElementById('filter_semester').innerHTML=this.responseText;
-					}
-					if (this.readyState == 4 && (this.status == 403 || this.status == 404)) {
-						document.getElementById('filter_semester').innerHTML='<option value="-1">All</option>';
-					}
-				};
-				fi_sem.open("GET", "../includes/faculty/get_filter_semester.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&program_id2="+prog_id, true);
-				fi_sem.send();
-			}
-		</script>
-		
 	</div>
 	
 	<div class="w3-clear"></div>
