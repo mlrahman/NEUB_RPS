@@ -130,7 +130,7 @@
 		
 			$t=get_current_time();
 			$d=get_current_date();
-			$task='Deleted Result Student ID: '.$reg_no.', Student Name: '.$name.', Program: '.$prog_title.', Course Code: '.$course_code.', Course Title: '.$course_title.', Semester: '.$course_semester.', Marks: '.$course_marks.', Grade: '.$course_grade.', Grade Point: '.$course_grade_point.', Remarks: '.$course_remarks.', Course Instructor: '.$course_instructor.', Instructor Designation: '.$course_instructor_designation.', Department of '.$course_instructor_department.', Result Status: '.$status;
+			$task='Deleted Result Student ID: '.$reg_no.', Student Name: '.$name.', Program: '.$prog_title.', Course Code: '.$course_code.', Course Title: '.$course_title.', Semester: '.$course_semester.', Marks: '.$course_marks.', Grade: '.$course_grade.', Grade Point: '.number_format($course_grade_point,2).', Remarks: '.$course_remarks.', Course Instructor: '.$course_instructor.', Instructor Designation: '.$course_instructor_designation.', Department of '.$course_instructor_department.', Result Status: '.$status;
 			$stmt = $conn->prepare("insert into nr_delete_history(nr_admin_id,nr_deleteh_task,nr_deleteh_date,nr_deleteh_time,nr_deleteh_status,nr_deleteh_type) values(:admin_id,'$task','$d','$t','Active','Result') ");
 			$stmt->bindParam(':admin_id', $_SESSION['admin_id']);
 			$stmt->execute();

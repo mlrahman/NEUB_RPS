@@ -226,7 +226,7 @@
 			$stmt->execute();
 			
 			
-			$task='Updated Result Student ID: '.$reg_no.', Student Name: '.$name.', Program: '.$prog_title.', Course Code: '.$course_code.', Course Title: '.$course_title.', Semester: '.$course_semester.', Marks: '.$course_marks.', Grade: '.$course_grade.', Grade Point: '.$course_grade_point.', Remarks: '.$course_remarks.', Course Instructor: '.$course_instructor.', Instructor Designation: '.$course_instructor_designation.', Department of '.$course_instructor_department.', Result Status: '.$result_status;
+			$task='Updated Result Student ID: '.$reg_no.', Student Name: '.$name.', Program: '.$prog_title.', Course Code: '.$course_code.', Course Title: '.$course_title.', Semester: '.$course_semester.', Marks: '.$course_marks.', Grade: '.$course_grade.', Grade Point: '.number_format($course_grade_point,2).', Remarks: '.$course_remarks.', Course Instructor: '.$course_instructor.', Instructor Designation: '.$course_instructor_designation.', Department of '.$course_instructor_department.', Result Status: '.$result_status;
 			$stmt = $conn->prepare("insert into nr_result_history(nr_result_id,nr_admin_id,nr_resulth_task,nr_resulth_date,nr_resulth_time,nr_resulth_status) values(:result_id,:admin_id,'$task','$d','$t','Active') ");
 			$stmt->bindParam(':admin_id', $_SESSION['admin_id']);
 			$stmt->bindParam(':result_id', $result_id);
