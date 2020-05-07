@@ -584,7 +584,7 @@
 						
 					
 					<label><i class="w3-text-red">*</i> <b>Upload Excel File</b></label>
-					<input class="w3-input w3-border w3-round-large" type="file" id="student_excel_file" title="Please upload the formatted and filled up excel file."  onchange="student_multiple_add_form_change()">
+					<input class="w3-input w3-border w3-round-large w3-margin-bottom" type="file" id="student_excel_file" title="Please upload the formatted and filled up excel file."  onchange="student_multiple_add_form_change()">
 					
 					<label><i class="w3-text-red">*</i> <b>Captcha</b></label>
 					<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">

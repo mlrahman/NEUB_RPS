@@ -185,7 +185,133 @@
 	
 	<!-- Window for add multiple result -->
 	<div id="add_multiple_window9" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
+		<span onclick="add_multiple_window9_close()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
+		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:285px;"><i class="fa fa-plus"></i> Add Multiple Result</p>
+		<div class="w3-container w3-margin-0 w3-padding-0"  id="student_multiple_add_box1">
+			<div class="w3-container w3-margin-top w3-margin-bottom w3-sand w3-justify w3-round-large w3-padding">
+				<p class="w3-bold w3-margin-0"><u>Steps</u>:</p>
+				<ol>
+					<li>First download the formatted excel file from <a href="../excel_files/demo/insert_multiple_result.xlsx" target="_blank" class="w3-text-blue">here</a>.</li>
+					<li>In this excel file (<span class="w3-text-red">*</span>) marked columns are mandatory for each row (not valid for blank row). Very carefully fill up the rows with your data. <b>Don't put gap</b> between two rows. Also <b>ignore duplicated data</b> for consistent input.</li>
+					<li>After filling the necessary rows you have to <b>submit it from the below form</b>. Don't forget to select the program, course, course instructor and semester in the below form. You can insert at most <b>300 results</b> in a single upload under a single program for a single course and a course instructor in a particular semester.</li>
+					<li>This process may take <b>up to six minutes</b> so keep patience. After finishing the process you will get a logs.</li>
+				</ol>
+			</div>
+			
+			<div class="w3-row w3-margin-top w3-margin-bottom w3-round-large w3-border w3-padding">
+				<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 6px;">
+					<div class="w3-row"  style="margin:0px 0px 0px 0px;padding:0px;">
+							
+						<div class="w3-col" style="width:49%;">
+							<label><i class="w3-text-red">*</i> <b>Select Program</b></label>
+							<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="result_multiple_add_prog" onchange="result_multiple_add_program_change()">
+								<option value="">Select</option>
+								<?php
+									$stmt = $conn->prepare("SELECT * FROM nr_program where nr_prog_status='Active' order by nr_prog_title asc");
+									$stmt->execute();
+									$stud_result=$stmt->fetchAll();
+									if(count($stud_result)>0)
+									{
+										$sz=count($stud_result);
+										for($k=0;$k<$sz;$k++)
+										{
+											$prog_id=$stud_result[$k][0];
+											$prog_title=$stud_result[$k][1];
+											echo '<option value="'.$prog_id.'">'.$prog_title.'</option>';
+										}
+									}
+								?>
+							</select>
+						</div>
+						<div class="w3-col" style="margin-left:2%;width:49%;">
+						
+							<label><i class="w3-text-red">*</i> <b>Select Course</b></label>
+							<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="result_multiple_add_course" onchange="result_multiple_add_form_change()" disabled>
+								<option value="">Select</option>
+							</select>
+						</div>
+					</div>
+					<label><i class="w3-text-red">*</i> <b>Select Course Instructor</b></label>
+					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="result_multiple_add_course_instructor" onchange="result_multiple_add_form_change()" disabled>
+						<option value="">Select</option>
+						<?php
+							$stmt = $conn->prepare("SELECT nr_faculty_id,nr_faculty_name,nr_faculty_designation,nr_dept_title FROM nr_faculty,nr_department where nr_faculty.nr_dept_id=nr_department.nr_dept_id and nr_faculty_resign_date='' and nr_faculty_status='Active' order by nr_faculty_name asc");
+							$stmt->execute();
+							$stud_result=$stmt->fetchAll();
+							if(count($stud_result)>0)
+							{
+								$sz=count($stud_result);
+								for($k=0;$k<$sz;$k++)
+								{
+									$faculty_id=$stud_result[$k][0];
+									$faculty_name=$stud_result[$k][1];
+									echo '<option value="'.$faculty_id.'">'.$faculty_name.', '.$stud_result[$k][2].' ('.$stud_result[$k][3].')</option>';
+								}
+							}
+						?>
+					</select>
+						
+					<label><i class="w3-text-red">*</i> <b>Select Semester</b></label>
+					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="result_multiple_add_semester" onchange="result_multiple_add_form_change()" disabled>
+						<option value="">Select</option>
+						<?php
+							$yy=get_current_year();
+							$ss=get_current_semester();
+							if($global_result_insert_semester_limit_flag==1)
+							{
+								$y=$yy-2;
+							}
+							else
+							{
+								$y=2012;
+							}
+							for($i=$y;$i<=$yy;$i++)
+							{
+								if($ss=='Spring' && $i==$yy) break;
+								echo '<option value="Spring '.$i.'">Spring '.$i.'</option>';
+								if($ss=='Summer' && $i==$yy) break;
+								echo '<option value="Summer '.$i.'">Summer '.$i.'</option>';
+								if($ss=='Fall' && $i==$yy) break;
+								echo '<option value="Fall '.$i.'">Fall '.$i.'</option>';
+								
+							}
+						?>
+					</select>
+					<label><i class="w3-text-red">*</i> <b>Upload Excel File</b></label>
+					<input class="w3-input w3-border w3-round-large w3-margin-bottom" type="file" id="result_excel_file" title="Please upload the formatted and filled up excel file."  onchange="result_multiple_add_form_change()" disabled>
+					
+					<?php
+						//spam Check 
+						$aaa=rand(1,20);
+						$bbb=rand(1,20);
+						$ccc=$aaa+$bbb;
+					?>
+					<input type="hidden" value="<?php echo $ccc; ?>" id="result_multiple_add_old_captcha">
+					
+					<label><i class="w3-text-red">*</i> <b>Captcha</b></label>
+					<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+						<div class="w3-col" style="width:40%;">
+							<input class="w3-input w3-border w3-center w3-round-large" type="text" value="<?php echo $aaa.' + '.$bbb.' = '; ?>" disabled>
+						</div>
+						<div class="w3-col" style="margin-left:2%;width:58%;">
+							<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="result_multiple_add_captcha" autocomplete="off" oninput="result_multiple_add_form_change()" disabled>
+						</div>
+					</div>
+									
+				
+				</div>
+				<div class="w3-col w3-margin-0" style="width:30%;padding:0px 6px 0px 6px;">
+					
+					<button onclick="result_multiple_add_form_reset()" class="w3-button w3-margin-top w3-red w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;"><i class="fa fa-eye-slash"></i> Clear</button>
+					
+					
+					<button onclick="document.getElementById('result_multiple_add_re_confirmation').style.display='block';" id="result_multiple_add_save_btn" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" disabled><i class="fa fa-save"></i> Save</button>
+				
+				
+				</div>
+			</div>
 		
+		</div>	
 	</div>
 	
 	
@@ -1127,6 +1253,130 @@
 		}
 		document.getElementById('add_single_window9').style.display='none';
 	}
+	
+	function add_multiple_window9_close()
+	{
+		document.getElementById('result_multiple_add_prog').value='';
+		document.getElementById('result_multiple_add_course').innerHTML='<option value="">Select</option>';
+		document.getElementById('result_multiple_add_course').disabled=true;
+		
+		document.getElementById('result_multiple_add_course_instructor').value='';
+		document.getElementById('result_multiple_add_course_instructor').disabled=true;
+		
+		document.getElementById('result_multiple_add_semester').value='';
+		document.getElementById('result_multiple_add_semester').disabled=true;
+		
+		document.getElementById('result_multiple_add_captcha').value='';
+		document.getElementById('result_multiple_add_captcha').disabled=true;
+		
+		document.getElementById('result_excel_file').value='';
+		document.getElementById('result_excel_file').disabled=true;
+		
+		document.getElementById('result_multiple_add_save_btn').disabled=true;
+		
+		
+		document.getElementById('add_multiple_window9').style.display='none';
+	}
+	
+	function result_multiple_add_program_change()
+	{
+		var result_multiple_add_prog=document.getElementById('result_multiple_add_prog').value.trim();
+		if(result_multiple_add_prog!="")
+		{
+			var xhttp1 = new XMLHttpRequest();
+			xhttp1.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById('result_multiple_add_course').innerHTML=this.responseText.trim();
+					document.getElementById('result_multiple_add_course').disabled=false;
+					document.getElementById('result_multiple_add_course_instructor').disabled=false;
+					document.getElementById('result_multiple_add_semester').disabled=false;
+					document.getElementById('result_multiple_add_captcha').disabled=false;
+					document.getElementById('result_excel_file').disabled=false;
+		
+				}
+				else if(this.readyState==4 && (this.status==404 || this.status==403))
+				{
+					document.getElementById('invalid_msg').style.display='block';
+					document.getElementById('i_msg').innerHTML='Network error occurred.';
+					setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+				}
+			};
+			xhttp1.open("POST", "../includes/super_admin/get_result_single_add_courses.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&prog_id="+result_multiple_add_prog, true);
+			xhttp1.send();
+			
+		}
+		else
+		{
+			document.getElementById('result_multiple_add_course').innerHTML='<option value="">Select</option>';
+			document.getElementById('result_multiple_add_course').disabled=true;
+			
+			document.getElementById('result_multiple_add_course_instructor').value='';
+			document.getElementById('result_multiple_add_course_instructor').disabled=true;
+			
+			document.getElementById('result_multiple_add_semester').value='';
+			document.getElementById('result_multiple_add_semester').disabled=true;
+			
+			document.getElementById('result_excel_file').value='';
+			document.getElementById('result_excel_file').disabled=true;
+		
+			
+			document.getElementById('result_multiple_add_captcha').value='';
+			document.getElementById('result_multiple_add_captcha').disabled=true;
+			
+			document.getElementById('result_multiple_add_save_btn').disabled=true;
+			
+			
+		}
+		
+	}
+	
+	function result_multiple_add_form_reset()
+	{
+		document.getElementById('result_multiple_add_prog').value='';
+		document.getElementById('result_multiple_add_course').innerHTML='<option value="">Select</option>';
+		document.getElementById('result_multiple_add_course').disabled=true;
+		
+		document.getElementById('result_multiple_add_course_instructor').value='';
+		document.getElementById('result_multiple_add_course_instructor').disabled=true;
+		
+		document.getElementById('result_multiple_add_semester').value='';
+		document.getElementById('result_multiple_add_semester').disabled=true;
+		
+		document.getElementById('result_multiple_add_captcha').value='';
+		document.getElementById('result_excel_file').value='';
+		document.getElementById('result_excel_file').disabled=true;
+		document.getElementById('result_multiple_add_captcha').disabled=true;
+		
+		document.getElementById('result_multiple_add_save_btn').disabled=true;
+		
+		
+	}
+	
+	
+	function result_multiple_add_form_change()
+	{
+		var result_multiple_add_prog=document.getElementById('result_multiple_add_prog').value.trim();
+		var result_multiple_add_course=document.getElementById('result_multiple_add_course').value.trim();
+		var result_multiple_add_course_instructor=document.getElementById('result_multiple_add_course_instructor').value.trim();
+		var result_multiple_add_semester=document.getElementById('result_multiple_add_semester').value.trim();
+		var result_excel_file=document.getElementById('result_excel_file').value.trim();
+		var result_multiple_add_captcha=document.getElementById('result_multiple_add_captcha').value.trim();
+		
+		
+		if(result_multiple_add_prog=="" || result_multiple_add_course=="" || result_multiple_add_course_instructor=="" || result_excel_file==""|| result_multiple_add_semester=="")
+		{
+			document.getElementById('result_multiple_add_save_btn').disabled=true;
+		}
+		else
+		{
+			document.getElementById('result_multiple_add_save_btn').disabled=false;
+		}
+		
+		
+	}
+
+	
+	
 	
 	function remove_result_view()
 	{

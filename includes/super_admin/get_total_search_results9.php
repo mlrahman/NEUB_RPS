@@ -36,12 +36,12 @@
 		}
 		else if($program_id!=-1 && $dept_id==-1)
 		{
-			$stmt = $conn->prepare("select * from nr_result a,nr_course b,nr_student c,nr_faculty d where a.nr_prog_id=:prog_id and a.nr_faculty_id=d.nr_faculty_id and c.nr_stud_id=a.nr_stud_id and and (c.nr_stud_id LIKE CONCAT('%',:search_text,'%') or c.nr_stud_name LIKE CONCAT('%',:search_text,'%') or b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id ".$filter." order by ".$order_by." ".$order);
+			$stmt = $conn->prepare("select * from nr_result a,nr_course b,nr_student c,nr_faculty d where a.nr_prog_id=:prog_id and a.nr_faculty_id=d.nr_faculty_id and c.nr_stud_id=a.nr_stud_id and (c.nr_stud_id LIKE CONCAT('%',:search_text,'%') or c.nr_stud_name LIKE CONCAT('%',:search_text,'%') or b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id ".$filter." order by ".$order_by." ".$order);
 			$stmt->bindParam(':prog_id', $program_id);
 		}
 		else if($program_id==-1 && $dept_id!=-1)
 		{
-			$stmt = $conn->prepare("select * from nr_result a,nr_course b,nr_student c,nr_faculty d where a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:dept_id) and a.nr_faculty_id=d.nr_faculty_id and c.nr_stud_id=a.nr_stud_id and and (c.nr_stud_id LIKE CONCAT('%',:search_text,'%') or c.nr_stud_name LIKE CONCAT('%',:search_text,'%') or b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id ".$filter." order by ".$order_by." ".$order);
+			$stmt = $conn->prepare("select * from nr_result a,nr_course b,nr_student c,nr_faculty d where a.nr_prog_id in (select nr_prog_id from nr_program where nr_dept_id=:dept_id) and a.nr_faculty_id=d.nr_faculty_id and c.nr_stud_id=a.nr_stud_id and (c.nr_stud_id LIKE CONCAT('%',:search_text,'%') or c.nr_stud_name LIKE CONCAT('%',:search_text,'%') or b.nr_course_code LIKE CONCAT('%',:search_text,'%') or b.nr_course_title LIKE CONCAT('%',:search_text,'%')) and a.nr_course_id=b.nr_course_id ".$filter." order by ".$order_by." ".$order);
 			$stmt->bindParam(':dept_id', $dept_id);
 		}
 		else if($program_id!=-1 && $dept_id!=-1)
