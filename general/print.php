@@ -557,14 +557,20 @@
 									{
 										$t_c=0.0;
 										$t_g=0.0;
+										$rp_flag=0;
+								
 										foreach($se_re['Spring-'.$i] as $z)
 										{
+											$rp_flag=1;
+								
 											if(number_format($z['grade_point'],2)>0.0)
 											{
 												$t_c=$t_c+$z['course_credit'];
 												$t_g=$t_g+($z['grade_point']*$z['course_credit']);
 											}
 										}
+										if($rp_flag==1)
+										{
 										
 										$html=$html.'<table style="width:700px;margin-top:10px;font-size:12px;" >
 											<tr>
@@ -595,7 +601,7 @@
 												}
 											
 										$html=$html.'<tr><td colspan="5" style="border-top: 1px solid black;"></td></tr></table>';
-										
+										}
 									}
 									
 									
@@ -603,14 +609,20 @@
 									{
 										$t_c=0.0;
 										$t_g=0.0;
+										$rp_flag=0;
+								
 										foreach($se_re['Summer-'.$i] as $z)
 										{
+											$rp_flag=1;
+								
 											if(number_format($z['grade_point'],2)>0.0)
 											{
 												$t_c=$t_c+$z['course_credit'];
 												$t_g=$t_g+($z['grade_point']*$z['course_credit']);
 											}
 										}
+										if($rp_flag==1)
+										{
 										$html=$html.'<table style="width:700px;margin-top:10px;font-size:12px;" >
 											<tr>
 												<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>Semester: '.'Summer-'.$i.'</b></td>
@@ -640,21 +652,27 @@
 												}
 											
 										$html=$html.'<tr><td colspan="5" style="border-top: 1px solid black;"></td></tr></table>';
-										
+										}
 									}
 									
 									if(array_key_exists(('Fall-'.$i),$se_re))
 									{
 										$t_c=0.0;
 										$t_g=0.0;
+										$rp_flag=0;
+								
 										foreach($se_re['Fall-'.$i] as $z)
 										{
+											$rp_flag=1;
+								
 											if(number_format($z['grade_point'],2)>0.0)
 											{
 												$t_c=$t_c+$z['course_credit'];
 												$t_g=$t_g+($z['grade_point']*$z['course_credit']);
 											}
 										}
+										if($rp_flag==1)
+										{
 										$html=$html.'<table style="width:700px;margin-top:10px;font-size:12px;" >
 											<tr>
 												<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>Semester: '.'Fall-'.$i.'</b></td>
@@ -684,7 +702,7 @@
 												}
 											
 										$html=$html.'<tr><td colspan="5" style="border-top: 1px solid black;"></td></tr></table>';
-										
+										}	
 									}
 								}
 								

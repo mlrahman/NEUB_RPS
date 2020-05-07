@@ -475,14 +475,18 @@
 							{
 								$t_c=0.0;
 								$t_g=0.0;
+								$rp_flag=0;
 								foreach($se_re['Spring-'.$i] as $z)
 								{
+									$rp_flag=1;
 									if(number_format($z['grade_point'],2)>0.0)
 									{
 										$t_c=$t_c+$z['course_credit'];
 										$t_g=$t_g+($z['grade_point']*$z['course_credit']);
 									}
 								}
+								if($rp_flag==1)
+								{
 								
 								
 					?>
@@ -523,21 +527,27 @@
 								</table>
 					
 					<?php
-								
+								}		
 							}
 							
 							if(array_key_exists(('Summer-'.$i),$se_re))
 							{
 								$t_c=0.0;
 								$t_g=0.0;
+								$rp_flag=0;
+								
 								foreach($se_re['Summer-'.$i] as $z)
 								{
+									$rp_flag=1;
+								
 									if(number_format($z['grade_point'],2)>0.0)
 									{
 										$t_c=$t_c+$z['course_credit'];
 										$t_g=$t_g+($z['grade_point']*$z['course_credit']);
 									}
 								}
+								if($rp_flag==1)
+								{
 								
 					?>
 								<button title="Click here to view details" onclick="show_result_div('<?php echo 'Summer-'.$i; ?>')" class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:8px 0px 5px 0px;"><i class="fa fa-plus-square" id="<?php echo 'Summer-'.$i; ?>_icon" ></i> Semester Result: <?php echo 'Summer-'.$i; ?></button>
@@ -577,22 +587,27 @@
 								</table>
 					
 					<?php
-								
+								}
 							}
 							
 							if(array_key_exists(('Fall-'.$i),$se_re))
 							{
 								$t_c=0.0;
 								$t_g=0.0;
+								$rp_flag=0;
+								
 								foreach($se_re['Fall-'.$i] as $z)
 								{
+									$rp_flag=1;
+								
 									if(number_format($z['grade_point'],2)>0.0)
 									{
 										$t_c=$t_c+$z['course_credit'];
 										$t_g=$t_g+($z['grade_point']*$z['course_credit']);
 									}
 								}
-								
+								if($rp_flag==1)
+								{
 								
 					?>
 								<button title="Click here to view details" onclick="show_result_div('<?php echo 'Fall-'.$i; ?>')" class="w3-button w3-black w3-round-large w3-hover-teal w3-padding w3-left-align" style="width:100%;max-width:300px;display:block;margin:8px 0px 5px 0px;"><i class="fa fa-plus-square" id="<?php echo 'Fall-'.$i; ?>_icon" ></i> Semester Result: <?php echo 'Fall-'.$i; ?></button>
@@ -632,7 +647,7 @@
 								</table>
 					
 					<?php
-								
+								}		
 							}
 						}
 					?>
