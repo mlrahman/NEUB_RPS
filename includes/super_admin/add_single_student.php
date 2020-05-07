@@ -86,6 +86,16 @@
 			
 			if($student_email!='')
 			{
+				$stmt = $conn->prepare("select * from nr_student where nr_stud_email=:email limit 1");
+				$stmt->bindParam(':email', $student_email);
+				$stmt->execute();
+				$result = $stmt->fetchAll();
+				if(count($result)>0)
+				{
+					echo 'unable5';
+					die();
+				}
+				
 				//sent email with password reset link
 				$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
 				$stmt->execute();
@@ -101,7 +111,7 @@
 				
 			
 				//sending password recovery link to user
-				$msg="Dear ".$f_name.", Welcome to ".$title." student panel service. Your eamil ".$student_email." is set for the notification and two factor authentication(2FA) service in ".$title.". You will get all the updates and OTPs for 2FA of your Student ID: ".$student_id." from ".$title." using this email. <p>&nbsp;</p>For any query you can contact at: <a href='mailto:".$contact_email."' target='_blank'>".$contact_email."</a>";
+				$msg="Dear ".$f_name.", Welcome to ".$title." student panel service. Your email ".$student_email." is set for the notification and two factor authentication(2FA) service in ".$title.". You will get all the updates and OTPs for 2FA of your Student ID: ".$student_id." from ".$title." using this email. <p>&nbsp;</p>For any query you can contact at: <a href='mailto:".$contact_email."' target='_blank'>".$contact_email."</a>";
 				$message = '<html><body>';
 				$message .= '<h1>Email Registered for Notification and 2FA from - '.$title.'</h1><p>  </p>';
 				$message .= '<p><b>Message Details:</b></p>';

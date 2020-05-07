@@ -91,6 +91,77 @@
 			$prcr_id=$result[0][0];
 			
 			
+			if($student_email!='' && $student_email!=$old_email)
+			{
+				$stmt = $conn->prepare("select * from nr_student where nr_stud_email=:email limit 1");
+				$stmt->bindParam(':email', $student_email);
+				$stmt->execute();
+				$result = $stmt->fetchAll();
+				if(count($result)>0)
+				{
+					echo 'unable5';
+					die();
+				}
+			}
+			
+			
+			
+			
+			//check program is changed or not .... and active or not 
+			if($student_old_prog!=$student_prog && $flll==1)
+			{
+				echo 'unable4';
+				die();
+			}
+			else if($student_old_prog!=$student_prog && $flll==0)
+			{
+				//getting new program credit id
+				$stmt = $conn->prepare("select nr_prcr_id from nr_program_credit where nr_prog_id=:prog_id and nr_prcr_status='Active' and nr_prcr_ex_date='' order by nr_prcr_id desc limit 1");
+				$stmt->bindParam(':prog_id', $student_prog);
+				$stmt->execute();
+				$result = $stmt->fetchAll();
+				if(count($result)==0)
+				{
+					echo 'Error';
+					die();
+				}
+				$prcr_id=$result[0][0];
+
+				
+				$stmt = $conn->prepare("delete from nr_admin_result_check_transaction where nr_stud_id=:stud_id ");
+				$stmt->bindParam(':stud_id', $student_id);
+				$stmt->execute();
+				
+				$stmt = $conn->prepare("delete from nr_faculty_result_check_transaction where nr_stud_id=:stud_id ");
+				$stmt->bindParam(':stud_id', $student_id);
+				$stmt->execute();
+				
+				$stmt = $conn->prepare("delete from nr_result_check_transaction where nr_stud_id=:stud_id ");
+				$stmt->bindParam(':stud_id', $student_id);
+				$stmt->execute();
+				
+				$stmt = $conn->prepare("delete from nr_transcript_print_reference where nr_stud_id=:stud_id ");
+				$stmt->bindParam(':stud_id', $student_id);
+				$stmt->execute();
+				
+				$stmt = $conn->prepare("delete from nr_result_history where nr_result_id in (select nr_result_id from nr_result where nr_stud_id=:stud_id ) ");
+				$stmt->bindParam(':stud_id', $student_id);
+				$stmt->execute();
+				
+				$stmt = $conn->prepare("delete from nr_result where nr_stud_id=:stud_id ");
+				$stmt->bindParam(':stud_id', $student_id);
+				$stmt->execute();
+				
+				$stmt = $conn->prepare("delete from nr_student_waived_credit where nr_stud_id=:stud_id ");
+				$stmt->bindParam(':stud_id', $student_id);
+				$stmt->execute();
+				
+				$stmt = $conn->prepare("delete from nr_student_semester_cgpa where nr_stud_id=:stud_id ");
+				$stmt->bindParam(':stud_id', $student_id);
+				$stmt->execute();
+				
+				
+			}
 			
 			if($student_email=='' && $old_email!='')
 			{
@@ -164,62 +235,6 @@
 				
 			}
 			
-			
-			//check program is changed or not .... and active or not 
-			if($student_old_prog!=$student_prog && $flll==1)
-			{
-				echo 'unable4';
-				die();
-			}
-			else if($student_old_prog!=$student_prog && $flll==0)
-			{
-				//getting new program credit id
-				$stmt = $conn->prepare("select nr_prcr_id from nr_program_credit where nr_prog_id=:prog_id and nr_prcr_status='Active' and nr_prcr_ex_date='' order by nr_prcr_id desc limit 1");
-				$stmt->bindParam(':prog_id', $student_prog);
-				$stmt->execute();
-				$result = $stmt->fetchAll();
-				if(count($result)==0)
-				{
-					echo 'Error';
-					die();
-				}
-				$prcr_id=$result[0][0];
-
-				
-				$stmt = $conn->prepare("delete from nr_admin_result_check_transaction where nr_stud_id=:stud_id ");
-				$stmt->bindParam(':stud_id', $student_id);
-				$stmt->execute();
-				
-				$stmt = $conn->prepare("delete from nr_faculty_result_check_transaction where nr_stud_id=:stud_id ");
-				$stmt->bindParam(':stud_id', $student_id);
-				$stmt->execute();
-				
-				$stmt = $conn->prepare("delete from nr_result_check_transaction where nr_stud_id=:stud_id ");
-				$stmt->bindParam(':stud_id', $student_id);
-				$stmt->execute();
-				
-				$stmt = $conn->prepare("delete from nr_transcript_print_reference where nr_stud_id=:stud_id ");
-				$stmt->bindParam(':stud_id', $student_id);
-				$stmt->execute();
-				
-				$stmt = $conn->prepare("delete from nr_result_history where nr_result_id in (select nr_result_id from nr_result where nr_stud_id=:stud_id ) ");
-				$stmt->bindParam(':stud_id', $student_id);
-				$stmt->execute();
-				
-				$stmt = $conn->prepare("delete from nr_result where nr_stud_id=:stud_id ");
-				$stmt->bindParam(':stud_id', $student_id);
-				$stmt->execute();
-				
-				$stmt = $conn->prepare("delete from nr_student_waived_credit where nr_stud_id=:stud_id ");
-				$stmt->bindParam(':stud_id', $student_id);
-				$stmt->execute();
-				
-				$stmt = $conn->prepare("delete from nr_student_semester_cgpa where nr_stud_id=:stud_id ");
-				$stmt->bindParam(':stud_id', $student_id);
-				$stmt->execute();
-				
-				
-			}
 			
 			//dealing with photo
 			$stmt = $conn->prepare("select a.nr_stud_photo,b.nr_prog_title from nr_student a,nr_program b where a.nr_stud_id=:student_id and a.nr_prog_id=b.nr_prog_id ");

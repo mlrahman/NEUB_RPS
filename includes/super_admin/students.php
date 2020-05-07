@@ -1812,6 +1812,15 @@
 						document.getElementById('i_msg').innerHTML='Sorry unable to add this student (invalid student ID).';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					}
+					else if(this.responseText.trim()=='unable5')
+					{
+						document.getElementById('student_single_add_box1').style.display='block';
+						document.getElementById('student_single_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry unable to add this student (email already in use).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
 					else
 					{
 						document.getElementById('student_single_add_box1').style.display='block';
@@ -2407,6 +2416,19 @@
 					
 						document.getElementById('invalid_msg').style.display='block';
 						document.getElementById('i_msg').innerHTML='Unable to make change in program (student graduated).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		
+					}
+					else if(this.responseText.trim()=='unable5')
+					{
+						document.getElementById('student_view_box4').style.display='block';
+						document.getElementById('student_view_box2').style.display='none';
+						document.getElementById('student_view_box3').style.display='none';
+						document.getElementById('student_view_box1').style.display='none';
+						document.getElementById('student_view_box5').style.display='none';
+					
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unable to make change (email already in use).';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 		
 					}

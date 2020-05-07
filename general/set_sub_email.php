@@ -9,6 +9,16 @@
 		require("../includes/function.php");
 		try{
 			
+			$stmt = $conn->prepare("select * from nr_student where nr_stud_email=:email limit 1");
+			$stmt->bindParam(':email', $email);
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			if(count($result)>0)
+			{
+				echo 'not_done2';
+				die();
+			}
+			
 			$stmt = $conn->prepare("select * from nr_student where nr_stud_id=:s_id and nr_stud_dob=:dob and nr_stud_status='Active' limit 1 ");
 			$stmt->bindParam(':s_id', $s_id);
 			$stmt->bindParam(':dob', $dob);
@@ -27,6 +37,7 @@
 			}
 			else
 			{
+				
 				$stmt = $conn->prepare("update nr_student set nr_stud_email=:email where nr_stud_id=:s_id and nr_stud_dob=:dob ");
 				$stmt->bindParam(':s_id', $s_id);
 				$stmt->bindParam(':dob', $dob);
@@ -48,7 +59,7 @@
 				$f_name=$result[0][1];
 				$student_email=$email;
 				
-				$msg="Dear ".$f_name.", Welcome to ".$title." student panel service. Your eamil ".$student_email." is set for the notification and two factor authentication(2FA) service in ".$title.". You will get all the updates and OTPs for 2FA of your Student ID: ".$s_id." from ".$title." using this email. <p>&nbsp;</p>For any query you can contact at: <a href='mailto:".$contact_email."' target='_blank'>".$contact_email."</a>";
+				$msg="Dear ".$f_name.", Welcome to ".$title." student panel service. Your email ".$student_email." is set for the notification and two factor authentication(2FA) service in ".$title.". You will get all the updates and OTPs for 2FA of your Student ID: ".$s_id." from ".$title." using this email. <p>&nbsp;</p>For any query you can contact at: <a href='mailto:".$contact_email."' target='_blank'>".$contact_email."</a>";
 				$message = '<html><body>';
 				$message .= '<h1>Email Registered for Notification and 2FA from - '.$title.'</h1><p>  </p>';
 				$message .= '<p><b>Message Details:</b></p>';

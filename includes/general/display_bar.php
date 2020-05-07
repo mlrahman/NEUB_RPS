@@ -116,6 +116,13 @@
 							setTimeout(function(){ document.getElementById('sub_failed').style.display='none'; }, 1500);
 					
 						}
+						else if(this.responseText.trim()=="not_done2")
+						{
+							document.getElementById('subscription_email').value=p_sub_email;
+							document.getElementById('sub_failed2').style.display='block';
+							setTimeout(function(){ document.getElementById('sub_failed2').style.display='none'; }, 1500);
+					
+						}
 						else if(this.responseText.trim()=="email_error")
 						{
 							document.getElementById('subscription_email').value=p_sub_email;

@@ -192,7 +192,11 @@ Email: mlrahman@neub.edu.bd
 		</div>
 		
 		<div id="sub_failed" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999999999999;display:none;">
-			<i class="fa fa-bell-o"></i> Sorry! Failed to made the changes.
+			<i class="fa fa-bell-o"></i> Sorry! Failed to make the changes.
+		</div>
+		
+		<div id="sub_failed2" class="w3-container w3-animate-top w3-center w3-red w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999999999999;display:none;">
+			<i class="fa fa-bell-o"></i> Sorry! Failed to make the changes email already in use.
 		</div>
 		
 		<div id="sub_change_done" class="w3-container w3-animate-top w3-center w3-green w3-padding w3-large" style="width:100%;top:0;left:0;position:fixed;z-index:9999999999999;display:none;">
