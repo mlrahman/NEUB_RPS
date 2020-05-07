@@ -467,6 +467,37 @@
 		document.getElementById('admin_delete_history_window').style.display='none';
 	}
 	
+	function get_admin_activity15(admin_id)
+	{
+		document.getElementById('admin_view_box4').style.display='none';
+		document.getElementById('admin_view_box3').style.display='none';
+		document.getElementById('admin_view_box2').style.display='block';
+		document.getElementById('admin_view_box1').style.display='none';
+		var xhttp1 = new XMLHttpRequest();
+		xhttp1.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById('admin_view_box4').style.display='block';
+				document.getElementById('admin_view_box3').style.display='none';
+				document.getElementById('admin_view_box2').style.display='none';
+				document.getElementById('admin_view_box1').style.display='none';
+		
+				document.getElementById('admin_view_box4').innerHTML=this.responseText;
+			}
+			else if(this.readyState==4 && (this.status==404 || this.status==403))
+			{
+				document.getElementById('admin_view_box4').style.display='none';
+				document.getElementById('admin_view_box3').style.display='none';
+				document.getElementById('admin_view_box2').style.display='none';
+				document.getElementById('admin_view_box1').style.display='block';
+		
+				document.getElementById('invalid_msg').style.display='block';
+				document.getElementById('i_msg').innerHTML='Network error occurred.';
+				setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+			}
+		};
+		xhttp1.open("POST", "../includes/super_admin/get_admin_activity.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&admin_member_id="+admin_id, true);
+		xhttp1.send();
+	}
 	function get_admin_delete_history()
 	{
 		document.getElementById('admin_delete_history_window').style.display='block';

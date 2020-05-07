@@ -22,7 +22,8 @@
 		$filter_type15=trim($_REQUEST['filter_type15']);
 		$page=trim($_REQUEST['search_results_from']);
 		$sort=trim($_REQUEST['sort']);
-		
+		$order='';
+		$order_by='';
 		if($sort==1)
 		{
 			$order_by='nr_admin_name';

@@ -133,7 +133,7 @@
 									
 									$t=get_current_time();
 									$d=get_current_date();
-									$task='Added Course Title: '.$course_title.', Course Code: '.$course_code.', Course Credit: '.number_format($course_credit,2).', Course Type: '.$course_type.', Offer Semester: '.$course_semester.', Offer Program: '.$prog_title.', Program Credit: '.$prog_credit.', Offer Status: '.$offer_status;
+									$task='Added Offer Course Title: '.$course_title.', Course Code: '.$course_code.', Course Credit: '.number_format($course_credit,2).', Course Type: '.$course_type.', Offer Semester: '.$course_semester.', Offer Program: '.$prog_title.', Program Credit: '.$prog_credit.', Offer Status: '.$offer_status;
 									$stmt = $conn->prepare("insert into nr_drop_history(nr_drop_id,nr_admin_id,nr_droph_task,nr_droph_date,nr_droph_time,nr_droph_status) values(:course_offer_id,:admin_id,'$task','$d','$t','Active') ");
 									$stmt->bindParam(':course_offer_id', $course_offer_id);
 									$stmt->bindParam(':admin_id', $_SESSION['admin_id']);

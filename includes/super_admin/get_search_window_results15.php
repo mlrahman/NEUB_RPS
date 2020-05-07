@@ -147,7 +147,8 @@
 		
 ?>
 	<div class="w3-container w3-margin-0 w3-padding-0" id="admin_view_box1">
-		<p class="w3-margin-0 w3-right w3-text-purple w3-cursor" style="margin: 0px 12px 5px 0px;" onclick="document.getElementById('admin_view_box1').style.display='none';document.getElementById('admin_view_box2').style.display='none';document.getElementById('admin_view_box3').style.display='block';"><i class="fa fa-history"></i> Admin History</p>
+		<p class="w3-margin-0 w3-right w3-text-purple w3-cursor" style="margin: 0px 12px 5px 0px;" onclick="get_admin_activity15(<?php echo $admin_member_id; ?>)"><i class="fa fa-desktop"></i> Admin Activity</p>
+		<p class="w3-margin-0 w3-right w3-text-purple w3-cursor" style="margin: 0px 12px 5px 0px;" onclick="document.getElementById('admin_view_box1').style.display='none';document.getElementById('admin_view_box2').style.display='none';document.getElementById('admin_view_box3').style.display='block';document.getElementById('admin_view_box4').style.display='none';"><i class="fa fa-history"></i> Admin History</p>
 		<p class="w3-text-red w3-small w3-bold" style="margin: 2px 0px 0px 12px;padding:0px;">Note: (*) marked fields are mandatory.</p>
 		<div class="w3-container w3-border w3-round-large w3-padding w3-margin-bottom" style="margin: 0px 12px 12px 12px;">
 			<div class="w3-row w3-margin-0 w3-padding-0">
@@ -281,7 +282,7 @@
 	
 	</div>
 	<div class="w3-container w3-margin-0 w3-padding-0 w3-center" id="admin_view_box3" style="display:none;">
-		<p class="w3-margin-0 w3-left w3-text-purple w3-cursor" style="margin: 0px 0px 0px 12px;" onclick="document.getElementById('admin_view_box1').style.display='block';document.getElementById('admin_view_box2').style.display='none';document.getElementById('admin_view_box3').style.display='none';"><i class="fa fa-mail-reply"></i> Back</p>
+		<p class="w3-margin-0 w3-left w3-text-purple w3-cursor" style="margin: 0px 0px 0px 12px;" onclick="document.getElementById('admin_view_box1').style.display='block';document.getElementById('admin_view_box2').style.display='none';document.getElementById('admin_view_box3').style.display='none';document.getElementById('admin_view_box4').style.display='none';"><i class="fa fa-mail-reply"></i> Back</p>
 		<div class="w3-clear"></div>
 		<div class="w3-container w3-border w3-round-large w3-padding" style="margin: 0px 12px 12px 12px;">
 			<table style="width:100%;margin:5px 0px;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar">
@@ -324,6 +325,9 @@
 				?>
 			</table>
 		</div>
+	</div>
+	<div class="w3-container w3-margin-0 w3-padding-0 w3-center" id="admin_view_box4" style="display:none;">
+		
 	</div>
 <?php		
 	}
