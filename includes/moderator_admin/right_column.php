@@ -56,6 +56,12 @@
 				</select>
 			</p>
 			
+			<!-- Menu -->
+
+			<div class="w3-container w3-left" style="margin:14px 0px 14px 0px;">
+				<button onclick="reload_dashboard()" class="w3-button w3-brown w3-round-large w3-hover-teal"><i class="fa fa-refresh"></i> Refresh</button>
+			
+			</div>
 			
 			<!-- Dashboard basic box-->
 			<div class="w3-row-padding w3-margin-bottom w3-margin-top">

@@ -9,6 +9,7 @@
 	}
 ?>
 <div class="w3-quarter w3-margin-bottom">
+	
 	<div class="w3-container w3-padding-16 w3-round-large w3-border w3-topbar w3-bottombar w3-leftbar w3-rightbar">
 		<div class="w3-left"><i class="fa fa-users w3-xxlarge w3-text-orange"></i></div>
 		<div class="w3-right">
