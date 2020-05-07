@@ -10,7 +10,7 @@
 		header("location:index.php");
 		die();
 	}
-	if(isset($_REQUEST['student_status']) && isset($_REQUEST['student_gender']) && isset($_REQUEST['student_birth_date']) && isset($_REQUEST['student_id']) && isset($_REQUEST['student_name']) && isset($_REQUEST['student_email']) && isset($_REQUEST['student_mobile']) && isset($_REQUEST['student_prog']) && isset($_REQUEST['admin_id']) && $_REQUEST['admin_id']==$_SESSION['admin_id'])
+	if(isset($_REQUEST['pass']) && isset($_REQUEST['student_status']) && isset($_REQUEST['student_gender']) && isset($_REQUEST['student_birth_date']) && isset($_REQUEST['student_id']) && isset($_REQUEST['student_name']) && isset($_REQUEST['student_email']) && isset($_REQUEST['student_mobile']) && isset($_REQUEST['student_prog']) && isset($_REQUEST['admin_id']) && $_REQUEST['admin_id']==$_SESSION['admin_id'])
 	{
 		try
 		{

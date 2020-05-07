@@ -1,4 +1,9 @@
 <?php
+//change it to 1 if all old results are uploaded in db or 0 for upload old results
+//it will use for limit the semesters in result add form
+$global_result_insert_semester_limit_flag=0;
+
+
 
 function get_grade($m)
 {

@@ -242,13 +242,13 @@
 							</div>
 							<div class="w3-col" style="margin-left:2%;width:32%;">
 								<label><b>Grade</b></label>
-								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $course_grade; ?>" id="result_view_grade" placeholder="Enter Grade" autocomplete="off" disabled>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $course_grade; ?>" id="result_view_grade" placeholder="---- N/A ----" autocomplete="off" disabled>
 								<input type="hidden" value="<?php echo $course_grade; ?>" id="result_view_old_grade">
 							
 							</div>
 							<div class="w3-col" style="margin-left:2%;width:32%;">
 								<label><b>Grade Point</b></label>
-								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo number_format($course_grade_point,2); ?>" id="result_view_grade_point" placeholder="Enter Grade Point" autocomplete="off" disabled>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo number_format($course_grade_point,2); ?>" id="result_view_grade_point" placeholder="---- N/A ----" autocomplete="off" disabled>
 								<input type="hidden" value="<?php echo number_format($course_grade_point,2); ?>" id="result_view_old_grade_point">
 							
 							</div>
@@ -270,7 +270,7 @@
 										<?php if($course_remarks!='MakeUp_MS, Incomplete'){ ?><option value="MakeUp_MS, Incomplete">MakeUp_MS, Incomplete</option><?php } ?>
 										<?php if($course_remarks!='Improvement'){ ?><option value="Improvement">Improvement</option><?php } ?>
 										<?php if($course_remarks!='Retake'){ ?><option value="Retake">Retake</option><?php } ?>
-									</option>
+									
 								</select>
 								<input type="hidden" value="<?php echo $course_remarks; ?>" id="result_view_old_remarks">
 							</div>

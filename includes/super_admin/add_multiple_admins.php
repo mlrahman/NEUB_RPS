@@ -157,7 +157,7 @@
 										$title=$result[0][2];
 										$contact_email=$result[0][9];//for sending message from contact us form
 								
-										$msg="Dear ".$f_name.", Welcome to ".$title." ".strtolower($admin_type)." panel. Your eamil ".$admin_email." is set for the login access in <a href='".$main_link."' target='_blank'>".strtolower($admin_type)." panel</a> of ".$title.". You can set your password from the following link: <a href='https://".$link."' target='_blank'>".$link."</a><p>&nbsp;</p><b>Note:</b> It is an one time link so be careful during the access, do not reload the page. For any query you can contact at: <a href='mailto:".$contact_email."' target='_blank'>".$contact_email."</a>";
+										$msg="Dear ".$f_name.", Welcome to ".$title." ".strtolower($admin_type)." panel. Your email ".$admin_email." is set for the login access in <a href='".$main_link."' target='_blank'>".strtolower($admin_type)." panel</a> of ".$title.". You can set your password from the following link: <a href='https://".$link."' target='_blank'>".$link."</a><p>&nbsp;</p><b>Note:</b> It is an one time link so be careful during the access, do not reload the page. For any query you can contact at: <a href='mailto:".$contact_email."' target='_blank'>".$contact_email."</a>";
 										$message = '<html><body>';
 										$message .= '<h1>Log In Access from - '.$title.'</h1><p>  </p>';
 										$message .= '<p><b>Message Details:</b></p>';

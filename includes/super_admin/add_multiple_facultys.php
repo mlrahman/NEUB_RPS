@@ -164,7 +164,7 @@
 										$contact_email=$result[0][9];//for sending message from contact us form
 								
 										//sending password recovery link to user
-										$msg="Dear ".$f_name.", Welcome to ".$title." faculty panel. Your eamil ".$faculty_email." is set for the login access in <a href='".$main_link."' target='_blank'>faculty panel</a> of ".$title.". You can set your password from the following link: <a href='https://".$link."' target='_blank'>".$link."</a><p>&nbsp;</p><b>Note:</b> It is an one time link so be careful during the access, do not reload the page. For any query you can contact at: <a href='mailto:".$contact_email."' target='_blank'>".$contact_email."</a>";
+										$msg="Dear ".$f_name.", Welcome to ".$title." faculty panel. Your email ".$faculty_email." is set for the login access in <a href='".$main_link."' target='_blank'>faculty panel</a> of ".$title.". You can set your password from the following link: <a href='https://".$link."' target='_blank'>".$link."</a><p>&nbsp;</p><b>Note:</b> It is an one time link so be careful during the access, do not reload the page. For any query you can contact at: <a href='mailto:".$contact_email."' target='_blank'>".$contact_email."</a>";
 										$message = '<html><body>';
 										$message .= '<h1>Log In Access from - '.$title.'</h1><p>  </p>';
 										$message .= '<p><b>Message Details:</b></p>';

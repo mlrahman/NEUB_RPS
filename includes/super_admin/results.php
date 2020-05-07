@@ -120,6 +120,47 @@
 </div>
 
 
+<!-- Confirmation modal for add single result-->
+<div id="result_single_add_re_confirmation" class="w3-modal" style="padding-top:100px;">
+	<div class="w3-modal-content w3-card-4 w3-animate-zoom w3-round-large w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border w3-border-black" style="max-width:700px;width:80%;">
+		<header class="w3-container w3-black"> 
+			<p class="w3-xxlarge" style="margin:0px 0px 10px 0px;">Confirmation</p>
+		</header>
+		<form onsubmit="return false">
+			
+		<div class="w3-container w3-padding">
+			<p class="w3-large w3-bold w3-text-brown">Are you sure you want to add this result?</p>
+			
+			<label><i class="w3-text-red">*</i> <b>Enter your password</b></label>
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large w3-margin-bottom" type="password" id="result_single_add_pass" placeholder="Enter your password" autocomplete="off">
+			
+		</div>
+		<div class="w3-container w3-light-grey w3-padding w3-black">
+			<button class="w3-button w3-right w3-green w3-border w3-round-large" onclick="result_single_add_form_save()">Yes</button>
+			<button class="w3-button w3-right w3-red w3-border w3-round-large w3-margin-right" onclick="document.getElementById('result_single_add_re_confirmation').style.display='none';document.getElementById('result_single_add_pass').value='';">No</button>
+		</div>
+		</form>
+	</div>
+	<script>
+		var pass_result_single_add_confirm = document.getElementById("result_single_add_pass");
+		function result_single_add_pass_co_fu()
+		{
+			if(pass_result_single_add_confirm.value.trim()!="")
+			{
+				pass_result_single_add_confirm.setCustomValidity('');
+				return true;
+			}
+			else
+			{
+				pass_result_single_add_confirm.setCustomValidity('Enter valid password');
+				return false;
+			}
+		}
+		pass_result_single_add_confirm.onchange=result_single_add_pass_co_fu;
+		
+	</script>
+</div>
+
 
 <div class="w3-container w3-margin-bottom w3-margin-top">
 	
@@ -138,6 +179,196 @@
 		<button onclick="get_result_delete_history()" class="w3-button w3-black w3-round-large w3-hover-teal w3-margin-left"><i class="fa fa-history"></i> Remove History</button>
 		
 	</div>
+	
+	
+	
+	<!-- Window for add multiple result -->
+	<div id="add_multiple_window9" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
+		
+	</div>
+	
+	
+	
+	<!-- Window for add single result -->
+	<div id="add_single_window9" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
+		<span onclick="add_single_window9_close()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
+		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:255px;"><i class="fa fa-plus"></i> Add Single Result</p>
+		<div class="w3-container w3-margin-0 w3-padding-0" id="result_single_add_box1">
+			<p class="w3-text-red w3-small w3-bold" style="margin: 2px 0px 0px 12px;padding:0px;">Note: (*) marked fields are mandatory.</p>
+			<div class="w3-container w3-border w3-round-large w3-padding w3-margin-bottom" style="margin: 0px 12px 12px 12px;">
+				<div class="w3-row w3-margin-0 w3-padding-0">
+					<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 0px;">
+						<div class="w3-row"  style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:49%;">
+								
+								<label><i class="w3-text-red">*</i> <b>Select Program</b></label>
+								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="result_single_add_prog" onchange="result_single_add_program_change()">
+									<option value="">Select</option>
+									<?php
+										$stmt = $conn->prepare("SELECT * FROM nr_program where nr_prog_status='Active' order by nr_prog_title asc");
+										$stmt->execute();
+										$stud_result=$stmt->fetchAll();
+										if(count($stud_result)>0)
+										{
+											$sz=count($stud_result);
+											for($k=0;$k<$sz;$k++)
+											{
+												$prog_id=$stud_result[$k][0];
+												$prog_title=$stud_result[$k][1];
+												echo '<option value="'.$prog_id.'">'.$prog_title.'</option>';
+											}
+										}
+									?>
+								</select>
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:49%;">
+							
+								<label><i class="w3-text-red">*</i> <b>Select Course</b></label>
+								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="result_single_add_course" onchange="result_single_add_form_change()" disabled>
+									<option value="">Select</option>
+								</select>
+							</div>
+						</div>
+						<label><i class="w3-text-red">*</i> <b>Select Course Instructor</b></label>
+						<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="result_single_add_course_instructor" onchange="result_single_add_form_change()" disabled>
+							<option value="">Select</option>
+							<?php
+								$stmt = $conn->prepare("SELECT nr_faculty_id,nr_faculty_name,nr_faculty_designation,nr_dept_title FROM nr_faculty,nr_department where nr_faculty.nr_dept_id=nr_department.nr_dept_id and nr_faculty_resign_date='' and nr_faculty_status='Active' order by nr_faculty_name asc");
+								$stmt->execute();
+								$stud_result=$stmt->fetchAll();
+								if(count($stud_result)>0)
+								{
+									$sz=count($stud_result);
+									for($k=0;$k<$sz;$k++)
+									{
+										$faculty_id=$stud_result[$k][0];
+										$faculty_name=$stud_result[$k][1];
+										echo '<option value="'.$faculty_id.'">'.$faculty_name.', '.$stud_result[$k][2].' ('.$stud_result[$k][3].')</option>';
+									}
+								}
+							?>
+						</select>
+						
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:35%;">
+								<label><i class="w3-text-red">*</i> <b>Student ID</b></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="number" placeholder="Enter Student ID" autocomplete="off" id="result_single_add_student_id" oninput="result_single_add_form_change()" disabled>
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:63%;">
+								<label><b>Student Name</b></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" placeholder="---- N/A ----" autocomplete="off" id="result_single_add_student_name" disabled>
+							</div>
+						</div>
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:32%;">
+								<label><i class="w3-text-red">*</i> <b>Marks</b></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="number"  placeholder="Enter Marks" id="result_single_add_marks" autocomplete="off"  oninput="result_single_add_form_change()" disabled>
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:32%;">
+								<label><b>Grade</b></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="result_single_add_grade" placeholder="---- N/A ----" autocomplete="off" disabled>
+								
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:32%;">
+								<label><b>Grade Point</b></label>
+								<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" id="result_single_add_grade_point" placeholder="---- N/A ----" autocomplete="off" disabled>
+								
+							</div>
+						</div>
+						<div class="w3-row"  style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:49%;">
+								<label><i class="w3-text-red">*</i> <b>Remarks</b></label>
+								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="result_single_add_remarks" onchange="result_single_add_form_change()" disabled>
+									<option value="">N/A</option>
+									<option value="Incomplete">Incomplete</option>
+									<option value="Expelled_Mid">Expelled_Mid</option>
+									<option value="MakeUp_MS">MakeUp_MS</option>
+									<option value="MakeUp_SF">MakeUp_SF</option>
+									<option value="MakeUp_MS_SF">MakeUp_MS_SF</option>
+									<option value="Expelled_SF">Expelled_SF</option>
+									<option value="MakeUp_MS, Expelled_SF">MakeUp_MS, Expelled_SF</option>
+									<option value="MakeUp_MS, Incomplete">MakeUp_MS, Incomplete</option>
+									<option value="Improvement">Improvement</option>
+									<option value="Retake">Retake</option>
+								</select>
+							</div>
+							
+							<div class="w3-col" style="margin-left:2%;width:49%;">
+								<label><i class="w3-text-red">*</i> <b>Select Semester</b></label>
+								<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="result_single_add_semester" onchange="result_single_add_form_change()" disabled>
+									<option value="">Select</option>
+									<?php
+										$yy=get_current_year();
+										$ss=get_current_semester();
+										if($global_result_insert_semester_limit_flag==1)
+										{
+											$y=$yy-2;
+										}
+										else
+										{
+											$y=2012;
+										}
+										for($i=$y;$i<=$yy;$i++)
+										{
+											if($ss=='Spring' && $i==$yy) break;
+											echo '<option value="Spring '.$i.'">Spring '.$i.'</option>';
+											if($ss=='Summer' && $i==$yy) break;
+											echo '<option value="Summer '.$i.'">Summer '.$i.'</option>';
+											if($ss=='Fall' && $i==$yy) break;
+											echo '<option value="Fall '.$i.'">Fall '.$i.'</option>';
+											
+										}
+									?>
+								</select>
+								
+							</div>
+						</div>
+						<label><i class="w3-text-red">*</i> <b>Status</b></label>
+						<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="result_single_add_status" onchange="result_single_add_form_change()" disabled>
+							<option value="">Select</option>
+							<option value="Active" class="w3-pale-green">Active</option>
+							<option value="Inactive" class="w3-pale-red">Inactive</option>
+						</select>
+						<?php
+							//spam Check 
+							$aaa=rand(1,20);
+							$bbb=rand(1,20);
+							$ccc=$aaa+$bbb;
+						?>
+						<input type="hidden" value="<?php echo $ccc; ?>" id="result_single_add_old_captcha">
+						
+						<label><i class="w3-text-red">*</i> <b>Captcha</b></label>
+						<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+							<div class="w3-col" style="width:40%;">
+								<input class="w3-input w3-border w3-center w3-round-large" type="text" value="<?php echo $aaa.' + '.$bbb.' = '; ?>" disabled>
+							</div>
+							<div class="w3-col" style="margin-left:2%;width:58%;">
+								<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="result_single_add_captcha" autocomplete="off" oninput="result_single_add_form_change()" disabled>
+							</div>
+						</div>
+							
+							
+						
+					</div>
+					<div class="w3-col w3-margin-0" style="width:30%;padding:0px 6px 0px 6px;">
+					
+						<button onclick="result_single_add_form_reset()" class="w3-button w3-margin-top w3-red w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;"><i class="fa fa-eye-slash"></i> Clear</button>
+						
+						
+						<button onclick="document.getElementById('result_single_add_re_confirmation').style.display='block';" id="result_single_add_save_btn" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" disabled><i class="fa fa-save"></i> Save</button>
+					
+					
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="w3-container w3-margin-0 w3-padding-0 w3-center" style="display:none;" id="result_single_add_box2">
+			<p style="font-size:15px;font-weight:bold;">Please wait while making changes..</p>
+			<i class="fa fa-spinner w3-spin w3-margin-bottom w3-margin-top" style="font-size:50px;"></i>
+		</div>
+	</div>
+	
 	
 	<!-- window for delete history -->
 	<div id="result_delete_history_window" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
@@ -281,7 +512,620 @@
 
 
 <script>
+	function result_single_add_form_save()
+	{
+		var result_single_add_prog=document.getElementById('result_single_add_prog').value.trim();
+		var result_single_add_course=document.getElementById('result_single_add_course').value.trim();
+		var result_single_add_course_instructor=document.getElementById('result_single_add_course_instructor').value.trim();
+		var result_single_add_student_id=document.getElementById('result_single_add_student_id').value.trim();
+		var result_single_add_student_name=document.getElementById('result_single_add_student_name').value.trim();
+		var result_single_add_marks=document.getElementById('result_single_add_marks').value.trim();
+		var result_single_add_remarks=document.getElementById('result_single_add_remarks').value.trim();
+		var result_single_add_semester=document.getElementById('result_single_add_semester').value.trim();
+		var result_single_add_status=document.getElementById('result_single_add_status').value.trim();
+		var result_single_add_captcha=document.getElementById('result_single_add_captcha').value.trim();
+		var result_single_add_old_captcha=document.getElementById('result_single_add_old_captcha').value.trim();
+		
+		if(result_single_add_prog=="" || result_single_add_course=="" || result_single_add_course_instructor=="" || result_single_add_student_id=="" || result_single_add_student_id.length!=12 || result_single_add_student_name=="" || result_single_add_student_name=="Unknown" || result_single_add_marks=="" || parseInt(result_single_add_marks)>100 || parseInt(result_single_add_marks)<0 || result_single_add_semester=="" ||  result_single_add_status=="")
+		{
+			document.getElementById('result_single_add_pass').value='';
+			
+			document.getElementById('result_single_add_re_confirmation').style.display='none';
+			
+			document.getElementById('invalid_msg').style.display='block';
+			document.getElementById('i_msg').innerHTML='Please fill up all the fields.';
+			setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		
+		}
+		else if(result_single_add_captcha=="" || result_single_add_captcha!=result_single_add_old_captcha)
+		{
+			document.getElementById('result_single_add_pass').value='';
+			
+			document.getElementById('result_single_add_re_confirmation').style.display='none';
+			
+			document.getElementById('invalid_msg').style.display='block';
+			document.getElementById('i_msg').innerHTML='Please insert valid captcha.';
+			setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		}
+		else if(result_single_add_prog!="" && result_single_add_course!="" && result_single_add_course_instructor!="" && result_single_add_student_id!="" && result_single_add_student_id.length==12 && result_single_add_student_name!="" && result_single_add_student_name!="Unknown" && result_single_add_marks!="" && parseInt(result_single_add_marks)<=100 && parseInt(result_single_add_marks)>=0 && result_single_add_semester!="" &&  result_single_add_status!="" && result_single_add_pass_co_fu()==true)
+		{
+			var pass=document.getElementById('result_single_add_pass').value.trim();
+			
+			document.getElementById('result_single_add_pass').value='';
+			
+			document.getElementById('result_single_add_re_confirmation').style.display='none';
+			
+			
+			document.getElementById('result_single_add_box1').style.display='none';
+			document.getElementById('result_single_add_box2').style.display='block';
+			
+			var xhttp1 = new XMLHttpRequest();
+			xhttp1.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					//console.log(this.responseText.trim());
+					if(this.responseText.trim()=='Ok')
+					{
+						document.getElementById('result_single_add_box1').style.display='block';
+						document.getElementById('result_single_add_box2').style.display='none';
+			
+						get_search_result9();
+						document.getElementById('result_single_add_student_id').value=(parseInt(result_single_add_student_id.trim())+1);
+						document.getElementById('result_single_add_marks').focus();
+						
+						document.getElementById('valid_msg').style.display='block';
+						document.getElementById('v_msg').innerHTML='Result successfully added.';
+						setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
+					
+						
+					}
+					else if(this.responseText.trim()=='pass_error')
+					{
+						document.getElementById('result_single_add_box1').style.display='block';
+						document.getElementById('result_single_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Sorry password doesn\'t match.';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					}
+					else  if(this.responseText.trim()=='unable')
+					{
+						document.getElementById('result_single_add_box1').style.display='block';
+						document.getElementById('result_single_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unable to add this result (invalid student ID).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					
+					}
+					else  if(this.responseText.trim()=='unable2')
+					{
+						document.getElementById('result_single_add_box1').style.display='block';
+						document.getElementById('result_single_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unable to add this result (student graduated).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					
+					}
+					else  if(this.responseText.trim()=='unable3')
+					{
+						document.getElementById('result_single_add_box1').style.display='block';
+						document.getElementById('result_single_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unable to add this result (invalid course).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					
+					}
+					else  if(this.responseText.trim()=='unable4')
+					{
+						document.getElementById('result_single_add_box1').style.display='block';
+						document.getElementById('result_single_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unable to add this result (invalid instructor).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					
+					}
+					else  if(this.responseText.trim()=='unable5')
+					{
+						document.getElementById('result_single_add_box1').style.display='block';
+						document.getElementById('result_single_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unable to add this result (invalid program).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					
+					}
+					else  if(this.responseText.trim()=='unable6')
+					{
+						document.getElementById('result_single_add_box1').style.display='block';
+						document.getElementById('result_single_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unable to add this result (ambiguous program and student).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					
+					}
+					else  if(this.responseText.trim()=='unable7')
+					{
+						document.getElementById('result_single_add_box1').style.display='block';
+						document.getElementById('result_single_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unable to add this result (duplicate data).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					
+					}
+					else  if(this.responseText.trim()=='unable8')
+					{
+						document.getElementById('result_single_add_box1').style.display='block';
+						document.getElementById('result_single_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unable to add this result (waived course).';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					
+					}
+					else
+					{
+						document.getElementById('result_single_add_box1').style.display='block';
+						document.getElementById('result_single_add_box2').style.display='none';
+						
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Unknown error occurred.';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+					
+					}
+				}
+				else if(this.readyState==4 && (this.status==404 || this.status==403))
+				{
+					document.getElementById('result_single_add_box1').style.display='block';
+					document.getElementById('result_single_add_box2').style.display='none';
+					
+					document.getElementById('invalid_msg').style.display='block';
+					document.getElementById('i_msg').innerHTML='Network error occurred.';
+					setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+				}
+				
+			};
+			xhttp1.open("POST", "../includes/super_admin/add_single_result.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&pass="+pass+"&prog_id="+result_single_add_prog+"&course_id="+result_single_add_course+"&instructor_id="+result_single_add_course_instructor+"&student_id="+result_single_add_student_id+"&marks="+result_single_add_marks+"&remarks="+result_single_add_remarks+"&semester="+result_single_add_semester+"&status="+result_single_add_status, true);
+			xhttp1.send();
+		}
+	}
 	
+	function result_single_add_form_change()
+	{
+		var result_single_add_prog=document.getElementById('result_single_add_prog').value.trim();
+		var result_single_add_course=document.getElementById('result_single_add_course').value.trim();
+		var result_single_add_course_instructor=document.getElementById('result_single_add_course_instructor').value.trim();
+		var result_single_add_student_id=document.getElementById('result_single_add_student_id').value.trim();
+		var result_single_add_student_name=document.getElementById('result_single_add_student_name').value.trim();
+		var result_single_add_marks=document.getElementById('result_single_add_marks').value.trim();
+		var result_single_add_remarks=document.getElementById('result_single_add_remarks').value.trim();
+		var result_single_add_semester=document.getElementById('result_single_add_semester').value.trim();
+		var result_single_add_status=document.getElementById('result_single_add_status').value.trim();
+		var result_single_add_captcha=document.getElementById('result_single_add_captcha').value.trim();
+		
+		if(result_single_add_student_id.length==12)
+		{
+			var xhttp1 = new XMLHttpRequest();
+			xhttp1.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+				
+					document.getElementById('result_single_add_student_name').value=this.responseText.trim();
+					result_single_add_form_change();
+				}
+				else if(this.readyState==4 && (this.status==404 || this.status==403))
+				{
+					document.getElementById('result_single_add_student_name').value='Unknown';
+					document.getElementById('invalid_msg').style.display='block';
+					document.getElementById('i_msg').innerHTML='Network error occurred.';
+					setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+				}
+			};
+			xhttp1.open("POST", "../includes/super_admin/get_result_single_add_student_name.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&student_id="+result_single_add_student_id+"&prog_id="+result_single_add_prog, true);
+			xhttp1.send();
+			
+			
+			
+		}
+		else
+		{
+			document.getElementById('result_single_add_student_name').value='';
+		}
+		
+		
+		if(result_single_add_marks!="")
+		{
+			if(parseInt(result_single_add_marks)>100)
+			{
+				document.getElementById('result_single_add_grade').value="";
+				document.getElementById('result_single_add_grade_point').value="";
+			
+				document.getElementById('invalid_msg').style.display='block';
+				document.getElementById('i_msg').innerHTML='Please insert valid marks.';
+				setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+			}
+			else if(parseInt(result_single_add_marks)<101 && parseInt(result_single_add_marks)>79)
+			{
+				document.getElementById('result_single_add_grade').value="A+";
+				document.getElementById('result_single_add_grade_point').value="4.00";
+			}
+			else if(parseInt(result_single_add_marks)<80 && parseInt(result_single_add_marks)>74)
+			{
+				document.getElementById('result_single_add_grade').value="A";
+				document.getElementById('result_single_add_grade_point').value="3.75";
+			}
+			else if(parseInt(result_single_add_marks)<75 && parseInt(result_single_add_marks)>69)
+			{
+				document.getElementById('result_single_add_grade').value="A-";
+				document.getElementById('result_single_add_grade_point').value="3.50";
+			}
+			else if(parseInt(result_single_add_marks)<70 && parseInt(result_single_add_marks)>64)
+			{
+				document.getElementById('result_single_add_grade').value="B+";
+				document.getElementById('result_single_add_grade_point').value="3.25";
+			}
+			else if(parseInt(result_single_add_marks)<65 && parseInt(result_single_add_marks)>59)
+			{
+				document.getElementById('result_single_add_grade').value="B";
+				document.getElementById('result_single_add_grade_point').value="3.00";
+			}
+			else if(parseInt(result_single_add_marks)<60 && parseInt(result_single_add_marks)>54)
+			{
+				document.getElementById('result_single_add_grade').value="B-";
+				document.getElementById('result_single_add_grade_point').value="2.75";
+			}
+			else if(parseInt(result_single_add_marks)<55 && parseInt(result_single_add_marks)>49)
+			{
+				document.getElementById('result_single_add_grade').value="C+";
+				document.getElementById('result_single_add_grade_point').value="2.50";
+			}
+			else if(parseInt(result_single_add_marks)<50 && parseInt(result_single_add_marks)>44)
+			{
+				document.getElementById('result_single_add_grade').value="C";
+				document.getElementById('result_single_add_grade_point').value="2.25";
+			}
+			else if(parseInt(result_single_add_marks)<45 && parseInt(result_single_add_marks)>39)
+			{
+				document.getElementById('result_single_add_grade').value="D";
+				document.getElementById('result_single_add_grade_point').value="2.00";
+			}
+			else if(parseInt(result_single_add_marks)<40 && parseInt(result_single_add_marks)>-1)
+			{
+				document.getElementById('result_single_add_grade').value="F";
+				document.getElementById('result_single_add_grade_point').value="0.00";
+			}
+			else
+			{
+				document.getElementById('result_single_add_grade').value="";
+				document.getElementById('result_single_add_grade_point').value="";
+			
+				document.getElementById('invalid_msg').style.display='block';
+				document.getElementById('i_msg').innerHTML='Please insert valid marks.';
+				setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+		
+			}
+		}
+		else
+		{
+			document.getElementById('result_single_add_grade').value="";
+			document.getElementById('result_single_add_grade_point').value="";
+			
+		}
+		
+		if(result_single_add_status=='Active')
+		{
+			if(document.getElementById('result_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('result_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('result_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('result_single_add_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('result_single_add_status').classList.add('w3-pale-green');
+		}
+		else if(result_single_add_status=='Inactive')
+		{
+			if(document.getElementById('result_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('result_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('result_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('result_single_add_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('result_single_add_status').classList.add('w3-pale-red');
+		}
+		else
+		{
+			if(document.getElementById('result_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('result_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('result_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('result_single_add_status').classList.remove('w3-pale-red');
+			}
+		}
+		
+		if(result_single_add_prog=="" || result_single_add_course=="" || result_single_add_course_instructor=="" || result_single_add_student_id=="" || result_single_add_student_id.length!=12 || result_single_add_student_name=="" || result_single_add_student_name=="Unknown" || result_single_add_marks=="" || parseInt(result_single_add_marks)>100 || parseInt(result_single_add_marks)<0 || result_single_add_semester=="" ||  result_single_add_status=="")
+		{
+			document.getElementById('result_single_add_save_btn').disabled=true;
+		}
+		else
+		{
+			document.getElementById('result_single_add_save_btn').disabled=false;
+		}
+		
+		
+	}
+
+	function result_single_add_form_reset()
+	{
+		document.getElementById('result_single_add_prog').value='';
+		document.getElementById('result_single_add_course').innerHTML='<option value="">Select</option>';
+		document.getElementById('result_single_add_course').disabled=true;
+		
+		document.getElementById('result_single_add_course_instructor').value='';
+		document.getElementById('result_single_add_course_instructor').disabled=true;
+		
+		document.getElementById('result_single_add_student_id').value='';
+		document.getElementById('result_single_add_student_id').disabled=true;
+		
+		document.getElementById('result_single_add_student_name').value='';
+		document.getElementById('result_single_add_student_name').disabled=true;
+		
+		document.getElementById('result_single_add_marks').value='';
+		document.getElementById('result_single_add_marks').disabled=true;
+		
+		document.getElementById('result_single_add_grade').value='';
+		document.getElementById('result_single_add_grade').disabled=true;
+		
+		document.getElementById('result_single_add_grade_point').value='';
+		document.getElementById('result_single_add_grade_point').disabled=true;
+		
+		document.getElementById('result_single_add_remarks').value='';
+		document.getElementById('result_single_add_remarks').disabled=true;
+		
+		document.getElementById('result_single_add_semester').value='';
+		document.getElementById('result_single_add_semester').disabled=true;
+		
+		document.getElementById('result_single_add_status').value='';
+		document.getElementById('result_single_add_status').disabled=true;
+		
+		document.getElementById('result_single_add_captcha').value='';
+		document.getElementById('result_single_add_captcha').disabled=true;
+		
+		document.getElementById('result_single_add_save_btn').disabled=true;
+		
+		var result_single_add_status=document.getElementById('result_single_add_status').value.trim();
+		
+		if(result_single_add_status=='Active')
+		{
+			if(document.getElementById('result_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('result_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('result_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('result_single_add_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('result_single_add_status').classList.add('w3-pale-green');
+		}
+		else if(result_single_add_status=='Inactive')
+		{
+			if(document.getElementById('result_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('result_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('result_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('result_single_add_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('result_single_add_status').classList.add('w3-pale-red');
+		}
+		else
+		{
+			if(document.getElementById('result_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('result_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('result_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('result_single_add_status').classList.remove('w3-pale-red');
+			}
+		}
+	}
+	
+	function result_single_add_program_change()
+	{
+		var result_single_add_prog=document.getElementById('result_single_add_prog').value.trim();
+		if(result_single_add_prog!="")
+		{
+			var xhttp1 = new XMLHttpRequest();
+			xhttp1.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById('result_single_add_course').innerHTML=this.responseText.trim();
+					document.getElementById('result_single_add_course').disabled=false;
+					document.getElementById('result_single_add_course_instructor').disabled=false;
+					document.getElementById('result_single_add_student_id').disabled=false;
+					document.getElementById('result_single_add_marks').disabled=false;
+					document.getElementById('result_single_add_remarks').disabled=false;
+					document.getElementById('result_single_add_semester').disabled=false;
+					document.getElementById('result_single_add_status').disabled=false;
+					document.getElementById('result_single_add_captcha').disabled=false;
+		
+				}
+				else if(this.readyState==4 && (this.status==404 || this.status==403))
+				{
+					document.getElementById('invalid_msg').style.display='block';
+					document.getElementById('i_msg').innerHTML='Network error occurred.';
+					setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+				}
+			};
+			xhttp1.open("POST", "../includes/super_admin/get_result_single_add_courses.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&prog_id="+result_single_add_prog, true);
+			xhttp1.send();
+			
+		}
+		else
+		{
+			document.getElementById('result_single_add_course').innerHTML='<option value="">Select</option>';
+			document.getElementById('result_single_add_course').disabled=true;
+			
+			document.getElementById('result_single_add_course_instructor').value='';
+			document.getElementById('result_single_add_course_instructor').disabled=true;
+			
+			document.getElementById('result_single_add_student_id').value='';
+			document.getElementById('result_single_add_student_id').disabled=true;
+			
+			document.getElementById('result_single_add_student_name').value='';
+			document.getElementById('result_single_add_student_name').disabled=true;
+			
+			document.getElementById('result_single_add_marks').value='';
+			document.getElementById('result_single_add_marks').disabled=true;
+			
+			document.getElementById('result_single_add_grade').value='';
+			document.getElementById('result_single_add_grade').disabled=true;
+			
+			document.getElementById('result_single_add_grade_point').value='';
+			document.getElementById('result_single_add_grade_point').disabled=true;
+			
+			document.getElementById('result_single_add_remarks').value='';
+			document.getElementById('result_single_add_remarks').disabled=true;
+			
+			document.getElementById('result_single_add_semester').value='';
+			document.getElementById('result_single_add_semester').disabled=true;
+			
+			document.getElementById('result_single_add_status').value='';
+			document.getElementById('result_single_add_status').disabled=true;
+			
+			document.getElementById('result_single_add_captcha').value='';
+			document.getElementById('result_single_add_captcha').disabled=true;
+			
+			document.getElementById('result_single_add_save_btn').disabled=true;
+			
+			var result_single_add_status=document.getElementById('result_single_add_status').value.trim();
+			
+			if(result_single_add_status=='Active')
+			{
+				if(document.getElementById('result_single_add_status').classList.contains('w3-pale-green'))
+				{
+					document.getElementById('result_single_add_status').classList.remove('w3-pale-green');
+				}
+				if(document.getElementById('result_single_add_status').classList.contains('w3-pale-red'))
+				{
+					document.getElementById('result_single_add_status').classList.remove('w3-pale-red');
+				}
+				document.getElementById('result_single_add_status').classList.add('w3-pale-green');
+			}
+			else if(result_single_add_status=='Inactive')
+			{
+				if(document.getElementById('result_single_add_status').classList.contains('w3-pale-green'))
+				{
+					document.getElementById('result_single_add_status').classList.remove('w3-pale-green');
+				}
+				if(document.getElementById('result_single_add_status').classList.contains('w3-pale-red'))
+				{
+					document.getElementById('result_single_add_status').classList.remove('w3-pale-red');
+				}
+				document.getElementById('result_single_add_status').classList.add('w3-pale-red');
+			}
+			else
+			{
+				if(document.getElementById('result_single_add_status').classList.contains('w3-pale-green'))
+				{
+					document.getElementById('result_single_add_status').classList.remove('w3-pale-green');
+				}
+				if(document.getElementById('result_single_add_status').classList.contains('w3-pale-red'))
+				{
+					document.getElementById('result_single_add_status').classList.remove('w3-pale-red');
+				}
+			}
+			
+		}
+		
+	}
+	
+	function add_single_window9_close()
+	{
+		document.getElementById('result_single_add_prog').value='';
+		document.getElementById('result_single_add_course').innerHTML='<option value="">Select</option>';
+		document.getElementById('result_single_add_course').disabled=true;
+		
+		document.getElementById('result_single_add_course_instructor').value='';
+		document.getElementById('result_single_add_course_instructor').disabled=true;
+		
+		document.getElementById('result_single_add_student_id').value='';
+		document.getElementById('result_single_add_student_id').disabled=true;
+		
+		document.getElementById('result_single_add_student_name').value='';
+		document.getElementById('result_single_add_student_name').disabled=true;
+		
+		document.getElementById('result_single_add_marks').value='';
+		document.getElementById('result_single_add_marks').disabled=true;
+		
+		document.getElementById('result_single_add_grade').value='';
+		document.getElementById('result_single_add_grade').disabled=true;
+		
+		document.getElementById('result_single_add_grade_point').value='';
+		document.getElementById('result_single_add_grade_point').disabled=true;
+		
+		document.getElementById('result_single_add_remarks').value='';
+		document.getElementById('result_single_add_remarks').disabled=true;
+		
+		document.getElementById('result_single_add_semester').value='';
+		document.getElementById('result_single_add_semester').disabled=true;
+		
+		document.getElementById('result_single_add_status').value='';
+		document.getElementById('result_single_add_status').disabled=true;
+		
+		document.getElementById('result_single_add_captcha').value='';
+		document.getElementById('result_single_add_captcha').disabled=true;
+		
+		document.getElementById('result_single_add_save_btn').disabled=true;
+		
+		var result_single_add_status=document.getElementById('result_single_add_status').value.trim();
+		
+		if(result_single_add_status=='Active')
+		{
+			if(document.getElementById('result_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('result_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('result_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('result_single_add_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('result_single_add_status').classList.add('w3-pale-green');
+		}
+		else if(result_single_add_status=='Inactive')
+		{
+			if(document.getElementById('result_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('result_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('result_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('result_single_add_status').classList.remove('w3-pale-red');
+			}
+			document.getElementById('result_single_add_status').classList.add('w3-pale-red');
+		}
+		else
+		{
+			if(document.getElementById('result_single_add_status').classList.contains('w3-pale-green'))
+			{
+				document.getElementById('result_single_add_status').classList.remove('w3-pale-green');
+			}
+			if(document.getElementById('result_single_add_status').classList.contains('w3-pale-red'))
+			{
+				document.getElementById('result_single_add_status').classList.remove('w3-pale-red');
+			}
+		}
+		document.getElementById('add_single_window9').style.display='none';
+	}
 	
 	function remove_result_view()
 	{
@@ -412,10 +1256,13 @@
 			}
 		}
 		
-		if(parseInt(result_view_marks)!=parseInt(result_view_old_marks))
+		if(parseInt(result_view_marks)!=parseInt(result_view_old_marks) && result_view_marks!="")
 		{
 			if(parseInt(result_view_marks)>100)
 			{
+				document.getElementById('result_view_grade').value="";
+				document.getElementById('result_view_grade_point').value="";
+			
 				document.getElementById('invalid_msg').style.display='block';
 				document.getElementById('i_msg').innerHTML='Please insert valid marks.';
 				setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
@@ -472,11 +1319,20 @@
 			}
 			else
 			{
+				document.getElementById('result_view_grade').value="";
+				document.getElementById('result_view_grade_point').value="";
+			
 				document.getElementById('invalid_msg').style.display='block';
 				document.getElementById('i_msg').innerHTML='Please insert valid marks.';
 				setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 		
 			}
+		}
+		if(result_view_marks=="")
+		{
+			document.getElementById('result_view_grade').value="";
+			document.getElementById('result_view_grade_point').value="";
+			
 		}
 		
 		if(parseInt(result_view_marks)>100 || parseInt(result_view_marks)<0 || result_view_status=="" || result_view_marks=="" || (result_view_status==result_view_old_status && result_view_marks==result_view_old_marks && result_view_remarks==result_view_old_remarks))
