@@ -1,4 +1,3 @@
-
 <?php
 	try{
 		require("../includes/moderator_admin/logged_out_auth.php");

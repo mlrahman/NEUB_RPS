@@ -1,4 +1,3 @@
-<!--Header-->
 <?php require("../includes/faculty/header.php"); ?>
 
 <!--Navbar -->

@@ -1,4 +1,3 @@
-<!--Header-->
 <?php require("../includes/general/header.php"); ?>
 			
 <!--Navbar -->

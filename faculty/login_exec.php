@@ -1,4 +1,3 @@
-
 <?php
 	if(isset($_REQUEST['sign_in']) && isset($_REQUEST['faculty_email']) && isset($_REQUEST['faculty_password']))
 	{

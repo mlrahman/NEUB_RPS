@@ -1,4 +1,3 @@
-<!--Header-->
 <?php require("../includes/moderator_admin/header.php"); ?>
 
 <!--Navbar -->

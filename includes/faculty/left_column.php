@@ -1,4 +1,3 @@
-
 <?php
 	try{
 		require("../includes/faculty/logged_out_auth.php");

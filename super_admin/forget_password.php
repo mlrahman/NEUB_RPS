@@ -1,5 +1,3 @@
-
-<!--Header-->
 <?php 
 	if(isset($_REQUEST['set_password']) && isset($_REQUEST['admin_id']) && isset($_REQUEST['email']) && isset($_REQUEST['admin_password']) && isset($_REQUEST['admin_cpassword']))
 	{

@@ -1,15 +1,3 @@
-<!-- 
-Jan 18, 2020
-Developed By:
-------------- 
-Mir Lutfur Rahman
-Lecturer
-Department of Computer Science & Engineering
-North East University Bangladesh
-Website: https://mlrahman.github.io
-Email: mlrahman@neub.edu.bd
-       mirlutfur.rahman@gmail.com
--->
 <?php 
 	ob_start();
 	session_start();
@@ -106,6 +94,19 @@ Email: mlrahman@neub.edu.bd
 		die();
 	}
 ?>
+<!-- 
+Jan 18, 2020
+Developed By:
+------------- 
+Mir Lutfur Rahman
+Lecturer
+Department of Computer Science & Engineering
+North East University Bangladesh
+Website: https://mlrahman.github.io
+Email: mlrahman@neub.edu.bd
+       mirlutfur.rahman@gmail.com
+-->
+
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns#"  lang="en-gb">
 	<head>

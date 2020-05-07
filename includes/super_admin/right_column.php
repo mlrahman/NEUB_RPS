@@ -1,4 +1,3 @@
-
 <?php
 	try{
 		require("../includes/super_admin/logged_out_auth.php");

@@ -1,4 +1,3 @@
-<!--Header-->
 <?php require("../includes/super_admin/header.php"); ?>
 
 <!--Navbar -->

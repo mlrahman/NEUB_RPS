@@ -1,4 +1,3 @@
-
 <div class="w3-container w3-margin-0 w3-padding-0">
 	<div class="w3-bar w3-black w3-card w3-hide-medium w3-hide-small">
 		<a href="https://<?php echo $web; ?>" target="_blank" class="w3-bar-item">

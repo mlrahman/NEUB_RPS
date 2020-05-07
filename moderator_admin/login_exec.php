@@ -1,4 +1,3 @@
-
 <?php
 	if(isset($_REQUEST['sign_in']) && isset($_REQUEST['moderator_email']) && isset($_REQUEST['moderator_password']))
 	{
