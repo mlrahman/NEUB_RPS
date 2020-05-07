@@ -47,6 +47,62 @@
 			$student_gender=$result[0][5];
 			$student_status=$result[0][6];
 			
+			
+			//sending notification to student
+			if($student_email!='' && $student_status=='Active')
+			{
+				
+				$stmt = $conn->prepare("select nr_course_code,nr_course_title,nr_course_credit from nr_course where nr_course_id=:course_id ");
+				$stmt->bindParam(':course_id', $student_waive_course);
+				$stmt->execute();
+				$result = $stmt->fetchAll();
+				$course_code=$result[0][0];
+				$course_title=$result[0][1];
+				$course_credit=$result[0][2];
+				
+				$data='<table border="2">
+							<tr>
+								<td style="padding:1px;"><b>Student ID</b></td>
+								<td style="padding:1px;"><b>Student Name</b></td>
+								<td style="padding:1px;"><b>Course Code</b></td>
+								<td style="padding:1px;"><b>Course Title</b></td>
+								<td style="padding:1px;"><b>Course Credit</b></td>
+							</tr>
+							<tr>
+								<td style="padding:1px;">'.$student_id.'</td>
+								<td style="padding:1px;">'.$student_name.'</td>
+								<td style="padding:1px;">'.$course_code.'</td>
+								<td style="padding:1px;">'.$course_title.'</td>
+								<td style="padding:1px;">'.number_format($course_credit,2).'</td>
+							</tr>
+						</table>';
+
+				//sent email with password reset link
+				$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
+				$stmt->execute();
+				$result = $stmt->fetchAll();
+				if(count($result)==0)
+				{
+					echo 'System not ready';
+					die();
+				}
+				$title=$result[0][2];
+				$contact_email=$result[0][9];//for sending message from contact us form
+				$f_name=$student_name;
+				//sending password recovery link to user
+				$msg="Dear ".$f_name.", One waived course is added in your student ID: ".$student_id.". Please check the mentioned details in the table. You can check it from ".$title." student panel. ".$data." <p>&nbsp;</p>For any query you can contact at: <a href='mailto:".$contact_email."' target='_blank'>".$contact_email."</a>";
+				$message = '<html><body>';
+				$message .= '<h1>Waived Course Added in - '.$title.'</h1><p>  </p>';
+				$message .= '<p><b>Message Details:</b></p>';
+				$message .= '<p>'.$msg.'</p></body></html>';
+				
+				
+				sent_mail($student_email,$title.' - Waived Course Added Notification',$message,$title,$contact_email);
+				
+
+
+			}
+			
 			$t=get_current_time();
 			$d=get_current_date();
 			

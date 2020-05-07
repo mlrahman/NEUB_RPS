@@ -38,6 +38,7 @@
 					$success=0;
 					$failed=0;
 					$logs='<ol>';
+					$email_array=array();
 					foreach ( $xlsx->rows() as $r => $row ) {
 						$c++;
 						if($c==1) continue;
@@ -90,7 +91,7 @@
 									}
 									else
 									{
-										$stmt = $conn->prepare("select nr_course_id from nr_course where nr_course_code=:course_code and nr_course_status='Active' and nr_prog_id in (select nr_prog_id from nr_student where nr_stud_id=:student_id and nr_stud_status='Active') limit 1");
+										$stmt = $conn->prepare("select nr_course_id,nr_course_title,nr_course_credit from nr_course where nr_course_code=:course_code and nr_course_status='Active' and nr_prog_id in (select nr_prog_id from nr_student where nr_stud_id=:student_id and nr_stud_status='Active') limit 1");
 										$stmt->bindParam(':course_code', $course_code);
 										$stmt->bindParam(':student_id', $student_id);
 										$stmt->execute();
@@ -104,6 +105,8 @@
 										else
 										{
 											$course_id=$result[0][0];
+											$course_title=$result[0][1];
+											$course_credit=$result[0][2];
 											
 											
 											$stmt = $conn->prepare("select nr_prcr_id,nr_stud_email,nr_stud_cell_no,nr_stud_name,nr_stud_dob,nr_stud_gender,nr_stud_status from nr_student where nr_stud_id=:student_id ");
@@ -117,6 +120,16 @@
 											$student_birth_date=$result[0][4];
 											$student_gender=$result[0][5];
 											$student_status=$result[0][6];
+											
+											if(array_key_exists($student_id,$email_array))
+											{
+												$index=count($email_array[$student_id]);
+												$email_array[$student_id][$index]=array('student_id'=>$student_id,'student_name'=>$student_name,'student_status'=>$student_status,'student_email'=>$student_email,'course_code'=>$course_code,'course_title'=>$course_title,'course_credit'=>number_format($course_credit,2));
+											}
+											else
+											{
+												$email_array[$student_id][0]=array('student_id'=>$student_id,'student_name'=>$student_name,'student_status'=>$student_status,'student_email'=>$student_email,'course_code'=>$course_code,'course_title'=>$course_title,'course_credit'=>number_format($course_credit,2));
+											}
 											
 											$t=get_current_time();
 											$d=get_current_date();
@@ -188,6 +201,73 @@
 						
 						$logs=$logs.'</li>';
 					}
+					
+					//sending email multiple times
+					$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
+					$stmt->execute();
+					$result = $stmt->fetchAll();
+					if(count($result)==0)
+					{
+						echo 'System not ready';
+						die();
+					}
+					$title=$result[0][2];
+					$contact_email=$result[0][9];
+					foreach($email_array  as $key=>$kk)
+					{
+						$sz=count($email_array[$key]);
+						$data='<table border="2">
+							<tr>
+								<td style="padding:1px;"><b>Student ID</b></td>
+								<td style="padding:1px;"><b>Student Name</b></td>
+								<td style="padding:1px;"><b>Course Code</b></td>
+								<td style="padding:1px;"><b>Course Title</b></td>
+								<td style="padding:1px;"><b>Course Credit</b></td>
+							</tr>';
+						$student_email='';
+						$student_status='';
+						$student_name='';
+						$ff=0;
+						for($j=0;$j<$sz;$j++)
+						{
+							if(array_key_exists($j,$email_array[$key]))
+							{
+								$ff=1;
+								$student_status=$email_array[$key][$j]['student_status'];
+								$student_name=$email_array[$key][$j]['student_name'];
+								$student_email=$email_array[$key][$j]['student_email'];
+								$data=$data.'<tr>
+									<td style="padding:1px;">'.$email_array[$key][$j]['student_id'].'</td>
+									<td style="padding:1px;">'.$email_array[$key][$j]['student_name'].'</td>
+									<td style="padding:1px;">'.$email_array[$key][$j]['course_code'].'</td>
+									<td style="padding:1px;">'.$email_array[$key][$j]['course_title'].'</td>
+									<td style="padding:1px;">'.number_format($email_array[$key][$j]['course_credit'],2).'</td>
+								</tr>';
+							}
+						}
+						$data=$data.'</table>';
+						
+						//sending notification to student
+						if($student_email!='' && $student_status=='Active' && $ff==1)
+						{
+							
+							$f_name=$student_name;
+							//sending password recovery link to user
+							$msg="Dear ".$f_name.", Some waived courses are added in your student ID: ".$student_id.". Please check the mentioned details in the table. You can check it from ".$title." student panel. ".$data." <p>&nbsp;</p>For any query you can contact at: <a href='mailto:".$contact_email."' target='_blank'>".$contact_email."</a>";
+							$message = '<html><body>';
+							$message .= '<h1>Waived Courses Added in - '.$title.'</h1><p>  </p>';
+							$message .= '<p><b>Message Details:</b></p>';
+							$message .= '<p>'.$msg.'</p></body></html>';
+							
+							
+							sent_mail($student_email,$title.' - Waived Courses Added Notification',$message,$title,$contact_email);
+							
+
+
+						}
+					}
+					
+					
 					unlink($base_directory.$excel_name);
 					$logs=$logs.'</ol>';
 					

@@ -178,6 +178,7 @@
 		
 		<button onclick="get_result_delete_history()" class="w3-button w3-black w3-round-large w3-hover-teal w3-margin-left"><i class="fa fa-history"></i> Remove History</button>
 		
+		<button onclick="get_total_search_results9(0,0)" class="w3-button w3-brown w3-round-large w3-hover-teal w3-margin-left"><i class="fa fa-refresh"></i> Refresh</button>
 	</div>
 	
 	

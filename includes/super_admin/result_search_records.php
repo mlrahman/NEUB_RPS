@@ -59,6 +59,12 @@
 
 
 <div class="w3-container w3-margin-bottom w3-margin-top">
+	<!-- Menu -->
+
+	<div class="w3-container w3-padding-0" style="margin:0px 0px 20px 0px;">
+		<button onclick="get_total_search_results11(0,0)" class="w3-button w3-brown w3-round-large w3-hover-teal"><i class="fa fa-refresh"></i> Refresh</button>
+	
+	</div>
 
 	<div class="w3-container" style="margin: 11px 0px 25px 0px;padding:0px;position:relative;">
 		<div class="w3-container w3-topbar w3-bottombar w3-round-large w3-rightbar w3-leftbar w3-padding" style="margin:0 auto; width:50%;min-width:310px;">
