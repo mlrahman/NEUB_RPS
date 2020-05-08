@@ -216,7 +216,7 @@
 			</div>
 		</div>
 		
-		<button onclick="" class="w3-button w3-black w3-round-large w3-hover-teal w3-margin-left"><i class="fa fa-eraser"></i> Remove Multiple</button>
+		<button onclick="document.getElementById('remove_multiple_window9').style.display='block';" class="w3-button w3-black w3-round-large w3-hover-teal w3-margin-left"><i class="fa fa-eraser"></i> Remove Multiple</button>
 		
 		<button onclick="" class="w3-button w3-black w3-round-large w3-hover-teal w3-margin-left"><i class="fa fa-edit"></i> Edit Multiple</button>
 		
@@ -377,6 +377,115 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	<!-- Window for remove multiple result -->
+	<div id="remove_multiple_window9" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
+		<span onclick="remove_multiple_window9_close()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
+		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:333px;"><i class="fa fa-plus"></i> Remove Multiple Result</p>
+		<div class="w3-container w3-margin-0 w3-padding-0"  id="result_multiple_remove_box1">
+			<div class="w3-row w3-margin-top w3-margin-bottom w3-round-large w3-border w3-padding">
+				<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 6px;">
+					<div class="w3-row"  style="margin:0px 0px 0px 0px;padding:0px;">
+							
+						<div class="w3-col" style="width:49%;">
+							<label><i class="w3-text-red">*</i> <b>Select Program</b></label>
+							<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="result_multiple_remove_prog" onchange="result_multiple_remove_program_change()">
+								<option value="">Select</option>
+								<?php
+									$stmt = $conn->prepare("SELECT * FROM nr_program where nr_prog_status='Active' order by nr_prog_title asc");
+									$stmt->execute();
+									$stud_result=$stmt->fetchAll();
+									if(count($stud_result)>0)
+									{
+										$sz=count($stud_result);
+										for($k=0;$k<$sz;$k++)
+										{
+											$prog_id=$stud_result[$k][0];
+											$prog_title=$stud_result[$k][1];
+											echo '<option value="'.$prog_id.'">'.$prog_title.'</option>';
+										}
+									}
+								?>
+							</select>
+						</div>
+						<div class="w3-col" style="margin-left:2%;width:49%;">
+						
+							<label><i class="w3-text-red">*</i> <b>Select Course</b></label>
+							<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="result_multiple_remove_course" onchange="result_multiple_remove_course_change()" disabled>
+								<option value="">Select</option>
+							</select>
+						</div>
+					</div>
+					
+					<label><i class="w3-text-red">*</i> <b>Select Semester</b></label>
+					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="result_multiple_remove_semester" onchange="result_multiple_remove_semester_change()" disabled>
+						<option value="">Select</option>
+						
+					</select>
+					
+					
+					<label><i class="w3-text-red">*</i> <b>Select Course Instructor</b></label>
+					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="result_multiple_remove_course_instructor" onchange="result_multiple_remove_form_change()" disabled>
+						<option value="">Select</option>
+					</select>
+						
+					
+					<?php
+						//spam Check 
+						$aaa=rand(1,20);
+						$bbb=rand(1,20);
+						$ccc=$aaa+$bbb;
+					?>
+					<input type="hidden" value="<?php echo $ccc; ?>" id="result_multiple_remove_old_captcha">
+					
+					<label><i class="w3-text-red">*</i> <b>Captcha</b></label>
+					<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+						<div class="w3-col" style="width:40%;">
+							<input class="w3-input w3-border w3-center w3-round-large" type="text" value="<?php echo $aaa.' + '.$bbb.' = '; ?>" disabled>
+						</div>
+						<div class="w3-col" style="margin-left:2%;width:58%;">
+							<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="result_multiple_remove_captcha" autocomplete="off" oninput="result_multiple_remove_form_change()" disabled>
+						</div>
+					</div>
+									
+				
+				</div>
+				<div class="w3-col w3-margin-0" style="width:30%;padding:0px 6px 0px 6px;">
+					
+					<button onclick="result_multiple_remove_form_reset()" class="w3-button w3-margin-top w3-red w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;"><i class="fa fa-eye-slash"></i> Clear</button>
+					
+					
+					<button onclick="document.getElementById('result_multiple_remove_re_confirmation').style.display='block';" id="result_multiple_remove_save_btn" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" disabled><i class="fa fa-save"></i> Save</button>
+				
+				
+				</div>
+			</div>
+		
+		</div>
+			<div class="w3-container w3-margin-0 w3-padding-0 w3-center" style="display:none;" id="result_multiple_remove_box2">
+			<p style="font-size:15px;font-weight:bold;">Please wait while making changes..</p>
+			<div class="w3-light-grey w3-round-xlarge w3-border w3-margin-top w3-margin-bottom" style="width:50%;margin:0 auto;">
+				<div class="w3-container w3-blue w3-round-xlarge w3-text-white w3-bold" id="result_multiple_studentress_id" style="width:0%;">0%</div>
+			</div>
+			<i class="fa fa-spinner w3-spin w3-margin-bottom w3-margin-top" style="font-size:50px;"></i>
+		</div>
+		<div class="w3-container w3-margin-0 w3-padding-0" id="result_multiple_remove_box3" style="display: none;">
+			<p class="w3-margin-0 w3-left-align w3-text-purple w3-cursor" style="margin: 0px 0px 0px 12px;" onclick="document.getElementById('result_multiple_remove_box1').style.display='block';document.getElementById('result_multiple_remove_box3').style.display='none';document.getElementById('result_multiple_remove_box2').style.display='none';"><i class="fa fa-mail-reply"></i> Back</p>
+			<div class="w3-container w3-border w3-round-large w3-padding" style="margin: 0px 12px 12px 12px;">
+				<p class="w3-bold w3-margin-0 w3-xlarge"><u>Process Complete</u> 
+					(<span id="result_multiple_total" class="w3-text-blue w3-margin-0 w3-large"></span>), 
+					(<span id="result_multiple_success" class="w3-text-green w3-margin-0 w3-large"></span>), 
+					(<span  id="result_multiple_failed" class="w3-text-red w3-margin-0 w3-large"></span>)
+				</p>
+				<div class="w3-container w3-margin-0 w3-justify w3-small w3-padding w3-round-large w3-light-gray" id="result_multiple_logs" style="height:auto;max-height: 250px;overflow:auto;">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
 	
 	
 	
@@ -703,6 +812,178 @@
 
 
 <script>
+
+	function result_multiple_remove_program_change()
+	{
+		var result_multiple_remove_prog=document.getElementById('result_multiple_remove_prog').value.trim();
+		if(result_multiple_remove_prog!="")
+		{
+			var xhttp1 = new XMLHttpRequest();
+			xhttp1.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById('result_multiple_remove_course').innerHTML=this.responseText.trim();
+					document.getElementById('result_multiple_remove_course').disabled=false;
+					
+				}
+				else if(this.readyState==4 && (this.status==404 || this.status==403))
+				{
+					document.getElementById('invalid_msg').style.display='block';
+					document.getElementById('i_msg').innerHTML='Network error occurred.';
+					setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+				}
+			};
+			xhttp1.open("POST", "../includes/super_admin/get_result_multiple_remove_courses.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&prog_id="+result_multiple_remove_prog, true);
+			xhttp1.send();
+			
+		}
+		else
+		{
+			document.getElementById('result_multiple_remove_course').innerHTML='<option value="">Select</option>';
+			document.getElementById('result_multiple_remove_course').disabled=true;
+			
+			document.getElementById('result_multiple_remove_course_instructor').value='';
+			document.getElementById('result_multiple_remove_course_instructor').disabled=true;
+			
+			document.getElementById('result_multiple_remove_semester').value='';
+			document.getElementById('result_multiple_remove_semester').disabled=true;
+			
+			document.getElementById('result_multiple_remove_captcha').value='';
+			document.getElementById('result_multiple_remove_captcha').disabled=true;
+			
+			document.getElementById('result_multiple_remove_save_btn').disabled=true;
+			
+			
+		}
+		
+	}
+	
+	function result_multiple_remove_course_change()
+	{
+		var result_multiple_remove_course=document.getElementById('result_multiple_remove_course').value.trim();
+		var result_multiple_remove_prog=document.getElementById('result_multiple_remove_prog').value.trim();
+		if(result_multiple_remove_course!="")
+		{
+			var xhttp1 = new XMLHttpRequest();
+			xhttp1.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById('result_multiple_remove_semester').innerHTML=this.responseText.trim();
+					document.getElementById('result_multiple_remove_semester').disabled=false;
+					
+				}
+				else if(this.readyState==4 && (this.status==404 || this.status==403))
+				{
+					document.getElementById('invalid_msg').style.display='block';
+					document.getElementById('i_msg').innerHTML='Network error occurred.';
+					setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+				}
+			};
+			xhttp1.open("POST", "../includes/super_admin/get_result_multiple_remove_semester.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&course_id="+result_multiple_remove_course+"&prog_id="+result_multiple_remove_prog, true);
+			xhttp1.send();
+			
+		}
+		else
+		{
+			
+			
+			document.getElementById('result_multiple_remove_semester').innerHTML='<option value="">Select</option>';
+			document.getElementById('result_multiple_remove_semester').disabled=true;
+			
+			document.getElementById('result_multiple_remove_course_instructor').value='';
+			document.getElementById('result_multiple_remove_course_instructor').disabled=true;
+			
+			document.getElementById('result_multiple_remove_captcha').value='';
+			document.getElementById('result_multiple_remove_captcha').disabled=true;
+			
+			document.getElementById('result_multiple_remove_save_btn').disabled=true;
+			
+		}
+		
+	}
+
+	function result_multiple_remove_form_reset()
+	{
+		document.getElementById('result_multiple_remove_prog').value='';
+		
+		
+		document.getElementById('result_multiple_remove_course').innerHTML='<option value="">Select</option>';
+		document.getElementById('result_multiple_remove_course').disabled=true;
+		
+		document.getElementById('result_multiple_remove_course_instructor').value='';
+		document.getElementById('result_multiple_remove_course_instructor').disabled=true;
+		
+		document.getElementById('result_multiple_remove_semester').value='';
+		document.getElementById('result_multiple_remove_semester').disabled=true;
+		
+		document.getElementById('result_multiple_remove_captcha').value='';
+		document.getElementById('result_multiple_remove_captcha').disabled=true;
+		
+		document.getElementById('result_multiple_remove_save_btn').disabled=true;
+		
+		document.getElementById('remove_multiple_window9').style.display='none';
+		
+			
+	}
+
+	function result_multiple_remove_semester_change()
+	{
+		var result_multiple_remove_course=document.getElementById('result_multiple_remove_course').value.trim();
+		var result_multiple_remove_prog=document.getElementById('result_multiple_remove_prog').value.trim();
+		var result_multiple_remove_semester=document.getElementById('result_multiple_remove_semester').value.trim();
+		if(result_multiple_remove_semester!="")
+		{
+			var xhttp1 = new XMLHttpRequest();
+			xhttp1.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById('result_multiple_remove_course_instructor').innerHTML=this.responseText.trim();
+					document.getElementById('result_multiple_remove_course_instructor').disabled=false;
+					
+				}
+				else if(this.readyState==4 && (this.status==404 || this.status==403))
+				{
+					document.getElementById('invalid_msg').style.display='block';
+					document.getElementById('i_msg').innerHTML='Network error occurred.';
+					setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+				}
+			};
+			xhttp1.open("POST", "../includes/super_admin/get_result_multiple_remove_instructor.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&course_id="+result_multiple_remove_course+"&prog_id="+result_multiple_remove_prog+"&semester="+result_multiple_remove_semester, true);
+			xhttp1.send();
+			
+		}
+		else
+		{
+			
+			
+			document.getElementById('result_multiple_remove_course_instructor').innerHTML='<option value="">Select</option>';
+			document.getElementById('result_multiple_remove_course_instructor').disabled=true;
+			
+			document.getElementById('result_multiple_remove_captcha').value='';
+			document.getElementById('result_multiple_remove_captcha').disabled=true;
+			
+			document.getElementById('result_multiple_remove_save_btn').disabled=true;
+			
+		}
+		
+	}
+
+	function result_multiple_remove_form_change()
+	{
+		var result_multiple_remove_course=document.getElementById('result_multiple_remove_course').value.trim();
+		var result_multiple_remove_prog=document.getElementById('result_multiple_remove_prog').value.trim();
+		var result_multiple_remove_semester=document.getElementById('result_multiple_remove_semester').value.trim();
+		var result_multiple_remove_course_instructor=document.getElementById('result_multiple_remove_course_instructor').value.trim();
+		if(result_multiple_remove_prog=="" || result_multiple_remove_semester=="" || result_multiple_remove_course=="" || result_multiple_remove_course_instructor=="")
+		{
+			document.getElementById('result_multiple_remove_captcha').disabled=true;
+			document.getElementById('result_multiple_remove_save_btn').disabled=true;
+		}
+		else
+		{
+			document.getElementById('result_multiple_remove_captcha').disabled=false;
+			document.getElementById('result_multiple_remove_save_btn').disabled=false;
+		}
+		
+	}
+
 	function result_single_add_form_save()
 	{
 		var result_single_add_prog=document.getElementById('result_single_add_prog').value.trim();
