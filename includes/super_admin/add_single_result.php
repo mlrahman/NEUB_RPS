@@ -291,7 +291,7 @@
 						</table>';
 			
 			
-			if($stud_email!='' && $stud_status=='Active')
+			if($stud_email!='' && $stud_status=='Active' && $status=='Active')
 			{
 
 				//sent email with password reset link
@@ -319,6 +319,53 @@
 
 
 			}
+			
+			
+			//updating other students info of same batch
+			$group_student='';
+			$sz=strlen($student_id);
+			for($i=0;$i<$sz-3;$i++)
+				$group_student=$group_student.$student_id[$i];
+				
+			
+			$stmt=$conn->prepare("select nr_stud_id,nr_prcr_id from nr_student where nr_stud_id!=:student_id and nr_stud_id like concat(:search_text,'___') order by nr_stud_id asc ");
+			$stmt->bindParam(':student_id',$student_id);
+			$stmt->bindParam(':search_text',$group_student);
+			$stmt->execute();
+			$result=$stmt->fetchAll();
+			$sz=count($result);
+			for($i=0;$i<$sz;$i++)
+			{
+				$s_id=$result[$i][0];
+				$p_id=$result[$i][1];
+				//updating stud info
+				$x=get_student_info($s_id,$p_id);
+				$dropout=$x['dropout'];
+				$graduated=$x['graduated'];
+				$cgpa=$x['cgpa'];
+				$last_semester=$x['last_semester'];
+				$last_year=$x['last_year'];
+				$drop_semester=$x['drop_semester'];
+				$drop_year=$x['drop_year'];
+				$earned_credit=$x['earned_credit'];
+				$waived_credit=$x['waived_credit'];
+				
+				$stmt = $conn->prepare("update nr_student_info set nr_studi_dropout=:dropout, nr_studi_graduated=:graduated, nr_studi_cgpa=:cgpa,nr_studi_last_semester=:last_semester,nr_studi_last_year=:last_year,nr_studi_publish_date='$d',nr_studi_status='Active', nr_studi_drop_semester=:drop_semester,nr_studi_drop_year=:drop_year,nr_studi_earned_credit=:earned_credit,nr_studi_waived_credit=:waived_credit where nr_stud_id=:student_id ");
+				$stmt->bindParam(':student_id', $s_id);
+				$stmt->bindParam(':dropout', $dropout);
+				$stmt->bindParam(':graduated', $graduated);
+				$stmt->bindParam(':cgpa', $cgpa);
+				$stmt->bindParam(':last_semester', $last_semester);
+				$stmt->bindParam(':last_year', $last_year);
+				$stmt->bindParam(':drop_semester', $drop_semester);
+				$stmt->bindParam(':drop_year', $drop_year);
+				$stmt->bindParam(':earned_credit', $earned_credit);
+				$stmt->bindParam(':waived_credit', $waived_credit);
+				$stmt->execute();
+				
+			}
+			
+			
 			echo 'Ok';
 		}
 		catch(PDOException $e)
