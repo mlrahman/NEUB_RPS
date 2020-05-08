@@ -77,7 +77,7 @@
 			$result = $stmt->fetchAll();
 			$prog_title=$result[0][0];
 			
-			if($student_email!='' && $student_status=='Active')
+			if($student_email!='' && $student_status=='Active'  && $status=='Active')
 			{
 				$data='<table border="2">
 							<tr>
