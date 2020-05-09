@@ -260,11 +260,84 @@
 		
 		<button onclick="document.getElementById('remove_multiple_window9').style.display='block';" class="w3-button w3-black w3-round-large w3-hover-teal w3-margin-left"><i class="fa fa-eraser"></i> Remove Multiple</button>
 		
-		<button onclick="" class="w3-button w3-black w3-round-large w3-hover-teal w3-margin-left"><i class="fa fa-edit"></i> Edit Multiple</button>
+		<button onclick="document.getElementById('edit_multiple_window9').style.display='block';" class="w3-button w3-black w3-round-large w3-hover-teal w3-margin-left"><i class="fa fa-edit"></i> Edit Multiple</button>
 		
 		<button onclick="get_result_delete_history()" class="w3-button w3-black w3-round-large w3-hover-teal w3-margin-left"><i class="fa fa-history"></i> Remove History</button>
 		
 		<button onclick="get_total_search_results9(0,0)" class="w3-button w3-brown w3-round-large w3-hover-teal w3-margin-left"><i class="fa fa-refresh"></i> Refresh</button>
+	</div>
+	
+	<!-- window for edit multiple -->
+	<div id="edit_multiple_window9" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
+		<span onclick="edit_multiple_window9_close()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
+		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:290px;"><i class="fa fa-plus"></i> Edit Multiple Result</p>
+		<div class="w3-container w3-margin-0 w3-padding-0"  id="result_multiple_edit_box1">
+			<div class="w3-container w3-margin-top w3-margin-bottom w3-sand w3-justify w3-round-large w3-padding">
+				<p class="w3-bold w3-margin-0"><u>Steps</u>:</p>
+				<ol>
+					<li>First download the formatted excel file from <a href="../excel_files/demo/insert_multiple_result.xlsx" target="_blank" class="w3-text-blue">here</a>.</li>
+					<li>In this excel file (<span class="w3-text-red">*</span>) marked columns are mandatory for each row (not valid for blank row). Very carefully fill up the rows with your data. <b>Don't put gap</b> between two rows. Also <b>ignore duplicated data</b> for consistent input.</li>
+					<li>After filling the necessary rows you have to <b>submit it from the below form</b>. You can edit at most <b>300 results</b> in a single upload. <b>Note:</b> In multiple edit you can change the status,remarks and marks of the result.</li>
+					<li>This process may take <b>up to six minutes</b> so keep patience. After finishing the process you will get a logs.</li>
+				</ol>
+			</div>
+			
+			<div class="w3-row w3-margin-top w3-margin-bottom w3-round-large w3-border w3-padding">
+				<div class="w3-col w3-margin-0" style="width:70%;padding:0px 6px 0px 6px;">
+					<label><i class="w3-text-red">*</i> <b>Upload Excel File</b></label>
+					<input class="w3-input w3-border w3-round-large w3-margin-bottom" type="file" id="result_edit_excel_file" title="Please upload the formatted and filled up excel file."  onchange="result_multiple_edit_form_change()">
+					
+					<?php
+						//spam Check 
+						$aaa=rand(1,20);
+						$bbb=rand(1,20);
+						$ccc=$aaa+$bbb;
+					?>
+					<input type="hidden" value="<?php echo $ccc; ?>" id="result_multiple_edit_old_captcha">
+					
+					<label><i class="w3-text-red">*</i> <b>Captcha</b></label>
+					<div class="w3-row" style="margin:0px 0px 8px 0px;padding:0px;">
+						<div class="w3-col" style="width:40%;">
+							<input class="w3-input w3-border w3-center w3-round-large" type="text" value="<?php echo $aaa.' + '.$bbb.' = '; ?>" disabled>
+						</div>
+						<div class="w3-col" style="margin-left:2%;width:58%;">
+							<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="result_multiple_edit_captcha" autocomplete="off" oninput="result_multiple_edit_form_change()">
+						</div>
+					</div>
+									
+				
+				</div>
+				<div class="w3-col w3-margin-0" style="width:30%;padding:0px 6px 0px 6px;">
+					<button onclick="result_multiple_edit_form_reset()" class="w3-button w3-margin-top w3-red w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;"><i class="fa fa-eye-slash"></i> Clear</button>
+					
+					
+					<button onclick="document.getElementById('result_multiple_edit_re_confirmation').style.display='block';" id="result_multiple_edit_save_btn" class="w3-button w3-margin-top w3-black w3-hover-teal w3-round-large w3-margin-left" style="min-width:150px;" disabled><i class="fa fa-save"></i> Save</button>
+				
+				
+				</div>
+			</div>
+		
+		</div>
+			<div class="w3-container w3-margin-0 w3-padding-0 w3-center" style="display:none;" id="result_multiple_edit_box2">
+			<p style="font-size:15px;font-weight:bold;">Please wait while making changes..</p>
+			<div class="w3-light-grey w3-round-xlarge w3-border w3-margin-top w3-margin-bottom" style="width:50%;margin:0 auto;">
+				<div class="w3-container w3-blue w3-round-xlarge w3-text-white w3-bold" id="result_multiple_studentress_id" style="width:0%;">0%</div>
+			</div>
+			<i class="fa fa-spinner w3-spin w3-margin-bottom w3-margin-top" style="font-size:50px;"></i>
+		</div>
+		<div class="w3-container w3-margin-0 w3-padding-0" id="result_multiple_edit_box3" style="display: none;">
+			<p class="w3-margin-0 w3-left-align w3-text-purple w3-cursor" style="margin: 0px 0px 0px 12px;" onclick="document.getElementById('result_multiple_edit_box1').style.display='block';document.getElementById('result_multiple_edit_box3').style.display='none';document.getElementById('result_multiple_edit_box2').style.display='none';"><i class="fa fa-mail-reply"></i> Back</p>
+			<div class="w3-container w3-border w3-round-large w3-padding" style="margin: 0px 12px 12px 12px;">
+				<p class="w3-bold w3-margin-0 w3-xlarge"><u>Process Complete</u> 
+					(<span id="result_edit_multiple_total" class="w3-text-blue w3-margin-0 w3-large"></span>), 
+					(<span id="result_edit_multiple_success" class="w3-text-green w3-margin-0 w3-large"></span>), 
+					(<span  id="result_edit_multiple_failed" class="w3-text-red w3-margin-0 w3-large"></span>)
+				</p>
+				<div class="w3-container w3-margin-0 w3-justify w3-small w3-padding w3-round-large w3-light-gray" id="result_multiple_edit_logs" style="height:auto;max-height: 250px;overflow:auto;">
+					
+				</div>
+			</div>
+		</div>
 	</div>
 	
 	
@@ -960,6 +1033,47 @@
 		
 		
 	}
+
+
+	function result_multiple_edit_form_reset()
+	{
+		document.getElementById('result_edit_excel_file').value='';
+		
+		document.getElementById('result_multiple_edit_captcha').value='';
+		
+		document.getElementById('result_multiple_edit_save_btn').disabled=true;
+		
+		
+	}
+
+
+	function edit_multiple_window9_close()
+	{
+		document.getElementById('result_edit_excel_file').value='';
+		
+		document.getElementById('result_multiple_edit_captcha').value='';
+		
+		document.getElementById('result_multiple_edit_save_btn').disabled=true;
+		
+		document.getElementById('edit_multiple_window9').style.display='none';
+		
+			
+	}
+
+	function result_multiple_edit_form_change()
+	{
+		var result_edit_excel_file=document.getElementById('result_edit_excel_file').value.trim();
+		if(result_edit_excel_file=="")
+		{
+			document.getElementById('result_multiple_edit_save_btn').disabled=true;
+		}
+		else
+		{
+			document.getElementById('result_multiple_edit_save_btn').disabled=false;
+		}
+		
+	}
+
 
 
 	function remove_multiple_window9_close()
