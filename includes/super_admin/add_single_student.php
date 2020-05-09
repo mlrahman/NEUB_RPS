@@ -84,7 +84,7 @@
 				die();
 			}
 			
-			if($student_email!='')
+			if($student_email!='' && $student_status=='Active')
 			{
 				$stmt = $conn->prepare("select * from nr_student where nr_stud_email=:email limit 1");
 				$stmt->bindParam(':email', $student_email);

@@ -162,7 +162,7 @@
 						</table>';
 						
 						
-			if($student_email!='' && $student_status=='Active')
+			if($student_email!='' && $student_status=='Active' && $result_status=='Active')
 			{
 
 				//sent email with password reset link

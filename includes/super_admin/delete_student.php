@@ -89,7 +89,7 @@
 				$base_directory = '../../images/student/';
 				unlink($base_directory.$photo);
 			}
-			if($student_email!='')
+			if($student_email!='' && $student_status=='Active')
 			{
 				//sent email with password reset link
 				$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");

@@ -9,7 +9,7 @@ This web application is developed for the result processing system of North East
     <li>In contact section university information with google map and a contact us form will appear.</li>
     <li>In footer section copyright and year will appear (onclick redirect to the official NEUB site).</li>
     <li>Student can search their result by using their Student ID (12 Digits) and Date of Birth (MM-DD-YYYY). Each search will be tracked by ip address and geo location (only admin can check it). A single search history will removed when it crosses the number 3000 in search list.</li>
-    <li>Student can subscribe notification by clicking the text and will get email for result or any other change in his/her profile.</li>
+    <li>Student can subscribe notification and two factor authentication (2FA) by clicking the text and will get email for result or any other change in his/her profile and OTPs for pass the 2FA during result check.</li>
     <li>Student will get all of his/her basic information that used in transcript.</li>
     <li>Student will get all of his/her result including drop course (according to the syllabus) and waived course.</li>
     <li>Incomplete result for any course will count as a fail in the transcript. Remarks will show in the result section but not in the transcript. Withdraw course information is not available in this portal.</li>
@@ -37,7 +37,7 @@ This web application is developed for the result processing system of North East
     <li>In the top right of the page, a program choose option is available where faculty can select any program or all program in his department to change the data. </li>
     <li>In search results, faculty can check student wise results or course wise results with search and sort option. For student wise results, faculty can check student basic info with semester wise results, fail courses, pass courses, drop courses (based on the syllabus), and waived courses. Each student wise result check will be tracked by IP address and geo-location (only admin can check it). Also, faculty can print an online transcript which will be tracked by a reference no with IP address and geo-location (only admin can check it). A single transcript print history will be removed when it crosses the number 50000 in the print list. On the other hand, in course wise result faculty can filter the data based on semesters and grades. By clicking view, faculty will get student basic info with course info, result info, and course instructor info. </li>
     <li>In edit profile faculty can edit his cell no, two-factor status, profile picture, and password.</li>
-    <li>By clicking sign out session will be destroyed and faculty will sign out from the access. Each page in faculty panel has a refresh button to reload the updated content in the page.</li>
+    <li>By clicking sign out session will be destroyed and faculty will sign out from the access. Each page in the faculty panel has a refresh button to reload the updated content in the page.</li>
     <li>In every 8 seconds, an automatic network connection and session check will be done. Admin has the right to destroy any faculty member session.</li>
 </ul>
 

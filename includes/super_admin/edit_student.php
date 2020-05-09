@@ -163,7 +163,7 @@
 				
 			}
 			
-			if($student_email=='' && $old_email!='')
+			if($student_email=='' && $old_email!='' && $student_status=='Active')
 			{
 				
 				//sent email with password reset link
@@ -192,7 +192,7 @@
 					
 				
 			}
-			else if($student_email!='' && $student_email!=$old_email)
+			else if($student_email!='' && $student_email!=$old_email && $student_status=='Active')
 			{
 				//sent email with password reset link
 				$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
