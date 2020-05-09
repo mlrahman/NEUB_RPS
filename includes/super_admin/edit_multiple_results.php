@@ -167,7 +167,7 @@
 									if(array_key_exists($student_id,$email_array))
 									{
 										$index=count($email_array[$student_id]);
-										$email_array[$student_id][$index]=array('student_id'=>$student_id,'student_name'=>$student_name,'student_email'=>$student_email,'student_status'=>$student_status,'course_code'=>$course_code,'course_title'=>$course_title,'semester'=>($sem.' '.$yea),'new_remarks'=>$remarks,'old_grade'=>grade_decrypt($student_id,$result_grade),'old_grade_point'=>grade_point_decrypt($student_id,$result_grade_point),'old_remrks'=>$result_remarks,'new_grade'=>get_grade($marks),'new_grade_point'=>get_grade_point($marks),'result_status'=>$status);
+										$email_array[$student_id][$index]=array('student_id'=>$student_id,'student_name'=>$student_name,'student_email'=>$student_email,'student_status'=>$student_status,'course_code'=>$course_code,'course_title'=>$course_title,'semester'=>($sem.' '.$yea),'new_remarks'=>$remarks,'old_grade'=>grade_decrypt($student_id,$result_grade),'old_grade_point'=>grade_point_decrypt($student_id,$result_grade_point),'old_remarks'=>$result_remarks,'new_grade'=>get_grade($marks),'new_grade_point'=>get_grade_point($marks),'result_status'=>$status);
 									}
 									else
 									{
@@ -228,9 +228,9 @@
 							$old_grade_point=$email_array[$key][$j]['old_grade_point'];
 							$old_remarks=$email_array[$key][$j]['old_remarks'];
 							
-							$new_grade=$email_array[$key][$j]['old_grade'];
-							$new_grade_point=$email_array[$key][$j]['old_grade_point'];
-							$new_remarks=$email_array[$key][$j]['old_remarks'];
+							$new_grade=$email_array[$key][$j]['new_grade'];
+							$new_grade_point=$email_array[$key][$j]['new_grade_point'];
+							$new_remarks=$email_array[$key][$j]['new_remarks'];
 							
 							$result_status=$email_array[$key][$j]['result_status'];
 							
@@ -238,29 +238,31 @@
 							{
 								$fl=1;
 								$data1=$data1.'<tr>
-									<td style="padding:1px;"><b>'.$student_id.'</b></td>
-									<td style="padding:1px;"><b>'.$student_name.'</b></td>
-									<td style="padding:1px;"><b>'.$course_code.'</b></td>
-									<td style="padding:1px;"><b>'.$course_title.'</b></td>
-									<td style="padding:1px;"><b>'.$semester.'</b></td>
-									<td style="padding:1px;"><b>'.$old_grade.'</b></td>
-									<td style="padding:1px;"><b>'.$old_grade_point.'</b></td>
-									<td style="padding:1px;"><b>'.$old_remarks.'</b></td>
+									<td style="padding:1px;">'.$student_id.'</td>
+									<td style="padding:1px;">'.$student_name.'</td>
+									<td style="padding:1px;">'.$course_code.'</td>
+									<td style="padding:1px;">'.$course_title.'</td>
+									<td style="padding:1px;">'.$semester.'</td>
+									<td style="padding:1px;">'.$old_grade.'</td>
+									<td style="padding:1px;">'.$old_grade_point.'</td>
+									<td style="padding:1px;">'.$old_remarks.'</td>
 								</tr>';
 								
 								$data2=$data2.'<tr>
-									<td style="padding:1px;"><b>'.$student_id.'</b></td>
-									<td style="padding:1px;"><b>'.$student_name.'</b></td>
-									<td style="padding:1px;"><b>'.$course_code.'</b></td>
-									<td style="padding:1px;"><b>'.$course_title.'</b></td>
-									<td style="padding:1px;"><b>'.$semester.'</b></td>
-									<td style="padding:1px;"><b>'.$new_grade.'</b></td>
-									<td style="padding:1px;"><b>'.$new_grade_point.'</b></td>
-									<td style="padding:1px;"><b>'.$new_remarks.'</b></td>
+									<td style="padding:1px;">'.$student_id.'</td>
+									<td style="padding:1px;">'.$student_name.'</td>
+									<td style="padding:1px;">'.$course_code.'</td>
+									<td style="padding:1px;">'.$course_title.'</td>
+									<td style="padding:1px;">'.$semester.'</td>
+									<td style="padding:1px;">'.$new_grade.'</td>
+									<td style="padding:1px;">'.$new_grade_point.'</td>
+									<td style="padding:1px;">'.$new_remarks.'</td>
 								</tr>';
 							}
 							
 						}
+						$data1=$data1.'</table>';
+						$data2=$data2.'</table>';
 						$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
 						$stmt->execute();
 						$result = $stmt->fetchAll();
