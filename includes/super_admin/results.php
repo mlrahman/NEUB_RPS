@@ -270,14 +270,14 @@
 	<!-- window for edit multiple -->
 	<div id="edit_multiple_window9" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
 		<span onclick="edit_multiple_window9_close()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
-		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:290px;"><i class="fa fa-plus"></i> Edit Multiple Result</p>
+		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:290px;"><i class="fa fa-edit"></i> Edit Multiple Result</p>
 		<div class="w3-container w3-margin-0 w3-padding-0"  id="result_multiple_edit_box1">
 			<div class="w3-container w3-margin-top w3-margin-bottom w3-sand w3-justify w3-round-large w3-padding">
 				<p class="w3-bold w3-margin-0"><u>Steps</u>:</p>
 				<ol>
 					<li>First download the formatted excel file from <a href="../excel_files/demo/insert_multiple_result.xlsx" target="_blank" class="w3-text-blue">here</a>.</li>
 					<li>In this excel file (<span class="w3-text-red">*</span>) marked columns are mandatory for each row (not valid for blank row). Very carefully fill up the rows with your data. <b>Don't put gap</b> between two rows. Also <b>ignore duplicated data</b> for consistent input.</li>
-					<li>After filling the necessary rows you have to <b>submit it from the below form</b>. You can edit at most <b>300 results</b> in a single upload. <b>Note:</b> In multiple edit you can change the status,remarks and marks of the result.</li>
+					<li>After filling the necessary rows you have to <b>submit it from the below form</b>. You can edit at most <b>300 results</b> in a single upload. <b>Note:</b> In multiple edit you can change the <b>status,remarks and marks</b> of the result.</li>
 					<li>This process may take <b>up to six minutes</b> so keep patience. After finishing the process you will get a logs.</li>
 				</ol>
 			</div>
