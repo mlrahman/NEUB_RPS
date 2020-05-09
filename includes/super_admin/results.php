@@ -2224,7 +2224,7 @@
 				if (this.readyState == 4 && this.status == 200) {
 					var str=this.responseText.trim();
 					
-					console.log(str);
+					//console.log(str);
 					var status=str[0]+str[1];
 					
 					if(status=='Ok')
