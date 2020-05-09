@@ -189,6 +189,13 @@
 				</select>
 			</p>
 			
+			<!-- Menu -->
+
+			<div class="w3-container w3-left" style="margin:14px 0px 14px 0px;">
+				<button onclick="reload_dashboard3();reload_dashboard2();" class="w3-button w3-brown w3-round-large w3-hover-teal"><i class="fa fa-refresh"></i> Refresh</button>
+			
+			</div>
+			
 			<!-- Student view -->			
 			<?php include("../includes/faculty/search_result.php"); ?>
 			<!-- Course View -->

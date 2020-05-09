@@ -37,7 +37,7 @@ This web application is developed for the result processing system of North East
     <li>In the top right of the page, a program choose option is available where faculty can select any program or all program in his department to change the data. </li>
     <li>In search results, faculty can check student wise results or course wise results with search and sort option. For student wise results, faculty can check student basic info with semester wise results, fail courses, pass courses, drop courses (based on the syllabus), and waived courses. Each student wise result check will be tracked by IP address and geo-location (only admin can check it). Also, faculty can print an online transcript which will be tracked by a reference no with IP address and geo-location (only admin can check it). A single transcript print history will be removed when it crosses the number 50000 in the print list. On the other hand, in course wise result faculty can filter the data based on semesters and grades. By clicking view, faculty will get student basic info with course info, result info, and course instructor info. </li>
     <li>In edit profile faculty can edit his cell no, two-factor status, profile picture, and password.</li>
-    <li>By clicking sign out session will be destroyed and faculty will sign out from the access.</li>
+    <li>By clicking sign out session will be destroyed and faculty will sign out from the access. Each page in faculty panel has a refresh button to reload the updated content in the page.</li>
     <li>In every 8 seconds, an automatic network connection and session check will be done. Admin has the right to destroy any faculty member session.</li>
 </ul>
 
