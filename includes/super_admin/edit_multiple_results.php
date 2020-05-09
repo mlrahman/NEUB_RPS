@@ -244,7 +244,7 @@
 									<td style="padding:1px;">'.$course_title.'</td>
 									<td style="padding:1px;">'.$semester.'</td>
 									<td style="padding:1px;">'.$old_grade.'</td>
-									<td style="padding:1px;">'.$old_grade_point.'</td>
+									<td style="padding:1px;">'.number_format($old_grade_point,2).'</td>
 									<td style="padding:1px;">'.$old_remarks.'</td>
 								</tr>';
 								
@@ -255,7 +255,7 @@
 									<td style="padding:1px;">'.$course_title.'</td>
 									<td style="padding:1px;">'.$semester.'</td>
 									<td style="padding:1px;">'.$new_grade.'</td>
-									<td style="padding:1px;">'.$new_grade_point.'</td>
+									<td style="padding:1px;">'.number_format($new_grade_point,2).'</td>
 									<td style="padding:1px;">'.$new_remarks.'</td>
 								</tr>';
 							}
