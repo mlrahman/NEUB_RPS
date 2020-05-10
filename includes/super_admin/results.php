@@ -1856,6 +1856,10 @@
 		
 		document.getElementById('result_multiple_add_save_btn').disabled=true;
 		
+		document.getElementById('result_multiple_add_box1').style.display='block';
+		document.getElementById('result_multiple_add_box3').style.display='none';
+		document.getElementById('result_multiple_add_box2').style.display='none';
+			
 		
 		document.getElementById('add_multiple_window9').style.display='none';
 	}
@@ -2472,7 +2476,7 @@
 						document.getElementById('result_multiple_failed').innerHTML=failed;
 						document.getElementById('result_multiple_logs').innerHTML=logs;
 			
-						result_multiple_add_form_clear();
+						result_multiple_add_form_reset();
 						get_total_search_results9(0,0);
 						
 						document.getElementById('valid_msg').style.display='block';
