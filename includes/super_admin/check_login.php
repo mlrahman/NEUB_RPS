@@ -9,7 +9,7 @@
 		$admin_time=$_SESSION['admin_time'];
 		$admin_date=$_SESSION['admin_date'];
 		
-		$stmt = $conn->prepare("select * from nr_admin_login_transaction where nr_admin_id=:admin_id and nr_suadlotr_time=:admin_time and nr_suadlotr_date=:admin_date and nr_suadlotr_status='Active' ");
+		$stmt = $conn->prepare("select * from nr_admin_login_transaction a,nr_admin b where a.nr_admin_id=:admin_id and a.nr_suadlotr_time=:admin_time and a.nr_suadlotr_date=:admin_date and a.nr_suadlotr_status='Active' and a.nr_admin_id=b.nr_admin_id and b.nr_admin_status='Active' ");
 		$stmt->bindParam(':admin_id', $admin_id);
 		$stmt->bindParam(':admin_date', $admin_date);
 		$stmt->bindParam(':admin_time', $admin_time);

@@ -744,6 +744,9 @@
 		document.getElementById('student_single_waive_add_captcha').value='';
 		document.getElementById('student_single_waive_add_save_btn').disabled=true;
 		
+		document.getElementById('student_single_waive_add_box1').style.display='block';
+		document.getElementById('student_single_waive_add_box2').style.display='none';
+			
 		document.getElementById('add_single_window_waive8').style.display='none';
 		
 	}
@@ -916,6 +919,10 @@
 	
 	function add_multiple_window_waive8_close()
 	{
+		document.getElementById('student_multiple_waive_add_box1').style.display='block';
+		document.getElementById('student_multiple_waive_add_box3').style.display='none';
+		document.getElementById('student_multiple_waive_add_box2').style.display='none';
+				
 		document.getElementById('student_waive_excel_file').value='';
 		document.getElementById('student_multiple_waive_add_captcha').value='';
 		document.getElementById('student_multiple_waive_add_save_btn').disabled=true;

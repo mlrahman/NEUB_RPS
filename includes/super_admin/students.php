@@ -901,6 +901,9 @@
 	
 	function add_single_window_waive8_close()
 	{
+		document.getElementById('student_single_waive_add_box1').style.display='block';
+		document.getElementById('student_single_waive_add_box2').style.display='none';
+			
 		document.getElementById('student_single_waive_add_id').value='';
 		document.getElementById('student_single_waive_add_course').value='';
 		document.getElementById('student_single_waive_add_captcha').value='';
@@ -1014,15 +1017,7 @@
 						document.getElementById('i_msg').innerHTML='Sorry unable to add this course in student course waived list (invalid student ID).';
 						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
 					}
-					else if(this.responseText.trim()=='unable5')
-					{
-						document.getElementById('student_single_waive_add_box1').style.display='block';
-						document.getElementById('student_single_waive_add_box2').style.display='none';
-						
-						document.getElementById('invalid_msg').style.display='block';
-						document.getElementById('i_msg').innerHTML='Sorry unable to add this course in student course waived list (student ID inactive).';
-						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
-					}
+					
 					else if(this.responseText.trim()=='unable6')
 					{
 						document.getElementById('student_single_waive_add_box1').style.display='block';
@@ -1078,6 +1073,10 @@
 	
 	function add_multiple_window_waive8_close()
 	{
+		document.getElementById('student_multiple_waive_add_box1').style.display='block';
+		document.getElementById('student_multiple_waive_add_box3').style.display='none';
+		document.getElementById('student_multiple_waive_add_box2').style.display='none';
+		
 		document.getElementById('student_waive_excel_file').value='';
 		document.getElementById('student_multiple_waive_add_captcha').value='';
 		document.getElementById('student_multiple_waive_add_save_btn').disabled=true;

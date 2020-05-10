@@ -147,6 +147,10 @@
 				
 				copy('../../images/'.$dir.'/'.$photo, '../../images/'.$dir2.'/'.$photo);
 				unlink('../../images/'.$dir.'/'.$photo);
+				
+				$stmt = $conn->prepare("delete from nr_admin_login_transaction where nr_admin_id=:admin_id ");
+				$stmt->bindParam(':admin_id', $admin_id);
+				$stmt->execute();
 			}
 			
 			$stmt = $conn->prepare("update nr_admin set nr_admin_name=:admin_name, nr_admin_designation=:admin_designation,nr_admin_email=:admin_email,nr_admin_cell_no=:admin_mobile,nr_admin_join_date=:admin_join_date, nr_admin_resign_date=:admin_resign_date,nr_admin_gender=:admin_gender,nr_admin_type=:admin_type,nr_admin_status=:admin_status where nr_admin_id=:admin_id ");

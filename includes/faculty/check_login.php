@@ -9,7 +9,7 @@
 		$faculty_time=$_SESSION['faculty_time'];
 		$faculty_date=$_SESSION['faculty_date'];
 		
-		$stmt = $conn->prepare("select * from nr_faculty_login_transaction where nr_faculty_id=:faculty_id and nr_falotr_time=:faculty_time and nr_falotr_date=:faculty_date and nr_falotr_status='Active' ");
+		$stmt = $conn->prepare("select * from nr_faculty_login_transaction a,nr_faculty b where a.nr_faculty_id=:faculty_id and a.nr_falotr_time=:faculty_time and a.nr_falotr_date=:faculty_date and a.nr_falotr_status='Active' and a.nr_faculty_id=b.nr_faculty_id and b.nr_faculty_status='Active' ");
 		$stmt->bindParam(':faculty_id', $faculty_id);
 		$stmt->bindParam(':faculty_date', $faculty_date);
 		$stmt->bindParam(':faculty_time', $faculty_time);

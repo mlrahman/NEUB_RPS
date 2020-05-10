@@ -12,7 +12,7 @@
 		header("location:index.php");
 		die();
 	}
-	if(isset($_REQUEST['excel']) && isset($_REQUEST['pass']) && isset($_REQUEST['student_prog']) && isset($_REQUEST['admin_id']) && $_REQUEST['admin_id']==$_SESSION['admin_id'])
+	if(isset($_REQUEST['excel']) && isset($_REQUEST['pass']) && isset($_REQUEST['student_prog']) && isset($_REQUEST['moderator_id']) && $_REQUEST['moderator_id']==$_SESSION['moderator_id'])
 	{
 		$excel_name='1';
 		//file delete server info required to update if needed
@@ -22,7 +22,7 @@
 			$excel=trim($_REQUEST['excel']);
 			$student_prog=trim($_REQUEST['student_prog']);
 			$pass=trim($_REQUEST['pass']);
-			if(password_encrypt($pass)!=$_SESSION['admin_password'])
+			if(password_encrypt($pass)!=$_SESSION['moderator_password'])
 			{
 				echo 'PE';
 				die();
@@ -210,9 +210,9 @@
 											if($student_email=='') $student_email='N/A';
 											if($student_mobile=='') $student_mobile='N/A';
 											$task='Added Student Name: '.$student_name.', Student DOB: '.$student_birth_date.', Student Gender: '.$student_gender.', Student Email: '.$student_email.', Student Mobile: '.$student_mobile.', Student Program: '.$prog_title.', Student CGPA: '.number_format($cgpa,2).', Earned Credit: '.$earned_credit.', Waived Credit: '.$waived_credit.', Student Status: '.$student_status;
-											$stmt = $conn->prepare("insert into nr_student_history(nr_stud_id,nr_admin_id,nr_studh_task,nr_studh_date,nr_studh_time,nr_studh_status) values(:student_id,:admin_id,'$task','$d','$t','Active') ");
+											$stmt = $conn->prepare("insert into nr_student_history(nr_stud_id,nr_admin_id,nr_studh_task,nr_studh_date,nr_studh_time,nr_studh_status) values(:student_id,:moderator_id,'$task','$d','$t','Active') ");
 											$stmt->bindParam(':student_id', $student_id);
-											$stmt->bindParam(':admin_id', $_SESSION['admin_id']);
+											$stmt->bindParam(':moderator_id', $_SESSION['moderator_id']);
 											$stmt->execute();
 											
 											$success++;

@@ -67,15 +67,6 @@
 				die();
 			}
 			
-			$stmt = $conn->prepare("select * from nr_student where nr_stud_id=:student_id and nr_stud_status='Inactive'");
-			$stmt->bindParam(':student_id', $student_id);
-			$stmt->execute();
-			$result = $stmt->fetchAll();
-			if(count($result)>=1)
-			{
-				echo 'unable5';
-				die();
-			}
 			
 			$stmt = $conn->prepare("select nr_studi_graduated from nr_student_info where nr_stud_id=:student_id ");
 			$stmt->bindParam(':student_id', $student_id);
