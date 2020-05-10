@@ -140,6 +140,18 @@
 			
 		</div>
 		
+		<!-- Page 8 starts here -->
+		<div id="page8" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
+			<?php include("../includes/moderator_admin/students.php"); ?>
+		</div>
+		
+		<!-- Page 9 starts here -->
+		<div id="page9" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
+			<?php include("../includes/moderator_admin/results.php"); ?>
+		</div>
+		
+		
+		
 		<!-- Page 3 starts here -->
 		<div id="page3" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
 			

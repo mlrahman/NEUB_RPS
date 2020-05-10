@@ -54,9 +54,11 @@
 			</div>
 		</div>
 		
-		<div class="w3-bar-block w3-text-black" style="height: auto;margin: 20px 25px;">
-			<p class="w3-bold w3-xlarge w3-text-teal w3-bottombar" style="margin:0px 0px 15px 0px;"><i class="fa fa-folder-open-o"></i> Menu</p>
+		<div class="w3-bar-block w3-text-black" style="height: 326px;overflow:auto;margin: 20px 25px;">
+			<p class="w3-bold w3-xlarge w3-text-teal w3-bottombar w3-white" style="margin:0px 0px 15px 0px;position: -webkit-sticky;   position: sticky;  top: 0; z-index:99999;"><i class="fa fa-folder-open-o"></i> Menu</p>
 			<a onclick="get_page(1)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-cursor"><i class="fa fa-dashboard"></i> Dashboard</a>
+			<a onclick="get_page(8)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-users"></i> Students</a>
+			<a onclick="get_page(9)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-database"></i> Results</a>
 			
 			<a onclick="get_page(3)" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top w3-cursor"><i class="fa fa-edit"></i> Edit Profile</a>
 			<a href="log_out.php?log_out=yes" class="w3-bar-item w3-bold w3-decoration-null w3-hover-black w3-round-large w3-border-teal w3-bottombar w3-leftbar w3-margin-top"><i class="fa fa-sign-out"></i> Sign Out</a>
@@ -70,13 +72,35 @@
 					document.getElementById('page1').style.display='block';
 					
 					document.getElementById('page3').style.display='none';
+					document.getElementById('page8').style.display='none';
+					document.getElementById('page9').style.display='none';
 				}
 				else if(a==3)
 				{
 					document.getElementById('page_title').innerHTML='<i class="fa fa-edit"></i> Edit Profile';
 					document.getElementById('page1').style.display='none';
+					document.getElementById('page8').style.display='none';
+					document.getElementById('page9').style.display='none';
 					
 					document.getElementById('page3').style.display='block';
+				}
+				else if(a==8)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-users"></i> Students';
+					document.getElementById('page1').style.display='none';
+					document.getElementById('page8').style.display='block';
+					document.getElementById('page9').style.display='none';
+					
+					document.getElementById('page3').style.display='none';
+				}
+				else if(a==9)
+				{
+					document.getElementById('page_title').innerHTML='<i class="fa fa-database"></i> Results';
+					document.getElementById('page1').style.display='none';
+					document.getElementById('page8').style.display='none';
+					document.getElementById('page9').style.display='block';
+					
+					document.getElementById('page3').style.display='none';
 				}
 			}
 		</script>
