@@ -1723,8 +1723,8 @@
 			document.getElementById('student_waive_re_confirmation').style.display='none';
 			
 			document.getElementById('student_view_box1').style.display='none';
-			document.getElementById('student_view_box3').style.display='none';
-			document.getElementById('student_view_box4').style.display='none';
+			
+			
 			document.getElementById('student_view_box5').style.display='none';
 			document.getElementById('student_view_box2').style.display='block';
 			
@@ -1747,9 +1747,9 @@
 					}
 					else if(this.responseText.trim()=='pass_error')
 					{
-						document.getElementById('student_view_box4').style.display='none';
+						
 						document.getElementById('student_view_box2').style.display='none';
-						document.getElementById('student_view_box3').style.display='none';
+						
 						document.getElementById('student_view_box1').style.display='none';
 						document.getElementById('student_view_box5').style.display='block';
 						
@@ -1759,9 +1759,9 @@
 					}
 					else if(this.responseText.trim()=='unable')
 					{
-						document.getElementById('student_view_box4').style.display='none';
+						
 						document.getElementById('student_view_box2').style.display='none';
-						document.getElementById('student_view_box3').style.display='none';
+						
 						document.getElementById('student_view_box1').style.display='none';
 						document.getElementById('student_view_box5').style.display='block';
 						
@@ -1771,9 +1771,9 @@
 					}
 					else
 					{
-						document.getElementById('student_view_box4').style.display='none';
+						
 						document.getElementById('student_view_box2').style.display='none';
-						document.getElementById('student_view_box3').style.display='none';
+						
 						document.getElementById('student_view_box1').style.display='none';
 						document.getElementById('student_view_box5').style.display='block';
 						
@@ -1786,9 +1786,9 @@
 				}
 				else if(this.readyState==4 && (this.status==404 || this.status==403))
 				{
-					document.getElementById('student_view_box4').style.display='none';
+					
 					document.getElementById('student_view_box2').style.display='none';
-					document.getElementById('student_view_box3').style.display='none';
+					
 					document.getElementById('student_view_box1').style.display='none';
 					document.getElementById('student_view_box5').style.display='block';
 					

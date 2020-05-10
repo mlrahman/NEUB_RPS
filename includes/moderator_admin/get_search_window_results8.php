@@ -1060,7 +1060,7 @@
 								<input class="w3-input w3-border w3-round-large" type="text"  maxlength="2"  placeholder=" * " id="student_waive_captcha" autocomplete="off" oninput="student_waive_form_change()" <?php if($flll==1){ echo 'disabled'; } ?> >
 							</div>
 						</div>
-						
+						<input type="hidden" id="student_view_id" value="<?php echo $s_id; ?>" />
 						<input type="hidden" value="<?php echo $ccc; ?>" id="student_waive_old_captcha">
 					</div>
 					<div class="w3-col w3-margin-0" style="width:30%;padding:0px 6px 0px 6px;">
