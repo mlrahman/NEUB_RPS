@@ -49,7 +49,7 @@
 			
 			
 			
-			$stmt = $conn->prepare("select nr_admin_email,nr_admin_type from nr_admin where nr_admin_id=:admin_id");
+			$stmt = $conn->prepare("select nr_admin_email,nr_admin_type,nr_admin_photo from nr_admin where nr_admin_id=:admin_id");
 			$stmt->bindParam(':admin_id', $admin_id);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
@@ -58,6 +58,7 @@
 			if(count($result)!=0){
 				$old_email=$result[0][0];
 				$old_admin_type=$result[0][1];
+				$photo=$result[0][2];
 			}
 			
 			if(($admin_email!='' && $admin_email!=$old_email) || $old_admin_type!=$admin_type)
@@ -126,6 +127,26 @@
 				
 				sent_mail($admin_email,$title.' - Log In Access',$message,$title,$contact_email);
 				
+			}
+			
+			if($old_admin_type!=$admin_type) //changing admin type in transcript print reference
+			{
+				$stmt = $conn->prepare("update nr_transcript_print_reference set nr_trprre_printed_by=:admin_type where nr_trprre_printed_by=:old_admin_type and nr_trprre_user_id=:admin_id");
+				$stmt->bindParam(':admin_type', $admin_type);
+				$stmt->bindParam(':old_admin_type', $old_admin_type);
+				$stmt->bindParam(':admin_id', $admin_id);
+				$stmt->execute();
+				
+				if($old_admin_type=='Admin') $dir='admin';
+				if($old_admin_type=='Moderator') $dir='moderator';
+				if($old_admin_type=='Super Admin') $dir='admin';
+				
+				if($admin_type=='Admin') $dir2='admin';
+				if($admin_type=='Moderator') $dir2='moderator';
+				if($admin_type=='Super Admin') $dir2='admin';
+				
+				copy('../../images/'.$dir.'/'.$photo, '../../images/'.$dir2.'/'.$photo);
+				unlink('../../images/'.$dir.'/'.$photo);
 			}
 			
 			$stmt = $conn->prepare("update nr_admin set nr_admin_name=:admin_name, nr_admin_designation=:admin_designation,nr_admin_email=:admin_email,nr_admin_cell_no=:admin_mobile,nr_admin_join_date=:admin_join_date, nr_admin_resign_date=:admin_resign_date,nr_admin_gender=:admin_gender,nr_admin_type=:admin_type,nr_admin_status=:admin_status where nr_admin_id=:admin_id ");
