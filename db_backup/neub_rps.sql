@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2020 at 04:09 PM
+-- Generation Time: May 12, 2020 at 01:14 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -50,7 +50,7 @@ CREATE TABLE `nr_admin` (
 
 INSERT INTO `nr_admin` (`nr_admin_id`, `nr_admin_name`, `nr_admin_email`, `nr_admin_password`, `nr_admin_cell_no`, `nr_admin_photo`, `nr_admin_type`, `nr_admin_designation`, `nr_admin_status`, `nr_admin_two_factor`, `nr_admin_resign_date`, `nr_admin_gender`, `nr_admin_join_date`) VALUES
 (1, 'Shams Elahi Rasel', 'mirlutfur.rahman@gmail.com', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '', '158677029315867702938237.jpg', 'Super Admin', 'Controller of Examination, NEUB', 'Active', 0, '', 'Male', '2012-11-03'),
-(6, 'Fahad Ahmed', 'mlrahman@neub.edu.bd', '', '', '15867702931586770293823.jpg', 'Moderator', 'Moderator of Controller of Exam, NEUB', 'Active', 0, '', 'Male', '2013-05-01');
+(6, 'Fahad Ahmed', 'mlrahman@neub.edu.bd', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '01739213886', '158928186715892818677563.jpg', 'Moderator', 'Moderator of Controller of Exam, NEUB', 'Active', 0, '', 'Male', '2013-05-01');
 
 -- --------------------------------------------------------
 
@@ -75,7 +75,21 @@ INSERT INTO `nr_admin_history` (`nr_admin_member_id`, `nr_admin_id`, `nr_adminh_
 (6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Assistant Controller of NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: , Admin Mobile: , Admin Status: Inactive', '2020-04-28', '11:17 PM', 'Active'),
 (6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Assistant Controller of NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-04-28', '11:18 PM', 'Active'),
 (6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Admin, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-04-28', '11:20 PM', 'Active'),
-(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-04-28', '11:28 PM', 'Active');
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-04-28', '11:28 PM', 'Active'),
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Admin, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-05-10', '12:49 PM', 'Active'),
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-05-10', '01:01 PM', 'Active'),
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Admin, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-05-10', '01:03 PM', 'Active'),
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-05-10', '01:05 PM', 'Active'),
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Admin, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-05-10', '01:09 PM', 'Active'),
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-05-10', '01:12 PM', 'Active'),
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Admin, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-05-10', '01:12 PM', 'Active'),
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-05-10', '01:13 PM', 'Active'),
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Admin, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-05-10', '04:59 PM', 'Active'),
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-05-10', '05:00 PM', 'Active'),
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Inactive', '2020-05-10', '05:01 PM', 'Active'),
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-05-10', '05:01 PM', 'Active'),
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Inactive', '2020-05-10', '05:03 PM', 'Active'),
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-05-10', '05:04 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -91,13 +105,6 @@ CREATE TABLE `nr_admin_link_token` (
   `nr_suadlito_time` varchar(20) NOT NULL,
   `nr_suadlito_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
-
---
--- Dumping data for table `nr_admin_link_token`
---
-
-INSERT INTO `nr_admin_link_token` (`nr_admin_id`, `nr_suadlito_token`, `nr_suadlito_type`, `nr_suadlito_date`, `nr_suadlito_time`, `nr_suadlito_status`) VALUES
-(6, '01cf3d112f2f85d21e7ebd0e2c25b8ae4fe9e365', 'Forget Password', '2020-04-28', '11:27 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -167,7 +174,26 @@ INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '01:49 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '09:54 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-03', '11:34 PM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '04:20 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '04:20 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '10:32 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:11 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-05', '04:08 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:09 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-07', '03:16 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '02:23 AM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '01:32 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-09', '05:22 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-09', '09:31 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-09', '11:09 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '12:33 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '04:07 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '04:59 PM', 'Inactive'),
+(6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '05:00 PM', 'Inactive'),
+(6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '05:01 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '05:09 PM', 'Inactive'),
+(6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '07:40 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '08:09 PM', 'Inactive'),
+(6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-12', '02:40 PM', 'Inactive');
 
 -- --------------------------------------------------------
 
@@ -286,7 +312,91 @@ INSERT INTO `nr_admin_result_check_transaction` (`nr_stud_id`, `nr_admin_id`, `n
 (130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '08:02 PM', 'Active'),
 (130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '08:04 PM', 'Active'),
 (130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '08:08 PM', 'Active'),
-(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '08:08 PM', 'Active');
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '08:08 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '08:11 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '08:12 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '08:13 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '10:32 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:29 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-05', '04:08 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:09 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:27 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:27 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:30 PM', 'Active'),
+(140203020004, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '05:22 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '07:52 PM', 'Active'),
+(150102040001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '11:21 PM', 'Active'),
+(130103020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-07', '04:01 PM', 'Active'),
+(130103020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-07', '04:18 PM', 'Active'),
+(130103020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-07', '04:18 PM', 'Active'),
+(130103020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-07', '04:19 PM', 'Active'),
+(130103020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-07', '04:20 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-07', '07:19 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-07', '07:19 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-07', '11:11 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-07', '11:16 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-07', '11:17 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-07', '11:17 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:01 AM', 'Active'),
+(140203020003, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:03 AM', 'Active'),
+(140203020003, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:04 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:04 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:06 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:06 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:08 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:12 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:12 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:14 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:17 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:18 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:39 AM', 'Active'),
+(130103020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:48 AM', 'Active'),
+(140203020003, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:48 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:49 AM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:50 AM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:54 AM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:56 AM', 'Active'),
+(140203020003, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:56 AM', 'Active'),
+(140203020003, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '01:03 AM', 'Active'),
+(140203020003, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '01:08 AM', 'Active'),
+(140203020003, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '01:20 AM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '02:05 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '02:05 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '02:35 PM', 'Active'),
+(140203020003, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '03:18 PM', 'Active'),
+(140203020003, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '03:20 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '04:56 PM', 'Active'),
+(140203020003, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '04:56 PM', 'Active'),
+(140203020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '04:57 PM', 'Active'),
+(140203020003, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-09', '11:09 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '12:34 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '12:34 PM', 'Active'),
+(130103020001, 6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '01:53 PM', 'Active'),
+(130103020001, 6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '01:54 PM', 'Active'),
+(130103020001, 6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '01:54 PM', 'Active'),
+(130103020002, 6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '01:59 PM', 'Active'),
+(130103020002, 6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '02:03 PM', 'Active'),
+(130103020001, 6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '02:07 PM', 'Active'),
+(130103020002, 6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '02:10 PM', 'Active'),
+(130103020002, 6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '02:10 PM', 'Active'),
+(130103020002, 6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '02:14 PM', 'Active'),
+(130103020002, 6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '02:15 PM', 'Active'),
+(130103020002, 6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '02:15 PM', 'Active'),
+(130103020002, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '02:16 PM', 'Active'),
+(130103020001, 6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '04:05 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '04:12 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '04:12 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '04:12 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '04:14 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '04:15 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '04:15 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '04:15 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '04:15 PM', 'Active'),
+(130103020001, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '04:16 PM', 'Active'),
+(130103020001, 6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '04:24 PM', 'Active'),
+(130103020001, 6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '04:25 PM', 'Active'),
+(140303020008, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '05:00 PM', 'Active'),
+(130103020002, 6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-12', '05:07 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -408,7 +518,29 @@ INSERT INTO `nr_delete_history` (`nr_admin_id`, `nr_deleteh_task`, `nr_deleteh_d
 (1, 'Deleted Admin Name: Kuddus, Admin Designation: kuddus, Admin Gender: Male, Admin Join Date: 2020-05-06, Admin Resign Date: N/A, Admin Type: Admin, Admin Email: kkr@kkr.kkr, Admin Mobile: N/A, Admin Status: Active', '2020-05-03', '11:35 PM', 'Active', 'Admin'),
 (1, 'Deleted Admin Name: teyj, Admin Designation: erty, Admin Gender: Female, Admin Join Date: 2020-05-04, Admin Resign Date: N/A, Admin Type: Moderator, Admin Email: N/A, Admin Mobile: N/A, Admin Status: Inactive', '2020-05-03', '11:35 PM', 'Active', 'Admin'),
 (1, 'Deleted Faculty Name: lihukgjy, Faculty Designation: drjvhbkj, Faculty Gender: Male, Faculty Join Date: 2020-05-04, Faculty Resign Date: N/A, Faculty Department: Law and Justice, Faculty Type: Permanent, Faculty Email: N/A, Faculty Mobile: N/A, Faculty Status: Active', '2020-05-03', '11:38 PM', 'Active', 'Faculty'),
-(1, 'Deleted Offer Course Title: Discrete Mathematics, Course Code: CSE 123, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 1st, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Active', '2020-05-04', '05:18 PM', 'Active', 'Course Offer List');
+(1, 'Deleted Offer Course Title: Discrete Mathematics, Course Code: CSE 123, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 1st, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Active', '2020-05-04', '05:18 PM', 'Active', 'Course Offer List'),
+(1, 'Deleted Admin Name: tghkj, Admin Designation: jyghbkj, Admin Gender: Male, Admin Join Date: 2020-05-07, Admin Resign Date: N/A, Admin Type: Admin, Admin Email: tguyhk@tgjhbkj.df, Admin Mobile: N/A, Admin Status: Active', '2020-05-05', '05:09 PM', 'Active', 'Admin'),
+(1, 'Deleted Result Student ID: 140203020004, Student Name: Pranta Sarkar, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 455, Course Title: Bioinformatics, Semester: Spring 2016, Marks: 30, Grade: F, Grade Point: 0, Course Instructor: Noushad Sojib, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering', '2020-05-06', '08:55 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 140203020004, Student Name: Pranta Sarkar, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 111, Course Title: Fundamentals of Computers, Semester: Spring 2015, Marks: 70, Grade: A-, Grade Point: 3.5, Course Instructor: Noushad Sojib, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering', '2020-05-06', '10:06 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 140203020002, Student Name: Mir Lutfur Rahman, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 211, Course Title: Object Oriented Programming Language, Semester: Spring 2015, Marks: 87, Grade: A+, Grade Point: 4.00, Remarks: , Course Instructor: Al Mehdi Saadat Chowdhury, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-07', '09:49 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 140203020002, Student Name: Mir Lutfur Rahman, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 211, Course Title: Object Oriented Programming Language, Semester: Spring 2015, Marks: 87, Grade: A+, Grade Point: 4.00, Remarks: , Course Instructor: Al Mehdi Saadat Chowdhury, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-07', '10:00 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 140203020002, Student Name: Mir Lutfur Rahman, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 211, Course Title: Object Oriented Programming Language, Semester: Spring 2015, Marks: 87, Grade: A+, Grade Point: 4.00, Remarks: , Course Instructor: Al Mehdi Saadat Chowdhury, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-07', '10:07 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 140203020002, Student Name: Mir Lutfur Rahman, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 211, Course Title: Object Oriented Programming Language, Semester: Spring 2015, Marks: 87, Grade: A+, Grade Point: 4.00, Remarks: , Course Instructor: Al Mehdi Saadat Chowdhury, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-07', '10:22 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 140203020002, Student Name: Mir Lutfur Rahman, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 211, Course Title: Object Oriented Programming Language, Semester: Spring 2015, Marks: 87, Grade: A+, Grade Point: 4.00, Remarks: , Course Instructor: Al Mehdi Saadat Chowdhury, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-07', '10:25 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 140203020002, Student Name: Mir Lutfur Rahman, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 211, Course Title: Object Oriented Programming Language, Semester: Spring 2015, Marks: 87, Grade: A+, Grade Point: 4.00, Remarks: , Course Instructor: Al Mehdi Saadat Chowdhury, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-07', '11:07 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 140203020003, Student Name: Rocksar Sultana Smriti, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 211, Course Title: Object Oriented Programming Language, Semester: Spring 2015, Marks: 65, Grade: B+, Grade Point: 3.25, Remarks: , Course Instructor: Al Mehdi Saadat Chowdhury, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-07', '11:07 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 140203020002, Student Name: Mir Lutfur Rahman, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 113, Course Title: Structured Programming Language, Semester: Summer 2014, Marks: 97, Grade: A+, Grade Point: 4.00, Remarks: MakeUp_MS, Course Instructor: Tasnim Zahan Tithi, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-08', '02:21 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 140203020002, Student Name: Mir Lutfur Rahman, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 211, Course Title: Object Oriented Programming Language, Semester: Spring 2015, Marks: 76, Grade: A, Grade Point: 3.75, Remarks: , Course Instructor: Al Mehdi Saadat Chowdhury, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-08', '08:39 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 140203020003, Student Name: Rocksar Sultana Smriti, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 211, Course Title: Object Oriented Programming Language, Semester: Spring 2015, Marks: 63, Grade: B, Grade Point: 3.00, Remarks: , Course Instructor: Al Mehdi Saadat Chowdhury, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-08', '08:39 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 140203020004, Student Name: Pranta Sarkar, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 211, Course Title: Object Oriented Programming Language, Semester: Spring 2015, Marks: 32, Grade: F, Grade Point: 0.00, Remarks: Incomplete, Course Instructor: Al Mehdi Saadat Chowdhury, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-08', '08:39 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 140203020005, Student Name: Topu Dash Roy, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 211, Course Title: Object Oriented Programming Language, Semester: Spring 2015, Marks: 65, Grade: B+, Grade Point: 3.25, Remarks: , Course Instructor: Al Mehdi Saadat Chowdhury, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-08', '08:40 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 130103020001, Student Name: Muhith Miah, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 313, Course Title: Database System, Semester: Fall 2015, Marks: 30, Grade: F, Grade Point: 0.00, Remarks: , Course Instructor: Mir Lutfur Rahman, Instructor Designation: Lecturer, Department of Computer Science and Engineering, Result Status: Active', '2020-05-08', '08:42 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 140203020002, Student Name: Mir Lutfur Rahman, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 113, Course Title: Structured Programming Language, Semester: Summer 2014, Marks: 97, Grade: A+, Grade Point: 4.00, Remarks: , Course Instructor: Tasnim Zahan Tithi, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-08', '08:49 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 140203020003, Student Name: Rocksar Sultana Smriti, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 314, Course Title: Database System Lab, Semester: Summer 2017, Marks: 45, Grade: C, Grade Point: 2.25, Remarks: MakeUp_MS, Course Instructor: Al Mehdi Saadat Chowdhury, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-08', '08:58 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 140203020004, Student Name: Pranta Sarkar, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 314, Course Title: Database System Lab, Semester: Summer 2017, Marks: 32, Grade: F, Grade Point: 0.00, Remarks: Incomplete, Course Instructor: Al Mehdi Saadat Chowdhury, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-08', '08:58 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 140203020005, Student Name: Topu Dash Roy, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 314, Course Title: Database System Lab, Semester: Summer 2017, Marks: 65, Grade: B+, Grade Point: 3.25, Remarks: , Course Instructor: Al Mehdi Saadat Chowdhury, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Inactive', '2020-05-08', '08:58 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 140203020003, Student Name: Rocksar Sultana Smriti, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 211, Course Title: Object Oriented Programming Language, Semester: Spring 2016, Marks: 75, Grade: A, Grade Point: 3.75, Remarks: Improvement, Course Instructor: Noushad Sojib, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-08', '09:00 PM', 'Active', 'Result'),
+(1, 'Deleted Result Student ID: 130103020001, Student Name: Muhith Miah, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 313, Course Title: Database System, Semester: Fall 2016, Marks: 72, Grade: A-, Grade Point: 3.50, Remarks: , Course Instructor: Mir Lutfur Rahman, Instructor Designation: Lecturer, Department of Computer Science and Engineering, Result Status: Active', '2020-05-09', '09:58 PM', 'Active', 'Result');
 
 -- --------------------------------------------------------
 
@@ -496,7 +628,8 @@ INSERT INTO `nr_drop` (`nr_drop_id`, `nr_prcr_id`, `nr_prog_id`, `nr_course_id`,
 (9, 1, 1, 4, 3, 'Optional I', 'Active'),
 (10, 1, 1, 10, 3, 'Optional I', 'Active'),
 (14, 3, 3, 11, 5, 'Compulsory', 'Active'),
-(16, 1, 1, 5, 7, 'Compulsory', 'Inactive');
+(16, 1, 1, 5, 7, 'Compulsory', 'Inactive'),
+(24, 1, 1, 7, 1, 'Compulsory', 'Active');
 
 -- --------------------------------------------------------
 
@@ -528,7 +661,8 @@ INSERT INTO `nr_drop_history` (`nr_drop_id`, `nr_admin_id`, `nr_droph_task`, `nr
 (5, 1, 'Edited Offer Course Title: Object Oriented Programming Language, Course Code: CSE 211, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 4th, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Active', '2020-04-25', '12:48 AM', 'Active'),
 (14, 1, 'Added Course Title: Cost Management and Accounting, Course Code: BBA 201, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 5, Offer Program: BBA, Program Credit: 127, Offer Status: Active', '2020-04-25', '04:45 PM', 'Active'),
 (16, 1, 'Added Course Title: Database System, Course Code: CSE 313, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 7, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Inactive', '2020-04-25', '09:01 PM', 'Active'),
-(6, 1, 'Edited Offer Course Title: Object Oriented Programming Language Lab, Course Code: CSE 212, Course Credit: 1.50, Course Type: Compulsory, Offer Semester: 4th, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Inactive', '2020-04-28', '03:42 PM', 'Active');
+(6, 1, 'Edited Offer Course Title: Object Oriented Programming Language Lab, Course Code: CSE 212, Course Credit: 1.50, Course Type: Compulsory, Offer Semester: 4th, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Inactive', '2020-04-28', '03:42 PM', 'Active'),
+(24, 1, 'Added Course Title: Discrete Mathematics, Course Code: CSE 123, Course Credit: 3.00, Course Type: Compulsory, Offer Semester: 1, Offer Program: B.Sc. (Engg.) in CSE, Program Credit: 160, Offer Status: Active', '2020-05-04', '08:12 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -596,7 +730,9 @@ INSERT INTO `nr_faculty_history` (`nr_faculty_id`, `nr_admin_id`, `nr_facultyh_t
 (1, 1, 'Edited Faculty Name: Noushad Sojib, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2016-04-20, Faculty Resign Date: , Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: mlrahman@neub.edu.bd, Faculty Mobile: 01739213886, Faculty Status: Inactive', '2020-04-27', '06:11 PM', 'Active'),
 (1, 1, 'Edited Faculty Name: Noushad Sojib, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2016-04-20, Faculty Resign Date: , Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: mlrahman@neub.edu.bd, Faculty Mobile: 01739213886, Faculty Status: Active', '2020-04-27', '06:11 PM', 'Active'),
 (9, 1, 'Added Faculty Name: Al Mehdi Saadat Chowdhury, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2013-11-24, Faculty Resign Date: , Faculty Department: Business Administration, Faculty Type: Permanent, Faculty Email: mirlutfur.rahman@gmail.com, Faculty Mobile: , Faculty Status: Active', '2020-04-27', '07:56 PM', 'Active'),
-(9, 1, 'Edited Faculty Name: Al Mehdi Saadat Chowdhury, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2013-11-24, Faculty Resign Date: , Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: mirlutfur.rahman@gmail.com, Faculty Mobile: , Faculty Status: Active', '2020-04-27', '07:58 PM', 'Active');
+(9, 1, 'Edited Faculty Name: Al Mehdi Saadat Chowdhury, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2013-11-24, Faculty Resign Date: , Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: mirlutfur.rahman@gmail.com, Faculty Mobile: , Faculty Status: Active', '2020-04-27', '07:58 PM', 'Active'),
+(1, 1, 'Edited Faculty Name: Noushad Sojib, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2016-04-20, Faculty Resign Date: , Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: mlrahman@neub.edu.bd, Faculty Mobile: 01739213886, Faculty Status: Inactive', '2020-05-10', '05:12 PM', 'Active'),
+(1, 1, 'Edited Faculty Name: Noushad Sojib, Faculty Designation: Assistant Professor, Faculty Gender: Male, Faculty Join Date: 2016-04-20, Faculty Resign Date: , Faculty Department: Computer Science and Engineering, Faculty Type: Permanent, Faculty Email: mlrahman@neub.edu.bd, Faculty Mobile: 01739213886, Faculty Status: Active', '2020-05-10', '05:12 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -675,7 +811,14 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-24', '06:25 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '09:26 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-26', '04:00 PM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-30', '04:10 PM', 'Inactive');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-30', '04:10 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:40 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '03:07 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '11:32 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '01:09 AM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '01:37 AM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-09', '06:06 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '05:10 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -716,7 +859,10 @@ INSERT INTO `nr_faculty_result_check_transaction` (`nr_stud_id`, `nr_faculty_id`
 (140203020009, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '01:47 PM', 'Active'),
 (140203020009, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-03-31', '01:51 PM', 'Active'),
 (140203020004, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:05 PM', 'Active'),
-(140203020004, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '09:26 PM', 'Active');
+(140203020004, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '09:26 PM', 'Active'),
+(140203020003, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '01:09 AM', 'Active'),
+(140203020003, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '01:13 AM', 'Active'),
+(140203020003, 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '01:16 AM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -820,9 +966,11 @@ CREATE TABLE `nr_result` (
 --
 
 INSERT INTO `nr_result` (`nr_result_id`, `nr_stud_id`, `nr_course_id`, `nr_result_marks`, `nr_result_grade`, `nr_result_grade_point`, `nr_result_semester`, `nr_result_year`, `nr_result_remarks`, `nr_result_status`, `nr_prog_id`, `nr_result_publish_date`, `nr_faculty_id`) VALUES
-(12, 140203020004, 1, 140203029814.5, '4ebc27a8251909faa082444ff8bfb1b68ab051e1', 140203026314.5, 'Spring', 2015, '', 'Active', 1, '2020-03-27', 1),
-(13, 140203020004, 10, 140203025814.5, 'd46b42d101ffeddecfdc21efea570b4d17fe65a2', 140203022814.5, 'Spring', 2016, 'Incomplete', 'Active', 1, '2020-03-31', 1),
-(14, 150102040001, 11, 150102049811.5, '48f31fa4724d90fe2fa9edaf7f95a5acbdba471a', 150102046311.5, 'Summer', 2015, 'MakeUp_SF', 'Active', 3, '2020-04-11', 1);
+(14, 150102040001, 11, 150102050811.5, '7ef3e0319886c4c2e914979903461b0e24eb9685', 150102046811.5, 'Summer', 2015, '', 'Inactive', 3, '2020-04-11', 1),
+(29, 140203020003, 5, 140203029013.5, '2b604cffbcab0643173c2aaceeb57e147d272c96', 140203025813.5, 'Summer', 2017, '', 'Active', 1, '2020-05-08', 1),
+(35, 140203020003, 6, 140203029813.5, 'd0ccd6b615a4424e4058ef8cc0e167be09f6a2e0', 140203026313.5, 'Summer', 2017, '', 'Active', 1, '2020-05-09', 4),
+(36, 140303020001, 5, 140303030011.5, '1525d714a8983cba6b0df8026b554e01e4e299be', 140303026311.5, 'Spring', 2016, '', 'Active', 1, '2020-05-10', 9),
+(37, 140303020008, 5, 140303028218.5, 'ebadc959a62bd4ed8a1639b1b6c4001a5896bb39', 140303025318.5, 'Spring', 2016, '', 'Active', 1, '2020-05-10', 9);
 
 -- --------------------------------------------------------
 
@@ -886,7 +1034,12 @@ INSERT INTO `nr_result_check_transaction` (`nr_stud_id`, `nr_rechtr_ip_address`,
 (140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:24 PM', 'Active'),
 (140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:49 PM', 'Active'),
 (140203020009, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-17', '03:49 PM', 'Active'),
-(140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '09:26 PM', 'Active');
+(140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-25', '09:26 PM', 'Active'),
+(130103020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-07', '04:02 PM', 'Active'),
+(130103020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-07', '04:05 PM', 'Active'),
+(130103020002, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-07', '04:06 PM', 'Active'),
+(140203020003, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '01:20 AM', 'Active'),
+(140203020003, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '01:24 AM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -902,6 +1055,34 @@ CREATE TABLE `nr_result_history` (
   `nr_resulth_time` varchar(20) NOT NULL,
   `nr_resulth_status` enum('Active','Inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `nr_result_history`
+--
+
+INSERT INTO `nr_result_history` (`nr_result_id`, `nr_admin_id`, `nr_resulth_task`, `nr_resulth_date`, `nr_resulth_time`, `nr_resulth_status`) VALUES
+(14, 1, 'Updated Result Student ID: 150102040001, Student Name: Rahat Mahmud, Program: BBA, Course Code: BBA 201, Course Title: Cost Management and Accounting, Semester: Summer 2015, Marks: 70, Grade: A-, Grade Point: -150252144.85431, Course Instructor: Noushad Sojib, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Inactive', '2020-05-06', '11:14 PM', 'Active'),
+(14, 1, 'Updated Result Student ID: 150102040001, Student Name: Rahat Mahmud, Program: BBA, Course Code: BBA 201, Course Title: Cost Management and Accounting, Semester: Summer 2015, Marks: 70, Grade: A-, Grade Point: 3.5, Course Instructor: Noushad Sojib, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-06', '11:33 PM', 'Active'),
+(14, 1, 'Updated Result Student ID: 150102040001, Student Name: Rahat Mahmud, Program: BBA, Course Code: BBA 201, Course Title: Cost Management and Accounting, Semester: Summer 2015, Marks: 70, Grade: A-, Grade Point: 3.5, Course Instructor: Noushad Sojib, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-06', '11:44 PM', 'Active'),
+(14, 1, 'Updated Result Student ID: 150102040001, Student Name: Rahat Mahmud, Program: BBA, Course Code: BBA 201, Course Title: Cost Management and Accounting, Semester: Summer 2015, Marks: 70, Grade: A-, Grade Point: 3.5, Course Instructor: Noushad Sojib, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-06', '11:46 PM', 'Active'),
+(14, 1, 'Updated Result Student ID: 150102040001, Student Name: Rahat Mahmud, Program: BBA, Course Code: BBA 201, Course Title: Cost Management and Accounting, Semester: Summer 2015, Marks: 70, Grade: A-, Grade Point: 3.5, Course Instructor: Noushad Sojib, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-06', '11:48 PM', 'Active'),
+(14, 1, 'Updated Result Student ID: 150102040001, Student Name: Rahat Mahmud, Program: BBA, Course Code: BBA 201, Course Title: Cost Management and Accounting, Semester: Summer 2015, Marks: 70, Grade: A-, Grade Point: 3.5, Course Instructor: Noushad Sojib, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-06', '11:49 PM', 'Active'),
+(14, 1, 'Updated Result Student ID: 150102040001, Student Name: Rahat Mahmud, Program: BBA, Course Code: BBA 201, Course Title: Cost Management and Accounting, Semester: Summer 2015, Marks: 70, Grade: A-, Grade Point: 3.5, Course Instructor: Noushad Sojib, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-06', '11:53 PM', 'Active'),
+(14, 1, 'Updated Result Student ID: 150102040001, Student Name: Rahat Mahmud, Program: BBA, Course Code: BBA 201, Course Title: Cost Management and Accounting, Semester: Summer 2015, Marks: 90, Grade: A+, Grade Point: 4, Remarks: , Course Instructor: Noushad Sojib, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-07', '12:04 AM', 'Active'),
+(14, 1, 'Updated Result Student ID: 150102040001, Student Name: Rahat Mahmud, Program: BBA, Course Code: BBA 201, Course Title: Cost Management and Accounting, Semester: Summer 2015, Marks: 69, Grade: B+, Grade Point: 3.25, Remarks: , Course Instructor: Noushad Sojib, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-07', '03:56 PM', 'Active'),
+(29, 1, 'Added Result Student ID: 140203020003, Student Name: Rocksar Sultana Smriti, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 313, Course Title: Database System, Semester: Summer 2017, Marks: 32, Grade: F, Grade Point: 0.00, Remarks: Incomplete, Course Instructor: Noushad Sojib, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-08', '03:19 PM', 'Active'),
+(29, 1, 'Updated Result Student ID: 140203020003, Student Name: , Program: B.Sc. (Engg.) in CSE, Course Code: CSE 313, Course Title: Database System, Semester: Summer 2017, Marks: 55, Grade: B-, Grade Point: 2.75, Remarks: MakeUp_MS_SF, Course Instructor: Noushad Sojib, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-09', '09:45 PM', 'Active'),
+(14, 1, 'Updated Result Student ID: 150102040001, Student Name: , Program: BBA, Course Code: BBA 201, Course Title: Cost Management and Accounting, Semester: Summer 2015, Marks: 80, Grade: A+, Grade Point: 4.00, Remarks: , Course Instructor: Noushad Sojib, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Inactive', '2020-05-09', '09:45 PM', 'Active'),
+(29, 1, 'Updated Result Student ID: 140203020003, Student Name: Rocksar Sultana Smriti, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 313, Course Title: Database System, Semester: Summer 2017, Marks: 47, Grade: C, Grade Point: 2.25, Remarks: MakeUp_MS_SF, Course Instructor: Noushad Sojib, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-09', '09:53 PM', 'Active'),
+(35, 1, 'Added Result Student ID: 140203020003, Student Name: Rocksar Sultana Smriti, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 314, Course Title: Database System Lab, Semester: Summer 2017, Marks: 56, Grade: B-, Grade Point: 2.75, Remarks: , Course Instructor: Mir Lutfur Rahman, Instructor Designation: Lecturer, Department of Computer Science and Engineering, Result Status: Active', '2020-05-09', '11:10 PM', 'Active'),
+(29, 1, 'Updated Result Student ID: 140203020003, Student Name: Rocksar Sultana Smriti, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 313, Course Title: Database System, Semester: Summer 2017, Marks: 72, Grade: A-, Grade Point: 3.50, Remarks: MakeUp_MS, Course Instructor: Noushad Sojib, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-09', '11:14 PM', 'Active'),
+(35, 1, 'Updated Result Student ID: 140203020003, Student Name: Rocksar Sultana Smriti, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 314, Course Title: Database System Lab, Semester: Summer 2017, Marks: 61, Grade: B, Grade Point: 3.00, Remarks: MakeUp_SF, Course Instructor: Mir Lutfur Rahman, Instructor Designation: Lecturer, Department of Computer Science and Engineering, Result Status: Active', '2020-05-09', '11:14 PM', 'Active'),
+(29, 1, 'Updated Result Student ID: 140203020003, Student Name: Rocksar Sultana Smriti, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 313, Course Title: Database System, Semester: Summer 2017, Marks: 30, Grade: F, Grade Point: 0.00, Remarks: , Course Instructor: Noushad Sojib, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-09', '11:18 PM', 'Active'),
+(35, 1, 'Updated Result Student ID: 140203020003, Student Name: Rocksar Sultana Smriti, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 314, Course Title: Database System Lab, Semester: Summer 2017, Marks: 40, Grade: D, Grade Point: 2.00, Remarks: , Course Instructor: Mir Lutfur Rahman, Instructor Designation: Lecturer, Department of Computer Science and Engineering, Result Status: Active', '2020-05-09', '11:18 PM', 'Active'),
+(29, 1, 'Updated Result Student ID: 140203020003, Student Name: Rocksar Sultana Smriti, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 313, Course Title: Database System, Semester: Summer 2017, Marks: 62, Grade: B, Grade Point: 3.00, Remarks: , Course Instructor: Noushad Sojib, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-09', '11:24 PM', 'Active'),
+(35, 1, 'Updated Result Student ID: 140203020003, Student Name: Rocksar Sultana Smriti, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 314, Course Title: Database System Lab, Semester: Summer 2017, Marks: 70, Grade: A-, Grade Point: 3.50, Remarks: , Course Instructor: Mir Lutfur Rahman, Instructor Designation: Lecturer, Department of Computer Science and Engineering, Result Status: Active', '2020-05-09', '11:24 PM', 'Active'),
+(36, 6, 'Added Result Student ID: 140303020001, Student Name: Syed Ahsan Sirat, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 313, Course Title: Database System, Semester: Spring 2016, Marks: 72, Grade: A-, Grade Point: 3.50, Remarks: , Course Instructor: Al Mehdi Saadat Chowdhury, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-10', '08:08 PM', 'Active'),
+(37, 6, 'Added Result Student ID: 140303020008, Student Name: Abad Khan, Program: B.Sc. (Engg.) in CSE, Course Code: CSE 313, Course Title: Database System, Semester: Spring 2016, Marks: 54, Grade: C+, Grade Point: 2.50, Remarks: , Course Instructor: Al Mehdi Saadat Chowdhury, Instructor Designation: Assistant Professor, Department of Computer Science and Engineering, Result Status: Active', '2020-05-10', '08:12 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -928,13 +1109,16 @@ CREATE TABLE `nr_student` (
 
 INSERT INTO `nr_student` (`nr_stud_id`, `nr_stud_name`, `nr_stud_dob`, `nr_stud_gender`, `nr_stud_email`, `nr_stud_cell_no`, `nr_stud_photo`, `nr_prog_id`, `nr_prcr_id`, `nr_stud_status`) VALUES
 (130103020001, 'Muhith Miah', '1993-01-01', 'Male', '', '01712345611', '', 1, 1, 'Inactive'),
-(130103020002, 'Farjana Rahman', '1994-01-01', 'Female', '', '', '', 1, 1, 'Active'),
+(130103020002, 'Farjana Rahman', '1994-01-01', 'Female', 'fkk@hj.kk', '', '', 1, 1, 'Active'),
+(140203020001, 'Humaira Ahmed Joti', '1990-01-01', 'Female', '', '', '', 1, 1, 'Active'),
 (140203020002, 'Mir Lutfur Rahman', '1996-07-04', 'Male', 'mlrahman@neub.edu.bd', '', '158841812715884181276265.jpg', 1, 1, 'Active'),
 (140203020003, 'Rocksar Sultana Smriti', '1995-01-09', 'Female', 'mirlutfur.rahman@gmail.com', '', '', 1, 1, 'Active'),
-(140203020004, 'Pranta Sarkar', '1990-07-02', 'Male', 'psarkar@gmail.com', '', '', 1, 1, 'Active'),
+(140203020004, 'Pranta Sarkar', '1990-07-02', 'Male', 'mirlutfur.rahman@gmail.com', '', '', 1, 1, 'Active'),
 (140203020005, 'Topu Dash Roy', '1994-12-31', 'Male', 'topucse05@gmail.com', '', '', 1, 1, 'Active'),
 (140203020009, 'Nusrat Hoque', '1990-07-02', 'Female', '', '', '', 1, 1, 'Active'),
-(150102040001, 'Rahat Mahmud', '1994-07-02', 'Male', '', '', '', 3, 3, 'Active');
+(140303020001, 'Syed Ahsan Sirat', '1990-01-01', 'Male', '', '', '', 1, 1, 'Active'),
+(140303020008, 'Abad Khan', '1992-01-01', 'Male', '', '', '', 1, 1, 'Active'),
+(150102040001, 'Rahat Mahmud', '1994-07-02', 'Male', 'mirlutfur.rahman@gmail.com', '', '', 3, 3, 'Active');
 
 -- --------------------------------------------------------
 
@@ -993,7 +1177,39 @@ INSERT INTO `nr_student_history` (`nr_stud_id`, `nr_admin_id`, `nr_studh_task`, 
 (130103020001, 1, 'Added Student Name: Muhith Miah, Student DOB: 1993-01-01, Student Gender: Male, Student Email: N/A, Student Mobile: 01712345611, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Inactive', '2020-05-03', '11:11 PM', 'Active'),
 (130103020002, 1, 'Added Student Name: Farjana Rahman, Student DOB: 1994-01-01, Student Gender: Female, Student Email: N/A, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Active', '2020-05-03', '11:11 PM', 'Active'),
 (140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-04, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 9.00, Student Status: Active', '2020-05-04', '06:58 PM', 'Active'),
-(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-04, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 12.00, Student Status: Active', '2020-05-04', '07:54 PM', 'Active');
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-04, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 12.00, Student Status: Active', '2020-05-04', '07:54 PM', 'Active'),
+(130103020002, 1, 'Edited Student Name: Farjana Rahman, Student DOB: 1994-01-01, Student Gender: Female, Student Email: fkk@hj.kk, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Active', '2020-05-07', '04:20 PM', 'Active'),
+(130103020001, 1, 'Edited Student Name: Muhith Miah, Student DOB: 1993-01-01, Student Gender: Male, Student Email: N/A, Student Mobile: 01712345611, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 3.00, Student Status: Inactive', '2020-05-07', '07:19 PM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-04, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 9.00, Student Status: Active', '2020-05-07', '11:17 PM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-04, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 4.00, Earned Credit: 3.00, Waived Credit: 10.50, Student Status: Active', '2020-05-08', '12:06 AM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-04, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 4.00, Earned Credit: 3.00, Waived Credit: 9.00, Student Status: Active', '2020-05-08', '12:08 AM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-04, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 4.00, Earned Credit: 3.00, Waived Credit: 10.50, Student Status: Active', '2020-05-08', '12:12 AM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-04, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 4.00, Earned Credit: 3.00, Waived Credit: 9.00, Student Status: Active', '2020-05-08', '12:14 AM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-04, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 4.00, Earned Credit: 3.00, Waived Credit: 12.00, Student Status: Active', '2020-05-08', '12:15 AM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-04, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 4.00, Earned Credit: 3.00, Waived Credit: 9.00, Student Status: Active', '2020-05-08', '12:18 AM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-04, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 4.00, Earned Credit: 3.00, Waived Credit: 12.00, Student Status: Active', '2020-05-08', '12:39 AM', 'Active'),
+(140203020003, 1, 'Edited Student Name: Rocksar Sultana Smriti, Student DOB: 1995-01-09, Student Gender: Female, Student Email: mirlutfur.rahman@gmail.com, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 3.75, Earned Credit: 3.00, Waived Credit: 3.00, Student Status: Active', '2020-05-08', '12:52 AM', 'Active'),
+(140203020003, 1, 'Edited Student Name: Rocksar Sultana Smriti, Student DOB: 1995-01-09, Student Gender: Female, Student Email: mirlutfur.rahman@gmail.com, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 3.75, Earned Credit: 3.00, Waived Credit: 6.00, Student Status: Active', '2020-05-08', '12:52 AM', 'Active'),
+(140203020003, 1, 'Edited Student Name: Rocksar Sultana Smriti, Student DOB: 1995-01-09, Student Gender: Female, Student Email: mirlutfur.rahman@gmail.com, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 3.75, Earned Credit: 3.00, Waived Credit: 7.50, Student Status: Active', '2020-05-08', '12:52 AM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-04, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 4.00, Earned Credit: 3.00, Waived Credit: 13.50, Student Status: Active', '2020-05-08', '12:52 AM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-04, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 4.00, Earned Credit: 3.00, Waived Credit: 15.00, Student Status: Active', '2020-05-08', '12:52 AM', 'Active'),
+(140203020002, 1, 'Edited Student Name: Mir Lutfur Rahman, Student DOB: 1996-07-04, Student Gender: Male, Student Email: mlrahman@neub.edu.bd, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 3.75, Earned Credit: 3.00, Waived Credit: 12.00, Student Status: Active', '2020-05-08', '02:05 PM', 'Active'),
+(130103020002, 6, 'Edited Student Name: Farjana Rahman, Student DOB: 1994-01-01, Student Gender: Female, Student Email: fkk@hj.kk, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 3.00, Student Status: Active', '2020-05-10', '02:15 PM', 'Active'),
+(130103020001, 1, 'Edited Student Name: Muhith Miah, Student DOB: 1993-01-01, Student Gender: Male, Student Email: N/A, Student Mobile: 01712345611, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 4.50, Student Status: Inactive', '2020-05-10', '04:12 PM', 'Active'),
+(130103020001, 1, 'Edited Student Name: Muhith Miah, Student DOB: 1993-01-01, Student Gender: Male, Student Email: N/A, Student Mobile: 01712345611, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 6.00, Student Status: Inactive', '2020-05-10', '04:13 PM', 'Active'),
+(130103020001, 1, 'Edited Student Name: Muhith Miah, Student DOB: 1993-01-01, Student Gender: Male, Student Email: N/A, Student Mobile: 01712345611, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 3.00, Student Status: Inactive', '2020-05-10', '04:15 PM', 'Active'),
+(130103020001, 1, 'Edited Student Name: Muhith Miah, Student DOB: 1993-01-01, Student Gender: Male, Student Email: N/A, Student Mobile: 01712345611, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 1.50, Student Status: Inactive', '2020-05-10', '04:15 PM', 'Active'),
+(130103020001, 1, 'Edited Student Name: Muhith Miah, Student DOB: 1993-01-01, Student Gender: Male, Student Email: N/A, Student Mobile: 01712345611, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Inactive', '2020-05-10', '04:15 PM', 'Active'),
+(130103020001, 1, 'Edited Student Name: Muhith Miah, Student DOB: 1993-01-01, Student Gender: Male, Student Email: N/A, Student Mobile: 01712345611, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 1.50, Student Status: Inactive', '2020-05-10', '04:17 PM', 'Active'),
+(130103020001, 1, 'Edited Student Name: Muhith Miah, Student DOB: 1993-01-01, Student Gender: Male, Student Email: N/A, Student Mobile: 01712345611, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 4.50, Student Status: Inactive', '2020-05-10', '04:20 PM', 'Active'),
+(140203020001, 1, 'Added Student Name: Humaira Ahmed Joti, Student DOB: 1990-01-01, Student Gender: Female, Student Email: N/A, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Active', '2020-05-10', '04:21 PM', 'Active'),
+(130103020001, 6, 'Edited Student Name: Muhith Miah, Student DOB: 1993-01-01, Student Gender: Male, Student Email: N/A, Student Mobile: 01712345611, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 7.50, Student Status: Inactive', '2020-05-10', '04:25 PM', 'Active'),
+(140303020001, 6, 'Added Student Name: Syed Ahsan Sirat, Student DOB: 1990-01-01, Student Gender: Male, Student Email: N/A, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Active', '2020-05-10', '04:40 PM', 'Active'),
+(140303020001, 6, 'Edited Student Name: Syed Ahsan Sirat, Student DOB: 1990-01-01, Student Gender: Male, Student Email: N/A, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 3.00, Student Status: Active', '2020-05-10', '04:41 PM', 'Active'),
+(140303020008, 6, 'Added Student Name: Abad Khan, Student DOB: 1992-01-01, Student Gender: Male, Student Email: N/A, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 0.00, Student Status: Active', '2020-05-10', '04:48 PM', 'Active'),
+(140303020001, 6, 'Edited Student Name: Syed Ahsan Sirat, Student DOB: 1990-01-01, Student Gender: Male, Student Email: N/A, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 6.00, Student Status: Active', '2020-05-10', '04:49 PM', 'Active'),
+(140303020008, 6, 'Edited Student Name: Abad Khan, Student DOB: 1992-01-01, Student Gender: Male, Student Email: N/A, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 3.00, Student Status: Active', '2020-05-10', '04:49 PM', 'Active'),
+(130103020002, 6, 'Edited Student Name: Farjana Rahman, Student DOB: 1994-01-01, Student Gender: Female, Student Email: fkk@hj.kk, Student Mobile: N/A, Student Program: B.Sc. (Engg.) in CSE, Student CGPA: 0.00, Earned Credit: 0.00, Waived Credit: 6.00, Student Status: Active', '2020-05-12', '05:07 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1021,14 +1237,17 @@ CREATE TABLE `nr_student_info` (
 --
 
 INSERT INTO `nr_student_info` (`nr_stud_id`, `nr_studi_dropout`, `nr_studi_graduated`, `nr_studi_cgpa`, `nr_studi_last_semester`, `nr_studi_last_year`, `nr_studi_publish_date`, `nr_studi_status`, `nr_studi_drop_semester`, `nr_studi_drop_year`, `nr_studi_earned_credit`, `nr_studi_waived_credit`) VALUES
-(130103020001, 1, 0, 0, 'Spring', 2013, '2020-05-03', 'Active', 'Fall', 2013, 0, 0),
-(130103020002, 1, 0, 0, 'Spring', 2013, '2020-05-03', 'Active', 'Fall', 2013, 0, 0),
-(140203020002, 1, 0, 0, 'Summer', 2014, '2020-05-04', 'Active', 'Spring', 2015, 0, 12),
-(140203020003, 1, 0, 0, 'Summer', 2014, '2020-05-03', 'Active', 'Spring', 2015, 0, 0),
-(140203020004, 1, 0, 3.5, 'Spring', 2016, '2020-04-20', 'Active', 'Fall', 2016, 3, 0),
-(140203020005, 1, 0, 0, 'Summer', 2014, '2020-04-20', 'Active', 'Spring', 2015, 0, 0),
-(140203020009, 1, 0, 0, 'Summer', 2014, '2020-04-20', 'Active', 'Spring', 2015, 0, 3),
-(150102040001, 1, 0, 3.5, 'Summer', 2015, '2020-04-20', 'Active', 'Spring', 2016, 3, 0);
+(130103020001, 1, 0, 0, 'Spring', 2013, '2020-05-10', 'Active', 'Fall', 2013, 0, 7.5),
+(130103020002, 1, 0, 0, 'Spring', 2013, '2020-05-12', 'Active', 'Fall', 2013, 0, 6),
+(140203020001, 1, 0, 0, 'Summer', 2014, '2020-05-10', 'Active', 'Spring', 2015, 0, 0),
+(140203020002, 1, 0, 0, 'Summer', 2014, '2020-05-09', 'Active', 'Spring', 2015, 0, 12),
+(140203020003, 1, 0, 3.17, 'Summer', 2017, '2020-05-09', 'Active', 'Spring', 2018, 4.5, 7.5),
+(140203020004, 1, 0, 0, 'Summer', 2014, '2020-05-09', 'Active', 'Spring', 2015, 0, 0),
+(140203020005, 1, 0, 0, 'Summer', 2014, '2020-05-09', 'Active', 'Spring', 2015, 0, 0),
+(140203020009, 1, 0, 0, 'Summer', 2014, '2020-05-09', 'Active', 'Spring', 2015, 0, 3),
+(140303020001, 1, 0, 3.5, 'Spring', 2016, '2020-05-10', 'Active', 'Fall', 2016, 3, 6),
+(140303020008, 1, 0, 2.5, 'Spring', 2016, '2020-05-10', 'Active', 'Fall', 2016, 3, 3),
+(150102040001, 1, 0, 0, 'Spring', 2015, '2020-05-09', 'Active', 'Fall', 2015, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1050,9 +1269,10 @@ CREATE TABLE `nr_student_semester_cgpa` (
 --
 
 INSERT INTO `nr_student_semester_cgpa` (`nr_stud_id`, `nr_studsc_semester`, `nr_studsc_year`, `nr_studsc_cgpa`, `nr_studsc_status`, `nr_studsc_publish_date`) VALUES
-(140203020004, 'Spring', 2015, 3.5, 'Active', '2020-04-20'),
-(140203020004, 'Spring', 2016, 0, 'Active', '2020-04-20'),
-(150102040001, 'Summer', 2015, 3.5, 'Active', '2020-04-20');
+(140203020003, 'Summer', 2017, 3.17, 'Active', '2020-05-09'),
+(140303020001, 'Spring', 2016, 3.5, 'Active', '2020-05-10'),
+(140303020008, 'Spring', 2016, 2.5, 'Active', '2020-05-10'),
+(150102040001, 'Summer', 2015, 0, 'Active', '2020-05-09');
 
 -- --------------------------------------------------------
 
@@ -1075,9 +1295,21 @@ CREATE TABLE `nr_student_waived_credit` (
 INSERT INTO `nr_student_waived_credit` (`nr_stwacr_id`, `nr_stud_id`, `nr_course_id`, `nr_stwacr_date`, `nr_stwacr_status`) VALUES
 (3, 140203020009, 1, '2020-01-01', 'Active'),
 (9, 140203020002, 5, '2020-05-03', 'Active'),
-(10, 140203020002, 2, '2020-05-03', 'Active'),
-(12, 140203020002, 8, '2020-05-04', 'Active'),
-(13, 140203020002, 1, '2020-05-04', 'Active');
+(13, 140203020002, 1, '2020-05-04', 'Active'),
+(18, 140203020002, 7, '2020-05-08', 'Active'),
+(19, 140203020003, 1, '2020-05-08', 'Active'),
+(20, 140203020003, 2, '2020-05-08', 'Active'),
+(21, 140203020003, 3, '2020-05-08', 'Active'),
+(22, 140203020002, 3, '2020-05-08', 'Active'),
+(23, 140203020002, 6, '2020-05-08', 'Active'),
+(24, 130103020002, 1, '2020-05-10', 'Active'),
+(27, 130103020001, 6, '2020-05-10', 'Active'),
+(28, 130103020001, 10, '2020-05-10', 'Active'),
+(29, 130103020001, 7, '2020-05-10', 'Active'),
+(30, 140303020001, 1, '2020-05-10', 'Active'),
+(31, 140303020001, 8, '2020-05-10', 'Active'),
+(32, 140303020008, 8, '2020-05-10', 'Active'),
+(33, 130103020002, 7, '2020-05-12', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1140,8 +1372,76 @@ CREATE TABLE `nr_transcript_print_reference` (
 INSERT INTO `nr_transcript_print_reference` (`nr_stud_id`, `nr_trprre_printed_by`, `nr_trprre_user_id`, `nr_trprre_ip_address`, `nr_trprre_country`, `nr_trprre_city`, `nr_trprre_lat`, `nr_trprre_lng`, `nr_trprre_timezone`, `nr_trprre_date`, `nr_trprre_time`, `nr_trprre_reference`, `nr_trprre_status`) VALUES
 (150102040001, 'Student', 150102040001, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '12:48 PM', '0110201408485592', 'Active'),
 (150102040001, 'Student', 150102040001, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-12', '02:12 PM', '0131201210123742', 'Active'),
+(130103020001, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '02:35 PM', '0140200810350717', 'Active'),
 (150102040001, 'Student', 150102040001, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '12:50 PM', '0143201408500047', 'Active'),
+(130103020001, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-05', '04:08 PM', '0164200512084381', 'Active'),
+(130103020001, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-05', '04:08 PM', '0177200512085225', 'Active'),
+(130103020001, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:29 PM', '0182200407293562', 'Active'),
 (150102040001, 'Student', 150102040001, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '12:46 PM', '0184201408464963', 'Active'),
+(130103020001, 'Moderator', 6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '07:52 PM', '0189200603524618', 'Active'),
+(130103020001, 'Moderator', 6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:27 PM', '0195200610272455', 'Active'),
+(140203020002, 'Moderator', 6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '08:14 PM', '0210200404143853', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:12 PM', '0211200407122641', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '10:35 PM', '0212200406353844', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:11 PM', '0212200407114060', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:25 PM', '0231200610251386', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:28 PM', '0231200610282794', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:09 PM', '0233200407092087', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:10 PM', '0237200610104018', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:33 PM', '0237200610334191', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '10:33 PM', '0239200406335821', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:30 PM', '0239200610303230', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:03 PM', '0242200407031198', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:29 PM', '0242200610291933', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:13 PM', '0245200407131881', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:31 PM', '0251200610311576', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:12 PM', '0252200610123698', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:20 PM', '0252200610200980', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:21 PM', '0253200407215957', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:29 PM', '0254200407291044', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:00 PM', '0255200407000845', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:33 PM', '0255200610330818', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:18 PM', '0256200610180680', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '10:33 PM', '0257200406330668', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '10:39 PM', '0259200406392816', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:35 PM', '0259200610352029', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:17 PM', '0261200407171838', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:27 PM', '0262200407275480', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:19 PM', '0263200407192617', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:21 PM', '0263200407210892', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '10:38 PM', '0265200406384385', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:20 PM', '0265200610203016', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:16 PM', '0268200407162557', 'Active'),
+(130103020002, 'Moderator', 6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '01:59 PM', '0268201009592375', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:08 PM', '0270200407082186', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:10 PM', '0270200407101027', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:09 PM', '0270200610093636', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:01 PM', '0271200407014831', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:06 PM', '0271200407063976', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:04 PM', '0273200407041973', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '10:41 PM', '0275200406410362', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:04 PM', '0277200407045280', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:17 PM', '0278200407175838', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:23 PM', '0278200610231597', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:07 PM', '0279200407070394', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:14 PM', '0280200407140148', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:24 PM', '0281200610241289', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:14 PM', '0282200610141460', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:13 PM', '0284200610132855', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:03 PM', '0286200407033144', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:21 PM', '0289200610214743', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:25 PM', '0291200407251568', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:18 PM', '0294200407184688', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:09 PM', '0295200610092762', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-06', '02:27 PM', '0298200610273889', 'Active'),
+(140203020002, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-04', '11:23 PM', '0299200407234226', 'Active'),
+(140203020003, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '12:04 AM', '0315200708043564', 'Active'),
+(140203020003, 'Student', 140203020003, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '01:25 AM', '0324200709254489', 'Active'),
+(140203020003, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '01:08 AM', '0326200709083750', 'Active'),
+(140203020003, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '03:20 PM', '0330200811203222', 'Active'),
+(140203020003, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '01:16 AM', '0366200709163978', 'Active'),
+(140203020003, 'Super Admin', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '01:08 AM', '0368200709083095', 'Active'),
+(140203020003, 'Faculty', 1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '01:16 AM', '0369200709165165', 'Active'),
 (140203020004, 'Student', 140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '12:51 PM', '0445201408512649', 'Active'),
 (140203020004, 'Student', 140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '12:52 PM', '0451201408523243', 'Active'),
 (140203020004, 'Student', 140203020004, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-04-14', '01:51 PM', '0454201409515965', 'Active'),
@@ -1369,7 +1669,7 @@ ALTER TABLE `nr_transcript_print_reference`
 -- AUTO_INCREMENT for table `nr_admin`
 --
 ALTER TABLE `nr_admin`
-  MODIFY `nr_admin_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `nr_admin_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `nr_course`
@@ -1387,7 +1687,7 @@ ALTER TABLE `nr_department`
 -- AUTO_INCREMENT for table `nr_drop`
 --
 ALTER TABLE `nr_drop`
-  MODIFY `nr_drop_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `nr_drop_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `nr_faculty`
@@ -1411,13 +1711,13 @@ ALTER TABLE `nr_program_credit`
 -- AUTO_INCREMENT for table `nr_result`
 --
 ALTER TABLE `nr_result`
-  MODIFY `nr_result_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `nr_result_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `nr_student_waived_credit`
 --
 ALTER TABLE `nr_student_waived_credit`
-  MODIFY `nr_stwacr_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `nr_stwacr_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `nr_system_component`

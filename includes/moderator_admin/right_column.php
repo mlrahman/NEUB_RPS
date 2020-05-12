@@ -154,7 +154,7 @@
 		
 		<!-- Page 3 starts here -->
 		<div id="page3" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
-			
+				<?php include("../includes/moderator_admin/edit_profile.php"); ?>
 		
 		</div>
 		

@@ -1,33 +1,33 @@
 <?php
 	try{
-		require("../includes/faculty/logged_out_auth.php");
+		require("../includes/moderator_admin/logged_out_auth.php");
 	}
 	catch(Exception $e)
 	{
 		header("location:index.php");
 		die();
 	}
-?>
-<?php
-	//faculty info
-	$stmt = $conn->prepare("select * from nr_faculty where nr_faculty_status='Active' and nr_faculty_id=:f_id");
-	$stmt->bindParam(':f_id', $_SESSION['faculty_id']);
-	$stmt->execute();
-	$result = $stmt->fetchAll();
-	if(count($result)==0)
-	{
-		die();
-	}
-	$faculty_id=$result[0][0];
-	$faculty_name=$result[0][1];
-	$faculty_designation=$result[0][2];
-	$faculty_email=$result[0][8];
-	$faculty_cell_no=$result[0][9];
-	$faculty_joining_date=get_date($result[0][3]);
-	$faculty_type=$result[0][5];
-	$faculty_gender=$result[0][13];
-	$photo=$result[0][10];
-	$otp=$result[0][12];
+	try{
+		//moderator_admin info
+		$stmt = $conn->prepare("select * from nr_admin where nr_admin_status='Active' and nr_admin_id=:f_id");
+		$stmt->bindParam(':f_id', $_SESSION['moderator_id']);
+		$stmt->execute();
+		$result = $stmt->fetchAll();
+		if(count($result)==0)
+		{
+			die();
+		}
+		$moderator_id=$result[0][0];
+		$moderator_name=$result[0][1];
+		$moderator_designation=$result[0][7];
+		$moderator_email=$result[0][2];
+		$moderator_cell_no=$result[0][4];
+		$moderator_joining_date=get_date($result[0][12]);
+		$moderator_type=$result[0][6];
+		$moderator_gender=$result[0][11];
+		$photo=$result[0][5];
+		$otp=$result[0][10];
+		
 ?>
 
 <div id="edit_loading" title="Please wait while uploading your profile.." class="w3-container w3-animate-top w3-text-white w3-center" style="display:none;height:100%;width:100%;top:0;left:0;background:black;opacity:0.6;position:fixed;z-index:99999999;padding-top:170px;border-radius:0px 0px 10px 10px;">
@@ -44,20 +44,20 @@
 	<div class="w3-row w3-margin-0 w3-padding-0">
 		<div class="w3-col w3-margin-0" style="width:50%;padding:0px 6px 0px 0px;">
 			<label><b>Name</b></label>
-			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $faculty_name; ?>" disabled>
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $moderator_name; ?>" disabled>
 		  
 			<label><b>Designation</b></label>
-			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $faculty_designation; ?>" disabled>
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $moderator_designation; ?>" disabled>
 		</div>
 		<div class="w3-col w3-margin-0" style="width:50%;padding:0px 0px 0px 6px;">
 			<div class="w3-row w3-margin-0 w3-padding-0">
 				<div class="w3-col w3-margin-0" style="width:30%;padding:0px 6px 0px 0px;">			
-					<?php if($photo=="" && $faculty_gender=="Male"){ ?>
-						<img src="../images/system/male_profile.png" id="faculty_profile_image2" class="w3-image" style="border: 2px solid black;margin:22px 0px 0px 0px;padding:0px;width:100%;max-width:100px;height: 120px;" title="DP (120X100)px" alt="DP (120X100)px">
+					<?php if($photo=="" && $moderator_gender=="Male"){ ?>
+						<img src="../images/system/male_profile.png" id="moderator_profile_image2" class="w3-image" style="border: 2px solid black;margin:22px 0px 0px 0px;padding:0px;width:100%;max-width:100px;height: 120px;" title="DP (120X100)px" alt="DP (120X100)px">
 					<?php } else if($photo==""){ ?>
-						<img src="../images/system/female_profile.png" id="faculty_profile_image2" class="w3-image" style="border: 2px solid black;10px 0px 0px 0px;padding:0px;width:100%;max-width:100px;height: 120px;" title="DP (120X100)px" alt="DP (120X100)px">
+						<img src="../images/system/female_profile.png" id="moderator_profile_image2" class="w3-image" style="border: 2px solid black;10px 0px 0px 0px;padding:0px;width:100%;max-width:100px;height: 120px;" title="DP (120X100)px" alt="DP (120X100)px">
 					<?php } else { ?>
-						<img src="../images/faculty/<?php echo $photo; ?>" id="faculty_profile_image2" class="w3-image" style="border: 2px solid black;10px 0px 0px 0px;padding:0px;width:100%;max-width:100px;height: 120px;"  title="DP (120X100)px" alt="DP (120X100)px">
+						<img src="../images/moderator/<?php echo $photo; ?>" id="moderator_profile_image2" class="w3-image" style="border: 2px solid black;10px 0px 0px 0px;padding:0px;width:100%;max-width:100px;height: 120px;"  title="DP (120X100)px" alt="DP (120X100)px">
 					<?php } ?>
 				</div>
 				
@@ -70,7 +70,7 @@
 					
 					<div class="w3-clear" style="margin-bottom: 30px;"></div>
 					<label><i class="w3-text-red">*</i> <b>Upload DP</b></label>
-					<input class="w3-input w3-border w3-margin-bottom w3-round-large" onclick="document.getElementById('dp_msg').style.display='block'" type="file" id="faculty_image" title="Please upload DP (120X100)px"  onchange="form_change()">
+					<input class="w3-input w3-border w3-margin-bottom w3-round-large" onclick="document.getElementById('dp_msg').style.display='block'" type="file" id="moderator_image" title="Please upload DP (120X100)px"  onchange="form_change()">
 					<i class="w3-text-red w3-small w3-bold" id="dp_msg" style="display: none;">*Upload DP with (120X100)px</i>
 				</div>
 			</div>
@@ -78,65 +78,44 @@
 	</div>
 	
 	
-	<label><b>Department</b></label>
-	<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $department; ?>" disabled>
-		
-	
 	<div class="w3-row w3-margin-0 w3-padding-0">
-		<div class="w3-col w3-margin-0" style="width:33.33%;padding:0px 6px 0px 0px;">
+		<div class="w3-col w3-margin-0" style="width:50%;padding:0px 6px 0px 0px;">
 			<label><b>Email</b></label>
-			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $faculty_email; ?>" disabled>
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $moderator_email; ?>" disabled>
 		</div>
-		<div class="w3-col w3-margin-0" style="width:33.33%;padding:0px 6px 0px 6px;">
-			<label><i class="w3-text-red">*</i> <b>Cell No</b></label>
-			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $faculty_cell_no; ?>" placeholder="Enter your 11 digits cell no" id="new_cell_phone" onkeyup="form_change()" autocomplete="off">
-		</div>
-		<div class="w3-col w3-margin-0" style="width:33.33%;padding:0px 6px 0px 6px;">
-			<label><i class="w3-text-red">*</i> <b>2-Step Verification</b></label>
-			<?php
-				if($otp==1) //enabled
-				{
-			?>
-					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="new_otp" onchange="form_change()">
-						<option value="1">Enabled</option>
-						<option value="0">Disabled</option>
-					</select>
-			<?php
-				} else {
-			?>
-					<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="new_otp" onchange="form_change()">
-						<option value="0">Disabled</option>
-						<option value="1">Enabled</option>
-					</select>
-			<?php
-				}
-			?>
-		</div>
-	</div>
-	<div class="w3-row w3-margin-0 w3-padding-0">
-		<div class="w3-col w3-margin-0" style="width:33.33%;padding:0px 6px 0px 0px;">
+		<div class="w3-col w3-margin-0" style="width:50%;padding:0px 0px 0px 6px;">
 			<label><b>Joining Date</b></label>
-			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $faculty_joining_date; ?>" disabled>
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $moderator_joining_date; ?>" disabled>
 		</div>
-		<div class="w3-col w3-margin-0" style="width:33.33%;padding:0px 6px 0px 6px;">
-			<label><b>Faculty Type</b></label>
-			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $faculty_type; ?>" disabled>
+		
+	</div>
+	<div class="w3-row w3-margin-0 w3-padding-0">
+		<div class="w3-col w3-margin-0" style="width:50%;padding:0px 6px 0px 0px;">
+			<label><i class="w3-text-red">*</i> <b>Cell No</b></label>
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $moderator_cell_no; ?>" placeholder="Enter your 11 digits cell no" id="new_cell_phone" onkeyup="form_change()" autocomplete="off">
 		</div>
-		<div class="w3-col w3-margin-0" style="width:33.33%;padding:0px 0px 0px 6px;">
+		
+		<div class="w3-col w3-margin-0" style="width:50%;padding:0px 0px 0px 6px;">
 			<label><b>Gender</b></label>
-			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $faculty_gender; ?>" disabled>
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $moderator_gender; ?>" disabled>
 		</div>
 	</div>
 	<div class="w3-row w3-margin-0 w3-padding-0">
-		<div class="w3-col w3-margin-0" style="width:33.33%;padding:0px 6px 0px 0px;">
+		<div class="w3-col w3-margin-0" style="width:50%;padding:0px 6px 0px 0px;">
 			<label><i class="w3-text-red">*</i> <b>New Password</b></label>
 			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="password" onkeyup="form_change()"  autocomplete="off" id="pass" placeholder="Enter only for change password">
 		</div>
-		<div class="w3-col w3-margin-0" style="width:33.33%;padding:0px 6px 0px 6px;">
+		<div class="w3-col w3-margin-0" style="width:50%;padding:0px 0px 0px 6px;">
 			<label><i class="w3-text-red">*</i> <b>Confirm New Password</b></label>
 			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="password" onkeyup="form_change()"  autocomplete="off" id="c_pass" placeholder="Confirm the new password">
 		</div>
-		<div class="w3-col w3-margin-0" style="width:33.33%;padding:0px 0px 0px 6px;">
+	</div>
+	<div class="w3-row w3-margin-0 w3-padding-0">
+		<div class="w3-col w3-margin-0" style="width:50%;padding:0px 6px 0px 0px;">
+			<label><b>2-Step Verification</b></label>
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php if($otp==1) { echo 'Enabled'; } else { echo 'Disabled'; } ?>" disabled>
+		</div>
+		<div class="w3-col w3-margin-0" style="width:50%;padding:0px 0px 0px 6px;">
 			<?php 
 				//spam Check 
 				$aaa=rand(1,20);
@@ -239,21 +218,19 @@
 				}
 				n_cell_phone.onchange=cellphone_check;
 				//old values
-				var faculty_cell_no=<?php echo '"'.$faculty_cell_no.'"'; ?>;
-				var otp=<?php echo $otp; ?>;
+				var moderator_cell_no=<?php echo '"'.$moderator_cell_no.'"'; ?>;
 					
 				function form_change()
 				{
 					
 					//new values
-					var new_faculty_cell_no=document.getElementById('new_cell_phone').value.trim();
-					var new_otp=document.getElementById('new_otp').value.trim();
+					var new_moderator_cell_no=document.getElementById('new_cell_phone').value.trim();
 					
-					var faculty_image=document.getElementById('faculty_image').value.trim();
+					var moderator_image=document.getElementById('moderator_image').value.trim();
 					var new_c_pass=document.getElementById("c_pass").value;
 					var new_pass=document.getElementById("pass").value;
 					
-					if(faculty_cell_no!=new_faculty_cell_no || otp!=new_otp || faculty_image!="" || new_c_pass!="" || new_pass!="")
+					if(moderator_cell_no!=new_moderator_cell_no || moderator_image!="" || new_c_pass!="" || new_pass!="")
 					{
 						document.getElementById("edit_btn").disabled = false;
 					}
@@ -265,29 +242,28 @@
 				function edit_profile()
 				{
 					//new values
-					var new_faculty_cell_no=document.getElementById('new_cell_phone').value.trim();
-					var new_otp=document.getElementById('new_otp').value.trim();
+					var new_moderator_cell_no=document.getElementById('new_cell_phone').value.trim();
 					
-					var faculty_image=document.getElementById('faculty_image').value.trim();
+					var moderator_image=document.getElementById('moderator_image').value.trim();
 					var new_c_pass=document.getElementById("c_pass").value;
 					var new_pass=document.getElementById("pass").value;
 					if(password_check()==true && reservation_captcha_val5()==true && cellphone_check()==true)
 					{
-						if(faculty_image!="")
+						if(moderator_image!="")
 						{
-							if(file_validate(faculty_image)==true)
+							if(file_validate(moderator_image)==true)
 							{
 								c_pass.setCustomValidity('');
 								pass.setCustomValidity('');
 								n_cell_phone.setCustomValidity('');
 								reservation_captcha5.setCustomValidity('');
-								document.getElementById('faculty_image').setCustomValidity('');
+								document.getElementById('moderator_image').setCustomValidity('');
 								
 								document.getElementById('edit_loading').style.display='block';
-								document.getElementById('faculty_image').setCustomValidity('');
-								var image=document.getElementById('faculty_image').files[0];
+								document.getElementById('moderator_image').setCustomValidity('');
+								var image=document.getElementById('moderator_image').files[0];
 								var fd_image=new FormData();
-								var link='faculty_image';
+								var link='moderator_image';
 								fd_image.append(link, image);
 								//Ajax for image upload
 								var xhttp1 = new XMLHttpRequest();
@@ -303,15 +279,14 @@
 										if(image_name=="Ok")
 										{
 											var tmppath = URL.createObjectURL(image);
-											$("#faculty_profile_image").fadeIn("fast").attr('src',tmppath);
-											$("#faculty_profile_image2").fadeIn("fast").attr('src',tmppath);
+											$("#moderator_profile_image").fadeIn("fast").attr('src',tmppath);
+											$("#moderator_profile_image2").fadeIn("fast").attr('src',tmppath);
 											
 											
 											document.getElementById('image_progress_id').style.width='0%';
 											document.getElementById('image_progress_id').innerHTML='0%';
 											
-											faculty_cell_no = document.getElementById('new_cell_phone').value;
-											otp = document.getElementById('new_otp').value;
+											moderator_cell_no = document.getElementById('new_cell_phone').value;
 											document.getElementById('edit_loading').style.display='none';
 										
 											clear_edit_profile();
@@ -355,12 +330,12 @@
 									  }
 									}
 								};
-								xhttp1.open("POST", "../includes/faculty/set_profile_pic.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&image="+link+"&cell_no="+new_faculty_cell_no+"&otp="+new_otp+"&password="+new_c_pass, true);
+								xhttp1.open("POST", "../includes/moderator_admin/set_profile_pic.php?moderator_id="+<?php echo $_SESSION['moderator_id']; ?>+"&image="+link+"&cell_no="+new_moderator_cell_no+"&password="+new_c_pass, true);
 								xhttp1.send(fd_image);
 							}
 							else
 							{
-								document.getElementById('faculty_image').setCustomValidity('Upload valid DP .jpg, .jpeg, .png, .bmp file');
+								document.getElementById('moderator_image').setCustomValidity('Upload valid DP .jpg, .jpeg, .png, .bmp file');
 							}
 							
 						}
@@ -370,7 +345,7 @@
 							pass.setCustomValidity('');
 							n_cell_phone.setCustomValidity('');
 							reservation_captcha5.setCustomValidity('');
-							document.getElementById('faculty_image').setCustomValidity('');
+							document.getElementById('moderator_image').setCustomValidity('');
 					
 							document.getElementById('edit_loading').style.display='block';
 							//upload without image
@@ -388,8 +363,7 @@
 										document.getElementById('image_progress_id').innerHTML='0%';
 										document.getElementById('edit_loading').style.display='none';
 										
-										faculty_cell_no = document.getElementById('new_cell_phone').value;
-										otp = document.getElementById('new_otp').value;
+										moderator_cell_no = document.getElementById('new_cell_phone').value;
 										
 										document.getElementById('valid_msg').style.display='block';
 										document.getElementById('v_msg').innerHTML='Profile Successfully updated.';
@@ -444,7 +418,7 @@
 								  }
 								}
 							};
-							xhttp1.open("POST", "../includes/faculty/set_profile.php?faculty_dept_id="+<?php echo $_SESSION['faculty_dept_id']; ?>+"&faculty_id="+<?php echo $_SESSION['faculty_id']; ?>+"&cell_no="+new_faculty_cell_no+"&otp="+new_otp+"&password="+new_c_pass, true);
+							xhttp1.open("POST", "../includes/moderator_admin/set_profile.php?moderator_id="+<?php echo $_SESSION['moderator_id']; ?>+"&cell_no="+new_moderator_cell_no+"&password="+new_c_pass, true);
 							xhttp1.send();
 							
 						}
@@ -456,10 +430,9 @@
 				{
 					
 					//new values
-					document.getElementById('new_cell_phone').value=faculty_cell_no;
-					document.getElementById('new_otp').value=otp;
+					document.getElementById('new_cell_phone').value=moderator_cell_no;
 					
-					document.getElementById('faculty_image').value='';
+					document.getElementById('moderator_image').value='';
 					document.getElementById('captcha5').value='';
 					document.getElementById("c_pass").value='';
 					document.getElementById("pass").value='';
@@ -470,7 +443,7 @@
 					pass.setCustomValidity('');
 					n_cell_phone.setCustomValidity('');
 					reservation_captcha5.setCustomValidity('');
-					document.getElementById('faculty_image').setCustomValidity('');
+					document.getElementById('moderator_image').setCustomValidity('');
 					
 				}
 			</script>
@@ -478,3 +451,12 @@
 	</div>
 </div>
 </form>
+<?php 
+
+	}
+	catch(Exception $e)
+	{
+		echo $e;
+	}
+
+?>
