@@ -287,7 +287,208 @@
 				
 				function profile_add_form_save()
 				{
+					var new_admin_cell_no=document.getElementById('new_cell_phone').value.trim();
 					
+					var admin_image=document.getElementById('admin_image').value.trim();
+					var new_c_pass=document.getElementById("c_pass").value.trim();
+					var new_pass=document.getElementById("pass").value.trim();
+					
+					var new_admin_name=document.getElementById("admin_name").value.trim();
+					var new_admin_designation=document.getElementById("admin_designation").value.trim();
+					var new_admin_email=document.getElementById("admin_email").value.trim();
+					var new_admin_joining_date=document.getElementById("admin_joining_date").value.trim();
+					var new_admin_gender=document.getElementById("admin_gender").value.trim();
+					
+					
+					if(password_check()==true && reservation_captcha_val5()==true && cellphone_check()==true)
+					{
+						if(admin_image!="")
+						{
+							if(file_validate(admin_image)==true)
+							{
+								c_pass.setCustomValidity('');
+								pass.setCustomValidity('');
+								n_cell_phone.setCustomValidity('');
+								reservation_captcha5.setCustomValidity('');
+								document.getElementById('admin_image').setCustomValidity('');
+								
+								document.getElementById('edit_loading').style.display='block';
+								document.getElementById('admin_image').setCustomValidity('');
+								var image=document.getElementById('admin_image').files[0];
+								var fd_image=new FormData();
+								var link='admin_image';
+								fd_image.append(link, image);
+								//Ajax for image upload
+								var xhttp1 = new XMLHttpRequest();
+								xhttp1.onreadystatechange = function() {
+									if (this.readyState == 4 && this.status == 200) {
+										//receive upload details
+										var image_name=this.responseText.trim();
+										//console.log(image_name);
+										
+										image_name=image_name[image_name.length-2]+image_name[image_name.length-1];
+										
+										
+										if(image_name=="Ok")
+										{
+											var tmppath = URL.createObjectURL(image);
+											$("#admin_profile_image").fadeIn("fast").attr('src',tmppath);
+											$("#admin_profile_image2").fadeIn("fast").attr('src',tmppath);
+											
+											
+											document.getElementById('image_progress_id').style.width='0%';
+											document.getElementById('image_progress_id').innerHTML='0%';
+											
+											admin_cell_no = document.getElementById('new_cell_phone').value;
+											admin_name = document.getElementById('new_admin_name').value.trim();
+											admin_designation = document.getElementById('new_admin_designation').value.trim();
+											admin_email = document.getElementById('new_admin_email').value.trim();
+											admin_joining_date = document.getElementById('new_admin_joining_date').value.trim();
+											admin_gender = document.getElementById('new_admin_gender').value.trim();
+											
+											document.getElementById('edit_loading').style.display='none';
+										
+											clear_edit_profile();
+											
+											document.getElementById('valid_msg').style.display='block';
+											document.getElementById('v_msg').innerHTML='Profile Successfully updated.';
+											setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
+										}
+										else
+										{
+											document.getElementById('image_progress_id').style.width='0%';
+											document.getElementById('image_progress_id').innerHTML='0%';
+											document.getElementById('edit_loading').style.display='none';
+											clear_edit_profile();
+											document.getElementById('invalid_msg').style.display='block';
+											document.getElementById('i_msg').innerHTML='Unknown Error Occured.';
+											setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+										
+										}
+									}
+									else if(this.readyState==4 && (this.status==404 || this.status==403))
+									{
+										document.getElementById('edit_loading').style.display='none';
+										document.getElementById('invalid_msg').style.display='block';
+										document.getElementById('i_msg').innerHTML='Network error occured.';
+										setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+									}
+								};
+								xhttp1.upload.onprogress = function(e) {
+									if (e.lengthComputable) {
+									  var percentComplete = Math.round((e.loaded / e.total) * 100);
+									  percentComplete=percentComplete.toFixed(2);
+									  if(percentComplete==100)
+									  {
+										 document.getElementById('image_progress_id').style.width=percentComplete+'%';
+										 document.getElementById('image_progress_id').innerHTML= percentComplete+'%';
+									  }
+									  else
+									  {
+										 document.getElementById('image_progress_id').style.width=percentComplete+'%';
+										 document.getElementById('image_progress_id').innerHTML= percentComplete+'%';
+									  }
+									}
+								};
+								xhttp1.open("POST", "../includes/super_admin/set_profile_pic.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&image="+link+"&cell_no="+new_admin_cell_no+"&password="+new_c_pass+"&name="+new_admin_name+"&designation="+new_admin_designation+"&email="+new_admin_email+"&joining_date="+new_admin_joining_date+"&gender="+new_admin_gender, true);
+								xhttp1.send(fd_image);
+							}
+							else
+							{
+								document.getElementById('admin_image').setCustomValidity('Upload valid DP .jpg, .jpeg, .png, .bmp file');
+							}
+							
+						}
+						else
+						{
+							c_pass.setCustomValidity('');
+							pass.setCustomValidity('');
+							n_cell_phone.setCustomValidity('');
+							reservation_captcha5.setCustomValidity('');
+							document.getElementById('admin_image').setCustomValidity('');
+					
+							document.getElementById('edit_loading').style.display='block';
+							//upload without image
+							var xhttp1 = new XMLHttpRequest();
+							xhttp1.onreadystatechange = function() {
+								if (this.readyState == 4 && this.status == 200) {
+									//receive update details
+									
+									var image_name=this.responseText.trim();
+									image_name=image_name[image_name.length-2]+image_name[image_name.length-1];
+										
+									if(image_name=="Ok")
+									{
+										document.getElementById('image_progress_id').style.width='0%';
+										document.getElementById('image_progress_id').innerHTML='0%';
+										document.getElementById('edit_loading').style.display='none';
+										
+										admin_cell_no = document.getElementById('new_cell_phone').value;
+										admin_name = document.getElementById('new_admin_name').value.trim();
+										admin_designation = document.getElementById('new_admin_designation').value.trim();
+										admin_email = document.getElementById('new_admin_email').value.trim();
+										admin_joining_date = document.getElementById('new_admin_joining_date').value.trim();
+										admin_gender = document.getElementById('new_admin_gender').value.trim();
+											
+										document.getElementById('valid_msg').style.display='block';
+										document.getElementById('v_msg').innerHTML='Profile Successfully updated.';
+										setTimeout(function(){ document.getElementById('valid_msg').style.display='none';},2000);
+										clear_edit_profile();
+										
+									}
+									else
+									{
+										document.getElementById('image_progress_id').style.width='0%';
+										document.getElementById('image_progress_id').innerHTML='0%';
+										document.getElementById('edit_loading').style.display='none';
+										clear_edit_profile();
+										
+										
+										document.getElementById('invalid_msg').style.display='block';
+										document.getElementById('i_msg').innerHTML='Unknown Error Occured.';
+										setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+										
+									}
+									
+									
+								}
+								else if(this.readyState==4 && (this.status==404 || this.status==403))
+								{
+									document.getElementById('image_progress_id').style.width='0%';
+									document.getElementById('image_progress_id').innerHTML='0%';
+									document.getElementById('edit_loading').style.display='none';
+									clear_edit_profile();
+									
+									
+									document.getElementById('invalid_msg').style.display='block';
+									document.getElementById('i_msg').innerHTML='Network error occured.';
+									setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+									
+									
+								}
+							};
+							xhttp1.upload.onprogress = function(e) {
+								if (e.lengthComputable) {
+								  var percentComplete = Math.round((e.loaded / e.total) * 100);
+								  percentComplete=percentComplete.toFixed(2);
+								  if(percentComplete==100)
+								  {
+									 document.getElementById('image_progress_id').style.width=percentComplete+'%';
+									 document.getElementById('image_progress_id').innerHTML= percentComplete+'%';
+								  }
+								  else
+								  {
+									 document.getElementById('image_progress_id').style.width=percentComplete+'%';
+									 document.getElementById('image_progress_id').innerHTML= percentComplete+'%';
+								  }
+								}
+							};
+							xhttp1.open("POST", "../includes/super_admin/set_profile.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&cell_no="+new_admin_cell_no+"&password="+new_c_pass+"&name="+new_admin_name+"&designation="+new_admin_designation+"&email="+new_admin_email+"&joining_date="+new_admin_joining_date+"&gender="+new_admin_gender, true);
+							xhttp1.send();
+							
+						}
+
+					}
 					
 					
 				}
@@ -313,8 +514,36 @@
 						//check for email change
 						if(admin_email!=new_admin_email)
 						{
-							
-							
+							document.getElementById('edit_loading').style.display='block';
+							var xhttp1 = new XMLHttpRequest();
+							xhttp1.onreadystatechange = function() {
+								if (this.readyState == 4 && this.status == 200) {
+									if(this.responseText.trim()=='Error')
+									{
+										document.getElementById('edit_loading').style.display='none';
+										document.getElementById('invalid_msg').style.display='block';
+										document.getElementById('i_msg').innerHTML='Invalid Email Inserted.';
+										setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+								
+									}
+									else
+									{
+										verification_otp=this.responseText.trim();
+										document.getElementById('profile_add_re_confirmation').style.display='block';
+										document.getElementById('edit_loading').style.display='none';
+									}									
+								}
+								else if(this.readyState==4 && (this.status==404 || this.status==403))
+								{
+									document.getElementById('edit_loading').style.display='none';
+												
+									document.getElementById('invalid_msg').style.display='block';
+									document.getElementById('i_msg').innerHTML='Network error occured.';
+									setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+								}
+							};
+							xhttp1.open("POST", "../includes/super_admin/get_otp_edit_profile.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&email="+new_admin_email, true);
+							xhttp1.send();
 						}
 						else
 						{
@@ -357,6 +586,12 @@
 												document.getElementById('image_progress_id').innerHTML='0%';
 												
 												admin_cell_no = document.getElementById('new_cell_phone').value;
+												admin_name = document.getElementById('new_admin_name').value.trim();
+												admin_designation = document.getElementById('new_admin_designation').value.trim();
+												admin_email = document.getElementById('new_admin_email').value.trim();
+												admin_joining_date = document.getElementById('new_admin_joining_date').value.trim();
+												admin_gender = document.getElementById('new_admin_gender').value.trim();
+												
 												document.getElementById('edit_loading').style.display='none';
 											
 												clear_edit_profile();
@@ -379,6 +614,7 @@
 										}
 										else if(this.readyState==4 && (this.status==404 || this.status==403))
 										{
+											document.getElementById('edit_loading').style.display='none';
 											document.getElementById('invalid_msg').style.display='block';
 											document.getElementById('i_msg').innerHTML='Network error occured.';
 											setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
@@ -434,7 +670,12 @@
 											document.getElementById('edit_loading').style.display='none';
 											
 											admin_cell_no = document.getElementById('new_cell_phone').value;
-											
+											admin_name = document.getElementById('new_admin_name').value.trim();
+											admin_designation = document.getElementById('new_admin_designation').value.trim();
+											admin_email = document.getElementById('new_admin_email').value.trim();
+											admin_joining_date = document.getElementById('new_admin_joining_date').value.trim();
+											admin_gender = document.getElementById('new_admin_gender').value.trim();
+												
 											document.getElementById('valid_msg').style.display='block';
 											document.getElementById('v_msg').innerHTML='Profile Successfully updated.';
 											setTimeout(function(){ document.getElementById('valid_msg').style.display='none';},2000);

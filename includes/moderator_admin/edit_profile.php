@@ -309,6 +309,8 @@
 									}
 									else if(this.readyState==4 && (this.status==404 || this.status==403))
 									{
+										document.getElementById('edit_loading').style.display='none';
+												
 										document.getElementById('invalid_msg').style.display='block';
 										document.getElementById('i_msg').innerHTML='Network error occured.';
 										setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
