@@ -30,6 +30,28 @@
 		
 ?>
 
+<!-- email otp -->
+<div id="profile_add_re_confirmation" class="w3-modal" style="padding-top:100px;">
+	<div class="w3-modal-content w3-card-4 w3-animate-zoom w3-round-large w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border w3-border-black" style="max-width:700px;width:80%;">
+		<header class="w3-container w3-black"> 
+			<p class="w3-xxlarge" style="margin:0px 0px 10px 0px;">Verification</p>
+		</header>
+		<form onsubmit="return false">
+			
+		<div class="w3-container w3-padding">
+			<p class="w3-large w3-bold w3-text-brown">We have sent you an OTP in new email please insert it for verification.</p>
+			
+			<label><i class="w3-text-red">*</i> <b>Enter OTP</b></label>
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large w3-margin-bottom" type="password" id="profile_add_pass" placeholder="Enter your password" autocomplete="off">
+			
+		</div>
+		<div class="w3-container w3-light-grey w3-padding w3-black">
+			<button class="w3-button w3-right w3-green w3-border w3-round-large" onclick="profile_add_form_save()">Yes</button>
+			<button class="w3-button w3-right w3-red w3-border w3-round-large w3-margin-right" onclick="document.getElementById('profile_add_re_confirmation').style.display='none';document.getElementById('profile_add_pass').value='';clear_edit_profile();">No</button>
+		</div>
+		</form>
+	</div>
+</div>
 
 
 <div id="edit_loading" title="Please wait while uploading your profile.." class="w3-container w3-animate-top w3-text-white w3-center" style="display:none;height:100%;width:100%;top:0;left:0;background:black;opacity:0.6;position:fixed;z-index:99999999;padding-top:170px;border-radius:0px 0px 10px 10px;">
@@ -143,6 +165,7 @@
 				</div>
 			</div>
 			<script>
+				var verification_otp='';
 				//Captcha Validation for create new password
 				var reservation_captcha5 = document.getElementById("captcha5");
 				var sol4=<?php echo $ccc; ?>;
@@ -262,6 +285,12 @@
 					}
 				}
 				
+				function profile_add_form_save()
+				{
+					
+					
+					
+				}
 				
 				function edit_profile()
 				{
