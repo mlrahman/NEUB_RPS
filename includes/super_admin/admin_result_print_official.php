@@ -289,459 +289,156 @@
 			
 			
 			/*******************************************/
+			$filename = $name." (".$reg_no.")"."_Transcript_".$ref.".xls";
+
+			header("Content-Disposition: attachment; filename=\"$filename\"");
+			header("Content-Type: application/vnd.ms-excel");
+
+				
+			echo 'Ref: '.$ref."\r\n";	
+			echo 'Student Name'."\t".$name."\r\n";
+			echo 'Registration No'."\t".$reg_no."\r\n";
+			echo 'Session'."\t".$session."\r\n";
+			echo 'Gender'."\t".$gender."\r\n";
+			echo 'Degree Name'."\t".$degree."\r\n";
+			echo 'Credit Required'."\t".$total_credit."\r\n";
+			echo 'Credit Earned'."\t".$earned_credit."\r\n";
+			echo 'Credit Waived'."\t".$waived_credit."\r\n";
+			echo 'CGPA Earned'."\t".$total_cgpa."\r\n";
+			echo 'Degree Status'."\t".$degree_status."\r\n";
+			echo 'Issue Date'."\t".get_date(get_current_date())."\r\n";
 			
+			echo "\r\n\r\n";
 			
-			
-			$html='
-			<head>
-				<style>
+			if(count($se_re)==0)
+			{
+				echo 'No result available'."\r\n";
+			}
+			for($i=get_year($s_id);$i<=Date("Y");$i++)
+			{			
+				if(array_key_exists(('Spring-'.$i),$se_re))
+				{
+					$t_c=0.0;
+					$t_g=0.0;
+					$rp_flag=0;
 				
-				.page-header, .page-header-space {
-				  height: 120px;
-				}
-
-				.page-footer, .page-footer-space {
-				  height: 50px;
-				  margin-top:10px;
-				}
-
-				.page-footer {
-				  position: fixed;
-				  bottom: 0;
-				  width: 700px;
-				  
-				}
-
-				.page-header {
-				  position: fixed;
-				  top: 0mm;
-				  width: 700px;
-				  margin:0px;
-				  
-				}
-
-				.page {
-				  page-break-inside: avoid;
-				  
-				}
-
-				@page {
-				  margin: 6mm 15mm 6mm 15mm;
-				  
-				}
+					foreach($se_re['Spring-'.$i] as $z)
+					{
+						$rp_flag=1;
 				
-				@media print {
-				   thead {display: table-header-group;} 
-				   tfoot {display: table-footer-group;}
-				   
-				   
-				   body {margin: 0;}
-				}
-				
-				#gt td{border-right:1px solid black;}
-				</style>
-			</head>
-			<html>
-				<body onclick="document.getElementById(\'content\').innerHTML=\'\';window.close();"  style="font-family: "Century Schoolbook", sans-serif;font-size:12px;"><div id="content">';
-			
-				$html=$html.'
-				<div class="page-header" style="text-align: center;">
-					<div style="border-bottom: 3px solid black;">
-						<div style="height:75px;">
-							<div style="width:65px;padding:0px;margin:0px;float:left;">
-								<img src="../../images/system/'.$logo.'" alt="NEUB LOGO" style="width:68px;height:70px;">
-							</div>
-							<div style="width:630px;float:left;padding:0px;margin:0px;">
-								<p style="padding: 0px;margin:10px 0px 5px 0px;font-size:25px;font-weight:bold;margin-left:8px;">NORTH EAST UNIVERSITY BANGLADESH (NEUB)</p>
-								<p style="margin:0px;padding:0px;font-size: 22px;font-weight:bold;text-align:center;">SYLHET, BANGLADESH.</p>
-							</div>
-						</div>
-					</div>
-					<p style="color:red;font-size:11px;text-align:justify;margin:4px 0px 0px 0px;padding:0px;">
-						<b>Note:</b> This is an unofficial transcript downloaded from North East University Bangladesh result portal. For any query you can visit the official website, result portal or can contact with the office of the controller of examination. 
-					</p>
-					<p style="color:purple;font-size:12px;text-align:right;margin:0px 0px 0px 0px;">
-						<b>Ref: '.$ref.'</b>
-					</p>
-				</div>
-
-				  <div class="page-footer">
-					<div style="border-top:3px solid black;margin: 0px;padding:0px;width:700px;text-align:center;">
-						<p style="margin:0px;padding:0px;font-size:12px;">Address: '.$address.'</p>
-						<p style="margin:0px;padding:0px;font-size:12px;">Phone: '.$telephone.', Fax: 0821-710223, Mobile: '.$mobile.', E-mail: '.$email.'</p>
-						<p style="margin:0px;padding:0px;font-size:12px;">Website: '.$web.'</p>
-					</div>
-				  </div>';
-
-				
-				
-				
-				
-				$html=$html.'
-
-				  <table>
-
-					<thead>
-					  <tr>
-						<td>
-						  <!--place holder for the fixed-position header-->
-						  <div class="page-header-space"></div>
-						</td>
-					  </tr>
-					</thead>
-
-					<tbody>
-					  <tr>
-						<td>
-							<p style="margin:0px 0px 5px 0px;padding:0px;font-size:17px;font-weight:bold;text-align:justify;">
-								Online Transcript of Academic Record
-							</p>
-							<div style="width:700px;">
-								<div style="width:90px;height:240px;float:left;padding:4px;box-sizing:border-box;">';
-									if($photo=="" && $gender=="Male"){ 
-											$html=$html.'<img src="../../images/system/male_profile.png" style="margin:0px;padding:0px;width:70px;height: 80px;border:2px solid black;" title="Picture (120X100)"/>';
-									} else if($photo==""){ 
-											$html=$html.'<img src="../../images/system/female_profile.png" style="margin:0px;padding:0px;width:70px;height: 80px;border: 2px solid black;" title="Picture (120X100)"/>';
-									} else { 
-											$html=$html.'<img src="../../images/student/'.$photo.'"  style="margin:0px;padding:0px;width:70px;height: 80px;border: 2px solid black;" title="Picture (120X100)"/>';
-									} 
-								
-								$html=$html.'</div>
-								<div style="width:410px;float:left;height:240px;">
-									<table style="font-weight:bold;font-size:12px;">
-										<tr>
-											<td valign="top">Student Name</td>
-											<td valign="top">: '.$name.'</td>
-										</tr>
-										<tr>
-											<td valign="top">Registration No</td>
-											<td valign="top">: '.$reg_no.'</td>
-										</tr>
-										<tr>
-											<td valign="top">Session</td>
-											<td valign="top">: '.$session.'</td>
-										</tr>
-										<tr>
-											<td valign="top">Gender</td>
-											<td valign="top">: '.$gender.'</td>
-										</tr>
-										<tr>
-											<td valign="top">Degree Name</td>
-											<td valign="top">: '.$degree.'</td>
-										</tr>
-										<tr>
-											<td valign="top">Credit Required</td>
-											<td valign="top">: '.$total_credit.'</td>
-										</tr>
-										<tr>
-											<td valign="top">Credit Earned</td>
-											<td valign="top">: '.$earned_credit.'</td>
-										</tr>
-										<tr>
-											<td valign="top">Credit Waived</td>
-											<td valign="top">: '.$waived_credit.'</td>
-										</tr>
-										<tr>
-											<td valign="top">CGPA Earned</td>
-											<td valign="top">: '.$total_cgpa.'</td>
-										</tr>
-										<tr>
-											<td valign="top">Degree Status</td>
-											<td valign="top">: '.$degree_status.'</td>
-										</tr>
-										<tr>
-											<td valign="top" style="color:blue;">Issue Date</td>
-											<td valign="top" style="color:blue;">: '.get_date(get_current_date()).'</td>
-										</tr>
-									</table>
-								</div>
-								<div style="width:190px;padding:0px;margin:0px;float:left;height: 240px;">
-									<p style="margin:0px 0px 3px 0px;padding:0px;font-size:12px;font-weight:bold;text-align:left;">
-										Grading System
-									</p>
-									<table id="gt" style="border-collapse: collapse;border: 1px solid black;font-size:12px;text-align:center;width:190px;">
-										<tr>
-											<td style="border: 1px solid black;width:90px;margin:0px;padding:0px;"><b>Marks%</b></td>
-											<td style="border: 1px solid black;width:50px;margin:0px;padding:0px;"><b>Letter</b></td>
-											<td style="border: 1px solid black;width:50pxmargin:0px;padding:0px;"><b>Grade Point</b></td>
-										</tr>
-										<tr>
-											<td>80% and Above</td> 
-											<td>A+</td>
-											<td>4.00</td>
-										</tr>
-										<tr>
-											<td>75% - 79%</td>
-											<td>A</td>
-											<td>3.75</td>
-										</tr> 
-										<tr>
-											<td>70% - 74%</td>
-											<td>A-</td>
-											<td>3.50</td>
-										</tr> 
-										<tr>
-											<td>65% - 69%</td>
-											<td>B+</td>
-											<td>3.25</td>
-										</tr> 
-										<tr>
-											<td>60% - 64%</td>
-											<td>B</td>
-											<td>3.00</td>
-										</tr> 
-										<tr>
-											<td>55% - 59%</td>
-											<td>B-</td>
-											<td>2.75</td>
-										</tr> 
-										<tr>
-											<td>50% - 54%</td>
-											<td>C+</td>
-											<td>2.50</td>
-										</tr> 
-										<tr>
-											<td>45% - 49%</td>
-											<td>C</td>
-											<td>2.25</td>
-										</tr> 
-										<tr>
-											<td>40% - 44%</td>
-											<td>D</td>
-											<td>2.00</td>
-										</tr> 
-										<tr>
-											<td>Less than 40%</td>
-											<td>F</td>
-											<td>0.00</td>
-										</tr>
-											
-									</table>
-									
-								</div>
-							</div>
-						
-						
-						';
-						
-						if(count($se_re)==0)
+						if(number_format($z['grade_point'],2)>0.0)
 						{
-							$html=$html.'<p class="w3-center w3-text-red" style="margin: 50px 0px 50px 0px;"><i class="fa fa-warning"></i> No result available</p>';
+							$t_c=$t_c+$z['course_credit'];
+							$t_g=$t_g+($z['grade_point']*$z['course_credit']);
 						}
-							for($i=get_year($s_id);$i<=Date("Y");$i++)
-							{			
-								if(array_key_exists(('Spring-'.$i),$se_re))
-								{
-									$t_c=0.0;
-									$t_g=0.0;
-									$rp_flag=0;
-								
-									foreach($se_re['Spring-'.$i] as $z)
-									{
-										$rp_flag=1;
-								
-										if(number_format($z['grade_point'],2)>0.0)
-										{
-											$t_c=$t_c+$z['course_credit'];
-											$t_g=$t_g+($z['grade_point']*$z['course_credit']);
-										}
-									}
-									if($rp_flag==1)
-									{
-									$html=$html.'<table style="width:700px;margin-top:10px;font-size:12px;" >
-										<tr>
-											<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>Semester: '.'Spring-'.$i.'</b></td>
-											<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>CGPA: '; if($t_c==0.0){  $html=$html.number_format(0.0,2); } else{  $html=$html.number_format(($t_g/$t_c),2); } $html=$html.'</b></td>
-											<td colspan="1" valign="top" style="border-top: 1px solid black;"><b>Credit: '.number_format($t_c,2).'</b></td>
-										</tr>
-										<tr class="w3-teal w3-bold">
-											<td style="width:15%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Course Code</b></td>
-											<td style="width:40%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Course Title</b></td>
-											<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Credit</b></td>
-											<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Grade</b></td>
-											<td style="width:25%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Grade Point</b></td>
-										</tr>';
-										
-											foreach($se_re['Spring-'.$i] as $z)
-											{
-												if(number_format($z['grade_point'],2)>0.0 or (number_format($z['grade_point'],2)==0.0 && $z['grade']=='F'))
-												{										
-													$html=$html.'<tr>
-														<td valign="top">'.$z['course_code'].'</td>
-														<td valign="top">'.$z['course_title'].'</td>
-														<td valign="top">'.number_format($z['course_credit'],2).'</td>
-														<td valign="top">'.$z['grade'].'</td>
-														<td valign="top">'.number_format($z['grade_point'],2).'</td>
-													</tr>';
-												}
-											}
-										
-									$html=$html.'<tr><td colspan="5" style="border-top: 1px solid black;"></td></tr></table>';
-									}
-								}
-								
-								
-								if(array_key_exists(('Summer-'.$i),$se_re))
-								{
-									$t_c=0.0;
-									$t_g=0.0;
-									$rp_flag=0;
-								
-									foreach($se_re['Summer-'.$i] as $z)
-									{
-										$rp_flag=1;
-								
-										if(number_format($z['grade_point'],2)>0.0)
-										{
-											$t_c=$t_c+$z['course_credit'];
-											$t_g=$t_g+($z['grade_point']*$z['course_credit']);
-										}
-									}
-									if($rp_flag==1)
-									{
-									$html=$html.'<table style="width:700px;margin-top:10px;font-size:12px;" >
-										<tr>
-											<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>Semester: '.'Summer-'.$i.'</b></td>
-											<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>CGPA: '; if($t_c==0.0){  $html=$html.number_format(0.0,2); } else{  $html=$html.number_format(($t_g/$t_c),2); } $html=$html.'</b></td>
-											<td colspan="1" valign="top" style="border-top: 1px solid black;"><b>Credit: '.number_format($t_c,2).'</b></td>
-										</tr>
-										<tr class="w3-teal w3-bold">
-											<td style="width:15%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Course Code</b></td>
-											<td style="width:40%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Course Title</b></td>
-											<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Credit</b></td>
-											<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Grade</b></td>
-											<td style="width:25%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Grade Point</b></td>
-										</tr>';
-										
-											foreach($se_re['Summer-'.$i] as $z)
-											{
-												if(number_format($z['grade_point'],2)>0.0 or (number_format($z['grade_point'],2)==0.0 && $z['grade']=='F'))
-												{
-													$html=$html.'<tr>
-														<td valign="top">'.$z['course_code'].'</td>
-														<td valign="top">'.$z['course_title'].'</td>
-														<td valign="top">'.number_format($z['course_credit'],2).'</td>
-														<td valign="top">'.$z['grade'].'</td>
-														<td valign="top">'.number_format($z['grade_point'],2).'</td>
-													</tr>';
-												}
-											}
-										
-									$html=$html.'<tr><td colspan="5" style="border-top: 1px solid black;"></td></tr></table>';
-									}
-								}
-								
-								if(array_key_exists(('Fall-'.$i),$se_re))
-								{
-									$t_c=0.0;
-									$t_g=0.0;
-									$rp_flag=0;
-								
-									foreach($se_re['Fall-'.$i] as $z)
-									{
-										$rp_flag=1;
-								
-										if(number_format($z['grade_point'],2)>0.0)
-										{
-											$t_c=$t_c+$z['course_credit'];
-											$t_g=$t_g+($z['grade_point']*$z['course_credit']);
-										}
-									}
-									if($rp_flag==1)
-									{
-								
-									$html=$html.'<table style="width:700px;margin-top:10px;font-size:12px;" >
-										<tr>
-											<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>Semester: '.'Fall-'.$i.'</b></td>
-											<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>CGPA: '; if($t_c==0.0){  $html=$html.number_format(0.0,2); } else{  $html=$html.number_format(($t_g/$t_c),2); } $html=$html.'</b></td>
-											<td colspan="1" valign="top" style="border-top: 1px solid black;"><b>Credit: '.number_format($t_c,2).'</b></td>
-										</tr>
-										<tr class="w3-teal w3-bold">
-											<td style="width:15%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Course Code</b></td>
-											<td style="width:40%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Course Title</b></td>
-											<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Credit</b></td>
-											<td style="width:10%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Grade</b></td>
-											<td style="width:25%;border-top: 1px solid black;border-bottom: 1px solid black;" valign="top"><b>Grade Point</b></td>
-										</tr>';
-										
-											foreach($se_re['Fall-'.$i] as $z)
-											{
-												if(number_format($z['grade_point'],2)>0.0 or (number_format($z['grade_point'],2)==0.0 && $z['grade']=='F'))
-												{
-													$html=$html.'<tr>
-														<td valign="top">'.$z['course_code'].'</td>
-														<td valign="top">'.$z['course_title'].'</td>
-														<td valign="top">'.number_format($z['course_credit'],2).'</td>
-														<td valign="top">'.$z['grade'].'</td>
-														<td valign="top">'.number_format($z['grade_point'],2).'</td>
-													</tr>';
-												}
-											}
-										
-									$html=$html.'<tr><td colspan="5" style="border-top: 1px solid black;"></td></tr></table>';
-									}
-								}
+					}
+					if($rp_flag==1)
+					{
+						echo 'Semester: Spring-'.$i."\t\t\t".'CGPA: ';
+						if($t_c==0.0){  echo number_format(0.0,2)."\t"; } 
+						else{  echo number_format(($t_g/$t_c),2)."\r\n"; }
+						echo 'Course Code'."\t".'Course Title'."\t".'Course Credit'."\t".'Grade'."\t".'Grade Point'."\r\n";					
+						foreach($se_re['Spring-'.$i] as $z)
+						{
+							if(number_format($z['grade_point'],2)>0.0 or (number_format($z['grade_point'],2)==0.0 && $z['grade']=='F'))
+							{										
+								echo $z['course_code']."\t".$z['course_title']."\t".number_format($z['course_credit'],2)."\t".$z['grade']."\t".number_format($z['grade_point'],2)."\r\n";
 							}
-							
-							//show waived courses there
-							if(count($ra_w)>0)
-							{
-								
-								$html=$html.'<table id="course_waived" style="width:700px;margin-top:10px;font-size:12px;">
-									<tr>
-										<td colspan="2" valign="top" style="border-top: 1px solid black;"><b>Waived Courses</b></td>
-										<td valign="top" style="border-top: 1px solid black;"><b>Credit: '.number_format($waived_credit,2).'</b></td>
-									</tr>
-									<tr class="w3-teal w3-bold">
-										<td valign="top" style="width:15%;border-top: 1px solid black;border-bottom: 1px solid black;"><b>Course Code</b></td>
-										<td valign="top" style="width:40%;border-top: 1px solid black;border-bottom: 1px solid black;"><b>Course Title</b></td>
-										<td valign="top" style="width:45%;border-top: 1px solid black;border-bottom: 1px solid black;"><b>Credit</b></td>
-									</tr>';
-									
-									foreach($ra_w as $cge)
-									{
-								
-										$html=$html.'<tr>
-											<td valign="top">'.$cge['course_code'].'</td>
-											<td valign="top">'.$cge['course_title'].'</td>
-											<td valign="top">'.number_format($cge['course_credit'],2).'</td>
-										</tr>';
-								
-									}
-									
-								$html=$html.'<tr><td colspan="3" style="border-top: 1px solid black;"></td></tr></table>';
-							}
-						
-						$html=$html.'</td>
-					  </tr>
-					</tbody>
-
-					<tfoot>
-					  <tr>
-						<td>
-						  <!--place holder for the fixed-position footer-->
-						  <div class="page-footer-space"></div>
-						</td>
-					  </tr>
-					</tfoot>
-
-				  </table>
-				';
-				
-				
+						}
+						echo "\r\n\r\n";
 					
-				$html=$html.'</div></body>
-			</html>';
-			
-			echo $html;
-		?>
-			
-			<script>
-				window.print();
-				window.onfocus=setTimeout(function(){window.close()},300);
-			</script>
-			
-		<?php
+					}
+				}
+				
+				
+				if(array_key_exists(('Summer-'.$i),$se_re))
+				{
+					$t_c=0.0;
+					$t_g=0.0;
+					$rp_flag=0;
+				
+					foreach($se_re['Summer-'.$i] as $z)
+					{
+						$rp_flag=1;
+				
+						if(number_format($z['grade_point'],2)>0.0)
+						{
+							$t_c=$t_c+$z['course_credit'];
+							$t_g=$t_g+($z['grade_point']*$z['course_credit']);
+						}
+					}
+					if($rp_flag==1)
+					{
+						echo 'Semester: Summer-'.$i."\t\t\t".'CGPA: ';
+						if($t_c==0.0){  echo number_format(0.0,2)."\t"; } 
+						else{  echo number_format(($t_g/$t_c),2)."\r\n"; }
+						echo 'Course Code'."\t".'Course Title'."\t".'Course Credit'."\t".'Grade'."\t".'Grade Point'."\r\n";					
+						foreach($se_re['Summer-'.$i] as $z)
+						{
+							if(number_format($z['grade_point'],2)>0.0 or (number_format($z['grade_point'],2)==0.0 && $z['grade']=='F'))
+							{										
+								echo $z['course_code']."\t".$z['course_title']."\t".number_format($z['course_credit'],2)."\t".$z['grade']."\t".number_format($z['grade_point'],2)."\r\n";
+							}
+						}
+						echo "\r\n\r\n";
+					
+					
+					}
+				}
+				
+				if(array_key_exists(('Fall-'.$i),$se_re))
+				{
+					$t_c=0.0;
+					$t_g=0.0;
+					$rp_flag=0;
+				
+					foreach($se_re['Fall-'.$i] as $z)
+					{
+						$rp_flag=1;
+				
+						if(number_format($z['grade_point'],2)>0.0)
+						{
+							$t_c=$t_c+$z['course_credit'];
+							$t_g=$t_g+($z['grade_point']*$z['course_credit']);
+						}
+					}
+					if($rp_flag==1)
+					{
+						echo 'Semester: Fall-'.$i."\t\t\t".'CGPA: ';
+						if($t_c==0.0){  echo number_format(0.0,2)."\t"; } 
+						else{  echo number_format(($t_g/$t_c),2)."\r\n"; }
+						echo 'Course Code'."\t".'Course Title'."\t".'Course Credit'."\t".'Grade'."\t".'Grade Point'."\r\n";					
+						foreach($se_re['Fall-'.$i] as $z)
+						{
+							if(number_format($z['grade_point'],2)>0.0 or (number_format($z['grade_point'],2)==0.0 && $z['grade']=='F'))
+							{										
+								echo $z['course_code']."\t".$z['course_title']."\t".number_format($z['course_credit'],2)."\t".$z['grade']."\t".number_format($z['grade_point'],2)."\r\n";
+							}
+						}
+						echo "\r\n\r\n";
+					
+						
+					}
+				}
+			}
+				
+				//show waived courses there
+				if(count($ra_w)>0)
+				{
+					
+					echo 'Waived Courses'."\t\t".'Credit: '.number_format($waived_credit,2)."\r\n";
+					echo 'Course Code'."\t".'Course Title'."\t".'Credit'."\r\n";
+						
+						foreach($ra_w as $cge)
+						{
+					
+							echo $cge['course_code']."\t".$cge['course_title']."\t".number_format($cge['course_credit'],2)."\r\n";
+							
+					
+						}
+						
+				}
+						
 			
 		}
 		catch(Exception $e)
