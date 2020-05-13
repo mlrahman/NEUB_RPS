@@ -31,9 +31,7 @@
 		else
 		{
 			$faculty_password=password_encrypt($faculty_password);
-			$stmt = $conn->prepare("update nr_faculty_login_transaction set nr_falotr_status='Inactive' where nr_faculty_id=:faculty_id ");
-			$stmt->bindParam(':faculty_id', $_SESSION['faculty_id']);
-			$stmt->execute();
+			$_SESSION['faculty_password']=$faculty_password;
 		}
 		$stmt = $conn->prepare("update nr_faculty set nr_faculty_password=:f_pass, nr_faculty_cell_no=:cell_no, nr_faculty_two_factor=:otp where nr_faculty_id=:f_id and nr_faculty_status='Active' ");
 		$stmt->bindParam(':f_pass', $faculty_password);

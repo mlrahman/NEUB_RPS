@@ -34,9 +34,7 @@
 		else
 		{
 			$faculty_password=password_encrypt($faculty_password);
-			$stmt = $conn->prepare("update nr_faculty_login_transaction set nr_falotr_status='Inactive' where nr_faculty_id=:faculty_id ");
-			$stmt->bindParam(':faculty_id', $_SESSION['faculty_id']);
-			$stmt->execute();
+			$_SESSION['faculty_password']=$faculty_password;
 		}
 		//file delete server info required to update if needed
 		$base_directory = '../../images/faculty/';

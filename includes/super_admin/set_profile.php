@@ -28,15 +28,19 @@
 		{
 			die();
 		}
+		$old_email=$result[0][2];
+		
+		if($old_email!=$email)
+		{
+			$_SESSION['admin_email']=$email;
+		}
 		
 		if($admin_password=="")
 			$admin_password=$result[0][3];
 		else
 		{
 			$admin_password=password_encrypt($admin_password);
-			$stmt = $conn->prepare("update nr_admin_login_transaction set nr_suadlotr_status='Inactive' where nr_admin_id=:admin_id ");
-			$stmt->bindParam(':admin_id', $_SESSION['admin_id']);
-			$stmt->execute();
+			$_SESSION['admin_password']=$admin_password;
 		}
 		$stmt = $conn->prepare("update nr_admin set nr_admin_password=:f_pass, nr_admin_cell_no=:cell_no, nr_admin_name=:name, nr_admin_designation=:designation, nr_admin_email=:email, nr_admin_join_date=:joining_date, nr_admin_gender=:gender where nr_admin_id=:f_id and nr_admin_status='Active' ");
 		$stmt->bindParam(':f_pass', $admin_password);

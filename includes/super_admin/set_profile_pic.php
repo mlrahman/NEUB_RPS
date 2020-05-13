@@ -32,14 +32,19 @@
 			die();
 		}
 		$old_image=$result[0][5];
+		$old_email=$result[0][2];
+		
+		if($old_email!=$email)
+		{
+			$_SESSION['admin_email']=$email;
+		}
+		
 		if($admin_password=="")
 			$admin_password=$result[0][3];
 		else
 		{
 			$admin_password=password_encrypt($admin_password);
-			$stmt = $conn->prepare("update nr_admin_login_transaction set nr_suadlotr_status='Inactive' where nr_admin_id=:admin_id ");
-			$stmt->bindParam(':admin_id', $_SESSION['admin_id']);
-			$stmt->execute();
+			$_SESSION['admin_password']=$admin_password;
 		}
 		//file delete server info required to update if needed
 		$base_directory = '../../images/admin/';

@@ -40,10 +40,10 @@
 		<form onsubmit="return false">
 			
 		<div class="w3-container w3-padding">
-			<p class="w3-large w3-bold w3-text-brown">We have sent you an OTP in new email please insert it for verification.</p>
+			<p class="w3-large w3-bold w3-text-brown">We have sent you an OTP in your new email address please insert it for verification.</p>
 			
 			<label><i class="w3-text-red">*</i> <b>Enter OTP</b></label>
-			<input class="w3-input w3-border w3-margin-bottom w3-round-large w3-margin-bottom" type="password" id="profile_add_pass" placeholder="Enter your password" autocomplete="off">
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large w3-margin-bottom" type="number" id="profile_add_pass" placeholder="Enter your password" autocomplete="off">
 			
 		</div>
 		<div class="w3-container w3-light-grey w3-padding w3-black">
@@ -69,10 +69,10 @@
 	<div class="w3-row w3-margin-0 w3-padding-0">
 		<div class="w3-col w3-margin-0" style="width:50%;padding:0px 6px 0px 0px;">
 			<label><?php if($_SESSION['admin_type']!='Admin') { ?><i class="w3-text-red">*</i> <?php } ?><b>Name</b></label>
-			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $admin_name; ?>" id="admin_name" placeholder="Enter Your Name" <?php if($_SESSION['admin_type']=='Admin') { echo 'disabled'; }?>>
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $admin_name; ?>" id="admin_name" placeholder="Enter Your Name" <?php if($_SESSION['admin_type']=='Admin') { echo 'disabled'; }?> oninput="form_change()" autocomplete="off">
 			
 			<label><?php if($_SESSION['admin_type']!='Admin') { ?><i class="w3-text-red">*</i> <?php } ?><b>Designation</b></label>
-			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $admin_designation; ?>" id="admin_designation" placeholder="Enter Your Designation" <?php if($_SESSION['admin_type']=='Admin') { echo 'disabled'; }?>>
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $admin_designation; ?>" id="admin_designation" placeholder="Enter Your Designation" <?php if($_SESSION['admin_type']=='Admin') { echo 'disabled'; }?> oninput="form_change()" autocomplete="off">
 			
 		</div>
 		<div class="w3-col w3-margin-0" style="width:50%;padding:0px 0px 0px 6px;">
@@ -107,12 +107,12 @@
 	<div class="w3-row w3-margin-0 w3-padding-0">
 		<div class="w3-col w3-margin-0" style="width:50%;padding:0px 6px 0px 0px;">
 			<label><?php if($_SESSION['admin_type']!='Admin') { ?><i class="w3-text-red">*</i> <?php } ?><b>Email</b></label>
-			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $admin_email; ?>" id="admin_email" placeholder="Enter Your Email" <?php if($_SESSION['admin_type']=='Admin') { echo 'disabled'; }?>>
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $admin_email; ?>" id="admin_email" placeholder="Enter Your Email" <?php if($_SESSION['admin_type']=='Admin') { echo 'disabled'; }?> oninput="form_change()" autocomplete="off">
 			
 		</div>
 		<div class="w3-col w3-margin-0" style="width:50%;padding:0px 0px 0px 6px;">
 			<label><?php if($_SESSION['admin_type']!='Admin') { ?><i class="w3-text-red">*</i> <?php } ?><b>Joining Date</b></label>
-			<input class="w3-input w3-border w3-margin-bottom w3-round-large" <?php if($_SESSION['admin_type']=='Admin') { ?> type="text" value="<?php echo get_date($result[0][12]); ?>"  <?php } else { ?> type="date" value="<?php echo $result[0][12]; ?>" <?php } ?> id="admin_joining_date" placeholder="Enter Your Joining Date" <?php if($_SESSION['admin_type']=='Admin') { echo 'disabled'; }?>>
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large" <?php if($_SESSION['admin_type']=='Admin') { ?> type="text" value="<?php echo get_date($result[0][12]); ?>"  <?php } else { ?> type="date" value="<?php echo $result[0][12]; ?>" <?php } ?> id="admin_joining_date" placeholder="Enter Your Joining Date" <?php if($_SESSION['admin_type']=='Admin') { echo 'disabled'; }?> oninput="form_change()" autocomplete="off">
 			
 		</div>
 		
@@ -120,12 +120,12 @@
 	<div class="w3-row w3-margin-0 w3-padding-0">
 		<div class="w3-col w3-margin-0" style="width:50%;padding:0px 6px 0px 0px;">
 			<label><i class="w3-text-red">*</i> <b>Cell No</b></label>
-			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $admin_cell_no; ?>" placeholder="Enter your 11 digits cell no" id="new_cell_phone" onkeyup="form_change()" autocomplete="off" >
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="text" value="<?php echo $admin_cell_no; ?>" placeholder="Enter your 11 digits cell no" id="new_cell_phone" oninput="form_change()" autocomplete="off" >
 		</div>
 		
 		<div class="w3-col w3-margin-0" style="width:50%;padding:0px 0px 0px 6px;">
 			<label><?php if($_SESSION['admin_type']!='Admin') { ?><i class="w3-text-red">*</i> <?php } ?><b>Gender</b></label>
-			<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="admin_gender" <?php if($_SESSION['admin_type']=='Admin') { echo 'disabled'; }?>>
+			<select class="w3-input w3-border w3-margin-bottom w3-round-large" id="admin_gender" <?php if($_SESSION['admin_type']=='Admin') { echo 'disabled'; }?> onchange="form_change()">
 				<option value="<?php echo $admin_gender; ?>"><?php echo $admin_gender; ?></option>
 				<?php if($admin_gender!='Male'){ ?><option value="Male">Male</option><?php } ?>
 				<?php if($admin_gender!='Female'){ ?><option value="Female">Female</option><?php } ?>
@@ -137,11 +137,11 @@
 	<div class="w3-row w3-margin-0 w3-padding-0">
 		<div class="w3-col w3-margin-0" style="width:50%;padding:0px 6px 0px 0px;">
 			<label><i class="w3-text-red">*</i> <b>New Password</b></label>
-			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="password" onkeyup="form_change()"  autocomplete="off" id="pass" placeholder="Enter only for change password">
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="password" oninput="form_change()"  autocomplete="off" id="pass" placeholder="Enter only for change password" autocomplete="off">
 		</div>
 		<div class="w3-col w3-margin-0" style="width:50%;padding:0px 0px 0px 6px;">
 			<label><i class="w3-text-red">*</i> <b>Confirm New Password</b></label>
-			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="password" onkeyup="form_change()"  autocomplete="off" id="c_pass" placeholder="Confirm the new password">
+			<input class="w3-input w3-border w3-margin-bottom w3-round-large" type="password" oninput="form_change()"  autocomplete="off" id="c_pass" placeholder="Confirm the new password" autocomplete="off">
 		</div>
 	</div>
 	<div class="w3-row w3-margin-0 w3-padding-0">
@@ -288,61 +288,153 @@
 				
 				function profile_add_form_save()
 				{
-					var new_admin_cell_no=document.getElementById('new_cell_phone').value.trim();
+					var in_otp=document.getElementById('profile_add_pass').value.trim();
 					
-					var admin_image=document.getElementById('admin_image').value.trim();
-					var new_c_pass=document.getElementById("c_pass").value.trim();
-					var new_pass=document.getElementById("pass").value.trim();
-					
-					var new_admin_name=document.getElementById("admin_name").value.trim();
-					var new_admin_designation=document.getElementById("admin_designation").value.trim();
-					var new_admin_email=document.getElementById("admin_email").value.trim();
-					<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
-						var new_admin_joining_date=document.getElementById("admin_joining_date").value.trim();
-					<?php } else { ?>
-						var new_admin_joining_date=admin_joining_date;
-					<?php } ?>
-					var new_admin_gender=document.getElementById("admin_gender").value.trim();
-					
-					
-					if(password_check()==true && reservation_captcha_val5()==true && cellphone_check()==true)
+					if(in_otp==verification_otp)
 					{
-						if(admin_image!="")
+						document.getElementById('profile_add_re_confirmation').style.display='none';
+						document.getElementById('profile_add_pass').value='';
+						var new_admin_cell_no=document.getElementById('new_cell_phone').value.trim();
+						
+						var admin_image=document.getElementById('admin_image').value.trim();
+						var new_c_pass=document.getElementById("c_pass").value.trim();
+						var new_pass=document.getElementById("pass").value.trim();
+						
+						var new_admin_name=document.getElementById("admin_name").value.trim();
+						var new_admin_designation=document.getElementById("admin_designation").value.trim();
+						var new_admin_email=document.getElementById("admin_email").value.trim();
+						<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
+							var new_admin_joining_date=document.getElementById("admin_joining_date").value.trim();
+						<?php } else { ?>
+							var new_admin_joining_date=admin_joining_date;
+						<?php } ?>
+						var new_admin_gender=document.getElementById("admin_gender").value.trim();
+						
+						
+						if(password_check()==true && reservation_captcha_val5()==true && cellphone_check()==true)
 						{
-							if(file_validate(admin_image)==true)
+							if(admin_image!="")
+							{
+								if(file_validate(admin_image)==true)
+								{
+									c_pass.setCustomValidity('');
+									pass.setCustomValidity('');
+									n_cell_phone.setCustomValidity('');
+									reservation_captcha5.setCustomValidity('');
+									document.getElementById('admin_image').setCustomValidity('');
+									
+									document.getElementById('edit_loading').style.display='block';
+									document.getElementById('admin_image').setCustomValidity('');
+									var image=document.getElementById('admin_image').files[0];
+									var fd_image=new FormData();
+									var link='admin_image';
+									fd_image.append(link, image);
+									//Ajax for image upload
+									var xhttp1 = new XMLHttpRequest();
+									xhttp1.onreadystatechange = function() {
+										if (this.readyState == 4 && this.status == 200) {
+											//receive upload details
+											var image_name=this.responseText.trim();
+											//console.log(image_name);
+											
+											image_name=image_name[image_name.length-2]+image_name[image_name.length-1];
+											
+											
+											if(image_name=="Ok")
+											{
+												var tmppath = URL.createObjectURL(image);
+												$("#admin_profile_image").fadeIn("fast").attr('src',tmppath);
+												$("#admin_profile_image2").fadeIn("fast").attr('src',tmppath);
+												
+												
+												document.getElementById('image_progress_id').style.width='0%';
+												document.getElementById('image_progress_id').innerHTML='0%';
+												
+												admin_cell_no = document.getElementById('new_cell_phone').value;
+												admin_name = document.getElementById('admin_name').value.trim();
+												admin_designation = document.getElementById('admin_designation').value.trim();
+												admin_email = document.getElementById('admin_email').value.trim();
+												<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
+												admin_joining_date = document.getElementById('admin_joining_date').value.trim();
+												<?php } ?>
+												admin_gender = document.getElementById('admin_gender').value.trim();
+												
+												document.getElementById('edit_loading').style.display='none';
+											
+												clear_edit_profile();
+												
+												document.getElementById('valid_msg').style.display='block';
+												document.getElementById('v_msg').innerHTML='Profile Successfully updated.';
+												setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
+											}
+											else
+											{
+												document.getElementById('image_progress_id').style.width='0%';
+												document.getElementById('image_progress_id').innerHTML='0%';
+												document.getElementById('edit_loading').style.display='none';
+												clear_edit_profile();
+												document.getElementById('invalid_msg').style.display='block';
+												document.getElementById('i_msg').innerHTML='Unknown Error Occured.';
+												setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+											
+											}
+										}
+										else if(this.readyState==4 && (this.status==404 || this.status==403))
+										{
+											document.getElementById('edit_loading').style.display='none';
+											document.getElementById('invalid_msg').style.display='block';
+											document.getElementById('i_msg').innerHTML='Network error occured.';
+											setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+										}
+									};
+									xhttp1.upload.onprogress = function(e) {
+										if (e.lengthComputable) {
+										  var percentComplete = Math.round((e.loaded / e.total) * 100);
+										  percentComplete=percentComplete.toFixed(2);
+										  if(percentComplete==100)
+										  {
+											 document.getElementById('image_progress_id').style.width=percentComplete+'%';
+											 document.getElementById('image_progress_id').innerHTML= percentComplete+'%';
+										  }
+										  else
+										  {
+											 document.getElementById('image_progress_id').style.width=percentComplete+'%';
+											 document.getElementById('image_progress_id').innerHTML= percentComplete+'%';
+										  }
+										}
+									};
+									xhttp1.open("POST", "../includes/super_admin/set_profile_pic.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&image="+link+"&cell_no="+new_admin_cell_no+"&password="+new_c_pass+"&name="+new_admin_name+"&designation="+new_admin_designation+"&email="+new_admin_email+"&joining_date="+new_admin_joining_date+"&gender="+new_admin_gender, true);
+									xhttp1.send(fd_image);
+								}
+								else
+								{
+									document.getElementById('admin_image').setCustomValidity('Upload valid DP .jpg, .jpeg, .png, .bmp file');
+								}
+								
+							}
+							else
 							{
 								c_pass.setCustomValidity('');
 								pass.setCustomValidity('');
 								n_cell_phone.setCustomValidity('');
 								reservation_captcha5.setCustomValidity('');
 								document.getElementById('admin_image').setCustomValidity('');
-								
+						
 								document.getElementById('edit_loading').style.display='block';
-								document.getElementById('admin_image').setCustomValidity('');
-								var image=document.getElementById('admin_image').files[0];
-								var fd_image=new FormData();
-								var link='admin_image';
-								fd_image.append(link, image);
-								//Ajax for image upload
+								//upload without image
 								var xhttp1 = new XMLHttpRequest();
 								xhttp1.onreadystatechange = function() {
 									if (this.readyState == 4 && this.status == 200) {
-										//receive upload details
+										//receive update details
+										
 										var image_name=this.responseText.trim();
-										//console.log(image_name);
-										
 										image_name=image_name[image_name.length-2]+image_name[image_name.length-1];
-										
-										
+											
 										if(image_name=="Ok")
 										{
-											var tmppath = URL.createObjectURL(image);
-											$("#admin_profile_image").fadeIn("fast").attr('src',tmppath);
-											$("#admin_profile_image2").fadeIn("fast").attr('src',tmppath);
-											
-											
 											document.getElementById('image_progress_id').style.width='0%';
 											document.getElementById('image_progress_id').innerHTML='0%';
+											document.getElementById('edit_loading').style.display='none';
 											
 											admin_cell_no = document.getElementById('new_cell_phone').value;
 											admin_name = document.getElementById('admin_name').value.trim();
@@ -352,14 +444,12 @@
 											admin_joining_date = document.getElementById('admin_joining_date').value.trim();
 											<?php } ?>
 											admin_gender = document.getElementById('admin_gender').value.trim();
-											
-											document.getElementById('edit_loading').style.display='none';
-										
-											clear_edit_profile();
-											
+												
 											document.getElementById('valid_msg').style.display='block';
 											document.getElementById('v_msg').innerHTML='Profile Successfully updated.';
-											setTimeout(function(){ document.getElementById('valid_msg').style.display='none'; }, 2000);
+											setTimeout(function(){ document.getElementById('valid_msg').style.display='none';},2000);
+											clear_edit_profile();
+											
 										}
 										else
 										{
@@ -367,18 +457,29 @@
 											document.getElementById('image_progress_id').innerHTML='0%';
 											document.getElementById('edit_loading').style.display='none';
 											clear_edit_profile();
+											
+											
 											document.getElementById('invalid_msg').style.display='block';
 											document.getElementById('i_msg').innerHTML='Unknown Error Occured.';
 											setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
-										
+											
 										}
+										
+										
 									}
 									else if(this.readyState==4 && (this.status==404 || this.status==403))
 									{
+										document.getElementById('image_progress_id').style.width='0%';
+										document.getElementById('image_progress_id').innerHTML='0%';
 										document.getElementById('edit_loading').style.display='none';
+										clear_edit_profile();
+										
+										
 										document.getElementById('invalid_msg').style.display='block';
 										document.getElementById('i_msg').innerHTML='Network error occured.';
 										setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+										
+										
 									}
 								};
 								xhttp1.upload.onprogress = function(e) {
@@ -397,106 +498,21 @@
 									  }
 									}
 								};
-								xhttp1.open("POST", "../includes/super_admin/set_profile_pic.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&image="+link+"&cell_no="+new_admin_cell_no+"&password="+new_c_pass+"&name="+new_admin_name+"&designation="+new_admin_designation+"&email="+new_admin_email+"&joining_date="+new_admin_joining_date+"&gender="+new_admin_gender, true);
-								xhttp1.send(fd_image);
+								xhttp1.open("POST", "../includes/super_admin/set_profile.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&cell_no="+new_admin_cell_no+"&password="+new_c_pass+"&name="+new_admin_name+"&designation="+new_admin_designation+"&email="+new_admin_email+"&joining_date="+new_admin_joining_date+"&gender="+new_admin_gender, true);
+								xhttp1.send();
+								
 							}
-							else
-							{
-								document.getElementById('admin_image').setCustomValidity('Upload valid DP .jpg, .jpeg, .png, .bmp file');
-							}
-							
-						}
-						else
-						{
-							c_pass.setCustomValidity('');
-							pass.setCustomValidity('');
-							n_cell_phone.setCustomValidity('');
-							reservation_captcha5.setCustomValidity('');
-							document.getElementById('admin_image').setCustomValidity('');
-					
-							document.getElementById('edit_loading').style.display='block';
-							//upload without image
-							var xhttp1 = new XMLHttpRequest();
-							xhttp1.onreadystatechange = function() {
-								if (this.readyState == 4 && this.status == 200) {
-									//receive update details
-									
-									var image_name=this.responseText.trim();
-									image_name=image_name[image_name.length-2]+image_name[image_name.length-1];
-										
-									if(image_name=="Ok")
-									{
-										document.getElementById('image_progress_id').style.width='0%';
-										document.getElementById('image_progress_id').innerHTML='0%';
-										document.getElementById('edit_loading').style.display='none';
-										
-										admin_cell_no = document.getElementById('new_cell_phone').value;
-										admin_name = document.getElementById('admin_name').value.trim();
-										admin_designation = document.getElementById('admin_designation').value.trim();
-										admin_email = document.getElementById('admin_email').value.trim();
-										<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
-										admin_joining_date = document.getElementById('admin_joining_date').value.trim();
-										<?php } ?>
-										admin_gender = document.getElementById('admin_gender').value.trim();
-											
-										document.getElementById('valid_msg').style.display='block';
-										document.getElementById('v_msg').innerHTML='Profile Successfully updated.';
-										setTimeout(function(){ document.getElementById('valid_msg').style.display='none';},2000);
-										clear_edit_profile();
-										
-									}
-									else
-									{
-										document.getElementById('image_progress_id').style.width='0%';
-										document.getElementById('image_progress_id').innerHTML='0%';
-										document.getElementById('edit_loading').style.display='none';
-										clear_edit_profile();
-										
-										
-										document.getElementById('invalid_msg').style.display='block';
-										document.getElementById('i_msg').innerHTML='Unknown Error Occured.';
-										setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
-										
-									}
-									
-									
-								}
-								else if(this.readyState==4 && (this.status==404 || this.status==403))
-								{
-									document.getElementById('image_progress_id').style.width='0%';
-									document.getElementById('image_progress_id').innerHTML='0%';
-									document.getElementById('edit_loading').style.display='none';
-									clear_edit_profile();
-									
-									
-									document.getElementById('invalid_msg').style.display='block';
-									document.getElementById('i_msg').innerHTML='Network error occured.';
-									setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
-									
-									
-								}
-							};
-							xhttp1.upload.onprogress = function(e) {
-								if (e.lengthComputable) {
-								  var percentComplete = Math.round((e.loaded / e.total) * 100);
-								  percentComplete=percentComplete.toFixed(2);
-								  if(percentComplete==100)
-								  {
-									 document.getElementById('image_progress_id').style.width=percentComplete+'%';
-									 document.getElementById('image_progress_id').innerHTML= percentComplete+'%';
-								  }
-								  else
-								  {
-									 document.getElementById('image_progress_id').style.width=percentComplete+'%';
-									 document.getElementById('image_progress_id').innerHTML= percentComplete+'%';
-								  }
-								}
-							};
-							xhttp1.open("POST", "../includes/super_admin/set_profile.php?admin_id="+<?php echo $_SESSION['admin_id']; ?>+"&cell_no="+new_admin_cell_no+"&password="+new_c_pass+"&name="+new_admin_name+"&designation="+new_admin_designation+"&email="+new_admin_email+"&joining_date="+new_admin_joining_date+"&gender="+new_admin_gender, true);
-							xhttp1.send();
-							
-						}
 
+						}
+					}
+					else
+					{
+						clear_edit_profile();
+						document.getElementById('invalid_msg').style.display='block';
+						document.getElementById('i_msg').innerHTML='Invalid OTP Inserted.';
+						setTimeout(function(){ document.getElementById('invalid_msg').style.display='none'; }, 2000);
+								
+						
 					}
 					
 					
@@ -531,6 +547,7 @@
 							var xhttp1 = new XMLHttpRequest();
 							xhttp1.onreadystatechange = function() {
 								if (this.readyState == 4 && this.status == 200) {
+									//console.log(this.responseText.trim());
 									if(this.responseText.trim()=='Error')
 									{
 										document.getElementById('edit_loading').style.display='none';
