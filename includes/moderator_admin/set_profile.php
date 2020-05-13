@@ -28,7 +28,12 @@
 		if($moderator_password=="")
 			$moderator_password=$result[0][3];
 		else
+		{
 			$moderator_password=password_encrypt($moderator_password);
+			$stmt = $conn->prepare("update nr_admin_login_transaction set nr_suadlotr_status='Inactive' where nr_admin_id=:admin_id ");
+			$stmt->bindParam(':admin_id', $_SESSION['moderator_id']);
+			$stmt->execute();
+		}
 		$stmt = $conn->prepare("update nr_admin set nr_admin_password=:f_pass, nr_admin_cell_no=:cell_no where nr_admin_id=:f_id and nr_admin_status='Active' ");
 		$stmt->bindParam(':f_pass', $moderator_password);
 		$stmt->bindParam(':cell_no', $moderator_cell_no);

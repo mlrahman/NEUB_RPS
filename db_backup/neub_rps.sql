@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2020 at 01:14 PM
+-- Generation Time: May 13, 2020 at 02:26 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -50,7 +50,8 @@ CREATE TABLE `nr_admin` (
 
 INSERT INTO `nr_admin` (`nr_admin_id`, `nr_admin_name`, `nr_admin_email`, `nr_admin_password`, `nr_admin_cell_no`, `nr_admin_photo`, `nr_admin_type`, `nr_admin_designation`, `nr_admin_status`, `nr_admin_two_factor`, `nr_admin_resign_date`, `nr_admin_gender`, `nr_admin_join_date`) VALUES
 (1, 'Shams Elahi Rasel', 'mirlutfur.rahman@gmail.com', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '', '158677029315867702938237.jpg', 'Super Admin', 'Controller of Examination, NEUB', 'Active', 0, '', 'Male', '2012-11-03'),
-(6, 'Fahad Ahmed', 'mlrahman@neub.edu.bd', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '01739213886', '158928186715892818677563.jpg', 'Moderator', 'Moderator of Controller of Exam, NEUB', 'Active', 0, '', 'Male', '2013-05-01');
+(6, 'Fahad Ahmed', 'mlrahman@neub.edu.bd', 'rps35137b180e04bfdfa9d69e7b814e70d1060e74d6rps', '01739213886', '158928186715892818677563.jpg', 'Moderator', 'Moderator of Controller of Exam, NEUB', 'Active', 0, '', 'Male', '2013-05-01'),
+(15, 'Sonjoy Nondi', 'sn@sn.sn', 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', '01711223311', '158937268315893726831534.jpg', 'Admin', 'Assistant Controller of Examination', 'Active', 0, '', 'Male', '2018-12-11');
 
 -- --------------------------------------------------------
 
@@ -89,7 +90,8 @@ INSERT INTO `nr_admin_history` (`nr_admin_member_id`, `nr_admin_id`, `nr_adminh_
 (6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Inactive', '2020-05-10', '05:01 PM', 'Active'),
 (6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-05-10', '05:01 PM', 'Active'),
 (6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Inactive', '2020-05-10', '05:03 PM', 'Active'),
-(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-05-10', '05:04 PM', 'Active');
+(6, 1, 'Edited Admin Name: Fahad Ahmed, Admin Designation: Moderator of Controller of Exam, NEUB, Admin Gender: Male, Admin Join Date: 2013-05-01, Admin Resign Date: , Admin Type: Moderator, Admin Email: mlrahman@neub.edu.bd, Admin Mobile: , Admin Status: Active', '2020-05-10', '05:04 PM', 'Active'),
+(15, 1, 'Added Admin Name: Sonjoy Nondi, Admin Designation: Assistant Controller of Examination, Admin Gender: Male, Admin Join Date: 2018-12-11, Admin Resign Date: N/A, Admin Type: Admin, Admin Email: sn@sn.sn, Admin Mobile: N/A, Admin Status: Active', '2020-05-13', '03:23 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -193,7 +195,16 @@ INSERT INTO `nr_admin_login_transaction` (`nr_admin_id`, `nr_suadlotr_ip_address
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '05:09 PM', 'Inactive'),
 (6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '07:40 PM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '08:09 PM', 'Inactive'),
-(6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-12', '02:40 PM', 'Inactive');
+(6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-12', '02:40 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-12', '10:33 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-13', '03:12 PM', 'Inactive'),
+(15, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-13', '03:25 PM', 'Inactive'),
+(15, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-13', '05:38 PM', 'Inactive'),
+(15, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-13', '06:11 PM', 'Inactive'),
+(15, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-13', '06:13 PM', 'Inactive'),
+(6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-13', '06:15 PM', 'Inactive'),
+(6, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-13', '06:16 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-13', '06:25 PM', 'Active');
 
 -- --------------------------------------------------------
 
@@ -692,7 +703,7 @@ CREATE TABLE `nr_faculty` (
 --
 
 INSERT INTO `nr_faculty` (`nr_faculty_id`, `nr_faculty_name`, `nr_faculty_designation`, `nr_faculty_join_date`, `nr_faculty_resign_date`, `nr_faculty_type`, `nr_dept_id`, `nr_faculty_password`, `nr_faculty_email`, `nr_faculty_cell_no`, `nr_faculty_photo`, `nr_faculty_status`, `nr_faculty_two_factor`, `nr_faculty_gender`) VALUES
-(1, 'Noushad Sojib', 'Assistant Professor', '2016-04-20', '', 'Permanent', 8, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'mlrahman@neub.edu.bd', '01739213886', '158677029315867702938237.jpg', 'Active', 0, 'Male'),
+(1, 'Noushad Sojib', 'Assistant Professor', '2016-04-20', '', 'Permanent', 8, 'rps35137b180e04bfdfa9d69e7b814e70d1060e74d6rps', 'mlrahman@neub.edu.bd', '01739213886', '158677029315867702938237.jpg', 'Active', 0, 'Male'),
 (3, 'Tasnim Zahan Tithi', 'Assistant Professor', '2014-01-15', '', 'Permanent', 8, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'tithi@gml.com', '01711224455', '', 'Active', 0, 'Female'),
 (4, 'Mir Lutfur Rahman', 'Lecturer', '2018-05-26', '', 'Adjunct', 8, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'raihan.testing@gmial.com', '01739213886', '', 'Active', 0, 'Male'),
 (5, 'Pranta Sarker', 'Lecturer', '2018-05-26', '', 'Permanent', 8, 'rps95d71c0c3e667dcc7b3e0a5b8f368c3aceb6ef42rps', 'ps@ne', '01680929776', '', 'Active', 0, 'Male'),
@@ -818,7 +829,9 @@ INSERT INTO `nr_faculty_login_transaction` (`nr_faculty_id`, `nr_falotr_ip_addre
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '01:09 AM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-08', '01:37 AM', 'Inactive'),
 (1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-09', '06:06 PM', 'Inactive'),
-(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '05:10 PM', 'Active');
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-10', '05:10 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-13', '06:19 PM', 'Inactive'),
+(1, '::1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2020-05-13', '06:20 PM', 'Inactive');
 
 -- --------------------------------------------------------
 
@@ -1669,7 +1682,7 @@ ALTER TABLE `nr_transcript_print_reference`
 -- AUTO_INCREMENT for table `nr_admin`
 --
 ALTER TABLE `nr_admin`
-  MODIFY `nr_admin_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `nr_admin_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `nr_course`

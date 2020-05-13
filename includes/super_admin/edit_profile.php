@@ -23,6 +23,7 @@
 		$admin_email=$result[0][2];
 		$admin_cell_no=$result[0][4];
 		$admin_joining_date=get_date($result[0][12]);
+		$admin_joining_date2=$result[0][12];
 		$admin_type=$result[0][6];
 		$admin_gender=$result[0][11];
 		$photo=$result[0][5];
@@ -256,7 +257,7 @@
 				var admin_name=<?php echo '"'.$admin_name.'"'; ?>;
 				var admin_designation=<?php echo '"'.$admin_designation.'"'; ?>;
 				var admin_email=<?php echo '"'.$admin_email.'"'; ?>;
-				var admin_joining_date=<?php echo '"'.$admin_joining_date.'"'; ?>;
+				var admin_joining_date=<?php echo '"'.$admin_joining_date2.'"'; ?>;
 				var admin_gender=<?php echo '"'.$admin_gender.'"'; ?>;
 				
 				function form_change()
@@ -296,7 +297,11 @@
 					var new_admin_name=document.getElementById("admin_name").value.trim();
 					var new_admin_designation=document.getElementById("admin_designation").value.trim();
 					var new_admin_email=document.getElementById("admin_email").value.trim();
-					var new_admin_joining_date=document.getElementById("admin_joining_date").value.trim();
+					<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
+						var new_admin_joining_date=document.getElementById("admin_joining_date").value.trim();
+					<?php } else { ?>
+						var new_admin_joining_date=admin_joining_date;
+					<?php } ?>
 					var new_admin_gender=document.getElementById("admin_gender").value.trim();
 					
 					
@@ -340,11 +345,13 @@
 											document.getElementById('image_progress_id').innerHTML='0%';
 											
 											admin_cell_no = document.getElementById('new_cell_phone').value;
-											admin_name = document.getElementById('new_admin_name').value.trim();
-											admin_designation = document.getElementById('new_admin_designation').value.trim();
-											admin_email = document.getElementById('new_admin_email').value.trim();
-											admin_joining_date = document.getElementById('new_admin_joining_date').value.trim();
-											admin_gender = document.getElementById('new_admin_gender').value.trim();
+											admin_name = document.getElementById('admin_name').value.trim();
+											admin_designation = document.getElementById('admin_designation').value.trim();
+											admin_email = document.getElementById('admin_email').value.trim();
+											<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
+											admin_joining_date = document.getElementById('admin_joining_date').value.trim();
+											<?php } ?>
+											admin_gender = document.getElementById('admin_gender').value.trim();
 											
 											document.getElementById('edit_loading').style.display='none';
 										
@@ -424,11 +431,13 @@
 										document.getElementById('edit_loading').style.display='none';
 										
 										admin_cell_no = document.getElementById('new_cell_phone').value;
-										admin_name = document.getElementById('new_admin_name').value.trim();
-										admin_designation = document.getElementById('new_admin_designation').value.trim();
-										admin_email = document.getElementById('new_admin_email').value.trim();
-										admin_joining_date = document.getElementById('new_admin_joining_date').value.trim();
-										admin_gender = document.getElementById('new_admin_gender').value.trim();
+										admin_name = document.getElementById('admin_name').value.trim();
+										admin_designation = document.getElementById('admin_designation').value.trim();
+										admin_email = document.getElementById('admin_email').value.trim();
+										<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
+										admin_joining_date = document.getElementById('admin_joining_date').value.trim();
+										<?php } ?>
+										admin_gender = document.getElementById('admin_gender').value.trim();
 											
 										document.getElementById('valid_msg').style.display='block';
 										document.getElementById('v_msg').innerHTML='Profile Successfully updated.';
@@ -505,7 +514,11 @@
 					var new_admin_name=document.getElementById("admin_name").value.trim();
 					var new_admin_designation=document.getElementById("admin_designation").value.trim();
 					var new_admin_email=document.getElementById("admin_email").value.trim();
-					var new_admin_joining_date=document.getElementById("admin_joining_date").value.trim();
+					<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
+						var new_admin_joining_date=document.getElementById("admin_joining_date").value.trim();
+					<?php } else { ?>
+						var new_admin_joining_date=admin_joining_date;
+					<?php } ?>
 					var new_admin_gender=document.getElementById("admin_gender").value.trim();
 					
 					
@@ -586,11 +599,13 @@
 												document.getElementById('image_progress_id').innerHTML='0%';
 												
 												admin_cell_no = document.getElementById('new_cell_phone').value;
-												admin_name = document.getElementById('new_admin_name').value.trim();
-												admin_designation = document.getElementById('new_admin_designation').value.trim();
-												admin_email = document.getElementById('new_admin_email').value.trim();
-												admin_joining_date = document.getElementById('new_admin_joining_date').value.trim();
-												admin_gender = document.getElementById('new_admin_gender').value.trim();
+												admin_name = document.getElementById('admin_name').value.trim();
+												admin_designation = document.getElementById('admin_designation').value.trim();
+												admin_email = document.getElementById('admin_email').value.trim();
+												<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
+												admin_joining_date = document.getElementById('admin_joining_date').value.trim();
+												<?php } ?>
+												admin_gender = document.getElementById('admin_gender').value.trim();
 												
 												document.getElementById('edit_loading').style.display='none';
 											
@@ -670,11 +685,13 @@
 											document.getElementById('edit_loading').style.display='none';
 											
 											admin_cell_no = document.getElementById('new_cell_phone').value;
-											admin_name = document.getElementById('new_admin_name').value.trim();
-											admin_designation = document.getElementById('new_admin_designation').value.trim();
-											admin_email = document.getElementById('new_admin_email').value.trim();
-											admin_joining_date = document.getElementById('new_admin_joining_date').value.trim();
-											admin_gender = document.getElementById('new_admin_gender').value.trim();
+											admin_name = document.getElementById('admin_name').value.trim();
+											admin_designation = document.getElementById('admin_designation').value.trim();
+											admin_email = document.getElementById('admin_email').value.trim();
+											<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
+											admin_joining_date = document.getElementById('admin_joining_date').value.trim();
+											<?php } ?>
+											admin_gender = document.getElementById('admin_gender').value.trim();
 												
 											document.getElementById('valid_msg').style.display='block';
 											document.getElementById('v_msg').innerHTML='Profile Successfully updated.';

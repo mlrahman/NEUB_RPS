@@ -31,8 +31,12 @@
 		if($moderator_password=="")
 			$moderator_password=$result[0][3];
 		else
+		{
 			$moderator_password=password_encrypt($moderator_password);
-		
+			$stmt = $conn->prepare("update nr_admin_login_transaction set nr_suadlotr_status='Inactive' where nr_admin_id=:admin_id ");
+			$stmt->bindParam(':admin_id', $_SESSION['moderator_id']);
+			$stmt->execute();
+		}
 		//file delete server info required to update if needed
 		$base_directory = '../../images/moderator/';
 		
