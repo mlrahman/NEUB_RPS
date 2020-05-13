@@ -250,8 +250,8 @@
 					var new_otp=document.getElementById('new_otp').value.trim();
 					
 					var faculty_image=document.getElementById('faculty_image').value.trim();
-					var new_c_pass=document.getElementById("c_pass").value;
-					var new_pass=document.getElementById("pass").value;
+					var new_c_pass=document.getElementById("c_pass").value.trim();
+					var new_pass=document.getElementById("pass").value.trim();
 					
 					if(faculty_cell_no!=new_faculty_cell_no || otp!=new_otp || faculty_image!="" || new_c_pass!="" || new_pass!="")
 					{
@@ -269,8 +269,8 @@
 					var new_otp=document.getElementById('new_otp').value.trim();
 					
 					var faculty_image=document.getElementById('faculty_image').value.trim();
-					var new_c_pass=document.getElementById("c_pass").value;
-					var new_pass=document.getElementById("pass").value;
+					var new_c_pass=document.getElementById("c_pass").value.trim();
+					var new_pass=document.getElementById("pass").value.trim();
 					if(password_check()==true && reservation_captcha_val5()==true && cellphone_check()==true)
 					{
 						if(faculty_image!="")

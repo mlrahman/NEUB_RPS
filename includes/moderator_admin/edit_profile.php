@@ -227,8 +227,8 @@
 					var new_moderator_cell_no=document.getElementById('new_cell_phone').value.trim();
 					
 					var moderator_image=document.getElementById('moderator_image').value.trim();
-					var new_c_pass=document.getElementById("c_pass").value;
-					var new_pass=document.getElementById("pass").value;
+					var new_c_pass=document.getElementById("c_pass").value.trim();
+					var new_pass=document.getElementById("pass").value.trim();
 					
 					if(moderator_cell_no!=new_moderator_cell_no || moderator_image!="" || new_c_pass!="" || new_pass!="")
 					{
@@ -245,8 +245,8 @@
 					var new_moderator_cell_no=document.getElementById('new_cell_phone').value.trim();
 					
 					var moderator_image=document.getElementById('moderator_image').value.trim();
-					var new_c_pass=document.getElementById("c_pass").value;
-					var new_pass=document.getElementById("pass").value;
+					var new_c_pass=document.getElementById("c_pass").value.trim();
+					var new_pass=document.getElementById("pass").value.trim();
 					if(password_check()==true && reservation_captcha_val5()==true && cellphone_check()==true)
 					{
 						if(moderator_image!="")

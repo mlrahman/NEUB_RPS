@@ -191,8 +191,7 @@
 		</div>
 		<!-- Page 14 starts here -->
 		<div id="page14" class="w3-container" style="display:none;height:530px;overflow:auto;padding:0px;margin:0px;">
-			
-		
+			<?php include("../includes/super_admin/edit_profile.php"); ?>
 		</div>
 		<?php if($_SESSION['admin_type']=='Super Admin'){ ?>
 		<!-- page15 starts here -->
