@@ -332,7 +332,7 @@
 					  position: fixed;
 					  bottom: 0;
 					  width: 700px;
-					  
+					  background:white;
 					}
 
 					.page-header {
@@ -340,7 +340,7 @@
 					  top: 0mm;
 					  width: 700px;
 					  margin:0px;
-					  
+					  background:white;
 					}
 
 					.page {

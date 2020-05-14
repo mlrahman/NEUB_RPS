@@ -309,6 +309,7 @@
 				  position: fixed;
 				  bottom: 0;
 				  width: 700px;
+				  background:white;
 				  
 				}
 
@@ -317,6 +318,7 @@
 				  top: 0mm;
 				  width: 700px;
 				  margin:0px;
+				  background:white;
 				  
 				}
 

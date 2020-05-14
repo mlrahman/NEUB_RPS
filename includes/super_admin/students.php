@@ -795,6 +795,8 @@
 
 	<div id="search_window8" class="w3-container w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-round-large w3-margin-bottom" style="display:none;">
 		<span onclick="close_search_box8()" title="Close window" class="w3-button w3-right w3-large w3-red w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 0px 0px 0px;"><i class="fa fa-close"></i></span>
+		<span onclick="print_student_view()" title="Print Window" class="w3-button w3-right w3-large w3-indigo w3-hover-teal w3-round" style="padding:2px 10px;margin: 15px 10px 0px 0px;"><i class="fa fa-print"></i></span>
+		
 		<p class="w3-bold w3-left w3-xlarge w3-text-teal w3-bottombar" style="margin:10px 0px 15px 0px;width:235px;"><i class="fa fa-eye"></i> Student Details</p>
 		<div id="search_window_details8" class="w3-container w3-margin-0 w3-padding-0">
 		
@@ -852,7 +854,10 @@
 	<div class="w3-clear"></div>
 	
 	<!-- table for student list -->
-	<p class="w3-margin-0 w3-padding-0 w3-medium">Total Data: <span class="w3-text-red" id="search_data_label8"></span></p>		
+	<p class="w3-margin-0 w3-padding-0 w3-medium w3-left">Total Data: <span class="w3-text-red" id="search_data_label8"></span></p>		
+	<p class="w3-margin-0 w3-padding-0 w3-medium w3-left w3-margin-left"><i class="fa fa-print w3-hover-text-teal w3-text-indigo w3-cursor" onclick="print_students()"> Print</i></p>		
+	<div class="w3-clear"></div>
+	
 	<table style="width:100%;margin:0px;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar">
 		<tr class="w3-teal w3-bold">
 			<td style="width:7%;" valign="top" class="w3-padding-small">S.L. No</td>
@@ -879,6 +884,44 @@
 </div>
 
 <script>
+
+	/****************************************/
+	function print_students()
+	{
+		var r_sort=document.getElementById('search_result_sort8').value;
+		var search_text=document.getElementById('search_text8').value.trim();
+		var filter_status8=document.getElementById('filter_status8').value.trim();
+		var filter_degree8=document.getElementById('filter_degree8').value.trim();
+		var dept_id8=document.getElementById('dept_id8').value.trim();
+		var prog_id8=document.getElementById('prog_id8').value.trim();
+		
+		window.open('../includes/super_admin/student_print.php?admin_id='+<?php echo $_SESSION["admin_id"]; ?>+'&sort='+r_sort+'&search_text='+search_text+'&filter_status='+filter_status8+'&filter_degree='+filter_degree8+'&dept_id='+dept_id8+'&prog_id='+prog_id8);		
+	}
+	
+	function print_students_delete_history()
+	{
+		window.open('../includes/super_admin/student_delete_history_print.php?admin_id='+<?php echo $_SESSION["admin_id"]; ?>);		
+	}
+	
+	function print_student_view() { 
+		var divContents = document.getElementById("search_window8").innerHTML; 
+		var a = window.open('', '', 'height=600, width=800'); 
+		a.document.write('<html><head>'); 
+		a.document.write('<link rel="stylesheet" href="../css/w3.css" type="text/css">');
+		a.document.write('<link rel="stylesheet" href="../css/style.css">');
+		a.document.write('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">');
+		a.document.write('<?php echo $print_html_style; ?>'); 
+		a.document.write('</head><body onclick="document.getElementById(\'content\').innerHTML=\'\';window.close();"  style="font-family: "Century Schoolbook", sans-serif;font-size:12px;"><div id="content">'); 
+		a.document.write('<?php echo $print_html_body; ?>');
+		a.document.write(divContents);
+		a.document.write('<?php echo $print_html_footer; ?>');		
+		a.document.write('</body></html>'); 
+		a.document.close(); 
+		setTimeout(function(){a.print();},1000);
+
+	} 
+	
+/***************************************************/
 
 	function student_single_waive_add_form_reset()
 	{
