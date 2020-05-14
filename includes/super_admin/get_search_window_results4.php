@@ -61,7 +61,7 @@
 		
 ?>
 	<div class="w3-container w3-margin-0 w3-padding-0" id="course_view_box1">
-		<p class="w3-margin-0 w3-right w3-text-purple w3-cursor" style="margin: 0px 12px 5px 0px;" onclick="document.getElementById('course_view_box1').style.display='none';document.getElementById('course_view_box2').style.display='none';document.getElementById('course_view_box3').style.display='block';"><i class="fa fa-history"></i> Program History</p>
+		<p class="w3-margin-0 w3-right w3-text-purple w3-cursor" style="margin: 0px 12px 5px 0px;" onclick="document.getElementById('course_view_box1').style.display='none';document.getElementById('course_view_box2').style.display='none';document.getElementById('course_view_box3').style.display='block';"><i class="fa fa-history"></i> Course History</p>
 		<p class="w3-text-red w3-small w3-bold" style="margin: 2px 0px 0px 12px;padding:0px;">Note: (*) marked fields are mandatory.</p>
 		<div class="w3-container w3-border w3-round-large w3-padding w3-margin-bottom" style="margin: 0px 12px 12px 12px;">
 			<div class="w3-row w3-margin-0 w3-padding-0">

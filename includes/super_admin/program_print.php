@@ -84,7 +84,7 @@
 				  position: fixed;
 				  bottom: 0;
 				  width: 700px;
-				  
+				  background:white;
 				}
 
 				.page-header {
@@ -92,7 +92,7 @@
 				  top: 0mm;
 				  width: 700px;
 				  margin:0px;
-				  
+				  background:white;
 				}
 
 				.page {
@@ -173,10 +173,10 @@
 		$html = $html.'<h2 style="border-bottom: 2px solid black;width:105px;">Programs</h2>Total Data: '.count($result).'<table style="width:695px;border: 2px solid black;">
 		<tr style="font-weight:bold;">
 			<td style="width:10%;border: 2px solid black;padding:2px;" valign="top" >S.L. No</td>
-			<td style="width:30%;border: 2px solid black;padding:2px;" valign="top" >Program Title</td>
+			<td style="width:40%;border: 2px solid black;padding:2px;" valign="top" >Program Title</td>
 			<td style="width:20%;border: 2px solid black;padding:2px;" valign="top" >Program Code</td>
-			<td style="width:12%;border: 2px solid black;padding:2px;" valign="top" >Program Credit</td>
-			<td style="width:12%;border: 2px solid black;padding:2px;" valign="top" >Total Students</td>
+			<td style="width:15%;border: 2px solid black;padding:2px;" valign="top" >Program Credit</td>
+			<td style="width:15%;border: 2px solid black;padding:2px;" valign="top" >Total Students</td>
 			</tr>';
 		
 		if(count($result)!=0)

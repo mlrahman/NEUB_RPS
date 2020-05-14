@@ -10,39 +10,9 @@
 		header("location:index.php");
 		die();
 	}
-	if(isset($_REQUEST['sort']) && isset($_REQUEST['filter_status2']) && isset($_REQUEST['search_text']) && isset($_REQUEST['admin_id']) &&  $_REQUEST['admin_id']==$_SESSION['admin_id'])
+	if(isset($_REQUEST['admin_id']) &&  $_REQUEST['admin_id']==$_SESSION['admin_id'])
 	{
 		$admin_id=trim($_REQUEST['admin_id']);
-		$search_text=trim($_REQUEST['search_text']);
-		$filter_status2=trim($_REQUEST['filter_status2']);
-		$sort=trim($_REQUEST['sort']);
-		
-		if($sort==1)
-		{
-			$order_by='nr_dept_title';
-			$order='asc';
-		}
-		else if($sort==2)
-		{
-			$order_by='nr_dept_title';
-			$order='desc';
-		}
-		else if($sort==3)
-		{
-			$order_by='nr_dept_code';
-			$order='asc';
-		}
-		else if($sort==4)
-		{
-			$order_by='nr_dept_code';
-			$order='desc';
-		}
-		
-		$filter='';
-		if($filter_status2==1)
-			$filter=' and nr_dept_status="Active" ';
-		if($filter_status2==2)
-			$filter=' and nr_dept_status="Inactive" ';
 		
 		$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
 		$stmt->execute();
@@ -152,43 +122,45 @@
 					<tbody>
 					  <tr>
 						<td>';
-			
-		$stmt = $conn->prepare("select nr_dept_id,nr_dept_title,nr_dept_code,nr_dept_status,(select count(b.nr_prog_id) from nr_program b where b.nr_dept_id=a.nr_dept_id),(select count(c.nr_stud_id) from nr_student c where c.nr_prog_id in (select d.nr_prog_id from nr_program d where d.nr_dept_id=a.nr_dept_id))  from nr_department a where (nr_dept_title like concat('%',:search_text,'%') or nr_dept_code like concat('%',:search_text,'%')) ".$filter." order by ".$order_by." ".$order);
-		$stmt->bindParam(':search_text', $search_text); $stmt->execute();
+		
+		
+		$stmt = $conn->prepare("select * from nr_delete_history a,nr_admin b where a.nr_admin_id=b.nr_admin_id and a.nr_deleteh_type='Course List' order by a.nr_deleteh_date desc,a.nr_deleteh_time desc ");
+		$stmt->execute();
 		$result = $stmt->fetchAll();
 		
-		$html = $html.'<h2 style="border-bottom: 2px solid black;width:140px;">Departments</h2>Total Data: '.count($result).'<table style="width:695px;border: 2px solid black;">
-		<tr style="font-weight:bold;">
-			<td style="width:10%;border: 2px solid black;padding:2px;" valign="top">S.L. No</td>
-			<td style="width:40%;border: 2px solid black;padding:2px;" valign="top">Department Title</td>
-			<td style="width:20%;border: 2px solid black;padding:2px;" valign="top">Department Code</td>
-			<td style="width:15%;border: 2px solid black;padding:2px;" valign="top">Total Programs</td>
-			<td style="width:15%;border: 2px solid black;padding:2px;" valign="top">Total Students</td>
-		</tr>';
-		
-		if(count($result)!=0)
-		{
-			$sz=count($result);
-			for($i=0;$i<$sz;$i++)
-			{
-				$col='';
-				if($result[$i][3]=='Inactive')
+		$html = $html.'<h2 style="border-bottom: 2px solid black;width:255px;">Course Remove History</h2>Total Data: '.count($result).'<table style="width:695px;border: 2px solid black;">
+			<tr style="font-weight:bold;">
+				<td style="width:10%;border: 2px solid black;padding:2px;" valign="top" >S.L. No</td>
+				<td style="width:40%;border: 2px solid black;padding:2px;" valign="top" >Performed Action</td>
+				<td style="width:20%;border: 2px solid black;padding:2px;" valign="top" >Performed By</td>
+				<td style="width:15%;border: 2px solid black;padding:2px;" valign="top" >Date</td>
+				<td style="width:15%;border: 2px solid black;padding:2px;" valign="top" >Time</td>
+			</tr>';
+			
+				
+				if(count($result)==0)
 				{
-					$col='background:#ffdddd;';
+					$html=$html.'<tr>
+						<td colspan="5"> <p class="w3-center w3-margin"><i class="fa fa-warning w3-text-red" title="No Data Available"> No Data Available.</i></p></td>
+					</tr>';
 				}
-				$html=$html.'<tr style="'.$col.'" title="Status '.$result[$i][3].'">
-						<td valign="top" style="padding:2px;border: 2px solid black;">'.($i+1).'</td>
-						<td valign="top" style="padding:2px;border: 2px solid black;">'.$result[$i][1].'</td>
-						<td valign="top" style="padding:2px;border: 2px solid black;">'.$result[$i][2].'</td>
-						<td valign="top" style="padding:2px;border: 2px solid black;">'.$result[$i][4].'</td>
-						<td valign="top" style="padding:2px;border: 2px solid black;">'.$result[$i][5].'</td>
-					</tr>';				
-			}
-		}
-		else
-			$html=$html.'<tr><td colspan="5"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
-		
-		$html=$html.'</table>
+				else
+				{
+					$sz=count($result);
+					for($i=0;$i<$sz;$i++)
+					{
+			
+						$html=$html.'<tr style="text-align:center;">
+							<td valign="top" style="padding:2px;border: 2px solid black;">'.($i+1).'</td>
+							<td valign="top" style="padding:2px;border: 2px solid black;font-size:11px;">'.$result[$i][1].'</td>
+							<td valign="top" style="padding:2px;border: 2px solid black;font-size:11px;">'.$result[$i][7].' <b>('.$result[$i][12].')</b>, '.$result[$i][13].'</td>
+							<td valign="top" style="padding:2px;border: 2px solid black;">'.get_date($result[$i][2]).'</td>
+							<td valign="top" style="padding:2px;border: 2px solid black;">'.$result[$i][3].'</td>
+						</tr>';
+			
+					}
+				}
+				$html=$html.'</table>
 						</td>
 					  </tr>
 					</tbody>
@@ -204,8 +176,7 @@
 
 				  </table></div></body>
 			</html>';
-			
-		echo $html;
+			echo $html;
 		
 		
 		?>
@@ -216,6 +187,7 @@
 			</script>
 			
 		<?php
+			
 	}
 	else
 	{

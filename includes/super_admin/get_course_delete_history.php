@@ -14,7 +14,8 @@
 	{
 		$admin_id=trim($_REQUEST['admin_id']);
 ?>		
-
+		<p class="w3-margin-0 w3-padding-0 w3-medium"><i class="fa fa-print w3-hover-text-teal w3-text-indigo w3-cursor" onclick="print_courses_delete_history()"> Print</i></p>		
+	
 		<table style="width:100%;margin:5px 0px 15px 0px;" class="w3-border w3-round w3-border-black w3-topbar w3-bottombar">
 			<tr class="w3-teal w3-bold">
 				<td style="width:10%;" valign="top" class="w3-padding-small">S.L. No</td>
