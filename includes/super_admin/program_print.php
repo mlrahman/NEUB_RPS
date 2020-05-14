@@ -10,39 +10,40 @@
 		header("location:index.php");
 		die();
 	}
-	if(isset($_REQUEST['sort']) && isset($_REQUEST['filter_status2']) && isset($_REQUEST['search_text']) && isset($_REQUEST['admin_id']) &&  $_REQUEST['admin_id']==$_SESSION['admin_id'])
+	if(isset($_REQUEST['sort']) && isset($_REQUEST['dept_id']) && isset($_REQUEST['filter_status3']) && isset($_REQUEST['search_text']) && isset($_REQUEST['admin_id']) &&  $_REQUEST['admin_id']==$_SESSION['admin_id'])
 	{
 		$admin_id=trim($_REQUEST['admin_id']);
+		$dept_id=trim($_REQUEST['dept_id']);
 		$search_text=trim($_REQUEST['search_text']);
-		$filter_status2=trim($_REQUEST['filter_status2']);
+		$filter_status3=trim($_REQUEST['filter_status3']);
 		$sort=trim($_REQUEST['sort']);
 		
 		if($sort==1)
 		{
-			$order_by='nr_dept_title';
+			$order_by='nr_prog_title';
 			$order='asc';
 		}
 		else if($sort==2)
 		{
-			$order_by='nr_dept_title';
+			$order_by='nr_prog_title';
 			$order='desc';
 		}
 		else if($sort==3)
 		{
-			$order_by='nr_dept_code';
+			$order_by='nr_prog_code';
 			$order='asc';
 		}
 		else if($sort==4)
 		{
-			$order_by='nr_dept_code';
+			$order_by='nr_prog_code';
 			$order='desc';
 		}
 		
 		$filter='';
-		if($filter_status2==1)
-			$filter=' and nr_dept_status="Active" ';
-		if($filter_status2==2)
-			$filter=' and nr_dept_status="Inactive" ';
+		if($filter_status3==1)
+			$filter=' and nr_prog_status="Active" ';
+		if($filter_status3==2)
+			$filter=' and nr_prog_status="Inactive" ';
 		
 		$stmt = $conn->prepare("select * from nr_system_component where nr_syco_status='Active' order by nr_syco_id desc limit 1 ");
 		$stmt->execute();
@@ -152,19 +153,31 @@
 					<tbody>
 					  <tr>
 						<td>';
-			
-		$stmt = $conn->prepare("select nr_dept_id,nr_dept_title,nr_dept_code,nr_dept_status,(select count(b.nr_prog_id) from nr_program b where b.nr_dept_id=a.nr_dept_id),(select count(c.nr_stud_id) from nr_student c where c.nr_prog_id in (select d.nr_prog_id from nr_program d where d.nr_dept_id=a.nr_dept_id))  from nr_department a where (nr_dept_title like concat('%',:search_text,'%') or nr_dept_code like concat('%',:search_text,'%')) ".$filter." order by ".$order_by." ".$order);
-		$stmt->bindParam(':search_text', $search_text); $stmt->execute();
+		
+		
+		if($dept_id==-1)
+		{
+			$stmt = $conn->prepare("select nr_prog_id,nr_prog_title,nr_prog_code,nr_prog_status,(select b.nr_prcr_total from nr_program_credit b where b.nr_prog_id=a.nr_prog_id and b.nr_prcr_ex_date='' order by b.nr_prcr_id desc limit 1),(select count(c.nr_stud_id) from nr_student c where c.nr_prog_id=a.nr_prog_id) from nr_program a where (nr_prog_title like concat('%',:search_text,'%') or nr_prog_code like concat('%',:search_text,'%'))  ".$filter." order by ".$order_by." ".$order);
+			$stmt->bindParam(':search_text', $search_text); 
+		}
+		else
+		{
+			$stmt = $conn->prepare("select nr_prog_id,nr_prog_title,nr_prog_code,nr_prog_status,(select b.nr_prcr_total from nr_program_credit b where b.nr_prog_id=a.nr_prog_id and b.nr_prcr_ex_date='' order by b.nr_prcr_id desc limit 1),(select count(c.nr_stud_id) from nr_student c where c.nr_prog_id=a.nr_prog_id) from nr_program a where (nr_prog_title like concat('%',:search_text,'%') or nr_prog_code like concat('%',:search_text,'%')) and a.nr_dept_id=:dept_id  ".$filter." order by ".$order_by." ".$order);
+			$stmt->bindParam(':search_text', $search_text);
+			$stmt->bindParam(':dept_id', $dept_id);
+
+		}			
+		$stmt->execute();
 		$result = $stmt->fetchAll();
 		
-		$html = $html.'<h2 style="border-bottom: 2px solid black;width:140px;">Departments</h2>Total Data: '.count($result).'<table style="width:695px;border: 2px solid black;">
+		$html = $html.'<h2 style="border-bottom: 2px solid black;width:105px;">Programs</h2>Total Data: '.count($result).'<table style="width:695px;border: 2px solid black;">
 		<tr style="font-weight:bold;">
-			<td style="width:10%;border: 2px solid black;padding:2px;" valign="top">S.L. No</td>
-			<td style="width:40%;border: 2px solid black;padding:2px;" valign="top">Department Title</td>
-			<td style="width:20%;border: 2px solid black;padding:2px;" valign="top">Department Code</td>
-			<td style="width:15%;border: 2px solid black;padding:2px;" valign="top">Total Programs</td>
-			<td style="width:15%;border: 2px solid black;padding:2px;" valign="top">Total Students</td>
-		</tr>';
+			<td style="width:10%;border: 2px solid black;padding:2px;" valign="top" >S.L. No</td>
+			<td style="width:30%;border: 2px solid black;padding:2px;" valign="top" >Program Title</td>
+			<td style="width:20%;border: 2px solid black;padding:2px;" valign="top" >Program Code</td>
+			<td style="width:12%;border: 2px solid black;padding:2px;" valign="top" >Program Credit</td>
+			<td style="width:12%;border: 2px solid black;padding:2px;" valign="top" >Total Students</td>
+			</tr>';
 		
 		if(count($result)!=0)
 		{
@@ -186,7 +199,7 @@
 			}
 		}
 		else
-			$html=$html.'<tr><td colspan="5"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+			 $html=$html.'<tr><td colspan="5"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
 		
 		$html=$html.'</table>
 						</td>
