@@ -236,7 +236,7 @@
 			}
 		}
 		else
-			$html=$html.'<tr><td colspan="8"><p class="w3-center w3-text-red" style="margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
+			$html=$html.'<tr><td colspan="8"><p style="text-align:center;color:red;margin: 10px 0px 10px 0px;"><i class="fa fa-warning"></i> No result available</p> </td></tr>';
 		
 		
 		$html=$html.'</table>
