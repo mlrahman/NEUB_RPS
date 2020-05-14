@@ -203,6 +203,7 @@
 		$stmt->bindParam(':search_text', $search_text);
 		$stmt->execute();
 		$result = $stmt->fetchAll();
+		$tot_c=0;
 		if(count($result)>0)
 		{
 			$sz=count($result);
@@ -242,11 +243,12 @@
 				}
 				if($fl==1)
 				{
+					$tot_c++;
 					$xyz[$r_id]=array('r_id'=>$r_id,'s_id'=>$s_id,'semester'=>$semester,'course_code'=>$course_code,'course_title'=>$course_title,'course_credit'=>$course_credit,'course_grade'=>$course_grade,'r_status'=>$r_status,'remarks'=>$remarks);
 				}
 			}
 			
-			$html = $html.'<h2 style="border-bottom: 2px solid black;width:80px;">Results</h2>Total Data: '.count($result).'<table style="width:695px;border: 2px solid black;">
+			$html = $html.'<h2 style="border-bottom: 2px solid black;width:80px;">Results</h2>Total Data: '.$tot_c.'<table style="width:695px;border: 2px solid black;">
 				<tr style="font-weight:bold;">
 					<td style="width:7%;border: 2px solid black;padding:2px;" valign="top">S.L. No</td>
 					<td style="width:15%;border: 2px solid black;padding:2px;" valign="top">Semester</td>
