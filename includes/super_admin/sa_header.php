@@ -30,7 +30,11 @@
 		$video_alt=$result[0][14];
 		$video=$result[0][15];
 		
+		$print_html_style='<style>.page-header, .page-header-space {height: 90px;} .page-footer, .page-footer-space { height: 50px; margin-top:10px; } .page-footer { position: fixed; bottom: 0; width: 700px; } .page-header { position: fixed; top: 0mm; width: 700px; margin:0px; } .page { page-break-inside: avoid; } @page { margin: 6mm 15mm 6mm 15mm; } @media print { thead {display: table-header-group;}  tfoot {display: table-footer-group;} body {margin: 0;} } </style>';
+				
+		$print_html_body='<div class="page-header" style="text-align: center;"><div style="border-bottom: 3px solid black;"><div style="height:75px;"><div style="width:65px;padding:0px;margin:0px;float:left;"><img src="../images/system/'.$logo.'" alt="NEUB LOGO" style="width:68px;height:70px;"></div><div style="width:630px;float:left;padding:0px;margin:0px;"><p style="padding: 0px;margin:10px 0px 5px 0px;font-size:22px;font-weight:bold;margin-left:8px;">NORTH EAST UNIVERSITY BANGLADESH (NEUB)</p><p style="margin:0px;padding:0px;font-size: 19px;font-weight:bold;text-align:center;">SYLHET, BANGLADESH.</p></div></div></div></div><div class="page-footer"><div style="border-top:3px solid black;margin: 0px;padding:0px;width:700px;text-align:center;"><p style="margin:0px;padding:0px;font-size:12px;">Address: '.$address.'</p><p style="margin:0px;padding:0px;font-size:12px;">Phone: '.$telephone.', Fax: 0821-710223, Mobile: '.$mobile.', E-mail: '.$email.'</p><p style="margin:0px;padding:0px;font-size:12px;">Website: '.$web.'</p></div></div><table><thead><tr><td><div class="page-header-space"></div></td></tr></thead><tbody><tr><td>';
 		
+		$print_html_footer='</td></tr></tbody><tfoot><tr><td><div class="page-footer-space"></div></td></tr></tfoot></table></div>';
 		
 	}
 	catch(PDOException $e)
