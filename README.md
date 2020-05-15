@@ -43,7 +43,7 @@ This web application is developed for the result processing system of North East
 
 <h2>Moderator Panel</h2>
 <ul>
-    <li>This panel will open by typing '/moderator_panel' after the URL link.</li>
+    <li>This panel will open by typing '/moderator_admin' after the URL link.</li>
 	<li>In header section a title  (click redirect to the same site) with a logo (click redirect to the official NEUB site) will appear.</li>
 	<li>In the body section, there will be a login form with email, password and captcha fields. By filling these fields, moderator will get the access of moderator panel.</li>
     <li>By checking to Remember Me, moderator can save his/her password for 30 days (Except cache and cookie cleaning), on the other hand, for clearing credentials to check out the Remember Me. Credentials will remember after a successful login.</li>
