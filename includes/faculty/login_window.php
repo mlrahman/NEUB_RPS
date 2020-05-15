@@ -32,7 +32,7 @@
 				$stmt->execute();
 				
 				//sending password recovery link to user
-				$msg="Dear ".$f_name.", Your Password Recovery Link is: <a href='https://".$link."' target='_blank'>".$link."</a>";
+				$msg="Dear ".$f_name.", Your Password Recovery Link is: <a href='https://".$link."' target='_blank'>".$link."</a><p>&nbsp;</p><b>Note: </b>This is an one time link so do not reload the page. For any query you can contact with <a href='mailto:".$contact_email."'>".$contact_email."</a>";
 				$message = '<html><body>';
 				$message .= '<h1>Password Recovery Link from - '.$title.'</h1><p>  </p>';
 				$message .= '<p><b>Message Details:</b></p>';
