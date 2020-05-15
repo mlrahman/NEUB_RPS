@@ -37,7 +37,7 @@
 					if(count($result)==0)
 					{
 						echo '<tr>
-							<td colspan="5"> <p class="w3-center w3-margin"><i class="fa fa-warning w3-text-red" title="No Data Available"> No Data Available.</i></p></td>
+							<td colspan="4"> <p class="w3-center w3-margin"><i class="fa fa-warning w3-text-red" title="No Data Available"> No Data Available.</i></p></td>
 						</tr>';
 					}
 					else
