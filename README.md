@@ -96,7 +96,7 @@ This web application is developed for the result processing system of North East
 	<li>In system components page, super admin can edit basic text and images of the entire system. But any change will be recorded in history.</li>
 	<li>For creating super admin one has to access the cpanel and insert manually in nr_admin table with admin type 'Super Admin' at database. There are no way of making super admin from the system directly.</li>
 	<li>In super admin edit profile page super admin can change all the information except the enable-disable feature of the two factor authentication service (2FA mandatory). </li>
-	<li>Super admin can export a backup copy of database using '/get_backup_db.php?db_backup=yes' link after signed in. </li>
+	<li>Super admin can export a backup copy of database using '/get_backup_db.php?db_backup=yes' link after signed in. <b>Note:</b> Both developer and super admin will get a notification email. </li>
 </ul>
 
 <h2>Installation Guideline</h2>
