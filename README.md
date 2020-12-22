@@ -1,5 +1,5 @@
 # NEUB_RPS
-This web application is developed for the result processing system of North East University Bangladesh.
+This web application is developed considering the result processing system of North East University Bangladesh. I build this website only for practicing purpose and by my own interest during the lockdown of COVID-19 for passing the leisure time. However if anyone interested to use it please let me know via email at mirlutfur.rahman@gmail.com. Below I have added some features of this application.
 
 <h2>Student Panel (General User)</h2>
 <ul>
